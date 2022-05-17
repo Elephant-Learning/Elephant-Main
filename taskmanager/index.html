@@ -2,9 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Task Manager | Elephant - The Ultimate Student Suite</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager | Elephant - The Better Student Hub</title>
+
+    <link rel="icon" href="../icons/elephant.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-
+    <div id="sidebar">
+        <div id="custom-picture"></div>
+        <button onclick="addTask()">+ Create Task</button>
+        <button onclick="addEvent()">+ Create Event</button>
+    </div>
+    <div id="parent-container">
+        <div id="navbar">
+            <div id="logo-div">
+                <img onclick="location.href = '../'" src="../icons/elephant.png" alt="" id="something">
+                <div>
+                    <h1>Elephant</h1>
+                    <p>The Ultimate Student Suite</p>
+                </div>
+            </div>
+            <div id="navbar-right">
+                <div id="progress-bar"></div>
+                <div class="navbar-icon-btn" onclick="toggleMusicModal(true)">
+                    <img src="icons/music.svg" alt="Bro" id="music">
+                </div>
+                <div class="navbar-icon-btn" onclick="toggleNotifModal()">
+                    <img src="icons/history.svg" alt="Bro" id="notifs">
+                </div>
+                <div class="navbar-icon-btn" onclick="toggleSettingsModal()">
+                    <img src="icons/settings.svg" alt="Bro" id="settings">
+                </div>
+            </div>
+        </div>
+        <div id="main-container"></div>
+        <div id="music-player" class="hidden-music-player">
+            <div id="music-modal">
+                <div id="cover-information">
+                    <img src="music/covers/space-trip.png" alt="" id="album-cover">
+                    <div>
+                        <h1 id="album-name">No Song Selected</h1>
+                        <p id="artist-name">Please Wait</p>
+                    </div>
+                </div>
+                <div id="main-controller">
+                    <div>
+                        <div id="music-heart" class="filled-heart"></div>
+                        <img src="icons/music/play.svg" alt="" id="music-pause" onclick="pausePlay()">
+                        <img src="icons/music/next.svg" alt="" id="music-skip" onclick="audio.currentTime = audio.duration;">
+                    </div>
+                    <div>
+                        <input type="range" value="0" min="0" max="5000" id="music-timeline" disabled="disabled">
+                    </div>
+                </div>
+                <div id="volume-options">
+                    <img src="icons/music/volume_down.svg" alt="">
+                    <input type="range" value="100" min="0" max="100" id="music-volume" onmousemove="setVolume()" onchange="setVolume()">
+                    <img src="icons/music/volume_up.svg" alt="">
+                </div>
+            </div>
+            <div id="music-background"></div>
+        </div>
+    </div>
 </body>
 </html>
