@@ -2,7 +2,8 @@ let audio = undefined;
 const songs = [
     ["Rainy Café", "Abhiram Boddu"],
     ["Space Trip", "Abhiram Boddu"],
-    ["Road Vibes", "Abhiram Boddu"]
+    ["Road Vibes", "Abhiram Boddu"],
+    ["City Night", "Abhiram Boddu"]
 ];
 
 let selectedSongIndex;
