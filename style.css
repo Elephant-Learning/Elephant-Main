@@ -1,15 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('fonts/TexGyreMath/font-face.css');
-@import url('Gotham-Medium.woff');
-@import url('Gotham-ExtraLight.woff');
-@import url('Gotham-Book.woff');
-@import url('Gotham-Bold.woff');
-@import url('Gotham-BoldItalic.woff');
-@import url('Gotham-ExtraLightItalic.woff');
-@import url('Gotham-Thin.woff');
-@import url('Gotham-Ultra.woff');
-@import url('Gotham-Light.woff');
-@import url('Gotham-Black.woff');
 
 :root{
     --blue-color-1:#2472fc;
@@ -63,7 +52,6 @@ body{
     font-weight:500;
     margin: 0 20vw 0 0;
     color:#bbb;
-    font-family: Gotham;
 }
 
 #pages {
