@@ -1,0 +1,46 @@
+@import url('Gotham Medium');
+@import url('Gotham Extra');
+@import url('Gotham Book');
+@import url('Gotham Bold');
+@import url('Gotham Bold Italic');
+@import url('Gotham Extra Light Italic');
+@import url('Gotham Thin');
+@import url('Gotham Ultra');
+@import url('Gotham Light');
+@import url('Gotham Black');
+
+
+
+#navbar{
+    width:100vw;
+    position:absolute;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    height:50px;
+    z-index:1;
+    opacity: 0.8;
+    font-family: 'Gotham Medium';
+    margin-left: 0%;
+    align-self: center;
+    padding: 0;
+    margin: 0;
+    line-height: 0px;
+}
+
+.logo {
+    width: 2vw;
+    margin-right: 15vw;
+}
+
+.navHeading {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    color:#515052;
+    gap:8vw;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    font-size: medium;
+}

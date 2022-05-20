@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(day)
 
     if(month === 5){
-        const prides = ["gay-pride", "heterosexual", "lesbian-pride", "non-binary-pride", "pride", "trans-pride"];
+        const prides = ["gay-pride", "heterosexual", "lesbian-pride", "non-binary-pride", "pride", "trans-pride", "bisexual-pride"];
         document.getElementById('favicon').setAttribute('href', "./icons/elephant-400-400-" + prides[Math.floor(Math.random() * prides.length)] + ".png");
     } else if(month === 7 && day === 28){
         document.getElementById('favicon').setAttribute('href', "./icons/elephant-400-400-india.png");
