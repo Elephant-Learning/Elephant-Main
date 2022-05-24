@@ -266,10 +266,48 @@ body{
     display:flex;
 }
 
+.carousel-item::after{
+    position:absolute;
+    bottom:-12.5vh;
+    width:35vw;
+    background:var(--bg-color-1);
+    border:1px solid var(--border-color);
+    right:-16px;
+    padding:16px;
+    border-radius:10px;
+    opacity:0.9;
+    font-size:14px;
+    text-align:center;
+}
+
+.carousel-item:nth-child(1)::after{
+    content:'Elephant Flashcards is an easy way to get better at memorizing. It allows for more complex flashcards to be created.';
+}
+
 .carousel-item:nth-child(1) > div:first-of-type{
     width:10vw;
     height:50vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
     background:linear-gradient(135deg, var(--blue-color-1), var(--blue-color-2));
+}
+
+.carousel-item:nth-child(1) > div:first-of-type > button:first-of-type{
+    margin-top:16px;
+}
+
+.carousel-item:nth-child(1) > div:first-of-type > button{
+    margin-top:8px;
+    width:8vw;
+    background:var(--blue-color-dark);
+    color:white;
+    border:none;
+    outline:none;
+    font-size:12px;
+    padding:5px 0;
+    border-radius:5px;
+    box-shadow:0 0 8px 0 black;
 }
 
 .carousel-item:nth-child(1) > div:last-of-type > div:first-of-type{
@@ -289,5 +327,48 @@ body{
 
 .carousel-item:nth-child(1) > div:last-of-type > div:first-of-type > h1{
     margin:0;
-    font-size:3vh;
+    font-size:2.5vh;
+}
+
+.carousel-item:nth-child(1) > div:last-of-type > div:last-of-type{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-left:12px;
+    margin-top:12px;
+}
+
+.flashcards-card{
+    width:8vw;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 0 8px 0 black;
+    border-radius:12px;
+    overflow:hidden;
+    background:white;
+}
+
+.flashcards-card > div:first-of-type{
+    width:8vw;
+    height:10vh;
+    border-radius:12px 12px 0 0;
+    background:linear-gradient(135deg, var(--red-color-1), var(--red-color-2));
+}
+
+.flashcards-card > div:last-of-type{
+    background:white;
+    padding:12px;
+    border-radius:0 0 12px 12px;
+}
+
+.flashcards-card > div:last-of-type > h1{
+    font-size:14px;
+    margin:2px 0;
+}
+
+.flashcards-card > div:last-of-type > p{
+    font-size:9px;
+    color:gray;
+    margin:0;
 }
