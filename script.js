@@ -29,7 +29,7 @@ async function getData() {
 
     let response;
 
-    try{ response = await fetch('https://api.trivia.willfry.co.uk/questions?limit=5')}
+    try{ response = await fetch('https://opentdb.com/api.php?amount=10')}
     catch{
         throw new Error("Internet Connectivity Error - Failed to Connect to Trivia API");
         return;
@@ -43,40 +43,49 @@ async function getData() {
     }
 
     if(firstQuestion) document.getElementById('flashcard-header').innerHTML = "Loading Sample Question"
-    else document.getElementById('flashcard-header').innerHTML = randomCongrats[Math.floor(Math.random() * randomCongrats.length)];
+    else if(!randomCongrats.includes(document.getElementById('flashcard-header').textContent)) document.getElementById('flashcard-header').innerHTML = randomCongrats[Math.floor(Math.random() * randomCongrats.length)];
 
     let data = await response.json();
+    data = data.results;
+
     let questionAsked;
+    let incorrectAnswer;
+    let foundQuestion = false;
+    let questionIndex = 0;
 
-    if(data["0"].incorrectAnswers.length > 8 || data["0"].question.length > 30) {
-        if(data["1"].incorrectAnswers.length > 8 || data["1"].question.length > 30) {
-            if(data["2"].incorrectAnswers.length > 8 || data["2"].question.length > 30) {
-                if(data["3"].incorrectAnswers.length > 8 || data["3"].question.length > 30) {
-                    if(data["4"].incorrectAnswers.length > 8 || data["4"].question.length > 30) {
-                        document.getElementById('flashcard-header').innerHTML = "Giving You An Easier Question";
-                        getData();
-                        return;
-                    } else questionAsked = data["4"];
-                } else questionAsked = data["3"];
-            } else questionAsked = data["2"];
-        } else questionAsked = data["1"];
-    } else questionAsked = data["0"];
 
-    document.getElementById('flashcard-header').innerHTML = questionAsked.question;
+    while(!foundQuestion){
+        try{
+            incorrectAnswer = data[questionIndex].incorrect_answers;
+
+            if(incorrectAnswer.length > 3 || data[questionIndex].question.length > 30) {
+                console.log(questionIndex)
+                questionIndex++;
+            } else foundQuestion = true;
+        } catch{
+            foundQuestion = true;
+            getData().then(r => console.log("%cTrivia Question Request Successful", "color:lightgreen;"));
+        }
+    }
+
+    data = data[questionIndex]
+
+    document.getElementById('flashcard-header').innerHTML = data.question;
 
     console.log("%cYou won't find the answer in here", "color:blue;");
 
     let answersArray = [];
+    incorrectAnswer = data.incorrect_answers
 
-    for(let i = 0; i < questionAsked.incorrectAnswers.length; i++){
-        let incorrectAnswer = document.createElement('h6');
-        incorrectAnswer.innerHTML = questionAsked.incorrectAnswers[i];
+    for(let i = 0; i < data.incorrect_answers.length; i++){
+        let incorrectAnswer = document.createElement('p');
+        incorrectAnswer.innerHTML = data.incorrect_answers[i];
         answersArray.push(incorrectAnswer);
     }
 
-    let correctAnswer = document.createElement('h6');
+    let correctAnswer = document.createElement('p');
     correctAnswer.setAttribute('onclick', 'getData()');
-    correctAnswer.innerHTML = questionAsked.correctAnswer;
+    correctAnswer.innerHTML = data.correct_answer;
     answersArray.push(correctAnswer);
 
     answersArray = shuffleArray(answersArray);
@@ -85,9 +94,10 @@ async function getData() {
         parentDiv.appendChild(answersArray[i])
     }
 
-    let skipBtn = document.createElement('h6');
+    let skipBtn = document.createElement('p');
     skipBtn.classList.add('skip-btn');
     skipBtn.innerHTML = "Skip Question";
+    skipBtn.setAttribute("onclick", "getData().then(r => console.log('%cTrivia Question Request Successful', 'color:lightgreen;'))")
 
     parentDiv.appendChild(skipBtn)
     firstQuestion = false;

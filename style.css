@@ -252,21 +252,47 @@ body{
     display:flex;
     flex-direction:column;
     justify-content:center;
-    gap:15px;
+    gap:8px;
     border-radius:0 25px 25px 0;
 }
 
-#flashcard-answers > p{
+#flashcard-answers > p:not(.skip-btn){
     background:var(--bg-color-200);
-    padding:10px 10px;
+    padding:10px 15px;
     border-radius:20px;
     font-size:12px;
     cursor:pointer;
     transition-duration:250ms;
 }
 
-#flashcard-answers > p:hover{
+#flashcard-answers > p:not(.skip-btn):hover{
     background:var(--bg-color-300);
+}
+
+.skip-btn{
+    padding:10px 15px;
+    border-radius:20px;
+    font-size:12px;
+    cursor:pointer;
+    transition-duration:250ms;
+    background: linear-gradient(135deg, var(--red-color-1), var(--blue-color-1)) 0 50%;
+    background-size: 300% 150%;
+}
+
+.skip-btn:hover{
+    animation: gradient 1s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .sub-banner{

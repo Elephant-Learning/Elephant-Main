@@ -1,3 +1,5 @@
+let api = 'ZmE1Y2I5N2YxYWQyNzEzZTEzNDRjM2QyNzE3NzZmODY=';
+
 document.addEventListener('DOMContentLoaded', function() {
     let date = new Date();
     let month = date.getMonth();
@@ -5,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let year = date.getFullYear();
     let time = date.getHours() + ":" + date.getMinutes();
 
-    console.log(date.getDay());
+    api = atob(api);
 
     let favicon = document.getElementById('favicon');
 
@@ -26,6 +28,41 @@ document.addEventListener('DOMContentLoaded', function() {
         favicon.setAttribute('href', "./icons/elephant-400-400-val-day-2.png");
     } else {
         favicon.setAttribute('href', "./icons/elephant-400-400-grayscale.png");
+    }
+
+    let long;
+    let lat;
+    // Accesing Geolocation of User
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            // Storing Longitude and Latitude in variables
+            long = position.coords.longitude;
+            lat = position.coords.latitude;
+            const base = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${api}&units=metric`;
+
+            // Using fetch to get data
+            fetch(base)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    const { temp, feels_like } = data.main;
+                    const place = data.name;
+                    const { description, icon } = data.weather[0];
+                    const { sunrise, sunset } = data.sys;
+
+                    const iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+                    const fahrenheit = (temp * 9) / 5 + 32;
+
+                    // Converting Epoch(Unix) time to GMT
+                    const sunriseGMT = new Date(sunrise * 1000);
+                    const sunsetGMT = new Date(sunset * 1000);
+
+                    if(description === "snow"){
+                        favicon.setAttribute('href', "./icons/elephant-400-400-snowy-2.png");
+                    }
+                });
+        });
     }
 
 }, false);
