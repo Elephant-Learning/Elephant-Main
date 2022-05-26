@@ -25,11 +25,12 @@ function favoriteMusic(){
         document.getElementById('music-heart').classList.remove('unfilled-heart');
         document.getElementById('music-heart').classList.add('filled-heart');
         favoriteMusic.push(selectedSongIndex);
-
+        addNotification("heart", "Favorited: " + songs[selectedSongIndex][0]);
     } else {
         document.getElementById('music-heart').classList.remove('filled-heart');
         document.getElementById('music-heart').classList.add('unfilled-heart');
         delete favoriteMusic[favoriteMusic.indexOf(selectedSongIndex)];
+        addNotification("heart", "Removed Favorite: " + songs[selectedSongIndex][0]);
     }
 
     localStorage.setItem('favorite-music', JSON.stringify(favoriteMusic));

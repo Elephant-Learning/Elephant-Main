@@ -90,6 +90,8 @@ function skipQuestion(index){
         if(reviewCards[index] === true) progress--;
         reviewCards[index] = false;
     }
+    let sound = new Audio('./sounds/skip.wav')
+    sound.play();
 }
 
 function writtenQuestionCheck(index){

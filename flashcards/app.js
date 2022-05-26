@@ -479,8 +479,6 @@ function createDeck(){
 }
 
 function deleteDeck(index){
-    let notifStorage = localStorage.getItem('notifications-storage');
-
     addNotification("delete", "Deleted Deck: " + localStorage.key(index));
 
     localStorage.removeItem(localStorage.key(index))
