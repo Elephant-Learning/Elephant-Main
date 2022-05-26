@@ -1300,53 +1300,36 @@ select option:checked {
 }
 
 .unfilled-heart{
-    border:3px solid black;
-    border-top:none;
-    border-left:none;
+    background:var(--text-color);
 }
 
-.unfilled-heart::before{
-    content:'';
-    width:16px;
-    height:15px;
-    position:absolute;
-    top:-14px;
-    right:-3px;
-    border-radius:10px 10px 0 0;
-    border:3px solid black;
-    border-bottom:none;
+.unfilled-heart::before, .unfilled-heart::after{
+    background:var(--text-color);
 }
 
-.unfilled-heart::after{
-    content:'';
-    width:15px;
-    height:16px;
-    position:absolute;
-    left:-14px;
-    bottom:-3px;
-    border-radius:10px 0 0 10px;
-    border:3px solid black;
-    border-right:none;
-}
 
-.filled-heart::before{
-    background:var(--theme-color-1);
+#music-heart::before{
     content:'';
     width:20px;
     height:15px;
     position:absolute;
     top:-14px;
     border-radius:10px 10px 0 0;
+    transition-duration:250ms;
 }
 
-.filled-heart::after{
-    background:var(--theme-color-1);
+#music-heart::after{
     content:'';
     width:15px;
     height:20px;
     position:absolute;
     left:-14px;
     border-radius:10px 0 0 10px;
+    transition-duration:250ms;
+}
+
+.filled-heart::before, .filled-heart::after{
+    background:var(--theme-color-1);
 }
 
 .hidden-music-player{

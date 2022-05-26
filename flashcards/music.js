@@ -17,14 +17,42 @@ function setVolume(){
     audio.volume = document.getElementById('music-volume').value / 100;
 }
 
+function favoriteMusic(){
+    let favoriteMusic = localStorage.getItem('favorite-music');
+    favoriteMusic = JSON.parse(favoriteMusic);
+
+    if(document.getElementById('music-heart').classList.contains('unfilled-heart')){
+        document.getElementById('music-heart').classList.remove('unfilled-heart');
+        document.getElementById('music-heart').classList.add('filled-heart');
+        favoriteMusic.push(selectedSongIndex);
+
+    } else {
+        document.getElementById('music-heart').classList.remove('filled-heart');
+        document.getElementById('music-heart').classList.add('unfilled-heart');
+        delete favoriteMusic[favoriteMusic.indexOf(selectedSongIndex)];
+    }
+
+    localStorage.setItem('favorite-music', JSON.stringify(favoriteMusic));
+}
+
 function randomizeSongs(play){
     let chosen = Math.floor(Math.random() * songs.length);
+    let favoriteMusic = localStorage.getItem('favorite-music');
+    favoriteMusic = JSON.parse(favoriteMusic);
 
     if(selectedSongIndex === chosen){
         randomizeSongs();
     } else {
         document.getElementById('album-name').innerHTML = songs[chosen][0];
         document.getElementById('artist-name').innerHTML = songs[chosen][1] + " - Elephant Team";
+
+        if(favoriteMusic.includes(chosen)){
+            document.getElementById('music-heart').classList.remove('unfilled-heart');
+            document.getElementById('music-heart').classList.add('filled-heart');
+        } else {
+            document.getElementById('music-heart').classList.remove('filled-heart');
+            document.getElementById('music-heart').classList.add('unfilled-heart');
+        }
 
         let name = songs[chosen][0].toLowerCase().replace(' ', '-')
         document.getElementById('album-cover').src = "./music/covers/" + name + ".png";

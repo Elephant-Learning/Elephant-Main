@@ -562,7 +562,7 @@ function checkSort(clear){
 
 function loadDecks(sort, title){
     let child = document.getElementById('main-container').lastElementChild;
-    const prohibitedTitles = ["theme-index", "notifications-storage", "level-index", "image-indexes"]
+    const prohibitedTitles = ["theme-index", "notifications-storage", "level-index", "image-indexes", "favorite-music"]
 
     while (child) {
         document.getElementById('main-container').removeChild(child);
@@ -696,6 +696,7 @@ window.onload = function(){
     let notifStorage = localStorage.getItem('notifications-storage');
     let userLevel = localStorage.getItem('level-index');
     let userImages = localStorage.getItem('image-indexes')
+    let favoriteMusic = localStorage.getItem('favorite-music')
 
     try{
         mainTheme = JSON.parse(mainTheme)
@@ -709,6 +710,9 @@ window.onload = function(){
     try { userLevel = parseInt(userLevel)}
     catch {userLevel = 0}
 
+    try {favoriteMusic = JSON.parse(favoriteMusic)}
+    catch {favoriteMusic = []}
+
     if(!userImages){userImages = []}
 
     if(notifStorage == null) notifStorage = new Notifications()
@@ -720,9 +724,14 @@ window.onload = function(){
         }
     } else mainTheme = [0, true, 4];
 
+    if(favoriteMusic === null){
+        favoriteMusic = [];
+    }
+
     localStorage.setItem('theme-index', JSON.stringify(mainTheme));
     localStorage.setItem('notifications-storage', JSON.stringify(notifStorage))
     localStorage.setItem('level-index', userLevel.toString());
+    localStorage.setItem('favorite-music', JSON.stringify(favoriteMusic));
 
     setupThemes();
     setTheme(mainTheme[0], mainTheme[2]);
