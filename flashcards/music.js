@@ -4,7 +4,8 @@ const songs = [
     ["Space Trip", "Abhiram Boddu"],
     ["Road Vibes", "Abhiram Boddu"],
     ["City Night", "Abhiram Boddu"],
-    ["Summer Strings", "Abhiram Boddu"]
+    ["Summer Strings", "Abhiram Boddu"],
+    ["Cool Breeze", "Abhiram Boddu"]
 ];
 
 let selectedSongIndex;

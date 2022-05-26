@@ -40,14 +40,14 @@ function checkAnswer(index){
 
     let answerDiv = document.createElement('div');
     const parentElem = document.querySelectorAll('.flashcard-def-btn')[index];
+    let correct = false;
 
     if(parentElem.childElementCount > 1) return;
 
     if(correctAnswers.includes(index)){
         correctAnswers[correctAnswers.indexOf(index)] = true;
         answerDiv.classList.add('right');
-        let sound = new Audio('./sounds/right.wav')
-        sound.play();
+        correct = true;
     } else {
         answerDiv.classList.add('wrong');
         let sound = new Audio('./sounds/wrong.wav')
@@ -67,6 +67,11 @@ function checkAnswer(index){
 
     if(complete){
         setupAnswers();
+        let sound = new Audio('./sounds/win.wav')
+        sound.play();
+    } else if(correct) {
+        let sound = new Audio('./sounds/right.wav')
+        sound.play();
     }
 
     parentElem.appendChild(answerDiv);

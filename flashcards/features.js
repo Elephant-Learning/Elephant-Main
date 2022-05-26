@@ -147,6 +147,8 @@ function closeDeck(){
     document.getElementById('review-modal').classList.remove('active-modal');
     document.getElementById('review-modal').classList.add('inactive-modal');
     reviewModalActive = false;
+    let sound = new Audio('./sounds/wrong.wav')
+    sound.play();
 }
 
 function closeCreateModal(){
