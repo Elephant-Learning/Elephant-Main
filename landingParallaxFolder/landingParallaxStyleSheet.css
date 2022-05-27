@@ -35,7 +35,7 @@
 }
 
 .navHeading {
-    display:flex;
+    display: flex;
     cursor: pointer;
     flex-direction:row;
     align-items:center;
@@ -110,7 +110,10 @@
     width: 130px;
     border: #0057b7 1px solid;
     border-radius: 12px;
-    margin-top: 65px;
+    top: 100px;
+    right: 200px;
+    gap: 0px;
+    margin: 0px;
 }
 
 .dropDownNavBarIndLink {
