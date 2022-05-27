@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Gotham Medium';
-    src: url('./fontsGothamSource/Gotham-Medium.otf') format('otf');
+    src: url('./fontsGothamSource/GothamMedium.otf') format('otf');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
     font-family: 'Gotham Extra';
-    src: url('./fontsGothamSource/Gotham-Extra.otf') format('otf');
+    src: url('./fontsGothamSource/Gotham Extra.otf') format('otf');
     font-weight: 200;
     font-style: normal;
     font-display: swap;
@@ -16,7 +16,7 @@
 
 @font-face {
     font-family: 'Gotham Book';
-    src: url('./fontsGothamSource/Gotham-Book.otf') format('otf');
+    src: url('./fontsGothamSource/Gotham Book.otf') format('otf');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -24,7 +24,7 @@
 
 @font-face {
     font-family: 'Gotham Bold';
-    src: url('./fontsGothamSource/Gotham-Bold.otf') format('otf');
+    src: url('./fontsGothamSource/Gotham Bold.otf') format('otf');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -32,7 +32,7 @@
 
 @font-face {
     font-family: 'Gotham Bold Italic';
-    src: url('./fontsGothamSource/Gotham-Medium.otf') format('otf');
+    src: url('./fontsGothamSource/Gotham Bold Italic.otf') format('otf');
     font-weight: bold;
     font-style: italic;
     font-display: swap;
@@ -40,7 +40,7 @@
 
 @font-face {
     font-family: 'Gotham Extra Light Italic';
-    src: url('./fontsGothamSources/Gotham-Medium.otf') format('otf');
+    src: url('./fontsGothamSources/Gotham Extra Light Italic.otf') format('otf');
     font-weight: 200;
     font-style: italic;
     font-display: swap;
@@ -48,7 +48,7 @@
 
 @font-face {
     font-family: 'Gotham Thin';
-    src: url('./fontsGothamSource/Gotham-Medium.otf') format('otf');
+    src: url('./fontsGothamSource/Gotham Thin.otf') format('otf');
     font-weight: 100;
     font-style: normal;
     font-display: swap;
@@ -56,7 +56,7 @@
 
 @font-face {
     font-family: 'Gotham Ultra';
-    src: url('./fontsGothamSource/Gotham-Medium.otf') format('otf');
+    src: url('./fontsGothamSource/Gotham Ultra.otf') format('otf');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -64,7 +64,7 @@
 
 @font-face {
     font-family: 'Gotham Light';
-    src: url('./fontsGothamSource/Gotham-Medium.otf') format('otf');
+    src: url('./fontsGothamSource/Gotham Light.otf') format('otf');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -72,7 +72,7 @@
 
 @font-face {
     font-family: 'Gotham Black';
-    src: url('./fontsGothamSource/Gotham-Medium.otf') format('otf');
+    src: url('./fontsGothamSource/Gotham Black.otf') format('otf');
     font-weight: 900;
     font-style: normal;
     font-display: swap;
