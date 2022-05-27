@@ -106,14 +106,12 @@
 
 .dropDownNavBarList {
     position: relative;
-    height: 6vw;
-    width: 130px;
+    margin-left: -16vw;
+    display: flex;
     border: #0057b7 1px solid;
     border-radius: 12px;
-    top: 100px;
-    right: 200px;
-    gap: 0px;
-    margin: 0px;
+    justify-self: center;
+    align-self: center;
 }
 
 .dropDownNavBarIndLink {
