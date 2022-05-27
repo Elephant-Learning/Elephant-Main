@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Gotham Medium';
-    src: url('./fontsGothamSource/GothamMedium.otf') format('otf');
+    src: url('./fontsGothamSource/Gotham Medium.otf') format('otf');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
