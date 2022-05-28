@@ -31,7 +31,7 @@
 
 .logo {
     width: 40px;
-    margin-right: 10vw;
+    margin-right: 12.25vw;
     cursor: pointer;
     margin-left: 2vw;
 }
@@ -111,14 +111,14 @@
     padding: 0%;
     width: 48vw;
     top: 0px;
-
+    justify-self: center;
+    
 }
 
 .featuresTabIcon {
     display: flex;
     margin-left: 2.5px;
-
-
+    margin-top: 10px;
 }
 
 .dropDownNavBarIndLink {
@@ -136,6 +136,7 @@
 .suiteFeatureHeading {
     font-size: 10px;
     font-family: 'Gotham Medium';
+    width: 10vw;
     margin-top: -40px;
     margin-left: 40px;
 }
