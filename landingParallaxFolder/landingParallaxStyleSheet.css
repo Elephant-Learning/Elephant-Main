@@ -17,7 +17,7 @@
     align-items:center;
     justify-content:center;
     justify-items: center;
-    height: 65px;
+    height: 7.5vh;
     z-index:1;
     opacity: 0.8;
     font-family: 'Gotham Medium';
@@ -30,8 +30,8 @@
 }
 
 .logo {
-    width: 40px;
-    margin-right: 12.25vw;
+    height: 4.5vh;
+    margin-right: 11.8vw;
     cursor: pointer;
     margin-left: 2vw;
 }
@@ -45,10 +45,26 @@
     margin-left: 2.25vw;
     margin-right: 2.25vw;
     font-size: medium;
-    -webkit-transition: color 0.3s;
-    transition: color 0.3s;
     color: black;
+    height: 7.5vh;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s ease-in-out;
     }
+
+.navHeadingSuiteFeatures {
+    position: relative;
+    cursor: pointer;
+    flex-direction:row;
+    align-items:center;
+    margin-left: 2.25vw;
+    margin-right: 2.25vw;
+    font-size: medium;
+    color: black;
+    height: 7.5vh;
+    display: flex;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s ease-in-out;
+}
 
 #dashboardHover {
     display: flex;
@@ -56,13 +72,13 @@
     font-size: medium;
     align-items: center;
     font-family: 'Gotham';
-     flex-direction:row;
-      align-items:center;
-      font-size: medium;
-      cursor: pointer;
-      -webkit-transition: color 0.25s;
-      transition: color 0.25s;
-  }
+    flex-direction:row;
+    align-items:center;
+    font-size: medium;
+    cursor: pointer;
+    -webkit-transition: color 0.25s;
+    transition: color 0.25s;
+}
      
     @keyframes gradientText {
       from {
@@ -94,7 +110,7 @@
     transition: color 0.3s;
     color: black;
     border: none;
-    border-radius: 8px;
+    border-radius: 3.5px;
     background-image: linear-gradient(to right,  #FF0018, #FFA52C, #FFFF41, #008018, #0000F9, #86007D, #FF0018);
     background-size: 2500%;
     animation: gradientText 10s infinite linear;
@@ -103,63 +119,96 @@
 .dropDownNavBarList {
     position: absolute;
     display: flex;
-    border: black 1px solid;
     justify-content: center; 
     align-items: center;
-    margin-top: 65px;
-    height: 65px;
+    margin-top: 7.5vh;
+    height: 7.5vh;
     padding: 0%;
-    width: 48vw;
-    top: 0px;
+    width: 38vw;
+    top: 0vh;
     justify-self: center;
-    
+    visibility: hidden;
+    border-radius: 3.5px;
+    background-image: linear-gradient(135deg, #eeeeee, #ffffff, #eeeeee);
+    pointer-events: none;
 }
 
 .featuresTabIcon {
-    display: flex;
-    margin-left: 2.5px;
-    margin-top: 10px;
+    height: 4.5vh;
+    margin-left: -1vw;
+    margin-right: 0.5vw;
+    margin-top: 1vh;
+}
+
+.featuresTabIcon2 {
+    height: 4.5vh;
+    margin-left: 1.75vw;
+    margin-top: 1.6vh;
+    
 }
 
 .dropDownNavBarIndLink {
-    height: 65px;
-    width: 15vw;
-    border: 1px solid black;    
-    display: flex; 
+    margin-left: 2.5vw;
+    height: 6.75vh;
+    width: 19.5vw;   
+    display: flex;
+    flex-direction: row; 
+    cursor: pointer;
 }
 
 .dropDownNavBarIndLink2 {
-    margin-left: 10px;
-    margin-top: 5px;
+    margin-left: 6.5vw;
+    margin-top: -1vh;
+    width: 19.5vw;
+    height: 6.75vh;
+    display: flex;
+    cursor: pointer;
+    flex-direction: row; 
 }
 
 .suiteFeatureHeading {
-    font-size: 10px;
+    font-size: 1.5vh;
     font-family: 'Gotham Medium';
-    width: 10vw;
-    margin-top: -40px;
-    margin-left: 40px;
+    width: 100vw;
+    margin-left: 0.25vw;
+    margin-top: 1.25vh;
+    cursor: pointer;
 }
 
 .suiteFeatureDescription {
-    font-size: 8px;
+    font-size: 1vh;
     font-family: 'Gotham Light';
-    margin-right: 5px;
-    margin-top: 2px;
-    margin-left: 40px;
+    margin-top: 3.25vh;
+    margin-left: -100vw;
+    width: 12vw;
+    color: gray;
+    -moz-transition: color 0.3s;
+    -webkit-transition: color 0.3s;
+    transition: color 0.3s;
+    cursor: pointer;
 }
 
 .suiteFeatureDescription2 {
-    font-size: 8px;
+    font-size: 1vh;
     font-family: 'Gotham Light';
-    margin-right: 5px;
-    
+    margin-top: 3.75vh;
+    margin-left: -100vw;
+    margin-right: 1vw;
+    width: 11vw;
+    color: gray;
+    -moz-transition: color 0.3s;
+    -webkit-transition: color 0.3s;
+    transition: color 0.3s;
+    cursor: pointer;
 }
 
 .suiteFeatureHeading2 {
-    font-size: 10px;
+    font-size: 1.5vh;
     font-family: 'Gotham Medium';
-    
+    width: 100vw;
+    margin-left: 1vw;
+    margin-top: 1.75vh;
+    cursor: pointer;
 }
 
 #navbar:hover > .navHeading {
@@ -168,8 +217,17 @@
 
 #navbar:hover > .navHeading:hover {
     color: black;
-    z-index: 2;
+    box-shadow: 0px 3px 0px 0px black inset;
 }
+
+#navbar:hover > .navHeadingSuiteFeatures {
+    color: grey;
+}
+
+#navbar:hover > .navHeadingSuiteFeatures:hover {
+    color: black;
+    box-shadow: 0px 3px 0px 0px  black inset;
+    }
 
 #navbar:hover > #dashboardHover:hover {
    color: transparent;
@@ -183,7 +241,109 @@
     color: white;
 }
 
+.navHeadingSuiteFeatures:hover ~ .dropDownNavBarList {
+    visibility: visible;
+    animation: fadeIn 275ms;
+    pointer-events: all;
+}
 
+.dropDownNavBarList:hover ~ .dropDownNavBarList {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: all;
+}
+
+.suiteFeatureDescription:hover ~ .suiteFeatureDescription {
+    color: black;
+}
+
+.suiteFeatureHeading:hover ~ .suiteFeatureDescription {
+    color: black;
+}
+
+.featuresTabIcon:hover ~ .suiteFeatureDescription {
+    color: black;
+}
+
+.featuresTabIcon2:hover ~ .suiteFeatureDescription2 {
+    color: black;
+}
+
+.suiteFeatureHeading2:hover ~ .suiteFeatureDescription2 {
+    color: black;
+}
+
+.suiteFeatureDescription2:hover ~ .suiteFeatureDescription2 {
+    color: black;
+}
+
+
+.dropDownNavBar.dropDownNavBarList:hover .dropDownNavBarList {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: all;
+}
+
+.navHeadingSuiteFeatures:hover + .dropDownNavBarList, .dropDownNavBarList:hover {
+    visibility: visible;
+    pointer-events: all;
+ }
+ 
+.suiteFeatureDescription:hover {
+     color: black;
+}
+
+ .suiteFeatureDescription2:hover {
+    color: black;
+}
+
+.dropDownNavBar:hover + .navHeadingSuiteFeatures {
+    color: black;
+}
+
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+.dropDownNavBarList::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: opacity 0.3s ease-in-out;
+}
+
+.navHeading:hover:after{
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: opacity 0.3s ease-in-out;
+}
+
+.navHeadingSuiteFeatures::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: opacity 0.3s ease-in-out;
+
+}
 
 
 /*
@@ -243,4 +403,3 @@
         color: #D12229;
     }
     }
-*/

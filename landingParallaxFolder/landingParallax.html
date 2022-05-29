@@ -8,9 +8,7 @@
 
     <link rel="icon" href="../icons/elephant-400-400-pride.png">
     <link rel="stylesheet" href="landingParallaxStyleSheet.css">
-    <script src="dependencies/pfpMaker.js" defer></script>
-    <script src="dependencies/faviconGenerator.js" defer></script>
-    <script src="script.js" defer></script>             
+    <script src="landingParallaxFolder/landingParallaxScript.js" defer></script>       
 </head>
 <body style = "margin: 0px; padding: 0;" >
     <header>
@@ -18,20 +16,21 @@
             <img src = "../icons/elephant-400-400-pride.png" alt = "Elephant" class = "logo" onclick="location.href = 'landingParallax.html'"> 
             
             <div class = "navHeading">Dashboard</div>
-            <div class = "navHeading" onclick="location.href = '../pages/suite-features/index.html'">Suite Features</div>
+            <div class = "navHeadingSuiteFeatures" onclick="location.href = '../pages/suite-features/index.html'"><p class = "hoverUnderlineAnimation">Suite Features</p></div>
             <div class = "navHeading" onclick="location.href = '../pages/pricing/index.html'">Pricing</div>
             <div class = "navHeading">Changelog</div>
             <div class = "navHeading">Forums</div>
             <button class = "signInButton">Sign in</button>
             <div class = "dropDownNavBarList">
                 <div class = "dropDownNavBarIndLink">
-                    <div class = "featuresTabIcon"><img src = "../pages/pricing/icons/brain.svg" alt = "flashcardsLogo" height="40px"></div>
-                    <h2 class = "suiteFeatureHeading">Elephant Flashcards</h2>
-                    <p class = "suiteFeatureDescription">Learn, memorize, and master definitions, solutions, and facts in an instant!</p>
+                    <img src = "../pages/pricing/icons/brain.svg" alt = "flashcardsLogo" class = "featuresTabIcon">
+                    <h2 class = "suiteFeatureHeading" onclick="location.href = '../flashcards/index.html'">Elephant Flashcards</h2>
+                    <p class = "suiteFeatureDescription" onclick="location.href = '../flashcards/index.html'">Learn, memorize, and master definitions, solutions, and facts in an instant!</p>
                 </div>  
-                <div class = "dropDownNavBarIndLink2"><img src = "../pages/pricing/icons/timeline.svg" alt = "taskManagerLogo" height="30px"></div>
+                <div class = "dropDownNavBarIndLink2">
+                    <img src = "../pages/pricing/icons/timeline.svg" alt = "taskManagerLogo" class = "featuresTabIcon2">
                     <h2 class = "suiteFeatureHeading2">Elephant Task Manager</h2>
-                    <p class = "suiteFeatureDescription2">Manage your time efficiently with long-term and short-term task scheduling and website blocking features to enhance your productivity at home, at school, and at work!</p>
+                    <p class = "suiteFeatureDescription2">Enhance your productivity with task scheduling and website blocking features!</p>
                 </div>         
             </div>
         </div>
