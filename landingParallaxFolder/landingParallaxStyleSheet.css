@@ -28,12 +28,13 @@
     margin-top: 0;
 }
 
-.logo {
+#logo {
     height: 4.5vh;
     margin-right: 11.8vw;
     cursor: pointer;
     margin-left: 2vw;
 }
+
 
 .navHeading {
     display: flex;
@@ -106,10 +107,10 @@
     align-items: center;
     text-align:center;
     justify-content: center;
-    width: 6.5vw;
+    width: 7.5vw;
     min-height: 4.5vh;
     font-family: 'Gotham';
-    margin-left: 7.5vw;
+    margin-left: 8vw;
     margin-right: 2vw;
     font-size: medium;
     -moz-transition: color 0.3s;
@@ -136,7 +137,7 @@
     align-items: center;
     margin-top: 7.5vh;
     height: 7.5vh;
-    width: 38vw;
+    width: 41vw;
     top: -0.1vh;
     justify-self: center;
     visibility: hidden;
@@ -157,38 +158,36 @@
 
 .featuresTabIcon {
     height: 4.5vh;
-    margin-left: -1.5vw;
-    margin-right: 0vw;
-    margin-top: 1vh;
     cursor: pointer;
+    align-self: center;
 }
 
 .featuresTabIcon2 {
     height: 4.5vh;
-    margin-left: 4vw;
-    margin-top: 1.6vh;
     cursor: pointer;
+    margin-right: 0.5vw;
+    align-self: center;
 }
 
 .dropDownNavBarIndLink {
-    margin-left: 2.5vw;
     height: 6.75vh;
     width: 19.5vw;   
     display: flex;
     flex-direction: row; 
     border-radius: 0.1vw;
     z-index: 3;
+    padding: 0.7vw;
 }
 
 .dropDownNavBarIndLink2 {
-    margin-left: 6.5vw;
-    margin-top: -1vh;
     width: 19.5vw;
     height: 6.75vh;
     display: flex;
     flex-direction: row; 
     border-radius: 0.1vw;
     z-index: 3;
+    padding: 0.7vw;
+    padding-left: 4vw;
 }
 
 .suiteFeatureHeading {
@@ -206,7 +205,7 @@
     font-family: 'Gotham Light';
     margin-top: 3.25vh;
     margin-left: -10vw;
-    width: 10vw;
+    width: 15vw;
     color: gray;
     -moz-transition: color 0.3s;
     -webkit-transition: color 0.3s;
@@ -220,9 +219,9 @@
 .suiteFeatureDescription2 {
     font-size: 1vh;
     font-family: 'Gotham Light';
-    margin-top: 3.75vh;
-    margin-left: -15vw;
-    width: 11vw;
+    margin-top: 3.25vh;
+    margin-left: -10vw;
+    width: 13vw;
     color: gray;
     -moz-transition: color 0.3s;
     -webkit-transition: color 0.3s;
@@ -237,11 +236,11 @@
 .suiteFeatureHeading2 {
     font-size: 1.5vh;
     font-family: 'Gotham Medium';
-    width: 15vw;
-    margin-left: 1vw;
-    margin-top: 1.75vh;
+    width: 10vw;
+    margin-left: 0.75vw;
+    margin-top: 1.25vh;
     cursor: pointer;
-    border-radius: 0.1vw;
+    border-radius: 0.1vw;   
 }
 
 #navbar:hover > .navHeading {
