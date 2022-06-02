@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root{
+    --dark-blue:#004153;
+    --blue:#335762;
+    --light-blue:#f6f7fb;
+    --green:#3dffae;
+    --red:#ff3d71;
+    --mid-blue:#42b3ff;
+
+    --theme-color-1:#405DE6;
+    --theme-color-2:#833AB4;
+    --theme-color-dark:#354382;
+
+    --bg-color-1:white;
+    --bg-color-2:#f6f7fb;
+    --card-color:white;
+    --text-color:black;
+    --border-color:lightgray;
+    --image-invert:0;
+
+    --popup-color-1:#000;
+    --popup-color-2:#000;
+
+    --darken-amount:0.15;
+}
+
+
+body{
+    margin:0;
+    font-family: 'Outfit', sans-serif;
+    background:var(--bg-color-1);
+    color:var(--text-color);
+    display:flex;
+    flex-direction:row;
+    overflow:hidden;
+    font-size:12px;
+    transition-duration:250ms;
+    transition-property:background, color;
+}
+
+#desktop-wrapper{
+    display:flex;
+    flex-direction:row;
+    width:100vw;
+    height:100vh;
+}
+
+#desktop-sidebar{
+    background:var(--bg-color-2);
+    border-right:1px solid var(--border-color);
+    width:250px;
+    padding:25px;
+}
+
+#desktop-profile{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:25px;
+}
+
+#desktop-profile-picture{
+    height:50px;
+}
+
+#desktop-username{
+    font-size:18px;
+    margin:0;
+    font-weight:700;
+}
+
+#desktop-profile-account{
+    font-size:13px;
+    margin:0;
+    font-weight:300;
+}
+
+#desktop-tabs{
+
+}

@@ -251,6 +251,7 @@ function addDefinition(index, value){
     document.querySelector(".ddiv-" + index).insertBefore(inputDiv, document.querySelector(".dbtn-" + index));
     document.querySelector("#dinput-" + index + "-" + inputDistribution[index - 1]).focus();
     document.querySelector("#dinput-" + index + "-" + inputDistribution[index - 1]).scrollIntoView();
+    window.scrollTo(0, 0);
 }
 
 function deleteCard(index){
@@ -373,6 +374,7 @@ function createNewCard(term, descriptionList){
 
     termInput.focus();
     if(document.querySelectorAll(".term-input")[cardIndex - 1] !== undefined) document.querySelectorAll(".term-input")[cardIndex - 1].scrollIntoView();
+    window.scrollTo(0, 0);
 }
 
 function saveChanges(edit){
@@ -791,4 +793,5 @@ function getDataUrl(img) {
 }
 
 checkSort(true);
+window.scrollTo(0, 0);
 console.log("Thank you for choosing %cElephant%c... also why are you looking in the console??", "color:#405DE6")
