@@ -133,6 +133,21 @@
             </div>
         </div>
     </div>
+    <div id="radio-modal">
+        <div id="radio-list">
+            <div>
+                <img src="./music/covers/city-night.png" alt="" id="favorited-tracks" onclick="favoritedPlaylist = true;">
+                <img src="./icons/heart.svg" alt="" onclick="favoritedPlaylist = true;">
+                <h1>Favorited Tracks</h1>
+            </div>
+            <div>
+                <img src="./music/covers/summer-strings.png" alt="" id="mix-playlist" onclick="favoritedPlaylist = false;">
+                <img src="./icons/radio.svg" alt="" onclick="favoritedPlaylist = false;">
+                <h1>Mixed Playlist</h1>
+            </div>
+        </div>
+        <div id="radio-background"></div>
+    </div>
     <div id="sidebar">
         <div id="custom-picture"></div>
         <button onclick="createDeck()">+ Create Deck</button>
@@ -208,6 +223,9 @@
         </div>
         <div id="sort-div-btn" onclick="toggleSortModal()">
             <img src="icons/sort.svg" alt="">
+        </div>
+        <div id="radio-div-btn" onclick="togglePlaylistModal()">
+            <img src="icons/radio.svg" alt="">
         </div>
     </div>
 </body>

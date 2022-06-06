@@ -86,21 +86,40 @@ function toggleSortModal(){
     }
 }
 
+function togglePlaylistModal(){
+    if(document.getElementById('radio-modal').style.visibility === "visible"){
+        document.getElementById('radio-modal').style.opacity = "0";
+        document.getElementById('radio-modal').style.visibility = "hidden";
+    } else {
+        document.getElementById('radio-modal').style.opacity = "1";
+        document.getElementById('radio-modal').style.visibility = "visible";
+    }
+}
+
 function toggleMusicModal(){
     if(document.getElementById('music-player').classList.contains('hidden-music-player')){
         document.getElementById('music-player').classList.remove('hidden-music-player')
         document.getElementById('dashboard-review-btn').style.bottom = "95px";
         document.getElementById('sort-div-btn').style.bottom = "95px"
+        document.getElementById('radio-div-btn').style.bottom = "95px";
         document.getElementById('flashcard-answers').style.maxHeight = "calc(100vh - 300px)"
         document.getElementById('main-container').style.paddingBottom = "95px";
-        document.getElementById('main-container').style.height = "calc(100vh - 190px)"
+        document.getElementById('main-container').style.height = "calc(100vh - 190px)";
+        document.getElementById('radio-div-btn').style.opacity = "1";
+        document.getElementById('radio-div-btn').style.visibility = "visible";
+        setupMusicPics();
     } else {
         document.getElementById('music-player').classList.add('hidden-music-player')
         document.getElementById('dashboard-review-btn').style.bottom = "25px";
-        document.getElementById('sort-div-btn').style.bottom = "25px"
+        document.getElementById('sort-div-btn').style.bottom = "25px";
+        document.getElementById('radio-div-btn').style.bottom = "25px";
         document.getElementById('flashcard-answers').style.maxHeight = "calc(100vh - 175px)"
         document.getElementById('main-container').style.paddingBottom = "25px";
         document.getElementById('main-container').style.height = "calc(100vh - 120px)"
+        document.getElementById('radio-div-btn').style.opacity = "0";
+        document.getElementById('radio-div-btn').style.visibility = "hidden";
+        document.getElementById('radio-modal').style.opacity = "0";
+        document.getElementById('radio-modal').style.visibility = "hidden";
     }
 }
 

@@ -1446,14 +1446,12 @@ select option:checked {
     filter:invert(var(--image-invert));
 }
 
-#sort-div-btn{
+#sort-div-btn, #radio-div-btn{
     position:absolute;
     background:linear-gradient(150deg, var(--theme-color-1), var(--theme-color-2));
-    bottom:25px;
-    right:25px;
     width:40px;
     height:40px;
-    box-shadow:0 0 10px 0 black;
+    box-shadow:0 0 10px 0 gray;
     border-radius:10px;
     display:flex;
     flex-direction:row;
@@ -1462,13 +1460,95 @@ select option:checked {
     cursor:pointer;
     transition-duration:250ms;
     filter:brightness(calc(-1 * var(--darken-amount) * var(--image-invert) + 1));
+    bottom:25px;
 }
 
-#sort-div-btn:hover{
+#sort-div-btn{
+    right:25px;
+}
+
+#radio-div-btn{
+    right:80px;
+    opacity:0;
+    visibility:hidden;
+    transition-property:opacity;
+    transition-delay:500ms;
+}
+
+#sort-div-btn:hover, #radio-div-btn:hover{
     transform:scale(1.1)
 }
 
-#sort-div-btn > img{
-    width:30px;
+#sort-div-btn > img, #radio-div-btn > img{
+    width:25px;
     filter:invert(1);
+}
+
+#radio-modal{
+    position:absolute;
+    left:270px;
+    bottom:95px;
+    z-index:1;
+    padding:25px;
+    width:200px;
+    height:75px;
+    border-radius:15px;
+    box-shadow:0 0 15px 0 gray;
+    backdrop-filter:blur(6px);
+    overflow:hidden;
+    transition-duration:250ms;
+    visibility:hidden;
+    opacity:0;
+}
+
+#radio-list{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    height:75px;
+    position:absolute;
+    z-index:3;
+    gap:10px;
+}
+
+#radio-list > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:10px;
+}
+
+#radio-list > div > img:first-of-type {
+    height:25px;
+    border-radius:7px;
+    box-shadow:0 0 10px 0 black;
+    cursor:pointer;
+    filter:brightness(0.75);
+}
+
+#radio-list > div > img:last-of-type{
+    height:20px;
+    position:absolute;
+    left:2.5px;
+    filter:invert(1);
+    cursor:pointer;
+}
+
+#radio-list > div > h1{
+    font-size:16px;
+    margin:0;
+    color:black;
+    font-weight:700;
+}
+
+#radio-background{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    opacity: 0.8;
+    z-index: 1;
+    background: var(--bg-color-1);
 }

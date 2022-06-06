@@ -1,4 +1,6 @@
 let audio = undefined;
+let favoritedPlaylist = false;
+
 const songs = [
     ["Rainy Café", "Abhiram Boddu"],
     ["Space Trip", "Abhiram Boddu"],
@@ -16,6 +18,31 @@ let savedVolume = document.getElementById('music-volume').value / 100;
 
 function setVolume(){
     audio.volume = document.getElementById('music-volume').value / 100;
+}
+
+function getFavoriteMusic(){
+    let favoriteTrack;
+    let favoriteMusic = localStorage.getItem('favorite-music');
+    favoriteMusic = JSON.parse(favoriteMusic);
+
+    try{
+        favoriteTrack = songs[favoriteMusic[Math.floor(Math.random() * favoriteMusic.length)]][0].toLowerCase().replace(' ', '-')
+        if(favoriteTrack === undefined) getFavoriteMusic();
+        return favoriteTrack;
+    } catch{
+        getFavoriteMusic();
+    }
+}
+
+function setupMusicPics(){
+    const favoriteTrack = getFavoriteMusic();
+
+    if(favoriteTrack === undefined){
+        setupMusicPics()
+    } else{
+        document.getElementById('favorited-tracks').src = './music/covers/' + favoriteTrack + ".png"
+        document.getElementById('mix-playlist').src = './music/covers/' + songs[Math.floor(Math.random() * songs.length)][0].toLowerCase().replace(' ', '-') + ".png"
+    }
 }
 
 function favoriteMusic(){
@@ -42,7 +69,7 @@ function randomizeSongs(play){
     let favoriteMusic = localStorage.getItem('favorite-music');
     favoriteMusic = JSON.parse(favoriteMusic);
 
-    if(selectedSongIndex === chosen){
+    if(selectedSongIndex === chosen || favoritedPlaylist && !favoriteMusic.includes(chosen)){
         randomizeSongs();
     } else {
         document.getElementById('album-name').innerHTML = songs[chosen][0];

@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let chosenIcon;
 
     if(month === 5){
-        const prides = ["gay-pride", "heterosexual", "lesbian-pride", "non-binary-pride", "pride", "trans-pride", "bisexual-pride"];
+        const prides = ["gay-pride", "heterosexual", "lesbian-pride", "non-binary-pride", "pride", "trans-pride", "bisexual"];
         chosenIcon = "./icons/elephant-400-400-" + prides[Math.floor(Math.random() * prides.length)] + ".png";
     } else if(month === 7 && day === 28){
         chosenIcon = "./icons/elephant-400-400-india.png";
