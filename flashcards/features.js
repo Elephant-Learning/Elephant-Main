@@ -91,6 +91,7 @@ function togglePlaylistModal(){
         document.getElementById('radio-modal').style.opacity = "0";
         document.getElementById('radio-modal').style.visibility = "hidden";
     } else {
+        setupMusicPics();
         document.getElementById('radio-modal').style.opacity = "1";
         document.getElementById('radio-modal').style.visibility = "visible";
     }

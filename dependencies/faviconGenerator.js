@@ -1,4 +1,5 @@
 let api = 'ZmE1Y2I5N2YxYWQyNzEzZTEzNDRjM2QyNzE3NzZmODY=';
+const prefix = "./";
 
 document.addEventListener('DOMContentLoaded', function() {
     let date = new Date();
@@ -14,21 +15,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if(month === 5){
         const prides = ["gay-pride", "heterosexual", "lesbian-pride", "non-binary-pride", "pride", "trans-pride", "bisexual"];
-        chosenIcon = "./icons/elephant-400-400-" + prides[Math.floor(Math.random() * prides.length)] + ".png";
+        chosenIcon = prefix + "icons/elephant-400-400-" + prides[Math.floor(Math.random() * prides.length)] + ".png";
     } else if(month === 7 && day === 28){
-        chosenIcon = "./icons/elephant-400-400-india.png";
+        chosenIcon = prefix + "icons/elephant-400-400-india.png";
     } else if(month === 6 && day === 4) {
-        chosenIcon = "./icons/elephant-400-400-usa2.png";
+        chosenIcon = prefix + "icons/elephant-400-400-usa2.png";
     } else if(month === 4 && year === 2022){
-        chosenIcon = "./icons/elephant-400-400-ukraine-2.png";
+        chosenIcon = prefix + "icons/elephant-400-400-ukraine-2.png";
     } else if(month === 10 && day === 24){
-        chosenIcon = "./icons/elephant-400-400-thanksgiving-1.png";
+        chosenIcon = prefix + "icons/elephant-400-400-thanksgiving-1.png";
     } else if([11,0,1].includes(month) && Math.floor(Math.random() * 10) === 1){
-        chosenIcon = "./icons/elephant-400-400-snowy-2.png";
+        chosenIcon = prefix + "icons/elephant-400-400-snowy-2.png";
     } else if(date.getDay() === 5 && day === 13 && time === "3:"){
-        chosenIcon = "./icons/elephant-400-400-val-day-2.png";
+        chosenIcon = prefix + "icons/elephant-400-400-val-day-2.png";
     } else {
-        chosenIcon = "./icons/elephant-400-400-grayscale.png";
+        chosenIcon = prefix + "icons/elephant-400-400-grayscale.png";
     }
 
     let long;
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const sunsetGMT = new Date(sunset * 1000);
 
                     if(description === "snow"){
-                        chosenIcon = "./icons/elephant-400-400-snowy-2.png";
+                        chosenIcon = prefix + "icons/elephant-400-400-snowy-2.png";
                     }
                 });
         });

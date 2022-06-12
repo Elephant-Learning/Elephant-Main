@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root{
     --dark-blue:#004153;
@@ -27,7 +27,7 @@
 
 body{
     margin:0;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background:var(--bg-color-1);
     color:var(--text-color);
     display:flex;
@@ -197,7 +197,7 @@ body{
 }
 
 #main-container > div div:last-of-type h1{
-    font-size:1.5em;
+    font-size:16px;
     width:130px;
     margin:0;
 }
@@ -223,7 +223,7 @@ body{
 }
 
 #main-container > div div:last-of-type p {
-    font-size:1em;
+    font-size:11px;
     line-height:12px;
     color:gray;
     margin:10px 0;
