@@ -44,7 +44,6 @@ document.getElementById('desktop-sidebar').addEventListener('contextmenu', funct
 })
 
 document.getElementById('desktop-sidebar').addEventListener('click', function(e){
-    e.preventDefault();
     document.getElementById('desktop-main-container-context-menu').classList.add('inactive-modal');
     document.getElementById('desktop-sidebar-context-menu').classList.add('inactive-modal');
     sidebarContextMenu = false;
@@ -67,7 +66,6 @@ document.getElementById('desktop-main-container').addEventListener('contextmenu'
 })
 
 document.getElementById('desktop-main-container').addEventListener('click', function(e){
-    e.preventDefault();
     document.getElementById('desktop-main-container-context-menu').classList.add('inactive-modal');
     document.getElementById('desktop-sidebar-context-menu').classList.add('inactive-modal');
     mainContextMenu = false;

@@ -213,7 +213,7 @@ body{
 
 .desktop-sidebar-break{
     height:1px;
-    width:220px;
+    width:calc(var(--size) * 220px);
     background:var(--light-border-color);
     margin:calc(var(--size) * 12px) calc(var(--size) * 18px);
 }
