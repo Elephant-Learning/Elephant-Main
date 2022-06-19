@@ -73,4 +73,23 @@ document.getElementById('desktop-main-container').addEventListener('click', func
     mainContextMenu = false;
 })
 
-togglePageFlip(0)
+function closeNews(){
+    document.getElementById('desktop-main-news').style.visibility = "hidden";
+    document.querySelectorAll('.desktop-tab').forEach(function(item){
+        item.style.top = "calc(var(--size) * 44px)";
+    })
+    document.getElementById('desktop-main-container-tab').style.top = "0";
+}
+
+function initialize(){
+    if(document.getElementById('desktop-main-news').hasChildNodes()){
+        document.getElementById('desktop-main-news').style.visibility = "visible";
+        document.querySelectorAll('.desktop-tab').forEach(function(item){
+            item.style.top = "calc(var(--size) * 68px)";
+        })
+        document.getElementById('desktop-main-container-tab').style.top = "calc(var(--size) * 24px)";
+    }
+    togglePageFlip(0)
+}
+
+initialize();
