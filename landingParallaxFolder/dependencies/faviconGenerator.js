@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
             favicon.setAttribute('href', "../icons/elephant-400-400-gay-pride.png");
             logo.setAttribute('src', "../icons/elephant-400-400-gay-pride.png");
         }
-        if (day >= 10 && day <= 13) {
+        if (day >= 9 && day <= 13) {
             favicon.setAttribute('href', "../icons/elephant-400-400-lesbian-pride.png");
             logo.setAttribute('src', "../icons/elephant-400-400-lesbian-pride.png");
         }
@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
             logo.setAttribute('src', "../icons/elephant-400-400-non-binary-pride.png");
         }
         else if (day >= 19 && day <= 22) {
-            favicon.setAttribute('href', "../icons/elephant-400-400-heterosexual.png");
-            logo.setAttribute('src', "../icons/elephant-400-400-heterosexual.png");
+            favicon.setAttribute('href', "../icons/elephant-400-400-pink-01.png");
+            logo.setAttribute('src', "../icons/elephant-400-400-pink-01.png");
         }
         else if (day >= 23 && day <= 26) {
             favicon.setAttribute('href', "../icons/elephant-400-400-trans-pride.png");

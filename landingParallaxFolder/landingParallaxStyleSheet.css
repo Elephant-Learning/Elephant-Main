@@ -35,7 +35,6 @@
     margin-left: 2vw;
 }
 
-
 .navHeading {
     display: flex;
     position: relative;
@@ -115,15 +114,16 @@
     font-size: medium;
     -moz-transition: color 0.3s;
     -webkit-transition: color 0.3s;
-    transition: color 0.3s;-webkit-transition: all 300ms  ease-in-out;
+    transition: color 0.3s;
+    -webkit-transition: all 300ms  ease-in-out;
     -ms-transition: color 300ms ease-in-out;
     -o-transition: color 300ms ease-in-out;
     color: black;
     border: none;
     border-radius: 0.25vw;
-    background-image: linear-gradient(135DEG,  #A75051, #B27D58, #B3AF38, #589A5D, #4781A7, #746198, #A75051);
+    background-image: linear-gradient(90deg ,#ffcfe4, #ff9cc7, #ff94c3, #fa6eab, #ff529d, #f7398b, #f7237e, #ff006d, #f7237e, #f7398b, #ff529d, #fa6eab, #ff94c3, #ff9cc7, #ffcfe4);
     background-size: 1000%;
-    animation: gradientText 1000s infinite linear;
+    animation: gradientText 2000s infinite linear;
     font-size: 1.8vh;
     line-height: 0%;
     padding: none;
@@ -133,12 +133,12 @@
 .dropDownNavBarList {
     display: flex;
     position:absolute;
-    justify-content: center; 
-    align-items: center;
+    justify-content: left; 
     margin-top: 7.5vh;
-    height: 7.5vh;
-    width: 41vw;
-    top: -0.1vh;
+    height: 15vh;
+    width: 14vw;
+    top: 0vh;
+    right: 46.5vw;
     justify-self: center;
     visibility: hidden;
     border-radius: 0.25vw;
@@ -154,59 +154,67 @@
     transition: all 300ms ease-in-out;
     opacity: 1;
     z-index: 2;
+    animation: fadeOut 275ms;
+    animation: fadeIn 275ms;
 }
 
 .featuresTabIcon {
-    height: 4.5vh;
+    width: 2.5vw;
     cursor: pointer;
-    align-self: center;
+    align-self: center; 
 }
 
 .featuresTabIcon2 {
     height: 4.5vh;
     cursor: pointer;
-    margin-right: 0.5vw;
-    align-self: center;
+    align-self: center; 
 }
 
 .dropDownNavBarIndLink {
-    height: 6.75vh;
-    width: 19.5vw;   
+    height: 5vh;
+    width: 12.5vw;   
     display: flex;
     flex-direction: row; 
     border-radius: 0.1vw;
     z-index: 3;
-    padding: 0.7vw;
+    align-self: right;
+    align-items: center;
+    padding-left: 0.75vw;
+    padding-top: 0.75vw;
 }
 
 .dropDownNavBarIndLink2 {
-    width: 19.5vw;
-    height: 6.75vh;
+    height: 5vh;
+    width: 12.5vw;   
     display: flex;
     flex-direction: row; 
     border-radius: 0.1vw;
     z-index: 3;
-    padding: 0.7vw;
-    padding-left: 4vw;
+    align-self: right;
+    align-items: center;
+    padding-left: 0.75vw;
+    padding-top: 8.75vh;
+    margin-left: -13vw;
 }
 
 .suiteFeatureHeading {
     font-size: 1.5vh;
     font-family: 'Gotham Medium';
     width: 10vw;
-    margin-left: 0.75vw;
-    margin-top: 1.25vh;
     cursor: pointer;
     border-radius: 0.1vw;
+    padding-left: 1vw;
+    padding-bottom: 2.75vh;
+    line-height: 0;
 }
 
 .suiteFeatureDescription {
-    font-size: 1vh;
+    font-size: 0.9vh;
     font-family: 'Gotham Light';
-    margin-top: 3.25vh;
-    margin-left: -10vw;
     width: 15vw;
     color: gray;
+    padding-top: 1.6vh;
+    margin-left: -6vw;
     -moz-transition: color 0.3s;
     -webkit-transition: color 0.3s;
     transition: color 0.3s;
@@ -217,18 +225,17 @@
 }
 
 .suiteFeatureDescription2 {
-    font-size: 1vh;
+    font-size: 0.9vh;
     font-family: 'Gotham Light';
-    margin-top: 3.25vh;
-    margin-left: -10vw;
-    width: 13vw;
+    width: 15vw;
     color: gray;
+    padding-top: 1.6vh;
+    margin-left: -6.2vw;
     -moz-transition: color 0.3s;
     -webkit-transition: color 0.3s;
     transition: color 0.3s;
     -ms-transition: color 0.3s;
     -o-transition: color 0.3s;
-    cursor: pointer;
     cursor: pointer;
     border-radius: 0.1vw;
 }
@@ -237,10 +244,11 @@
     font-size: 1.5vh;
     font-family: 'Gotham Medium';
     width: 10vw;
-    margin-left: 0.75vw;
-    margin-top: 1.25vh;
     cursor: pointer;
-    border-radius: 0.1vw;   
+    border-radius: 0.1vw;
+    padding-left: 1vw;
+    padding-bottom: 2.75vh;
+    line-height: 0;  
 }
 
 #navbar:hover > .navHeading {
@@ -248,8 +256,8 @@
 }
 
 #navbar:hover > .navHeading:hover {
-    color: black;
-    box-shadow: 0px 0.1vh 0px 0px black inset;
+    color: #fc036f;
+    box-shadow: 0px 0.1vh 0px 0px #fc036f inset;
 }
 
 #navbar:hover > .navHeadingSuiteFeatures {
@@ -257,8 +265,8 @@
 }
 
 #navbar:hover > .navHeadingSuiteFeatures:hover {
-    color: black;
-    box-shadow: 0px 0.1vh 0px 0px  black inset;
+    color: #fc036f;
+    box-shadow: 0px 0.1vh 0px 0px #fc036f inset;
     }
 
 #navbar:hover > #dashboardHover:hover {
@@ -311,11 +319,12 @@
 
 
 
-.dropDownNavBar.dropDownNavBarList:hover .dropDownNavBarList {
+.dropDownNavBarList.dropDownNavBarList:hover .dropDownNavBarList {
     visibility: visible;
     opacity: 1;
     pointer-events: all;
 }
+
 
 .navHeadingSuiteFeatures:hover + .dropDownNavBarList, .dropDownNavBarList:hover {
     visibility: visible;
@@ -337,6 +346,8 @@
 .dropDownNavBarIndLink:hover .navHeadingSuiteFeatures {
     color: black;
 }
+
+
 
 @keyframes fadeIn {
     0% {
@@ -362,11 +373,10 @@
     z-index: 1;
     width: 100%;
     height: 100%;
-    opacity: 1;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: fadeOut 275ms;    
 }
 
-.navHeading:hover:after{
+.navHeading:hover::after{
     content: '';
     position: absolute;
     z-index: -1;
@@ -374,13 +384,13 @@
     height: 100%;
     opacity: 0;
     border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     transition: opacity 0.3s ease-in-out;
     -moz-transition: opacity 0.3s ease-in-out;
     -webkit-transition: opacity 0.3s ease-in-out;
-        -ms-transition: opacity 0.3s ease-in-out;
+    -ms-transition: opacity 0.3s ease-in-out;
     -o-transition: opacity 0.3s ease-in-out;
     cursor: pointer;
+    box-shadow: 0px 0.1vh 0px 0px  black inset;
 }
 
 .navHeadingSuiteFeatures::after {
@@ -390,17 +400,18 @@
     width: 100%;
     height: 100%;
     opacity: 0;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     transition: opacity 0.3s ease-in-out;
     transition: opacity 0.3s ease-in-out;
     -moz-transition: opacity 0.3s ease-in-out;
     -webkit-transition: opacity 0.3s ease-in-out;
     -ms-transition: opacity 0.3s ease-in-out;
     -o-transition: opacity 0.3s ease-in-out;
+    box-shadow: 0px 0.1vh 0px 0px  black inset;
+    animation: fadeOut 275ms;   
 }
 
 .dropDownNavBarList:hover::after {
-    animation: fadeOut 275ms;
+    opacity: 0;
 }
 
 
