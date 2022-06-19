@@ -7,12 +7,13 @@
     <title>Flashcards | Elephant - The Ultimate Student Suite</title>
 
     <link rel="icon" href="../icons/elephant-400-400-grayscale.png">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/recents.css">
 
     <script src="dependencies/FileSaver.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
 
-    <script src="script.js" defer></script>
+    <script src="modalHandling.js" defer></script>
 </head>
 <body>
     <div id="desktop-wrapper">
@@ -22,7 +23,7 @@
                 <p>Create Folder</p>
             </div>
         </div>
-        <div id="desktop-main-container-context-menu" class="inactive-modal context-menu">
+        <div id="desktop-main-container-context-menu" class="context-menu inactive-modal">
             <div>
                 <img src="./icons/plus.png" alt="Add">
                 <p>Create Deck</p>
@@ -31,6 +32,18 @@
                 <img src="./icons/add_folder.png" alt="Add">
                 <p>Create Folder</p>
             </div>
+        </div>
+        <div id="desktop-settings-modal" class="inactive-modal">
+            <h1>Settings & Preferences</h1>
+            <div id="desktop-settings-size">
+                <p class="desktop-size-settings-p" onclick="toggleSizeSetting(0)">75%</p>
+                <p class="desktop-size-settings-p settings-size-active" onclick="toggleSizeSetting(1)">100%</p>
+                <p class="desktop-size-settings-p" onclick="toggleSizeSetting(2)">125%</p>
+                <p class="desktop-size-settings-p" onclick="toggleSizeSetting(3)">150%</p>
+            </div>
+        </div>
+        <div id="desktop-notifications-modal" class="inactive-modal">
+
         </div>
         <div id="desktop-navbar">
             <div id="desktop-main-image">
@@ -46,6 +59,10 @@
                 </div>
                 <div class="desktop-navbar-right-img">
                     <img src="./icons/notification.png" alt="Notifications">
+                    <div></div>
+                </div>
+                <div class="desktop-navbar-right-img" onclick="toggleSettingsModal()">
+                    <img src="./icons/settings.png" alt="Notifications">
                 </div>
                 <div id="desktop-navbar-profile">
                     <img src="../icons/avatars/33.png" alt="" id="desktop-navbar-profile-image">
@@ -60,19 +77,19 @@
         <div id="desktop-parent-container">
             <div id="desktop-sidebar">
                 <div id="desktop-sidebar-categories">
-                    <div class="desktop-sidebar-category active-sidebar-category">
+                    <div class="desktop-sidebar-category active-sidebar-category" onclick="togglePageFlip(0)">
                         <div>
                             <img src="./icons/recent.png" alt="Recent">
                         </div>
                         <p>Recents</p>
                     </div>
-                    <div class="desktop-sidebar-category">
+                    <div class="desktop-sidebar-category" onclick="togglePageFlip(1)">
                         <div>
                             <img src="./icons/deck.png" alt="Recent">
                         </div>
                         <p>Your Decks</p>
                     </div>
-                    <div class="desktop-sidebar-category">
+                    <div class="desktop-sidebar-category" onclick="togglePageFlip(2)">
                         <div>
                             <img src="./icons/favorite.png" alt="Recent">
                         </div>
@@ -102,11 +119,41 @@
                     </div>
                 </div>
             </div>
-            <div id="desktop-main-container"></div>
+            <div id="desktop-main-container">
+                <p id="desktop-main-container-tab"></p>
+                <div id="desktop-main-tabs">
+                    <div class="desktop-tab" id="recents-tab">
+                        <div id="recents-create">
+                            <div>
+                                <img src="./icons/file.png" alt="">
+                                <div>
+                                    <h1>Create New Deck</h1>
+                                    <p>Revise and Memorize</p>
+                                </div>
+                                <img src="icons/plus.png" alt="">
+                            </div>
+                            <div>
+                                <img src="./icons/folder.png" alt="">
+                                <div>
+                                    <h1>Create New Folder</h1>
+                                    <p>Organize and Group Decks</p>
+                                </div>
+                                <img src="icons/plus.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="desktop-tab" id="favorites-tab">
+                        stop cring
+                    </div>
+                    <div class="desktop-tab" id="your-decks">
+                        stop crcing
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div id="mobile-wrapper">
-
+        mobile version not released...
     </div>
 </body>
 </html>
