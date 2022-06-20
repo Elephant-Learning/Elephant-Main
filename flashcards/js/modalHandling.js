@@ -1,7 +1,7 @@
 let sidebarContextMenu = false;
 let mainContextMenu = false;
 
-let pages = ["Recently Viewed", "Your Decks", "Favorited Decks"]
+let pages = ["Recently Viewed", "Your Decks", "Favorited Decks", "Skyline High School Chat Group"]
 
 function toggleSettingsModal(){
     if(document.getElementById('desktop-settings-modal').classList.contains('inactive-modal')){
@@ -18,6 +18,20 @@ function togglePageFlip(index){
     try {document.querySelector(".active-tab").classList.remove('active-tab')}
     catch{}
     document.querySelectorAll('.desktop-tab')[index].classList.add('active-tab')
+
+    const removeBottomBtns = [3]
+
+    if(removeBottomBtns.includes(index)){
+        document.querySelectorAll('.desktop-bottom-btn').forEach(function(item){
+            item.classList.add('inactive-modal')
+        })
+    } else {
+        try {
+            document.querySelectorAll('.desktop-bottom-btn').forEach(function(item){
+                item.classList.remove('inactive-modal')
+            })
+        } catch{}
+    }
 }
 
 function toggleSizeSetting(value){
@@ -87,7 +101,12 @@ function initialize(){
         })
         document.getElementById('desktop-main-container-tab').style.top = "calc(var(--size) * 24px)";
     }
-    togglePageFlip(0)
+    togglePageFlip(3)
+}
+
+//toggle Loading Bar
+window.onload = function(){
+    document.getElementById('desktop-loader-container').classList.add('inactive-modal')
 }
 
 initialize();
