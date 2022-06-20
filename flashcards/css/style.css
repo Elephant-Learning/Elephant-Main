@@ -53,7 +53,7 @@ body{
     border-right:1px solid var(--dark-border-color);
 }
 
-#desktop-main-image > img{
+#desktop-main-image > a > img{
     width:calc(var(--size) * 24px);
     /*filter:saturate(0);*/
 }
@@ -136,7 +136,7 @@ body{
 
 #desktop-navbar-profile-image {
     height: calc(var(--size) * 24px);
-    margin-right:12px;
+    margin-right:calc(var(--size) * 12px);
 }
 
 #navbar-profile-text > h1{
@@ -152,13 +152,14 @@ body{
     font-weight:300;
     color:lightgray;
     cursor:default;
+    width:auto;
     margin:0;
 }
 
 #desktop-navbar-profile > img:last-of-type{
     filter:invert(1);
     height:calc(var(--size) * 16px);
-    margin:0 6px
+    margin:0 calc(var(--size) * 6px);
 }
 
 #desktop-parent-container{
@@ -291,11 +292,12 @@ body{
 #desktop-settings-modal:not(.inactive-modal){
     position:absolute;
     z-index:1;
-    right:calc(var(--size) * 128px);
+    right:calc(var(--size) * 114px);
     width:calc(var(--size) * 320px);
     top:calc(var(--size) * 60px);
     background:var(--bg-color-1);
     border-radius:calc(var(--size) * 6px);
+    border:1px solid var(--light-border-color);
     box-shadow:0 0 calc(var(--size) * 6px) 0 var(--dark-border-color);
     min-height:calc(var(--size) * 192px);
 }
@@ -356,7 +358,7 @@ body{
 
 #desktop-main-container-tab{
     font-size:calc(var(--size) * 12px);
-    width:calc(100vw - calc(var(--size) * 304px));
+    width:100%;
     padding:calc(var(--size) * 14px) calc(var(--size) * 24px);
     font-weight:600;
     border-bottom:1px solid var(--light-border-color);
@@ -380,6 +382,8 @@ body{
     position:absolute;
     top:calc(var(--size) * 44px);
     left:calc(var(--size) * 256px);
+    width:calc(100vw - var(--size) * 256px);
+    height:calc(100vh - var(--size) * 128px)
 }
 
 #mobile-wrapper{
@@ -405,6 +409,7 @@ body{
 #desktop-main-news > a{
     font-size:calc(var(--size) * 12px);;
     font-weight:600;
+    text-decoration:underline 2px;
     color:black;
 }
 
@@ -421,7 +426,7 @@ body{
 }
 
 #desktop-loader-container{
-    transition-duration:1ms;
+    transition-duration:500ms;
     position:absolute;
     z-index:5;
     top:0;
@@ -483,6 +488,39 @@ body{
     z-index:7;
     color:white;
     bottom:27.5vmin;
+}
+
+#desktop-bottom-buttons{
+    position:absolute;
+    display:flex;
+    flex-direction:row-reverse;
+    align-items:center;
+    gap:calc(var(--size) * 12px);
+    bottom:calc(var(--size) * 12px);
+    right:calc(var(--size) * 12px);
+}
+
+.desktop-bottom-btn{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    background:var(--dark-gray);
+    width:calc(var(--size) * 36px);
+    height:calc(var(--size) * 36px);
+    border-radius:50%;
+    cursor:pointer;
+    transition-duration:250ms;
+}
+
+.desktop-bottom-btn:not(.inactive-modal){
+    opacity:1;
+    visibility:visible;
+}
+
+.desktop-bottom-btn > img{
+    height:calc(var(--size) * 20px);
+    filter:invert(1);
 }
 
 @keyframes loaderRotate{
