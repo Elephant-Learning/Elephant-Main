@@ -165,7 +165,14 @@
                     </div>
                     <div class="desktop-tab" id="chat-div">
                         <div id="chat-main-container">
-
+                            <div id="chat-window"></div>
+                            <div id="chat-input-div">
+                                <textarea placeholder="Message Skyline High School..." id="chat-input" onkeydown="textAreaAdjust(this)"></textarea>
+                                <div id="chat-options">
+                                    <img src="./icons/emojis/happy.png" id="emojis-btn" alt="Emojis">
+                                    <img src="./icons/deck.png" alt="Decks">
+                                </div>
+                            </div>
                         </div>
                         <div id="chat-members"></div>
                     </div>

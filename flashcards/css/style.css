@@ -383,7 +383,7 @@ body{
     top:calc(var(--size) * 44px);
     left:calc(var(--size) * 256px);
     width:calc(100vw - var(--size) * 256px);
-    height:calc(100vh - var(--size) * 128px)
+    height:calc(100vh - var(--size) * 92px)
 }
 
 #mobile-wrapper{

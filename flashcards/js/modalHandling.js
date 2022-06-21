@@ -89,6 +89,7 @@ function closeNews(){
     document.getElementById('desktop-main-news').style.visibility = "hidden";
     document.querySelectorAll('.desktop-tab').forEach(function(item){
         item.style.top = "calc(var(--size) * 44px)";
+        item.style.height = "calc(100vh - var(--size) * 92px)";
     })
     document.getElementById('desktop-main-container-tab').style.top = "0";
 }
@@ -98,10 +99,11 @@ function initialize(){
         document.getElementById('desktop-main-news').style.visibility = "visible";
         document.querySelectorAll('.desktop-tab').forEach(function(item){
             item.style.top = "calc(var(--size) * 68px)";
+            item.style.height = "calc(100vh - var(--size) * 116px)";
         })
         document.getElementById('desktop-main-container-tab').style.top = "calc(var(--size) * 24px)";
     }
-    togglePageFlip(3)
+    togglePageFlip(0)
 }
 
 //toggle Loading Bar
