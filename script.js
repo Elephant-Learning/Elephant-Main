@@ -9,8 +9,7 @@ const randomCongrats = [
 ]
 
 function initialize(){
-    console.log("b")
-    getData().then(r => console.log("%cTrivia Question Request Successful", "color:lightgreen;"));
+    getData().then();
 }
 
 function shuffleArray(array) {
@@ -32,7 +31,6 @@ async function getData() {
     try{ response = await fetch('https://opentdb.com/api.php?amount=10')}
     catch{
         throw new Error("Internet Connectivity Error - Failed to Connect to Trivia API");
-        return;
     }
 
     let child = parentDiv.lastElementChild;
@@ -59,7 +57,6 @@ async function getData() {
             incorrectAnswer = data[questionIndex].incorrect_answers;
 
             if(incorrectAnswer.length > 3 || data[questionIndex].question.length > 30) {
-                console.log(questionIndex)
                 questionIndex++;
             } else foundQuestion = true;
         } catch{
@@ -75,7 +72,6 @@ async function getData() {
     console.log("%cYou won't find the answer in here", "color:blue;");
 
     let answersArray = [];
-    incorrectAnswer = data.incorrect_answers
 
     for(let i = 0; i < data.incorrect_answers.length; i++){
         let incorrectAnswer = document.createElement('p');

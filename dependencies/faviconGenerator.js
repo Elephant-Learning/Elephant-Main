@@ -1,4 +1,5 @@
 let api = 'ZmE1Y2I5N2YxYWQyNzEzZTEzNDRjM2QyNzE3NzZmODY=';
+const prefix = "./";
 
 document.addEventListener('DOMContentLoaded', function() {
     let date = new Date();
@@ -9,25 +10,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     api = atob(api);
 
-    let favicon = document.getElementById('favicon');
+    let favicon = document.querySelectorAll('.icon');
+    let chosenIcon;
 
     if(month === 5){
-        const prides = ["gay-pride", "heterosexual", "lesbian-pride", "non-binary-pride", "pride", "trans-pride", "bisexual-pride"];
-        favicon.setAttribute('href', "./icons/elephant-400-400-" + prides[Math.floor(Math.random() * prides.length)] + ".png");
+        const prides = ["gay-pride", "heterosexual", "lesbian-pride", "non-binary-pride", "pride", "trans-pride", "bisexual"];
+        chosenIcon = prefix + "icons/elephant-400-400-" + prides[Math.floor(Math.random() * prides.length)] + ".png";
     } else if(month === 7 && day === 28){
-        favicon.setAttribute('href', "./icons/elephant-400-400-india.png");
+        chosenIcon = prefix + "icons/elephant-400-400-india.png";
     } else if(month === 6 && day === 4) {
-        favicon.setAttribute('href', "./icons/elephant-400-400-usa2.png");
+        chosenIcon = prefix + "icons/elephant-400-400-usa2.png";
     } else if(month === 4 && year === 2022){
-        favicon.setAttribute('href', "./icons/elephant-400-400-ukraine-2.png");
+        chosenIcon = prefix + "icons/elephant-400-400-ukraine-2.png";
     } else if(month === 10 && day === 24){
-        favicon.setAttribute('href', "./icons/elephant-400-400-thanksgiving-1.png");
+        chosenIcon = prefix + "icons/elephant-400-400-thanksgiving-1.png";
     } else if([11,0,1].includes(month) && Math.floor(Math.random() * 10) === 1){
-        favicon.setAttribute('href', "./icons/elephant-400-400-snowy-2.png");
+        chosenIcon = prefix + "icons/elephant-400-400-snowy-2.png";
     } else if(date.getDay() === 5 && day === 13 && time === "3:"){
-        favicon.setAttribute('href', "./icons/elephant-400-400-val-day-2.png");
+        chosenIcon = prefix + "icons/elephant-400-400-val-day-2.png";
     } else {
-        favicon.setAttribute('href', "./icons/elephant-400-400-grayscale.png");
+        chosenIcon = prefix + "icons/elephant-400-400-grayscale.png";
     }
 
     let long;
@@ -59,10 +61,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     const sunsetGMT = new Date(sunset * 1000);
 
                     if(description === "snow"){
-                        favicon.setAttribute('href', "./icons/elephant-400-400-snowy-2.png");
+                        chosenIcon = prefix + "icons/elephant-400-400-snowy-2.png";
                     }
                 });
         });
+    }
+
+    for(let i = 0; i < favicon.length; i++){
+        if(favicon[i].tagName === "LINK") favicon[i].setAttribute('href', chosenIcon);
+        else if(favicon[i].tagName === "IMG") favicon[i].src = chosenIcon;
     }
 
 }, false);

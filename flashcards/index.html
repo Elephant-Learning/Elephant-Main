@@ -7,208 +7,159 @@
     <title>Flashcards | Elephant - The Ultimate Student Suite</title>
 
     <link rel="icon" href="../icons/elephant-400-400-grayscale.png">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/recents.css">
 
     <script src="dependencies/FileSaver.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
 
-    <script src="app.js" defer></script>
-    <script src="features.js" defer></script>
-    <script src="review.js" defer></script>
-    <script src="music.js" defer></script>
+    <script src="modalHandling.js" defer></script>
 </head>
 <body>
-    <div id="popup-modal" class="inactive-modal">
-        <div class="popup-image-bg">
-            <div class="popup-image"></div>
-        </div>
-        <div class="popup-main"></div>
-    </div>
-    <div id="import-deck-modal" class="inactive-modal">
-        <div>
-            <div id="import-deck-modal-header"><p onclick="importDeck()">X</p></div>
-            <div id="import-deck-modal-body">
-                <h1>Import Elephant Deck</h1>
-                <p>Accepted File Types: EDECK</p>
-                <button id="import-file-trigger">Upload Edeck File</button>
-                <input type="file" id="import-file-upload" accept=".edeck">
-                <h6 id="import-deck-modal-file">No File Selected</h6>
-                <button onclick="uploadDeck()">Import Deck</button>
-            </div>
-        </div>
-    </div>
-    <div id="settings-modal" class="inactive-modal">
-        <div id="settings-theme">
-            <h2>Update Theme</h2>
-            <div id="themes-list"></div>
-        </div>
-        <div id="settings-mode">
-            <h2>Dark Mode?</h2>
-            <input type="checkbox" id="dark-mode-input" onchange="setTheme(currentTheme, currentBackground)">
-        </div>
-        <div id="settings-background">
-            <h2>Background Image</h2>
+    <div id="desktop-wrapper">
+        <div id="desktop-sidebar-context-menu" class="inactive-modal context-menu">
             <div>
-                <div id="settings-bg-1" onclick="setTheme(currentTheme, 0)"></div>
-                <div id="settings-bg-2" onclick="setTheme(currentTheme, 1)"></div>
-                <div id="settings-bg-3" onclick="setTheme(currentTheme, 2)"></div>
-                <div id="settings-bg-4" onclick="setTheme(currentTheme, 3)"></div>
-                <div id="settings-bg-5" onclick="setTheme(currentTheme, 4)"></div>
-                <div id="settings-bg-6" onclick="setTheme(currentTheme, 5)"></div>
+                <img src="./icons/add_folder.png" alt="Add">
+                <p>Create Folder</p>
             </div>
         </div>
-    </div>
-    <div id="review-modal" class="inactive-modal">
-        <div id="review-main-container">
-            <div id="review-flashcard">
-                <div id="flashcard-header">
-                    <h1 id="flashcard-header-text"></h1>
-                </div>
-                <div id="flashcard-answers">
-                    <!--<div>
-                        <input type="text">
-                        <div class="wrong"></div>
-                    </div>
-                    <div><input type="text"></div>
-                    <div><input type="text"></div>
-                    <div><input type="text"></div>-->
-                </div>
-            </div>
-        </div>
-        <div id="review-sidebar">
-            <div id="review-progress">20/40 Flashcards</div>
-            <button onclick="closeDeck()" id="dashboard-review-btn">Back To Dashboard</button>
-        </div>
-    </div>
-    <div id="create-modal" class="inactive-modal">
-        <div>
-            <div id="create-sidebar">
-                <h1 id="create-header"></h1>
-                <p id="create-description"></p>
-                <p>List of Hotkeys:</p>
-                <ul>
-                    <li>Enter - Create New Card</li>
-                    <li>Ctrl + D - Add Definition</li>
-                    <li>Ctrl + Enter - Save Changes</li>
-                    <li>Esc - Cancel Changes</li>
-                </ul>
-            </div>
-            <div id="main-create"></div>
-            <div id="card-information">
-                <h1>Deck Preview</h1>
-                <div id="deck-preview">
-                    <div id="deck-preview-color"></div>
-                    <div id="deck-preview-main">
-                        <textarea placeholder="Deck Name..." id="create-deck-name"></textarea>
-                        <textarea placeholder="Description..." id="create-deck-desc"></textarea>
-                    </div>
-                </div>
-                <select id="subject-input">
-                    <option value="history">History</option>
-                    <option value="language">English</option>
-                    <option value="math">Mathematics</option>
-                    <option value="science">Science</option>
-                    <option value="money">Finance</option>
-                    <option value="foreign">World Language</option>
-                    <option value="sports">Sports</option>
-                    <option value="work">Work/Job</option>
-                    <option value="music">Music and Instruments</option>
-                    <option value="other">Other</option>
-                    <option value="disabled" selected disabled hidden>Please Select a Subject</option>
-                </select>
-                <div id="create-deck-img"></div>
-                <button id="save-card" onclick="saveChanges()">Save Changes</button>
-                <button id="export-card" onclick="exportData()">Export Deck</button>
-                <button id="cancel-card" onclick="closeCreateModal()">Cancel Changes</button>
-            </div>
-        </div>
-    </div>
-    <div id="schedule-modal" class="inactive-modal"></div>
-    <div id="notifications-modal" class="inactive-modal">
-        <div>
-            <img src="icons/add_deck.svg" alt="dgsf">
+        <div id="desktop-main-container-context-menu" class="context-menu inactive-modal">
             <div>
-                <p>Imported New Deck: Physics Vectors Scalars</p>
-                <h6>March 3rd, 2021</h6>
+                <img src="./icons/plus.png" alt="Add">
+                <p>Create Deck</p>
+            </div>
+            <div>
+                <img src="./icons/add_folder.png" alt="Add">
+                <p>Create Folder</p>
+            </div>
+        </div>
+        <div id="desktop-settings-modal" class="inactive-modal">
+            <h1>Settings & Preferences</h1>
+            <div id="desktop-settings-size">
+                <p class="desktop-size-settings-p" onclick="toggleSizeSetting(0)">75%</p>
+                <p class="desktop-size-settings-p settings-size-active" onclick="toggleSizeSetting(1)">100%</p>
+                <p class="desktop-size-settings-p" onclick="toggleSizeSetting(2)">125%</p>
+                <p class="desktop-size-settings-p" onclick="toggleSizeSetting(3)">150%</p>
+            </div>
+        </div>
+        <div id="desktop-notifications-modal" class="inactive-modal">
+
+        </div>
+        <div id="desktop-navbar">
+            <div id="desktop-main-image">
+                <img src="../icons/elephant-400-400-grayscale.png" alt="Elephant Logo">
+            </div>
+            <div id="desktop-input-div">
+                <img src="./icons/search.png" alt="Search" id="desktop-input-img">
+                <input type="text" id="desktop-navbar-input" placeholder="Search Decks, Users, Classrooms">
+            </div>
+            <div id="desktop-navbar-right">
+                <div class="desktop-navbar-right-img">
+                    <img src="./icons/music.png" alt="Notifications">
+                </div>
+                <div class="desktop-navbar-right-img">
+                    <img src="./icons/notification.png" alt="Notifications">
+                    <div></div>
+                </div>
+                <div class="desktop-navbar-right-img" onclick="toggleSettingsModal()">
+                    <img src="./icons/settings.png" alt="Notifications">
+                </div>
+                <div id="desktop-navbar-profile">
+                    <img src="../icons/avatars/33.png" alt="" id="desktop-navbar-profile-image">
+                    <div id="navbar-profile-text">
+                        <h1 id="desktop-navbar-profile-name">Ronak Kothari</h1>
+                        <p id="desktop-navbar-profile-email">rk.ronakjkothari@gmail.com</p>
+                    </div>
+                    <img src="./icons/expand_down.png" alt="Dropdown">
+                </div>
+            </div>
+        </div>
+        <div id="desktop-parent-container">
+            <div id="desktop-sidebar">
+                <div id="desktop-sidebar-categories">
+                    <div class="desktop-sidebar-category active-sidebar-category" onclick="togglePageFlip(0)">
+                        <div>
+                            <img src="./icons/recent.png" alt="Recent">
+                        </div>
+                        <p>Recents</p>
+                    </div>
+                    <div class="desktop-sidebar-category" onclick="togglePageFlip(1)">
+                        <div>
+                            <img src="./icons/deck.png" alt="Recent">
+                        </div>
+                        <p>Your Decks</p>
+                    </div>
+                    <div class="desktop-sidebar-category" onclick="togglePageFlip(2)">
+                        <div>
+                            <img src="./icons/favorite.png" alt="Recent">
+                        </div>
+                        <p>Favorites</p>
+                    </div>
+                    <div class="desktop-sidebar-category">
+                        <div>
+                            <img src="./icons/chat.png" alt="Recent">
+                        </div>
+                        <p>Skyline High School</p>
+                    </div>
+                    <div class="desktop-sidebar-break"></div>
+                    <h1>Folders</h1>
+                    <div id="desktop-sidebar-folders">
+                        <div class="desktop-sidebar-category desktop-sidebar-folder">
+                            <div>
+                                <img src="./icons/folder.png" alt="Recent">
+                            </div>
+                            <p>Spanish 3</p>
+                        </div>
+                        <div class="desktop-sidebar-category desktop-sidebar-folder">
+                            <div>
+                                <img src="./icons/folder.png" alt="Recent">
+                            </div>
+                            <p>Honors World History</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="desktop-main-container">
+                <div id="desktop-main-news">
+                    <img src="./icons/discord.png" alt="">
+                    <a href="https://discord.gg/YbZS8H6RbB/">Join The New Elephant Discord Server</a>
+                    <p onclick="closeNews()">X</p>
+                </div>
+                <p id="desktop-main-container-tab"></p>
+                <div id="desktop-main-tabs">
+                    <div class="desktop-tab" id="recents-tab">
+                        <div id="recents-create">
+                            <div>
+                                <img src="./icons/file.png" alt="">
+                                <div>
+                                    <h1>Create New Deck</h1>
+                                    <p>Revise and Memorize</p>
+                                </div>
+                                <img src="icons/plus.png" alt="">
+                            </div>
+                            <div>
+                                <img src="./icons/folder.png" alt="">
+                                <div>
+                                    <h1>Create New Folder</h1>
+                                    <p>Organize and Group Decks</p>
+                                </div>
+                                <img src="icons/plus.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="desktop-tab" id="favorites-tab">
+                        stop cring
+                        <a href="http://www.google.com/" > Google </a>
+                    </div>
+                    <div class="desktop-tab" id="your-decks">
+                        stop crcing
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div id="sidebar">
-        <div id="custom-picture"></div>
-        <button onclick="createDeck()">+ Create Deck</button>
-        <button onclick="importDeck()">+ Import Deck</button>
-    </div>
-    <div id="parent-container">
-        <div id="navbar">
-            <div id="logo-div">
-                <img onclick="location.href = '../'" src="../icons/elephant-400-400-grayscale.png" alt="" id="something">
-                <div>
-                    <h1>Elephant</h1>
-                    <p>The Ultimate Student Suite</p>
-                </div>
-            </div>
-            <div id="navbar-right">
-                <div id="progress-bar"></div>
-                <div class="navbar-icon-btn" onclick="toggleMusicModal(true)">
-                    <img src="icons/music.svg" alt="Bro" id="music">
-                </div>
-                <div class="navbar-icon-btn" onclick="toggleNotifModal()">
-                    <img src="icons/history.svg" alt="Bro" id="notifs">
-                </div>
-                <div class="navbar-icon-btn" onclick="toggleSettingsModal()">
-                    <img src="icons/settings.svg" alt="Bro" id="settings">
-                </div>
-            </div>
-        </div>
-        <div id="sort-div" class="inactive-sort">
-            <input type="text" onchange="checkSort(false)" id="sort-title-input" placeholder="Filter By Title">
-            <select id="sort-subject-input" onchange="checkSort(false)">
-                <option value="history">History</option>
-                <option value="language">English</option>
-                <option value="math">Mathematics</option>
-                <option value="science">Science</option>
-                <option value="money">Finance</option>
-                <option value="foreign">World Language</option>
-                <option value="sports">Sports</option>
-                <option value="work">Work/Job</option>
-                <option value="music">Music and Instruments</option>
-                <option value="other">Other</option>
-                <option value="disabled" selected disabled hidden>Filter By Subject</option>
-            </select>
-            <button id="clear-sorts-btn" class="" onclick="checkSort(true)">Clear Filters</button>
-            <div id="sort-div-bg"></div>
-        </div>
-        <div id="main-container"></div>
-        <div id="music-player" class="hidden-music-player">
-            <div id="music-modal">
-                <div id="cover-information">
-                    <img src="music/covers/space-trip.png" alt="" id="album-cover">
-                    <div>
-                        <h1 id="album-name">No Song Selected</h1>
-                        <p id="artist-name">Please Wait</p>
-                    </div>
-                </div>
-                <div id="main-controller">
-                    <div>
-                        <div id="music-heart" class="filled-heart" onclick="favoriteMusic()"></div>
-                        <img src="icons/music/play.svg" alt="" id="music-pause" onclick="pausePlay()">
-                        <img src="icons/music/next.svg" alt="" id="music-skip" onclick="audio.currentTime = audio.duration;">
-                    </div>
-                    <div>
-                        <input type="range" value="0" min="0" max="5000" id="music-timeline" disabled="disabled">
-                    </div>
-                </div>
-                <div id="volume-options">
-                    <img src="icons/music/volume_down.svg" alt="">
-                    <input type="range" value="100" min="0" max="100" id="music-volume" onmousemove="setVolume()" onchange="setVolume()">
-                    <img src="icons/music/volume_up.svg" alt="">
-                </div>
-            </div>
-            <div id="music-background"></div>
-        </div>
-        <div id="sort-div-btn" onclick="toggleSortModal()">
-            <img src="icons/sort.svg" alt="">
-        </div>
+    <div id="mobile-wrapper">
+        mobile version not released...
     </div>
 </body>
 </html>
