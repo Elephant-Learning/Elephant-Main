@@ -125,6 +125,14 @@
     border:1px solid var(--light-border-color);
     border-radius:calc(var(--size) * 6px);
     gap:calc(var(--size) * 18px);
+    position:relative;
+    width:calc(var(--size) * 445px);
+    transition-duration:125ms;
+    cursor:pointer;
+}
+
+.flashcard-deck:hover{
+    background:var(--hover-light);
 }
 
 .flashcard-deck > div:first-of-type{
@@ -186,8 +194,8 @@
 }
 
 .shared-flashcard{
-    background:linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient));
-    /*background:linear-gradient(135deg, var(--tertiary-accent), var(--tertiary-accent-gradient));*/
+    /*background:linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient));*/
+    background:linear-gradient(135deg, var(--tertiary-accent), var(--tertiary-accent-gradient));
 }
 
 .personal-flashcard{
@@ -195,11 +203,12 @@
 }
 
 .flashcard-deck > div:last-of-type{
-    margin-left:calc(var(--size) * 24px);
     display:flex;
     flex-direction:row;
     align-items:center;
-    gap:calc(var(--size) * 4px)
+    gap:calc(var(--size) * 4px);
+    position:absolute;
+    right:calc(var(--size) * 18px);
 }
 
 .flashcard-deck > div:last-of-type > img{

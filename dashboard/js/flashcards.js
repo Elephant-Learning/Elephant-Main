@@ -29,7 +29,11 @@ function displayFlashcard(name, author, type){
     let authorImg = document.createElement('img');
     let authorText = document.createElement('p');
 
-    nameText.innerHTML = name;
+    if(name.length > 13){
+        name = name.substring(0,12) + "..."
+    }
+
+    nameText.innerHTML = name.substring(0,15);
     authorText.innerHTML = author;
     authorImg.src = "../icons/avatars/" + Math.floor(Math.random() * 47) + ".png";
     authorDiv.append(authorImg, authorText);
@@ -54,7 +58,7 @@ function displayFlashcard(name, author, type){
 
 function loadFlashcards(keyword, viewIndex, sortIndex){
     for(let i = 0; i < 105; i++){
-        displayFlashcard("Elephant deck", "Random User", Math.floor(Math.random() * 3));
+        displayFlashcard("Elephant Deck", "Random User", Math.floor(Math.random() * 3));
     } if(document.getElementById('flashcards-list').hasChildNodes()){
         document.getElementById('no-flashcards').classList.add('inactive-modal');
     }
