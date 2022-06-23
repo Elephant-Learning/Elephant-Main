@@ -2,50 +2,202 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard | Elephant - The Ultimate Student Suite</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards | Elephant - The Ultimate Student Suite</title>
 
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <link rel="icon" href="../icons/elephant-400-400-grayscale.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/flashcards.css">
+    <!--<link rel="stylesheet" href="css/chat.css">
+    <script src="js/chatSystem.js" defer></script>
+    <script src="dependencies/FileSaver.js" defer></script>-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
+
+    <script src="js/modalHandling.js" defer></script>
+    <script src="js/flashcards.js" defer></script>
 </head>
 <body>
     <div id="desktop-wrapper">
-        <div id="desktop-sidebar">
-            <div id="desktop-profile">
-                <img src="../icons/avatars/6.png" alt="" id="desktop-profile-picture">
-                <div>
-                    <h1 id="desktop-username">ronakkothari123</h1>
-                    <p id="desktop-profile-account">Elephant Student</p>
+        <div id="desktop-loader-container">
+            <div id="desktop-loader-bg-left"></div>
+            <div id="desktop-loader"></div>
+            <img src="../icons/elephant-400-400-white.png" alt="Loading Ain't Goin So Well" id="desktop-loader-img">
+            <div id="desktop-loader-bg-right"></div>
+            <p id="desktop-loader-text"></p>
+        </div>
+        <div id="desktop-sidebar-context-menu" class="inactive-modal context-menu">
+            <div>
+                <img src="./icons/add_folder.png" alt="Add">
+                <p>New Folder</p>
+            </div>
+        </div>
+        <div id="desktop-main-container-context-menu" class="context-menu inactive-modal">
+            <div>
+                <img src="./icons/add_file.png" alt="Add">
+                <p>New Deck</p>
+            </div>
+            <div>
+                <img src="./icons/add_folder.png" alt="Add">
+                <p>New Folder</p>
+            </div>
+        </div>
+        <div id="desktop-settings-modal" class="inactive-modal">
+            <h1>Settings & Preferences</h1>
+            <div id="desktop-settings-size">
+                <p class="desktop-size-settings-p" onclick="toggleSizeSetting(0)">75%</p>
+                <p class="desktop-size-settings-p settings-size-active" onclick="toggleSizeSetting(1)">100%</p>
+                <p class="desktop-size-settings-p" onclick="toggleSizeSetting(2)">125%</p>
+                <p class="desktop-size-settings-p" onclick="toggleSizeSetting(3)">150%</p>
+            </div>
+        </div>
+        <div id="desktop-notifications-modal" class="inactive-modal">
+            <h1>Notifications</h1>
+        </div>
+        <div id="desktop-navbar">
+            <div id="desktop-main-image">
+                <a href="../"><img src="../icons/elephant-400-400-grayscale.png" alt="Elephant Logo"></a>
+            </div>
+            <div id="desktop-input-div">
+                <img src="./icons/search.png" alt="Search" id="desktop-input-img">
+                <input type="text" id="desktop-navbar-input" placeholder="Search Decks, Users, Classrooms">
+            </div>
+            <div id="desktop-navbar-right">
+                <div class="desktop-navbar-right-img">
+                    <img src="./icons/music.png" alt="Notifications">
+                </div>
+                <div class="desktop-navbar-right-img">
+                    <img src="./icons/notification.png" alt="Notifications" id="notifications-btn">
+                    <div></div>
+                </div>
+                <div class="desktop-navbar-right-img" onclick="toggleSettingsModal()">
+                    <img src="./icons/settings.png" alt="Notifications">
+                </div>
+                <div id="desktop-navbar-profile">
+                    <img src="../icons/avatars/33.png" alt="" id="desktop-navbar-profile-image">
+                    <div id="navbar-profile-text">
+                        <h1 id="desktop-navbar-profile-name">Ronak Kothari</h1>
+                        <p id="desktop-navbar-profile-email">Elephant Administrator</p>
+                    </div>
+                    <img src="./icons/expand_down.png" alt="Dropdown">
                 </div>
             </div>
-            <div id="desktop-tabs">
-                <h1>Elephant Menu</h1>
-                <div class="desktop-tab">
-                    <img src="./icons/dashboard.svg" alt="">
-                    <p>Dashboard</p>
-                </div>
-                <div class="desktop-tab">
-                    <img src="./icons/chat.svg" alt="">
-                    <p>Friends</p>
-                </div>
-                <div class="desktop-tab">
-                    <img src="./icons/flashcard.svg" alt="">
-                    <p>Flashcards</p>
-                </div>
-                <div class="desktop-tab">
-                    <img src="./icons/task-manager.svg" alt="">
-                    <p>Task-Manager</p>
+        </div>
+        <div id="desktop-parent-container">
+            <div id="desktop-sidebar">
+                <div id="desktop-sidebar-categories">
+                    <div class="desktop-sidebar-category active-sidebar-category" onclick="togglePageFlip(0)">
+                        <div>
+                            <img src="./icons/deck.png" alt="Recent">
+                        </div>
+                        <p>Flashcards</p>
+                    </div>
+                    <div class="desktop-sidebar-category unavailable-sidebar-category" onclick="">
+                        <div>
+                            <img src="./icons/recent.png" alt="Recent">
+                        </div>
+                        <p>Task Manager</p>
+                    </div>
+                    <div class="desktop-sidebar-break"></div>
+                    <h1>Folders</h1>
+                    <div id="desktop-sidebar-folders">
+                        <div class="desktop-sidebar-category desktop-sidebar-folder">
+                            <div>
+                                <img src="./icons/folder.png" alt="Recent">
+                            </div>
+                            <p>Spanish 3</p>
+                        </div>
+                        <div class="desktop-sidebar-category desktop-sidebar-folder">
+                            <div>
+                                <img src="./icons/folder.png" alt="Recent">
+                            </div>
+                            <p>Honors World History</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="desktop-classroom-tabs">
-
+            <div id="desktop-main-container">
+                <div id="desktop-main-news">
+                    <img src="./icons/discord.png" alt="">
+                    <a href="https://discord.gg/YbZS8H6RbB/">Join The New Elephant Discord Server</a>
+                    <p onclick="closeNews()">X</p>
+                </div>
+                <p id="desktop-main-container-tab"></p>
+                <div id="desktop-main-tabs">
+                    <div class="desktop-tab" id="flashcards-tab">
+                        <div id="flashcards-main-options">
+                            <div>
+                                <img src="./icons/file.png" alt="">
+                                <div>
+                                    <h1>Create New Deck</h1>
+                                    <p>Revise and Memorize</p>
+                                </div>
+                                <img src="icons/plus.png" alt="">
+                            </div>
+                            <div>
+                                <img src="./icons/folder.png" alt="">
+                                <div>
+                                    <h1>Create New Folder</h1>
+                                    <p>Organize and Group Decks</p>
+                                </div>
+                                <img src="icons/plus.png" alt="">
+                            </div>
+                        </div>
+                        <div id="flashcards-main-container">
+                            <div id="flashcards-sorting">
+                                <div class="flashcard-sorting">
+                                    <p>View:</p>
+                                    <select onchange="">
+                                        <option value="0">All Decks</option>
+                                        <option value="1">Your Decks</option>
+                                    </select>
+                                </div>
+                                <div class="flashcard-sorting">
+                                    <p>Sort By:</p>
+                                    <select onchange="">
+                                        <option value="0">Last Viewed</option>
+                                        <option value="1">Favorited</option>
+                                        <option value="2">Alphabetical</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="desktop-tab" id="favorites-tab">
+                        stop cring
+                        <a href="http://www.google.com/" > Google </a>
+                    </div>
+                    <div class="desktop-tab" id="chat-div">
+                        <div id="chat-main-container">
+                            <div id="chat-window"></div>
+                            <div id="chat-input-div">
+                                <textarea placeholder="Message Skyline High School..." id="chat-input" onkeydown="textAreaAdjust(this)"></textarea>
+                                <div id="chat-options">
+                                    <img src="./icons/emojis/happy.png" id="emojis-btn" alt="Emojis">
+                                    <img src="./icons/deck.png" alt="Decks">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="chat-members"></div>
+                    </div>
+                    <div class="desktop-tab" id="search-results"></div>
+                    <div class="desktop-tab" id="folder-div"></div>
+                    <div class="desktop-tab" id="profile-div"></div>
+                </div>
+                <div id="desktop-bottom-buttons">
+                    <div class="desktop-bottom-btn">
+                        <img src="./icons/add_file.png" alt="">
+                    </div>
+                    <div class="desktop-bottom-btn">
+                        <img src="./icons/add_folder.png" alt="">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div id="mobile-wrapper">
-
+        mobile version not released...
     </div>
 </body>
 </html>

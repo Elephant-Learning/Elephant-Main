@@ -1,4 +1,4 @@
-#recents-create{
+#flashcards-main-options{
     display:flex;
     flex-direction:row;
     align-items:center;
@@ -9,7 +9,7 @@
     width:calc(100vw - calc(var(--size) * 304px));
 }
 
-#recents-create > div{
+#flashcards-main-options > div{
     display:flex;
     flex-direction:row;
     align-items:center;
@@ -22,26 +22,26 @@
     transition-duration:250ms;
 }
 
-#recents-create > div:nth-of-type(1):hover{
+#flashcards-main-options > div:nth-of-type(1):hover{
     background:var(--light-accent);
 }
 
-#recents-create > div:nth-of-type(2):hover{
-    background:var(--green-light);
+#flashcards-main-options > div:nth-of-type(2):hover{
+    background:var(--light-accent);
 }
 
-#recents-create > div > img:first-of-type{
+#flashcards-main-options > div > img:first-of-type{
     height:calc(var(--size) * 30px);
 }
 
-#recents-create > div > div > h1{
+#flashcards-main-options > div > div > h1{
     font-size:calc(var(--size) * 12px);
     font-weight:600;
     margin:0;
     cursor:default;
 }
 
-#recents-create > div > div > p{
+#flashcards-main-options > div > div > p{
     font-size:calc(var(--size) * 10px);
     font-weight:400;
     margin:0;
@@ -49,7 +49,35 @@
     cursor:default;
 }
 
-#recents-create > div > img:last-of-type{
+#flashcards-main-options > div > img:last-of-type{
     height:calc(var(--size) * 18px);
     margin-left:calc(var(--size) * 18px)
+}
+
+#flashcards-sorting{
+    display:flex;
+    flex-direction:row;
+    margin-left:calc(var(--size) * 24px);
+    gap:calc(var(--size) * 12px);
+}
+
+.flashcard-sorting{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+}
+
+.flashcard-sorting > p{
+    font-size:calc(var(--size) * 12px);
+    color:gray;
+    margin:0;
+}
+
+.flashcard-sorting > select{
+    outline:none;
+    border:none;
+    background:transparent;
+    color:black;
+    font-size:calc(var(--size) * 12px);
+    font-weight:400;
 }
