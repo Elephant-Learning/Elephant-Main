@@ -135,7 +135,7 @@
 }
 
 .outgoing_message > div{
-    background:var(--accent-color);
+    background:var(--primary-accent);
 }
 
 .text-message > div{
