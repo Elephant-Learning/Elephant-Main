@@ -13,10 +13,51 @@ const Deck = function(name, author){
 //viewIndex
 //0 = All Decks
 //1 = Your Decks
+function displayFlashcard(name, author, type){
+    const tags = ["personal", "community", "shared"]
+    let mainDiv = document.createElement('div');
 
+    let iconDiv = document.createElement('div');
+    let icon = document.createElement('img');
+
+    icon.src = "./icons/file.png";
+    iconDiv.appendChild(icon);
+
+    let textDiv = document.createElement('div');
+    let nameText = document.createElement('h1');
+    let authorDiv = document.createElement('div');
+    let authorImg = document.createElement('img');
+    let authorText = document.createElement('p');
+
+    nameText.innerHTML = name;
+    authorText.innerHTML = author;
+    authorImg.src = "../icons/avatars/" + Math.floor(Math.random() * 47) + ".png";
+    authorDiv.append(authorImg, authorText);
+    textDiv.append(nameText, authorDiv);
+
+    let tag = document.createElement('p');
+    tag.innerHTML = tags[type];
+    tag.classList.add(tags[type] + "-flashcard");
+
+    let options = document.createElement('div');
+    let favoriteImg = document.createElement('img');
+    let menuImg = document.createElement('img');
+
+    favoriteImg.src = "./icons/favorite.png";
+    menuImg.src = "./icons/menu_vertical.png";
+    options.append(favoriteImg, menuImg);
+
+    mainDiv.append(iconDiv, textDiv, tag, options);
+    mainDiv.classList.add('flashcard-deck');
+    document.getElementById('flashcards-list').appendChild(mainDiv);
+}
 
 function loadFlashcards(keyword, viewIndex, sortIndex){
-    console.log(keyword);
+    for(let i = 0; i < 105; i++){
+        displayFlashcard("Elephant deck", "Random User", Math.floor(Math.random() * 3));
+    } if(document.getElementById('flashcards-list').hasChildNodes()){
+        document.getElementById('no-flashcards').classList.add('inactive-modal');
+    }
 }
 
 loadFlashcards();

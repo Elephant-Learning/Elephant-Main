@@ -13,10 +13,22 @@
     --primary-accent-gradient:#ff319c;
     --secondary-accent:#00a8ff;
     --secondary-accent-gradient:#31d6dc;
+    --tertiary-accent:#f8680a;
+    --tertiary-accent-gradient:#fa8d37;
     --accent-highlight:#f30096;
     --light-accent:#ffedf6;
     --green-light:#e8fff3;
     --size:1;
+}
+
+*::-webkit-scrollbar{
+    width:calc(var(--size) * 8px);
+    background:transparent;
+}
+
+*::-webkit-scrollbar-thumb{
+    background:var(--dark-border-color);
+
 }
 
 body{
