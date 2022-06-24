@@ -24,7 +24,7 @@
 
 @font-face {
     font-family: 'Gotham Bold';
-    src: url('./fontsGothamSource/Gotham Bold.otf') format('otf');
+    src: url('fontsGothamSource/Gotham Bold.otf') format('otf');
     font-weight: bold;
     font-style: normal;
     font-display: swap;

@@ -1,7 +1,8 @@
 let sidebarContextMenu = false;
 let mainContextMenu = false;
 
-let pages = ["Recently Viewed", "Your Decks", "Favorited Decks"]
+let pages = ["Elephant Flashcards", "Elephant Task Manager", "Chat Group", "Flashcards Editor", "Flashcard Viewing Platform", "Search Results", "Folder", "My Profile"];
+let randomChatMessage = ["Rearranging Your Cards Into Decks...", "Managing Your Tasks Prematurely...", "Closing Minecraft and Beginning To Work...", "Placing 3 Day Blocks on Discord...", "Contemplating Your Life Choices...", "Do You People Even Read This???"]
 
 function toggleSettingsModal(){
     if(document.getElementById('desktop-settings-modal').classList.contains('inactive-modal')){
@@ -13,11 +14,24 @@ function toggleSettingsModal(){
 
 function togglePageFlip(index){
     document.getElementById('desktop-main-container-tab').innerHTML = pages[index];
-    document.querySelector(".active-sidebar-category").classList.remove('active-sidebar-category')
-    document.querySelectorAll('.desktop-sidebar-category')[index].classList.add('active-sidebar-category')
-    try {document.querySelector(".active-tab").classList.remove('active-tab')}
-    catch{}
+    try{document.querySelector(".active-sidebar-category").classList.remove('active-sidebar-category')} catch{}
+    try{document.querySelectorAll('.desktop-sidebar-category')[index].classList.add('active-sidebar-category')} catch{}
+    try {document.querySelector(".active-tab").classList.remove('active-tab')} catch{}
     document.querySelectorAll('.desktop-tab')[index].classList.add('active-tab')
+
+    const removeBottomBtns = [1, 2, 3, 4, 5, 6, 7]
+
+    if(removeBottomBtns.includes(index)){
+        document.querySelectorAll('.desktop-bottom-btn').forEach(function(item){
+            item.classList.add('inactive-modal')
+        })
+    } else {
+        try {
+            document.querySelectorAll('.desktop-bottom-btn').forEach(function(item){
+                item.classList.remove('inactive-modal')
+            })
+        } catch{}
+    }
 }
 
 function toggleSizeSetting(value){
@@ -25,6 +39,8 @@ function toggleSizeSetting(value){
     document.querySelector(".settings-size-active").classList.remove("settings-size-active");
     document.querySelectorAll(".desktop-size-settings-p")[value].classList.add("settings-size-active");
     document.querySelector(':root').style.setProperty('--size', sizes[value].toString());
+    let element = document.getElementById('notifications-btn');
+    document.getElementById('desktop-settings-modal').style.right = "calc(var(--size)" + (getRightBound(element) + 364 * sizes[value]) + "px)";
 }
 
 document.getElementById('desktop-sidebar').addEventListener('contextmenu', function(e){
@@ -75,19 +91,48 @@ function closeNews(){
     document.getElementById('desktop-main-news').style.visibility = "hidden";
     document.querySelectorAll('.desktop-tab').forEach(function(item){
         item.style.top = "calc(var(--size) * 44px)";
+        item.style.height = "calc(100vh - var(--size) * 92px)";
     })
     document.getElementById('desktop-main-container-tab').style.top = "0";
 }
 
 function initialize(){
+    document.getElementById('desktop-loader-text').innerHTML = randomChatMessage[Math.floor(Math.random() * randomChatMessage.length)];
     if(document.getElementById('desktop-main-news').hasChildNodes()){
         document.getElementById('desktop-main-news').style.visibility = "visible";
         document.querySelectorAll('.desktop-tab').forEach(function(item){
             item.style.top = "calc(var(--size) * 68px)";
+            item.style.height = "calc(100vh - var(--size) * 116px)";
         })
+
+        let element = document.getElementById('notifications-btn');
+        document.getElementById('desktop-settings-modal').style.right = "calc(var(--size)" + (getRightBound(element) + 334) + "px)";
         document.getElementById('desktop-main-container-tab').style.top = "calc(var(--size) * 24px)";
+        console.log(document.getElementById('desktop-settings-modal').style.right)
     }
-    togglePageFlip(0)
+    loadFlashcards();
+    if(document.getElementById('flashcards-list').hasChildNodes()){
+        document.getElementById('no-flashcards').classList.add('inactive-modal');
+    }
+    viewFlashcard(undefined, 1);
+}
+
+function getRightBound(element) {
+    var xPosition = 0;
+
+    while(element) {
+        xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+        element = element.offsetParent;
+    }
+
+    xPosition -= window.innerWidth
+
+    return xPosition;
+}
+
+//toggle Loading Bar
+window.onload = function(){
+    document.getElementById('desktop-loader-container').classList.add('inactive-modal')
 }
 
 initialize();
