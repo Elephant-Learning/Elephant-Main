@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 const tags = ["personal", "community", "shared"];
 
-=======
->>>>>>> main
 const Deck = function(name, author){
     this.name = name;
     this.author = "Unauthored";
@@ -19,10 +16,6 @@ const Deck = function(name, author){
 //0 = All Decks
 //1 = Your Decks
 function displayFlashcard(name, author, type){
-<<<<<<< HEAD
-=======
-    const tags = ["personal", "community", "shared"]
->>>>>>> main
     let mainDiv = document.createElement('div');
 
     let iconDiv = document.createElement('div');
@@ -30,10 +23,7 @@ function displayFlashcard(name, author, type){
 
     icon.src = "./icons/file.png";
     iconDiv.appendChild(icon);
-<<<<<<< HEAD
     iconDiv.classList.add(tags[type] + "-flashcard");
-=======
->>>>>>> main
 
     let textDiv = document.createElement('div');
     let nameText = document.createElement('h1');
@@ -65,7 +55,6 @@ function displayFlashcard(name, author, type){
 
     mainDiv.append(iconDiv, textDiv, tag, options);
     mainDiv.classList.add('flashcard-deck');
-<<<<<<< HEAD
     mainDiv.classList.add(tags[type] + "-flashcard-border");
     mainDiv.setAttribute('onclick', "viewFlashcard(undefined, " + type + ")");
     document.getElementById('flashcards-list').appendChild(mainDiv);
@@ -95,17 +84,3 @@ function loadFlashcards(keyword, viewIndex, sortIndex){
 function createDeck(){
     togglePageFlip(3);
 }
-=======
-    document.getElementById('flashcards-list').appendChild(mainDiv);
-}
-
-function loadFlashcards(keyword, viewIndex, sortIndex){
-    for(let i = 0; i < 105; i++){
-        displayFlashcard("Elephant Deck", "Random User", Math.floor(Math.random() * 3));
-    } if(document.getElementById('flashcards-list').hasChildNodes()){
-        document.getElementById('no-flashcards').classList.add('inactive-modal');
-    }
-}
-
-loadFlashcards();
->>>>>>> main
