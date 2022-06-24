@@ -114,7 +114,7 @@ function initialize(){
     if(document.getElementById('flashcards-list').hasChildNodes()){
         document.getElementById('no-flashcards').classList.add('inactive-modal');
     }
-    viewFlashcard(undefined, 1);
+    togglePageFlip(0)
 }
 
 function getRightBound(element) {
