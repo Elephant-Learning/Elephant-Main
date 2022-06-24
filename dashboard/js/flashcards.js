@@ -61,6 +61,7 @@ function displayFlashcard(name, author, type){
 }
 
 function viewFlashcard(card, type){
+    console.log("Something")
     document.getElementById('flashcard-stripe').className = "";
     document.getElementById('flashcard-stripe').classList.add(tags[type] + "-flashcard");
     document.getElementById('flashcard-stripe-text').innerHTML = tags[type];
@@ -71,7 +72,7 @@ function viewFlashcard(card, type){
         element.classList.add(tags[type] + "-flashcard-border");
     })
 
-    togglePageFlip(0)
+    togglePageFlip(4)
 }
 
 function loadFlashcards(keyword, viewIndex, sortIndex){
