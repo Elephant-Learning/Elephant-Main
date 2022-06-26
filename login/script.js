@@ -71,6 +71,9 @@ function initialize(){
     document.querySelectorAll(".orange-btn").forEach(function(element){
         element.style.background = "linear-gradient(135deg, var(--" + colors[2] + "-accent), var(--" + colors[2] + "-accent-gradient))";
     });
+
+    if(Math.floor(Math.random() * 2) === 1) document.getElementById('student-account-pic').src = "./icons/student_nerd.png"
+
     togglePageFlip(0);
 }
 
