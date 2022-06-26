@@ -55,6 +55,21 @@
         <div id="desktop-notifications-modal" class="inactive-modal">
             <h1>Notifications</h1>
         </div>
+        <div id="desktop-music-container">
+            <div id="desktop-music-main">
+                <div id="music-image">
+                    <img src="./music/covers/timeless-inception.png" alt="">
+                </div>
+                <h1 id="music-name">Timeless Inception</h1>
+                <p id="music-author">Abhiram Boddu - Elephant Team</p>
+                <input type="range" name="" id="slider-input">
+                <div id="music-controls">
+                    <img src="./icons/favorite.png" alt="">
+                    <img src="./icons/pause.png" alt="">
+                    <img src="./icons/forward.png" alt="">
+                </div>
+            </div>
+        </div>
         <div id="desktop-navbar">
             <div id="desktop-main-image">
                 <a href="../"><img src="../icons/elephant-400-400-pink-flashcards-01.png" alt="Elephant Logo"></a>
@@ -64,7 +79,7 @@
                 <input type="text" id="desktop-navbar-input" placeholder="Search Decks, Users, Classrooms">
             </div>
             <div id="desktop-navbar-right">
-                <div class="desktop-navbar-right-img">
+                <div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
                     <img src="./icons/music.png" alt="Notifications">
                 </div>
                 <div class="desktop-navbar-right-img">
@@ -87,7 +102,7 @@
         <div id="desktop-parent-container">
             <div id="desktop-sidebar">
                 <div id="desktop-sidebar-categories">
-                    <div class="desktop-sidebar-category active-sidebar-category" onclick="togglePageFlip(0)">
+                    <div class="desktop-sidebar-category active-sidebar-category" onclick="togglePageFlip(0, 0)">
                         <div>
                             <img src="./icons/deck.png" alt="Recent">
                         </div>
@@ -98,6 +113,12 @@
                             <img src="./icons/recent.png" alt="Recent">
                         </div>
                         <p>Task Manager</p>
+                    </div>
+                    <div class="desktop-sidebar-category" onclick="togglePageFlip(8, 2)">
+                        <div>
+                            <img src="./icons/admin.png" alt="Recent">
+                        </div>
+                        <p>Admin Portal</p>
                     </div>
                     <div class="desktop-sidebar-break"></div>
                     <h1>Folders</h1>
@@ -162,11 +183,12 @@
                                     </select>
                                 </div>
                             </div>
-                            <div id="flashcards-list-container">
+                             <div id="flashcards-list-container">
                                 <div id="flashcards-list"></div>
                                 <div id="no-flashcards" onclick="togglePageFlip(3)">
                                     <p>Nothing to show here. Create a Deck Now!</p>
                                 </div>
+                                <div id="flashcards-display-test"></div>
                             </div>
                         </div>
                     </div>
@@ -237,6 +259,7 @@
                     <div class="desktop-tab" id="search-results"></div>
                     <div class="desktop-tab" id="folder-div"></div>
                     <div class="desktop-tab" id="profile-div"></div>
+                    <div class="desktop-tab" id="administrator-portal"></div>
                 </div>
                 <div id="desktop-bottom-buttons">
                     <div class="desktop-bottom-btn" onclick="createDeck()">

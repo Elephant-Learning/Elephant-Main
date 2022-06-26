@@ -1,0 +1,374 @@
+:root{
+    --blue-color-1:#2472fc;
+    --blue-color-2:#8711c1;
+    --blue-color-dark:#354382;
+
+    --red-color-1:#FA0874;
+    --red-color-2:#e91fa8;
+    --red-color-dark:#664180;
+
+    --bg-color-1:#ffffff;
+    --bg-color-2:#f6f7fb;
+    --border-color:lightgray;
+}
+
+body{
+    margin:0;
+    font-family:"Outfit", sans-serif;
+    overflow:hidden;
+}
+
+#main-wrapper{
+    display:flex;
+    flex-direction:row;
+    width:100vw;
+    height:100vh;
+    position:absolute;
+    top:0;
+}
+
+#main-wrapper > div{
+    width:50vw;
+}
+
+#news-carousel{
+    background:linear-gradient(135deg, var(--blue-color-1), var(--blue-color-2));
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-around;
+    position:relative;
+}
+
+#main-container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
+.inactive-container{
+    visibility:hidden;
+    height:0;
+    opacity:0;
+}
+
+.form-container{
+    transition-duration:250ms;
+    display:flex;
+    flex-direction:column;
+    width:25vw;
+}
+
+.form-container:not(.inactive-container){
+    opacity:1;
+    visibility:visible;
+}
+
+.form-container > h1{
+    font-weight:100;
+    font-size:36px;
+    margin:0;
+}
+
+.form-container > p{
+    margin-top:24px;
+    font-size:15px;
+    color:gray;
+    font-weight:300;
+}
+
+.form-input, .form-select{
+    display:flex;
+    flex-direction:column;
+    position:relative;
+}
+
+.form-input > p, .form-select > p{
+    color:gray;
+    font-weight:700;
+    font-size:14px;
+}
+
+.form-select {
+    margin-bottom:16px;
+}
+
+.form-input > img, .form-select > img{
+    height:16px;
+    width:16px;
+    filter:invert(1) brightness(0.5);
+    position:absolute;
+    bottom:10px;
+    left:8px;
+}
+
+.form-select > img{
+    bottom:8px;
+}
+
+.form-input > input, .form-select > select{
+    height:32px;
+    border-radius:5px;
+    border:1px solid var(--border-color);
+    outline:none;
+    color:gray;
+    padding-left:32px;
+    font-size:13px;
+    background:var(--bg-color-1);
+    transition-duration:250ms;
+}
+
+.form-input > input:focus{
+    background:var(--bg-color-2);
+}
+
+#remember-div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:12px;
+    position:relative;
+    color:gray;
+}
+
+#remember-div > p{
+    font-size:14px;
+}
+
+#remember-div > h6{
+    position:absolute;
+    top:-20px;
+    left:225px;
+    font-size:12px;
+    background:var(--bg-color-2);
+    width:16px;
+    height:16px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    border:1px solid var(--border-color);
+    cursor:pointer;
+}
+
+#remember-div > h6::after{
+    content:'Clearing browser history and data will reset the saved Elephant Login Information';
+    position:absolute;
+    width:250px;
+    right:-280px;
+    background:var(--bg-color-2);
+    font-weight:300;
+    border:1px solid var(--border-color);
+    border-radius:5px;
+    padding:5px 10px;
+    visibility:hidden;
+    opacity:0;
+    transition-duration:250ms;
+}
+
+#remember-div > h6:hover::after{
+    visibility:visible;
+    opacity:1;
+}
+
+.form-container > button{
+    background:var(--blue-color-1);
+    color:white;
+    border:none;
+    height:32px;
+    font-size:12px;
+    border-radius:5px;
+    margin-top:12px;
+    cursor:pointer;
+    outline:none;
+    transition-duration:125ms;
+}
+
+.form-container > button:active{
+    box-shadow:inset 0 0 12px 0 black;
+}
+
+.form-container > h6{
+    font-weight:300;
+    text-align:center;
+    font-size:12px;
+}
+
+.form-container > h6 > span{
+    color:var(--blue-color-1);
+    cursor:pointer;
+    font-weight:700;
+}
+
+#logo{
+    position:absolute;
+    top:16px;
+    left:16px;
+    width:50px;
+    cursor:pointer;
+}
+
+#news-carousel > *:not(#carousel-bg){
+    z-index:2;
+    position:absolute;
+}
+
+#carousel-bg{
+    position:absolute;
+    top:0;
+    right:0;
+    width:50vw;
+    height:100vh;
+    background-repeat:repeat;
+    background-size:512px;
+    background-image:url("../dashboard/images/patterns/3.jpg");
+    mix-blend-mode: multiply;
+    opacity:0.15;
+    z-index:0;
+}
+
+#carousel-right{
+    right:25px;
+}
+
+#carousel-left{
+    left:25px;
+}
+
+.carousel-button{
+    font-size:32px;
+    color:white;
+    background:transparent;
+    border:none;
+    outline:none;
+    cursor:pointer;
+    font-weight:100;
+}
+
+.inactive-carousel{
+    visibility:hidden;
+}
+
+.carousel-item:not(.inactive-carousel){
+    width:35vw;
+    height:50vh;
+    border-radius:25px;
+    overflow:hidden;
+    opacity:0.9;
+    visibility:visible;
+    box-shadow:0 0 12px 0 #222;
+}
+
+.carousel-item:nth-child(1){
+    background:var(--bg-color-2);
+    display:flex;
+}
+
+.carousel-item::after{
+    position:absolute;
+    bottom:-12.5vh;
+    width:35vw;
+    background:var(--bg-color-1);
+    border:1px solid var(--border-color);
+    right:-16px;
+    padding:16px;
+    border-radius:10px;
+    opacity:0.9;
+    font-size:14px;
+    text-align:center;
+}
+
+.carousel-item:nth-child(1)::after{
+    content:'Elephant Flashcards is an easy way to get better at memorizing. It allows for more complex flashcards to be created.';
+}
+
+.carousel-item:nth-child(1) > div:first-of-type{
+    width:10vw;
+    height:50vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    background:linear-gradient(135deg, var(--blue-color-1), var(--blue-color-2));
+}
+
+.carousel-item:nth-child(1) > div:first-of-type > button:first-of-type{
+    margin-top:16px;
+}
+
+.carousel-item:nth-child(1) > div:first-of-type > button{
+    margin-top:8px;
+    width:8vw;
+    background:var(--blue-color-dark);
+    color:white;
+    border:none;
+    outline:none;
+    font-size:12px;
+    padding:5px 0;
+    border-radius:5px;
+    box-shadow:0 0 8px 0 black;
+}
+
+.carousel-item:nth-child(1) > div:last-of-type > div:first-of-type{
+    background:var(--bg-color-1);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    width:25vw;
+    padding:0.75vh 0;
+}
+
+.carousel-item:nth-child(1) > div:last-of-type > div:first-of-type > img{
+    height:4vh;
+    margin-left:0.5vw;
+    margin-right:0.25vw;
+}
+
+.carousel-item:nth-child(1) > div:last-of-type > div:first-of-type > h1{
+    margin:0;
+    font-size:2.5vh;
+}
+
+.carousel-item:nth-child(1) > div:last-of-type > div:last-of-type{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-left:12px;
+    margin-top:12px;
+}
+
+.flashcards-card{
+    width:8vw;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 0 8px 0 black;
+    border-radius:12px;
+    overflow:hidden;
+    background:white;
+}
+
+.flashcards-card > div:first-of-type{
+    width:8vw;
+    height:10vh;
+    border-radius:12px 12px 0 0;
+    background:linear-gradient(135deg, var(--red-color-1), var(--red-color-2));
+}
+
+.flashcards-card > div:last-of-type{
+    background:white;
+    padding:12px;
+    border-radius:0 0 12px 12px;
+}
+
+.flashcards-card > div:last-of-type > h1{
+    font-size:14px;
+    margin:2px 0;
+}
+
+.flashcards-card > div:last-of-type > p{
+    font-size:9px;
+    color:gray;
+    margin:0;
+}

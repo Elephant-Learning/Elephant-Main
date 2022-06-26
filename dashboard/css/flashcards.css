@@ -86,6 +86,7 @@
     color:black;
     font-size:calc(var(--size) * 12px);
     font-weight:400;
+    font-family:'Montserrat';
 }
 
 #flashcards-list-container{
@@ -122,6 +123,15 @@
     flex-direction:row;
     flex-wrap:wrap;
     gap:calc(var(--size) * 12px);
+}
+
+#flashcards-display-test{
+    width:auto;
+    position:absolute;
+    font-size:calc(var(--size) * 14px);
+    font-weight:700;
+    z-index:20;
+
 }
 
 .flashcard-deck{
@@ -271,8 +281,10 @@
     text-transform:uppercase;
     color:white;
     font-size:calc(var(--size) * 14px);
-    margin-top:calc(var(--size) * 48px);
+    margin-top:calc(var(--size) * 72px);
     text-shadow:0 0 calc(var(--size) * 2px) black;
+    width:calc(var(--size) * 128px);
+    text-align:right;
 }
 
 #flashcard-main{

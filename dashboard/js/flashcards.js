@@ -31,11 +31,16 @@ function displayFlashcard(name, author, type){
     let authorImg = document.createElement('img');
     let authorText = document.createElement('p');
 
-    if(name.length > 13){
-        name = name.substring(0,12) + "..."
+    let testSpace = document.getElementById('flashcards-display-test');
+    for(let i = 0; i < name.length; i++){
+        testSpace.innerHTML = name.substring(0, i);
+        if(testSpace.clientWidth > 200) {
+            name = name.substring(0, i - 1) + "...";
+            break;
+        }
     }
 
-    nameText.innerHTML = name.substring(0,15);
+    nameText.innerHTML = name
     authorText.innerHTML = author;
     authorImg.src = "../icons/avatars/" + Math.floor(Math.random() * 47) + ".png";
     authorDiv.append(authorImg, authorText);
@@ -77,7 +82,7 @@ function viewFlashcard(card, type){
 
 function loadFlashcards(keyword, viewIndex, sortIndex){
     for(let i = 0; i < 105; i++){
-        displayFlashcard("Test Elephant Deck", "Random User", Math.floor(Math.random() * 3));
+        displayFlashcard("Elephant Flashcards Test", "Random User", Math.floor(Math.random() * 3));
     }
 }
 

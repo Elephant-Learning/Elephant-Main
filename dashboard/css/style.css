@@ -33,6 +33,7 @@
 body{
     font-family: 'Montserrat', sans-serif;
     background:var(--bg-color-1);
+    overflow:hidden;
     margin:0;
 }
 
@@ -125,7 +126,7 @@ body{
 }
 
 .desktop-navbar-right-img > div{
-    background:var(--primary-accent);
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
     width:calc(var(--size) * 8px);
     height:calc(var(--size) * 8px);
     border-radius:50%;
@@ -401,12 +402,16 @@ body{
     visibility:visible;
 }
 
+#desktop-main-tabs{
+    width:calc(100vw - var(--size) * 256px);
+}
+
 .desktop-tab{
     transition-duration:250ms;
     position:absolute;
     top:calc(var(--size) * 44px);
     left:calc(var(--size) * 256px);
-    width:calc(100vw - var(--size) * 256px);
+    width:100%;
     height:calc(100vh - var(--size) * 92px)
 }
 
@@ -563,6 +568,67 @@ body{
     } to{
         transform:scale(1);
     }
+}
+
+#desktop-music-container{
+    position:absolute;
+    width:calc(var(--size) * 256px);
+    right:0;
+    bottom:0;
+    height:calc(100vh - var(--size) * 48px);
+    border-left:1px solid var(--light-border-color);
+    backdrop-filter:blur(4px);
+    z-index:1;
+    transition-duration:500ms;
+    opacity:1;
+}
+
+#desktop-music-main{
+    background:rgba(255,255,255,0.75);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+    height:100%;
+}
+
+#desktop-music-container.inactive-modal {
+    transform: translateX(calc(var(--size) * 256px));
+    opacity: 0;
+    visibility: hidden;
+}
+
+#music-image{
+    margin-top:calc(var(--size) * 48px);
+    border-radius:calc(var(--size) * 18px);
+    box-shadow:0 0 calc(var(--size) * 6px) 0 var(--dark-gray);
+    width:calc(var(--size) * 160px);
+    height:calc(var(--size) * 160px);
+    overflow:hidden;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+#music-image > img{
+    height:calc(var(--size) * 175px);
+
+}
+
+#music-name{
+    text-align:center;
+    font-size:calc(var(--size) * 14px);
+    font-weight:700;
+    margin: calc(var(--size) * 12px) 0 0;
+}
+
+#music-author{
+    text-align:center;
+    font-size:calc(var(--size) * 12px);
+    font-weight:400;
+    margin:0;
+    color:gray;
 }
 
 @media(max-width:480px){

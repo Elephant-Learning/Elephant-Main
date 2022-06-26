@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login | Elephant - The Ultimate Student Suite</title>
+
+    <script src="script.js" defer></script>
+    <link rel="icon" href="../icons/elephant-400-400-grayscale.png" id="favicon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="main-wrapper">
+        <div id="main-container">
+            <div class="form-container" id="log-in-container">
+                <h1>Welcome Back</h1>
+                <p>Good to see you again! Please enter your details to proceed to your dashboard!</p>
+                <div class="form-input">
+                    <p>Email</p>
+                    <input type="text" id="log-in-email">
+                    <img src="icons/email.svg" alt="">
+                </div>
+                <div class="form-input">
+                    <p>Password</p>
+                    <input type="password" id="log-in-password">
+                    <img src="icons/password.svg" alt="">
+                </div>
+                <div id="remember-div">
+                    <input type="checkbox" id="remember-checkbox">
+                    <p>Remember On This Computer</p>
+                    <h6>i</h6>
+                </div>
+                <button id="log-in-btn">Sign In</button>
+                <h6>Don't have an account? <span id="sign-up-link">Sign Up</span></h6>
+            </div>
+            <div class="inactive-container form-container" id="sign-up-container">
+                <h1>Welcome New User</h1>
+                <p>Enter your details down below and get ready to make learning easier!</p>
+                <div class="form-input">
+                    <p>Username</p>
+                    <input type="text" id="sign-up-username">
+                    <img src="icons/username.svg" alt="">
+                </div>
+                <div class="form-input">
+                    <p>Email</p>
+                    <input type="text" id="sign-up-email">
+                    <img src="icons/email.svg" alt="">
+                </div>
+                <div class="form-input">
+                    <p>Password</p>
+                    <input type="password" id="sign-up-password">
+                    <img src="icons/password.svg" alt="">
+                </div>
+                <div class="form-select">
+                    <p>Account Format</p>
+                    <select name="dsf" id="sign-up-type">
+                        <option value="undefined" disabled selected hidden>What Kind of User Are You?</option>
+                        <option value="individual">Individual Account</option>
+                        <option value="student">Student Account</option>
+                        <option value="instructor">Instructor Account</option>
+                        <option value="enterprise">Organization Account</option>
+                    </select>
+                    <img src="./icons/user.svg" alt="">
+                </div>
+                <button id="sign-up-btn">Sign Up</button>
+                <h6>Already have an account? <span id="log-in-link">Log In</span></h6>
+            </div>
+        </div>
+        <div id="news-carousel">
+            <button id="carousel-left" class="carousel-button"><</button>
+            <div id="carousel">
+                <div class="carousel-item">
+                    <div>
+                        <button>+ Create Deck</button>
+                        <button>+ Import Deck</button>
+                    </div>
+                    <div>
+                        <div>
+                            <img src="../icons/elephant-400-400-grayscale.png" alt="">
+                            <h1>Elephant</h1>
+                        </div>
+                        <div>
+                            <div class="flashcards-card">
+                                <div></div>
+                                <div>
+                                    <h1>Napoleon Rise To Power</h1>
+                                    <p>Learn about Napoleon's Rise to power and other facts about the man himself!</p>
+                                </div>
+                            </div>
+                            <div class="flashcards-card">
+                                <div></div>
+                                <div>
+                                    <h1>Week 3 Vocabulary</h1>
+                                    <p>Memorize the vocabulary terms for week 3!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item inactive-carousel"></div>
+            </div>
+            <button id="carousel-right" class="carousel-button">></button>
+            <div id="carousel-bg"></div>
+        </div>
+        <img src="../icons/elephant-400-400-grayscale.png" alt="Logo" id="logo">
+    </div>
+</body>
+</html>
