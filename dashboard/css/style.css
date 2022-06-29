@@ -73,7 +73,8 @@ body *{
 }
 
 #desktop-main-image > a > img{
-    width:calc(var(--size) * 24px);
+    width:calc(var(--size) * 28px);
+    padding-top: 3px;
     /*filter:saturate(0);*/
 }
 
