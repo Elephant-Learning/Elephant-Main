@@ -15,6 +15,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
 
+    <script src="js/music.js" defer></script>
     <script src="js/flashcards.js" defer></script>
     <script src="js/modalHandling.js" defer></script>
 </head>
@@ -55,19 +56,20 @@
         <div id="desktop-notifications-modal" class="inactive-modal">
             <h1>Notifications</h1>
         </div>
-        <div id="desktop-music-container">
+        <div id="desktop-music-container" class="inactive-modal">
             <div id="desktop-music-main">
                 <div id="music-image">
-                    <img src="./music/covers/timeless-inception.png" alt="">
+                    <img src="./music/covers/space-trip.png" alt="">
                 </div>
-                <h1 id="music-name">Timeless Inception</h1>
+                <h1 id="music-name">Space Trip</h1>
                 <p id="music-author">Abhiram Boddu - Elephant Team</p>
-                <input type="range" name="" id="slider-input">
+                <input type="range" value="10" id="slider-input" min="0" max="100" disabled="disabled">
                 <div id="music-controls">
                     <img src="./icons/favorite.png" alt="">
                     <img src="./icons/pause.png" alt="">
                     <img src="./icons/forward.png" alt="">
                 </div>
+                <div id="playlist-list"></div>
             </div>
         </div>
         <div id="desktop-navbar">
@@ -209,7 +211,9 @@
                         </div>
                         <div id="chat-members"></div>
                     </div>
-                    <div class="desktop-tab" id="flashcards-editor"></div>
+                    <div class="desktop-tab" id="flashcards-editor">
+
+                    </div>
                     <div class="desktop-tab" id="flashcards-viewer">
                         <div id="flashcards-viewer-main">
                             <div id="flashcard-main-view">

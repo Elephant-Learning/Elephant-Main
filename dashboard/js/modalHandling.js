@@ -122,6 +122,7 @@ function initialize(){
     if(document.getElementById('flashcards-list').hasChildNodes()){
         document.getElementById('no-flashcards').classList.add('inactive-modal');
     }
+    initializeMusic();
     togglePageFlip(0)
 }
 

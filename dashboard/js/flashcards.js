@@ -5,6 +5,7 @@ const Deck = function(name, author){
     this.author = "Unauthored";
     this.favoritesNumber = 0;
     this.lastModified = new Date();
+    this.creationDate;
 }
 
 //sortIndex
@@ -66,7 +67,6 @@ function displayFlashcard(name, author, type){
 }
 
 function viewFlashcard(card, type){
-    console.log("Something")
     document.getElementById('flashcard-stripe').className = "";
     document.getElementById('flashcard-stripe').classList.add(tags[type] + "-flashcard");
     document.getElementById('flashcard-stripe-text').innerHTML = tags[type];
