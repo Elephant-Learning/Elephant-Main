@@ -46,7 +46,7 @@ function selectSong(){
 
     if(previousSong === currentActiveSong) selectSong()
     else{
-        document.getElementById('music-image').src = "./music/covers/" + musics[currentActiveSong][0].toLowerCase().replace(' ', '-') + ".png";
+        document.getElementById('music-image').src = "./music/covers/min/" + musics[currentActiveSong][0].toLowerCase().replace(' ', '-') + ".png";
         document.getElementById('music-name').innerHTML = musics[currentActiveSong][0];
         document.getElementById('music-author').innerHTML = musics[currentActiveSong][1];
 
@@ -102,5 +102,5 @@ function setupPlaylists(){
         }
         radioImage.src = "./music/icons/mixed_radio.png";
     }
-    randomImage.src = "./music/covers/" + randomMusic[0].toLowerCase().replace(' ', '-') + ".png";
+    randomImage.src = "./music/covers/min/" + randomMusic[0].toLowerCase().replace(' ', '-') + ".png";
 }
