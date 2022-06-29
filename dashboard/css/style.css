@@ -602,7 +602,7 @@ body *{
     visibility: hidden;
 }
 
-#music-image{
+#music-image-div{
     margin-top:calc(var(--size) * 48px);
     border-radius:50%;
     box-shadow:0 0 calc(var(--size) * 6px) 0 var(--dark-gray);
@@ -618,6 +618,7 @@ body *{
     animation-duration:3s;
     animation-iteration-count:infinite;
     animation-timing-function:linear;
+    animation-play-state:paused;
 }
 
 @keyframes rotateDisc {
@@ -628,7 +629,7 @@ body *{
     }
 }
 
-#music-image::after{
+#music-image-div::after{
     content:'';
     width:calc(var(--size) * 36px);
     height:calc(var(--size) * 36px);
@@ -639,7 +640,7 @@ body *{
     border-radius:50%;
 }
 
-#music-image > img{
+#music-image-div > img{
     height:calc(var(--size) * 175px);
 
 }

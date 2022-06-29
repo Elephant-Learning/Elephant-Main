@@ -58,16 +58,16 @@
         </div>
         <div id="desktop-music-container" class="inactive-modal">
             <div id="desktop-music-main">
-                <div id="music-image">
-                    <img src="./music/covers/space-trip.png" alt="">
+                <div id="music-image-div">
+                    <img src="./music/covers/space-trip.png" id="music-image">
                 </div>
-                <h1 id="music-name">Space Trip</h1>
-                <p id="music-author">Abhiram Boddu - Elephant Team</p>
-                <input type="range" value="10" id="slider-input" min="0" max="100" disabled="disabled">
+                <h1 id="music-name"></h1>
+                <p id="music-author"></p>
+                <input type="range" value="0" id="slider-input" min="0" max="10000" disabled="disabled">
                 <div id="music-controls">
                     <img src="./icons/favorite.png" alt="">
-                    <img src="./icons/pause.png" alt="">
-                    <img src="./icons/forward.png" alt="">
+                    <img src="./icons/play.png" id="music-play-img">
+                    <img src="./icons/forward.png" id="music-next-img">
                 </div>
                 <div id="playlist-list"></div>
             </div>

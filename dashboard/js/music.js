@@ -1,3 +1,9 @@
+let currentActiveSong;
+let paused = true;
+let firstTime = true;
+let songManager;
+let song;
+
 const musics = [
     ["City Night", "Abhiram Boddu"],
     ["Cool Breeze", "Abhiram Boddu"],
@@ -11,6 +17,54 @@ const musics = [
 
 function initializeMusic(){
     setupPlaylists()
+    selectSong()
+}
+
+document.getElementById('music-play-img').onclick = toggleAudio;
+document.getElementById('music-next-img').onclick = selectSong;
+
+function toggleAudio(){
+    if(paused){
+        document.getElementById('music-play-img').src = "./icons/pause.png";
+        document.getElementById('music-image-div').style.animationPlayState = "running";
+        songManager = setInterval(sliderManager, 1000);
+        song.play();
+    } else {
+        document.getElementById('music-play-img').src = "./icons/play.png";
+        document.getElementById('music-image-div').style.animationPlayState = "paused";
+        clearInterval(songManager);
+        song.pause();
+    }
+
+    paused = !paused;
+}
+
+function selectSong(){
+    if(!firstTime) song.pause();
+    let previousSong = currentActiveSong;
+    currentActiveSong = Math.floor(Math.random() * musics.length);
+
+    if(previousSong === currentActiveSong) selectSong()
+    else{
+        document.getElementById('music-image').src = "./music/covers/" + musics[currentActiveSong][0].toLowerCase().replace(' ', '-') + ".png";
+        document.getElementById('music-name').innerHTML = musics[currentActiveSong][0];
+        document.getElementById('music-author').innerHTML = musics[currentActiveSong][1];
+
+        song = new Audio("./music/" + musics[currentActiveSong][0].toLowerCase().replace(' ', '-') + ".wav");
+    }
+
+    if(firstTime) firstTime = false;
+    else {
+        if(paused) toggleAudio()
+        else song.play();
+    }
+}
+
+function sliderManager(){
+    document.getElementById('slider-input').value = (song.currentTime / song.duration) * document.getElementById('slider-input').max;
+
+    if(song.currentTime === song.duration) selectSong();
+
 }
 
 function setupPlaylists(){
@@ -46,7 +100,7 @@ function setupPlaylists(){
                 document.getElementById('playlist-list').appendChild(newImg)
             });
         }
-        radioImage.src = "./icons/mixed_radio.png";
+        radioImage.src = "./music/icons/mixed_radio.png";
     }
     randomImage.src = "./music/covers/" + randomMusic[0].toLowerCase().replace(' ', '-') + ".png";
 }
