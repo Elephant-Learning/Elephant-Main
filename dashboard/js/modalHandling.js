@@ -1,8 +1,8 @@
 let sidebarContextMenu = false;
 let mainContextMenu = false;
 
-let pages = ["Elephant Flashcards", "Elephant Task Manager", "Favorited Decks", "Skyline High School Chat Group"];
-let randomChatMessage = ["Rearranging Your Cards Into Decks...", "Managing Your Tasks Prematurely...", "Closing Minecraft and Beginning To Work...", "Placing 3 Day Blocks on Discord...", "Contemplating Your Life Choices...", "Do You People Even Read This???"]
+let pages = ["Elephant Flashcards", "Elephant Task Manager", "Chat Group", "Flashcards Editor", "Flashcard Viewing Platform", "Search Results", "Folder", "My Profile", "Administrator Portal"];
+let randomChatMessage = ["Rearranging Your Cards Into Decks...", "Managing Your Tasks Prematurely...", "Closing Minecraft and Beginning To Work...", "Placing 3 Day Blocks on Discord...", "Contemplating Your Life Choices...", "Do You People Even Read This???", "Please be Patient... I'm new..."]
 
 function toggleSettingsModal(){
     if(document.getElementById('desktop-settings-modal').classList.contains('inactive-modal')){
@@ -12,15 +12,22 @@ function toggleSettingsModal(){
     }
 }
 
-function togglePageFlip(index){
+function toggleMusicModal(){
+    if(document.getElementById('desktop-music-container').classList.contains('inactive-modal')){
+        document.getElementById('desktop-music-container').classList.remove('inactive-modal');
+    } else {
+        document.getElementById('desktop-music-container').classList.add('inactive-modal');
+    }
+}
+
+function togglePageFlip(index, sidebar){
     document.getElementById('desktop-main-container-tab').innerHTML = pages[index];
-    document.querySelector(".active-sidebar-category").classList.remove('active-sidebar-category')
-    document.querySelectorAll('.desktop-sidebar-category')[index].classList.add('active-sidebar-category')
-    try {document.querySelector(".active-tab").classList.remove('active-tab')}
-    catch{}
+    try{document.querySelector(".active-sidebar-category").classList.remove('active-sidebar-category')} catch{}
+    try{document.querySelectorAll('.desktop-sidebar-category')[sidebar].classList.add('active-sidebar-category')} catch{}
+    try {document.querySelector(".active-tab").classList.remove('active-tab')} catch{}
     document.querySelectorAll('.desktop-tab')[index].classList.add('active-tab')
 
-    const removeBottomBtns = [3]
+    const removeBottomBtns = [1, 2, 3, 4, 5, 6, 7]
 
     if(removeBottomBtns.includes(index)){
         document.querySelectorAll('.desktop-bottom-btn').forEach(function(item){
@@ -95,10 +102,10 @@ function closeNews(){
         item.style.height = "calc(100vh - var(--size) * 92px)";
     })
     document.getElementById('desktop-main-container-tab').style.top = "0";
+    document.getElementById('desktop-music-container').style.height = "calc(100vh - var(--size) * 48px)";
 }
 
 function initialize(){
-    document.getElementById('desktop-loader-text').innerHTML = randomChatMessage[Math.floor(Math.random() * randomChatMessage.length)];
     if(document.getElementById('desktop-main-news').hasChildNodes()){
         document.getElementById('desktop-main-news').style.visibility = "visible";
         document.querySelectorAll('.desktop-tab').forEach(function(item){
@@ -109,8 +116,13 @@ function initialize(){
         let element = document.getElementById('notifications-btn');
         document.getElementById('desktop-settings-modal').style.right = "calc(var(--size)" + (getRightBound(element) + 334) + "px)";
         document.getElementById('desktop-main-container-tab').style.top = "calc(var(--size) * 24px)";
-        console.log(document.getElementById('desktop-settings-modal').style.right)
+        document.getElementById('desktop-music-container').style.height = "calc(100vh - var(--size) * 72px)";
     }
+    loadFlashcards();
+    if(document.getElementById('flashcards-list').hasChildNodes()){
+        document.getElementById('no-flashcards').classList.add('inactive-modal');
+    }
+    initializeMusic();
     togglePageFlip(0)
 }
 
@@ -131,5 +143,9 @@ function getRightBound(element) {
 window.onload = function(){
     document.getElementById('desktop-loader-container').classList.add('inactive-modal')
 }
+
+document.addEventListener('DOMContentLoaded', function(e){
+    document.getElementById('desktop-loader-text').innerHTML = randomChatMessage[Math.floor(Math.random() * randomChatMessage.length)];
+})
 
 initialize();
