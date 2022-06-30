@@ -83,7 +83,11 @@ function viewFlashcard(card, type){
 function loadFlashcards(keyword, viewIndex, sortIndex){
     for(let i = 0; i < 105; i++){
         displayFlashcard("Elephant Flashcards Test", "Random User", Math.floor(Math.random() * 3));
-    }
+    } document.getElementById('flashcards-display-test').innerHTML = "";
+}
+
+function createFolder(){
+    togglePageFlip(6);
 }
 
 function createDeck(){

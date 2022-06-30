@@ -86,7 +86,6 @@
     color:black;
     font-size:calc(var(--size) * 12px);
     font-weight:400;
-    font-family:'Montserrat';
 }
 
 #flashcards-list-container{

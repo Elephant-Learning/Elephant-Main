@@ -388,7 +388,7 @@ body *{
 
 #desktop-main-container-tab{
     font-size:calc(var(--size) * 12px);
-    width:100%;
+    width:calc(100% - var(--size) * 48px);
     padding:calc(var(--size) * 14px) calc(var(--size) * 24px);
     font-weight:600;
     border-bottom:1px solid var(--light-border-color);
@@ -408,15 +408,16 @@ body *{
 }
 
 #desktop-main-tabs{
-    width:calc(100vw - var(--size) * 256px);
+    width:100%;
 }
 
 .desktop-tab{
     transition-duration:250ms;
+    transition-property:opacity;
     position:absolute;
     top:calc(var(--size) * 44px);
     left:calc(var(--size) * 256px);
-    width:100%;
+    width:calc(100vw - var(--size) * 256px);
     height:calc(100vh - var(--size) * 92px)
 }
 
@@ -707,22 +708,44 @@ body *{
 #playlist-list{
     margin-top:calc(var(--size) * 18px);
     display:flex;
-    flex-direction:row;
+    flex-direction:row-reverse;
     gap:calc(var(--size) * 18px);
     flex-wrap:wrap;
     width:calc(var(--size) * 208px);
     justify-content:center;
+    align-items:flex-start;
 }
 
-#playlist-list > img{
-    height:calc(var(--size) * 64px);
-    border-radius:calc(var(--size) * 18px);
-    transition-duration:250ms;
+#playlist-list > div{
+    display:flex;
+    flex-direction:column-reverse;
+    gap:calc(var(--size) * 6px);
+    text-align:center;
+    width:calc(var(--size) * 64px);
     cursor:pointer;
 }
 
-#playlist-list > img:hover{
+#playlist-list > div > img{
+    width:100%;
+    border-radius:calc(var(--size) * 18px);
+    transition-duration:250ms;
+}
+
+#playlist-list > div:hover > img{
     transform:scale(1.05);
+}
+
+#playlist-list > div > p{
+    font-size:12px;
+    transition-duration:250ms;
+    color:gray;
+    font-weight:400;
+    opacity:0;
+    margin:0;
+}
+
+#playlist-list > div:hover > p{
+    opacity:1;
 }
 
 @media(max-width:480px){

@@ -67,6 +67,12 @@ function sliderManager(){
 
 }
 
+function toTitleCase(str) {
+    return str.toLowerCase().split(' ').map(function (word) {
+        return (word.charAt(0).toUpperCase() + word.slice(1));
+    }).join(' ');
+}
+
 function setupPlaylists(){
     let canvas = document.createElement('canvas');
     let ctx = canvas.getContext('2d');
@@ -75,32 +81,46 @@ function setupPlaylists(){
     canvas.height = 400;
 
     // Code to Generate Random Liked Music Goes Here
-    let randomMusic = musics[Math.floor(Math.random() * musics.length)];
-    let randomImage = new Image();
-    randomImage.onload = function(){
-        let radioImage = new Image();
-        radioImage.onload = function(){
-            let radioImageSize = 250;
+    const types = ["mixed_radio", "favorites"]
+    for(let i = 0; i < types.length; i++){
 
-            ctx.beginPath();
-            ctx.drawImage(randomImage, 0, 0, canvas.width, canvas.height);
-            ctx.drawImage(radioImage, (canvas.width - radioImageSize)/2, (canvas.height - radioImageSize)/2, radioImageSize, radioImageSize)
-            ctx.closePath();
+        let playlistDiv = document.createElement('div');
 
-            canvas.toBlob(function(blob) {
-                const newImg = document.createElement('img');
-                const url = URL.createObjectURL(blob);
+        let randomMusic = musics[Math.floor(Math.random() * musics.length)];
+        let randomImage = new Image();
+        randomImage.onload = function(){
+            let radioImage = new Image();
+            radioImage.onload = function(){
+                let radioImageSize = 250;
 
-                newImg.onload = function() {
-                    // no longer need to read the blob so it's revoked
-                    URL.revokeObjectURL(url);
-                };
+                ctx.beginPath();
+                ctx.drawImage(randomImage, 0, 0, canvas.width, canvas.height);
+                ctx.drawImage(radioImage, (canvas.width - radioImageSize)/2, (canvas.height - radioImageSize)/2, radioImageSize, radioImageSize)
+                ctx.closePath();
 
-                newImg.src = url;
-                document.getElementById('playlist-list').appendChild(newImg)
-            });
+                canvas.toBlob(function(blob) {
+                    const newImg = document.createElement('img');
+                    const url = URL.createObjectURL(blob);
+
+                    newImg.onload = function() {
+                        // no longer need to read the blob so it's revoked
+                        URL.revokeObjectURL(url);
+                    };
+
+                    newImg.src = url;
+                    playlistDiv.appendChild(newImg)
+                });
+            }
+            radioImage.src = "./music/icons/" + types[i] + ".png";
         }
-        radioImage.src = "./music/icons/mixed_radio.png";
+        randomImage.src = "./music/covers/min/" + randomMusic[0].toLowerCase().replace(' ', '-') + ".png";
+
+        let playlistText = document.createElement('p');
+        playlistText.innerHTML = toTitleCase(types[i].replace('_', " "))
+
+        playlistDiv.appendChild(playlistText);
+
+        document.getElementById('playlist-list').appendChild(playlistDiv)
     }
-    randomImage.src = "./music/covers/min/" + randomMusic[0].toLowerCase().replace(' ', '-') + ".png";
+
 }
