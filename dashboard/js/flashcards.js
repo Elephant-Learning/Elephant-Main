@@ -1,11 +1,25 @@
 const tags = ["personal", "community", "shared"];
 
-const Deck = function(name, author){
+const Card = function(term){
+    this.term = term;
+    this.definitions = [];
+
+    this.addDefinition = function(definition){
+        this.definitions.push(definition)
+    }
+}
+
+const Deck = function(name){
     this.name = name;
+    this.cards = [];
     this.author = "Unauthored";
     this.favoritesNumber = 0;
     this.lastModified = new Date();
     this.creationDate;
+
+    this.addCard = function(card){
+        this.cards.push(card);
+    }
 }
 
 //sortIndex
@@ -77,7 +91,7 @@ function viewFlashcard(card, type){
         element.classList.add(tags[type] + "-flashcard-border");
     })
 
-    togglePageFlip(4)
+    togglePageFlip(4, undefined, false);
 }
 
 function loadFlashcards(keyword, viewIndex, sortIndex){
@@ -87,9 +101,9 @@ function loadFlashcards(keyword, viewIndex, sortIndex){
 }
 
 function createFolder(){
-    togglePageFlip(6);
+    togglePageFlip(6, undefined, false);
 }
 
 function createDeck(){
-    togglePageFlip(3);
+    togglePageFlip(3, undefined, false);
 }

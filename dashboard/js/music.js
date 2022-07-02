@@ -8,6 +8,7 @@ const musics = [
     ["City Night", "Abhiram Boddu"],
     ["Cool Breeze", "Abhiram Boddu"],
     ["Insomnia", "Abhiram Boddu"],
+    ["Nostalgia", "Sid Gupta"],
     ["Rainy Café", "Abhiram Boddu"],
     ["Road Vibes", "Abhiram Boddu"],
     ["Space Trip", "Abhiram Boddu"],

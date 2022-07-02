@@ -12,6 +12,10 @@ document.addEventListener('keydown', function(e){
     } if(e.keyCode === 78 && !document.querySelectorAll('.desktop-tab')[0].classList.contains('inactive-modal')) {
         e.preventDefault();
         createDeck();
+    } if(e.keyCode === 27) {
+        history.pop();
+        let previousPage = history.pop();
+        try{togglePageFlip(previousPage[0], previousPage[1])} catch{}
     }
 });
 

@@ -4,6 +4,8 @@ let mainContextMenu = false;
 let pages = ["Elephant Flashcards", "Elephant Task Manager", "Chat Group", "Flashcards Editor", "Flashcard Viewing Platform", "Search Results", "Folder Editor", "Folder Viewer", "My Profile", "Administrator Portal"];
 let randomChatMessage = ["Rearranging Your Cards Into Decks...", "Managing Your Tasks Prematurely...", "Closing Minecraft and Beginning To Work...", "Placing 3 Day Blocks on Discord...", "Contemplating Your Life Choices...", "Do You People Even Read This???", "Please be Patient... I'm new..."]
 
+let history = [];
+
 function toggleSettingsModal(){
     if(document.getElementById('desktop-settings-modal').classList.contains('inactive-modal')){
         document.getElementById('desktop-settings-modal').classList.remove('inactive-modal');
@@ -40,6 +42,8 @@ function togglePageFlip(index, sidebar){
             })
         } catch{}
     }
+
+    history.push([index, sidebar]);
 }
 
 function toggleSizeSetting(value){
@@ -123,7 +127,7 @@ function initialize(){
         document.getElementById('no-flashcards').classList.add('inactive-modal');
     }
     initializeMusic();
-    togglePageFlip(0,0)
+    togglePageFlip(0,0, false)
 }
 
 function getRightBound(element) {
