@@ -2,6 +2,17 @@ let controlActive = false;
 let songSelectEnabled = true;
 
 document.addEventListener('keydown', function(e){
+    let inputActive = false;
+
+    document.querySelectorAll('input').forEach(function(element){
+        if(element === document.activeElement) {
+            console.log("Input Active");
+            inputActive = true;
+        }
+    })
+
+    if(inputActive) return;
+
     if(e.keyCode === 17) controlActive = true;
     if(e.keyCode === 32 && !document.getElementById('desktop-music-container').classList.contains('inactive-modal')) {
         e.preventDefault();
@@ -16,7 +27,7 @@ document.addEventListener('keydown', function(e){
         history.pop();
         let previousPage = history.pop();
         try{togglePageFlip(previousPage[0], previousPage[1])} catch{}
-    }
+    } if(e.keyCode === 77 && controlActive) toggleMusicModal();
 });
 
 document.addEventListener('keyup', function(e){

@@ -1,5 +1,4 @@
-let sidebarContextMenu = false;
-let mainContextMenu = false;
+let contextMenu = false;
 
 let pages = ["Elephant Flashcards", "Elephant Task Manager", "Chat Group", "Flashcards Editor", "Flashcard Viewing Platform", "Search Results", "Folder Editor", "Folder Viewer", "My Profile", "Administrator Portal"];
 let randomChatMessage = ["Rearranging Your Cards Into Decks...", "Managing Your Tasks Prematurely...", "Closing Minecraft and Beginning To Work...", "Placing 3 Day Blocks on Discord...", "Contemplating Your Life Choices...", "Do You People Even Read This???", "Please be Patient... I'm new..."]
@@ -57,47 +56,72 @@ function toggleSizeSetting(value){
 
 document.getElementById('desktop-sidebar').addEventListener('contextmenu', function(e){
     e.preventDefault();
-    sidebarContextMenu = true;
 
-    let refactoredClientX = e.clientX
-    if(e.clientX > 128) refactoredClientX -= 128
+    while (document.getElementById('context-menu').firstChild) {
+        document.getElementById('context-menu').firstChild.remove()
+    }
 
-    let refactoredClientY = e.clientY;
-    if(e.clientY > window.innerHeight - 25) refactoredClientY -= 25;
+    const options = [["add_folder", "New Folder", "createFolder()"]]
 
-    document.getElementById('desktop-sidebar-context-menu').style.left = refactoredClientX + "px";
-    document.getElementById('desktop-sidebar-context-menu').style.top = refactoredClientY + "px";
-    document.getElementById('desktop-sidebar-context-menu').classList.remove('inactive-modal');
-    document.getElementById('desktop-main-container-context-menu').classList.add('inactive-modal');
+    contextMenuOptions(options)
+
+    toggleContextMenu(true, e);
 })
 
 document.getElementById('desktop-sidebar').addEventListener('click', function(e){
-    document.getElementById('desktop-main-container-context-menu').classList.add('inactive-modal');
-    document.getElementById('desktop-sidebar-context-menu').classList.add('inactive-modal');
-    sidebarContextMenu = false;
+    toggleContextMenu(false);
 })
 
 document.getElementById('desktop-main-container').addEventListener('contextmenu', function(e){
-    e.preventDefault();
-    mainContextMenu = true;
+    e.preventDefault()
 
-    let refactoredClientX = e.clientX
-    if(e.clientX > window.innerWidth - 128) refactoredClientX -= 128
+    while (document.getElementById('context-menu').firstChild) {
+        document.getElementById('context-menu').firstChild.remove()
+    }
 
-    let refactoredClientY = e.clientY;
-    if(e.clientY > window.innerHeight - 50) refactoredClientY -= 50;
+    const options = [["add_file", "New Deck", "createDeck()"], ["add_folder", "New Folder", "createFolder()"]]
 
-    document.getElementById('desktop-main-container-context-menu').style.left = refactoredClientX + "px";
-    document.getElementById('desktop-main-container-context-menu').style.top = refactoredClientY + "px";
-    document.getElementById('desktop-main-container-context-menu').classList.remove('inactive-modal');
-    document.getElementById('desktop-sidebar-context-menu').classList.add('inactive-modal');
+    contextMenuOptions(options)
+
+    toggleContextMenu(true, e);
 })
 
 document.getElementById('desktop-main-container').addEventListener('click', function(e){
-    document.getElementById('desktop-main-container-context-menu').classList.add('inactive-modal');
-    document.getElementById('desktop-sidebar-context-menu').classList.add('inactive-modal');
-    mainContextMenu = false;
+    toggleContextMenu(false);
 })
+
+function contextMenuOptions(options){
+    for(let i = 0; i < options.length; i++){
+        let newDiv = document.createElement('div');
+        let newImg = document.createElement('img');
+        let newPara = document.createElement('p');
+
+        newImg.src = "./icons/" + options[i][0] + ".png";
+        newPara.innerHTML = options[i][1];
+
+        newDiv.append(newImg, newPara);
+        newDiv.setAttribute('onclick', options[i][2] + "; toggleContextMenu(false);");
+        document.getElementById('context-menu').appendChild(newDiv);
+    }
+}
+
+function toggleContextMenu(display, e){
+    contextMenu = !contextMenu;
+
+    if(display) {
+        let refactoredClientX = e.clientX
+        if(e.clientX > window.innerWidth - 128) refactoredClientX -= 128
+
+        let refactoredClientY = e.clientY;
+        if(e.clientY > window.innerHeight - 50) refactoredClientY -= 50;
+
+        document.getElementById('context-menu').style.left = refactoredClientX + "px";
+        document.getElementById('context-menu').style.top = refactoredClientY + "px";
+        document.getElementById('context-menu').classList.remove('inactive-modal');
+    } else {
+        document.getElementById('context-menu').classList.add('inactive-modal');
+    }
+}
 
 function closeNews(){
     document.getElementById('desktop-main-news').style.visibility = "hidden";

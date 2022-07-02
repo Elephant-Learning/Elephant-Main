@@ -257,7 +257,7 @@ body *{
     margin: 0 0 calc(var(--size) * 6px) calc(var(--size) * 18px);
 }
 
-.context-menu:not(.inactive-modal){
+#context-menu:not(.inactive-modal){
     visibility: visible;
     opacity:1;
     transition-duration:250ms;
@@ -269,35 +269,33 @@ body *{
     padding:calc(var(--size) * 12px) 0;
     /*border-radius:5px;*/
     overflow:hidden;
+    border-radius:calc(var(--size) * 6px);
+    box-shadow:0 0 calc(var(--size) * 12px) 0 black;
     width:calc(var(--size) * 128px);
     color:white;
     z-index:1;
 }
 
-.context-menu > div{
+#context-menu > div{
     display:flex;
     flex-direction:row;
     align-items:center;
-    background:transparent;
-    transition-duration:250ms;
     width:calc(var(--size) * 128px);
     cursor:pointer;
     padding:3px 0;
 }
 
-
-
-.context-menu > div:hover{
-    background:var(--primary-accent);
+#context-menu > div:hover{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
 }
 
-.context-menu > div > img{
+#context-menu > div > img{
     height:calc(var(--size) * 14px);
     filter:invert(1);
     padding:0 8px;
 }
 
-.context-menu > div > p{
+#context-menu > div > p{
     font-size:calc(var(--size) * 12px);
     font-weight:500;
     cursor:pointer;
