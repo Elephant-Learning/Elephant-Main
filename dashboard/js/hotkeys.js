@@ -6,10 +6,14 @@ document.addEventListener('keydown', function(e){
 
     document.querySelectorAll('input').forEach(function(element){
         if(element === document.activeElement) {
-            console.log("Input Active");
             inputActive = true;
         }
     })
+
+    if(e.keyCode === 13 && document.getElementById('desktop-navbar-input') === document.activeElement){
+        search();
+        inputActive = false;
+    }
 
     if(inputActive) return;
 

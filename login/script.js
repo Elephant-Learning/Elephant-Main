@@ -1,5 +1,26 @@
 let selectedSignUpOption;
 
+const UserTypes = {
+    INDIVIDUAL: "INDIVIDUAL",
+    STUDENT: "STUDENT",
+    INSTRUCTOR: "INSTRUCTOR"
+}
+
+const User = function(){
+    this.firstName = "";
+    this.lastName = "";
+    this.email = "";
+    this.password = "";
+    this.type = "";
+    this.profilePic = Math.floor(Math.random() * 47);
+
+    this.updateName = function(fullname){
+        fullname = fullname.split(' ');
+        this.firstName = fullname[0];
+        this.lastName = fullname[fullname.length - 1]
+    }
+}
+
 function toggleTextVisibility(index){
     if(document.querySelectorAll('.visibility-toggleable')[index].getAttribute('type') === "password"){
         document.querySelectorAll('.visibility-toggleable')[index].setAttribute('type', "text");
@@ -77,5 +98,59 @@ function initialize(){
     togglePageFlip(0);
 }
 
+document.getElementById('login').onclick = function(){
+    //login code goes here
+}
+
+document.getElementById('individual-sign-up').onclick = function(){
+    const user = new User();
+
+    user.updateName(document.getElementById('individual-name').value);
+    user.email = document.getElementById('individual-email').value;
+    user.password = document.getElementById('individual-password').value;
+    user.type = UserTypes.INDIVIDUAL;
+
+    createUser(user)
+}
+
+document.getElementById('student-sign-up').onclick = function(){
+    const user = new User();
+
+    user.updateName(document.getElementById('student-name').value);
+    user.email = document.getElementById('student-email').value;
+    user.password = document.getElementById('student-password').value;
+    user.type = UserTypes.STUDENT;
+
+    createUser(user);
+}
+
+document.getElementById('instructor-sign-up').onclick = function(){
+    const user = new User();
+
+    user.updateName(document.getElementById('instructor-name').value);
+    user.email = document.getElementById('instructor-email').value;
+    user.password = document.getElementById('instructor-password').value;
+    user.type = UserTypes.INSTRUCTOR;
+
+    createUser(user)
+}
+
+document.querySelectorAll('button').forEach(function(element){
+    element.addEventListener('click', function(e){
+        let click = new Audio('./sounds/click.mp3')
+        click.play();
+    })
+})
+
+document.querySelectorAll('.account-option-div').forEach(function(element){
+    element.addEventListener('click', function(e){
+        let click = new Audio('./sounds/click.mp3')
+        click.play();
+    })
+})
+
+function createUser(data){
+
+}
 
 initialize();

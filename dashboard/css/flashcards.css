@@ -256,8 +256,8 @@
 
 #flashcard-main-view{
     background:var(--bg-color-1);
-    width:calc(15/9 * (100vh - var(--size) * 164px));
-    height:calc(100vh - var(--size) * 164px);
+    width:calc(100vw - var(--size) * 640px);
+    height:calc(9 * (100vw - var(--size) * 640px) / 16);
     display:flex;
     flex-direction:row;
     border-radius:calc(var(--size) * 18px);
@@ -333,14 +333,13 @@
     justify-content:center;
     align-items:center;
     font-weight:800;
-    font-size:calc(var(--size) * 64px);
+    font-size:calc(3.75vw);
     text-align:center;
 }
 
 #flashcard-actions{
     margin-left:calc(var(--size) * 24px);
-    width:calc(100vw - (15/9 * (100vh - var(--size) * 164px)) - 332px);
-    min-width:calc(var(--size) * 176px);
+    width:calc(var(--size) * 308px);
     display:flex;
     flex-direction:column;
     gap:calc(var(--size) * 12px);

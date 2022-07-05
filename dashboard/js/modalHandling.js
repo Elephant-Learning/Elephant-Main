@@ -5,6 +5,11 @@ let randomChatMessage = ["Rearranging Your Cards Into Decks...", "Managing Your 
 
 let history = [];
 
+function search(){
+    document.getElementById('desktop-navbar-input').blur();
+    togglePageFlip(5, undefined);
+}
+
 function toggleSettingsModal(){
     if(document.getElementById('desktop-settings-modal').classList.contains('inactive-modal')){
         document.getElementById('desktop-settings-modal').classList.remove('inactive-modal');
@@ -68,7 +73,7 @@ document.getElementById('desktop-sidebar').addEventListener('contextmenu', funct
     toggleContextMenu(true, e);
 })
 
-document.getElementById('desktop-sidebar').addEventListener('click', function(e){
+document.addEventListener('click', function(e){
     toggleContextMenu(false);
 })
 
@@ -84,10 +89,6 @@ document.getElementById('desktop-main-container').addEventListener('contextmenu'
     contextMenuOptions(options)
 
     toggleContextMenu(true, e);
-})
-
-document.getElementById('desktop-main-container').addEventListener('click', function(e){
-    toggleContextMenu(false);
 })
 
 function contextMenuOptions(options){

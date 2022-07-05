@@ -56,6 +56,7 @@
                     <img src="./icons/forward.png" id="music-next-img">
                 </div>
                 <div id="playlist-list"></div>
+                <div id="playlist-playing"></div>
             </div>
         </div>
         <div id="desktop-navbar">
@@ -117,7 +118,7 @@
                     <div class="desktop-sidebar-break"></div>
                     <h1>Folders</h1>
                     <div id="desktop-sidebar-folders">
-                        <div class="desktop-sidebar-folder">
+                        <div class="desktop-sidebar-folder" onclick="togglePageFlip(7)">
                             <div>
                                 <img src="./icons/folder.png" alt="Recent">
                             </div>
@@ -254,7 +255,26 @@
                     </div>
                     <div class="desktop-tab" id="search-results"></div>
                     <div class="desktop-tab" id="folder-editor"></div>
-                    <div class="desktop-tab" id="folder-viewer"></div>
+                    <div class="desktop-tab" id="folder-viewer">
+                        <div id="folder-main">
+                            <div id="folder-tab-container">
+                                <div id="folder-tab"></div>
+                                <div id="folder-back">
+                                    <div class="folder-page"></div>
+                                    <div class="folder-page"></div>
+                                </div>
+                            </div>
+                            <div id="folder-forward">
+                                <div id="folder-text">
+                                    <h1>Something about something is something</h1>
+                                    <p>By Ronak Kothari</p>
+                                </div>
+                                <!--<div id="folder-main-image">
+                                    <img src="../icons/avatars/41.png" alt="Something">
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
                     <div class="desktop-tab" id="profile-div"></div>
                     <div class="desktop-tab" id="administrator-portal"></div>
                 </div>

@@ -74,12 +74,20 @@ function toTitleCase(str) {
     }).join(' ');
 }
 
+function setPlaylist(index){
+    document.querySelectorAll('.playlist-running').forEach(function(element){
+        if(!element.classList.contains('inactive-modal')) element.classList.add("inactive-modal");
+    })
+
+    document.querySelectorAll('.playlist-running')[index].classList.remove('inactive-modal');
+}
+
 function setupPlaylists(){
     let canvas = document.createElement('canvas');
     let ctx = canvas.getContext('2d');
 
-    canvas.width = 400;
-    canvas.height = 400;
+    canvas.width = 200;
+    canvas.height = 200;
 
     // Code to Generate Random Liked Music Goes Here
     const types = ["mixed_radio", "favorites"]
@@ -92,7 +100,7 @@ function setupPlaylists(){
         randomImage.onload = function(){
             let radioImage = new Image();
             radioImage.onload = function(){
-                let radioImageSize = 250;
+                let radioImageSize = 125;
 
                 ctx.beginPath();
                 ctx.drawImage(randomImage, 0, 0, canvas.width, canvas.height);
@@ -104,11 +112,31 @@ function setupPlaylists(){
                     const url = URL.createObjectURL(blob);
 
                     newImg.onload = function() {
-                        // no longer need to read the blob so it's revoked
+                        let playlistRunningDiv = document.createElement('div');
+                        let playlistRunningImg = document.getElementById('playlist-type-image-' + i).cloneNode();
+
+                        playlistRunningDiv.appendChild(playlistRunningImg);
+
+                        let playlistTextDiv = document.createElement('div')
+                        let playlistRunningHeader = document.createElement('h1');
+                        let playlistRunningText = document.createElement('p');
+
+                        playlistRunningHeader.innerHTML = "Currently Playing";
+                        playlistRunningText.innerHTML = toTitleCase(types[i].replace('_', " "));
+
+                        playlistTextDiv.append(playlistRunningHeader, playlistRunningText);
+                        playlistRunningDiv.appendChild(playlistTextDiv)
+
+                        if(i !== 0) playlistRunningDiv.classList.add('inactive-modal');
+                        playlistRunningDiv.classList.add('playlist-running');
+
+                        document.getElementById('playlist-playing').appendChild(playlistRunningDiv);
+
                         URL.revokeObjectURL(url);
                     };
 
                     newImg.src = url;
+                    newImg.id = "playlist-type-image-" + i;
                     playlistDiv.appendChild(newImg)
                 });
             }
@@ -118,10 +146,8 @@ function setupPlaylists(){
 
         let playlistText = document.createElement('p');
         playlistText.innerHTML = toTitleCase(types[i].replace('_', " "))
-
         playlistDiv.appendChild(playlistText);
-
-        document.getElementById('playlist-list').appendChild(playlistDiv)
+        playlistDiv.setAttribute("onclick", "setPlaylist(" + i + ")");
+        document.getElementById('playlist-list').appendChild(playlistDiv);
     }
-
 }
