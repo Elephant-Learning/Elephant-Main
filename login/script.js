@@ -102,6 +102,30 @@ document.getElementById('login').onclick = function(){
     //login code goes here
 }
 
+function sendForm(email, fullName, type){
+
+    let form = document.createElement('form');
+    form.setAttribute('name', 'google-form');
+
+    let emailInput = document.createElement('input');
+    emailInput.value = email;
+    emailInput.setAttribute('name', "Emails");
+
+    let fullNameInput = document.createElement('input');
+    fullNameInput.value = fullName;
+    fullNameInput.setAttribute('name', "Names");
+
+    let typeInput = document.createElement('input');
+    typeInput.value = type;
+    typeInput.setAttribute('name', "User Type");
+
+    form.append(emailInput, fullNameInput, typeInput)
+
+    fetch("https://script.google.com/macros/s/AKfycbxIWkXEO4ez9tgCluX4Fo2oOLN9KJwENjaF47ue53aKjFA-dGGiCU0wHuQPtZ0gZnXqpg/exec", { method: 'POST', body: new FormData(form)})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
+}
+
 document.getElementById('individual-sign-up').onclick = function(){
     const user = new User();
 
@@ -109,6 +133,8 @@ document.getElementById('individual-sign-up').onclick = function(){
     user.email = document.getElementById('individual-email').value;
     user.password = document.getElementById('individual-password').value;
     user.type = UserTypes.INDIVIDUAL;
+
+    sendForm(document.getElementById('individual-name').value, user.email, user.type);
 
     createUser(user)
 }
@@ -121,6 +147,8 @@ document.getElementById('student-sign-up').onclick = function(){
     user.password = document.getElementById('student-password').value;
     user.type = UserTypes.STUDENT;
 
+    sendForm(document.getElementById('student-name').value, user.email, user.type);
+
     createUser(user);
 }
 
@@ -131,6 +159,9 @@ document.getElementById('instructor-sign-up').onclick = function(){
     user.email = document.getElementById('instructor-email').value;
     user.password = document.getElementById('instructor-password').value;
     user.type = UserTypes.INSTRUCTOR;
+
+    sendForm(document.getElementById('instructor-name').value, user.email, user.type);
+
 
     createUser(user)
 }

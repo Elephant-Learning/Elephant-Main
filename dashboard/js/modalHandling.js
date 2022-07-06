@@ -168,6 +168,44 @@ function getRightBound(element) {
     return xPosition;
 }
 
+function toggleTheme(){
+    let root = document.querySelector(":root");
+
+    if(document.getElementById('desktop-settings-theme-toggle').checked){
+        root.style.setProperty('--text-color', 'white');
+        root.style.setProperty("--bg-color-1", "#1a1a1a");
+        root.style.setProperty("--bg-color-2", "#0f0f0f")
+        root.style.setProperty("--light-border-color", "#202224");
+        root.style.setProperty("--dark-gray", "#26282a");
+        root.style.setProperty("--light-gray", "#454749");
+        root.style.setProperty("--hover-dark", "#454749")
+        root.style.setProperty("--image-invert", "0.75");
+        root.style.setProperty("--light-accent", "#2f1e2e");
+        root.style.setProperty("--primary-accent", "#b21f5c");
+        root.style.setProperty("--primary-accent-gradient", "#901360");
+        root.style.setProperty("--secondary-accent", "#116088");
+        root.style.setProperty("--secondary-accent-gradient", "#1f6d70");
+        root.style.setProperty("--tertiary-accent", "#9b4912");
+        root.style.setProperty("--tertiary-accent-gradient", "#99541e");
+    } else {
+        root.style.setProperty('--text-color', 'black');
+        root.style.setProperty("--bg-color-1", "#ffffff");
+        root.style.setProperty("--bg-color-2", "#f6f7fb")
+        root.style.setProperty("--light-border-color", "#ebebeb");
+        root.style.setProperty("--dark-gray", "#1e1e1e");
+        root.style.setProperty("--light-gray", "#2c2c2c");
+        root.style.setProperty("--hover-dark", "#0f0f0f")
+        root.style.setProperty("--image-invert", "0");
+        root.style.setProperty("--light-accent", "#ffedf6");
+        root.style.setProperty("--primary-accent", "#fe599d");
+        root.style.setProperty("--primary-accent-gradient", "#f30096");
+        root.style.setProperty("--secondary-accent", "#00a8ff");
+        root.style.setProperty("--secondary-accent-gradient", "#31d6dc");
+        root.style.setProperty("--tertiary-accent", "#f8680a");
+        root.style.setProperty("--tertiary-accent-gradient", "#fa8d37");
+    }
+}
+
 //toggle Loading Bar
 window.onload = function(){
     document.getElementById('desktop-loader-container').classList.add('inactive-modal')

@@ -39,6 +39,7 @@
 
 #flashcards-main-options > div > img:first-of-type{
     height:calc(var(--size) * 30px);
+    filter:invert(1) brightness(var(--image-invert));
 }
 
 #flashcards-main-options > div > div > h1{
@@ -57,7 +58,8 @@
 
 #flashcards-main-options > div > img:last-of-type{
     height:calc(var(--size) * 18px);
-    margin-left:calc(var(--size) * 18px)
+    margin-left:calc(var(--size) * 18px);
+    filter:invert(1) brightness(var(--image-invert));
 }
 
 #flashcards-sorting{
@@ -83,7 +85,7 @@
     outline:none;
     border:none;
     background:transparent;
-    color:black;
+    color:var(--text-color);
     font-size:calc(var(--size) * 12px);
     font-weight:400;
 }
@@ -244,6 +246,7 @@
 
 .flashcard-deck > div:last-of-type > img{
     height:calc(var(--size) * 18px);
+    filter:invert(1) brightness(var(--image-invert));
     cursor:pointer;
 }
 
