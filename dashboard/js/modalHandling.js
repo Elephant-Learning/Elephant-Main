@@ -153,7 +153,11 @@ function initialize(){
 
     let preferences = localStorage.getItem('preferences');
 
-    if(!preferences) preferences = JSON.stringify([2,1]);
+    if(!preferences) {
+        preferences = JSON.stringify([2, 1]);
+        localStorage.setItem('preferences', JSON.stringify(preferences));
+        preferences = localStorage.getItem('preferences');
+    }
 
     preferences = JSON.parse(preferences);
 
