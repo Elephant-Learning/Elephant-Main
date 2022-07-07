@@ -52,11 +52,12 @@ function togglePageFlip(index, sidebar){
 
 function toggleSizeSetting(value){
     const sizes = [0.75, 1, 1.25, 1.5];
-    document.querySelector(".settings-size-active").classList.remove("settings-size-active");
-    document.querySelectorAll(".desktop-size-settings-p")[value].classList.add("settings-size-active");
+    let preferences = JSON.parse(localStorage.getItem('preferences'));
+
     document.querySelector(':root').style.setProperty('--size', sizes[value].toString());
-    let element = document.getElementById('notifications-btn');
-    document.getElementById('desktop-settings-modal').style.right = "calc(var(--size)" + (getRightBound(element) + 364 * sizes[value]) + "px)";
+
+    preferences[1] = value;
+    localStorage.setItem('preferences', JSON.stringify(preferences));
 }
 
 document.getElementById('desktop-sidebar').addEventListener('contextmenu', function(e){
@@ -75,6 +76,10 @@ document.getElementById('desktop-sidebar').addEventListener('contextmenu', funct
 
 document.addEventListener('click', function(e){
     toggleContextMenu(false);
+})
+
+document.getElementById('desktop-navbar-profile').addEventListener('click', function(e){
+
 })
 
 document.getElementById('desktop-main-container').addEventListener('contextmenu', function(e){
@@ -106,15 +111,25 @@ function contextMenuOptions(options){
     }
 }
 
-function toggleContextMenu(display, e){
+function toggleContextMenu(display, e, fixedPosition){
     contextMenu = !contextMenu;
 
     if(display) {
-        let refactoredClientX = e.clientX
-        if(e.clientX > window.innerWidth - 128) refactoredClientX -= 128
 
-        let refactoredClientY = e.clientY;
-        if(e.clientY > window.innerHeight - 50) refactoredClientY -= 50;
+        let refactoredClientX, refactoredClientY;
+
+        if(fixedPosition !== undefined){
+            refactoredClientX = fixedPosition[0];
+            refactoredClientY = fixedPosition[1];
+
+            console.log(refactoredClientX, refactoredClientY)
+        } else{
+            refactoredClientX = e.clientX
+            if(e.clientX > window.innerWidth - 128) refactoredClientX -= 128
+
+            refactoredClientY = e.clientY;
+            if(e.clientY > window.innerHeight - 50) refactoredClientY -= 50;
+        }
 
         document.getElementById('context-menu').style.left = refactoredClientX + "px";
         document.getElementById('context-menu').style.top = refactoredClientY + "px";
@@ -135,6 +150,18 @@ function closeNews(){
 }
 
 function initialize(){
+
+    let preferences = localStorage.getItem('preferences');
+
+    if(!preferences) preferences = JSON.stringify([2,1]);
+
+    preferences = JSON.parse(preferences);
+
+    toggleTheme(preferences[0]);
+    toggleSizeSetting(preferences[1])
+
+    localStorage.setItem('preferences', JSON.stringify(preferences));
+
     if(document.getElementById('desktop-main-news').hasChildNodes()){
         document.getElementById('desktop-main-news').style.visibility = "visible";
         document.querySelectorAll('.desktop-tab').forEach(function(item){
@@ -143,14 +170,16 @@ function initialize(){
         })
 
         let element = document.getElementById('notifications-btn');
-        document.getElementById('desktop-settings-modal').style.right = "calc(var(--size)" + (getRightBound(element) + 334) + "px)";
         document.getElementById('desktop-main-container-tab').style.top = "calc(var(--size) * 24px)";
         document.getElementById('desktop-music-container').style.height = "calc(100vh - var(--size) * 72px)";
     }
+
     loadFlashcards();
+
     if(document.getElementById('flashcards-list').hasChildNodes()){
         document.getElementById('no-flashcards').classList.add('inactive-modal');
     }
+
     initializeMusic();
     togglePageFlip(0,0, false)
 }
@@ -168,33 +197,35 @@ function getRightBound(element) {
     return xPosition;
 }
 
-function toggleTheme(){
+function toggleTheme(themeIndex){
     let root = document.querySelector(":root");
 
-    if(document.getElementById('desktop-settings-theme-toggle').checked){
+    if(themeIndex === 1){
         root.style.setProperty('--text-color', 'white');
         root.style.setProperty("--bg-color-1", "#1a1a1a");
         root.style.setProperty("--bg-color-2", "#0f0f0f")
         root.style.setProperty("--light-border-color", "#202224");
         root.style.setProperty("--dark-gray", "#26282a");
         root.style.setProperty("--light-gray", "#454749");
-        root.style.setProperty("--hover-dark", "#454749")
+        root.style.setProperty("--hover-dark", "#454749");
+        root.style.setProperty("--hover-light", "black");
         root.style.setProperty("--image-invert", "0.75");
         root.style.setProperty("--light-accent", "#2f1e2e");
-        root.style.setProperty("--primary-accent", "#b21f5c");
-        root.style.setProperty("--primary-accent-gradient", "#901360");
-        root.style.setProperty("--secondary-accent", "#116088");
-        root.style.setProperty("--secondary-accent-gradient", "#1f6d70");
-        root.style.setProperty("--tertiary-accent", "#9b4912");
-        root.style.setProperty("--tertiary-accent-gradient", "#99541e");
-    } else {
+        root.style.setProperty("--primary-accent", "#e32b78");
+        root.style.setProperty("--primary-accent-gradient", "#b11074");
+        root.style.setProperty("--secondary-accent", "#0d87c5");
+        root.style.setProperty("--secondary-accent-gradient", "#27b4b9");
+        root.style.setProperty("--tertiary-accent", "#af5112");
+        root.style.setProperty("--tertiary-accent-gradient", "#d0691b");
+    } else if(themeIndex === 0){
         root.style.setProperty('--text-color', 'black');
         root.style.setProperty("--bg-color-1", "#ffffff");
         root.style.setProperty("--bg-color-2", "#f6f7fb")
         root.style.setProperty("--light-border-color", "#ebebeb");
         root.style.setProperty("--dark-gray", "#1e1e1e");
         root.style.setProperty("--light-gray", "#2c2c2c");
-        root.style.setProperty("--hover-dark", "#0f0f0f")
+        root.style.setProperty("--hover-dark", "#0f0f0f");
+        root.style.setProperty("--hover-light", "#f5f5f5");
         root.style.setProperty("--image-invert", "0");
         root.style.setProperty("--light-accent", "#ffedf6");
         root.style.setProperty("--primary-accent", "#fe599d");
@@ -203,7 +234,14 @@ function toggleTheme(){
         root.style.setProperty("--secondary-accent-gradient", "#31d6dc");
         root.style.setProperty("--tertiary-accent", "#f8680a");
         root.style.setProperty("--tertiary-accent-gradient", "#fa8d37");
+    } else if(themeIndex === 2){
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) toggleTheme(1);
+        else toggleTheme(0)
     }
+
+    let preferences = JSON.parse(localStorage.getItem('preferences'));
+    preferences[0] = themeIndex;
+    localStorage.setItem('preferences', JSON.stringify(preferences));
 }
 
 //toggle Loading Bar

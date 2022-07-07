@@ -30,18 +30,6 @@
             <p id="desktop-loader-text"></p>
         </div>
         <div id="context-menu" class="inactive-modal"></div>
-        <div id="desktop-settings-modal" class="inactive-modal">
-            <h1>Settings & Preferences</h1>
-            <div id="desktop-settings-size">
-                <p class="desktop-size-settings-p" onclick="toggleSizeSetting(0)">75%</p>
-                <p class="desktop-size-settings-p settings-size-active" onclick="toggleSizeSetting(1)">100%</p>
-                <p class="desktop-size-settings-p" onclick="toggleSizeSetting(2)">125%</p>
-                <p class="desktop-size-settings-p" onclick="toggleSizeSetting(3)">150%</p>
-            </div>
-            <div id="desktop-settings-theme">
-                <input type="checkbox" id="desktop-settings-theme-toggle" onchange="toggleTheme()">
-            </div>
-        </div>
         <div id="desktop-notifications-modal" class="inactive-modal">
             <h1>Notifications</h1>
         </div>
@@ -78,9 +66,6 @@
                     <img src="./icons/notification.png" alt="Notifications" id="notifications-btn">
                     <div></div>
                 </div>
-                <div class="desktop-navbar-right-img" onclick="toggleSettingsModal()">
-                    <img src="./icons/settings.png" alt="Notifications">
-                </div>
                 <div id="desktop-navbar-profile">
                     <img src="../icons/avatars/33.png" alt="" id="desktop-navbar-profile-image">
                     <div id="navbar-profile-text">
@@ -88,6 +73,60 @@
                         <p id="desktop-navbar-profile-email">Elephant Administrator</p>
                     </div>
                     <img src="./icons/expand_down.png" alt="Dropdown">
+                    <div id="desktop-profile-modal" class="active-modal">
+                        <div>
+                            <img src="./icons/emojis/happy.png" id="desktop-profile-user-img" alt="">
+                            <p>Your Profile</p>
+                        </div>
+                        <div>
+                            <img src="./icons/theme.png" alt="">
+                            <p>Theme</p>
+                            <img src="./icons/expand-right.png" alt="">
+                            <div class="profile-sub-modal">
+                                <div onclick="toggleTheme(0)">
+                                    <img src="./icons/sun.png" alt="">
+                                    <p>Light Theme</p>
+                                </div>
+                                <div onclick="toggleTheme(1)">
+                                    <img src="./icons/moon.png" alt="">
+                                    <p>Dark Theme</p>
+                                </div>
+                                <div onclick="toggleTheme(2)">
+                                    <img src="./icons/50%25.png" alt="">
+                                    <p>System Default</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="./icons/zoom.png">
+                            <p>Accessibility Zoom</p>
+                            <img src="./icons/expand-right.png" alt="">
+                            <div class="profile-sub-modal">
+                                <div onclick="toggleSizeSetting(0)">
+                                    <img src="./icons/zoom_out.png" alt="">
+                                    <p>75%</p>
+                                </div>
+                                <div onclick="toggleSizeSetting(1)">
+                                    <img src="./icons/search.png" alt="">
+                                    <p>100%</p>
+                                </div>
+                                <div onclick="toggleSizeSetting(2)">
+                                    <img src="./icons/zoom_in.png" alt="">
+                                    <p>125%</p>
+                                </div>
+                                <div onclick="toggleSizeSetting(3)">
+                                    <img src="./icons/zoom_in.png" alt="">
+                                    <p>150%</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-break"></div>
+                        <div>
+                            <img src="./icons/logout.png">
+                            <p>Log Out</p>
+                        </div>
+                        <!--<button>Get Premium</button>-->
+                    </div>
                 </div>
             </div>
         </div>
