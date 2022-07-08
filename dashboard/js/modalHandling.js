@@ -167,6 +167,9 @@ function initialize(){
 
     preferences = JSON.parse(preferences);
 
+    if(!preferences < 3) preferences = [2, preferences[1]];
+    if(!preferences[1] < 4) preferences = [preferences[0], 1];
+
     toggleTheme(preferences[0]);
     toggleSizeSetting(preferences[1])
 
