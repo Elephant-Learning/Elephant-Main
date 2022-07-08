@@ -884,7 +884,7 @@ body *{
 .folder-page{
     width:calc(var(--size) * 95px);
     height:calc(var(--size) * 10px);
-    background:var(--hover-light);
+    background:white;
     border-radius:calc(var(--size) * 5px) calc(var(--size) * 5px) 0 0;
 }
 

@@ -28,13 +28,16 @@
     cursor:pointer;
 }
 
-#flashcards-main-options > div:nth-of-type(1):hover{
-    /*background:var(--light-accent);*/
+/*#flashcards-main-options > div:nth-of-type(1):hover{
     border:1px solid var(--primary-accent);
 }
 
 #flashcards-main-options > div:nth-of-type(2):hover{
     border:1px solid var(--secondary-accent);
+}*/
+
+#flashcards-main-options > div:hover{
+    border:1px solid var(--primary-accent);
 }
 
 #flashcards-main-options > div > img:first-of-type{
@@ -162,8 +165,8 @@
 }
 
 .flashcard-deck:hover{
-    box-shadow:0 0 calc(var(--size) * 16px) 0 var(--hover-light);
-    transform:scale(1.025);
+    /*box-shadow:0 0 calc(var(--size) * 16px) 0 var(--hover-light);
+    transform:scale(1.025);*/
 }
 
 .flashcard-deck > div:first-of-type{
@@ -367,6 +370,7 @@
 
 .flashcard-action > img{
     height:calc(var(--size) * 30px);
+    filter:invert(var(--image-invert));
 }
 
 .flashcard-action > div > h1{

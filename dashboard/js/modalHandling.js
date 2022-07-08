@@ -56,6 +56,12 @@ function toggleSizeSetting(value){
 
     document.querySelector(':root').style.setProperty('--size', sizes[value].toString());
 
+    document.querySelectorAll('.profile-zoom-check-img').forEach(function(element){
+        element.classList.add('inactive-modal');
+    })
+
+    document.querySelectorAll('.profile-zoom-check-img')[value].classList.remove('inactive-modal');
+
     preferences[1] = value;
     localStorage.setItem('preferences', JSON.stringify(preferences));
 }
@@ -151,11 +157,11 @@ function closeNews(){
 
 function initialize(){
 
+    const emojis_refactored = ["confused", "cool", "happy", "laugh", "nerd", "neutral", "unamused", "uwu", "wink"];
     let preferences = localStorage.getItem('preferences');
 
     if(!preferences) {
-        preferences = JSON.stringify([2, 1]);
-        localStorage.setItem('preferences', JSON.stringify(preferences));
+        localStorage.setItem('preferences', JSON.stringify([2, 1]));
         preferences = localStorage.getItem('preferences');
     }
 
@@ -177,6 +183,8 @@ function initialize(){
         document.getElementById('desktop-main-container-tab').style.top = "calc(var(--size) * 24px)";
         document.getElementById('desktop-music-container').style.height = "calc(100vh - var(--size) * 72px)";
     }
+
+    document.getElementById('desktop-profile-user-img').src = "./icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
 
     loadFlashcards();
 
@@ -206,15 +214,15 @@ function toggleTheme(themeIndex){
 
     if(themeIndex === 1){
         root.style.setProperty('--text-color', 'white');
-        root.style.setProperty("--bg-color-1", "#1a1a1a");
-        root.style.setProperty("--bg-color-2", "#0f0f0f")
-        root.style.setProperty("--light-border-color", "#202224");
-        root.style.setProperty("--dark-gray", "#26282a");
-        root.style.setProperty("--light-gray", "#454749");
-        root.style.setProperty("--hover-dark", "#454749");
+        root.style.setProperty("--bg-color-1", "#242627");
+        root.style.setProperty("--bg-color-2", "#1a1c1e")
+        root.style.setProperty("--light-border-color", "#313133");
+        root.style.setProperty("--dark-gray", "#151718");
+        root.style.setProperty("--light-gray", "#242627");
+        root.style.setProperty("--hover-dark", "#242627");
         root.style.setProperty("--hover-light", "black");
         root.style.setProperty("--image-invert", "0.75");
-        root.style.setProperty("--light-accent", "#2f1e2e");
+        root.style.setProperty("--light-accent", "#3a3c3d");
         root.style.setProperty("--primary-accent", "#e32b78");
         root.style.setProperty("--primary-accent-gradient", "#b11074");
         root.style.setProperty("--secondary-accent", "#0d87c5");
@@ -242,6 +250,12 @@ function toggleTheme(themeIndex){
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) toggleTheme(1);
         else toggleTheme(0)
     }
+
+    document.querySelectorAll('.profile-theme-check-img').forEach(function(element){
+        element.classList.add('inactive-modal');
+    })
+
+    document.querySelectorAll('.profile-theme-check-img')[themeIndex].classList.remove('inactive-modal');
 
     let preferences = JSON.parse(localStorage.getItem('preferences'));
     preferences[0] = themeIndex;
