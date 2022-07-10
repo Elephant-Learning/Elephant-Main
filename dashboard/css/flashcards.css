@@ -382,3 +382,295 @@
     margin:0;
     font-size:calc(var(--size) * 12px);
 }
+
+#flashcards-information-editor {
+    border-left:1px solid var(--light-border-color);
+    width:calc(var(--size) * 250px);
+    position:absolute;
+    right:0;
+    padding:calc(var(--size) * 24px) 0;
+    height:calc(100% - calc(var(--size) * 48px));
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+/*#flashcards-information-editor > div:first-of-type {
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    width:calc(var(--size) * 125px);
+    height:calc(var(--size) * 125px);
+    border-radius:50%;
+    box-shadow:0 0 calc(var(--size) * 12px) 0 var(--light-gray);
+    margin-bottom:calc(var(--size) * 12px);
+    border:1px solid gray;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+#flashcards-information-editor > div:first-of-type > div{
+    width:calc(var(--size) * 100px);
+    height:calc(var(--size) * 100px);
+    background:var(--bg-color-1);
+    border-radius:50%;
+    box-shadow:inset 0 0 calc(var(--size) * 6px) 0 var(--light-gray);
+    border:1px solid gray;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+#flashcards-information-editor > div:first-of-type > div > img{
+    width:calc(var(--size) * 60px);
+    filter:invert(calc(var(--image-invert) * 0.5 + 0.25));
+}*/
+
+#flashcards-information-editor > h1{
+    text-align:center;
+    margin: 0 0 calc(var(--size) * 2px);
+    font-size:calc(var(--size) * 14px);
+    width:calc(var(--size) * 200px);
+}
+
+#flashcards-information-editor > p{
+    text-align:center;
+    font-size:calc(var(--size) * 12px);
+    color:gray;
+    margin:0;
+    width:calc(var(--size) * 200px);
+}
+
+#flashcards-information-buttons{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:calc(var(--size) * 6px);
+    position:absolute;
+    bottom:calc(var(--size) * 24px);
+}
+
+#flashcards-information-buttons > button{
+    width:calc(var(--size) * 200px);
+    font-size:calc(var(--size) * 12px);
+    font-weight:600;
+    text-transform:uppercase;
+    height:calc(var(--size) * 28px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    border-radius:calc(var(--size) * 8px);
+    transition-duration:250ms;
+    border:none;
+    color:white;
+    cursor:pointer
+}
+
+#flashcards-information-buttons > button:hover{
+    transform:scale(1.025);
+    box-shadow:0 0 calc(var(--size) * 6px) 0 var(--dark-gray);
+}
+
+#flashcards-information-buttons > button:first-of-type{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+}
+
+#flashcards-information-buttons > button:nth-of-type(2){
+    background:var(--dark-gray)
+}
+
+.flashcards-information-input{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    width:calc(var(--size) * 200px);
+    margin-top:calc(var(--size) * 12px);
+    position:relative;
+}
+
+.flashcards-information-input > input{
+    height:calc(var(--size) * 24px);
+    width:100%;
+    border:1px solid var(--light-border-color);
+    background:var(--bg-color-1);
+    border-radius:calc(var(--size) * 6px);
+    padding-left:calc(var(--size) * 26px);
+    color:gray;
+    font-size:calc(var(--size) * 13px);
+    outline:none;
+}
+
+.flashcards-information-input > img{
+    position:absolute;
+    height:calc(var(--size) * 18px);
+    left:calc(var(--size) * 5px);
+    filter:invert(0.5);
+}
+
+.flashcards-information-dropdown {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    width:calc(var(--size) * 200px);
+    margin-top:calc(var(--size) * 12px);
+    position:relative;
+}
+
+#flashcards-main-editor{
+    width:calc(100% - 250px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    height:100%;
+}
+
+#flashcards-main-editor-tools{
+    height:calc(var(--size) * 24px);
+    padding:calc(var(--size) * 6px) calc(var(--size) * 12px);
+    width:calc(100% - var(--size) * 24px);
+    border-bottom:1px solid var(--light-border-color);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 6px);
+}
+
+#flashcards-main-editor-tools > button{
+    font-size:calc(var(--size) * 10px);
+    padding:calc(var(--size) * 3px) calc(var(--size) * 8px);
+    color:white;
+    background:var(--light-gray);
+    border:1px solid var(--dark-border-color);
+    border-radius:calc(var(--size) * 8px);
+    cursor:pointer;
+    transition-duration:125ms;
+}
+
+#flashcards-main-editor-tools > button:hover{
+    transform:scale(1.025);
+}
+
+#flashcards-main-editor-tools > img{
+    height:calc(var(--size) * 14px);
+    cursor:pointer;
+    background:white;
+    filter:invert(1);
+    padding:calc(var(--size) * 6px);
+    border-radius:50%;
+}
+
+#flashcards-editor{
+    display:flex;
+}
+
+#flashcard-editor-cards{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    flex-shrink:0;
+    overflow-y: scroll;
+    overflow-x:hidden;
+    height:calc(100% - var(--size) * 85px);
+    align-items:center;
+    gap:calc(var(--size) * 24px);
+    padding:calc(var(--size) * 24px) 0;
+}
+
+.editor-card{
+    width:calc(100% - var(--size) * 48px);
+    /*min-height:calc(var(--size) * 124px);*/
+    background:var(--bg-color-1);
+    border:1px solid var(--light-border-color);
+    border-radius:calc(var(--size) * 6px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.editor-card > p{
+    margin:0;
+    width:calc(100% - var(--size) * 12px);;
+    background:var(--light-gray);
+    font-size:calc(var(--size) * 16px);
+    font-weight:700;
+    padding: calc(var(--size) * 4px) 0 calc(var(--size) * 4px) calc(var(--size) * 12px);
+    border-top-left-radius:calc(var(--size) * 6px);
+    border-top-right-radius:calc(var(--size) * 6px);
+    color:white;
+}
+
+.editor-card > div{
+    width:100%;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+}
+
+.editor-card > div > div{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    width:calc(50% - 50px);
+    gap:calc(var(--size) * 12px);
+    padding:calc(var(--size) * 24px) 0;
+}
+
+.editor-card input, .editor-card button{
+    width:calc(100% - var(--size) * 12px);
+    padding:calc(var(--size) * 6px) calc(var(--size) * 12px);
+    font-size:calc(var(--size) * 12px);
+    border-radius:calc(var(--size) * 6px);
+    outline:none;
+}
+
+.editor-card input{
+    border:1px solid var(--light-border-color);
+    background:var(--bg-color-2);
+}
+
+.editor-card button{
+    border:none;
+    cursor:pointer;
+    color:white;
+    background:var(--light-gray);
+    width:calc(100% + var(--size) * 14px);
+    font-weight:700;
+    text-transform: uppercase;
+    transition-duration:125ms;
+}
+
+.editor-card button:hover{
+    background:var(--primary-accent);
+    transform:scale(1.01);
+}
+
+::selection, ::-moz-selection {
+    background: var(--primary-accent);
+}
+
+#editor-add-card{
+    border:calc(var(--size) * 2px) dashed lightgray;
+    border-radius:calc(var(--size) * 6px);
+    cursor:pointer;
+    width:calc(100% - var(--size) * 48px);
+    min-height:calc(var(--size) * 124px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    color:lightgray;
+    font-weight:400;
+    font-size:calc(var(--size) * 16px);
+    transition-duration:125ms;
+}
+
+#editor-add-card:hover{
+    transform:scale(1.01);
+}

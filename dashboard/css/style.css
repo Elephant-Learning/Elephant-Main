@@ -38,12 +38,12 @@ body{
     font-family: 'Montserrat', sans-serif;
     background:var(--bg-color-1);
     overflow:hidden;
-    color:var(--text-color);
     margin:0;
 }
 
 body *{
     font-family: 'Montserrat', sans-serif;
+    color:var(--text-color);
 }
 
 #desktop-wrapper{
@@ -329,6 +329,7 @@ body *{
     width:calc(var(--size) * 256px);
     border-right:1px solid var(--light-border-color);
     height:calc(100vh - var(--size) * 72px);
+    background:transparent;
     background:var(--bg-color-1);
     padding:calc(var(--size) * 12px) 0;
 }
@@ -342,7 +343,7 @@ body *{
     cursor:pointer;
 }
 
-.desktop-sidebar-category:not(.active-sidebar-category):not(.unavailable-sidebar-category):hover {
+.desktop-sidebar-category:not(.active-sidebar-category):not(.unavailable-sidebar-category):hover, .desktop-sidebar-folder:not(.active-sidebar-category):hover {
     background:var(--hover-light)
 }
 
@@ -741,7 +742,7 @@ body *{
     height:7px;
     border-radius:50%;
     background:var(--primary-accent);
-    box-shadow:calc(var(--size) * -208px) 0 0 calc(var(--size) * 208px) var(--primary-accent)
+    box-shadow:calc(var(--size) * -208px) 0 0 calc(var(--size) * 208px) var(--primary-accent);
 }
 
 #music-controls{

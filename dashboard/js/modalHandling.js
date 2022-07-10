@@ -5,6 +5,10 @@ let randomChatMessage = ["Rearranging Your Cards Into Decks...", "Managing Your 
 
 let history = [];
 
+let folderAmount = 0;
+
+const flashcardsVersion = "v1.0.0"
+
 function search(){
     document.getElementById('desktop-navbar-input').blur();
     togglePageFlip(5, undefined);
@@ -29,6 +33,15 @@ function toggleMusicModal(){
 function togglePageFlip(index, sidebar){
     document.getElementById('desktop-main-container-tab').innerHTML = pages[index];
     try{document.querySelector(".active-sidebar-category").classList.remove('active-sidebar-category')} catch{}
+
+    if(!(sidebar === undefined)){
+        if(sidebar >= document.querySelectorAll('.desktop-sidebar-category').length){
+            document.querySelectorAll('.desktop-sidebar-folder')[sidebar - document.querySelectorAll('.desktop-sidebar-category').length].classList.add('active-sidebar-category')
+        } else {
+            document.querySelectorAll('.desktop-sidebar-category')[sidebar].classList.add('active-sidebar-category')
+        }
+    }
+
     try{document.querySelectorAll('.desktop-sidebar-category')[sidebar].classList.add('active-sidebar-category')} catch{}
     try {document.querySelector(".active-tab").classList.remove('active-tab')} catch{}
     document.querySelectorAll('.desktop-tab')[index].classList.add('active-tab')
@@ -48,6 +61,27 @@ function togglePageFlip(index, sidebar){
     }
 
     history.push([index, sidebar]);
+}
+
+function sidebarFolder(title){
+    let newDiv = document.createElement('div');
+    let imgDiv = document.createElement('div');
+    let img = document.createElement('img');
+    let para = document.createElement('p');
+
+    img.src = "./icons/folder.png";
+    imgDiv.appendChild(img);
+
+    para.innerHTML = title;
+
+    newDiv.append(imgDiv, para);
+    newDiv.classList.add('desktop-sidebar-folder');
+
+    folderAmount++;
+
+    newDiv.setAttribute('onclick', 'togglePageFlip(7, ' + (folderAmount + document.querySelectorAll('.desktop-sidebar-category').length - 1) + ")")
+
+    document.getElementById('desktop-sidebar-folders').appendChild(newDiv);
 }
 
 function toggleSizeSetting(value){
@@ -167,11 +201,22 @@ function initialize(){
 
     preferences = JSON.parse(preferences);
 
-    if(!preferences < 3) preferences = [2, preferences[1]];
-    if(!preferences[1] < 4) preferences = [preferences[0], 1];
+    if(!(preferences[0] < 3)) {
+        preferences = [2, preferences[1]];
+    }
+
+    if(!(preferences[1] < 4)) {
+        preferences = [preferences[0], 1];
+    }
 
     toggleTheme(preferences[0]);
     toggleSizeSetting(preferences[1])
+
+    sidebarFolder("Spanish 3");
+    sidebarFolder("Honors World History");
+    sidebarFolder("Honors Language Arts");
+    sidebarFolder("Pre-Calculus");
+    sidebarFolder("Physics");
 
     localStorage.setItem('preferences', JSON.stringify(preferences));
 
@@ -217,15 +262,15 @@ function toggleTheme(themeIndex){
 
     if(themeIndex === 1){
         root.style.setProperty('--text-color', 'white');
-        root.style.setProperty("--bg-color-1", "#242627");
-        root.style.setProperty("--bg-color-2", "#1a1c1e")
-        root.style.setProperty("--light-border-color", "#313133");
-        root.style.setProperty("--dark-gray", "#151718");
-        root.style.setProperty("--light-gray", "#242627");
-        root.style.setProperty("--hover-dark", "#242627");
+        root.style.setProperty("--bg-color-1", "#121212");
+        root.style.setProperty("--bg-color-2", "#212121")
+        root.style.setProperty("--light-border-color", "#2c2c2c");
+        root.style.setProperty("--dark-gray", "#090909");
+        root.style.setProperty("--light-gray", "#2c2c2c");
+        root.style.setProperty("--hover-dark", "#181818");
         root.style.setProperty("--hover-light", "black");
         root.style.setProperty("--image-invert", "0.75");
-        root.style.setProperty("--light-accent", "#3a3c3d");
+        root.style.setProperty("--light-accent", "#333");
         root.style.setProperty("--primary-accent", "#e32b78");
         root.style.setProperty("--primary-accent-gradient", "#b11074");
         root.style.setProperty("--secondary-accent", "#0d87c5");

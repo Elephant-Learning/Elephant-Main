@@ -33,6 +33,9 @@ function toggleTextVisibility(index){
     document.querySelectorAll('.visibility-toggleable')[index].focus();
 }
 
+function login(){
+    // fetch userID based on information
+}
 
 function closeModals(){
     document.querySelectorAll('.country-code-search').forEach(function(element){
