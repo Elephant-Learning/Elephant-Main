@@ -19,7 +19,7 @@
             <div id="announcements">
                 <h1>Announcement</h1>
                 <p>Elephant Team is proud to present Elephant Flashcards v1.0.0</p>
-                <div>
+                <div onclick="document.getElementById('announcements').classList.add('inactive-modal');">
                     <img src="./icons/close.png" alt="">
                 </div>
             </div>
@@ -33,12 +33,26 @@
                 </div>
                 <div>
                     <a href="#">About Us</a>
-                    <a href="#">Products</a>
+                    <div class="navbar-modal">
+                        <p>Products</p>
+                        <div>
+                            <div></div>
+                            <div class="navbar-modal-main">
+                                <div>
+                                    <img src="../icons/elephant-400-400-pink-flashcards-01.png" alt="">
+                                    <div>
+                                        <h1>Elephant Flashcards</h1>
+                                        <p>Random Temporary Description</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <a href="#">Plans</a>
                 </div>
                 <div>
-                    <p>Login</p>
-                    <button>Sign Up For Free</button>
+                    <a href="../login">Login</a>
+                    <a href="../login?signup">Sign Up</a>
                 </div>
             </div>
             <div id="desktop-main">
@@ -63,7 +77,7 @@
                                     <img src="./icons/apps/outlook.svg" alt="">
                                     <img src="./icons/apps/powerpoint.svg" alt="">
                                     <img src="./icons/apps/excel.svg" alt="">
-                                    <img src="./icons/apps/discord.png" alt="">
+                                    <img src="./icons/apps/minecraft.svg" alt="">
                                     <img src="./icons/apps/spotify.svg" alt="">
                                 </div>
                             </div>
@@ -77,7 +91,14 @@
                 </div>
             </div>
             <div id="desktop-partners">
-                none
+                <!--Test Partners. Don't mean anything yet!-->
+                <img src="https://assets-global.website-files.com/5dfc18aeef0cf9644ab5ccca/617856aab688340f14c7cff0_t-mobile-logo.svg" alt="">
+                <img src="https://assets-global.website-files.com/5dfc18aeef0cf9644ab5ccca/6263101ab44c9f5f200f8b51_sony-logo.svg" alt="">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Khan_Academy_logo_%282018%29.svg/1280px-Khan_Academy_logo_%282018%29.svg.png" alt="">
+                <img src="https://1000logos.net/wp-content/uploads/2020/10/IXL-logo.png" alt="">
+                <img src="https://images.ctfassets.net/00atxywtfxvd/2MlqAOzmHjSPtssv6HlNox/1cb35b40775835a5f574ebc5509907a1/coursera-wordmark-blue.svg" alt="">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Udemy_logo.svg/2560px-Udemy_logo.svg.png" alt="">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/EdX_newer_logo.svg/768px-EdX_newer_logo.svg.png?20220108041454" alt="">
             </div>
         </div>
     </div>

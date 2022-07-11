@@ -252,6 +252,10 @@ document.querySelectorAll('.account-option-div').forEach(function(element){
     })
 })
 
+window.onload = function(){
+    if(document.location.href.split("?")[1] === "signup") togglePageFlip(1);
+}
+
 function createUser(data){
 
 }
