@@ -24,6 +24,10 @@
     --size:1;
 }
 
+::selection, ::-moz-selection {
+    background: var(--primary-accent);
+}
+
 *::-webkit-scrollbar{
     width:calc(var(--size) * 8px);
     background:transparent;

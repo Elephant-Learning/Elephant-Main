@@ -651,10 +651,6 @@
     transform:scale(1.01);
 }
 
-::selection, ::-moz-selection {
-    background: var(--primary-accent);
-}
-
 #editor-add-card{
     border:calc(var(--size) * 2px) dashed lightgray;
     border-radius:calc(var(--size) * 6px);
