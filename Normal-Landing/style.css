@@ -232,7 +232,7 @@ body *{
 #desktop-main-bg{
     position:absolute;
     z-index:0;
-    background-image:url("./images/patterns/0.jpg");
+    background-image:url("./images/patterns/2.jpg");
     background-attachment:fixed;
     background-size:512px;
     background-repeat:repeat;
@@ -489,7 +489,7 @@ body *{
 
 .desktop-break{
     width:100vw;
-    height:8px;
+    height:42px;
     background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
 }
 
@@ -581,12 +581,12 @@ body *{
     font-size:36px;
     font-weight:700;
     width:80%;
-    margin-bottom:18px;
 }
 
 .main-article-text > p{
     font-size:16px;
     font-weight:400;
+    margin:18px 0;
 }
 
 .article-quote{
@@ -659,20 +659,26 @@ body *{
     align-items:center;
     text-align:center;
     width:calc(100% - 96px);
-    padding:48px;
+    padding:96px 48px;
     z-index:1;
 }
 
 #ratings-div-main > h1{
     font-size:36px;
     font-weight:700;
-    margin:0;
+    margin:0
 }
 
 #ratings-div-main > p{
     font-size:14px;
-    margin:0;
+    font-weight:500;
     text-transform:uppercase;
+}
+
+#ratings-div-main > *:not(div){
+    color:white;
+    text-shadow: 0 0 6px black;
+    margin:0;
 }
 
 #ratings-container{
