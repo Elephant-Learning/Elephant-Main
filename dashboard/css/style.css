@@ -125,10 +125,11 @@ body *{
     display:flex;
     flex-direction:row;
     align-items:center;
+    gap:calc(var(--size) * 12px);
 }
 
 .desktop-navbar-right-img{
-    width:calc(var(--size) * 36px);
+    width:calc(var(--size) * 24px);
     position:relative;
     border:none;
 }
@@ -146,7 +147,7 @@ body *{
     border-radius:50%;
     position:absolute;
     top:calc(var(--size) * 10px);
-    right:calc(var(--size) * 4px)
+    right:calc(var(--size) * 0px)
 }
 
 #desktop-navbar-profile{
@@ -407,7 +408,6 @@ body *{
     border-radius:calc(var(--size) * 6px);
     box-shadow:0 0 calc(var(--size) * 12px) 0 black;
     width:calc(var(--size) * 128px);
-    color:white;
     z-index:1;
 }
 
@@ -435,6 +435,7 @@ body *{
     font-weight:500;
     cursor:pointer;
     margin:0;
+    color:white;
 }
 
 .inactive-modal{
@@ -504,13 +505,16 @@ body *{
 #desktop-main-news > img{
     height:calc(var(--size) * 18px);
     margin-right:calc(var(--size) * 6px);
+    filter:invert(1);
 }
 
 #desktop-main-news > a{
     font-size:calc(var(--size) * 12px);;
-    font-weight:600;
-    text-decoration:underline 2px;
-    color:black;
+    font-weight:400;
+    text-decoration:underline 1px;
+    color:white;
+    text-transform:uppercase;
+    letter-spacing:1px;
 }
 
 #desktop-main-news > p{
@@ -518,6 +522,8 @@ body *{
     right:calc(var(--size) * 18px);
     font-size:calc(var(--size) * 12px);
     cursor:pointer;
+    color:white;
+    font-weight:600;
 }
 
 #desktop-loader-container:not(.inactive-modal){
@@ -941,6 +947,295 @@ body *{
 
 #folder-main-image > img{
     height:calc(var(--size) * 25px);
+}
+
+#desktop-notifications-modal{
+    display:flex;
+    flex-direction:column;
+    position:absolute;
+    right:calc(var(--size) * 24px);
+    top:calc(var(--size) * 56px);
+    z-index:2;
+    background:var(--bg-color-1);
+    transition-duration:250ms;
+    border-radius:calc(var(--size) * 6px);
+    border:1px solid var(--light-border-color);
+    justify-content:center;
+}
+
+#desktop-notifications-header{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    padding:calc(var(--size) * 12px) calc(var(--size) * 24px) calc(var(--size) * 6px) calc(var(--size) * 24px);
+    width:calc(var(--size) * 324px);
+}
+
+#desktop-notifications-header > h1{
+    margin:0;
+    font-size:16px;
+    font-weight:700;
+}
+
+#desktop-notifications-header > img{
+    height:calc(var(--size) * 16px);
+    filter:invert(0.25);
+    cursor:pointer;
+}
+
+#desktop-notifications-tabs{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    padding:calc(var(--size) * 0px) calc(var(--size) * 18px);
+    width:calc(var(--size) * 336px);
+    gap:calc(var(--size) * 18px);
+    border-bottom:1px solid var(--light-border-color);
+}
+
+#desktop-notifications-list-container{
+    display:flex;
+    flex-direction:column;
+    flex-shrink: 0;
+    width:calc(var(--size) * 372px);
+    height:calc(var(--size) * 560px);
+    max-height:calc(var(--size) * 490px);
+    position:relative;
+}
+
+.active-notifications-list::-webkit-scrollbar-thumb{
+    background:var(--light-border-color);
+    border-radius:calc(var(--size) * 4px) 0 0 calc(var(--size) * 4px);
+
+}
+
+.desktop-notifications-list:not(.active-notifications-list), #no-notifications:not(.active-notifications-list){
+    visibility:hidden;
+    opacity:0;
+    height:0;
+}
+
+.desktop-notifications-tab{
+    transition-duration:125ms;
+}
+
+.active-notifications-list{
+    visibility:visible;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    opacity:1;
+}
+
+#no-notifications, .desktop-notifications-list{
+    width:calc(var(--size) * 324px);
+    height:calc(var(--size) * 512px);
+    max-height:calc(100vh - 275px);
+    padding:calc(var(--size) * 24px);
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+.desktop-notifications-list{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 18px);
+}
+
+#no-notifications{
+    border:2px dashed var(--light-border-color);
+    border-radius:calc(var(--size) * 6px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    gap:calc(var(--size) * 12px);
+}
+
+#no-notifications > *{
+    width:calc(var(--size) * 276px);
+}
+
+#no-notifications > p{
+    color:gray;
+    font-size:calc(var(--size) * 12px);
+    font-weight:500;
+    margin:0;
+}
+
+#no-notifications > button{
+    height:calc(var(--size) * 30px);
+    font-size:calc(var(--size) * 14px);
+    background:var(--light-gray);
+    border:none;
+    outline:none;
+    border-radius:calc(var(--size) * 6px);
+    cursor:pointer;
+    color:white;
+    transition-duration:125ms;
+    width:calc(var(--size) * 256px);
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+#no-notifications > button:hover{
+    transform:scale(1.025);
+    box-shadow:0 0 6px 0 var(--light-gray);
+}
+
+#no-notifications > button:active{
+    box-shadow:0 0 0;
+    transform:none;
+}
+
+.desktop-notifications-tab{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:calc(var(--size) * 6px);
+    cursor:pointer;
+    padding:calc(var(--size) * 6px);
+    transition-duration:125ms;
+    border-bottom:1px solid var(--bg-color-1);
+}
+
+.desktop-notifications-tab > *{
+    transition-duration:125ms;
+}
+
+.desktop-notifications-tab > h1{
+    font-size:calc(var(--size) * 14px);
+    font-weight:500;
+    margin:0;
+    cursor:pointer;
+}
+
+.desktop-notifications-tab > p{
+    font-size:calc(var(--size) * 10px);
+    font-weight:500;
+    padding:calc(var(--size) * 3px) calc(var(--size) * 6px);
+    border-radius:calc(var(--size) * 3px);
+    margin:0;
+    cursor:pointer;
+}
+
+.desktop-notifications-tab:not(.active-notifications-tab) > h1{
+    color:#aaa;
+}
+
+.desktop-notifications-tab:not(.active-notifications-tab) > p{
+    color:#aaa;
+    background:var(--light-border-color);
+}
+
+.active-notifications-tab{
+    border-bottom:1px solid var(--light-gray);
+}
+
+.active-notifications-tab > p{
+    color:white;
+    background:var(--light-gray);
+}
+
+.desktop-notification{
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-start;
+    align-items:center;
+    width:calc(var(--size) * 324px);
+    gap:calc(var(--size) * 12px);
+    border-bottom:1px solid var(--light-border-color);
+    padding-bottom:calc(var(--size) * 18px);
+}
+
+.desktop-notification > *{
+    flex-shrink: 0;
+}
+
+.desktop-notification > div:first-of-type{
+    width:calc(var(--size) * 8px);
+    height:calc(var(--size) * 8px);
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    border-radius:50%;
+}
+
+.desktop-notification > div:nth-of-type(2){
+    background:var(--light-accent);
+    height:calc(var(--size) * 42px);
+    width:calc(var(--size) * 42px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    border-radius:calc(var(--size) * 6px);
+}
+
+.desktop-notification > div:nth-of-type(2) > img{
+    height:calc(var(--size) * 32px);
+}
+
+.desktop-notification > div:nth-of-type(3){
+    display:flex;
+    flex-direction:column;
+    gap:calc(var(--size) * 6px);
+}
+
+.desktop-notification > div:nth-of-type(3) > h1{
+    margin:0;
+    width:calc(var(--size) * 256px);
+    font-size:calc(var(--size) * 13px);
+    font-weight:400;
+}
+
+.desktop-notification > div:nth-of-type(3) > p{
+    margin:0;
+    font-size:calc(var(--size) * 12px);
+    font-weight:300;
+    color:gray;
+}
+
+.desktop-notification-options{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:calc(var(--size) * 9px);
+}
+
+.desktop-notification-options > button{
+    padding:calc(var(--size) * 6px) calc(var(--size) * 18px);
+    border-radius:calc(var(--size) * 4px);
+    cursor:pointer;
+    font-weight:400;
+    font-size:calc(var(--size) * 11px);
+    transition-duration:250ms;
+}
+
+.desktop-notification-options > button:hover{
+    box-shadow:0 0 calc(var(--size) * 6px) 0 var(--light-gray);
+}
+
+.desktop-notification-options > button:active{
+    box-shadow:none;
+}
+
+.desktop-notification-btn-2{
+    border:1px solid var(--light-border-color);
+    background:var(--bg-color-1);
+    color:var(--text-color);
+}
+
+.desktop-notification-btn-1{
+    border:1px solid var(--dark-border-color);
+    background:var(--light-gray);
+    color:white;
+}
+
+.bolded{
+    font-weight:700;
 }
 
 @media(max-width:480px){

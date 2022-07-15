@@ -14,6 +14,112 @@ function search(){
     togglePageFlip(5, undefined);
 }
 
+
+function createNotification(TYPE, DATA){
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+    let newDiv = document.createElement('div');
+    let unreadDiv = document.createElement('div');
+    let avatarDiv = document.createElement('div');
+    let avatar = document.createElement('img');
+    let textDiv = document.createElement('div');
+    let timeDiv = document.createElement('p');
+    let optionsDiv = document.createElement('div');
+
+    let parentDiv;
+
+    avatar.src = "../icons/avatars/" + Math.floor(Math.random() * 47) + ".png";
+    avatarDiv.appendChild(avatar);
+
+    let today = new Date();
+    let dateEnding = "th";
+    let timeEnding = "AM"
+
+    if(today.getHours() > 11) timeEnding = "PM";
+    if(today.getHours() === 0) today.setHours(12);
+
+    if(today.getDate() > 20 || today.getDate < 4){
+        if(today.getDate() & 10 === 1) dateEnding = "st";
+        if(today.getDate() & 10 === 2) dateEnding = "nd";
+        if(today.getDate() & 10 === 3) dateEnding = "rd";
+    }
+
+    timeDiv.innerHTML = months[today.getMonth()] + " " + today.getDate() + dateEnding + ", " + today.getFullYear() + " at " + today.getHours() + ":" + today.getMinutes() + " " + timeEnding;
+
+    if(TYPE === "friend"){
+        let header = document.createElement('h1');
+        let span1 = document.createElement('span');
+        let btn1 = document.createElement('button');
+        let btn2 = document.createElement('button');
+
+        span1.classList.add('bolded');
+        span1.innerHTML = DATA.name;
+
+        header.append(span1, document.createTextNode(" would like to be your friend."));
+
+        btn1.innerHTML = "Accept";
+        btn2.innerHTML = "Decline";
+        btn1.classList.add('desktop-notification-btn-1');
+        btn2.classList.add('desktop-notification-btn-2');
+
+        optionsDiv.append(btn1, btn2);
+        optionsDiv.classList.add('desktop-notification-options');
+
+        textDiv.append(header, timeDiv, optionsDiv);
+
+        parentDiv = document.querySelectorAll('.desktop-notifications-list')[1];
+
+        document.querySelectorAll('.desktop-notifications-tab-number')[1].innerHTML = (parseInt(document.querySelectorAll('.desktop-notifications-tab-number')[1].textContent) + 1).toString();
+
+    } else if(TYPE === "deckShared"){
+        let header = document.createElement('h1');
+        let span1 = document.createElement('span');
+        let span2 = document.createElement('span');
+        let btn1 = document.createElement('button');
+
+        span1.classList.add('bolded')
+        span2.classList.add('bolded')
+        span1.innerHTML = DATA.sender;
+        span2.innerHTML = DATA.deckName;
+
+        header.append(span1, document.createTextNode(" shared "), span2, document.createTextNode(" with you."));
+
+        btn1.innerHTML = "Open Deck";
+        btn1.classList.add('desktop-notification-btn-1');
+
+        optionsDiv.appendChild(btn1);
+        optionsDiv.classList.add('desktop-notification-options');
+
+        textDiv.append(header, timeDiv, optionsDiv);
+
+        parentDiv = document.querySelectorAll('.desktop-notifications-list')[0];
+
+        document.querySelectorAll('.desktop-notifications-tab-number')[0].innerHTML = (parseInt(document.querySelectorAll('.desktop-notifications-tab-number')[0].textContent) + 1).toString();
+    } else if(TYPE === "deckFavorited"){
+        let header = document.createElement('h1');
+        let span1 = document.createElement('span');
+        let span2 = document.createElement('span');
+
+        span1.classList.add('bolded')
+        span2.classList.add('bolded')
+        span1.innerHTML = DATA.sender;
+        span2.innerHTML = DATA.deckName;
+
+        header.append(span1, document.createTextNode(" favorited your deck, "), span2, document.createTextNode("."));
+
+        textDiv.append(header, timeDiv);
+
+        parentDiv = document.querySelectorAll('.desktop-notifications-list')[0];
+
+        document.querySelectorAll('.desktop-notifications-tab-number')[0].innerHTML = (parseInt(document.querySelectorAll('.desktop-notifications-tab-number')[0].textContent) + 1).toString();
+    }
+
+    newDiv.append(unreadDiv, avatarDiv, textDiv);
+    newDiv.classList.add('desktop-notification')
+
+    parentDiv.appendChild(newDiv);
+}
+
 function toggleSettingsModal(){
     if(document.getElementById('desktop-settings-modal').classList.contains('inactive-modal')){
         document.getElementById('desktop-settings-modal').classList.remove('inactive-modal');
@@ -218,6 +324,26 @@ function initialize(){
     sidebarFolder("Pre-Calculus");
     sidebarFolder("Physics");
 
+    for(let i = 0; i < 14; i++){
+        createNotification("friend", {
+            name: "Elephant Student"
+        })
+    }
+
+    for(let i = 0; i < 29; i++){
+        if(Math.floor(Math.random() * 2) === 0){
+            createNotification("deckShared", {
+                sender: "Elephant Student",
+                deckName: "Random Deck"
+            })
+        } else {
+            createNotification("deckFavorited", {
+                sender: "Elephant Student",
+                deckName: "Random Deck"
+            })
+        }
+    }
+
     localStorage.setItem('preferences', JSON.stringify(preferences));
 
     if(document.getElementById('desktop-main-news').hasChildNodes()){
@@ -241,6 +367,8 @@ function initialize(){
     }
 
     initializeMusic();
+
+    toggleNotificationTab(0)
     togglePageFlip(0,0, false)
 }
 
@@ -255,6 +383,27 @@ function getRightBound(element) {
     xPosition -= window.innerWidth
 
     return xPosition;
+}
+
+function toggleNotificationsModal(){
+    if(document.getElementById('desktop-notifications-modal').classList.contains('inactive-modal')){
+        document.getElementById('desktop-notifications-modal').classList.remove('inactive-modal');
+    } else {
+        document.getElementById('desktop-notifications-modal').classList.add('inactive-modal')
+    }
+}
+
+function toggleNotificationTab(index){
+    document.querySelector(".active-notifications-tab").classList.remove('active-notifications-tab');
+    document.querySelectorAll('.desktop-notifications-tab')[index].classList.add('active-notifications-tab');
+
+    document.querySelector('.active-notifications-list').classList.remove('active-notifications-list');
+
+    if(document.querySelectorAll('.desktop-notifications-list')[index].hasChildNodes()){
+        document.querySelectorAll('.desktop-notifications-list')[index].classList.add('active-notifications-list');
+    } else {
+        document.getElementById('no-notifications').classList.add('active-notifications-list');
+    }
 }
 
 function toggleTheme(themeIndex){
