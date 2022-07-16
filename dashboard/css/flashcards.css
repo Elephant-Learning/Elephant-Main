@@ -473,6 +473,11 @@
     box-shadow:0 0 calc(var(--size) * 6px) 0 var(--dark-gray);
 }
 
+#flashcards-information-buttons > button:active{
+    transform:none;
+    box-shadow:none;
+}
+
 #flashcards-information-buttons > button:first-of-type{
     background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
 }
@@ -530,8 +535,8 @@
 
 #flashcards-main-editor-tools{
     height:calc(var(--size) * 24px);
-    padding:calc(var(--size) * 6px) calc(var(--size) * 12px);
-    width:calc(100% - var(--size) * 24px);
+    padding:calc(var(--size) * 6px) calc(var(--size) * 24px);
+    width:calc(100% - var(--size) * 48px);
     border-bottom:1px solid var(--light-border-color);
     display:flex;
     flex-direction:row;
@@ -542,7 +547,7 @@
 
 #flashcards-main-editor-tools > button{
     font-size:calc(var(--size) * 10px);
-    padding:calc(var(--size) * 3px) calc(var(--size) * 8px);
+    padding:calc(var(--size) * 3px) calc(var(--size) * 12px);
     color:white;
     background:var(--light-gray);
     border:1px solid var(--dark-border-color);
@@ -595,8 +600,8 @@
 
 .editor-card > p{
     margin:0;
-    width:calc(100% - var(--size) * 12px);;
-    background:var(--light-gray);
+    width:calc(100% - var(--size) * 12px);
+    background:var(--dark-border-color);
     font-size:calc(var(--size) * 16px);
     font-weight:700;
     padding: calc(var(--size) * 4px) 0 calc(var(--size) * 4px) calc(var(--size) * 12px);
@@ -639,7 +644,7 @@
     border:none;
     cursor:pointer;
     color:white;
-    background:var(--light-gray);
+    background:var(--dark-border-color);
     width:calc(100% + var(--size) * 14px);
     font-weight:700;
     text-transform: uppercase;
@@ -656,7 +661,7 @@
     border-radius:calc(var(--size) * 6px);
     cursor:pointer;
     width:calc(100% - var(--size) * 48px);
-    min-height:calc(var(--size) * 124px);
+    min-height:calc(var(--size) * 196px);
     display:flex;
     flex-direction:row;
     align-items:center;

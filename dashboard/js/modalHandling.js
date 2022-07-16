@@ -14,10 +14,43 @@ function search(){
     togglePageFlip(5, undefined);
 }
 
-
-function createNotification(TYPE, DATA){
+function dateToObject(DATE){
     const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
+    let endingDate = "th";
+    let endingTime = "AM"
+
+    if(DATE.getHours() > 11) {
+        endingTime = "PM";
+        if(DATE.getHours() > 12) DATE.setHours(DATE.getHours() - 12);
+    }
+    if(DATE.getHours() === 0) DATE.setHours(12);
+
+    let refactoredMinutes;
+
+    if(DATE.getMinutes().toString().length === 1) refactoredMinutes = "0" + DATE.getMinutes().toString();
+    else refactoredMinutes = DATE.getMinutes().toString();
+
+    console.log(DATE.getMinutes().toString().length)
+
+    if(DATE.getDate() > 20 || DATE.getDate < 4){
+        if(DATE.getDate() & 10 === 1) endingDate = "st";
+        if(DATE.getDate() & 10 === 2) endingDate = "nd";
+        if(DATE.getDate() & 10 === 3) endingDate = "rd";
+    }
+
+    return {
+        month: months[DATE.getMonth()],
+        date: DATE.getDate(),
+        dateEnding: endingDate,
+        year: DATE.getFullYear(),
+        hour: DATE.getHours(),
+        minutes: refactoredMinutes,
+        timeEnding: endingTime
+    }
+}
+
+function createNotification(TYPE, DATA){
     let newDiv = document.createElement('div');
     let unreadDiv = document.createElement('div');
     let avatarDiv = document.createElement('div');
@@ -31,20 +64,9 @@ function createNotification(TYPE, DATA){
     avatar.src = "../icons/avatars/" + Math.floor(Math.random() * 47) + ".png";
     avatarDiv.appendChild(avatar);
 
-    let today = new Date();
-    let dateEnding = "th";
-    let timeEnding = "AM"
+    let today = dateToObject(new Date());
 
-    if(today.getHours() > 11) timeEnding = "PM";
-    if(today.getHours() === 0) today.setHours(12);
-
-    if(today.getDate() > 20 || today.getDate < 4){
-        if(today.getDate() & 10 === 1) dateEnding = "st";
-        if(today.getDate() & 10 === 2) dateEnding = "nd";
-        if(today.getDate() & 10 === 3) dateEnding = "rd";
-    }
-
-    timeDiv.innerHTML = months[today.getMonth()] + " " + today.getDate() + dateEnding + ", " + today.getFullYear() + " at " + today.getHours() + ":" + today.getMinutes() + " " + timeEnding;
+    timeDiv.innerHTML = today.month + " " + today.date + today.dateEnding + ", " + today.year + " at " + today.hour + ":" + today.minutes + " " + today.timeEnding;
 
     if(TYPE === "friend"){
         let header = document.createElement('h1');
@@ -357,6 +379,8 @@ function initialize(){
         document.getElementById('desktop-main-container-tab').style.top = "calc(var(--size) * 24px)";
         document.getElementById('desktop-music-container').style.height = "calc(100vh - var(--size) * 72px)";
     }
+
+    closeNews()
 
     document.getElementById('desktop-profile-user-img').src = "./icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
 
