@@ -54,7 +54,7 @@ function click (node) {
     }
 }
 
-// Detect WebView inside a native macOS dashboard by ruling out all browsers
+// Detect WebView inside a native macOS flashcards by ruling out all browsers
 // We just need to check for 'Safari' because all other browsers (besides Firefox) include that too
 // https://www.whatismybrowser.com/guides/the-latest-user-agent/macos
 var isMacOSWebView = _global.navigator && /Macintosh/.test(navigator.userAgent) && /AppleWebKit/.test(navigator.userAgent) && !/Safari/.test(navigator.userAgent)

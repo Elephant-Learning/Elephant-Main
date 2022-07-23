@@ -31,8 +31,6 @@ function dateToObject(DATE){
     if(DATE.getMinutes().toString().length === 1) refactoredMinutes = "0" + DATE.getMinutes().toString();
     else refactoredMinutes = DATE.getMinutes().toString();
 
-    console.log(DATE.getMinutes().toString().length)
-
     if(DATE.getDate() > 20 || DATE.getDate < 4){
         if(DATE.getDate() & 10 === 1) endingDate = "st";
         if(DATE.getDate() & 10 === 2) endingDate = "nd";
@@ -150,14 +148,6 @@ function toggleSettingsModal(){
     }
 }
 
-function toggleMusicModal(){
-    if(document.getElementById('desktop-music-container').classList.contains('inactive-modal')){
-        document.getElementById('desktop-music-container').classList.remove('inactive-modal');
-    } else {
-        document.getElementById('desktop-music-container').classList.add('inactive-modal');
-    }
-}
-
 function togglePageFlip(index, sidebar){
     document.getElementById('desktop-main-container-tab').innerHTML = pages[index];
     try{document.querySelector(".active-sidebar-category").classList.remove('active-sidebar-category')} catch{}
@@ -210,22 +200,6 @@ function sidebarFolder(title){
     newDiv.setAttribute('onclick', 'togglePageFlip(7, ' + (folderAmount + document.querySelectorAll('.desktop-sidebar-category').length - 1) + ")")
 
     document.getElementById('desktop-sidebar-folders').appendChild(newDiv);
-}
-
-function toggleSizeSetting(value){
-    const sizes = [0.75, 1, 1.25, 1.5];
-    let preferences = JSON.parse(localStorage.getItem('preferences'));
-
-    document.querySelector(':root').style.setProperty('--size', sizes[value].toString());
-
-    document.querySelectorAll('.profile-zoom-check-img').forEach(function(element){
-        element.classList.add('inactive-modal');
-    })
-
-    document.querySelectorAll('.profile-zoom-check-img')[value].classList.remove('inactive-modal');
-
-    preferences[1] = value;
-    localStorage.setItem('preferences', JSON.stringify(preferences));
 }
 
 document.getElementById('desktop-sidebar').addEventListener('contextmenu', function(e){
@@ -320,25 +294,6 @@ function closeNews(){
 function initialize(){
 
     const emojis_refactored = ["confused", "cool", "happy", "laugh", "nerd", "neutral", "unamused", "uwu", "wink"];
-    let preferences = localStorage.getItem('preferences');
-
-    if(!preferences) {
-        localStorage.setItem('preferences', JSON.stringify([2, 1]));
-        preferences = localStorage.getItem('preferences');
-    }
-
-    preferences = JSON.parse(preferences);
-
-    if(!(preferences[0] < 3)) {
-        preferences = [2, preferences[1]];
-    }
-
-    if(!(preferences[1] < 4)) {
-        preferences = [preferences[0], 1];
-    }
-
-    toggleTheme(preferences[0]);
-    toggleSizeSetting(preferences[1])
 
     sidebarFolder("Spanish 3");
     sidebarFolder("Honors World History");
@@ -366,8 +321,6 @@ function initialize(){
         }
     }
 
-    localStorage.setItem('preferences', JSON.stringify(preferences));
-
     if(document.getElementById('desktop-main-news').hasChildNodes()){
         document.getElementById('desktop-main-news').style.visibility = "visible";
         document.querySelectorAll('.desktop-tab').forEach(function(item){
@@ -389,8 +342,6 @@ function initialize(){
     if(document.getElementById('flashcards-list').hasChildNodes()){
         document.getElementById('no-flashcards').classList.add('inactive-modal');
     }
-
-    initializeMusic();
 
     toggleNotificationTab(0)
     togglePageFlip(0,0, false)
@@ -428,59 +379,6 @@ function toggleNotificationTab(index){
     } else {
         document.getElementById('no-notifications').classList.add('active-notifications-list');
     }
-}
-
-function toggleTheme(themeIndex){
-    let root = document.querySelector(":root");
-
-    if(themeIndex === 1){
-        root.style.setProperty('--text-color', 'white');
-        root.style.setProperty("--bg-color-1", "#121212");
-        root.style.setProperty("--bg-color-2", "#212121")
-        root.style.setProperty("--light-border-color", "#2c2c2c");
-        root.style.setProperty("--dark-gray", "#090909");
-        root.style.setProperty("--light-gray", "#2c2c2c");
-        root.style.setProperty("--hover-dark", "#181818");
-        root.style.setProperty("--hover-light", "black");
-        root.style.setProperty("--image-invert", "0.75");
-        root.style.setProperty("--light-accent", "#333");
-        root.style.setProperty("--primary-accent", "#e32b78");
-        root.style.setProperty("--primary-accent-gradient", "#b11074");
-        root.style.setProperty("--secondary-accent", "#0d87c5");
-        root.style.setProperty("--secondary-accent-gradient", "#27b4b9");
-        root.style.setProperty("--tertiary-accent", "#af5112");
-        root.style.setProperty("--tertiary-accent-gradient", "#d0691b");
-    } else if(themeIndex === 0){
-        root.style.setProperty('--text-color', 'black');
-        root.style.setProperty("--bg-color-1", "#ffffff");
-        root.style.setProperty("--bg-color-2", "#f6f7fb")
-        root.style.setProperty("--light-border-color", "#ebebeb");
-        root.style.setProperty("--dark-gray", "#1e1e1e");
-        root.style.setProperty("--light-gray", "#2c2c2c");
-        root.style.setProperty("--hover-dark", "#0f0f0f");
-        root.style.setProperty("--hover-light", "#f5f5f5");
-        root.style.setProperty("--image-invert", "0");
-        root.style.setProperty("--light-accent", "#ffedf6");
-        root.style.setProperty("--primary-accent", "#fe599d");
-        root.style.setProperty("--primary-accent-gradient", "#f30096");
-        root.style.setProperty("--secondary-accent", "#00a8ff");
-        root.style.setProperty("--secondary-accent-gradient", "#31d6dc");
-        root.style.setProperty("--tertiary-accent", "#f8680a");
-        root.style.setProperty("--tertiary-accent-gradient", "#fa8d37");
-    } else if(themeIndex === 2){
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) toggleTheme(1);
-        else toggleTheme(0)
-    }
-
-    document.querySelectorAll('.profile-theme-check-img').forEach(function(element){
-        element.classList.add('inactive-modal');
-    })
-
-    document.querySelectorAll('.profile-theme-check-img')[themeIndex].classList.remove('inactive-modal');
-
-    let preferences = JSON.parse(localStorage.getItem('preferences'));
-    preferences[0] = themeIndex;
-    localStorage.setItem('preferences', JSON.stringify(preferences));
 }
 
 //toggle Loading Bar

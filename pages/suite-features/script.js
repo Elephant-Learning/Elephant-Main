@@ -54,5 +54,5 @@ function addProduct(image, name, description, creator, link, color){
     document.getElementById('products-showcase').appendChild(newDiv);
 }
 
-addProduct('brain', "Flashcards", "Memorization made easier than ever!", ["Ronak Kothari", "Abhiram Boddu"], '../../dashboard', 0);
+addProduct('brain', "Flashcards", "Memorization made easier than ever!", ["Ronak Kothari", "Abhiram Boddu"], '../../flashcards', 0);
 addProduct('timeline', "Task Manager", "Track your tasks fast and efficiently!", ["Ronak Kothari", "Neal Parekh"], undefined, 2);

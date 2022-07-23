@@ -329,3 +329,8 @@ body *{
     display:flex;
     flex-direction:row;
 }
+
+.inactive-modal{
+    visibility:hidden;
+    opacity:0;
+}
