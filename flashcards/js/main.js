@@ -26,12 +26,12 @@ document.getElementById('music-next-img').onclick = selectSong;
 
 function toggleAudio(){
     if(paused){
-        document.getElementById('music-play-img').src = "./icons/pause.png";
+        document.getElementById('music-play-img').src = "../icons/pause.png";
         document.getElementById('music-image-div').style.animationPlayState = "running";
         songManager = setInterval(sliderManager, 1000);
         song.play();
     } else {
-        document.getElementById('music-play-img').src = "./icons/play.png";
+        document.getElementById('music-play-img').src = "../icons/play.png";
         document.getElementById('music-image-div').style.animationPlayState = "paused";
         clearInterval(songManager);
         song.pause();
@@ -47,11 +47,11 @@ function selectSong(){
 
     if(previousSong === currentActiveSong) selectSong()
     else{
-        document.getElementById('music-image').src = "./music/covers/min/" + musics[currentActiveSong][0].toLowerCase().replace(' ', '-') + ".png";
+        document.getElementById('music-image').src = "../music/covers/min/" + musics[currentActiveSong][0].toLowerCase().replace(' ', '-') + ".png";
         document.getElementById('music-name').innerHTML = musics[currentActiveSong][0];
         document.getElementById('music-author').innerHTML = musics[currentActiveSong][1];
 
-        song = new Audio("./music/" + musics[currentActiveSong][0].toLowerCase().replace(' ', '-') + ".wav");
+        song = new Audio("../music/" + musics[currentActiveSong][0].toLowerCase().replace(' ', '-') + ".wav");
     }
 
     if(firstTime) firstTime = false;
@@ -140,9 +140,9 @@ function setupPlaylists(){
                     playlistDiv.appendChild(newImg)
                 });
             }
-            radioImage.src = "./music/icons/" + types[i] + ".png";
+            radioImage.src = "../music/icons/" + types[i] + ".png";
         }
-        randomImage.src = "./music/covers/min/" + randomMusic[0].toLowerCase().replace(' ', '-') + ".png";
+        randomImage.src = "../music/covers/min/" + randomMusic[0].toLowerCase().replace(' ', '-') + ".png";
 
         let playlistText = document.createElement('p');
         playlistText.innerHTML = toTitleCase(types[i].replace('_', " "))
@@ -229,6 +229,153 @@ function toggleSizeSetting(value){
     localStorage.setItem('preferences', JSON.stringify(preferences));
 }
 
+function dateToObject(DATE){
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+    let endingDate = "th";
+    let endingTime = "AM"
+
+    if(DATE.getHours() > 11) {
+        endingTime = "PM";
+        if(DATE.getHours() > 12) DATE.setHours(DATE.getHours() - 12);
+    }
+    if(DATE.getHours() === 0) DATE.setHours(12);
+
+    let refactoredMinutes;
+
+    if(DATE.getMinutes().toString().length === 1) refactoredMinutes = "0" + DATE.getMinutes().toString();
+    else refactoredMinutes = DATE.getMinutes().toString();
+
+    if(DATE.getDate() > 20 || DATE.getDate < 4){
+        if(DATE.getDate() & 10 === 1) endingDate = "st";
+        if(DATE.getDate() & 10 === 2) endingDate = "nd";
+        if(DATE.getDate() & 10 === 3) endingDate = "rd";
+    }
+
+    return {
+        month: months[DATE.getMonth()],
+        date: DATE.getDate(),
+        dateEnding: endingDate,
+        year: DATE.getFullYear(),
+        hour: DATE.getHours(),
+        minutes: refactoredMinutes,
+        timeEnding: endingTime
+    }
+}
+
+function createNotification(TYPE, DATA){
+    let newDiv = document.createElement('div');
+    let unreadDiv = document.createElement('div');
+    let avatarDiv = document.createElement('div');
+    let avatar = document.createElement('img');
+    let textDiv = document.createElement('div');
+    let timeDiv = document.createElement('p');
+    let optionsDiv = document.createElement('div');
+
+    let parentDiv;
+
+    avatar.src = "../../icons/avatars/" + Math.floor(Math.random() * 47) + ".png";
+    avatarDiv.appendChild(avatar);
+
+    let today = dateToObject(new Date());
+
+    timeDiv.innerHTML = today.month + " " + today.date + today.dateEnding + ", " + today.year + " at " + today.hour + ":" + today.minutes + " " + today.timeEnding;
+
+    if(TYPE === "friend"){
+        let header = document.createElement('h1');
+        let span1 = document.createElement('span');
+        let btn1 = document.createElement('button');
+        let btn2 = document.createElement('button');
+
+        span1.classList.add('bolded');
+        span1.innerHTML = DATA.name;
+
+        header.append(span1, document.createTextNode(" would like to be your friend."));
+
+        btn1.innerHTML = "Accept";
+        btn2.innerHTML = "Decline";
+        btn1.classList.add('desktop-notification-btn-1');
+        btn2.classList.add('desktop-notification-btn-2');
+
+        optionsDiv.append(btn1, btn2);
+        optionsDiv.classList.add('desktop-notification-options');
+
+        textDiv.append(header, timeDiv, optionsDiv);
+
+        parentDiv = document.querySelectorAll('.desktop-notifications-list')[1];
+
+        document.querySelectorAll('.desktop-notifications-tab-number')[1].innerHTML = (parseInt(document.querySelectorAll('.desktop-notifications-tab-number')[1].textContent) + 1).toString();
+
+    } else if(TYPE === "deckShared"){
+        let header = document.createElement('h1');
+        let span1 = document.createElement('span');
+        let span2 = document.createElement('span');
+        let btn1 = document.createElement('button');
+
+        span1.classList.add('bolded')
+        span2.classList.add('bolded')
+        span1.innerHTML = DATA.sender;
+        span2.innerHTML = DATA.deckName;
+
+        header.append(span1, document.createTextNode(" shared "), span2, document.createTextNode(" with you."));
+
+        btn1.innerHTML = "Open Deck";
+        btn1.classList.add('desktop-notification-btn-1');
+
+        optionsDiv.appendChild(btn1);
+        optionsDiv.classList.add('desktop-notification-options');
+
+        textDiv.append(header, timeDiv, optionsDiv);
+
+        parentDiv = document.querySelectorAll('.desktop-notifications-list')[0];
+
+        document.querySelectorAll('.desktop-notifications-tab-number')[0].innerHTML = (parseInt(document.querySelectorAll('.desktop-notifications-tab-number')[0].textContent) + 1).toString();
+    } else if(TYPE === "deckFavorited"){
+        let header = document.createElement('h1');
+        let span1 = document.createElement('span');
+        let span2 = document.createElement('span');
+
+        span1.classList.add('bolded')
+        span2.classList.add('bolded')
+        span1.innerHTML = DATA.sender;
+        span2.innerHTML = DATA.deckName;
+
+        header.append(span1, document.createTextNode(" favorited your deck, "), span2, document.createTextNode("."));
+
+        textDiv.append(header, timeDiv);
+
+        parentDiv = document.querySelectorAll('.desktop-notifications-list')[0];
+
+        document.querySelectorAll('.desktop-notifications-tab-number')[0].innerHTML = (parseInt(document.querySelectorAll('.desktop-notifications-tab-number')[0].textContent) + 1).toString();
+    }
+
+    newDiv.append(unreadDiv, avatarDiv, textDiv);
+    newDiv.classList.add('desktop-notification')
+
+    parentDiv.appendChild(newDiv);
+}
+
+function toggleNotificationsModal(){
+    if(document.getElementById('desktop-notifications-modal').classList.contains('inactive-modal')){
+        document.getElementById('desktop-notifications-modal').classList.remove('inactive-modal');
+    } else {
+        document.getElementById('desktop-notifications-modal').classList.add('inactive-modal')
+    }
+}
+
+function toggleNotificationTab(index){
+    document.querySelector(".active-notifications-tab").classList.remove('active-notifications-tab');
+    document.querySelectorAll('.desktop-notifications-tab')[index].classList.add('active-notifications-tab');
+
+    document.querySelector('.active-notifications-list').classList.remove('active-notifications-list');
+
+    if(document.querySelectorAll('.desktop-notifications-list')[index].hasChildNodes()){
+        document.querySelectorAll('.desktop-notifications-list')[index].classList.add('active-notifications-list');
+    } else {
+        document.getElementById('no-notifications').classList.add('active-notifications-list');
+    }
+}
+
 function mainInitialize(){
     let preferences = localStorage.getItem('preferences');
 
@@ -247,8 +394,30 @@ function mainInitialize(){
         preferences = [preferences[0], 1];
     }
 
+    for(let i = 0; i < 14; i++){
+        createNotification("friend", {
+            name: "Elephant Student"
+        })
+    }
+
+    for(let i = 0; i < 29; i++){
+        if(Math.floor(Math.random() * 2) === 0){
+            createNotification("deckShared", {
+                sender: "Elephant Student",
+                deckName: "Random Deck"
+            })
+        } else {
+            createNotification("deckFavorited", {
+                sender: "Elephant Student",
+                deckName: "Random Deck"
+            })
+        }
+    }
+
     toggleTheme(preferences[0]);
-    toggleSizeSetting(preferences[1])
+    toggleSizeSetting(preferences[1]);
+
+    toggleNotificationTab(0);
 
     initializeMusic();
 

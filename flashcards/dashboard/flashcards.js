@@ -36,7 +36,7 @@ function displayFlashcard(name, author, type){
     let iconDiv = document.createElement('div');
     let icon = document.createElement('img');
 
-    icon.src = "./icons/file.png";
+    icon.src = "../icons/file.png";
     iconDiv.appendChild(icon);
     iconDiv.classList.add(tags[type] + "-flashcard");
 
@@ -57,7 +57,7 @@ function displayFlashcard(name, author, type){
 
     nameText.innerHTML = name
     authorText.innerHTML = author;
-    authorImg.src = "../icons/avatars/" + Math.floor(Math.random() * 47) + ".png";
+    authorImg.src = "../../icons/avatars/" + Math.floor(Math.random() * 47) + ".png";
     authorDiv.append(authorImg, authorText);
     textDiv.append(nameText, authorDiv);
 
@@ -69,8 +69,8 @@ function displayFlashcard(name, author, type){
     let favoriteImg = document.createElement('img');
     let menuImg = document.createElement('img');
 
-    favoriteImg.src = "./icons/favorite.png";
-    menuImg.src = "./icons/menu_vertical.png";
+    favoriteImg.src = "../icons/favorite.png";
+    menuImg.src = "../icons/menu_vertical.png";
     options.append(favoriteImg, menuImg);
 
     mainDiv.append(iconDiv, textDiv, tag, options);
