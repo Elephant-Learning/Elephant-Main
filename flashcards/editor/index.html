@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./style.css">
 
     <script src="../js/main.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <div id="desktop-container">
@@ -169,68 +170,7 @@
                 </div>
             </div>
             <div id="desktop-main-container" class="kanban">
-                <div class="flashcards-card">
-                    <p class="flashcards-card-number">1</p>
-                    <div class="flashcards-card-copyright">
-                        <img src="../../icons/elephant-400-400-black.png" alt="">
-                        <div>
-                            <p>Elephant</p>
-                            <img src="./icons/copyright.png" alt="">
-                        </div>
-                    </div>
-                    <h1>Reasons For Napoleon's Downfall</h1>
-                    <div class="flashcards-card-answers">
-                        <input type="text" class="flashcards-definition-input" placeholder="Definition">
-                        <input type="text" class="flashcards-definition-input" placeholder="Definition">
-                        <input type="text" class="flashcards-definition-input" placeholder="Definition">
-                        <button class="flashcards-definition-add">+ Add Definition</button>
-                    </div>
-                    <div class="flashcards-card-footer">
-
-                    </div>
-                </div>
-                <div class="flashcards-card">
-                    <p class="flashcards-card-number">2</p>
-                    <div class="flashcards-card-copyright">
-                        <img src="../../icons/elephant-400-400-black.png" alt="">
-                        <div>
-                            <p>Elephant</p>
-                            <img src="./icons/copyright.png" alt="">
-                        </div>
-                    </div>
-                    <h1>What is 1 + 3</h1>
-                    <div class="flashcards-card-answers">
-                        <input type="text" class="flashcards-definition-input" placeholder="Definition">
-                        <input type="text" class="flashcards-definition-input" placeholder="Definition">
-                        <button class="flashcards-definition-add">+ Add Definition</button>
-                    </div>
-                    <div class="flashcards-card-footer">
-
-                    </div>
-                </div>
-                <div class="flashcards-card">
-                    <p class="flashcards-card-number">3</p>
-                    <div class="flashcards-card-copyright">
-                        <img src="../../icons/elephant-400-400-black.png" alt="">
-                        <div>
-                            <p>Elephant</p>
-                            <img src="./icons/copyright.png" alt="">
-                        </div>
-                    </div>
-                    <h1>Another Flashcard</h1>
-                    <div class="flashcards-card-answers">
-                        <input type="text" class="flashcards-definition-input" placeholder="Definition">
-                        <input type="text" class="flashcards-definition-input" placeholder="Definition">
-                        <input type="text" class="flashcards-definition-input" placeholder="Definition">
-                        <input type="text" class="flashcards-definition-input" placeholder="Definition">
-                        <input type="text" class="flashcards-definition-input" placeholder="Definition">
-                        <button class="flashcards-definition-add">+ Add Definition</button>
-                    </div>
-                    <div class="flashcards-card-footer">
-
-                    </div>
-                </div>
-                <div id="flashcards-add-card">+ Create New Card</div>
+                <div id="flashcards-add-card" onclick="createCard()">+ Create New Card</div>
             </div>
             <a href="../dashboard" id="back-btn">
                 <img src="../icons/back.png" alt="">
