@@ -3,8 +3,17 @@
     justify-content:flex-start;
 }
 
-#back-btn{
+.bottom-btns{
     position:absolute;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    bottom:calc(var(--size) * 12px);
+    right:calc(var(--size) * 12px);
+    gap:calc(var(--size) * 6px);
+}
+
+.bottom-btns > a, .bottom-btns > div{
     width:calc(var(--size) * 36px);
     height:calc(var(--size) * 36px);
     background:var(--dark-gray);
@@ -14,16 +23,14 @@
     justify-content:center;
     border-radius:50%;
     cursor:pointer;
-    bottom:calc(var(--size) * 12px);
-    right:calc(var(--size) * 12px);
     transition-duration:250ms;
 }
 
-#back-btn:hover{
+.bottom-btns > a:hover, .bottom-btns > div:hover{
     box-shadow:0 0 calc(var(--size) * 6px) 0 var(--dark-gray);
 }
 
-#back-btn > img{
+.bottom-btns > a > img, .bottom-btns > div > img{
     height:calc(var(--size) * 20px);
     filter:invert(1);
 }
@@ -160,6 +167,7 @@
     overflow-y:scroll;
     padding:calc(var(--size) * 32px);
     height:calc(100vh - var(--size) * 150px);
+    width:calc(100vw - var(--size) * 64px)
 }
 
 .kanban{
@@ -168,6 +176,8 @@
     align-items:flex-start;
     justify-content:flex-start;
     gap:calc(var(--size) * 18px);
+    width:100vw;
+    overflow-x:scroll;
 }
 
 .kanban > #flashcards-add-card{
@@ -356,4 +366,8 @@
 
 .kanban > .flashcards-card > .flashcards-card-footer > .flashcards-card-footer-right > img:hover{
     transform:scale(1.1);
+}
+
+#desktop-notifications-modal.inactive-modal{
+    display:none;
 }

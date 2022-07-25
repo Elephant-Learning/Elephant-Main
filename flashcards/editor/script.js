@@ -1,3 +1,20 @@
+function addDefinition(index){
+    let answersDiv = document.createElement('div');
+    let definitionsInput = document.createElement('input');
+    let definitionsImg = document.createElement('img');
+
+    definitionsInput.placeholder = "Definition";
+    definitionsInput.classList.add('flashcards-definition-input');
+    definitionsInput.classList.add('flashcards-definition-input-' + index);
+    definitionsImg.src = "./icons/delete.png";
+    definitionsImg.setAttribute("onclick", "this.parentNode.remove()");
+
+    answersDiv.append(definitionsInput, definitionsImg);
+    answersDiv.classList.add('flashcards-card-answers-div');
+    document.getElementById('flashcards-card-answers-' + index).insertBefore(answersDiv, document.getElementById('flashcards-definition-add-' + index));
+    document.querySelectorAll('.flashcards-definition-input-' + index)[document.querySelectorAll('.flashcards-definition-input-' + index).length - 1].focus();
+}
+
 function createCard(term, definitions){
     let newDiv = document.createElement('div');
     let newNumber = document.createElement('p');
@@ -22,13 +39,13 @@ function createCard(term, definitions){
     copyrightDiv.append(copyrightElephant, copyrightTextDiv);
     copyrightDiv.classList.add('flashcards-card-copyright');
 
-    console.log(term, definitions)
-
     if(term === undefined){
         cardTitle.placeholder = "New Flashcard"
     } else {
         cardTitle.value = term;
     }
+
+    cardTitle.id = "flashcards-input-" + (document.querySelectorAll('.flashcards-card').length + 1).toString();
 
     if(definitions === undefined){
         let answersDiv = document.createElement('div');
@@ -37,7 +54,9 @@ function createCard(term, definitions){
 
         definitionsInput.placeholder = "Definition";
         definitionsInput.classList.add('flashcards-definition-input');
+        definitionsInput.classList.add('flashcards-definition-input-' + (document.querySelectorAll('.flashcards-card').length + 1).toString());
         definitionsImg.src = "./icons/delete.png";
+        definitionsImg.setAttribute("onclick", "this.parentNode.remove()");
 
         answersDiv.append(definitionsInput, definitionsImg);
         answersDiv.classList.add('flashcards-card-answers-div');
@@ -52,6 +71,7 @@ function createCard(term, definitions){
             definitionsInput.value = definitions[i];
             definitionsInput.classList.add('flashcards-definition-input');
             definitionsImg.src = "./icons/delete.png";
+            definitionsImg.setAttribute("onclick", "this.parentNode.remove()");
 
             answersDiv.append(definitionsInput, definitionsImg);
             answersDiv.classList.add('flashcards-card-answers-div');
@@ -62,10 +82,13 @@ function createCard(term, definitions){
 
     let definitionBtn = document.createElement('button');
     definitionBtn.innerHTML = "+ Add Definition";
+    definitionBtn.setAttribute("onclick", "addDefinition(" + (document.querySelectorAll('.flashcards-card').length + 1).toString() + ")")
     definitionBtn.classList.add('flashcards-definition-add');
+    definitionBtn.id = 'flashcards-definition-add-' + (document.querySelectorAll('.flashcards-card').length + 1).toString();
 
     definitionsDiv.appendChild(definitionBtn);
     definitionsDiv.classList.add('flashcards-card-answers')
+    definitionsDiv.id = 'flashcards-card-answers-' + (document.querySelectorAll('.flashcards-card').length + 1).toString();
 
     let footerRight = document.createElement('div');
     let duplicateImg = document.createElement('img');
@@ -84,4 +107,11 @@ function createCard(term, definitions){
     newDiv.classList.add('flashcards-card');
 
     document.getElementById('desktop-main-container').insertBefore(newDiv, document.getElementById('flashcards-add-card'));
+    document.getElementById('flashcards-input-' + document.querySelectorAll('.flashcards-card').length).focus()
 }
+
+document.getElementById('save-deck').onclick = function(){
+    //Save Deck
+}
+
+createCard("Napoleon", ["Cringe worthy", "Died alone"])

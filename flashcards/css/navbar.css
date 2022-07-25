@@ -30,6 +30,7 @@
 
 *::-webkit-scrollbar{
     width:calc(var(--size) * 8px);
+    height:calc(var(--size) * 8px);
     background:transparent;
 }
 
@@ -559,6 +560,7 @@ body *{
     border-radius:calc(var(--size) * 6px);
     border:1px solid var(--light-border-color);
     justify-content:center;
+    visibility:visible;
 }
 
 #desktop-notifications-header{
