@@ -9,6 +9,7 @@ const Deck = function(){
 
 function deleteCard(index){
     let exportedDeck = new Deck();
+    let untitledNums = 0;
 
     for(let i = 0; i < document.querySelectorAll('.flashcards-card').length; i++){
         let definitions = [];
@@ -16,6 +17,11 @@ function deleteCard(index){
         document.querySelectorAll(".flashcards-definition-input-" + (i + 1)).forEach(function(element){
             definitions.push(element.value)
         })
+
+        if(document.getElementById("flashcards-input-" + (i + 1)).value === "") {
+            untitledNums++;
+            document.getElementById("flashcards-input-" + (i + 1)).value = "Untitled-Elephant-Deck-" + untitledNums;
+        }
 
         exportedDeck.terms[document.getElementById("flashcards-input-" + (i + 1)).value] = definitions;
     }
@@ -25,7 +31,10 @@ function deleteCard(index){
     })
 
     for(let i = 0; i < Object.keys(exportedDeck.terms).length; i++){
-        if(i !== index - 1) createCard(Object.keys(exportedDeck.terms)[i], exportedDeck.terms[Object.keys(exportedDeck.terms)[i]])
+        if(i !== index - 1) {
+            if(Object.keys(exportedDeck.terms)[i].substring(0,23) === "Untitled-Elephant-Deck-") createCard(undefined, exportedDeck.terms[Object.keys(exportedDeck.terms)[i]])
+            else createCard(Object.keys(exportedDeck.terms)[i], exportedDeck.terms[Object.keys(exportedDeck.terms)[i]])
+        }
    }
 }
 
@@ -141,6 +150,7 @@ function createCard(term, definitions){
     definitionBtn.setAttribute("onclick", "addDefinition(" + (document.querySelectorAll('.flashcards-card').length + 1).toString() + ")")
     definitionBtn.classList.add('flashcards-definition-add');
     definitionBtn.id = 'flashcards-definition-add-' + (document.querySelectorAll('.flashcards-card').length + 1).toString();
+    definitionBtn.tabIndex = 0;
 
     definitionsDiv.appendChild(definitionBtn);
     definitionsDiv.classList.add('flashcards-card-answers')
@@ -168,22 +178,52 @@ function createCard(term, definitions){
     document.getElementById('flashcards-input-' + document.querySelectorAll('.flashcards-card').length).focus()
 }
 
+function displayAlert(index, content){
+
+    let refactoredContent = "";
+
+    console.log(index, content);
+
+    if(index === 0){
+        const errorTypes = ["Unnamed Card: Card ", "Definition Left Blank: Card "]
+
+        for(let i = 0; i < content.length; i++){
+            if(refactoredContent !== "") refactoredContent = refactoredContent + ", " + errorTypes[content[i][1]] + (content[i][0] + 1);
+            else refactoredContent = errorTypes[content[i][1]] + (content[i][0] + 1)
+        }
+
+        console.log(refactoredContent);
+
+        document.querySelectorAll('.desktop-alert-desc')[index].innerHTML = "Please Correct The Following Errors: " + refactoredContent;
+    }
+
+    document.querySelectorAll('.desktop-alert')[index].classList.remove('inactive-modal');
+    setTimeout(function(){
+        document.querySelectorAll('.desktop-alert')[index].classList.add('inactive-modal');
+    }, 10000);
+}
+
 document.getElementById('save-deck').onclick = function(){
     let exportedDeck = new Deck();
+    let errors = [];
 
     exportedDeck.name = document.getElementById('deck-name').textContent;
 
     for(let i = 0; i < document.querySelectorAll('.flashcards-card').length; i++){
         let definitions = [];
 
+        if(document.getElementById("flashcards-input-" + (i + 1)).value === "") errors.push([i, 0])
+
         document.querySelectorAll(".flashcards-definition-input-" + (i + 1)).forEach(function(element){
+            if(element.value === "") errors.push([i, 1])
             definitions.push(element.value)
         })
 
         exportedDeck.terms[document.getElementById("flashcards-input-" + (i + 1)).value] = definitions;
     }
 
-    console.log(exportedDeck);
+    if(errors.length === 0) console.log(exportedDeck);
+    else displayAlert(0, errors);
 }
 
 document.addEventListener('keydown', function(e){
@@ -207,5 +247,9 @@ window.addEventListener("beforeunload", function(e){
     if(!enableRedirect) e.returnValue = 'Are you sure you want to leave?';
 })
 
-createCard();
-toggleDisplayView(0)
+function initialize(){
+    createCard()
+    toggleDisplayView(0)
+}
+
+initialize();
