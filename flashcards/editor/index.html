@@ -149,7 +149,7 @@
             <div id="editor-tools">
                 <div id="editor-tools-left">
                     <div id="deck-info-tools">
-                        <h1>Elephant Flashcards Test</h1>
+                        <h1 contenteditable="true" id="deck-name">New Elephant Deck</h1>
                         <div class="deck-info-tools-option">
                             <img src="./icons/edit.png" alt="Edit">
                         </div>
@@ -161,14 +161,15 @@
                     </div>
                 </div>
                 <div id="view-buttons">
-                    <div class="view-button active-view-button">
+                    <div class="view-button" onclick="toggleDisplayView(0)">
                         <img src="./icons/kanban.png" alt="Kanban">
                     </div>
-                    <div class="view-button">
+                    <div class="view-button" onclick="toggleDisplayView(1)">
                         <img src="./icons/list.png" alt="List">
                     </div>
                 </div>
             </div>
+            <div id="desktop-main-container-bg"></div>
             <div id="desktop-main-container" class="kanban">
                 <div id="flashcards-add-card" onclick="createCard()">+ Create New Card</div>
             </div>

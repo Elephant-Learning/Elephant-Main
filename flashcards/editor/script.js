@@ -1,3 +1,49 @@
+let controlActive = false;
+let enableRedirect = false;
+
+const Deck = function(){
+    this.terms = {}
+    this.authorID = 0;
+    this.name = ""
+}
+
+function deleteCard(index){
+    let exportedDeck = new Deck();
+
+    for(let i = 0; i < document.querySelectorAll('.flashcards-card').length; i++){
+        let definitions = [];
+
+        document.querySelectorAll(".flashcards-definition-input-" + (i + 1)).forEach(function(element){
+            definitions.push(element.value)
+        })
+
+        exportedDeck.terms[document.getElementById("flashcards-input-" + (i + 1)).value] = definitions;
+    }
+
+    document.querySelectorAll('.flashcards-card').forEach(function(element){
+        element.remove();
+    })
+
+    for(let i = 0; i < Object.keys(exportedDeck.terms).length; i++){
+        if(i !== index - 1) createCard(Object.keys(exportedDeck.terms)[i], exportedDeck.terms[Object.keys(exportedDeck.terms)[i]])
+   }
+}
+
+function toggleDisplayView(index){
+    document.getElementById('desktop-main-container').className = ""
+    if(index === 0){
+        document.getElementById('desktop-main-container').classList.add('kanban');
+    } else if(index === 1){
+        document.getElementById('desktop-main-container').classList.add('list');
+    }
+
+    document.querySelectorAll('.view-button').forEach(function(element){
+        element.classList.remove('active-view-button');
+    })
+
+    document.querySelectorAll('.view-button')[index].classList.add('active-view-button');
+}
+
 function addDefinition(index){
     let answersDiv = document.createElement('div');
     let definitionsInput = document.createElement('input');
@@ -13,6 +59,16 @@ function addDefinition(index){
     answersDiv.classList.add('flashcards-card-answers-div');
     document.getElementById('flashcards-card-answers-' + index).insertBefore(answersDiv, document.getElementById('flashcards-definition-add-' + index));
     document.querySelectorAll('.flashcards-definition-input-' + index)[document.querySelectorAll('.flashcards-definition-input-' + index).length - 1].focus();
+}
+
+function duplicateCard(index){
+    let definitions = [];
+
+    document.querySelectorAll(".flashcards-definition-input-" + index).forEach(function(element){
+        definitions.push(element.value)
+    })
+
+    createCard(document.getElementById('flashcards-input-' + index).value, definitions)
 }
 
 function createCard(term, definitions){
@@ -39,11 +95,9 @@ function createCard(term, definitions){
     copyrightDiv.append(copyrightElephant, copyrightTextDiv);
     copyrightDiv.classList.add('flashcards-card-copyright');
 
-    if(term === undefined){
-        cardTitle.placeholder = "New Flashcard"
-    } else {
-        cardTitle.value = term;
-    }
+    cardTitle.placeholder = "New Flashcard"
+
+    if(term !== undefined) cardTitle.value = term;
 
     cardTitle.id = "flashcards-input-" + (document.querySelectorAll('.flashcards-card').length + 1).toString();
 
@@ -68,8 +122,10 @@ function createCard(term, definitions){
             let definitionsInput = document.createElement('input');
             let definitionsImg = document.createElement('img');
 
+            definitionsInput.placeholder = "Definition";
             definitionsInput.value = definitions[i];
             definitionsInput.classList.add('flashcards-definition-input');
+            definitionsInput.classList.add('flashcards-definition-input-' + (document.querySelectorAll('.flashcards-card').length + 1).toString());
             definitionsImg.src = "./icons/delete.png";
             definitionsImg.setAttribute("onclick", "this.parentNode.remove()");
 
@@ -96,6 +152,8 @@ function createCard(term, definitions){
 
     duplicateImg.src = "./icons/duplicate.png";
     deleteImg.src = "./icons/delete.png";
+    duplicateImg.setAttribute("onclick", "duplicateCard(" + (document.querySelectorAll('.flashcards-card').length + 1) + ")")
+    deleteImg.setAttribute("onclick", "deleteCard(" + (document.querySelectorAll('.flashcards-card').length + 1) + ")");
 
     footerRight.classList.add('flashcards-card-footer-right')
     footerRight.append(duplicateImg, deleteImg);
@@ -111,7 +169,43 @@ function createCard(term, definitions){
 }
 
 document.getElementById('save-deck').onclick = function(){
-    //Save Deck
+    let exportedDeck = new Deck();
+
+    exportedDeck.name = document.getElementById('deck-name').textContent;
+
+    for(let i = 0; i < document.querySelectorAll('.flashcards-card').length; i++){
+        let definitions = [];
+
+        document.querySelectorAll(".flashcards-definition-input-" + (i + 1)).forEach(function(element){
+            definitions.push(element.value)
+        })
+
+        exportedDeck.terms[document.getElementById("flashcards-input-" + (i + 1)).value] = definitions;
+    }
+
+    console.log(exportedDeck);
 }
 
-createCard("Napoleon", ["Cringe worthy", "Died alone"])
+document.addEventListener('keydown', function(e){
+    if(e.keyCode === 17) controlActive = true;
+    if(e.keyCode === 68 && controlActive){
+        e.preventDefault();
+        if(document.activeElement.classList.contains('flashcards-definition-input')){
+            addDefinition(document.activeElement.classList[1].slice(-1))
+        }
+    } if(e.keyCode === 13){
+        e.preventDefault();
+        createCard()
+    }
+})
+
+document.addEventListener('keyup', function(e){
+    if(e.keyCode === 17) controlActive = false;
+})
+
+window.addEventListener("beforeunload", function(e){
+    if(!enableRedirect) e.returnValue = 'Are you sure you want to leave?';
+})
+
+createCard();
+toggleDisplayView(0)

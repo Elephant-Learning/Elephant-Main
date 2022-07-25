@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 #desktop-parent-container{
     flex-direction:column;
     justify-content:flex-start;
@@ -11,6 +15,7 @@
     bottom:calc(var(--size) * 12px);
     right:calc(var(--size) * 12px);
     gap:calc(var(--size) * 6px);
+    z-index:2;
 }
 
 .bottom-btns > a, .bottom-btns > div{
@@ -76,6 +81,7 @@
 
 #deck-info-tools > h1{
     font-size:calc(var(--size) * 12px);
+    outline:none;
     font-weight:700;
     margin:0;
 }
@@ -163,11 +169,23 @@
     filter:invert(1);
 }
 
+#desktop-main-container-bg{
+    width:100vw;
+    height:calc(100vh - var(--size) * 85px);
+    background-image:url("./images/patterns/grid.png");
+    background-size:128px;
+    opacity:0.15;
+    position:absolute;
+    z-index:1;
+    top:calc(var(--size) * 36px);
+}
+
 #desktop-main-container{
     overflow-y:scroll;
     padding:calc(var(--size) * 32px);
-    height:calc(100vh - var(--size) * 150px);
-    width:calc(100vw - var(--size) * 64px)
+    height:calc(100vh - var(--size) * 149px);
+    width:calc(100vw - var(--size) * 64px);
+    z-index:1;
 }
 
 .kanban{
