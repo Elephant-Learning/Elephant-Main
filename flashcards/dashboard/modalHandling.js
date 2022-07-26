@@ -22,7 +22,13 @@ function toggleSettingsModal(){
     }
 }
 
-function togglePageFlip(index, sidebar){
+function togglePageFlip(index, sidebar, link){
+
+    if(link){
+        window.location.href = link;
+        return;
+    }
+
     document.getElementById('desktop-main-container-tab').innerHTML = pages[index];
     try{document.querySelector(".active-sidebar-category").classList.remove('active-sidebar-category')} catch{}
 

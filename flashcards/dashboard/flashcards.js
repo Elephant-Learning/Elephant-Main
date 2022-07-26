@@ -30,7 +30,7 @@ const Deck = function(name){
 //viewIndex
 //0 = All Decks
 //1 = Your Decks
-function displayFlashcard(name, author, type){
+function displayFlashcard(name, author, type, deckID){
     let mainDiv = document.createElement('div');
 
     let iconDiv = document.createElement('div');
@@ -76,34 +76,20 @@ function displayFlashcard(name, author, type){
     mainDiv.append(iconDiv, textDiv, tag, options);
     mainDiv.classList.add('flashcard-deck');
     mainDiv.classList.add(tags[type] + "-flashcard-border");
-    mainDiv.setAttribute('onclick', "viewFlashcard(undefined, " + type + ")");
+    mainDiv.setAttribute('onclick', "togglePageFlip(undefined, undefined, '../viewer?ID=" + deckID + "')");
     document.getElementById('flashcards-list').appendChild(mainDiv);
-}
-
-function viewFlashcard(card, type){
-    document.getElementById('flashcard-stripe').className = "";
-    document.getElementById('flashcard-stripe').classList.add(tags[type] + "-flashcard");
-    document.getElementById('flashcard-stripe-text').innerHTML = tags[type];
-
-    document.querySelectorAll(".flashcard-action").forEach(function(element){
-        element.className = "";
-        element.classList.add('flashcard-action')
-        element.classList.add(tags[type] + "-flashcard-border");
-    })
-
-    togglePageFlip(4, undefined, false);
 }
 
 function loadFlashcards(keyword, viewIndex, sortIndex){
     for(let i = 0; i < 105; i++){
-        displayFlashcard("Elephant Flashcards Test", "Random User", Math.floor(Math.random() * 3));
+        displayFlashcard("Elephant Flashcards Test", "Random User", Math.floor(Math.random() * 3), 0);
     } document.getElementById('flashcards-display-test').innerHTML = "";
 }
 
 function createFolder(){
-    togglePageFlip(6, undefined, false);
+    togglePageFlip(6, undefined);
 }
 
 function createDeck(){
-    togglePageFlip(3, undefined, false);
+    togglePageFlip(undefined, undefined, "../editor");
 }
