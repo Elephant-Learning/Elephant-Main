@@ -36,7 +36,10 @@
 
 *::-webkit-scrollbar-thumb{
     background:var(--dark-border-color);
+}
 
+*::-webkit-scrollbar-corner{
+    background:transparent;
 }
 
 body{

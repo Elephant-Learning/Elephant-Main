@@ -157,16 +157,18 @@ function createCard(term, definitions){
     definitionsDiv.id = 'flashcards-card-answers-' + (document.querySelectorAll('.flashcards-card').length + 1).toString();
 
     let footerRight = document.createElement('div');
+    let backpackImg = document.createElement('img')
     let duplicateImg = document.createElement('img');
     let deleteImg = document.createElement('img');
 
+    backpackImg.src = "./icons/pack.png";
     duplicateImg.src = "./icons/duplicate.png";
     deleteImg.src = "./icons/delete.png";
     duplicateImg.setAttribute("onclick", "duplicateCard(" + (document.querySelectorAll('.flashcards-card').length + 1) + ")")
     deleteImg.setAttribute("onclick", "deleteCard(" + (document.querySelectorAll('.flashcards-card').length + 1) + ")");
 
     footerRight.classList.add('flashcards-card-footer-right')
-    footerRight.append(duplicateImg, deleteImg);
+    footerRight.append(backpackImg, duplicateImg, deleteImg);
 
     footerDiv.appendChild(footerRight);
     footerDiv.classList.add('flashcards-card-footer');
@@ -179,7 +181,6 @@ function createCard(term, definitions){
 }
 
 function displayAlert(index, content){
-
     let refactoredContent = "";
 
     console.log(index, content);
@@ -201,6 +202,16 @@ function displayAlert(index, content){
     setTimeout(function(){
         document.querySelectorAll('.desktop-alert')[index].classList.add('inactive-modal');
     }, 10000);
+}
+
+function toggleBackpackModal(){
+    if(document.getElementById('backpack-modal').classList.contains('inactive-modal')) {
+        document.getElementById('backpack-tag-text').innerHTML = "Close Backpack";
+        document.getElementById('backpack-modal').classList.remove('inactive-modal');
+    } else {
+        document.getElementById('backpack-tag-text').innerHTML = "Open Backpack";
+        document.getElementById('backpack-modal').classList.add('inactive-modal')
+    }
 }
 
 document.getElementById('save-deck').onclick = function(){
@@ -250,6 +261,7 @@ window.addEventListener("beforeunload", function(e){
 function initialize(){
     createCard()
     toggleDisplayView(0)
+    window.scrollTo(0,0);
 }
 
 initialize();
