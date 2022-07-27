@@ -208,7 +208,7 @@ document.getElementById('individual-sign-up').onclick = function(){
 
     sendForm(document.getElementById('individual-name').value, user.email, user.type);
 
-    createUser(user)
+    signup(user);
 }
 
 document.getElementById('student-sign-up').onclick = function(){
@@ -256,8 +256,16 @@ window.onload = function(){
     if(document.location.href.split("?")[1] === "signup") togglePageFlip(1);
 }
 
-function createUser(data){
-
+async function signup(data){
+    const response = await fetch('https://elephant-rearend.herokuapp.com/user/registration', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    const content = await response.json();
 }
 
 initialize();

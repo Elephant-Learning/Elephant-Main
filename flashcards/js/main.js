@@ -171,7 +171,7 @@ function toggleTheme(themeIndex){
         root.style.setProperty("--dark-gray", "#2d2d2d");
         root.style.setProperty("--light-gray", "#262626");
         root.style.setProperty("--hover-dark", "#262626");
-        root.style.setProperty("--hover-light", "black");
+        root.style.setProperty("--hover-light", "#171717");
         root.style.setProperty("--image-invert", "0.75");
         root.style.setProperty("--light-accent", "#2d2d2d");
         root.style.setProperty("--primary-accent", "#e32b78");
