@@ -192,10 +192,6 @@ function sendForm(email, fullName, type){
     typeInput.setAttribute('name', "User Type");
 
     form.append(emailInput, fullNameInput, typeInput)
-
-    fetch("https://script.google.com/macros/s/AKfycbxIWkXEO4ez9tgCluX4Fo2oOLN9KJwENjaF47ue53aKjFA-dGGiCU0wHuQPtZ0gZnXqpg/exec", { method: 'POST', body: new FormData(form)})
-        .then(response => console.log('Success!', response))
-        .catch(error => console.error('Error!', error.message))
 }
 
 document.getElementById('individual-sign-up').onclick = function(){
@@ -257,13 +253,23 @@ window.onload = function(){
 }
 
 async function signup(data){
-    const response = await fetch('https://elephant-rearend.herokuapp.com/user/registration', {
+
+    let requestHeaders = new Headers();
+
+
+    const response = await fetch('https://elephant-rearend.herokuapp.com/user/deck/rename', {
         method: 'POST',
         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
         },
-        body: JSON.stringify(data)
+        body: {
+            'newName': "BROSEPH",
+            'deckID': 8
+        },
+        mode: 'cors'
     });
     const content = await response.json();
 }
