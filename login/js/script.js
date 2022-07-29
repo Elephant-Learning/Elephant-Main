@@ -3,7 +3,7 @@ let selectedSignUpOption;
 const UserTypes = {
     INDIVIDUAL: "INDIVIDUAL",
     STUDENT: "STUDENT",
-    INSTRUCTOR: "INSTRUCTOR"
+    INSTRUCTOR: "TEACHER"
 }
 
 const User = function(){
@@ -202,8 +202,6 @@ document.getElementById('individual-sign-up').onclick = function(){
     user.password = document.getElementById('individual-password').value;
     user.type = UserTypes.INDIVIDUAL;
 
-    sendForm(document.getElementById('individual-name').value, user.email, user.type);
-
     signup(user);
 }
 
@@ -215,9 +213,7 @@ document.getElementById('student-sign-up').onclick = function(){
     user.password = document.getElementById('student-password').value;
     user.type = UserTypes.STUDENT;
 
-    sendForm(document.getElementById('student-name').value, user.email, user.type);
-
-    createUser(user);
+    signup(user);
 }
 
 document.getElementById('instructor-sign-up').onclick = function(){
@@ -228,10 +224,8 @@ document.getElementById('instructor-sign-up').onclick = function(){
     user.password = document.getElementById('instructor-password').value;
     user.type = UserTypes.INSTRUCTOR;
 
-    sendForm(document.getElementById('instructor-name').value, user.email, user.type);
 
-
-    createUser(user)
+    signup(user)
 }
 
 document.querySelectorAll('button').forEach(function(element){
@@ -257,7 +251,7 @@ async function signup(data){
     let requestHeaders = new Headers();
 
 
-    const response = await fetch('https://elephant-rearend.herokuapp.com/user/deck/rename', {
+    const response = await fetch('https://elephant-rearend.herokuapp.com/user/registration', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -265,13 +259,11 @@ async function signup(data){
             'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type'
         },
-        body: {
-            'newName': "BROSEPH",
-            'deckID': 8
-        },
+        body: JSON.stringify(data),
         mode: 'cors'
     });
     const content = await response.json();
+    console.log(content);
 }
 
 initialize();
