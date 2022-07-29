@@ -394,26 +394,6 @@ function mainInitialize(){
         preferences = [preferences[0], 1];
     }
 
-    for(let i = 0; i < 14; i++){
-        createNotification("friend", {
-            name: "Elephant Student"
-        })
-    }
-
-    for(let i = 0; i < 29; i++){
-        if(Math.floor(Math.random() * 2) === 0){
-            createNotification("deckShared", {
-                sender: "Elephant Student",
-                deckName: "Random Deck"
-            })
-        } else {
-            createNotification("deckFavorited", {
-                sender: "Elephant Student",
-                deckName: "Random Deck"
-            })
-        }
-    }
-
     toggleTheme(preferences[0]);
     toggleSizeSetting(preferences[1]);
 

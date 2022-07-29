@@ -247,10 +247,6 @@ window.onload = function(){
 }
 
 async function signup(data){
-
-    let requestHeaders = new Headers();
-
-
     const response = await fetch('https://elephant-rearend.herokuapp.com/user/registration', {
         method: 'POST',
         headers: {
@@ -264,6 +260,39 @@ async function signup(data){
     });
     const content = await response.json();
     console.log(content);
+}
+
+document.getElementById('login').onclick = login;
+
+async function login(){
+    let email = document.getElementById('login-username').value;
+    let password = document.getElementById('login-password').value;
+
+    const response = await fetch('https://elephant-rearend.herokuapp.com/user/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        body: JSON.stringify({
+            "email": email,
+            "password": password
+        }),
+        mode: 'cors'
+    });
+    const content = await response.json();
+    console.log(content)
+
+    /*let savedUserId = localStorage.getItem('savedUserId');
+
+    if(!savedUserId) {
+        localStorage.setItem('savedUserId', content.userId);
+        savedUserId = localStorage.getItem('savedUserId');
+    }
+
+    savedUserId = JSON.parse(savedUserId);*/
 }
 
 initialize();

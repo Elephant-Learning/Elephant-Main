@@ -245,6 +245,7 @@ body *{
 
 .profile-sub-modal{
     left:calc(var(--size) * -202px);
+    top:0;
 }
 
 #desktop-profile-modal > div:not(.profile-break), .profile-sub-modal > div{
@@ -605,12 +606,13 @@ body *{
     height:calc(var(--size) * 512px);
     max-height:calc(var(--size) * 490px);
     position:relative;
+    align-items:center;
+    justify-content:center;
 }
 
 .active-notifications-list::-webkit-scrollbar-thumb{
     background:var(--light-border-color);
     border-radius:calc(var(--size) * 4px) 0 0 calc(var(--size) * 4px);
-
 }
 
 .desktop-notifications-list:not(.active-notifications-list), #no-notifications:not(.active-notifications-list){
@@ -656,6 +658,7 @@ body *{
     align-items:center;
     justify-content:center;
     text-align:center;
+    width:calc(100% - var(--size) * 96px);
     gap:calc(var(--size) * 12px);
 }
 
@@ -835,6 +838,10 @@ body *{
     border:1px solid var(--dark-border-color);
     background:var(--light-gray);
     color:white;
+}
+
+#desktop-notifications-modal.inactive-modal{
+    display:none;
 }
 
 .bolded{

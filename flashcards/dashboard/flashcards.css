@@ -103,7 +103,6 @@
     height:calc(100vh - var(--size) * 300px);
     border-radius:calc(var(--size) * 12px);
     border:calc(var(--size) * 2px) dashed lightgray;
-    color:lightgray;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -113,6 +112,7 @@
 
 #no-flashcards > p{
     font-size:calc(var(--size) * 12px);
+    color:gray;
     margin:0;
     font-weight:400;
     transition-duration:250ms;

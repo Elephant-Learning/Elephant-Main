@@ -1,6 +1,6 @@
 let contextMenu = false;
 
-let pages = ["Elephant Flashcards", "Elephant Task Manager", "Chat Group", "Flashcards Editor", "Flashcard Viewing Platform", "Search Results", "Folder Editor", "Folder Viewer", "My Profile", "Administrator Portal"];
+let pages = ["Elephant Flashcards", "Elephant Task Manager", "Chat Group", "Search Results", "Folder Editor", "Folder Viewer", "My Profile", "Administrator Portal"];
 let randomChatMessage = ["Rearranging Your Cards Into Decks...", "Managing Your Tasks Prematurely...", "Closing Minecraft and Beginning To Work...", "Placing 3 Day Blocks on Discord...", "Contemplating Your Life Choices...", "Do You People Even Read This???", "Please be Patient... I'm new..."]
 
 let history = [];
@@ -171,7 +171,11 @@ function closeNews(){
     document.getElementById('desktop-music-container').style.height = "calc(100vh - var(--size) * 48px)";
 }
 
-function initialize(){
+function initialize(user){
+
+    if(user.status === "FAILURE") {
+        location.href = "../../login"
+    } else user = user.context.user
 
     const emojis_refactored = ["confused", "cool", "happy", "laugh", "nerd", "neutral", "unamused", "uwu", "wink"];
 
@@ -195,9 +199,25 @@ function initialize(){
 
     closeNews()
 
+    console.log(user);
+
+    document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png"
+    document.getElementById('my-profile-img').src = "../../icons/avatars/" + user.pfpId + ".png"
+    document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
+    document.getElementById('my-profile-name').innerHTML = user.firstName + " " + user.lastName;
+    document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
+    document.getElementById('my-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
+    document.getElementById('my-profile-email').innerHTML = user.email;
+
     document.getElementById('desktop-profile-user-img').src = "../icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
 
-    loadFlashcards();
+    for(let i = 0; i < user.notifications.length; i++){
+        //create notification
+    }
+
+    for(let i = 0; i < user.decks.length; i++){
+        displayFlashcard("Elephant Flashcards Test", "Random User", Math.floor(Math.random() * 3), 0);
+    } document.getElementById('flashcards-display-test').innerHTML = "";
 
     if(document.getElementById('flashcards-list').hasChildNodes()){
         document.getElementById('no-flashcards').classList.add('inactive-modal');
@@ -207,7 +227,7 @@ function initialize(){
 }
 
 function getRightBound(element) {
-    var xPosition = 0;
+    let xPosition = 0;
 
     while(element) {
         xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
@@ -228,4 +248,21 @@ document.addEventListener('DOMContentLoaded', function(e){
     document.getElementById('desktop-loader-text').innerHTML = randomChatMessage[Math.floor(Math.random() * randomChatMessage.length)];
 })
 
-initialize();
+async function locateUserInfo(){
+    const response = await fetch('https://elephant-rearend.herokuapp.com/user/login/user?id=1', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const context = await response.json()
+    console.log(context)
+    initialize(context)
+}
+
+locateUserInfo()

@@ -569,7 +569,3 @@ html {
 .kanban > .flashcards-card > .flashcards-card-footer > .flashcards-card-footer-right > img:hover{
     transform:scale(1.1);
 }
-
-#desktop-notifications-modal.inactive-modal{
-    display:none;
-}

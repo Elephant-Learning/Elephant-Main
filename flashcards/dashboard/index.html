@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="flashcards.css">
+    <link rel="stylesheet" href="profile.css">
     <!--<link rel="stylesheet" href="css/chat.css">
     <script src="js/chatSystem.js" defer></script>
     <script src="dependencies/FileSaver.js" defer></script>-->
@@ -91,14 +92,14 @@
                     <div></div>
                 </div>
                 <div id="desktop-navbar-profile">
-                    <img src="../../icons/avatars/33.png" alt="" id="desktop-navbar-profile-image">
+                    <img src="" alt="Image" id="desktop-navbar-profile-image">
                     <div id="navbar-profile-text">
-                        <h1 id="desktop-navbar-profile-name">Ronak Kothari</h1>
-                        <p id="desktop-navbar-profile-email">Elephant Administrator</p>
+                        <h1 id="desktop-navbar-profile-name"></h1>
+                        <p id="desktop-navbar-profile-type"></p>
                     </div>
                     <img src="../icons/expand_down.png" alt="Dropdown">
                     <div id="desktop-profile-modal" class="active-modal">
-                        <div onclick="togglePageFlip(8)">
+                        <div onclick="togglePageFlip(6)">
                             <img src="../icons/emojis/happy.png" id="desktop-profile-user-img" alt="">
                             <p>Your Profile</p>
                         </div>
@@ -152,7 +153,7 @@
                             </div>
                         </div>
                         <div class="profile-break"></div>
-                        <div>
+                        <div onclick="location.href = '../../login'">
                             <img src="../icons/logout.png">
                             <p>Log Out</p>
                         </div>
@@ -240,7 +241,7 @@
                             </div>
                              <div id="flashcards-list-container">
                                 <div id="flashcards-list"></div>
-                                <div id="no-flashcards" onclick="togglePageFlip(3)">
+                                <div id="no-flashcards" onclick="createDeck()">
                                     <p>Nothing to show here. Create a Deck Now!</p>
                                 </div>
                                 <div id="flashcards-display-test"></div>
@@ -283,6 +284,23 @@
                                 <!--<div id="folder-main-image">
                                     <img src="../icons/avatars/41.png" alt="Something">
                                 </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="desktop-tab" id="my-profile">
+                        <div id="my-profile-container">
+                            <div id="my-profile-image-container">
+                                <img src="" alt="" id="my-profile-img">
+                            </div>
+                            <div id="my-profile-text-container">
+                                <h1 id="my-profile-name"></h1>
+                                <p id="my-profile-type"></p>
+                                <div id="my-profile-information">
+                                    <div class="my-profile-information">
+                                        <img src="../icons/email.png" alt="">
+                                        <p id="my-profile-email"></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
