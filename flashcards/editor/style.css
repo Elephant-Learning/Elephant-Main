@@ -62,6 +62,7 @@ html {
     justify-content:center;
     position:relative;
     border-bottom:1px solid var(--light-border-color);
+    gap:calc(var(--size) * 12px);
 }
 
 #editor-tools-left{
@@ -147,6 +148,61 @@ html {
     border-radius:calc(var(--size) * 6px);
     padding:0 calc(var(--size) * 6px);
     gap:calc(var(--size) * 4px);
+}
+
+#add-to-folder{
+    background:var(--bg-color-2);
+}
+
+#add-to-folder:hover{
+    box-shadow: 0 0 calc(var(--size) * 6px) 0 var(--light-border-color);
+}
+
+#add-to-folder:focus{
+    box-shadow:none;
+}
+
+#add-to-folder > img{
+    height:calc(var(--size) * 16px);
+}
+
+#add-to-folder > p{
+    margin:0;
+}
+
+#invite-btn, #add-to-folder{
+    font-size:calc(var(--size) * 12px);
+    padding:calc(var(--size) * 4px) calc(var(--size) * 12px);
+    font-weight:500;
+    border-radius:calc(var(--size) * 6px);
+    transition-duration:250ms;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    cursor:pointer;
+    gap:calc(var(--size) * 6px);
+}
+
+#invite-btn{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+}
+
+#invite-btn > img{
+    filter:invert(1);
+    height:calc(var(--size) * 16px);
+}
+
+#invite-btn > p{
+    margin:0;
+    color:white;
+}
+
+#invite-btn:hover{
+    box-shadow: 0 0 calc(var(--size) * 6px) 0 var(--primary-accent);
+}
+
+#invite-btn:active{
+    box-shadow:none;
 }
 
 .view-button{

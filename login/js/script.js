@@ -268,6 +268,11 @@ async function login(){
     let email = document.getElementById('login-username').value;
     let password = document.getElementById('login-password').value;
 
+    console.log(JSON.stringify({
+        "email": email,
+        "password": password
+    }));
+
     const response = await fetch('https://elephant-rearend.herokuapp.com/user/login', {
         method: 'POST',
         headers: {
