@@ -247,7 +247,7 @@ window.onload = function(){
 }
 
 async function signup(data){
-    const response = await fetch('https://elephant-rearend.herokuapp.com/user/registration', {
+    const response = await fetch('https://elephant-rearend.herokuapp.com/registration', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -260,6 +260,25 @@ async function signup(data){
     });
     const content = await response.json();
     console.log(content);
+    console.log(content.context.user.token.token)
+
+    const confirmResponse = await fetch('https://elephant-rearend.herokuapp.com/registration/confirm?token=' + content.context.user.token.token, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    });
+
+    const confirmContent = await confirmResponse.json();
+    console.log(confirmContent);
+
+    document.getElementById('login-username').value = data.email;
+    document.getElementById('login-password').value = data.password;
+    login();
 }
 
 document.getElementById('login').onclick = login;
@@ -273,7 +292,7 @@ async function login(){
         "password": password
     }));
 
-    const response = await fetch('https://elephant-rearend.herokuapp.com/user/login', {
+    const response = await fetch('https://elephant-rearend.herokuapp.com/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -290,14 +309,8 @@ async function login(){
     const content = await response.json();
     console.log(content)
 
-    /*let savedUserId = localStorage.getItem('savedUserId');
-
-    if(!savedUserId) {
-        localStorage.setItem('savedUserId', content.userId);
-        savedUserId = localStorage.getItem('savedUserId');
-    }
-
-    savedUserId = JSON.parse(savedUserId);*/
+    localStorage.setItem('savedUserId', JSON.stringify(content.context.user.id));
+    location.href = "../flashcards/dashboard";
 }
 
 initialize();

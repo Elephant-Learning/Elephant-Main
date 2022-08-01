@@ -249,7 +249,8 @@ document.addEventListener('DOMContentLoaded', function(e){
 })
 
 async function locateUserInfo(){
-    const response = await fetch('https://elephant-rearend.herokuapp.com/user/login/user?id=1', {
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
+    const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

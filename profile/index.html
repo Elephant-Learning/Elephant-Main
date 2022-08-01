@@ -2,9 +2,202 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | Elephant - The Ultimate Student Suite</title>
+
+    <link rel="icon" href="../icons/elephant-400-400-grayscale.png">
+    <link rel="stylesheet" href="../flashcards/css/navbar.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="../flashcards/js/main.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
+<div id="desktop-wrapper">
+    <div id="desktop-notifications-modal" class="inactive-modal">
+        <div id="desktop-notifications-header">
+            <h1>Notifications</h1>
+            <img src="../icons/x.png" alt="" onclick="toggleNotificationsModal()">
+        </div>
+        <div id="desktop-notifications-tabs">
+            <div class="desktop-notifications-tab active-notifications-tab" onclick="toggleNotificationTab(0)">
+                <h1>General</h1>
+                <p class="desktop-notifications-tab-number">0</p>
+            </div>
+            <div class="desktop-notifications-tab" onclick="toggleNotificationTab(1)">
+                <h1>Friends</h1>
+                <p class="desktop-notifications-tab-number">0</p>
+            </div>
+        </div>
+        <div id="desktop-notifications-list-container">
+            <div id="desktop-notifications-list">
+                <div class="desktop-notifications-list active-notifications-list"></div>
+                <div class="desktop-notifications-list"></div>
+            </div>
+            <div id="no-notifications">
+                <p>You're up to date! Now get back to studying.</p>
+                <button>Refresh</button>
+            </div>
+        </div>
+    </div>
+    <div id="desktop-music-container" class="inactive-modal">
+        <div id="desktop-music-main">
+            <div id="music-image-div">
+                <img src="../flashcards/music/covers/space-trip.png" id="music-image">
+            </div>
+            <h1 id="music-name"></h1>
+            <p id="music-author"></p>
+            <input type="range" value="0" id="slider-input" min="0" max="10000" disabled="disabled">
+            <div id="music-controls">
+                <img src="../flashcards/icons/favorite.png" alt="">
+                <img src="../flashcards/icons/play.png" id="music-play-img">
+                <img src="../flashcards/icons/forward.png" id="music-next-img">
+            </div>
+            <div id="playlist-list"></div>
+            <div id="playlist-playing"></div>
+        </div>
+    </div>
+    <div id="desktop-navbar">
+        <div id="desktop-main-image">
+            <a href="../"><img src="../icons/elephant-400-400-white.png" alt="Elephant Logo"></a>
+        </div>
+        <div id="desktop-input-div">
+            <img src="../flashcards/icons/search.png" alt="Search" id="desktop-input-img">
+            <input type="text" id="desktop-navbar-input" placeholder="Search Users, Classrooms">
+        </div>
+        <div id="desktop-navbar-right">
+            <div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
+                <img src="../flashcards/icons/music.png" alt="Notifications">
+            </div>
+            <div class="desktop-navbar-right-img" onclick="toggleNotificationsModal()">
+                <img src="../flashcards/icons/notification.png" alt="Notifications" id="notifications-btn">
+                <div></div>
+            </div>
+            <div id="desktop-navbar-profile">
+                <img src="" alt="Image" id="desktop-navbar-profile-image">
+                <div id="navbar-profile-text">
+                    <h1 id="desktop-navbar-profile-name"></h1>
+                    <p id="desktop-navbar-profile-type"></p>
+                </div>
+                <img src="../flashcards/icons/expand_down.png" alt="Dropdown">
+                <div id="desktop-profile-modal" class="active-modal">
+                    <div onclick="location.href = '../profile'">
+                        <img src="../flashcards/icons/emojis/happy.png" id="desktop-profile-user-img" alt="">
+                        <p>Your Profile</p>
+                    </div>
+                    <div>
+                        <img src="../flashcards/icons/theme.png" alt="">
+                        <p>Theme</p>
+                        <img src="../flashcards/icons/expand-right.png" alt="">
+                        <div class="profile-sub-modal">
+                            <div onclick="toggleTheme(0)">
+                                <img src="../flashcards/icons/sun.png" alt="">
+                                <p>Light Theme</p>
+                                <img src="../flashcards/icons/check.png" alt="" class="profile-theme-check-img">
+                            </div>
+                            <div onclick="toggleTheme(1)">
+                                <img src="../flashcards/icons/moon.png" alt="">
+                                <p>Dark Theme</p>
+                                <img src="../flashcards/icons/check.png" alt="" class="profile-theme-check-img">
+                            </div>
+                            <div onclick="toggleTheme(2)">
+                                <img src="../flashcards/icons/50%25.png" alt="">
+                                <p>System Default</p>
+                                <img src="../flashcards/icons/check.png" alt="" class="profile-theme-check-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="../flashcards/icons/zoom.png">
+                        <p>Accessibility Zoom</p>
+                        <img src="../flashcards/icons/expand-right.png" alt="">
+                        <div class="profile-sub-modal">
+                            <div onclick="toggleSizeSetting(0)">
+                                <img src="../flashcards/icons/zoom_out.png" alt="">
+                                <p>75%</p>
+                                <img src="../flashcards/icons/check.png" alt="" class="profile-zoom-check-img">
+                            </div>
+                            <div onclick="toggleSizeSetting(1)">
+                                <img src="../flashcards/icons/search.png" alt="">
+                                <p>100%</p>
+                                <img src="../flashcards/icons/check.png" alt="" class="profile-zoom-check-img">
+                            </div>
+                            <div onclick="toggleSizeSetting(2)">
+                                <img src="../flashcards/icons/zoom_in.png" alt="">
+                                <p>125%</p>
+                                <img src="../flashcards/icons/check.png" alt="" class="profile-zoom-check-img">
+                            </div>
+                            <div onclick="toggleSizeSetting(3)">
+                                <img src="../flashcards/icons/zoom_in.png" alt="">
+                                <p>150%</p>
+                                <img src="../flashcards/icons/check.png" alt="" class="profile-zoom-check-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-break"></div>
+                    <div onclick="location.href = '../../login'">
+                        <img src="../flashcards/icons/logout.png">
+                        <p>Log Out</p>
+                    </div>
+                    <!--<button>Get Premium</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="desktop-parent-container">
+        <div id="desktop-sidebar">
+            <div id="desktop-sidebar-categories">
+                <div class="desktop-sidebar-category" onclick="location.href = '../flashcards/dashboard'">
+                    <div>
+                        <img src="../flashcards/icons/deck.png" alt="Recent">
+                    </div>
+                    <p>Flashcards</p>
+                </div>
+                <!--<div class="desktop-sidebar-category unavailable-sidebar-category" onclick="">
+                    <div>
+                        <img src="./icons/recent.png" alt="Recent">
+                    </div>
+                    <p>Task Manager</p>
+                </div>
+                <div class="desktop-sidebar-category unavailable-sidebar-category" onclick="">
+                    <div>
+                        <img src="./icons/network.png" alt="Recent">
+                    </div>
+                    <p>Community</p>
+                </div>-->
+                <div class="desktop-sidebar-category" onclick="togglePageFlip(9, 1)">
+                    <div>
+                        <img src="../flashcards/icons/admin.png" alt="Recent">
+                    </div>
+                    <p>Admin Portal</p>
+                </div>
+                <div class="desktop-sidebar-break"></div>
+            </div>
+        </div>
+        <div id="desktop-main-container">
+            <div id="desktop-main-news">
+                <!--<img src="./icons/discord.png" alt="">
+                <a href="https://discord.gg/YbZS8H6RbB/">Join The New Elephant Discord Server</a>
+                <p onclick="closeNews()">X</p>-->
+            </div>
+            <p id="desktop-main-container-tab">User Profile</p>
+            <div id="desktop-profile-section">
 
+            </div>
+            <div id="desktop-bottom-buttons">
+                <div class="desktop-bottom-btn" onclick="createDeck()">
+                    <img src="../icons/add_file.png" alt="">
+                </div>
+                <div class="desktop-bottom-btn" onclick="createFolder()">
+                    <img src="../icons/add_folder.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="mobile-wrapper">
+    mobile version not released...
+</div>
 </body>
 </html>

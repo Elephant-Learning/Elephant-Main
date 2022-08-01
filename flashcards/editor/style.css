@@ -164,6 +164,7 @@ html {
 
 #add-to-folder > img{
     height:calc(var(--size) * 16px);
+    filter:invert(var(--image-invert));
 }
 
 #add-to-folder > p{
@@ -315,7 +316,6 @@ html {
     font-size:calc(var(--size) * 12px);
     font-weight:600;
     margin: calc(var(--size) * 12px) 0 0;
-    color:var(--light-gray);
 }
 
 #sharing-done{
