@@ -124,11 +124,11 @@ html {
     display:flex;
     flex-direction:row;
     align-items:center;
-    gap:calc(var(--size) * 4px);
+    gap:calc(var(--size) * 6px);
 }
 
 #deck-author > img{
-    height:calc(var(--size) * 20px);
+    height:calc(var(--size) * 18px);
 }
 
 #deck-author > p{

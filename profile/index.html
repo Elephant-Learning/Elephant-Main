@@ -58,6 +58,21 @@
             <div id="playlist-playing"></div>
         </div>
     </div>
+    <div id="desktop-avatar-container" class="inactive-modal">
+        <div id="desktop-avatar-main">
+            <div id="desktop-avatar-current-container">
+                <img id="desktop-avatar-current" src="" alt="">
+                <h1>Profile Avatar Selector</h1>
+                <p>Customize your profile to truly represent you!</p>
+            </div>
+            <div id="desktop-avatar-selector-container">
+                <div id="desktop-avatar-selector-main">
+
+                </div>
+                <button onclick="toggleAvatarModal()">Done</button>
+            </div>
+        </div>
+    </div>
     <div id="desktop-navbar">
         <div id="desktop-main-image">
             <a href="../"><img src="../icons/elephant-400-400-white.png" alt="Elephant Logo"></a>
@@ -154,25 +169,13 @@
                     </div>
                     <p>Flashcards</p>
                 </div>
-                <!--<div class="desktop-sidebar-category unavailable-sidebar-category" onclick="">
-                    <div>
-                        <img src="./icons/recent.png" alt="Recent">
-                    </div>
-                    <p>Task Manager</p>
-                </div>
-                <div class="desktop-sidebar-category unavailable-sidebar-category" onclick="">
-                    <div>
-                        <img src="./icons/network.png" alt="Recent">
-                    </div>
-                    <p>Community</p>
-                </div>-->
                 <div class="desktop-sidebar-category" onclick="togglePageFlip(9, 1)">
                     <div>
                         <img src="../flashcards/icons/admin.png" alt="Recent">
                     </div>
                     <p>Admin Portal</p>
                 </div>
-                <div class="desktop-sidebar-break"></div>
+                <!--<div class="desktop-sidebar-break"></div>-->
             </div>
         </div>
         <div id="desktop-main-container">
@@ -183,14 +186,24 @@
             </div>
             <p id="desktop-main-container-tab">User Profile</p>
             <div id="desktop-profile-section">
-
-            </div>
-            <div id="desktop-bottom-buttons">
-                <div class="desktop-bottom-btn" onclick="createDeck()">
-                    <img src="../icons/add_file.png" alt="">
+                <div id="my-profile-container">
+                    <div id="my-profile-image-container">
+                        <img src="" alt="" id="my-profile-img">
+                    </div>
+                    <div id="my-profile-text-container">
+                        <h1 id="my-profile-name"></h1>
+                        <p id="my-profile-type"></p>
+                        <div id="my-profile-information">
+                            <div class="my-profile-information">
+                                <img src="../flashcards/icons/email.png" alt="">
+                                <p id="my-profile-email"></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="desktop-bottom-btn" onclick="createFolder()">
-                    <img src="../icons/add_folder.png" alt="">
+                <div id="my-profile-options">
+                    <button id="pfp-change-btn" onclick="toggleAvatarModal()">Change Profile Picture</button>
+                    <button>Change Display Name</button>
                 </div>
             </div>
         </div>

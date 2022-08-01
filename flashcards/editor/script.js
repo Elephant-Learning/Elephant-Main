@@ -255,10 +255,13 @@ function toggleSharingModal(){
     }
 }
 
-document.getElementById('save-deck').onclick = function(){
+document.getElementById('save-deck').onclick = async function(){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
     let exportedDeck = new Deck();
     let errors = [];
 
+    exportedDeck.authorId = savedUserId;
     exportedDeck.name = document.getElementById('deck-name').textContent;
 
     for(let i = 0; i < document.querySelectorAll('.flashcards-card').length; i++){
@@ -274,8 +277,23 @@ document.getElementById('save-deck').onclick = function(){
         exportedDeck.terms[document.getElementById("flashcards-input-" + (i + 1)).value] = definitions;
     }
 
-    if(errors.length === 0) console.log(exportedDeck);
-    else displayAlert(0, errors);
+    if(errors.length === 0) {
+        console.log(exportedDeck);
+        const response = await fetch('https://elephant-rearend.herokuapp.com/deck/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify(exportedDeck),
+            mode: 'cors'
+        })
+
+        enableRedirect = true;
+        location.href = "../dashboard"
+    } else displayAlert(0, errors);
 }
 
 document.addEventListener('keydown', function(e){
@@ -308,6 +326,8 @@ function initialize(user){
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png";
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
+    document.getElementById('deck-author-img').src = "../../icons/avatars/" + user.pfpId + ".png";
+    document.getElementById('deck-author-p').innerHTML = user.firstName + " " + user.lastName;
 
     createCard()
     toggleDisplayView(0)
@@ -319,7 +339,7 @@ function initialize(user){
 }
 
 async function locateUserInfo(){
-    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
     const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {

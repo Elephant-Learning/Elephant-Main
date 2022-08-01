@@ -30,7 +30,7 @@ const Deck = function(name){
 //viewIndex
 //0 = All Decks
 //1 = Your Decks
-function displayFlashcard(name, author, type, deckID){
+async function displayFlashcard(name, author, type, deckID){
     let mainDiv = document.createElement('div');
 
     let iconDiv = document.createElement('div');
@@ -55,9 +55,22 @@ function displayFlashcard(name, author, type, deckID){
         }
     }
 
+    const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + author, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const content = await response.json()
+
     nameText.innerHTML = name
-    authorText.innerHTML = author;
-    authorImg.src = "../../icons/avatars/" + Math.floor(Math.random() * 47) + ".png";
+    authorText.innerHTML = content.context.user.firstName + " " + content.context.user.lastName;
+    authorImg.src = "../../icons/avatars/" + content.context.user.pfpId + ".png";
     authorDiv.append(authorImg, authorText);
     textDiv.append(nameText, authorDiv);
 

@@ -1,6 +1,6 @@
 let contextMenu = false;
 
-let pages = ["Elephant Flashcards", "Elephant Task Manager", "Chat Group", "Search Results", "Folder Editor", "Folder Viewer", "My Profile", "Administrator Portal"];
+let pages = ["Elephant Flashcards", "Elephant Task Manager", "Chat Group", "Search Results", "Folder Editor", "Folder Viewer"];
 let randomChatMessage = ["Rearranging Your Cards Into Decks...", "Managing Your Tasks Prematurely...", "Closing Minecraft and Beginning To Work...", "Placing 3 Day Blocks on Discord...", "Contemplating Your Life Choices...", "Do You People Even Read This???", "Please be Patient... I'm new..."]
 
 let history = [];
@@ -77,7 +77,7 @@ function sidebarFolder(title){
 
     folderAmount++;
 
-    newDiv.setAttribute('onclick', 'togglePageFlip(7, ' + (folderAmount + document.querySelectorAll('.desktop-sidebar-category').length - 1) + ")")
+    newDiv.setAttribute('onclick', 'togglePageFlip(5, ' + (folderAmount + document.querySelectorAll('.desktop-sidebar-category').length - 1) + ")")
 
     document.getElementById('desktop-sidebar-folders').appendChild(newDiv);
 }
@@ -171,7 +171,7 @@ function closeNews(){
     document.getElementById('desktop-music-container').style.height = "calc(100vh - var(--size) * 48px)";
 }
 
-function initialize(user){
+async function initialize(user){
 
     if(user.status === "FAILURE") {
         location.href = "../../login"
@@ -201,13 +201,9 @@ function initialize(user){
 
     console.log(user);
 
-    document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png"
-    document.getElementById('my-profile-img').src = "../../icons/avatars/" + user.pfpId + ".png"
+    document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png";
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
-    document.getElementById('my-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
-    document.getElementById('my-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
-    document.getElementById('my-profile-email').innerHTML = user.email;
 
     document.getElementById('desktop-profile-user-img').src = "../icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
 
@@ -216,14 +212,15 @@ function initialize(user){
     }
 
     for(let i = 0; i < user.decks.length; i++){
-        displayFlashcard("Elephant Flashcards Test", "Random User", Math.floor(Math.random() * 3), 0);
+        await displayFlashcard(user.decks[Object.keys(user.decks)[i]].name, user.id, 0, user.decks[Object.keys(user.decks)[i]].id);
     } document.getElementById('flashcards-display-test').innerHTML = "";
 
     if(document.getElementById('flashcards-list').hasChildNodes()){
         document.getElementById('no-flashcards').classList.add('inactive-modal');
     }
 
-    togglePageFlip(0,0, false)
+    togglePageFlip(0,0, false);
+    closeLoader();
 }
 
 function getRightBound(element) {
@@ -240,7 +237,7 @@ function getRightBound(element) {
 }
 
 //toggle Loading Bar
-window.onload = function(){
+function closeLoader(){
     document.getElementById('desktop-loader-container').classList.add('inactive-modal')
 }
 
@@ -262,7 +259,6 @@ async function locateUserInfo(){
     })
 
     const context = await response.json()
-    console.log(context)
     initialize(context)
 }
 
