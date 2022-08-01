@@ -1,5 +1,6 @@
 let controlActive = false;
 let enableRedirect = false;
+let sharedFriendNumbers = 0;
 
 const Deck = function(){
     this.terms = {}
@@ -37,6 +38,38 @@ function deleteCard(index){
         }
    }
 }
+
+function deleteSharedFriend(index){
+    document.querySelectorAll('.sharing-friends')[index].remove();
+}
+
+function addSharedFriend(pfpId, name, email){
+    let newDiv = document.createElement('div');
+    let imageDiv = document.createElement('div');
+    let image = document.createElement('img');
+    let textDiv = document.createElement('div');
+    let nameText = document.createElement('h1');
+    let emailText = document.createElement('p');
+    let removeText = document.createElement('p');
+
+    image.src = "../../icons/avatars/" + pfpId + ".png";
+    imageDiv.appendChild(image);
+
+    nameText.innerHTML = name;
+    emailText.innerHTML = email;
+
+    textDiv.append(nameText, emailText);
+    removeText.innerHTML = "Remove";
+    removeText.setAttribute('onclick', "this.parentNode.remove()");
+
+    newDiv.append(imageDiv, textDiv, removeText);
+    newDiv.classList.add('sharing-friends');
+
+    document.getElementById('sharing-friends-list').appendChild(newDiv);
+    sharedFriendNumbers++;
+}
+
+
 
 function toggleDisplayView(index){
     document.getElementById('desktop-main-container').className = ""
@@ -214,6 +247,14 @@ function toggleBackpackModal(){
     }
 }
 
+function toggleSharingModal(){
+    if(document.getElementById('desktop-sharing-modal').classList.contains('inactive-modal')){
+        document.getElementById('desktop-sharing-modal').classList.remove('inactive-modal')
+    } else {
+        document.getElementById('desktop-sharing-modal').classList.add('inactive-modal')
+    }
+}
+
 document.getElementById('save-deck').onclick = function(){
     let exportedDeck = new Deck();
     let errors = [];
@@ -262,6 +303,10 @@ function initialize(){
     createCard()
     toggleDisplayView(0)
     window.scrollTo(0,0);
+
+    for(let i = 0; i < 23; i++){
+        addSharedFriend(Math.floor(Math.random() * 47), "Elephant Student", "student@elephantsuite.me")
+    }
 }
 
 initialize();

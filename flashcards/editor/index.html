@@ -166,8 +166,23 @@
                     <img src="./icons/expand.png" alt="">
                 </div>
                 <div id="invite-btn">
-                    <img src="./icons/plus.png" alt="">
-                    <p>Invite</p>
+                    <img src="./icons/plus.png" alt="" onclick="toggleSharingModal()">
+                    <p onclick="toggleSharingModal()">Invite</p>
+                    <div id="desktop-sharing-modal" class="inactive-modal">
+                        <div id="sharing-main-image-container">
+                            <img src="./icons/share.png" alt="" id="sharing-main-image">
+                        </div>
+                        <h1>Share Deck With Friends</h1>
+                        <p>You've already created your deck. Now get some friends to study along with you!</p>
+                        <div id="sharing-friends-list"></div>
+                        <h6>Friends</h6>
+                        <div id="sharing-input">
+                            <img src="./icons/crowd.png" alt="">
+                            <p>Select Friend</p>
+                            <img src="./icons/expand.png" alt="">
+                        </div>
+                        <button id="sharing-done" onclick="toggleSharingModal()">Done</button>
+                    </div>
                 </div>
                 <div id="view-buttons">
                     <div class="view-button" onclick="toggleDisplayView(0)">
