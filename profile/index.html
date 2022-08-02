@@ -151,7 +151,7 @@
                         </div>
                     </div>
                     <div class="profile-break"></div>
-                    <div onclick="location.href = '../../login'">
+                    <div onclick="localStorage.removeItem('savedUserId'); location.href = '../../login'">
                         <img src="../flashcards/icons/logout.png">
                         <p>Log Out</p>
                     </div>
@@ -203,7 +203,7 @@
                 </div>
                 <div id="my-profile-options">
                     <button id="pfp-change-btn" onclick="toggleAvatarModal()">Change Profile Picture</button>
-                    <button>Change Display Name</button>
+                    <button id="delete-acc-btn" onclick="deleteAccount()">Delete Account</button>
                 </div>
             </div>
         </div>

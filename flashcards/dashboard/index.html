@@ -67,7 +67,7 @@
                 <p id="music-author"></p>
                 <input type="range" value="0" id="slider-input" min="0" max="10000" disabled="disabled">
                 <div id="music-controls">
-                    <img src="../icons/favorite.png" alt="">
+                    <img src="../icons/unfilled_heart.png" alt="">
                     <img src="../icons/play.png" id="music-play-img">
                     <img src="../icons/forward.png" id="music-next-img">
                 </div>
@@ -153,7 +153,7 @@
                             </div>
                         </div>
                         <div class="profile-break"></div>
-                        <div onclick="location.href = '../../login'">
+                        <div onclick="localStorage.removeItem('savedUserId'); location.href = '../../login'">
                             <img src="../icons/logout.png">
                             <p>Log Out</p>
                         </div>

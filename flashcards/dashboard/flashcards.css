@@ -249,8 +249,13 @@
 
 .flashcard-deck > div:last-of-type > img{
     height:calc(var(--size) * 18px);
-    filter:invert(1) brightness(var(--image-invert));
+    filter:invert(var(--image-invert));
+    transition-duration:250ms;
     cursor:pointer;
+}
+
+.flashcard-deck > div:last-of-type > img:hover{
+    transform:scale(1.1);
 }
 
 #flashcards-viewer-main{

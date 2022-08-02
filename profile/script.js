@@ -22,11 +22,7 @@ async function toggleAvatarModal(){
             mode: 'cors'
         })
 
-        const content = await response.json();
-        console.log(content, JSON.stringify({
-            userId: savedUserId,
-            pfpId: selectedProfile
-        }))
+        locateUserInfo();
     }
 }
 
@@ -57,6 +53,23 @@ function initialize(user){
         newImg.setAttribute("onclick", "selectPfp(" + i + ")")
         document.getElementById('desktop-avatar-selector-main').appendChild(newImg);
     }
+}
+
+async function deleteAccount(){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
+    const response = await fetch('https://elephant-rearend.herokuapp.com/registration/delete?id=' + savedUserId, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const context = await response.json();
+    console.log(context)
 }
 
 async function locateUserInfo(){

@@ -246,7 +246,17 @@ document.addEventListener('DOMContentLoaded', function(e){
 })
 
 async function locateUserInfo(){
-    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
+
+    let savedUserId;
+
+    try{
+        savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
+    } catch {
+        location.href = "../../login";
+    }
+
+    if(!savedUserId  && savedUserId !== 0) location.href = "../../login";
+
     const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {

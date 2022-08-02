@@ -37,6 +37,24 @@ function togglePageFlip(index, sidebar, link){
     }
 }
 
+window.onload = async function(){
+    if(document.location.href.split("?")[1].includes("deck=")) {
+        const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        })
+
+        const context = await response.json();
+        console.log(context)
+    }
+}
+
 function initialize(user){
     if(user.status === "FAILURE") {
         location.href = "../../login"

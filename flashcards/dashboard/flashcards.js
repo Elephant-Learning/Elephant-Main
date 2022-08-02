@@ -80,16 +80,30 @@ async function displayFlashcard(name, author, type, deckID){
 
     let options = document.createElement('div');
     let favoriteImg = document.createElement('img');
-    let menuImg = document.createElement('img');
+    let editImg = document.createElement('img');
 
-    favoriteImg.src = "../icons/favorite.png";
-    menuImg.src = "../icons/menu_vertical.png";
-    options.append(favoriteImg, menuImg);
+    favoriteImg.src = "../icons/unfilled_heart.png";
+    favoriteImg.classList.add('unloved');
+    editImg.src = "../editor/icons/edit.png";
+
+    favoriteImg.addEventListener('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        favoriteDeck(this, deckID)
+    })
+
+    editImg.addEventListener('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        editFlashcard(deckID);
+    })
+
+    options.append(favoriteImg, editImg);
 
     mainDiv.append(iconDiv, textDiv, tag, options);
     mainDiv.classList.add('flashcard-deck');
     mainDiv.classList.add(tags[type] + "-flashcard-border");
-    mainDiv.setAttribute('onclick', "togglePageFlip(undefined, undefined, '../viewer?ID=" + deckID + "')");
+    mainDiv.setAttribute('onclick', "location.href = '../viewer?deck=" + deckID + "'");
     document.getElementById('flashcards-list').appendChild(mainDiv);
 }
 
@@ -97,6 +111,22 @@ function loadFlashcards(keyword, viewIndex, sortIndex){
     for(let i = 0; i < 105; i++){
         displayFlashcard("Elephant Flashcards Test", "Random User", Math.floor(Math.random() * 3), 0);
     } document.getElementById('flashcards-display-test').innerHTML = "";
+}
+
+function editFlashcard(id){
+    location.href = "../editor?deck=" + id;
+}
+
+function favoriteDeck(elem, id){
+    if(elem.classList.contains('unloved')){
+        elem.src = "../icons/filled_heart.png";
+        elem.classList.remove('unloved');
+        elem.classList.add('loved')
+    } else {
+        elem.src = "../icons/unfilled_heart.png";
+        elem.classList.add('unloved');
+        elem.classList.remove('loved')
+    }
 }
 
 function createFolder(){

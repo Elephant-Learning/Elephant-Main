@@ -8,7 +8,9 @@
 
     <link rel="icon" href="../../icons/elephant-400-400-grayscale.png">
     <link rel="stylesheet" href="../css/navbar.css">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/kanban.css">
+    <link rel="stylesheet" href="css/list.css">
 
     <script src="../js/main.js" defer></script>
     <script src="script.js" defer></script>
@@ -136,7 +138,7 @@
                             </div>
                         </div>
                         <div class="profile-break"></div>
-                        <div>
+                        <div onclick="localStorage.removeItem('savedUserId'); location.href = '../../login'">
                             <img src="../icons/logout.png">
                             <p>Log Out</p>
                         </div>

@@ -94,11 +94,19 @@
     color:white;
     text-transform:uppercase;
     letter-spacing:1px;
-    background:var(--light-gray);
     border-radius:calc(var(--size) * 12px);
     font-size:calc(var(--size) * 12px);
     transition-duration:250ms;
+    outline:none;
     cursor:pointer;
+}
+
+#my-profile-options > button:not(#delete-acc-btn){
+    background:var(--light-gray);
+}
+
+#delete-acc-btn{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
 }
 
 #my-profile-options > button:hover{
