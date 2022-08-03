@@ -1,6 +1,7 @@
 let controlActive = false;
 let enableRedirect = true;
 let sharedFriendNumbers = 0;
+let editing;
 
 const Deck = function(){
     this.terms = {}
@@ -262,7 +263,9 @@ function toggleSharingModal(){
     }
 }
 
-document.getElementById('save-deck').onclick = async function(){
+document.getElementById('save-deck').onclick = saveDeck;
+
+async function saveDeck(){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
 
     let exportedDeck = new Deck();
@@ -303,6 +306,38 @@ document.getElementById('save-deck').onclick = async function(){
     } else displayAlert(0, errors);
 }
 
+async function checkForEditing(){
+    try{
+        if(document.location.href.split("?")[1].includes("deck=")) {
+            const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + document.location.href.split("=")[1], {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                mode: 'cors'
+            })
+
+            let cards = await response.json();
+
+            console.log(cards);
+
+            cards = cards.context.deck
+            editing = cards.id;
+
+            cards = cards.cards;
+
+            for(let i = 0; i < cards.length; i++){
+                createCard(cards[i].term, cards[i].definitions)
+            }
+        }
+    } catch {
+        editing = undefined;
+    }
+}
+
 document.addEventListener('keydown', function(e){
     if(e.keyCode === 17) controlActive = true;
     if(e.keyCode === 68 && controlActive){
@@ -310,9 +345,11 @@ document.addEventListener('keydown', function(e){
         if(document.activeElement.classList.contains('flashcards-definition-input')){
             addDefinition(document.activeElement.classList[1].slice(-1))
         }
-    } if(e.keyCode === 13){
+    } if(e.keyCode === 13 ** !controlActive){
         e.preventDefault();
         createCard()
+    } else if(e.keyCode === 13 && controlActive){
+        saveDeck();
     }
 })
 
@@ -324,11 +361,13 @@ window.addEventListener("beforeunload", function(e){
     if(!enableRedirect) e.returnValue = 'Are you sure you want to leave?';
 })
 
-function initialize(user){
+async function initialize(user){
 
     if(user.status === "FAILURE") {
         location.href = "../../login"
     } else user = user.context.user;
+
+    await checkForEditing();
 
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png";
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
@@ -336,7 +375,7 @@ function initialize(user){
     document.getElementById('deck-author-img').src = "../../icons/avatars/" + user.pfpId + ".png";
     document.getElementById('deck-author-p').innerHTML = user.firstName + " " + user.lastName;
 
-    createCard()
+    if(editing === undefined) createCard()
     toggleDisplayView(0)
     window.scrollTo(0,0);
 

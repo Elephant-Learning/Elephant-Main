@@ -128,6 +128,9 @@ async function deleteDeck(id){
         mode: 'cors'
     })
 
+    const context = await response.json();
+    console.log(context);
+
     locateUserInfo();
 }
 
