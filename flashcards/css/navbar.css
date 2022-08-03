@@ -638,8 +638,6 @@ body *{
     max-height:calc(100vh - 275px);
     padding:calc(var(--size) * 24px);
     position:absolute;
-    top:0;
-    left:0;
 }
 
 .desktop-notifications-list{

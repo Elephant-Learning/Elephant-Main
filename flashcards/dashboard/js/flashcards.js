@@ -30,7 +30,7 @@ const Deck = function(name){
 //viewIndex
 //0 = All Decks
 //1 = Your Decks
-async function displayFlashcard(name, author, type, deckID){
+async function displayFlashcard(name, author, type, deckID, favorite){
     let mainDiv = document.createElement('div');
 
     let iconDiv = document.createElement('div');
@@ -49,7 +49,7 @@ async function displayFlashcard(name, author, type, deckID){
     let testSpace = document.getElementById('flashcards-display-test');
     for(let i = 0; i < name.length; i++){
         testSpace.innerHTML = name.substring(0, i);
-        if(testSpace.clientWidth > 200) {
+        if(testSpace.clientWidth > 190) {
             name = name.substring(0, i - 1) + "...";
             break;
         }
@@ -66,7 +66,8 @@ async function displayFlashcard(name, author, type, deckID){
         mode: 'cors'
     })
 
-    const content = await response.json()
+    const content = await response.json();
+    console.log(content)
 
     nameText.innerHTML = name
     authorText.innerHTML = content.context.user.firstName + " " + content.context.user.lastName;
@@ -83,8 +84,14 @@ async function displayFlashcard(name, author, type, deckID){
     let editImg = document.createElement('img');
     let deleteImg = document.createElement('img')
 
-    favoriteImg.src = "../icons/unfilled_heart.png";
-    favoriteImg.classList.add('unloved');
+    if(favorite){
+        favoriteImg.src = "../icons/filled_heart.png";
+        favoriteImg.classList.add('loved');
+    } else {
+        favoriteImg.src = "../icons/unfilled_heart.png";
+        favoriteImg.classList.add('unloved');
+    }
+
     editImg.src = "../editor/icons/edit.png";
     deleteImg.src = "../icons/delete.png";
 
@@ -111,7 +118,7 @@ async function displayFlashcard(name, author, type, deckID){
     mainDiv.append(iconDiv, textDiv, tag, options);
     mainDiv.classList.add('flashcard-deck');
     mainDiv.classList.add(tags[type] + "-flashcard-border");
-    mainDiv.setAttribute('onclick', "location.href = '../viewer?deck=" + deckID + "'");
+    mainDiv.setAttribute('onclick', "location.href = '../viewer/?deck=" + deckID + "'");
     document.getElementById('flashcards-list').appendChild(mainDiv);
 }
 
@@ -134,25 +141,52 @@ async function deleteDeck(id){
     locateUserInfo();
 }
 
-function loadFlashcards(keyword, viewIndex, sortIndex){
-    for(let i = 0; i < 105; i++){
-        displayFlashcard("Elephant Flashcards Test", "Random User", Math.floor(Math.random() * 3), 0);
-    } document.getElementById('flashcards-display-test').innerHTML = "";
-}
-
 function editFlashcard(id){
-    location.href = "../editor?deck=" + id;
+    location.href = "../editor/?deck=" + id;
 }
 
-function favoriteDeck(elem, id){
+async function favoriteDeck(elem, id){
     if(elem.classList.contains('unloved')){
         elem.src = "../icons/filled_heart.png";
         elem.classList.remove('unloved');
         elem.classList.add('loved')
+
+        const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+        const response = await fetch('https://elephant-rearend.herokuapp.com/deck/like', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                userId: savedUserId,
+                deckId: id
+            }),
+            mode: 'cors'
+        })
+
     } else {
         elem.src = "../icons/unfilled_heart.png";
         elem.classList.add('unloved');
         elem.classList.remove('loved')
+
+        const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+        const response = await fetch('https://elephant-rearend.herokuapp.com/deck/unlike', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                userId: savedUserId,
+                deckId: id
+            }),
+            mode: 'cors'
+        })
     }
 }
 

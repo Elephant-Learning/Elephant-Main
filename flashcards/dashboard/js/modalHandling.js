@@ -185,8 +185,11 @@ function displayFlashcardsManager(user){
         ele.lastChild.remove();
     }
 
+    console.log(user.likedDecksIds)
+
     for(let i = 0; i < min(user.decks.length, deckShowAmount); i++){
-        displayFlashcard(user.decks[Object.keys(user.decks)[i]].name, user.id, 0, user.decks[Object.keys(user.decks)[i]].id);
+        displayFlashcard(user.decks[Object.keys(user.decks)[i]].name, user.id, 0, user.decks[Object.keys(user.decks)[i]].id, user.likedDecksIds.includes(user.decks[Object.keys(user.decks)[i]].id));
+        if(!document.getElementById('no-flashcards').classList.contains('inactive-modal')) document.getElementById('no-flashcards').classList.add('inactive-modal');
     } document.getElementById('flashcards-display-test').innerHTML = "";
 
     if(user.decks.length > deckShowAmount){
@@ -218,8 +221,10 @@ async function displayMoreFlashcards(){
 
 async function initialize(user){
 
+    console.log(user);
+
     if(user.status === "FAILURE") {
-        location.href = "../../login"
+        location.href = "../../../login"
     } else user = user.context.user
 
     const emojis_refactored = ["confused", "cool", "happy", "laugh", "nerd", "neutral", "unamused", "uwu", "wink"];
@@ -258,10 +263,6 @@ async function initialize(user){
 
     await displayFlashcardsManager(user);
 
-    if(document.getElementById('flashcards-list').hasChildNodes()){
-        document.getElementById('no-flashcards').classList.add('inactive-modal');
-    }
-
     togglePageFlip(0,0, false);
     closeLoader();
 }
@@ -295,10 +296,10 @@ async function locateUserInfo(){
     try{
         savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
     } catch {
-        location.href = "../../login";
+        location.href = "../../../login";
     }
 
-    if(!savedUserId  && savedUserId !== 0) location.href = "../../login";
+    if(!savedUserId  && savedUserId !== 0) location.href = "../../../login";
 
     const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',

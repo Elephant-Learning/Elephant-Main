@@ -1,12 +1,16 @@
+const visibilityOptions = ["PRIVATE", "SHARED", "PUBLIC"]
+
 let controlActive = false;
 let enableRedirect = true;
 let sharedFriendNumbers = 0;
+let selectedVisibility = 0;
 let editing;
 
 const Deck = function(){
     this.terms = {}
-    this.authorID = 0;
+    this.authorId = 0;
     this.name = ""
+    this.visibility = "PRIVATE";
 }
 
 function deleteCard(index){
@@ -119,7 +123,38 @@ async function backpackCard(index){
 }
 
 function createBackpackCard(deck){
+    let newDiv = document.createElement('div');
+    let imgDiv = document.createElement('div');
+    let textDiv = document.createElement('div');
+    let optionsDiv = document.createElement('div');
 
+    let deckImg = document.createElement('img');
+    deckImg.src = "../icons/deck.png";
+
+    imgDiv.appendChild(deckImg);
+
+    let deckName = document.createElement('h1');
+    let authorDiv = document.createElement('div');
+    let authorImg = document.createElement('img');
+    let authorText = document.createElement('p');
+
+    deckName.innerHTML = deck.name;
+    authorImg.src = "../../icons/avatars/46.png";
+    authorText.innerHTML = "Elephant Student";
+
+    authorDiv.append(authorImg, authorText);
+    textDiv.append(deckName, authorDiv);
+
+    let optionsUnpack = document.createElement('img');
+    let optionsDelete = document.createElement('img');
+
+    optionsUnpack.src = "./icons/unpack.png";
+    optionsDelete.src = "./icons/delete.png";
+    optionsDiv.append(optionsUnpack, optionsDelete);
+
+    newDiv.append(imgDiv, textDiv, optionsDiv);
+    newDiv.classList.add('backpack-cards');
+    document.getElementById('backpack-card-list').appendChild(newDiv);
 }
 
 function createCard(term, definitions){
@@ -272,6 +307,7 @@ async function saveDeck(){
     let errors = [];
 
     exportedDeck.authorId = savedUserId;
+    exportedDeck.visibility = visibilityOptions[selectedVisibility]
     exportedDeck.name = document.getElementById('deck-name').textContent;
 
     for(let i = 0; i < document.querySelectorAll('.flashcards-card').length; i++){
@@ -286,6 +322,8 @@ async function saveDeck(){
 
         exportedDeck.terms[document.getElementById("flashcards-input-" + (i + 1)).value] = definitions;
     }
+
+    console.log(exportedDeck)
 
     if(errors.length === 0) {
         console.log(exportedDeck);
@@ -326,6 +364,11 @@ async function checkForEditing(){
 
             cards = cards.context.deck
             editing = cards.id;
+            document.getElementById('deck-name').innerHTML = cards.name;
+
+            for(let i = 0; i < cards.sharedUsers; i++){
+                addSharedFriend(Math.floor(Math.random() * 47), "Elephant Student", "student@elephantsuite.me")
+            }
 
             cards = cards.cards;
 
@@ -337,7 +380,6 @@ async function checkForEditing(){
         editing = undefined;
     }
 }
-
 document.addEventListener('keydown', function(e){
     if(e.keyCode === 17) controlActive = true;
     if(e.keyCode === 68 && controlActive){
@@ -379,10 +421,6 @@ async function initialize(user){
     toggleDisplayView(0)
     window.scrollTo(0,0);
 
-    for(let i = 0; i < 23; i++){
-        addSharedFriend(Math.floor(Math.random() * 47), "Elephant Student", "student@elephantsuite.me")
-    }
-
     enableRedirect = false;
 }
 
@@ -409,6 +447,12 @@ async function locateUserInfo(){
 
     const context = await response.json();
     initialize(context)
+}
+
+for(let i = 0; i < 20; i++){
+    createBackpackCard({
+        name: "Something"
+    })
 }
 
 locateUserInfo()

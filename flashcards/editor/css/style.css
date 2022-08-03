@@ -89,9 +89,14 @@ html {
 
 #deck-info-tools > h1{
     font-size:calc(var(--size) * 12px);
+    cursor:pointer;
     outline:none;
     font-weight:700;
     margin:0;
+}
+
+#deck-info-tools > h1:focus{
+    cursor:text;
 }
 
 .deck-info-tools-option{
@@ -406,6 +411,10 @@ html {
     border-radius:calc(var(--size) * 12px);
     transition-duration:250ms;
     cursor:pointer;
+}
+
+#backpack-done{
+    margin-top:calc(var(--size) * 12px);
 }
 
 #sharing-done:hover{

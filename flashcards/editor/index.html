@@ -60,150 +60,13 @@
                 </div>
             </div>
         </div>
-        <div id="desktop-backpack-modal">
+        <div id="desktop-backpack-modal" class="inactive-modal">
             <div id="backpack-main-image-container">
                 <img src="./icons/pack.png" alt="" id="backpack-main-image">
             </div>
             <h1>Your Backpack</h1>
             <p>Create decks with cards already made by others to save time and focus on what really matters!</p>
-            <div id="backpack-card-list">
-                <div class="backpack-cards">
-                    <div>
-                        <img src="../icons/deck.png" alt="">
-                    </div>
-                    <div>
-                        <h1>What is 2 + 2 which is what a nerd would say haha brt skrt boom woosh</h1>
-                        <div>
-                            <img src="../../icons/avatars/46.png" alt="">
-                            <p>Neal Parekh</p>
-                        </div>
-                    </div>
-                    <div>
-                        <img src="./icons/unpack.png" alt="">
-                        <img src="./icons/delete.png" alt="">
-                    </div>
-                </div>
-                <div class="backpack-cards">
-                    <div>
-                        <img src="../icons/deck.png" alt="">
-                    </div>
-                    <div>
-                        <h1>What is 2 + 2</h1>
-                        <div>
-                            <img src="../../icons/avatars/46.png" alt="">
-                            <p>Neal Parekh</p>
-                        </div>
-                    </div>
-                    <div>
-                        <img src="./icons/delete.png" alt="">
-                    </div>
-                </div>
-                <div class="backpack-cards">
-                    <div>
-                        <img src="../icons/deck.png" alt="">
-                    </div>
-                    <div>
-                        <h1>What is 2 + 2</h1>
-                        <div>
-                            <img src="../../icons/avatars/46.png" alt="">
-                            <p>Neal Parekh</p>
-                        </div>
-                    </div>
-                    <div>
-                        <img src="./icons/delete.png" alt="">
-                    </div>
-                </div>
-                <div class="backpack-cards">
-                    <div>
-                        <img src="../icons/deck.png" alt="">
-                    </div>
-                    <div>
-                        <h1>What is 2 + 2</h1>
-                        <div>
-                            <img src="../../icons/avatars/46.png" alt="">
-                            <p>Neal Parekh</p>
-                        </div>
-                    </div>
-                    <div>
-                        <img src="./icons/delete.png" alt="">
-                    </div>
-                </div>
-                <div class="backpack-cards">
-                    <div>
-                        <img src="../icons/deck.png" alt="">
-                    </div>
-                    <div>
-                        <h1>What is 2 + 2</h1>
-                        <div>
-                            <img src="../../icons/avatars/46.png" alt="">
-                            <p>Neal Parekh</p>
-                        </div>
-                    </div>
-                    <div>
-                        <img src="./icons/delete.png" alt="">
-                    </div>
-                </div>
-                <div class="backpack-cards">
-                    <div>
-                        <img src="../icons/deck.png" alt="">
-                    </div>
-                    <div>
-                        <h1>What is 2 + 2</h1>
-                        <div>
-                            <img src="../../icons/avatars/46.png" alt="">
-                            <p>Neal Parekh</p>
-                        </div>
-                    </div>
-                    <div>
-                        <img src="./icons/delete.png" alt="">
-                    </div>
-                </div>
-                <div class="backpack-cards">
-                    <div>
-                        <img src="../icons/deck.png" alt="">
-                    </div>
-                    <div>
-                        <h1>What is 2 + 2</h1>
-                        <div>
-                            <img src="../../icons/avatars/46.png" alt="">
-                            <p>Neal Parekh</p>
-                        </div>
-                    </div>
-                    <div>
-                        <img src="./icons/delete.png" alt="">
-                    </div>
-                </div>
-                <div class="backpack-cards">
-                    <div>
-                        <img src="../icons/deck.png" alt="">
-                    </div>
-                    <div>
-                        <h1>What is 2 + 2</h1>
-                        <div>
-                            <img src="../../icons/avatars/46.png" alt="">
-                            <p>Neal Parekh</p>
-                        </div>
-                    </div>
-                    <div>
-                        <img src="./icons/delete.png" alt="">
-                    </div>
-                </div>
-                <div class="backpack-cards">
-                    <div>
-                        <img src="../icons/deck.png" alt="">
-                    </div>
-                    <div>
-                        <h1>What is 2 + 2</h1>
-                        <div>
-                            <img src="../../icons/avatars/46.png" alt="">
-                            <p>Neal Parekh</p>
-                        </div>
-                    </div>
-                    <div>
-                        <img src="./icons/delete.png" alt="">
-                    </div>
-                </div>
-            </div>
+            <div id="backpack-card-list"></div>
             <button id="backpack-done" onclick="toggleBackpackModal()">Done</button>
         </div>
         <div id="desktop-navbar">
@@ -297,8 +160,8 @@
             <div id="editor-tools">
                 <div id="editor-tools-left">
                     <div id="deck-info-tools">
-                        <h1 contenteditable="true" id="deck-name">New Elephant Deck</h1>
-                        <div class="deck-info-tools-option">
+                        <h1 contenteditable="true" id="deck-name" onclick="document.execCommand('selectAll',false,null)">New Elephant Deck</h1>
+                        <div class="deck-info-tools-option" onclick="document.getElementById('deck-name').focus(); document.getElementById('deck-name').select()">
                             <img src="./icons/edit.png" alt="Edit">
                         </div>
                         <div id="deck-privacy-div" class="personal">Personal</div>
