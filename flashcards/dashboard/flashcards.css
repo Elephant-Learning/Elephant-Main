@@ -122,11 +122,40 @@
     font-size:calc(var(--size) * 14px);
 }
 
+#show-more-btn{
+    height:calc(var(--size) * 36px);
+    width:calc(var(--size) * 481px);
+    position:absolute;
+    z-index:2;
+    bottom:0;
+    left:0;
+    color:white;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-size:calc(var(--size) * 14px);
+    background:var(--light-gray);
+    border:none;
+    outline:none;
+    border-radius:calc(var(--size) * 12px);
+    transition-duration:250ms;
+    cursor:pointer;
+}
+
+#show-more-btn:hover{
+    box-shadow:0 0 calc(var(--size) * 6px) 0 var(--light-gray);
+}
+
+#show-more-btn:active{
+    box-shadow:none;
+}
+
 #flashcards-list{
     display:flex;
     flex-direction:row;
     flex-wrap:wrap;
     gap:calc(var(--size) * 12px);
+    padding-bottom:calc(var(--size) * 48px);
+    position:relative;
 }
 
 #flashcards-display-test{

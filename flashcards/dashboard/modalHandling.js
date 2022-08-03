@@ -1,3 +1,4 @@
+let deckShowAmount = 10;
 let contextMenu = false;
 
 let pages = ["Elephant Flashcards", "Elephant Task Manager", "Chat Group", "Search Results", "Folder Editor", "Folder Viewer"];
@@ -171,6 +172,50 @@ function closeNews(){
     document.getElementById('desktop-music-container').style.height = "calc(100vh - var(--size) * 48px)";
 }
 
+function min(num1, num2){
+    if(num1 > num2) return num2
+    else return num1
+}
+
+function displayFlashcardsManager(user){
+
+    let ele = document.getElementById('flashcards-list');
+
+    while(ele.lastChild) {
+        ele.lastChild.remove();
+    }
+
+    for(let i = 0; i < min(user.decks.length, deckShowAmount); i++){
+        displayFlashcard(user.decks[Object.keys(user.decks)[i]].name, user.id, 0, user.decks[Object.keys(user.decks)[i]].id);
+    } document.getElementById('flashcards-display-test').innerHTML = "";
+
+    if(user.decks.length > deckShowAmount){
+        let newBtn = document.createElement('button');
+        newBtn.innerHTML = "Show More";
+        newBtn.setAttribute("onclick", "displayMoreFlashcards()");
+        newBtn.id = "show-more-btn"
+        ele.appendChild(newBtn);
+    }
+}
+
+async function displayMoreFlashcards(){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+    const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const context = await response.json();
+    deckShowAmount += 10;
+    displayFlashcardsManager(context.context.user);
+}
+
 async function initialize(user){
 
     if(user.status === "FAILURE") {
@@ -211,9 +256,7 @@ async function initialize(user){
         //create notification
     }
 
-    for(let i = 0; i < user.decks.length; i++){
-        await displayFlashcard(user.decks[Object.keys(user.decks)[i]].name, user.id, 0, user.decks[Object.keys(user.decks)[i]].id);
-    } document.getElementById('flashcards-display-test').innerHTML = "";
+    await displayFlashcardsManager(user);
 
     if(document.getElementById('flashcards-list').hasChildNodes()){
         document.getElementById('no-flashcards').classList.add('inactive-modal');
@@ -268,7 +311,7 @@ async function locateUserInfo(){
         mode: 'cors'
     })
 
-    const context = await response.json()
+    const context = await response.json();
     initialize(context)
 }
 

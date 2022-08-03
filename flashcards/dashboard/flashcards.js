@@ -81,10 +81,12 @@ async function displayFlashcard(name, author, type, deckID){
     let options = document.createElement('div');
     let favoriteImg = document.createElement('img');
     let editImg = document.createElement('img');
+    let deleteImg = document.createElement('img')
 
     favoriteImg.src = "../icons/unfilled_heart.png";
     favoriteImg.classList.add('unloved');
     editImg.src = "../editor/icons/edit.png";
+    deleteImg.src = "../icons/delete.png";
 
     favoriteImg.addEventListener('click', function(e){
         e.preventDefault();
@@ -98,13 +100,35 @@ async function displayFlashcard(name, author, type, deckID){
         editFlashcard(deckID);
     })
 
-    options.append(favoriteImg, editImg);
+    deleteImg.addEventListener('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        deleteDeck(deckID);
+    });
+
+    options.append(editImg, favoriteImg, deleteImg);
 
     mainDiv.append(iconDiv, textDiv, tag, options);
     mainDiv.classList.add('flashcard-deck');
     mainDiv.classList.add(tags[type] + "-flashcard-border");
     mainDiv.setAttribute('onclick', "location.href = '../viewer?deck=" + deckID + "'");
     document.getElementById('flashcards-list').appendChild(mainDiv);
+}
+
+async function deleteDeck(id){
+    const response = await fetch('https://elephant-rearend.herokuapp.com/deck/delete?id=' + id, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Expose-Headers': 'Content-Length, X-JSON',
+            'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+        },
+        method: 'DELETE',
+        mode: 'cors'
+    })
+
+    locateUserInfo();
 }
 
 function loadFlashcards(keyword, viewIndex, sortIndex){

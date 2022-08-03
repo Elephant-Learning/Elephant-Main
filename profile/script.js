@@ -47,11 +47,17 @@ function initialize(user){
 
     selectedProfile = user.pfpId;
 
+    let element = document.getElementById('desktop-avatar-selector-main');
+
+    while(element.lastChild) {
+        element.lastChild.remove();
+    }
+
     for(let i = 0; i < 47; i++){
         let newImg = document.createElement('img');
         newImg.src = "../../icons/avatars/" + i + ".png";
         newImg.setAttribute("onclick", "selectPfp(" + i + ")")
-        document.getElementById('desktop-avatar-selector-main').appendChild(newImg);
+        element.appendChild(newImg);
     }
 }
 

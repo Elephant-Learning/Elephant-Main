@@ -26,7 +26,7 @@
                 <p id="music-author"></p>
                 <input type="range" value="0" id="slider-input" min="0" max="10000" disabled="disabled">
                 <div id="music-controls">
-                    <img src="../icons/favorite.png" alt="">
+                    <img src="../icons/unfilled_heart.png" alt="">
                     <img src="../icons/play.png" id="music-play-img">
                     <img src="../icons/forward.png" id="music-next-img">
                 </div>
@@ -59,6 +59,152 @@
                     <button>Refresh</button>
                 </div>
             </div>
+        </div>
+        <div id="desktop-backpack-modal">
+            <div id="backpack-main-image-container">
+                <img src="./icons/pack.png" alt="" id="backpack-main-image">
+            </div>
+            <h1>Your Backpack</h1>
+            <p>Create decks with cards already made by others to save time and focus on what really matters!</p>
+            <div id="backpack-card-list">
+                <div class="backpack-cards">
+                    <div>
+                        <img src="../icons/deck.png" alt="">
+                    </div>
+                    <div>
+                        <h1>What is 2 + 2 which is what a nerd would say haha brt skrt boom woosh</h1>
+                        <div>
+                            <img src="../../icons/avatars/46.png" alt="">
+                            <p>Neal Parekh</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="./icons/unpack.png" alt="">
+                        <img src="./icons/delete.png" alt="">
+                    </div>
+                </div>
+                <div class="backpack-cards">
+                    <div>
+                        <img src="../icons/deck.png" alt="">
+                    </div>
+                    <div>
+                        <h1>What is 2 + 2</h1>
+                        <div>
+                            <img src="../../icons/avatars/46.png" alt="">
+                            <p>Neal Parekh</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="./icons/delete.png" alt="">
+                    </div>
+                </div>
+                <div class="backpack-cards">
+                    <div>
+                        <img src="../icons/deck.png" alt="">
+                    </div>
+                    <div>
+                        <h1>What is 2 + 2</h1>
+                        <div>
+                            <img src="../../icons/avatars/46.png" alt="">
+                            <p>Neal Parekh</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="./icons/delete.png" alt="">
+                    </div>
+                </div>
+                <div class="backpack-cards">
+                    <div>
+                        <img src="../icons/deck.png" alt="">
+                    </div>
+                    <div>
+                        <h1>What is 2 + 2</h1>
+                        <div>
+                            <img src="../../icons/avatars/46.png" alt="">
+                            <p>Neal Parekh</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="./icons/delete.png" alt="">
+                    </div>
+                </div>
+                <div class="backpack-cards">
+                    <div>
+                        <img src="../icons/deck.png" alt="">
+                    </div>
+                    <div>
+                        <h1>What is 2 + 2</h1>
+                        <div>
+                            <img src="../../icons/avatars/46.png" alt="">
+                            <p>Neal Parekh</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="./icons/delete.png" alt="">
+                    </div>
+                </div>
+                <div class="backpack-cards">
+                    <div>
+                        <img src="../icons/deck.png" alt="">
+                    </div>
+                    <div>
+                        <h1>What is 2 + 2</h1>
+                        <div>
+                            <img src="../../icons/avatars/46.png" alt="">
+                            <p>Neal Parekh</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="./icons/delete.png" alt="">
+                    </div>
+                </div>
+                <div class="backpack-cards">
+                    <div>
+                        <img src="../icons/deck.png" alt="">
+                    </div>
+                    <div>
+                        <h1>What is 2 + 2</h1>
+                        <div>
+                            <img src="../../icons/avatars/46.png" alt="">
+                            <p>Neal Parekh</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="./icons/delete.png" alt="">
+                    </div>
+                </div>
+                <div class="backpack-cards">
+                    <div>
+                        <img src="../icons/deck.png" alt="">
+                    </div>
+                    <div>
+                        <h1>What is 2 + 2</h1>
+                        <div>
+                            <img src="../../icons/avatars/46.png" alt="">
+                            <p>Neal Parekh</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="./icons/delete.png" alt="">
+                    </div>
+                </div>
+                <div class="backpack-cards">
+                    <div>
+                        <img src="../icons/deck.png" alt="">
+                    </div>
+                    <div>
+                        <h1>What is 2 + 2</h1>
+                        <div>
+                            <img src="../../icons/avatars/46.png" alt="">
+                            <p>Neal Parekh</p>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="./icons/delete.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <button id="backpack-done" onclick="toggleBackpackModal()">Done</button>
         </div>
         <div id="desktop-navbar">
             <div id="desktop-main-image">
@@ -218,23 +364,9 @@
                     <img src="../icons/back.png" alt="">
                 </a>
             </div>
-        </div>
-        <div id="backpack-modal" class="inactive-modal">
-            <div id="backpack-tag" onclick="toggleBackpackModal()">
-                <img src="./icons/pack.png" alt="">
-                <p id="backpack-tag-text">Open Backpack</p>
-            </div>
-            <div id="backpack-storage">
-                <div class="backpack-card">
-                    <div>
-                        <img src="../icons/deck.png" alt="">
-                    </div>
-                    <div>
-                        <h1>Random Garbage</h1>
-                        <p>Card By Neal Parekh</p>
-                    </div>
-                    <img src="./icons/unpack.png" alt="">
-                    <img src="./icons/delete.png" alt="">
+            <div class="bottom-left-btns">
+                <div id="backpack-btn" onclick="toggleBackpackModal()">
+                    <img src="./icons/pack.png" alt="">
                 </div>
             </div>
         </div>

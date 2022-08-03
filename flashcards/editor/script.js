@@ -1,5 +1,5 @@
 let controlActive = false;
-let enableRedirect = false;
+let enableRedirect = true;
 let sharedFriendNumbers = 0;
 
 const Deck = function(){
@@ -113,6 +113,14 @@ function duplicateCard(index){
     createCard(document.getElementById('flashcards-input-' + index).value, definitions)
 }
 
+async function backpackCard(index){
+
+}
+
+function createBackpackCard(deck){
+
+}
+
 function createCard(term, definitions){
     let newDiv = document.createElement('div');
     let newNumber = document.createElement('p');
@@ -199,6 +207,7 @@ function createCard(term, definitions){
     deleteImg.src = "./icons/delete.png";
     duplicateImg.setAttribute("onclick", "duplicateCard(" + (document.querySelectorAll('.flashcards-card').length + 1) + ")")
     deleteImg.setAttribute("onclick", "deleteCard(" + (document.querySelectorAll('.flashcards-card').length + 1) + ")");
+    backpackImg.setAttribute("onclick", "backpackCard(" + (document.querySelectorAll('.flashcards-card').length + 1) + ")")
 
     footerRight.classList.add('flashcards-card-footer-right')
     footerRight.append(backpackImg, duplicateImg, deleteImg);
@@ -238,12 +247,10 @@ function displayAlert(index, content){
 }
 
 function toggleBackpackModal(){
-    if(document.getElementById('backpack-modal').classList.contains('inactive-modal')) {
-        document.getElementById('backpack-tag-text').innerHTML = "Close Backpack";
-        document.getElementById('backpack-modal').classList.remove('inactive-modal');
+    if(document.getElementById('desktop-backpack-modal').classList.contains('inactive-modal')) {
+        document.getElementById('desktop-backpack-modal').classList.remove('inactive-modal');
     } else {
-        document.getElementById('backpack-tag-text').innerHTML = "Open Backpack";
-        document.getElementById('backpack-modal').classList.add('inactive-modal')
+        document.getElementById('desktop-backpack-modal').classList.add('inactive-modal')
     }
 }
 
@@ -336,6 +343,8 @@ function initialize(user){
     for(let i = 0; i < 23; i++){
         addSharedFriend(Math.floor(Math.random() * 47), "Elephant Student", "student@elephantsuite.me")
     }
+
+    enableRedirect = false;
 }
 
 async function locateUserInfo(){

@@ -39,7 +39,7 @@ function togglePageFlip(index, sidebar, link){
 
 window.onload = async function(){
     if(document.location.href.split("?")[1].includes("deck=")) {
-        const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+        const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + document.location.href.split("=")[1], {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
