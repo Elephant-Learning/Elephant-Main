@@ -209,9 +209,12 @@
     height:calc(var(--size) * 64px);
     padding:calc(var(--size) * 12px);
     background:var(--bg-color-1);
-    border:1px solid var(--light-border-color);
     border-radius:calc(var(--size) * 12px);
     cursor:pointer;
+}
+
+#desktop-avatar-selector-main > img:not(.selected-avatar-img){
+    border:1px solid var(--light-border-color);
 }
 
 #desktop-avatar-selector-container > button{
@@ -238,4 +241,8 @@
 
 #desktop-avatar-selector-container > button:active{
     box-shadow:none;
+}
+
+.selected-avatar-img{
+    border:1px solid var(--primary-accent);
 }

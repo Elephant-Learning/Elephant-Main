@@ -28,7 +28,9 @@ async function toggleAvatarModal(){
 
 function selectPfp(index){
     selectedProfile = index;
-    document.getElementById('desktop-avatar-current').src = "../../icons/avatars/" + index + ".png"
+    document.getElementById('desktop-avatar-current').src = "../../icons/avatars/" + index + ".png";
+    try{document.querySelector('.selected-avatar-img').classList.remove('selected-avatar-img');} catch{}
+    document.querySelectorAll('.avatar-img')[selectedProfile].classList.add('selected-avatar-img')
 }
 
 function initialize(user){
@@ -57,8 +59,11 @@ function initialize(user){
         let newImg = document.createElement('img');
         newImg.src = "../../icons/avatars/" + i + ".png";
         newImg.setAttribute("onclick", "selectPfp(" + i + ")")
+        newImg.classList.add('avatar-img')
         element.appendChild(newImg);
     }
+
+    selectPfp(selectedProfile);
 }
 
 async function deleteAccount(){

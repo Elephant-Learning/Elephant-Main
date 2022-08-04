@@ -326,18 +326,49 @@ async function saveDeck(){
     console.log(exportedDeck)
 
     if(errors.length === 0) {
-        console.log(exportedDeck);
-        const response = await fetch('https://elephant-rearend.herokuapp.com/deck/create', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type'
-            },
-            body: JSON.stringify(exportedDeck),
-            mode: 'cors'
-        })
+        if(editing === undefined){
+            const response = await fetch('https://elephant-rearend.herokuapp.com/deck/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                body: JSON.stringify(exportedDeck),
+                mode: 'cors'
+            })
+        } else {
+            const nameResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/rename', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                body: JSON.stringify({
+                    newName: exportedDeck.name,
+                    deckId: editing
+                }),
+                mode: 'cors'
+            })
+
+            const termsResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/resetTerms', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                body: JSON.stringify({
+                    newTerms: exportedDeck.terms,
+                    deckId: editing
+                }),
+                mode: 'cors'
+            });
+        }
 
         enableRedirect = true;
         location.href = "../dashboard"
@@ -380,6 +411,7 @@ async function checkForEditing(){
         editing = undefined;
     }
 }
+
 document.addEventListener('keydown', function(e){
     if(e.keyCode === 17) controlActive = true;
     if(e.keyCode === 68 && controlActive){

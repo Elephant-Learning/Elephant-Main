@@ -287,6 +287,138 @@
     height:calc(var(--size) * 25px);
 }
 
+#desktop-friending-modal:not(.inactive-modal){
+    right:calc(var(--size) * 24px);
+}
+
+#desktop-friending-modal.inactive-modal{
+    right:calc(var(--size) * -368px);
+}
+
+#desktop-friending-modal{
+    position:absolute;
+    top:calc(var(--size) * 56px);
+    background:var(--bg-color-1);
+    border:1px solid var(--light-border-color);
+    transition-duration:500ms;
+    padding:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 16px);
+    width:calc(var(--size) * 320px);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 6px);
+    z-index:2;
+    cursor:default;
+}
+
+#friending-main-image-container{
+    width:calc(var(--size) * 64px);
+    height:calc(var(--size) * 64px);
+    margin-bottom:calc(var(--size) * 16px);
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    border-radius:50%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+#friending-main-image-container > img{
+    height:calc(var(--size) * 42px);
+    filter:invert(1);
+}
+
+#desktop-friending-modal > h1{
+    margin:0;
+    font-size:calc(var(--size) * 16px);
+}
+
+#desktop-friending-modal > p{
+    font-size:calc(var(--size) * 12px);
+    margin: 0 0 calc(var(--size) * 12px);
+    color:gray;
+}
+
+#desktop-friending-modal > h6{
+    font-size:calc(var(--size) * 12px);
+    font-weight:600;
+    margin: calc(var(--size) * 6px) 0 0;
+}
+
+#friending-input-container{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+    width:calc(var(--size) * 296px);
+    padding:0 calc(var(--size) * 12px);
+    border:1px solid var(--light-border-color);
+    border-radius:calc(var(--size) * 6px);
+}
+
+#friending-input-container > img{
+    height:calc(var(--size) * 18px);
+    filter:invert(0.5);
+}
+
+#friending-input-container > input{
+    width:calc(var(--size) * 268px);
+    height:calc(var(--size) * 32px);
+    color:gray;
+    font-size:calc(var(--size) * 12px);
+    outline:none;
+    border:none;
+    background:transparent;
+}
+
+#friending-buttons{
+    width:calc(var(--size) * 320px);
+    margin-top:calc(var(--size) * 6px);
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+}
+
+#friending-buttons > button{
+    width:47.5%;
+    border:none;
+    outline:none;
+    font-size:calc(var(--size) * 14px);
+    text-transform:uppercase;
+    letter-spacing:1px;
+    border-radius:calc(var(--size) * 12px);
+    transition-duration:250ms;
+    cursor:pointer;
+}
+
+#friending-buttons > button:first-of-type{
+    background:transparent;
+    color:var(--light-gray);
+    padding:calc(var(--size) * 11px) 0;
+    border:1px solid gray;
+}
+
+#friending-buttons > button:last-of-type{
+    color:white;
+    padding:calc(var(--size) * 12px) 0;
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+}
+
+#friending-buttons > button:first-of-type:hover:not(#friending-buttons > button:active){
+    box-shadow:0 0 calc(var(--size) * 12px) 0 gray;
+}
+
+#friending-buttons > button:last-of-type:hover:not(#friending-buttons > button:active){
+    box-shadow:0 0 calc(var(--size) * 12px) 0 var(--primary-accent);
+}
+
+#friending-buttons > button:active{
+    box-shadow:none;
+}
+
 @media(max-width:480px){
     #desktop-wrapper{
         display:none;

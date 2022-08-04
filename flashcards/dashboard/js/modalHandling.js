@@ -177,6 +177,18 @@ function min(num1, num2){
     else return num1
 }
 
+function toggleFriendingModal(send){
+    if(document.getElementById('desktop-friending-modal').classList.contains('inactive-modal')){
+        document.getElementById('friending-input').value = "";
+        document.getElementById('desktop-friending-modal').classList.remove('inactive-modal')
+    } else {
+        document.getElementById('desktop-friending-modal').classList.add('inactive-modal');
+        if(send){
+
+        }
+    }
+}
+
 function displayFlashcardsManager(user){
 
     let ele = document.getElementById('flashcards-list');
@@ -184,8 +196,6 @@ function displayFlashcardsManager(user){
     while(ele.lastChild) {
         ele.lastChild.remove();
     }
-
-    console.log(user.likedDecksIds)
 
     for(let i = 0; i < min(user.decks.length, deckShowAmount); i++){
         displayFlashcard(user.decks[Object.keys(user.decks)[i]].name, user.id, 0, user.decks[Object.keys(user.decks)[i]].id, user.likedDecksIds.includes(user.decks[Object.keys(user.decks)[i]].id));
@@ -220,9 +230,6 @@ async function displayMoreFlashcards(){
 }
 
 async function initialize(user){
-
-    console.log(user);
-
     if(user.status === "FAILURE") {
         location.href = "../../../login"
     } else user = user.context.user

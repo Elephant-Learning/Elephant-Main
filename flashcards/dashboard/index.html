@@ -7,7 +7,7 @@
     <title>Flashcards | Elephant - The Ultimate Student Suite</title>
 
     <link rel="icon" href="../../icons/elephant-400-400-grayscale.png">
-    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/flashcards.css">
     <link rel="stylesheet" href="css/profile.css">
@@ -75,6 +75,22 @@
                 <div id="playlist-playing"></div>
             </div>
         </div>
+        <div id="desktop-friending-modal" class="inactive-modal">
+            <div id="friending-main-image-container">
+                <img src="../icons/add_friend.png" alt="" id="backpack-main-image">
+            </div>
+            <h1>Add Friends</h1>
+            <p>Use Elephant to the fullest along with your study buddies to get the most out of Elephant!</p>
+            <h6>Friend Email Addresses</h6>
+            <div id="friending-input-container">
+                <img src="../icons/email.png" alt="">
+                <input type="text" id="friending-input">
+            </div>
+            <div id="friending-buttons">
+                <button id="friending-cancel" onclick="toggleFriendingModal(false)">Cancel</button>
+                <button id="friending-done" onclick="toggleFriendingModal(true)">Send</button>
+            </div>
+        </div>
         <div id="desktop-navbar">
             <div id="desktop-main-image">
                 <a href="../dashboard"><img src="../../icons/elephant-400-400-pink-flashcards-01.png" alt="Elephant Logo"></a>
@@ -84,14 +100,14 @@
                 <input type="text" id="desktop-navbar-input" placeholder="Search Decks, Users, Classrooms">
             </div>
             <div id="desktop-navbar-right">
-                <div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
+                <!--<div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
                     <img src="../icons/music.png" alt="Notifications">
-                </div>
+                </div>-->
                 <div class="desktop-navbar-right-img" onclick="toggleNotificationsModal()">
                     <img src="../icons/notification.png" alt="Notifications" id="notifications-btn">
                     <div></div>
                 </div>
-                <div class="desktop-navbar-right-img">
+                <div class="desktop-navbar-right-img" onclick="toggleFriendingModal(false)">
                     <img src="../icons/add_friend.png" alt="Friend Request">
                 </div>
                 <div id="desktop-navbar-profile">
