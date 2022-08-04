@@ -165,15 +165,16 @@ function toggleTheme(themeIndex){
 
     if(themeIndex === 1){
         root.style.setProperty('--text-color', 'white');
-        root.style.setProperty("--bg-color-1", "#1e1e1e");
-        root.style.setProperty("--bg-color-2", "#171717")
-        root.style.setProperty("--light-border-color", "#2d2d2d");
-        root.style.setProperty("--dark-gray", "#2d2d2d");
-        root.style.setProperty("--light-gray", "#262626");
-        root.style.setProperty("--hover-dark", "#262626");
+        root.style.setProperty("--bg-color-1", "#25282d");
+        root.style.setProperty("--bg-color-2", "#1a1b1e")
+        root.style.setProperty("--light-border-color", "#2e3138");
+        root.style.setProperty("--dark-border-color", "#1a1b1e");
+        root.style.setProperty("--dark-gray", "#101213");
+        root.style.setProperty("--light-gray", "#16171a");
+        root.style.setProperty("--hover-dark", "#16171a");
         root.style.setProperty("--hover-light", "#171717");
         root.style.setProperty("--image-invert", "0.75");
-        root.style.setProperty("--light-accent", "#2d2d2d");
+        root.style.setProperty("--light-accent", "#383a42");
         root.style.setProperty("--primary-accent", "#e32b78");
         root.style.setProperty("--primary-accent-gradient", "#b11074");
         root.style.setProperty("--secondary-accent", "#0d87c5");

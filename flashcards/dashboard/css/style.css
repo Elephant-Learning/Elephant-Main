@@ -396,7 +396,6 @@
 
 #friending-buttons > button:first-of-type{
     background:transparent;
-    color:var(--light-gray);
     padding:calc(var(--size) * 11px) 0;
     border:1px solid gray;
 }
