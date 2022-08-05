@@ -56,7 +56,6 @@ async function addSharedFriend(userId, init){
     let emailText = document.createElement('p');
     let removeText = document.createElement('p');
 
-    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
     const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + userId, {
         method: 'GET',
         headers: {
@@ -86,6 +85,7 @@ async function addSharedFriend(userId, init){
         removeText.setAttribute('onclick', "addSharedFriend(" + userId + ", " + true + "); this.parentNode.remove()");
     }
 
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
     if(init === undefined){
         const response = await fetch('https://elephant-rearend.herokuapp.com/notifications/sendSharedDeck', {
             method: 'POST',
@@ -442,11 +442,28 @@ async function checkForEditing(){
             console.log(cards);
 
             cards = cards.context.deck
+
             editing = cards.id;
             document.getElementById('deck-name').innerHTML = cards.name;
 
+            const authorResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + cards.authorId, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                mode: 'cors'
+            })
+
+            const authorContext = await authorResponse.json();
+
+            document.getElementById('deck-author-img').src = "../../icons/avatars/" + authorContext.context.user.pfpId + ".png";
+            document.getElementById('deck-author-p').innerHTML = authorContext.context.user.firstName + " " + authorContext.context.user.lastName;
+
             for(let i = 0; i < cards.sharedUsers; i++){
-                addSharedFriend(Math.floor(Math.random() * 47), "Elephant Student", "student@elephantsuite.me")
+                await addSharedFriend(cards.sharedUsers[i], false);
             }
 
             cards = cards.cards;
@@ -491,11 +508,14 @@ async function initialize(user){
 
     await checkForEditing();
 
+    if(editing === undefined){
+        document.getElementById('deck-author-img').src = "../../icons/avatars/" + user.pfpId + ".png";
+        document.getElementById('deck-author-p').innerHTML = user.firstName + " " + user.lastName;
+    }
+
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png";
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
-    document.getElementById('deck-author-img').src = "../../icons/avatars/" + user.pfpId + ".png";
-    document.getElementById('deck-author-p').innerHTML = user.firstName + " " + user.lastName;
 
     console.log(user);
 
