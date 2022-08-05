@@ -38,6 +38,10 @@ function initialize(user){
         location.href = "../../login"
     } else user = user.context.user;
 
+    if(user.type !== "EMPLOYEE"){
+        document.getElementById('desktop-sidebar-employee').classList.add('inactive-modal')
+    }
+
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png"
     document.getElementById('my-profile-img').src = "../../icons/avatars/" + user.pfpId + ".png"
     document.getElementById('desktop-avatar-current').src = "../../icons/avatars/" + user.pfpId + ".png"
@@ -79,8 +83,7 @@ async function deleteAccount(){
         mode: 'cors'
     })
 
-    const context = await response.json();
-    console.log(context)
+    location.href = "../../login"
 }
 
 async function locateUserInfo(){

@@ -191,7 +191,7 @@ async function favoriteDeck(elem, id){
 }
 
 function createFolder(){
-    togglePageFlip(6, undefined);
+    togglePageFlip(4, undefined);
 }
 
 function createDeck(){

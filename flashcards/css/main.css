@@ -646,6 +646,8 @@ body *{
     align-items:flex-start;
     justify-content:flex-start;
     gap:calc(var(--size) * 18px);
+    top:0;
+    left:0;
 }
 
 #no-notifications{
@@ -957,6 +959,10 @@ body *{
     cursor:pointer;
     margin:0;
     color:white;
+}
+
+#desktop-sidebar-employee.inactive-modal{
+    display:none;
 }
 
 .active-sidebar-category{

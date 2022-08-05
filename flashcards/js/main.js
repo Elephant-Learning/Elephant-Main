@@ -264,6 +264,106 @@ function dateToObject(DATE){
     }
 }
 
+
+async function friendUser(friending, friendId, notificationId){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
+    if(friending){
+        const friendingResponse = await fetch('https://elephant-rearend.herokuapp.com/friends/add', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'PUT, DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                userId: savedUserId,
+                friendId: friendId
+            }),
+            mode: 'cors'
+        })
+
+        const friendingContext = await friendingResponse.json();
+        console.log(friendingContext);
+    }
+
+    const notificationDeletionResponse = await fetch('https://elephant-rearend.herokuapp.com/notifications/delete?id=' + notificationId, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const notificationDeletionContext = await notificationDeletionResponse.json();
+    console.log(notificationDeletionContext);
+
+    const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const userContext = await userResponse.json()
+
+    notificationsManager(userContext.context.user);
+}
+
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
+async function notificationsManager(user){
+
+    document.querySelectorAll('.desktop-notifications-list').forEach(function(element){
+        removeAllChildNodes(element);
+    })
+
+    document.querySelectorAll('.desktop-notifications-tab-number').forEach(function(element){
+        element.innerHTML = "0";
+    })
+
+    for(let i = 0; i < user.notifications.length; i++){
+        if(user.notifications[i].type === "FRIEND_REQUEST"){
+            const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + user.notifications[i].senderId, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                mode: 'cors'
+            })
+
+            const context = await response.json();
+
+            createNotification("friend", {
+                name: context.context.user.firstName + " " + context.context.user.lastName,
+                pfpId: context.context.user.pfpId,
+                senderId: user.notifications[i].senderId,
+                time: user.notifications[i].time,
+                notificationId: user.notifications[i].id
+            })
+        }
+    }
+}
+
+function computeTime(time){
+    return time;
+}
+
 function createNotification(TYPE, DATA){
     let newDiv = document.createElement('div');
     let unreadDiv = document.createElement('div');
@@ -275,12 +375,12 @@ function createNotification(TYPE, DATA){
 
     let parentDiv;
 
-    avatar.src = "../../icons/avatars/" + Math.floor(Math.random() * 47) + ".png";
+    avatar.src = "../../icons/avatars/" + DATA.pfpId + ".png";
     avatarDiv.appendChild(avatar);
 
     let today = dateToObject(new Date());
 
-    timeDiv.innerHTML = today.month + " " + today.date + today.dateEnding + ", " + today.year + " at " + today.hour + ":" + today.minutes + " " + today.timeEnding;
+    timeDiv.innerHTML = computeTime(DATA.time);
 
     if(TYPE === "friend"){
         let header = document.createElement('h1');
@@ -297,6 +397,8 @@ function createNotification(TYPE, DATA){
         btn2.innerHTML = "Decline";
         btn1.classList.add('desktop-notification-btn-1');
         btn2.classList.add('desktop-notification-btn-2');
+        btn1.setAttribute("onclick", "friendUser(true, " + DATA.senderId + ", " + DATA.notificationId + ")")
+        btn2.setAttribute("onclick", "friendUser(false, undefined, " + DATA.notificationId + ")")
 
         optionsDiv.append(btn1, btn2);
         optionsDiv.classList.add('desktop-notification-options');

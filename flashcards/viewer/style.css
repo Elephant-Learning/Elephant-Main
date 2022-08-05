@@ -137,3 +137,52 @@
     width:calc(100vw - var(--size) * 256px);
     height:calc(100vh - var(--size) * 92px)
 }
+
+#deck-carousel{
+    overflow-y:scroll;
+}
+
+#desktop-flashcard-container{
+    width:calc(100vw - calc(var(--size) * 304px));
+    height:calc(100vh - calc(var(--size) * 176px));
+    background:var(--bg-color-1);
+    position:absolute;
+    left:calc(var(--size) * 24px);
+    top:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 12px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    cursor:pointer;
+    border:1px solid var(--light-border-color);
+}
+
+#desktop-flashcard-main > h1{
+    font-size:calc(var(--size) * 64px);
+    width:calc(100vw - calc(var(--size) * 352px));
+    margin:0;
+    font-weight:700;
+}
+
+#desktop-flashcard-options{
+    position:absolute;
+    bottom:calc(var(--size) * -42px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    height:calc(var(--size) * 24px);
+}
+
+#desktop-flashcard-options > img{
+    height:calc(var(--size) * 24px);
+    filter:invert(var(--image-invert));
+    cursor:pointer;
+}
+
+#desktop-flashcard-options > p{
+    font-size:calc(var(--size) * 14px);
+    width:calc(var(--size) * 128px);
+    cursor:default;
+}

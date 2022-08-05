@@ -34,32 +34,6 @@
                 <div id="playlist-playing"></div>
             </div>
         </div>
-        <div id="desktop-notifications-modal" class="inactive-modal">
-            <div id="desktop-notifications-header">
-                <h1>Notifications</h1>
-                <img src="../icons/x.png" alt="" onclick="toggleNotificationsModal()">
-            </div>
-            <div id="desktop-notifications-tabs">
-                <div class="desktop-notifications-tab active-notifications-tab" onclick="toggleNotificationTab(0)">
-                    <h1>General</h1>
-                    <p class="desktop-notifications-tab-number">0</p>
-                </div>
-                <div class="desktop-notifications-tab" onclick="toggleNotificationTab(1)">
-                    <h1>Friends</h1>
-                    <p class="desktop-notifications-tab-number">0</p>
-                </div>
-            </div>
-            <div id="desktop-notifications-list-container">
-                <div id="desktop-notifications-list">
-                    <div class="desktop-notifications-list active-notifications-list"></div>
-                    <div class="desktop-notifications-list"></div>
-                </div>
-                <div id="no-notifications">
-                    <p>You're up to date! Now get back to studying.</p>
-                    <button>Refresh</button>
-                </div>
-            </div>
-        </div>
         <div id="desktop-backpack-modal" class="inactive-modal">
             <div id="backpack-main-image-container">
                 <img src="./icons/pack.png" alt="" id="backpack-main-image">
@@ -81,10 +55,6 @@
                 <!--<div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
                     <img src="../icons/music.png" alt="Notifications">
                 </div>-->
-                <div class="desktop-navbar-right-img" onclick="toggleNotificationsModal()">
-                    <img src="../icons/notification.png" alt="Notifications" id="notifications-btn">
-                    <div></div>
-                </div>
                 <div id="desktop-navbar-profile">
                     <img src="./icons/crowd.png" alt="" id="desktop-navbar-profile-image">
                     <div id="navbar-profile-text">
@@ -191,6 +161,8 @@
                             <img src="./icons/crowd.png" alt="">
                             <p>Select Friend</p>
                             <img src="./icons/expand.png" alt="">
+                            <div id="sharing-input-hitbox" onclick="toggleSharedInputList()"></div>
+                            <div id="sharing-input-friends-list" class="inactive-modal"></div>
                         </div>
                         <button id="sharing-done" onclick="toggleSharingModal()">Done</button>
                     </div>

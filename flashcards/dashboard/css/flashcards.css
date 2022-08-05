@@ -103,7 +103,7 @@
     width:calc(100vw - var(--size) * 306px);
     height:calc(100vh - var(--size) * 300px);
     border-radius:calc(var(--size) * 12px);
-    border:calc(var(--size) * 2px) dashed lightgray;
+    border:calc(var(--size) * 2px) dashed gray;
     display:flex;
     flex-direction:column;
     align-items:center;

@@ -2,7 +2,6 @@ const visibilityOptions = ["PRIVATE", "SHARED", "PUBLIC"]
 
 let controlActive = false;
 let enableRedirect = true;
-let sharedFriendNumbers = 0;
 let selectedVisibility = 0;
 let editing;
 
@@ -48,7 +47,7 @@ function deleteSharedFriend(index){
     document.querySelectorAll('.sharing-friends')[index].remove();
 }
 
-function addSharedFriend(pfpId, name, email){
+async function addSharedFriend(userId, init){
     let newDiv = document.createElement('div');
     let imageDiv = document.createElement('div');
     let image = document.createElement('img');
@@ -57,24 +56,73 @@ function addSharedFriend(pfpId, name, email){
     let emailText = document.createElement('p');
     let removeText = document.createElement('p');
 
-    image.src = "../../icons/avatars/" + pfpId + ".png";
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+    const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + userId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    let context = await response.json();
+    context = context.context.user;
+
+    image.src = "../../icons/avatars/" + context.pfpId + ".png";
     imageDiv.appendChild(image);
 
-    nameText.innerHTML = name;
-    emailText.innerHTML = email;
+    nameText.innerHTML = context.firstName + " " + context.lastName;
+    emailText.innerHTML = context.email;
 
     textDiv.append(nameText, emailText);
-    removeText.innerHTML = "Remove";
-    removeText.setAttribute('onclick', "this.parentNode.remove()");
+    if(init){
+        removeText.innerHTML = "Add";
+        removeText.setAttribute('onclick', "addSharedFriend(" + userId + ", " + undefined + "); this.parentNode.remove()");
+    } else {
+        removeText.innerHTML = "Remove";
+        removeText.setAttribute('onclick', "addSharedFriend(" + userId + ", " + true + "); this.parentNode.remove()");
+    }
+
+    console.log(JSON.stringify({
+        type: "SHARED_DECK",
+        message: "Bro shared a deck with you!",
+        recipientId: userId,
+        deckId: editing,
+        senderId: savedUserId
+    }))
+
+    if(init === undefined){
+        const response = await fetch('https://elephant-rearend.herokuapp.com/notifications/sendSharedDeck', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                type: "SHARED_DECK",
+                message: "Bro shared a deck with you!",
+                recipientId: userId,
+                deckId: editing,
+                senderId: savedUserId
+            }),
+            mode: 'cors'
+        })
+
+        const context = await response.json();
+        console.log(context);
+    }
 
     newDiv.append(imageDiv, textDiv, removeText);
     newDiv.classList.add('sharing-friends');
 
-    document.getElementById('sharing-friends-list').appendChild(newDiv);
-    sharedFriendNumbers++;
+    if(init) document.getElementById('sharing-input-friends-list').appendChild(newDiv);
+    else document.getElementById('sharing-friends-list').appendChild(newDiv);
 }
-
-
 
 function toggleDisplayView(index){
     document.getElementById('desktop-main-container').className = ""
@@ -89,6 +137,14 @@ function toggleDisplayView(index){
     })
 
     document.querySelectorAll('.view-button')[index].classList.add('active-view-button');
+}
+
+function toggleSharedInputList(){
+    if(document.getElementById('sharing-input-friends-list').classList.contains('inactive-modal')){
+        document.getElementById('sharing-input-friends-list').classList.remove('inactive-modal')
+    } else {
+        document.getElementById('sharing-input-friends-list').classList.add('inactive-modal')
+    }
 }
 
 function addDefinition(index){
@@ -448,6 +504,12 @@ async function initialize(user){
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
     document.getElementById('deck-author-img').src = "../../icons/avatars/" + user.pfpId + ".png";
     document.getElementById('deck-author-p').innerHTML = user.firstName + " " + user.lastName;
+
+    console.log(user);
+
+    for(let i = 0; i < user.friendIds.length; i++){
+        addSharedFriend(user.friendIds[i], true);
+    }
 
     if(editing === undefined) createCard()
     toggleDisplayView(0)

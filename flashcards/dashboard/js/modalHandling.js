@@ -12,7 +12,7 @@ const flashcardsVersion = "v1.0.0"
 
 function search(){
     document.getElementById('desktop-navbar-input').blur();
-    togglePageFlip(5, undefined);
+    togglePageFlip(3, undefined);
 }
 
 function toggleSettingsModal(){
@@ -62,7 +62,7 @@ function togglePageFlip(index, sidebar, link){
     history.push([index, sidebar]);
 }
 
-function sidebarFolder(title){
+function sidebarFolder(title, index){
     let newDiv = document.createElement('div');
     let imgDiv = document.createElement('div');
     let img = document.createElement('img');
@@ -177,15 +177,62 @@ function min(num1, num2){
     else return num1
 }
 
-function toggleFriendingModal(send){
+async function toggleFriendingModal(send){
     if(document.getElementById('desktop-friending-modal').classList.contains('inactive-modal')){
         document.getElementById('friending-input').value = "";
         document.getElementById('desktop-friending-modal').classList.remove('inactive-modal')
     } else {
-        document.getElementById('desktop-friending-modal').classList.add('inactive-modal');
         if(send){
+            const response = await fetch('https://elephant-rearend.herokuapp.com/login/userByEmail?email=' + document.getElementById('friending-input').value, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                mode: 'cors'
+            })
 
-        }
+            const context = await response.json();
+            console.log(context);
+
+            if(context.status === "SUCCESS"){
+                const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+                const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type'
+                    },
+                    mode: 'cors'
+                })
+
+                const userContext = await userResponse.json();
+
+                const notificationResponse = await fetch('https://elephant-rearend.herokuapp.com/notifications/sendFriendRequest', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type'
+                    },
+                    body: JSON.stringify({
+                        type: "FRIEND_REQUEST",
+                        message: userContext.context.user.firstName + " " + userContext.context.user.lastName + " sent you a friend request!",
+                        senderId: userContext.context.user.id,
+                        recipientId: context.context.user.id
+                    }),
+                    mode: 'cors'
+                })
+
+                const notificationContext = await notificationResponse.json();
+                console.log(notificationContext);
+            }
+        } document.getElementById('desktop-friending-modal').classList.add('inactive-modal');
     }
 }
 
@@ -236,11 +283,13 @@ async function initialize(user){
 
     const emojis_refactored = ["confused", "cool", "happy", "laugh", "nerd", "neutral", "unamused", "uwu", "wink"];
 
-    sidebarFolder("Spanish 3");
-    sidebarFolder("Honors World History");
-    sidebarFolder("Honors Language Arts");
-    sidebarFolder("Pre-Calculus");
-    sidebarFolder("Physics");
+    if(user.type !== "EMPLOYEE"){
+        document.getElementById('desktop-sidebar-employee').classList.add('inactive-modal')
+    }
+
+    for(let i = 0; i < user.folders.length; i++){
+        sidebarFolder(user.folders[i].name, user.folders[i].id)
+    }
 
     if(document.getElementById('desktop-main-news').hasChildNodes()){
         document.getElementById('desktop-main-news').style.visibility = "visible";
@@ -264,8 +313,10 @@ async function initialize(user){
 
     document.getElementById('desktop-profile-user-img').src = "../icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
 
-    for(let i = 0; i < user.notifications.length; i++){
-        //create notification
+    notificationsManager(user)
+
+    if(user.notifications.length > 0){
+        document.getElementById('desktop-navbar-notifications-container').appendChild(document.createElement('div'));
     }
 
     await displayFlashcardsManager(user);

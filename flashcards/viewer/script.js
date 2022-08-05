@@ -1,3 +1,6 @@
+let deck;
+let activeFlashcardCard = 0;
+
 function togglePageFlip(index, sidebar, link){
 
     const pages = ["Deck Carousel", "Deck Memorize", "Deck Review", "Deck Statistics"];
@@ -37,6 +40,10 @@ function togglePageFlip(index, sidebar, link){
     }
 }
 
+function updateFlashcard(){
+    document.getElementById('desktop-flashcard-main-header').innerHTML = deck[activeFlashcardCard].term;
+}
+
 window.onload = async function(){
     if(document.location.href.split("?")[1].includes("deck=")) {
         const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + document.location.href.split("=")[1], {
@@ -51,7 +58,9 @@ window.onload = async function(){
         })
 
         const context = await response.json();
-        console.log(context)
+        deck = context.context.deck.cards;
+
+        updateFlashcard();
     }
 }
 
@@ -63,6 +72,8 @@ function initialize(user){
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png";
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
+
+    togglePageFlip(0, 0);
 }
 
 async function locateUserInfo(){

@@ -418,6 +418,12 @@
     box-shadow:none;
 }
 
+option{
+    color:white;
+    font-weight:500;
+    background:var(--dark-gray);
+}
+
 @media(max-width:480px){
     #desktop-wrapper{
         display:none;
