@@ -930,7 +930,7 @@ body *{
     overflow:hidden;
     border-radius:calc(var(--size) * 6px);
     box-shadow:0 0 calc(var(--size) * 12px) 0 black;
-    width:calc(var(--size) * 128px);
+    width:calc(var(--size) * 194px);
     z-index:1;
 }
 
@@ -938,9 +938,9 @@ body *{
     display:flex;
     flex-direction:row;
     align-items:center;
-    width:calc(var(--size) * 128px);
+    width:calc(var(--size) * 194px);
     cursor:pointer;
-    padding:3px 0;
+    padding:calc(var(--size) * 6px) 0;
 }
 
 #context-menu > div:hover{
@@ -948,14 +948,13 @@ body *{
 }
 
 #context-menu > div > img{
-    height:calc(var(--size) * 14px);
+    height:calc(var(--size) * 17px);
     filter:invert(1);
-    padding:0 8px;
+    padding:0 calc(var(--size) * 12px);
 }
 
 #context-menu > div > p{
-    font-size:calc(var(--size) * 12px);
-    font-weight:500;
+    font-size:calc(var(--size) * 13px);
     cursor:pointer;
     margin:0;
     color:white;

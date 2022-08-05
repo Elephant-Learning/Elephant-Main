@@ -13,6 +13,8 @@ document.addEventListener('keydown', function(e){
     if(e.keyCode === 13 && document.getElementById('desktop-navbar-input') === document.activeElement){
         search();
         inputActive = false;
+    } else if(e.keyCode === 13 && document.getElementById('desktop-navbar-input') === document.activeElement){
+        toggleFriendingModal(true)
     }
 
     if(inputActive) return;

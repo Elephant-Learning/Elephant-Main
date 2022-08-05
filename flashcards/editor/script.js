@@ -86,14 +86,6 @@ async function addSharedFriend(userId, init){
         removeText.setAttribute('onclick', "addSharedFriend(" + userId + ", " + true + "); this.parentNode.remove()");
     }
 
-    console.log(JSON.stringify({
-        type: "SHARED_DECK",
-        message: "Bro shared a deck with you!",
-        recipientId: userId,
-        deckId: editing,
-        senderId: savedUserId
-    }))
-
     if(init === undefined){
         const response = await fetch('https://elephant-rearend.herokuapp.com/notifications/sendSharedDeck', {
             method: 'POST',

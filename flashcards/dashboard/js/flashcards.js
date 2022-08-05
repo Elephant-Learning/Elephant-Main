@@ -119,6 +119,25 @@ async function displayFlashcard(name, author, type, deckID, favorite){
     mainDiv.classList.add('flashcard-deck');
     mainDiv.classList.add(tags[type] + "-flashcard-border");
     mainDiv.setAttribute('onclick', "location.href = '../viewer/?deck=" + deckID + "'");
+
+    mainDiv.addEventListener('contextmenu', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        while (document.getElementById('context-menu').firstChild) {
+            document.getElementById('context-menu').firstChild.remove()
+        }
+
+        let options = [
+            ["view", "View Deck", "location.href = '../viewer/?deck=" + deckID + "'"],
+            ["../editor/icons/edit", "Edit Deck", "editFlashcard(" + deckID + ")"],
+            ["../icons/delete", "Delete Deck", "deleteDeck(" + deckID + ")"]
+        ]
+
+        contextMenuOptions(options)
+        toggleContextMenu(true, e);
+    })
+
     document.getElementById('flashcards-list').appendChild(mainDiv);
 }
 
