@@ -356,12 +356,100 @@ async function notificationsManager(user){
                 time: user.notifications[i].time,
                 notificationId: user.notifications[i].id
             })
+        } else if(user.notifications[i].type === "SHARED_DECK"){
+            const responseCreator = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + user.notifications[i].senderId, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                mode: 'cors'
+            })
+
+            const contextCreator = await responseCreator.json();
+
+            const responseDeck = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + user.notifications[i].deckId, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                mode: 'cors'
+            })
+
+            const contextDeck = await responseDeck.json();
+
+            createNotification("deckShared", {
+                sender: contextCreator.context.user.firstName + " " + contextCreator.context.user.lastName,
+                deckName: contextDeck.context.deck.name,
+                deckId: user.notifications[i].deckId,
+                time: user.notifications[i].time,
+                pfpId: contextCreator.context.user.pfpId,
+                notificationId: user.notifications[i].id
+            })
         }
     }
 }
 
 function computeTime(time){
     return time;
+}
+
+async function addDeckShared(deckID, adding, notificationId){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
+    if(adding){
+        const response = await fetch('https://elephant-rearend.herokuapp.com/deck/shareDeck', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                deckId: deckID,
+                sharedUserId: savedUserId
+            }),
+            mode: 'cors'
+        })
+
+        const context = await response.json();
+        console.log(context);
+    }
+
+    const notificationDeletionResponse = await fetch('https://elephant-rearend.herokuapp.com/notifications/delete?id=' + notificationId, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const notificationDeletionContext = await notificationDeletionResponse.json();
+    console.log(notificationDeletionContext);
+
+    const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const userContext = await userResponse.json()
+
+    notificationsManager(userContext.context.user);
 }
 
 function createNotification(TYPE, DATA){
@@ -377,8 +465,6 @@ function createNotification(TYPE, DATA){
 
     avatar.src = "../../icons/avatars/" + DATA.pfpId + ".png";
     avatarDiv.appendChild(avatar);
-
-    let today = dateToObject(new Date());
 
     timeDiv.innerHTML = computeTime(DATA.time);
 
@@ -414,18 +500,23 @@ function createNotification(TYPE, DATA){
         let span1 = document.createElement('span');
         let span2 = document.createElement('span');
         let btn1 = document.createElement('button');
+        let btn2 = document.createElement('button');
 
         span1.classList.add('bolded')
         span2.classList.add('bolded')
         span1.innerHTML = DATA.sender;
         span2.innerHTML = DATA.deckName;
 
-        header.append(span1, document.createTextNode(" shared "), span2, document.createTextNode(" with you."));
+        header.append(span1, document.createTextNode(" wants to share "), span2, document.createTextNode(" with you."));
 
-        btn1.innerHTML = "Open Deck";
+        btn1.innerHTML = "Accept";
+        btn2.innerHTML = "Decline";
         btn1.classList.add('desktop-notification-btn-1');
+        btn2.classList.add('desktop-notification-btn-2');
+        btn1.setAttribute("onclick", "addDeckShared(" + DATA.deckId + ", true, " + DATA.notificationId + ")")
+        btn2.setAttribute("onclick", "addDeckShared(" + DATA.deckId + ", false, " + DATA.notificationId + ")")
 
-        optionsDiv.appendChild(btn1);
+        optionsDiv.append(btn1, btn2);
         optionsDiv.classList.add('desktop-notification-options');
 
         textDiv.append(header, timeDiv, optionsDiv);
@@ -499,8 +590,6 @@ function mainInitialize(){
 
     toggleTheme(preferences[0]);
     toggleSizeSetting(preferences[1]);
-
-    toggleNotificationTab(0);
 
     initializeMusic();
 

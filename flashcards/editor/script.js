@@ -87,6 +87,39 @@ async function addSharedFriend(userId, init){
 
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
     if(init === undefined){
+
+        const responseDeck = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + editing, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        })
+
+        const contextDeck = await responseDeck.json();
+
+        if(contextDeck.context.deck.visibility === "PRIVATE"){
+            const response = await fetch('https://elephant-rearend.herokuapp.com/deck/visibility', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                body: JSON.stringify({
+                    deckId: editing,
+                    visibility: "SHARED"
+                }),
+                mode: 'cors'
+            })
+
+            const context = await response.json();
+        }
+
         const response = await fetch('https://elephant-rearend.herokuapp.com/notifications/sendSharedDeck', {
             method: 'POST',
             headers: {
@@ -443,6 +476,14 @@ async function checkForEditing(){
 
             cards = cards.context.deck
 
+            if(cards.visibility === "PRIVATE"){
+                document.getElementById('deck-privacy-div').innerHTML = "PERSONAL";
+                document.getElementById('deck-privacy-div').classList.add('personal');
+            } else if(cards.visibility === "SHARED"){
+                document.getElementById('deck-privacy-div').innerHTML = "SHARED";
+                document.getElementById('deck-privacy-div').classList.add('shared');
+            }
+
             editing = cards.id;
             document.getElementById('deck-name').innerHTML = cards.name;
 
@@ -473,6 +514,7 @@ async function checkForEditing(){
             }
         }
     } catch {
+        document.getElementById('deck-name').innerHTML = "New Elephant Deck"
         editing = undefined;
     }
 }

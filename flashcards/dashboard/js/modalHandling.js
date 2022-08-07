@@ -313,7 +313,8 @@ async function initialize(user){
 
     document.getElementById('desktop-profile-user-img').src = "../icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
 
-    notificationsManager(user)
+    await notificationsManager(user);
+    toggleNotificationTab(0);
 
     if(user.notifications.length > 0){
         document.getElementById('desktop-navbar-notifications-container').appendChild(document.createElement('div'));
