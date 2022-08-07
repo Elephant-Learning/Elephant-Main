@@ -33,7 +33,7 @@ function selectPfp(index){
     document.querySelectorAll('.avatar-img')[selectedProfile].classList.add('selected-avatar-img')
 }
 
-function initialize(user){
+async function initialize(user){
     if(user.status === "FAILURE") {
         location.href = "../../login"
     } else user = user.context.user;
@@ -58,6 +58,9 @@ function initialize(user){
     while(element.lastChild) {
         element.lastChild.remove();
     }
+
+    await notificationsManager(user);
+    toggleNotificationTab(0);
 
     for(let i = 0; i < 47; i++){
         let newImg = document.createElement('img');

@@ -239,65 +239,6 @@ function min(num1, num2){
     else return num1
 }
 
-async function toggleFriendingModal(send){
-    if(document.getElementById('desktop-friending-modal').classList.contains('inactive-modal')){
-        document.getElementById('friending-input').value = "";
-        document.getElementById('desktop-friending-modal').classList.remove('inactive-modal')
-    } else {
-        if(send){
-            const response = await fetch('https://elephant-rearend.herokuapp.com/login/userByEmail?email=' + document.getElementById('friending-input').value, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                    'Access-Control-Allow-Headers': 'Content-Type'
-                },
-                mode: 'cors'
-            })
-
-            const context = await response.json();
-            console.log(context);
-
-            if(context.status === "SUCCESS"){
-                const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
-                const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*',
-                        'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                        'Access-Control-Allow-Headers': 'Content-Type'
-                    },
-                    mode: 'cors'
-                })
-
-                const userContext = await userResponse.json();
-
-                const notificationResponse = await fetch('https://elephant-rearend.herokuapp.com/notifications/sendFriendRequest', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*',
-                        'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                        'Access-Control-Allow-Headers': 'Content-Type'
-                    },
-                    body: JSON.stringify({
-                        type: "FRIEND_REQUEST",
-                        message: userContext.context.user.firstName + " " + userContext.context.user.lastName + " sent you a friend request!",
-                        senderId: userContext.context.user.id,
-                        recipientId: context.context.user.id
-                    }),
-                    mode: 'cors'
-                })
-
-                const notificationContext = await notificationResponse.json();
-                console.log(notificationContext);
-            }
-        } document.getElementById('desktop-friending-modal').classList.add('inactive-modal');
-    }
-}
-
 function displayFlashcardsManager(user){
 
     let ele = document.getElementById('flashcards-list');
@@ -384,10 +325,6 @@ async function initialize(user){
 
     await notificationsManager(user);
     toggleNotificationTab(0);
-
-    if(user.notifications.length > 0){
-        document.getElementById('desktop-navbar-notifications-container').appendChild(document.createElement('div'));
-    }
 
     await displayFlashcardsManager(user);
 

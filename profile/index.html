@@ -37,7 +37,7 @@
             </div>
             <div id="no-notifications">
                 <p>You're up to date! Now get back to studying.</p>
-                <button>Refresh</button>
+                <button onclick="refreshNotifications()">Refresh</button>
             </div>
         </div>
     </div>
@@ -73,6 +73,22 @@
             </div>
         </div>
     </div>
+    <div id="desktop-friending-modal" class="inactive-modal">
+        <div id="friending-main-image-container">
+            <img src="../flashcards/icons/add_friend.png" alt="" id="backpack-main-image">
+        </div>
+        <h1>Add Friends</h1>
+        <p>Use Elephant to the fullest along with your study buddies to get the most out of Elephant!</p>
+        <h6>Friend Email Addresses</h6>
+        <div id="friending-input-container">
+            <img src="../flashcards/icons/email.png" alt="">
+            <input type="text" id="friending-input">
+        </div>
+        <div id="friending-buttons">
+            <button id="friending-cancel" onclick="toggleFriendingModal(false)">Cancel</button>
+            <button id="friending-done" onclick="toggleFriendingModal(true)">Send</button>
+        </div>
+    </div>
     <div id="desktop-navbar">
         <div id="desktop-main-image">
             <a href="../"><img src="../icons/elephant-400-400-white.png" alt="Elephant Logo"></a>
@@ -82,12 +98,14 @@
             <input type="text" id="desktop-navbar-input" placeholder="Search Users, Classrooms">
         </div>
         <div id="desktop-navbar-right">
-            <div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
+            <!--<div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
                 <img src="../flashcards/icons/music.png" alt="Notifications">
+            </div>-->
+            <div class="desktop-navbar-right-img" onclick="toggleFriendingModal(false)">
+                <img src="../flashcards/icons/add_friend.png" alt="Friend Request">
             </div>
-            <div class="desktop-navbar-right-img" onclick="toggleNotificationsModal()">
+            <div class="desktop-navbar-right-img" onclick="toggleNotificationsModal()" id="desktop-navbar-notifications-container">
                 <img src="../flashcards/icons/notification.png" alt="Notifications" id="notifications-btn">
-                <div></div>
             </div>
             <div id="desktop-navbar-profile">
                 <img src="" alt="Image" id="desktop-navbar-profile-image">

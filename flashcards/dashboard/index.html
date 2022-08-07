@@ -53,7 +53,7 @@
                 </div>
                 <div id="no-notifications">
                     <p>You're up to date! Now get back to studying.</p>
-                    <button>Refresh</button>
+                    <button onclick="refreshNotifications()">Refresh</button>
                 </div>
             </div>
         </div>
@@ -76,7 +76,7 @@
         </div>
         <div id="desktop-friending-modal" class="inactive-modal">
             <div id="friending-main-image-container">
-                <img src="../icons/add_friend.png" alt="" id="backpack-main-image">
+                <img src="../icons/add_friend.png" alt="" id="friending-main-image">
             </div>
             <h1>Add Friends</h1>
             <p>Use Elephant to the fullest along with your study buddies to get the most out of Elephant!</p>
@@ -118,11 +118,11 @@
                 <!--<div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
                     <img src="../icons/music.png" alt="Notifications">
                 </div>-->
-                <div class="desktop-navbar-right-img" id="desktop-navbar-notifications-container" onclick="toggleNotificationsModal()">
-                    <img src="../icons/notification.png" alt="Notifications" id="notifications-btn">
-                </div>
                 <div class="desktop-navbar-right-img" onclick="toggleFriendingModal(false)">
                     <img src="../icons/add_friend.png" alt="Friend Request">
+                </div>
+                <div class="desktop-navbar-right-img" id="desktop-navbar-notifications-container" onclick="toggleNotificationsModal()">
+                    <img src="../icons/notification.png" alt="Notifications" id="notifications-btn">
                 </div>
                 <div id="desktop-navbar-profile">
                     <img src="" alt="Image" id="desktop-navbar-profile-image">

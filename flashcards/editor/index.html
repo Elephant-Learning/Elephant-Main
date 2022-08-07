@@ -141,12 +141,12 @@
                         </div>
                     </div>
                 </div>
-                <div id="add-to-folder">
+                <div id="add-to-folder" class="inactive-modal">
                     <img src="./icons/add_folder.png" alt="">
                     <p>Add To Folder</p>
                     <img src="./icons/expand.png" alt="">
                 </div>
-                <div id="invite-btn">
+                <div id="invite-btn" class="inactive-modal">
                     <img src="./icons/plus.png" alt="" onclick="toggleSharingModal()">
                     <p onclick="toggleSharingModal()">Invite</p>
                     <div id="desktop-sharing-modal" class="inactive-modal">
@@ -162,7 +162,9 @@
                             <p>Select Friend</p>
                             <img src="./icons/expand.png" alt="">
                             <div id="sharing-input-hitbox" onclick="toggleSharedInputList()"></div>
-                            <div id="sharing-input-friends-list" class="inactive-modal"></div>
+                            <div id="sharing-input-friends-list" class="inactive-modal">
+                                <div id="no-friends">LOL YOU HAVE NO FRIENDS</div>
+                            </div>
                         </div>
                         <button id="sharing-done" onclick="toggleSharingModal()">Done</button>
                     </div>

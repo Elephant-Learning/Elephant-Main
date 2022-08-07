@@ -479,6 +479,20 @@ html {
     filter:invert(0.5);
 }
 
+#no-friends{
+    width:calc(var(--size) * 308px);
+    text-align:center;
+    color:gray;
+    padding:calc(var(--size) * 8px) 0;
+    margin:calc(var(--size) * 4px) 0;
+    border:1px dashed gray;
+    border-radius:calc(var(--size) * 6px);
+}
+
+#no-friends.inactive-modal{
+    display:none;
+}
+
 .view-button{
     cursor:pointer;
     height:calc(var(--size) * 24px);

@@ -315,13 +315,103 @@ async function friendUser(friending, friendId, notificationId){
 
     const userContext = await userResponse.json()
 
-    notificationsManager(userContext.context.user);
+    await notificationsManager(userContext.context.user);
+}
+
+async function toggleFriendingModal(send){
+    if(document.getElementById('desktop-friending-modal').classList.contains('inactive-modal')){
+        document.getElementById('friending-input').value = "";
+        document.getElementById('desktop-friending-modal').classList.remove('inactive-modal')
+    } else {
+        if(send){
+            const response = await fetch('https://elephant-rearend.herokuapp.com/login/userByEmail?email=' + document.getElementById('friending-input').value, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                mode: 'cors'
+            })
+
+            const context = await response.json();
+            console.log(context);
+
+            if(context.status === "SUCCESS"){
+                const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+                const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type'
+                    },
+                    mode: 'cors'
+                })
+
+                const userContext = await userResponse.json();
+
+                const notificationResponse = await fetch('https://elephant-rearend.herokuapp.com/notifications/sendFriendRequest', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type'
+                    },
+                    body: JSON.stringify({
+                        type: "FRIEND_REQUEST",
+                        message: userContext.context.user.firstName + " " + userContext.context.user.lastName + " sent you a friend request!",
+                        senderId: userContext.context.user.id,
+                        recipientId: context.context.user.id
+                    }),
+                    mode: 'cors'
+                })
+
+                const notificationContext = await notificationResponse.json();
+                console.log(notificationContext);
+            }
+        } document.getElementById('desktop-friending-modal').classList.add('inactive-modal');
+    }
 }
 
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
+}
+
+async function refreshNotifications(){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+    const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const context = await response.json();
+    await notificationsManager(context.context.user);
+
+    let activeNotificationsTab = 0;
+    let notificationsTabIncrement = 0;
+
+    document.querySelectorAll('.desktop-notifications-tab').forEach(function(element){
+        console.log(element.classList, notificationsTabIncrement);
+        if(element.classList.contains('active-notifications-tab')) {
+            activeNotificationsTab = notificationsTabIncrement;
+        }
+        notificationsTabIncrement++;
+    });
+
+    console.log(activeNotificationsTab);
+    toggleNotificationTab(activeNotificationsTab);
 }
 
 async function notificationsManager(user){
@@ -333,6 +423,12 @@ async function notificationsManager(user){
     document.querySelectorAll('.desktop-notifications-tab-number').forEach(function(element){
         element.innerHTML = "0";
     })
+
+    try{
+        document.getElementById("desktop-notification-icon").remove();
+    } catch{
+
+    }
 
     for(let i = 0; i < user.notifications.length; i++){
         if(user.notifications[i].type === "FRIEND_REQUEST"){
@@ -392,6 +488,13 @@ async function notificationsManager(user){
                 notificationId: user.notifications[i].id
             })
         }
+    }
+
+    console.log(user.notifications.length);
+    if(user.notifications.length > 0){
+        let newDiv = document.createElement('div');
+        newDiv.id = "desktop-notification-icon"
+        document.getElementById('desktop-navbar-notifications-container').appendChild(newDiv);
     }
 }
 

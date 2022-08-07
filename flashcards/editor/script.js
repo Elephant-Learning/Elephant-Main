@@ -147,6 +147,12 @@ async function addSharedFriend(userId, init){
 
     if(init) document.getElementById('sharing-input-friends-list').appendChild(newDiv);
     else document.getElementById('sharing-friends-list').appendChild(newDiv);
+
+    if(document.getElementById('sharing-input-friends-list').children.length > 1){
+        document.getElementById('no-friends').classList.add('inactive-modal');
+    } else {
+        document.getElementById('no-friends').className = "";
+    }
 }
 
 function toggleDisplayView(index){
@@ -459,6 +465,10 @@ async function saveDeck(){
 async function checkForEditing(){
     try{
         if(document.location.href.split("?")[1].includes("deck=")) {
+
+            document.getElementById('add-to-folder').classList.remove('inactive-modal');
+            document.getElementById('invite-btn').classList.remove('inactive-modal');
+
             const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + document.location.href.split("=")[1], {
                 method: 'GET',
                 headers: {
@@ -518,7 +528,7 @@ async function checkForEditing(){
     } catch {
         document.getElementById('deck-privacy-div').innerHTML = "PERSONAL";
         document.getElementById('deck-privacy-div').classList.add('personal');
-        document.getElementById('deck-name').innerHTML = "New Elephant Deck"
+        document.getElementById('deck-name').innerHTML = "New Elephant Deck";
         editing = undefined;
     }
 }
@@ -566,7 +576,7 @@ async function initialize(user){
     console.log(user);
 
     for(let i = 0; i < user.friendIds.length; i++){
-        addSharedFriend(user.friendIds[i], true);
+        await addSharedFriend(user.friendIds[i], true);
     }
 
     if(editing === undefined) createCard()
