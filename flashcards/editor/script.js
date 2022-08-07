@@ -476,6 +476,8 @@ async function checkForEditing(){
 
             cards = cards.context.deck
 
+            console.log(cards.visibility);
+
             if(cards.visibility === "PRIVATE"){
                 document.getElementById('deck-privacy-div').innerHTML = "PERSONAL";
                 document.getElementById('deck-privacy-div').classList.add('personal');
@@ -514,6 +516,8 @@ async function checkForEditing(){
             }
         }
     } catch {
+        document.getElementById('deck-privacy-div').innerHTML = "PERSONAL";
+        document.getElementById('deck-privacy-div').classList.add('personal');
         document.getElementById('deck-name').innerHTML = "New Elephant Deck"
         editing = undefined;
     }

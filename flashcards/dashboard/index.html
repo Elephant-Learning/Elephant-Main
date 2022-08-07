@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/flashcards.css">
-    <link rel="stylesheet" href="css/profile.css">
     <!--<link rel="stylesheet" href="css/chat.css">
     <script src="js/chatSystem.js" defer></script>
     <script src="dependencies/FileSaver.js" defer></script>-->
@@ -89,6 +88,22 @@
             <div id="friending-buttons">
                 <button id="friending-cancel" onclick="toggleFriendingModal(false)">Cancel</button>
                 <button id="friending-done" onclick="toggleFriendingModal(true)">Send</button>
+            </div>
+        </div>
+        <div id="desktop-folder-modal" class="inactive-modal">
+            <div id="folder-main-image-container">
+                <img src="../icons/folder.png" alt="sdf" id="folder-main-image">
+            </div>
+            <h1>Create Folder</h1>
+            <p>Create Elephant Folders and sort all decks to optimize your educational experience!</p>
+            <h6>New Folder Name</h6>
+            <div id="folder-input-container">
+                <img src="../icons/folder.png" alt="">
+                <input type="text" id="folder-input">
+            </div>
+            <div id="folder-buttons">
+                <button id="folder-cancel" onclick="toggleFolderModal(false)">Cancel</button>
+                <button id="folder-done" onclick="toggleFolderModal(true)">Create</button>
             </div>
         </div>
         <div id="desktop-navbar">

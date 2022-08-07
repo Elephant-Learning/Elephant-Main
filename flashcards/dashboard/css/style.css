@@ -295,9 +295,26 @@
     right:calc(var(--size) * -368px);
 }
 
+#desktop-folder-modal:not(.inactive-modal){
+    bottom:calc(var(--size) * 24px);
+}
+
+#desktop-folder-modal.inactive-modal{
+    bottom:calc(var(--size) * -368px);
+}
+
+
+
+#desktop-folder-modal{
+    left:calc(var(--size) * 280px);
+}
+
 #desktop-friending-modal{
-    position:absolute;
     top:calc(var(--size) * 56px);
+}
+
+#desktop-friending-modal, #desktop-folder-modal{
+    position:absolute;
     background:var(--bg-color-1);
     border:1px solid var(--light-border-color);
     transition-duration:500ms;
@@ -313,7 +330,7 @@
     cursor:default;
 }
 
-#friending-main-image-container{
+#friending-main-image-container, #folder-main-image-container{
     width:calc(var(--size) * 64px);
     height:calc(var(--size) * 64px);
     margin-bottom:calc(var(--size) * 16px);
@@ -325,29 +342,31 @@
     justify-content:center;
 }
 
-#friending-main-image-container > img{
+#friending-main-image-container > img, #folder-main-image-container > img{
     height:calc(var(--size) * 42px);
+    position:absolute;
+    left:calc(var(--size) * 36px);
     filter:invert(1);
 }
 
-#desktop-friending-modal > h1{
+#desktop-friending-modal > h1, #desktop-folder-modal > h1{
     margin:0;
     font-size:calc(var(--size) * 16px);
 }
 
-#desktop-friending-modal > p{
+#desktop-friending-modal > p, #desktop-folder-modal > p{
     font-size:calc(var(--size) * 12px);
     margin: 0 0 calc(var(--size) * 12px);
     color:gray;
 }
 
-#desktop-friending-modal > h6{
+#desktop-friending-modal > h6, #desktop-folder-modal > h6{
     font-size:calc(var(--size) * 12px);
     font-weight:600;
     margin: calc(var(--size) * 6px) 0 0;
 }
 
-#friending-input-container{
+#friending-input-container, #folder-input-container{
     display:flex;
     flex-direction:row;
     align-items:center;
@@ -358,12 +377,12 @@
     border-radius:calc(var(--size) * 6px);
 }
 
-#friending-input-container > img{
+#friending-input-container > img, #folder-input-container > img{
     height:calc(var(--size) * 18px);
     filter:invert(0.5);
 }
 
-#friending-input-container > input{
+#friending-input-container > input, #folder-input-container > input{
     width:calc(var(--size) * 268px);
     height:calc(var(--size) * 32px);
     color:gray;
@@ -373,7 +392,7 @@
     background:transparent;
 }
 
-#friending-buttons{
+#friending-buttons, #folder-buttons{
     width:calc(var(--size) * 320px);
     margin-top:calc(var(--size) * 6px);
     display:flex;
@@ -382,7 +401,7 @@
     align-items:center;
 }
 
-#friending-buttons > button{
+#friending-buttons > button, #folder-buttons > button{
     width:47.5%;
     border:none;
     outline:none;
@@ -394,27 +413,27 @@
     cursor:pointer;
 }
 
-#friending-buttons > button:first-of-type{
+#friending-buttons > button:first-of-type, #folder-buttons > button:first-of-type{
     background:transparent;
     padding:calc(var(--size) * 11px) 0;
     border:1px solid gray;
 }
 
-#friending-buttons > button:last-of-type{
+#friending-buttons > button:last-of-type, #folder-buttons > button:last-of-type{
     color:white;
     padding:calc(var(--size) * 12px) 0;
     background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
 }
 
-#friending-buttons > button:first-of-type:hover:not(#friending-buttons > button:active){
+#friending-buttons > button:first-of-type:hover:not(#friending-buttons > button:active), #folder-buttons > button:first-of-type:hover:not(#folder-buttons > button:active){
     box-shadow:0 0 calc(var(--size) * 12px) 0 gray;
 }
 
-#friending-buttons > button:last-of-type:hover:not(#friending-buttons > button:active){
+#friending-buttons > button:last-of-type:hover:not(#friending-buttons > button:active), #folder-buttons > button:last-of-type:hover:not(#folder-buttons > button:active){
     box-shadow:0 0 calc(var(--size) * 12px) 0 var(--primary-accent);
 }
 
-#friending-buttons > button:active{
+#friending-buttons > button:active, #folder-buttons > button:active{
     box-shadow:none;
 }
 

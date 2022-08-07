@@ -36,9 +36,12 @@ async function displayFlashcard(name, author, type, deckID, favorite){
     let iconDiv = document.createElement('div');
     let icon = document.createElement('img');
 
+    if(type === "PRIVATE") type = "PERSONAL";
+    else if(type === "PUBLIC") type = "COMMUNITY"
+
     icon.src = "../icons/file.png";
     iconDiv.appendChild(icon);
-    iconDiv.classList.add(tags[type] + "-flashcard");
+    iconDiv.classList.add(type.toLowerCase() + "-flashcard");
 
     let textDiv = document.createElement('div');
     let nameText = document.createElement('h1');
@@ -67,7 +70,6 @@ async function displayFlashcard(name, author, type, deckID, favorite){
     })
 
     const content = await response.json();
-    console.log(content)
 
     nameText.innerHTML = name
     authorText.innerHTML = content.context.user.firstName + " " + content.context.user.lastName;
@@ -76,8 +78,8 @@ async function displayFlashcard(name, author, type, deckID, favorite){
     textDiv.append(nameText, authorDiv);
 
     let tag = document.createElement('p');
-    tag.innerHTML = tags[type];
-    tag.classList.add(tags[type] + "-flashcard");
+    tag.innerHTML = type;
+    tag.classList.add(type.toLowerCase() + "-flashcard");
 
     let options = document.createElement('div');
     let favoriteImg = document.createElement('img');
@@ -117,7 +119,7 @@ async function displayFlashcard(name, author, type, deckID, favorite){
 
     mainDiv.append(iconDiv, textDiv, tag, options);
     mainDiv.classList.add('flashcard-deck');
-    mainDiv.classList.add(tags[type] + "-flashcard-border");
+    mainDiv.classList.add(type.toLowerCase() + "-flashcard-border");
     mainDiv.setAttribute('onclick', "location.href = '../viewer/?deck=" + deckID + "'");
 
     mainDiv.addEventListener('contextmenu', function(e){
@@ -131,7 +133,7 @@ async function displayFlashcard(name, author, type, deckID, favorite){
         let options = [
             ["view", "View Deck", "location.href = '../viewer/?deck=" + deckID + "'"],
             ["../editor/icons/edit", "Edit Deck", "editFlashcard(" + deckID + ")"],
-            ["../icons/delete", "Delete Deck", "deleteDeck(" + deckID + ")"]
+            ["delete", "Delete Deck", "deleteDeck(" + deckID + ")"]
         ]
 
         contextMenuOptions(options)
@@ -210,7 +212,7 @@ async function favoriteDeck(elem, id){
 }
 
 function createFolder(){
-    togglePageFlip(4, undefined);
+    toggleFolderModal(false)
 }
 
 function createDeck(){

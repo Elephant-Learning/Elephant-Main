@@ -62,7 +62,7 @@ function togglePageFlip(index, sidebar, link){
     history.push([index, sidebar]);
 }
 
-function sidebarFolder(title, index){
+function sidebarFolder(title, folderId){
     let newDiv = document.createElement('div');
     let imgDiv = document.createElement('div');
     let img = document.createElement('img');
@@ -78,7 +78,24 @@ function sidebarFolder(title, index){
 
     folderAmount++;
 
-    newDiv.setAttribute('onclick', 'togglePageFlip(5, ' + (folderAmount + document.querySelectorAll('.desktop-sidebar-category').length - 1) + ")")
+    newDiv.setAttribute('onclick', "viewFolder(" + folderId + ", " + (folderAmount + document.querySelectorAll('.desktop-sidebar-category').length - 1) + ")")
+    newDiv.addEventListener('contextmenu', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        while (document.getElementById('context-menu').firstChild) {
+            document.getElementById('context-menu').firstChild.remove()
+        }
+
+        let options = [
+            ["folder", "Open Folder", "viewFolder(" + folderId + ", " + (folderAmount + document.querySelectorAll('.desktop-sidebar-category').length - 1) + ")"],
+            ["../editor/icons/edit", "Edit Folder", ""],
+            ["delete", "Delete Folder", ""]
+        ]
+
+        contextMenuOptions(options)
+        toggleContextMenu(true, e);
+    })
 
     document.getElementById('desktop-sidebar-folders').appendChild(newDiv);
 }
@@ -131,6 +148,51 @@ function contextMenuOptions(options){
         newDiv.append(newImg, newPara);
         newDiv.setAttribute('onclick', options[i][2] + "; toggleContextMenu(false);");
         document.getElementById('context-menu').appendChild(newDiv);
+    }
+}
+
+async function toggleFolderModal(create){
+    if(document.getElementById('desktop-folder-modal').classList.contains('inactive-modal')){
+        document.getElementById('folder-input').value = ""
+        document.getElementById('desktop-folder-modal').classList.remove('inactive-modal')
+    } else {
+        if(create){
+            const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+            const response = await fetch('https://elephant-rearend.herokuapp.com/folder/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                body: JSON.stringify({
+                    name: document.getElementById('folder-input').value,
+                    userId: savedUserId,
+                    deckIds: []
+                }),
+                mode: 'cors'
+            })
+
+            const context = await response.json();
+            console.log(context);
+
+            const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                mode: 'cors'
+            })
+
+            const userContext = await userResponse.json()
+
+            displayFolders(userContext.context.user);
+        }
+        document.getElementById('desktop-folder-modal').classList.add('inactive-modal')
     }
 }
 
@@ -245,7 +307,7 @@ function displayFlashcardsManager(user){
     }
 
     for(let i = 0; i < min(user.decks.length, deckShowAmount); i++){
-        displayFlashcard(user.decks[Object.keys(user.decks)[i]].name, user.id, 0, user.decks[Object.keys(user.decks)[i]].id, user.likedDecksIds.includes(user.decks[Object.keys(user.decks)[i]].id));
+        displayFlashcard(user.decks[Object.keys(user.decks)[i]].name, user.id, user.decks[Object.keys(user.decks)[i]].visibility, user.decks[Object.keys(user.decks)[i]].id, user.likedDecksIds.includes(user.decks[Object.keys(user.decks)[i]].id));
         if(!document.getElementById('no-flashcards').classList.contains('inactive-modal')) document.getElementById('no-flashcards').classList.add('inactive-modal');
     } document.getElementById('flashcards-display-test').innerHTML = "";
 
@@ -276,6 +338,15 @@ async function displayMoreFlashcards(){
     displayFlashcardsManager(context.context.user);
 }
 
+async function displayFolders(user){
+    removeAllChildNodes(document.getElementById('desktop-sidebar-folders'));
+    folderAmount = 0;
+
+    for(let i = 0; i < user.folders.length; i++){
+        sidebarFolder(user.folders[i].name, user.folders[i].id)
+    }
+}
+
 async function initialize(user){
     if(user.status === "FAILURE") {
         location.href = "../../../login"
@@ -287,9 +358,7 @@ async function initialize(user){
         document.getElementById('desktop-sidebar-employee').classList.add('inactive-modal')
     }
 
-    for(let i = 0; i < user.folders.length; i++){
-        sidebarFolder(user.folders[i].name, user.folders[i].id)
-    }
+    displayFolders(user)
 
     if(document.getElementById('desktop-main-news').hasChildNodes()){
         document.getElementById('desktop-main-news').style.visibility = "visible";
