@@ -299,6 +299,17 @@
     left:calc(var(--size) * 280px);
 }
 
+#search-results-main{
+    margin-top:calc(var(--size) * 24px);
+    margin-left:calc(var(--size) * 24px);
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:flex-start;
+    align-items:flex-start;
+    gap:calc(var(--size) * 24px);
+}
+
 option{
     color:white;
     font-weight:500;

@@ -30,7 +30,7 @@ const Deck = function(name){
 //viewIndex
 //0 = All Decks
 //1 = Your Decks
-async function displayFlashcard(name, author, type, deckID, favorite){
+async function displayFlashcard(name, author, type, deckID, favorite, search){
     let mainDiv = document.createElement('div');
 
     let iconDiv = document.createElement('div');
@@ -115,7 +115,12 @@ async function displayFlashcard(name, author, type, deckID, favorite){
         deleteDeck(deckID);
     });
 
-    options.append(editImg, favoriteImg, deleteImg);
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+    if(author === savedUserId){
+        options.append(editImg, favoriteImg, deleteImg);
+    } else {
+        options.append(favoriteImg);
+    }
 
     mainDiv.append(iconDiv, textDiv, tag, options);
     mainDiv.classList.add('flashcard-deck');
@@ -130,17 +135,29 @@ async function displayFlashcard(name, author, type, deckID, favorite){
             document.getElementById('context-menu').firstChild.remove()
         }
 
-        let options = [
-            ["view", "View Deck", "location.href = '../viewer/?deck=" + deckID + "'"],
-            ["../editor/icons/edit", "Edit Deck", "editFlashcard(" + deckID + ")"],
-            ["delete", "Delete Deck", "deleteDeck(" + deckID + ")"]
-        ]
+        let cmOptions = []
 
-        contextMenuOptions(options)
+        if(author === savedUserId){
+            cmOptions = [
+                ["view", "View Deck", "location.href = '../viewer/?deck=" + deckID + "'"],
+                ["../editor/icons/edit", "Edit Deck", "editFlashcard(" + deckID + ")"],
+                ["delete", "Delete Deck", "deleteDeck(" + deckID + ")"]
+            ]
+        } else {
+            cmOptions = [
+                ["view", "View Deck", "location.href = '../viewer/?deck=" + deckID + "'"]
+            ]
+        }
+
+        contextMenuOptions(cmOptions)
         toggleContextMenu(true, e);
     })
 
-    document.getElementById('flashcards-list').appendChild(mainDiv);
+    if(search){
+        document.getElementById('search-results-main').appendChild(mainDiv);
+    } else {
+        document.getElementById('flashcards-list').appendChild(mainDiv);
+    }
 }
 
 async function deleteDeck(id){

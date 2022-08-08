@@ -43,6 +43,46 @@ function deleteCard(index){
    }
 }
 
+async function publishDeck(){
+    const response = await fetch('https://elephant-rearend.herokuapp.com/deck/visibility', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        body: JSON.stringify({
+            deckId: editing,
+            visibility: "PUBLIC"
+        }),
+        mode: 'cors'
+    })
+
+    const context = await response.json();
+    console.log(context);
+}
+
+async function unpublishDeck(){
+    const response = await fetch('https://elephant-rearend.herokuapp.com/deck/visibility', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        body: JSON.stringify({
+            deckId: editing,
+            visibility: "PRIVATE"
+        }),
+        mode: 'cors'
+    })
+
+    const context = await response.json();
+    console.log(context);
+}
+
 function deleteSharedFriend(index){
     document.querySelectorAll('.sharing-friends')[index].remove();
 }
@@ -491,9 +531,22 @@ async function checkForEditing(){
             if(cards.visibility === "PRIVATE"){
                 document.getElementById('deck-privacy-div').innerHTML = "PERSONAL";
                 document.getElementById('deck-privacy-div').classList.add('personal');
+
+                let publishBtnImg = document.createElement('img')
+                publishBtnImg.src = "./icons/upload.png";
+                document.getElementById('publish-btn').append(publishBtnImg, document.createTextNode("Publish"))
+                document.getElementById('publish-btn').setAttribute("onclick", "publishDeck()")
             } else if(cards.visibility === "SHARED"){
                 document.getElementById('deck-privacy-div').innerHTML = "SHARED";
                 document.getElementById('deck-privacy-div').classList.add('shared');
+            } else if(cards.visibility === "PUBLIC"){
+                document.getElementById('deck-privacy-div').innerHTML = "COMMUNITY";
+                document.getElementById('deck-privacy-div').classList.add('community');
+
+                let publishBtnImg = document.createElement('img')
+                publishBtnImg.src = "./icons/download.png";
+                document.getElementById('publish-btn').append(publishBtnImg, document.createTextNode("Unpublish"))
+                document.getElementById('publish-btn').setAttribute("onclick", "unpublishDeck()")
             }
 
             editing = cards.id;
