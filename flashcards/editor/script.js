@@ -204,6 +204,13 @@ function toggleDisplayView(index){
         document.getElementById('desktop-main-container').classList.add('list');
     }
 
+    let preferences = localStorage.getItem('preferences');
+    preferences = JSON.parse(preferences);
+
+    preferences[2] = index;
+    console.log(preferences)
+    localStorage.setItem('preferences', JSON.stringify(preferences));
+
     document.querySelectorAll('.view-button').forEach(function(element){
         element.classList.remove('active-view-button');
     })
@@ -651,13 +658,16 @@ async function initialize(user){
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
 
     console.log(user);
+    let preferences = localStorage.getItem('preferences');
+    console.log(preferences);
+    preferences = JSON.parse(preferences)
 
     for(let i = 0; i < user.friendIds.length; i++){
         await addSharedFriend(user.friendIds[i], true);
     }
 
     if(editing === undefined) createCard()
-    toggleDisplayView(0)
+    toggleDisplayView(preferences[2]);
     window.scrollTo(0,0);
 
     enableRedirect = false;

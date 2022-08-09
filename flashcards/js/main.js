@@ -677,18 +677,22 @@ function mainInitialize(){
     let preferences = localStorage.getItem('preferences');
 
     if(!preferences) {
-        localStorage.setItem('preferences', JSON.stringify([2, 1]));
+        localStorage.setItem('preferences', JSON.stringify([2, 1, 0]));
         preferences = localStorage.getItem('preferences');
     }
 
     preferences = JSON.parse(preferences);
 
     if(!(preferences[0] < 3)) {
-        preferences = [2, preferences[1]];
+        preferences = [2, preferences[1], preferences[2]];
     }
 
     if(!(preferences[1] < 4)) {
-        preferences = [preferences[0], 1];
+        preferences = [preferences[0], 1, preferences[2]];
+    }
+
+    if(!(preferences[2] < 2)){
+        preferences = [preferences[0], preferences[1], 0];
     }
 
     toggleTheme(preferences[0]);
