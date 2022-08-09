@@ -60,7 +60,7 @@ async function publishDeck(){
     })
 
     const context = await response.json();
-    console.log(context);
+    toggleCardVisibility(context.context.deck.visibility)
 }
 
 async function unpublishDeck(){
@@ -80,7 +80,7 @@ async function unpublishDeck(){
     })
 
     const context = await response.json();
-    console.log(context);
+    toggleCardVisibility(context.context.deck.visibility)
 }
 
 function deleteSharedFriend(index){
@@ -141,7 +141,7 @@ async function addSharedFriend(userId, init){
 
         const contextDeck = await responseDeck.json();
 
-        if(contextDeck.context.deck.visibility === "PRIVATE"){
+        if(contextDeck.context.deck.visibility !== "SHARED"){
             const response = await fetch('https://elephant-rearend.herokuapp.com/deck/visibility', {
                 method: 'POST',
                 headers: {
@@ -158,6 +158,7 @@ async function addSharedFriend(userId, init){
             })
 
             const context = await response.json();
+            toggleCardVisibility(context.context.deck.visibility);
         }
 
         const response = await fetch('https://elephant-rearend.herokuapp.com/notifications/sendSharedDeck', {
@@ -465,6 +466,11 @@ async function saveDeck(){
                 body: JSON.stringify(exportedDeck),
                 mode: 'cors'
             })
+
+            const context = await response.json();
+
+            enableRedirect = true;
+            location.href = "../editor/?deck=" + context.context.deck.id;
         } else {
             const nameResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/rename', {
                 method: 'POST',
@@ -495,11 +501,49 @@ async function saveDeck(){
                 }),
                 mode: 'cors'
             });
+
+            enableRedirect = true;
+            location.href = "../dashboard"
         }
 
         enableRedirect = true;
-        location.href = "../dashboard"
+
+        if(editing === undefined){
+
+        } else {
+            location.href = "../dashboard"
+        }
     } else displayAlert(0, errors);
+}
+
+function toggleCardVisibility(visibility){
+    removeAllChildNodes(document.getElementById('publish-btn'))
+
+    if(visibility === "PRIVATE"){
+        document.getElementById('deck-privacy-div').innerHTML = "PERSONAL";
+        document.getElementById('deck-privacy-div').className = 'personal';
+
+        let publishBtnImg = document.createElement('img')
+        publishBtnImg.src = "./icons/upload.png";
+        document.getElementById('publish-btn').append(publishBtnImg, document.createTextNode("Publish"))
+        document.getElementById('publish-btn').setAttribute("onclick", "publishDeck()")
+    } else if(visibility === "SHARED"){
+        document.getElementById('deck-privacy-div').innerHTML = "SHARED";
+        document.getElementById('deck-privacy-div').className = 'shared';
+
+        let publishBtnImg = document.createElement('img')
+        publishBtnImg.src = "./icons/upload.png";
+        document.getElementById('publish-btn').append(publishBtnImg, document.createTextNode("Publish"))
+        document.getElementById('publish-btn').setAttribute("onclick", "publishDeck()")
+    } else if(visibility === "PUBLIC"){
+        document.getElementById('deck-privacy-div').innerHTML = "COMMUNITY";
+        document.getElementById('deck-privacy-div').className = 'community';
+
+        let publishBtnImg = document.createElement('img')
+        publishBtnImg.src = "./icons/download.png";
+        document.getElementById('publish-btn').append(publishBtnImg, document.createTextNode("Unpublish"))
+        document.getElementById('publish-btn').setAttribute("onclick", "unpublishDeck()")
+    }
 }
 
 async function checkForEditing(){
@@ -508,6 +552,7 @@ async function checkForEditing(){
 
             document.getElementById('add-to-folder').classList.remove('inactive-modal');
             document.getElementById('invite-btn').classList.remove('inactive-modal');
+            document.getElementById('publish-btn').classList.remove('inactive-modal');
 
             const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + document.location.href.split("=")[1], {
                 method: 'GET',
@@ -526,28 +571,7 @@ async function checkForEditing(){
 
             cards = cards.context.deck
 
-            console.log(cards.visibility);
-
-            if(cards.visibility === "PRIVATE"){
-                document.getElementById('deck-privacy-div').innerHTML = "PERSONAL";
-                document.getElementById('deck-privacy-div').classList.add('personal');
-
-                let publishBtnImg = document.createElement('img')
-                publishBtnImg.src = "./icons/upload.png";
-                document.getElementById('publish-btn').append(publishBtnImg, document.createTextNode("Publish"))
-                document.getElementById('publish-btn').setAttribute("onclick", "publishDeck()")
-            } else if(cards.visibility === "SHARED"){
-                document.getElementById('deck-privacy-div').innerHTML = "SHARED";
-                document.getElementById('deck-privacy-div').classList.add('shared');
-            } else if(cards.visibility === "PUBLIC"){
-                document.getElementById('deck-privacy-div').innerHTML = "COMMUNITY";
-                document.getElementById('deck-privacy-div').classList.add('community');
-
-                let publishBtnImg = document.createElement('img')
-                publishBtnImg.src = "./icons/download.png";
-                document.getElementById('publish-btn').append(publishBtnImg, document.createTextNode("Unpublish"))
-                document.getElementById('publish-btn').setAttribute("onclick", "unpublishDeck()")
-            }
+            toggleCardVisibility(cards.visibility)
 
             editing = cards.id;
             document.getElementById('deck-name').innerHTML = cards.name;

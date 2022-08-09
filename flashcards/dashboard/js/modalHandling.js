@@ -42,13 +42,14 @@ async function search(){
     let userLikedDecks = userContext.context.user.likedDecksIds
     let userSharedDecks = userContext.context.user.sharedDecks
     let decks = deckContext.context.decks;
-    console.log(deckContext)
+
+    removeAllChildNodes(document.getElementById('search-results-main'))
+
+    togglePageFlip(3, undefined);
 
     for(let i = 0; i < decks.length; i++){
         if(decks[i].visibility === "PUBLIC" || userSharedDecks.includes(decks[i].id) || decks[i].authorId === savedUserId) await displayFlashcard(decks[i].name, decks[i].authorId, decks[i].visibility, decks[i].id, userLikedDecks.includes(decks[i].id), true);
     } document.getElementById('flashcards-display-test').innerHTML = "";
-
-    togglePageFlip(3, undefined);
 }
 
 function toggleSettingsModal(){

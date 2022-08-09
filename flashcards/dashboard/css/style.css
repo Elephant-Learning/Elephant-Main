@@ -307,7 +307,21 @@
     flex-wrap:wrap;
     justify-content:flex-start;
     align-items:flex-start;
-    gap:calc(var(--size) * 24px);
+    gap:calc(var(--size) * 12px);
+}
+
+#flashcards-display-test{
+    color:var(--bg-color-2);
+}
+
+#invite-btn-hitbox{
+    background:blue;
+    width:120px;
+    height:120px;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:2;
 }
 
 option{

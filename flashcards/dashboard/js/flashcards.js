@@ -52,7 +52,7 @@ async function displayFlashcard(name, author, type, deckID, favorite, search){
     let testSpace = document.getElementById('flashcards-display-test');
     for(let i = 0; i < name.length; i++){
         testSpace.innerHTML = name.substring(0, i);
-        if(testSpace.clientWidth > 190) {
+        if(testSpace.clientWidth > 180) {
             name = name.substring(0, i - 1) + "...";
             break;
         }
