@@ -1,4 +1,4 @@
-let currentActiveSong;
+/*let currentActiveSong;
 let paused = true;
 let firstTime = true;
 let songManager;
@@ -66,12 +66,6 @@ function sliderManager(){
 
     if(song.currentTime === song.duration) selectSong();
 
-}
-
-function toTitleCase(str) {
-    return str.toLowerCase().split(' ').map(function (word) {
-        return (word.charAt(0).toUpperCase() + word.slice(1));
-    }).join(' ');
 }
 
 function setPlaylist(index){
@@ -158,7 +152,7 @@ function toggleMusicModal(){
     } else {
         document.getElementById('desktop-music-container').classList.add('inactive-modal');
     }
-}
+}*/
 
 function toggleTheme(themeIndex){
     let root = document.querySelector(":root");
@@ -212,6 +206,12 @@ function toggleTheme(themeIndex){
     let preferences = JSON.parse(localStorage.getItem('preferences'));
     preferences[0] = themeIndex;
     localStorage.setItem('preferences', JSON.stringify(preferences));
+}
+
+function toTitleCase(str) {
+    return str.toLowerCase().split(' ').map(function (word) {
+        return (word.charAt(0).toUpperCase() + word.slice(1));
+    }).join(' ');
 }
 
 function toggleSizeSetting(value){
@@ -698,7 +698,7 @@ function mainInitialize(){
     toggleTheme(preferences[0]);
     toggleSizeSetting(preferences[1]);
 
-    initializeMusic();
+    //initializeMusic();
 
     localStorage.setItem('preferences', JSON.stringify(preferences));
 }

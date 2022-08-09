@@ -532,8 +532,14 @@ function toggleCardVisibility(visibility){
 
         let publishBtnImg = document.createElement('img')
         publishBtnImg.src = "./icons/upload.png";
-        document.getElementById('publish-btn').append(publishBtnImg, document.createTextNode("Publish"))
-        document.getElementById('publish-btn').setAttribute("onclick", "publishDeck()")
+        document.getElementById('publish-btn').append(publishBtnImg, document.createTextNode("Publish"));
+        document.getElementById('publish-btn').setAttribute("onclick", "publishDeck()");
+        try{
+            document.getElementById('publish-btn').classList.remove('personal')
+            document.getElementById('publish-btn').classList.add('community')
+        } catch{
+            document.getElementById('publish-btn').classList.add('community')
+        }
     } else if(visibility === "SHARED"){
         document.getElementById('deck-privacy-div').innerHTML = "SHARED";
         document.getElementById('deck-privacy-div').className = 'shared';
@@ -542,14 +548,26 @@ function toggleCardVisibility(visibility){
         publishBtnImg.src = "./icons/upload.png";
         document.getElementById('publish-btn').append(publishBtnImg, document.createTextNode("Publish"))
         document.getElementById('publish-btn').setAttribute("onclick", "publishDeck()")
+        try{
+            document.getElementById('publish-btn').classList.remove('personal')
+            document.getElementById('publish-btn').classList.add('community')
+        } catch{
+            document.getElementById('publish-btn').classList.add('community')
+        }
     } else if(visibility === "PUBLIC"){
         document.getElementById('deck-privacy-div').innerHTML = "COMMUNITY";
         document.getElementById('deck-privacy-div').className = 'community';
 
         let publishBtnImg = document.createElement('img')
         publishBtnImg.src = "./icons/download.png";
-        document.getElementById('publish-btn').append(publishBtnImg, document.createTextNode("Unpublish"))
-        document.getElementById('publish-btn').setAttribute("onclick", "unpublishDeck()")
+        document.getElementById('publish-btn').append(publishBtnImg, document.createTextNode("Unpublish"));
+        document.getElementById('publish-btn').setAttribute("onclick", "unpublishDeck()");
+        try{
+            document.getElementById('publish-btn').classList.remove('community')
+            document.getElementById('publish-btn').classList.add('personal')
+        } catch{
+            document.getElementById('publish-btn').classList.add('personal')
+        }
     }
 }
 

@@ -48,15 +48,15 @@ html {
 }
 
 .personal, .active-view-button{
-    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient)) !important;
 }
 
 .community{
-    background:linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient));
+    background:linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient)) !important;
 }
 
 .shared{
-    background:linear-gradient(135deg, var(--tertiary-accent), var(--tertiary-accent-gradient));
+    background:linear-gradient(135deg, var(--tertiary-accent), var(--tertiary-accent-gradient)) !important;
 }
 
 #editor-tools{
@@ -202,7 +202,6 @@ html {
 }
 
 #publish-btn{
-    background:linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient));
     border:none;
     outline:none;
     color:white;
@@ -218,7 +217,11 @@ html {
     color:white;
 }
 
-#publish-btn:hover{
+#publish-btn.personal:hover{
+    box-shadow: 0 0 calc(var(--size) * 6px) 0 var(--primary-accent);
+}
+
+#publish-btn.community:hover{
     box-shadow: 0 0 calc(var(--size) * 6px) 0 var(--secondary-accent);
 }
 
@@ -448,7 +451,7 @@ html {
 }
 
 #sharing-done:hover{
-    box-shadow:0 0 calc(var(--size) * 12px) 0 var(--primary-accent);
+    box-shadow:0 0 calc(var(--size) * 12px) 0 var(--tertiary-accent);
 }
 
 #sharing-done:active{
