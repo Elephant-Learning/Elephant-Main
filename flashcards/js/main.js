@@ -173,8 +173,8 @@ function toggleTheme(themeIndex){
         root.style.setProperty("--primary-accent-gradient", "#b11074");
         root.style.setProperty("--secondary-accent", "#0d87c5");
         root.style.setProperty("--secondary-accent-gradient", "#27b4b9");
-        root.style.setProperty("--tertiary-accent", "#af5112");
-        root.style.setProperty("--tertiary-accent-gradient", "#d0691b");
+        root.style.setProperty("--tertiary-accent", "#db7735");
+        root.style.setProperty("--tertiary-accent-gradient", "#d47d39");
     } else if(themeIndex === 0){
         root.style.setProperty('--text-color', 'black');
         root.style.setProperty("--bg-color-1", "#ffffff");

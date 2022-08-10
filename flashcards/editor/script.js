@@ -514,12 +514,6 @@ async function saveDeck(){
         }
 
         enableRedirect = true;
-
-        if(editing === undefined){
-
-        } else {
-            location.href = "../dashboard"
-        }
     } else displayAlert(0, errors);
 }
 

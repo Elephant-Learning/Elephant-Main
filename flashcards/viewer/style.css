@@ -140,6 +140,13 @@
 
 #deck-carousel{
     overflow-y:scroll;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.inactive-flashcard{
+    display:none;
 }
 
 #desktop-flashcard-container{
@@ -157,6 +164,15 @@
     text-align:center;
     cursor:pointer;
     border:1px solid var(--light-border-color);
+    transition-duration:250ms;
+}
+
+#desktop-flashcard-container.flipped{
+    transform:scale(1.01, 0);
+}
+
+#desktop-flashcard-container.unflipped{
+    transform:scale(1, 1);
 }
 
 #desktop-flashcard-main > h1{
@@ -166,12 +182,18 @@
     font-weight:700;
 }
 
+#desktop-flashcard-main > div > p{
+    font-size:calc(var(--size) * 20px);
+    font-weight:300;
+}
+
 #desktop-flashcard-options{
     position:absolute;
-    bottom:calc(var(--size) * -42px);
+    bottom:calc(var(--size) * 18px);
     display:flex;
     flex-direction:row;
     align-items:center;
+    justify-content:space-between;
     height:calc(var(--size) * 24px);
 }
 
@@ -184,5 +206,6 @@
 #desktop-flashcard-options > p{
     font-size:calc(var(--size) * 14px);
     width:calc(var(--size) * 128px);
+    text-align:center;
     cursor:default;
 }
