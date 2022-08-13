@@ -498,8 +498,36 @@ async function notificationsManager(user){
     }
 }
 
+function timeToText(date){
+    let month = ["January","February","March","April","May","June","July", "August","September","October","November","December"];
+    let AMPM = "A.M.";
+    let dateHours = date.getHours();
+    let dateMinutes = date.getMinutes();
+    let dateDay = date.getDate();
+
+    if(dateHours === 0) dateHours += 12;
+    else if(dateHours >= 12){
+        AMPM = "P.M."
+        if(dateHours > 12){
+            dateHours -= 12;
+        }
+    }
+
+    if(dateMinutes < 10){
+        dateMinutes = "0" + dateMinutes;
+    } if(dateDay < 10){
+        dateDay = "0" + dateDay;
+    }
+
+    return month[date.getMonth()] + " " + dateDay + ", " + date.getFullYear() + " at " + dateHours + ":" + dateMinutes + " " + AMPM;
+}
+
 function computeTime(time){
-    return time;
+    let splitTime = time.split('-');
+    let timing = splitTime[2].split(':');
+    let originalDate = new Date(Date.UTC(splitTime[0], splitTime[1] - 1, timing[0].substring(0, 2), timing[0].slice(-2), timing[1]));
+
+    return timeToText(originalDate);
 }
 
 async function addDeckShared(deckID, adding, notificationId){

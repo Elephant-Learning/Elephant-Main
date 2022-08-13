@@ -475,6 +475,7 @@ async function saveDeck(){
             })
 
             const context = await response.json();
+            console.log(context);
 
             enableRedirect = true;
             location.href = "../editor/?deck=" + context.context.deck.id;

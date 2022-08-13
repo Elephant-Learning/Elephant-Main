@@ -130,6 +130,7 @@ html {
     color:white;
     text-transform:uppercase;
     margin:0 calc(var(--size) * 12px);
+    cursor:default;
 }
 
 #deck-author{
@@ -145,6 +146,7 @@ html {
 
 #deck-author > p{
     font-size:calc(var(--size) * 12px);
+    cursor:default;
     font-weight:400;
     margin:0;
 }
