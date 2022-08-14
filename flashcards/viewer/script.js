@@ -75,7 +75,7 @@ function updateFlashcard(){
     removeAllChildNodes(document.getElementById('desktop-flashcard-answers'));
     for(let i = 0; i < deck[activeFlashcardCard].definitions.length; i++){
         let newPara = document.createElement('p');
-        newPara.innerHTML = deck[activeFlashcardCard].definitions[i];
+        newPara.innerHTML = toTitleCase(deck[activeFlashcardCard].definitions[i]);
         document.getElementById('desktop-flashcard-answers').appendChild(newPara);
     }
 
@@ -85,23 +85,63 @@ function updateFlashcard(){
 }
 
 window.onload = async function(){
-    if(document.location.href.split("?")[1].includes("deck=")) {
-        const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + document.location.href.split("=")[1], {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type'
-            },
-            mode: 'cors'
-        })
+    let deckInt = false;
 
-        const context = await response.json();
-        deck = context.context.deck.cards;
+    try{
+        deckInt = document.location.href.split("?")[1].includes("deck=");
+    } catch(e){
+        location.href = "./?deck=0";
+    }
+
+    console.log(document.location.href.split("=")[1] === "0")
+
+    if(document.location.href.split("=")[1] === "0"){
+        deck = [
+            {
+                term: "How many colors are there in a rainbow?",
+                definitions: ["7"]
+            }, {
+                term: "What fruit do raisins come from?",
+                definitions: ["grape"]
+            }, {
+                term: "What does a thermometer measure?",
+                definitions: ["temperature"]
+            }, {
+                term: "What are the primary colors?",
+                definitions: ["red", "blue", "yellow"]
+            }, {
+                term: "How many cents are in a quarter?",
+                definitions: ["25"]
+            }, {
+                term: "Who Painted the Mona Lisa?",
+                definitions: ["leonardo da vinci"]
+            }, {
+                term: "What does the NBA stand for",
+                definitions: ["national basketball association"]
+            }
+        ]
+
+        console.log(deck.length);
 
         updateFlashcard();
+        return;
     }
+
+    const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + document.location.href.split("=")[1], {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const context = await response.json();
+    deck = context.context.deck.cards;
+
+    updateFlashcard();
 }
 
 function initialize(user){
