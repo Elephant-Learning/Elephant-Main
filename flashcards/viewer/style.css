@@ -200,7 +200,12 @@
 #desktop-flashcard-options > img{
     height:calc(var(--size) * 24px);
     filter:invert(var(--image-invert));
+    transition-duration:250ms;
     cursor:pointer;
+}
+
+#desktop-flashcard-options > img:hover{
+    transform:scale(1.25);
 }
 
 #desktop-flashcard-options > p{
@@ -262,4 +267,149 @@
     align-items:center;
     justify-content:center;
     text-align:center;
+}
+
+#desktop-memorize-term-container{
+    width:calc(50% - var(--size) * 64px);
+    height:calc(100% - var(--size) * 64px);
+    padding:0 calc(var(--size) * 32px);
+    border-right:1px solid var(--light-border-color);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+}
+
+#desktop-memorize-term{
+    font-size:calc(var(--size) * 36px);
+    font-weight:700;
+}
+
+#desktop-memorize-term-buttons{
+    position:absolute;
+    width:100%;
+    bottom:0;
+}
+
+#desktop-memorize-term-buttons > button{
+    width:calc(100% - var(--size) * 64px);
+    padding:calc(var(--size) * 6px) 0;
+    border-radius:calc(var(--size) * 6px);
+    font-size:calc(var(--size) * 14px);
+    transition-duration:250ms;
+    cursor:pointer;
+    outline:none;
+}
+
+#desktop-memorize-term-buttons > button:hover{
+    box-shadow:0 0 calc(var(--size) * 6px) 0 var(--light-gray);
+}
+
+#desktop-memorize-term-buttons > button:active{
+    box-shadow:none;
+}
+
+#desktop-memorize-skip{
+    border:1px solid var(--light-border-color);
+    background:var(--bg-color-2);
+    color:gray;
+}
+
+#desktop-memorize-definitions-list{
+    width:50%;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
+    height:calc(100% - var(--size) * 64px);
+    margin:calc(var(--size) * 32px) 0;
+    gap:calc(var(--size) * 16px);
+}
+
+#desktop-memorize-definitions-list::-webkit-scrollbar-thumb{
+    background:var(--light-border-color);
+    border-radius:calc(var(--size) * 6px) 0 0 calc(var(--size) * 6px);
+}
+
+.desktop-memorize-definition{
+    width:calc(100% - var(--size) * 64px);
+    background:var(--bg-color-2);
+    border-radius:calc(var(--size) * 6px);
+    border:1px solid var(--light-border-color);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    padding:calc(var(--size) * 36px) 0;
+    position:relative;
+}
+
+.desktop-memorize-definition:not(.desktop-memorize-definition-selected){
+    border:1px solid var(--light-border-color);
+}
+
+.desktop-memorize-definition-selected{
+    border:1px solid var(--primary-accent);
+}
+
+.desktop-memorize-definition > p{
+    font-size:calc(var(--size) * 14px);
+    width:calc(100% - var(--size) * 48px);
+    margin:0;
+}
+
+.desktop-memorize-definition:not(.desktop-memorize-definition-selected) > p{
+    color:gray;
+}
+
+.desktop-memorize-select-img{
+    position:absolute;
+    width:calc(var(--size) * 24px);
+    height:calc(var(--size) * 24px);
+    background:var(--bg-color-2);
+    border-radius:50%;
+    border:1px solid var(--primary-accent);
+    right:calc(var(--size) * -12px);
+    top:calc(var(--size) * -12px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+.desktop-memorize-select-img > img{
+    height:calc(var(--size) * 18px);
+    filter:invert(var(--image-invert));
+}
+
+.desktop-memorize-definition:not(.desktop-memorize-definition-selected) > .desktop-memorize-select-img{
+    visibility:hidden;
+    opacity:0;
+}
+
+.desktop-memorize-definition-selected > .desktop-memorize-select-img{
+    visibility:visible;
+    opacity:1;
+}
+
+.desktop-memorize-options{
+    position:absolute;
+    right:calc(var(--size) * 6px);
+    bottom:calc(var(--size) * 6px);
+}
+
+.desktop-memorize-options > img{
+    height:calc(var(--size) * 18px);
+    filter:invert(0.5);
+    transition-duration:250ms;
+}
+
+.desktop-memorize-options > img:hover{
+    transform:scale(1.025);
+    filter:invert(var(--image-invert));
 }

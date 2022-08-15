@@ -41,49 +41,6 @@ function togglePageFlip(index, sidebar, link){
     }
 }
 
-function toggleFlashcardFlip(){
-    document.getElementById('desktop-flashcard-container').classList.remove('unflipped');
-    document.getElementById('desktop-flashcard-container').classList.add('flipped');
-    setTimeout(function(){
-        if(document.getElementById('desktop-flashcard-main-header').classList.contains('inactive-flashcard')){
-            document.getElementById('desktop-flashcard-main-header').classList.remove('inactive-flashcard')
-            document.getElementById('desktop-flashcard-answers').classList.add('inactive-flashcard')
-        } else {
-            document.getElementById('desktop-flashcard-answers').classList.remove('inactive-flashcard')
-            document.getElementById('desktop-flashcard-main-header').classList.add('inactive-flashcard')
-        }
-
-        document.getElementById('desktop-flashcard-container').classList.add('unflipped');
-        document.getElementById('desktop-flashcard-container').classList.remove('flipped');
-    }, 250);
-}
-
-document.getElementById('desktop-flashcard-container').onclick = toggleFlashcardFlip;
-
-function changeFlashcard(direction){
-    if(direction === "left" && activeFlashcardCard >= 0){
-        activeFlashcardCard -= 1;
-    } else if(direction === "right" && activeFlashcardCard < deck.length - 1){
-        activeFlashcardCard += 1;
-    }
-
-    updateFlashcard()
-}
-
-function updateFlashcard(){
-    document.getElementById('desktop-flashcard-main-header').innerHTML = deck[activeFlashcardCard].term;
-    removeAllChildNodes(document.getElementById('desktop-flashcard-answers'));
-    for(let i = 0; i < deck[activeFlashcardCard].definitions.length; i++){
-        let newPara = document.createElement('p');
-        newPara.innerHTML = toTitleCase(deck[activeFlashcardCard].definitions[i]);
-        document.getElementById('desktop-flashcard-answers').appendChild(newPara);
-    }
-
-    document.getElementById('desktop-flashcard-number').innerHTML = (activeFlashcardCard + 1) + " / " + deck.length;
-    document.getElementById('desktop-flashcard-main-header').className = "";
-    document.getElementById('desktop-flashcard-answers').className = "inactive-flashcard"
-}
-
 window.onload = async function(){
     let deckInt = false;
 
@@ -113,15 +70,25 @@ window.onload = async function(){
                 term: "How many cents are in a quarter?",
                 definitions: ["25"]
             }, {
+                term: "What are the names of the first 10 numbers?",
+                definitions: ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
+            }, {
                 term: "Who Painted the Mona Lisa?",
                 definitions: ["leonardo da vinci"]
             }, {
-                term: "What does the NBA stand for",
+                term: "What does the NBA stand for?",
                 definitions: ["national basketball association"]
+            }, {
+                term: "What's the closest planet to the sun?",
+                definitions: ["mercury"]
+            }, {
+                term: "What is the name of the largest youtube channel?",
+                definitions: ["t-series"]
+            }, {
+                term: "What is the name of the oldest instrument?",
+                definitions: ["flute"]
             }
-        ]
-
-        console.log(deck.length);
+        ];
 
         updateFlashcard();
         return;
@@ -146,7 +113,7 @@ window.onload = async function(){
 
 function initialize(user){
     if(user.status === "FAILURE") {
-        location.href = "../../login"
+        location.href = "../../../login"
     } else user = user.context.user;
 
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png";

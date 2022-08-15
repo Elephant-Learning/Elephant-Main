@@ -493,9 +493,7 @@ async function saveDeck(){
                     deckId: editing
                 }),
                 mode: 'cors'
-        });
-
-            const nameContext = await nameResponse.json();
+            });
 
             const termsResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/resetTerms', {
                 method: 'POST',
@@ -512,14 +510,8 @@ async function saveDeck(){
                 mode: 'cors'
             });
 
-            const termsContext = await termsResponse.json();
-
             enableRedirect = true;
-            console.log(nameContext, termsContext, JSON.stringify({
-                newTerms: exportedDeck.terms,
-                deckId: editing
-            }));
-            //location.href = "../dashboard"
+            location.href = "../dashboard"
         }
 
         enableRedirect = true;
