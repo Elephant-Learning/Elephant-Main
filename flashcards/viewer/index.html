@@ -13,7 +13,7 @@
     <script src="../js/main.js" defer></script>
     <script src="js/script.js" defer></script>
     <script src="js/carousel.js" defer></script>
-    <script src="js/memorize.js"></script>
+    <script src="js/memorize.js" defer></script>
 </head>
 <body>
     <div id="desktop-music-container" class="inactive-modal">
@@ -149,6 +149,18 @@
                     <p>Deck Statistics</p>
                 </div>
             </div>
+            <div id="desktop-sidebar-information">
+                <div id="desktop-sidebar-deck-type">
+                    <img src="../icons/deck.png" alt="">
+                </div>
+                <div id="desktop-sidebar-deck-text">
+                    <div id="desktop-sidebar-deck-name"></div>
+                    <div id="desktop-sidebar-deck-author-container">
+                        <img src="" alt="" id="desktop-sidebar-deck-author-img">
+                        <p id="desktop-sidebar-deck-author"></p>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="desktop-main-container">
             <p id="desktop-main-container-tab">Deck Carousel</p>
@@ -169,96 +181,41 @@
                 <div class="desktop-tab" id="deck-memorize">
                     <div id="desktop-memorize-main">
                         <div id="desktop-memorize-term-container">
-                            <h1 id="desktop-memorize-term">How Many Colors Are In A Rainbow?</h1>
+                            <h1 id="desktop-memorize-term"></h1>
                             <div id="desktop-memorize-term-buttons">
                                 <button id="desktop-memorize-skip">Skip Question</button>
                             </div>
                         </div>
-                        <div id="desktop-memorize-definitions-list">
-                            <div class="desktop-memorize-definition desktop-memorize-definition-selected">
-                                <p>Something About Something</p>
-                                <div class="desktop-memorize-select-img">
-                                    <img src="./icons/correct.png" alt="">
-                                </div>
-                                <div class="desktop-memorize-options">
-                                    <img src="./icons/cancel.png" alt="">
-                                </div>
-                            </div>
-                            <div class="desktop-memorize-definition">
-                                <p>Nothing About Nothing</p>
-                                <div class="desktop-memorize-select-img">
-                                    <img src="./icons/correct.png" alt="">
-                                </div>
-                                <div class="desktop-memorize-options">
-                                    <img src="./icons/cancel.png" alt="">
-                                </div>
-                            </div>
-                            <div class="desktop-memorize-definition">
-                                <p>Something About Something is Something About Something but Nothing About Nothing isn't Nothing</p>
-                                <div class="desktop-memorize-select-img">
-                                    <img src="./icons/correct.png" alt="">
-                                </div>
-                                <div class="desktop-memorize-options">
-                                    <img src="./icons/cancel.png" alt="">
-                                </div>
-                            </div>
-                            <div class="desktop-memorize-definition desktop-memorize-definition-selected">
-                                <p>Something About Something</p>
-                                <div class="desktop-memorize-select-img">
-                                    <img src="./icons/correct.png" alt="">
-                                </div>
-                                <div class="desktop-memorize-options">
-                                    <img src="./icons/cancel.png" alt="">
-                                </div>
-                            </div>
-                            <div class="desktop-memorize-definition">
-                                <p>Nothing About Nothing</p>
-                                <div class="desktop-memorize-select-img">
-                                    <img src="./icons/correct.png" alt="">
-                                </div>
-                                <div class="desktop-memorize-options">
-                                    <img src="./icons/cancel.png" alt="">
-                                </div>
-                            </div>
-                            <div class="desktop-memorize-definition">
-                                <p>Something About Something is Something About Something but Nothing About Nothing isn't Nothing</p>
-                                <div class="desktop-memorize-select-img">
-                                    <img src="./icons/correct.png" alt="">
-                                </div>
-                                <div class="desktop-memorize-options">
-                                    <img src="./icons/cancel.png" alt="">
-                                </div>
-                            </div>
-                            <div class="desktop-memorize-definition desktop-memorize-definition-selected">
-                                <p>Something About Something</p>
-                                <div class="desktop-memorize-select-img">
-                                    <img src="./icons/correct.png" alt="">
-                                </div>
-                                <div class="desktop-memorize-options">
-                                    <img src="./icons/cancel.png" alt="">
-                                </div>
-                            </div>
-                            <div class="desktop-memorize-definition">
-                                <p>Nothing About Nothing</p>
-                                <div class="desktop-memorize-select-img">
-                                    <img src="./icons/correct.png" alt="">
-                                </div>
-                                <div class="desktop-memorize-options">
-                                    <img src="./icons/cancel.png" alt="">
-                                </div>
-                            </div>
-                            <div class="desktop-memorize-definition">
-                                <p>Something About Something is Something About Something but Nothing About Nothing isn't Nothing</p>
-                                <div class="desktop-memorize-select-img">
-                                    <img src="./icons/correct.png" alt="">
-                                </div>
-                                <div class="desktop-memorize-options">
-                                    <img src="./icons/cancel.png" alt="">
+                        <div id="desktop-memorize-definitions-list"></div>
+                    </div>
+                    <div id="desktop-memorize-panel">
+                        <div id="desktop-memorize-panel-questions-left-container">
+                            <h1 id="desktop-memorize-panel-questions-left"></h1>
+                            <p>Questions Left</p>
+                            <div id="desktop-memorize-panel-questions-left-progress">
+                                <div class="i-card" id="desktop-memorize-panel-questions-left-information">
+                                    <div>
+                                        <img src="./icons/information.png" alt="">
+                                    </div>
+                                    <div>
+                                        <p>The Progress Bar Displays how far you are along on Elephant Memorize</p>
+                                        <div>
+                                            <div></div>
+                                            <p>Incomplete</p>
+                                        </div>
+                                        <div>
+                                            <div class="community"></div>
+                                            <p>Begun Learning</p>
+                                        </div>
+                                        <div>
+                                            <div class="personal"></div>
+                                            <p>Memorized</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="desktop-memorize-panel"></div>
                 </div>
                 <div class="desktop-tab" id="deck-review">
                     c

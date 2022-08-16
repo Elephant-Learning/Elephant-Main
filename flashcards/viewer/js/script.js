@@ -91,6 +91,7 @@ window.onload = async function(){
         ];
 
         updateFlashcard();
+        initializeMemorize();
         return;
     }
 
@@ -106,9 +107,33 @@ window.onload = async function(){
     })
 
     const context = await response.json();
+
+    if(context.context.deck.visibility === "PUBLIC") document.getElementById('desktop-sidebar-deck-type').classList.add('community');
+    else if(context.context.deck.visibility === "SHARED") document.getElementById('desktop-sidebar-deck-type').classList.add('shared');
+    else if(context.context.deck.visibility === "PRIVATE") document.getElementById('desktop-sidebar-deck-type').classList.add('personal');
+
+    document.getElementById('desktop-sidebar-deck-name').innerHTML = context.context.deck.name;
+
+    const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + context.context.deck.authorId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const userContext = await userResponse.json()
+
+    document.getElementById('desktop-sidebar-deck-author-img').src = "../../icons/avatars/" + userContext.context.user.pfpId + ".png"
+    document.getElementById('desktop-sidebar-deck-author').innerHTML = userContext.context.user.firstName + " " + userContext.context.user.lastName
+
     deck = context.context.deck.cards;
 
     updateFlashcard();
+    initializeMemorize();
 }
 
 function initialize(user){
