@@ -40,7 +40,7 @@ async function search(){
     const deckContext = await deckResponse.json();
 
     let userLikedDecks = userContext.context.user.likedDecksIds
-    let userSharedDecks = userContext.context.user.sharedDecks
+    let userSharedDecks = userContext.context.user.sharedDeckIds
     let decks = deckContext.context.decks;
 
     removeAllChildNodes(document.getElementById('search-results-main'))
@@ -276,7 +276,7 @@ function min(num1, num2){
     else return num1
 }
 
-function displayFlashcardsManager(user){
+async function displayFlashcardsManager(user){
 
     let ele = document.getElementById('flashcards-list');
 
@@ -284,8 +284,29 @@ function displayFlashcardsManager(user){
         ele.lastChild.remove();
     }
 
-    for(let i = 0; i < min(user.decks.length, deckShowAmount); i++){
-        displayFlashcard(user.decks[Object.keys(user.decks)[i]].name, user.id, user.decks[Object.keys(user.decks)[i]].visibility, user.decks[Object.keys(user.decks)[i]].id, user.likedDecksIds.includes(user.decks[Object.keys(user.decks)[i]].id), false);
+    for(let i = 0; i < user.statistics.recentlyViewedDeckIds.length; i++){
+
+        const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + user.statistics.recentlyViewedDeckIds[i], {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        });
+
+        const context = await response.json();
+
+        if(document.getElementById('flashcards-view-sorting').value === "1" && context.context.deck.authorId === user.id){
+            displayFlashcard(context.context.deck.name, context.context.deck.authorId, context.context.deck.visibility, context.context.deck.id, user.likedDecksIds.includes(context.context.deck.id), false);
+        } else if(document.getElementById('flashcards-view-sorting').value === "2" && user.sharedDeckIds.includes(context.context.deck.id)){
+            displayFlashcard(context.context.deck.name, context.context.deck.authorId, context.context.deck.visibility, context.context.deck.id, user.likedDecksIds.includes(context.context.deck.id), false);
+        } else if(document.getElementById('flashcards-view-sorting').value === "0") {
+            displayFlashcard(context.context.deck.name, context.context.deck.authorId, context.context.deck.visibility, context.context.deck.id, user.likedDecksIds.includes(context.context.deck.id), false);
+        }
+
         if(!document.getElementById('no-flashcards').classList.contains('inactive-modal')) document.getElementById('no-flashcards').classList.add('inactive-modal');
     } document.getElementById('flashcards-display-test').innerHTML = "";
 
@@ -298,7 +319,7 @@ function displayFlashcardsManager(user){
     }
 }
 
-async function displayMoreFlashcards(){
+async function refreshFlashcards(){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
     const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
@@ -312,7 +333,6 @@ async function displayMoreFlashcards(){
     })
 
     const context = await response.json();
-    deckShowAmount += 10;
     displayFlashcardsManager(context.context.user);
 }
 

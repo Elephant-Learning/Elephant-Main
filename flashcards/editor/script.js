@@ -477,6 +477,24 @@ async function saveDeck(){
             const context = await response.json();
             console.log(context);
 
+            const recentDeckResponse = await fetch('https://elephant-rearend.herokuapp.com/statistics/recentlyViewedDecks', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                body: JSON.stringify({
+                    userId: savedUserId,
+                    deckId: context.context.deck.id
+                }),
+                mode: 'cors'
+            });
+
+            const recentDeckContext = await recentDeckResponse.json();
+            console.log(recentDeckContext);
+
             enableRedirect = true;
             location.href = "../editor/?deck=" + context.context.deck.id;
         } else {
@@ -509,6 +527,24 @@ async function saveDeck(){
                 }),
                 mode: 'cors'
             });
+
+            const recentDeckResponse = await fetch('https://elephant-rearend.herokuapp.com/statistics/recentlyViewedDecks', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                body: JSON.stringify({
+                    userId: savedUserId,
+                    deckId: editing
+                }),
+                mode: 'cors'
+            });
+
+            const recentDeckContext = await recentDeckResponse.json();
+            console.log(recentDeckContext);
 
             enableRedirect = true;
             location.href = "../dashboard"

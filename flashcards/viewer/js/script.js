@@ -104,7 +104,7 @@ window.onload = async function(){
             'Access-Control-Allow-Headers': 'Content-Type'
         },
         mode: 'cors'
-    })
+    });
 
     const context = await response.json();
 
@@ -113,6 +113,25 @@ window.onload = async function(){
     else if(context.context.deck.visibility === "PRIVATE") document.getElementById('desktop-sidebar-deck-type').classList.add('personal');
 
     document.getElementById('desktop-sidebar-deck-name').innerHTML = context.context.deck.name;
+
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+    const recentDeckResponse = await fetch('https://elephant-rearend.herokuapp.com/statistics/recentlyViewedDecks', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        body: JSON.stringify({
+            userId: savedUserId,
+            deckId: context.context.deck.id
+        }),
+        mode: 'cors'
+    });
+
+    const recentDeckContext = await recentDeckResponse.json();
+    console.log(recentDeckContext);
 
     const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + context.context.deck.authorId, {
         method: 'GET',

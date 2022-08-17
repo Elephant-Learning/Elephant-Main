@@ -567,20 +567,24 @@ async function addDeckShared(deckID, adding, notificationId){
     const notificationDeletionContext = await notificationDeletionResponse.json();
     console.log(notificationDeletionContext);
 
-    const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type'
-        },
-        mode: 'cors'
-    })
+    if(adding){
+        location.href = "../viewer/?deck=" + deckID;
+    } else {
+        const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        })
 
-    const userContext = await userResponse.json()
+        const userContext = await userResponse.json()
 
-    notificationsManager(userContext.context.user);
+        notificationsManager(userContext.context.user);
+    }
 }
 
 function createNotification(TYPE, DATA){

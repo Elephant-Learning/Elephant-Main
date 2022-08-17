@@ -1,5 +1,6 @@
 let correntAnswerNumber = 0;
 let indexesIncomplete, indexesReviewed, indexesComplete;
+let deckMaxDefinitions = 0;
 
 function memorizeCheckAnswer(index){
     document.querySelectorAll('.desktop-memorize-definition')[index].classList.add('desktop-memorize-definition-selected');
@@ -110,6 +111,9 @@ function setupCard(deckIndex){
     if(randomizedAnswers.length > 3) incorrectAnswerLength = randomizedAnswers.length * 2 + Math.floor(Math.random() * 2) - 1;
     else incorrectAnswerLength = randomizedAnswers.length * 2 + Math.floor(Math.random() * 2);
 
+    console.log(incorrectAnswerLength, deckMaxDefinitions);
+    if(incorrectAnswerLength > deckMaxDefinitions) incorrectAnswerLength = deckMaxDefinitions;
+
     while(randomizedAnswers.length < incorrectAnswerLength){
         let randomAnswer = deck[Math.floor(Math.random() * deck.length)];
         randomAnswer = randomAnswer.definitions[Math.floor(Math.random() * randomAnswer.definitions.length)];
@@ -133,12 +137,15 @@ function setupCard(deckIndex){
 }
 
 function initializeMemorize(){
-    indexesIncomplete = []
-    indexesReviewed = []
-    indexesComplete = []
+    indexesIncomplete = [];
+    indexesReviewed = [];
+    indexesComplete = [];
 
     for(let i = 0; i < deck.length; i++){
         indexesIncomplete.push(i)
+        for(let j = 0; j < deck[i].definitions.length; j++){
+            deckMaxDefinitions++;
+        }
     } document.getElementById('desktop-memorize-panel-questions-left').innerHTML = indexesIncomplete.length * 2 + indexesReviewed.length;
     setupCard(Math.floor(Math.random() * indexesIncomplete.length + indexesReviewed.length));
 }

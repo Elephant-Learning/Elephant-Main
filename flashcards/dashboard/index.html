@@ -258,9 +258,10 @@
                             <div id="flashcards-sorting">
                                 <div class="flashcard-sorting">
                                     <p>View:</p>
-                                    <select onchange="">
+                                    <select onchange="refreshFlashcards()" id="flashcards-view-sorting">
                                         <option value="0">All Decks</option>
                                         <option value="1">Your Decks</option>
+                                        <option value="2">Shared Decks</option>
                                     </select>
                                 </div>
                                 <div class="flashcard-sorting">
@@ -274,7 +275,7 @@
                             </div>
                              <div id="flashcards-list-container">
                                 <div id="flashcards-list"></div>
-                                <div id="no-flashcards" onclick="createDeck()">
+                                    <div id="no-flashcards" onclick="createDeck()">
                                     <p>Nothing to show here. Create a Deck Now!</p>
                                 </div>
                                 <div id="flashcards-display-test"></div>
