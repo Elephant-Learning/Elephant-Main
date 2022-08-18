@@ -111,7 +111,7 @@ window.onload = async function(){
     const context = await response.json();
     console.log(context);
 
-    if(savedUserId !== context.context.deck.authorId && !context.context.deck.sharedUsers.includes(savedUserId)) {
+    if(savedUserId !== context.context.deck.authorId && !context.context.deck.sharedUsers.includes(savedUserId) && context.context.deck.visibility !== "PUBLIC") {
         location.href = "../dashboard";
         return;
     }
