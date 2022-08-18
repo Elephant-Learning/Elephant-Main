@@ -3,7 +3,7 @@
     overflow-x:hidden;
 }
 
-#flashcards-main-options{
+#flashcards-main-options, #folder-main-options{
     display:flex;
     flex-direction:row;
     align-items:center;
@@ -14,7 +14,7 @@
     width:calc(100vw - calc(var(--size) * 304px));
 }
 
-#flashcards-main-options > div{
+#flashcards-main-options > div, #folder-main-options > div{
     display:flex;
     flex-direction:row;
     align-items:center;
@@ -36,30 +36,30 @@
     border:1px solid var(--secondary-accent);
 }*/
 
-#flashcards-main-options > div:hover{
+#flashcards-main-options > div:hover, #folder-main-options > div:hover{
     border:1px solid var(--primary-accent);
 }
 
-#flashcards-main-options > div > img:first-of-type{
+#flashcards-main-options > div > img:first-of-type, #folder-main-options > div > img:first-of-type{
     height:calc(var(--size) * 30px);
     filter:invert(1) brightness(var(--image-invert));
 }
 
-#flashcards-main-options > div > div > h1{
+#flashcards-main-options > div > div > h1, #folder-main-options > div > div > h1{
     font-size:calc(var(--size) * 14px);
     font-weight:600;
     margin:0;
     cursor:pointer;
 }
 
-#flashcards-main-options > div > div > p{
+#flashcards-main-options > div > div > p, #folder-main-options > div > div > p{
     font-size:calc(var(--size) * 12px);
     margin:0;
     color:gray;
     cursor:pointer;
 }
 
-#flashcards-main-options > div > img:last-of-type{
+#flashcards-main-options > div > img:last-of-type, #folder-main-options > div > img:last-of-type{
     height:calc(var(--size) * 18px);
     margin-left:calc(var(--size) * 18px);
     filter:invert(1) brightness(var(--image-invert));
@@ -216,6 +216,9 @@
 
 .flashcard-deck > div:first-of-type > img:first-of-type{
     height:calc(var(--size) * 24px);
+}
+
+.flashcard-deck:not(.user-flashcard) > div:first-of-type > img:first-of-type{
     filter:invert(1);
 }
 

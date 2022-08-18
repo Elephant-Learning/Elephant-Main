@@ -12,19 +12,26 @@ const flashcardsVersion = "v1.0.0"
 
 async function search(){
     document.getElementById('desktop-navbar-input').blur();
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
 
-    const deckResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/getByName?name=' + document.getElementById('desktop-navbar-input').value, {
-        method: 'GET',
+    /*const deckResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/getByName', {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type'
         },
+        body: JSON.stringify({
+            userId: savedUserId,
+            name: document.getElementById('desktop-navbar-input').value
+        }),
         mode: 'cors'
     })
 
-    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+    const deckContext = await deckResponse.json();
+    console.log(deckContext);*/
+
     const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {
@@ -37,19 +44,48 @@ async function search(){
     })
 
     const userContext = await userResponse.json();
-    const deckContext = await deckResponse.json();
 
     let userLikedDecks = userContext.context.user.likedDecksIds
     let userSharedDecks = userContext.context.user.sharedDeckIds
-    let decks = deckContext.context.decks;
+    let userFriends = userContext.context.user.friendIds
+    /*let decks = deckContext.context.decks;
 
-    removeAllChildNodes(document.getElementById('search-results-main'))
+    removeAllChildNodes(document.getElementById('search-results-main'))*/
 
     togglePageFlip(3, undefined);
 
-    for(let i = 0; i < decks.length; i++){
+    /*for(let i = 0; i < decks.length; i++){
         if(decks[i].visibility === "PUBLIC" || userSharedDecks.includes(decks[i].id) || decks[i].authorId === savedUserId) await displayFlashcard(decks[i].name, decks[i].authorId, decks[i].visibility, decks[i].id, userLikedDecks.includes(decks[i].id), true);
-    } document.getElementById('flashcards-display-test').innerHTML = "";
+    } document.getElementById('flashcards-display-test').innerHTML = "";*/
+
+    const elephantUsersResponse = await fetch('https://elephant-rearend.herokuapp.com/login/userByName?name=' + document.getElementById('desktop-navbar-input').value, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    });
+
+    const elephantUsersContext = await elephantUsersResponse.json();
+    console.log(elephantUsersContext);
+
+    for(let i = 0; i < elephantUsersContext.context.users.length; i++){
+        if(!(elephantUsersContext.context.users[i].id === savedUserId)){
+            await displayFlashcard("user", {
+                name: elephantUsersContext.context.users[i].firstName + " " + elephantUsersContext.context.users[i].lastName,
+                type: elephantUsersContext.context.users[i].type,
+                email: elephantUsersContext.context.users[i].email,
+                pfpId: elephantUsersContext.context.users[i].pfpId,
+                friend: userFriends.includes(elephantUsersContext.context.users[i].id),
+                search: true
+            })
+        }
+
+        console.log(!(elephantUsersContext.context.users[i].id === savedUserId));
+    }
 }
 
 function toggleSettingsModal(){
@@ -97,6 +133,10 @@ function togglePageFlip(index, sidebar, link){
     }
 
     history.push([index, sidebar]);
+}
+
+function viewFolder(folderId, sidebarNum){
+    togglePageFlip(5, sidebarNum);
 }
 
 function sidebarFolder(title, folderId){
@@ -300,11 +340,32 @@ async function displayFlashcardsManager(user){
         const context = await response.json();
 
         if(document.getElementById('flashcards-view-sorting').value === "1" && context.context.deck.authorId === user.id){
-            displayFlashcard(context.context.deck.name, context.context.deck.authorId, context.context.deck.visibility, context.context.deck.id, user.likedDecksIds.includes(context.context.deck.id), false);
+            await displayFlashcard("flashcard", {
+                name: context.context.deck.name,
+                author: context.context.deck.authorId,
+                type: context.context.deck.visibility,
+                deckID: context.context.deck.id,
+                favorite: user.likedDecksIds.includes(context.context.deck.id),
+                search: false
+            });
         } else if(document.getElementById('flashcards-view-sorting').value === "2" && user.sharedDeckIds.includes(context.context.deck.id)){
-            displayFlashcard(context.context.deck.name, context.context.deck.authorId, context.context.deck.visibility, context.context.deck.id, user.likedDecksIds.includes(context.context.deck.id), false);
+            await displayFlashcard("flashcard", {
+                name: context.context.deck.name,
+                author: context.context.deck.authorId,
+                type: context.context.deck.visibility,
+                deckID: context.context.deck.id,
+                favorite: user.likedDecksIds.includes(context.context.deck.id),
+                search: false
+            });
         } else if(document.getElementById('flashcards-view-sorting').value === "0") {
-            displayFlashcard(context.context.deck.name, context.context.deck.authorId, context.context.deck.visibility, context.context.deck.id, user.likedDecksIds.includes(context.context.deck.id), false);
+            await displayFlashcard("flashcard", {
+                name: context.context.deck.name,
+                author: context.context.deck.authorId,
+                type: context.context.deck.visibility,
+                deckID: context.context.deck.id,
+                favorite: user.likedDecksIds.includes(context.context.deck.id),
+                search: false
+            });
         }
 
         if(!document.getElementById('no-flashcards').classList.contains('inactive-modal')) document.getElementById('no-flashcards').classList.add('inactive-modal');

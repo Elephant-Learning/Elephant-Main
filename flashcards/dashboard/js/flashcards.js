@@ -30,18 +30,25 @@ const Deck = function(name){
 //viewIndex
 //0 = All Decks
 //1 = Your Decks
-async function displayFlashcard(name, author, type, deckID, favorite, search){
+async function displayFlashcard(flashcardType, params){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
     let mainDiv = document.createElement('div');
 
     let iconDiv = document.createElement('div');
     let icon = document.createElement('img');
 
-    if(type === "PRIVATE") type = "PERSONAL";
-    else if(type === "PUBLIC") type = "COMMUNITY"
+    if(flashcardType === "flashcard"){
+        if(params.type === "PRIVATE") params.type = "PERSONAL";
+        else if(params.type === "PUBLIC") params.type = "COMMUNITY";
 
-    icon.src = "../icons/file.png";
+        icon.src = "../icons/file.png";
+        iconDiv.classList.add(params.type.toLowerCase() + "-flashcard");
+    } else if(flashcardType === "user"){
+        icon.src = "../../icons/avatars/" + params.pfpId + ".png";
+        iconDiv.classList.add("personal-flashcard");
+    }
+
     iconDiv.appendChild(icon);
-    iconDiv.classList.add(type.toLowerCase() + "-flashcard");
 
     let textDiv = document.createElement('div');
     let nameText = document.createElement('h1');
@@ -50,110 +57,159 @@ async function displayFlashcard(name, author, type, deckID, favorite, search){
     let authorText = document.createElement('p');
 
     let testSpace = document.getElementById('flashcards-display-test');
-    for(let i = 0; i < name.length; i++){
-        testSpace.innerHTML = name.substring(0, i);
-        if(testSpace.clientWidth > 180) {
-            name = name.substring(0, i - 1) + "...";
-            break;
+    if(flashcardType === "flashcard"){
+        for(let i = 0; i < params.name.length; i++){
+            testSpace.innerHTML = params.name.substring(0, i);
+            if(testSpace.clientWidth > 180) {
+                params.name = params.name.substring(0, i - 1) + "...";
+                break;
+            }
         }
+
+        const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + params.author, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        })
+
+        const content = await response.json();
+
+        nameText.innerHTML = params.name
+        authorText.innerHTML = content.context.user.firstName + " " + content.context.user.lastName;
+        authorImg.src = "../../icons/avatars/" + content.context.user.pfpId + ".png";
+        authorDiv.append(authorImg, authorText);
+    } else if(flashcardType === "user") {
+        for(let i = 0; i < params.name.length; i++){
+            testSpace.innerHTML = params.name.substring(0, i);
+            if(testSpace.clientWidth > 180) {
+                params.name = params.name.substring(0, i - 1) + "...";
+                break;
+            }
+        }
+
+        nameText.innerHTML = params.name;
+        authorText.innerHTML = params.email;
+        authorDiv.appendChild(authorText);
     }
 
-    const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + author, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type'
-        },
-        mode: 'cors'
-    })
 
-    const content = await response.json();
-
-    nameText.innerHTML = name
-    authorText.innerHTML = content.context.user.firstName + " " + content.context.user.lastName;
-    authorImg.src = "../../icons/avatars/" + content.context.user.pfpId + ".png";
-    authorDiv.append(authorImg, authorText);
     textDiv.append(nameText, authorDiv);
 
     let tag = document.createElement('p');
-    tag.innerHTML = type;
-    tag.classList.add(type.toLowerCase() + "-flashcard");
 
-    let options = document.createElement('div');
-    let favoriteImg = document.createElement('img');
-    let editImg = document.createElement('img');
-    let deleteImg = document.createElement('img')
-
-    if(favorite){
-        favoriteImg.src = "../icons/filled_heart.png";
-        favoriteImg.classList.add('loved');
-    } else {
-        favoriteImg.src = "../icons/unfilled_heart.png";
-        favoriteImg.classList.add('unloved');
+    if(flashcardType === "flashcard"){
+        tag.innerHTML = params.type;
+        tag.classList.add(params.type.toLowerCase() + "-flashcard");
+    } else if(flashcardType === "user"){
+        tag.innerHTML = params.type;
+        tag.classList.add("personal-flashcard");
     }
 
-    editImg.src = "../editor/icons/edit.png";
-    deleteImg.src = "../icons/delete.png";
+    let options = document.createElement('div');
 
-    favoriteImg.addEventListener('click', function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        favoriteDeck(this, deckID)
-    })
+    if(flashcardType === "flashcard"){
+        let favoriteImg = document.createElement('img');
+        let editImg = document.createElement('img');
+        let deleteImg = document.createElement('img')
 
-    editImg.addEventListener('click', function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        editFlashcard(deckID);
-    })
+        if(params.favorite){
+            favoriteImg.src = "../icons/filled_heart.png";
+            favoriteImg.classList.add('loved');
+        } else {
+            favoriteImg.src = "../icons/unfilled_heart.png";
+            favoriteImg.classList.add('unloved');
+        }
 
-    deleteImg.addEventListener('click', function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        deleteDeck(deckID);
-    });
+        editImg.src = "../editor/icons/edit.png";
+        deleteImg.src = "../icons/delete.png";
 
-    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
-    if(author === savedUserId){
-        options.append(editImg, favoriteImg, deleteImg);
-    } else {
-        options.append(favoriteImg);
+        favoriteImg.addEventListener('click', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            favoriteDeck(this, params.deckID)
+        })
+
+        editImg.addEventListener('click', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            editFlashcard(params.deckID);
+        })
+
+        deleteImg.addEventListener('click', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            deleteDeck(params.deckID);
+        });
+
+        if(params.author === savedUserId){
+            options.append(editImg, favoriteImg, deleteImg);
+        } else {
+            options.append(favoriteImg);
+        }
+    } else if(flashcardType === "user"){
+        let friendImg = document.createElement('img');
+
+        if(params.friend){
+            friendImg.src = "../icons/remove_friend.png";
+        } else {
+            friendImg.src = "../icons/add_friend.png";
+            friendImg.addEventListener('click', function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                document.getElementById('friending-input').value = params.email;
+
+                if(document.getElementById('desktop-friending-modal').classList.contains('inactive-modal')){
+                    document.getElementById('desktop-friending-modal').classList.remove('inactive-modal');
+                }
+
+                toggleFriendingModal(true);
+            })
+        }
+
+        options.append(friendImg);
     }
 
     mainDiv.append(iconDiv, textDiv, tag, options);
     mainDiv.classList.add('flashcard-deck');
-    mainDiv.classList.add(type.toLowerCase() + "-flashcard-border");
-    mainDiv.setAttribute('onclick', "location.href = '../viewer/?deck=" + deckID + "'");
+    if(flashcardType === "flashcard"){
+        mainDiv.classList.add(params.type.toLowerCase() + "-flashcard-border");
+        mainDiv.setAttribute('onclick', "location.href = '../viewer/?deck=" + params.deckID + "'");
+        mainDiv.addEventListener('contextmenu', function(e){
+            e.preventDefault();
+            e.stopPropagation();
 
-    mainDiv.addEventListener('contextmenu', function(e){
-        e.preventDefault();
-        e.stopPropagation();
+            while (document.getElementById('context-menu').firstChild) {
+                document.getElementById('context-menu').firstChild.remove()
+            }
 
-        while (document.getElementById('context-menu').firstChild) {
-            document.getElementById('context-menu').firstChild.remove()
-        }
+            let cmOptions = []
 
-        let cmOptions = []
+            if(params.author === savedUserId){
+                cmOptions = [
+                    ["view", "View Deck", "location.href = '../viewer/?deck=" + params.deckID + "'"],
+                    ["../editor/icons/edit", "Edit Deck", "editFlashcard(" + params.deckID + ")"],
+                    ["delete", "Delete Deck", "deleteDeck(" + params.deckID + ")"]
+                ]
+            } else {
+                cmOptions = [
+                    ["view", "View Deck", "location.href = '../viewer/?deck=" + params.deckID + "'"]
+                ]
+            }
 
-        if(author === savedUserId){
-            cmOptions = [
-                ["view", "View Deck", "location.href = '../viewer/?deck=" + deckID + "'"],
-                ["../editor/icons/edit", "Edit Deck", "editFlashcard(" + deckID + ")"],
-                ["delete", "Delete Deck", "deleteDeck(" + deckID + ")"]
-            ]
-        } else {
-            cmOptions = [
-                ["view", "View Deck", "location.href = '../viewer/?deck=" + deckID + "'"]
-            ]
-        }
+            contextMenuOptions(cmOptions)
+            toggleContextMenu(true, e);
+        })
+    } else if(flashcardType === "user"){
+        mainDiv.classList.add("personal-flashcard-border");
+        mainDiv.classList.add("user-flashcard");
+    }
 
-        contextMenuOptions(cmOptions)
-        toggleContextMenu(true, e);
-    })
-
-    if(search){
+    if(params.search){
         document.getElementById('search-results-main').appendChild(mainDiv);
     } else {
         document.getElementById('flashcards-list').appendChild(mainDiv);
