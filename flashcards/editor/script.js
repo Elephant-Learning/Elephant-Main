@@ -605,7 +605,7 @@ function toggleCardVisibility(visibility){
 async function checkForEditing(){
     try{
         if(document.location.href.split("?")[1].includes("deck=")) {
-
+            const savedUserId  = JSON.parse(localStorage.getItem('savedUserId'));
             document.getElementById('add-to-folder').classList.remove('inactive-modal');
             document.getElementById('invite-btn').classList.remove('inactive-modal');
             document.getElementById('publish-btn').classList.remove('inactive-modal');
@@ -624,8 +624,9 @@ async function checkForEditing(){
             let cards = await response.json();
 
             console.log(cards);
+            cards = cards.context.deck;
 
-            cards = cards.context.deck
+            if(savedUserId !== cards.authorId) location.href = "../dashboard";
 
             toggleCardVisibility(cards.visibility)
 
@@ -658,7 +659,7 @@ async function checkForEditing(){
                 createCard(cards[i].term, cards[i].definitions)
             }
         }
-    } catch {
+    } catch(error) {
         document.getElementById('deck-privacy-div').innerHTML = "PERSONAL";
         document.getElementById('deck-privacy-div').classList.add('personal');
         document.getElementById('deck-name').innerHTML = "New Elephant Deck";

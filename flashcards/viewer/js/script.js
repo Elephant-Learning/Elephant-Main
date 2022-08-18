@@ -95,6 +95,8 @@ window.onload = async function(){
         return;
     }
 
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
     const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + document.location.href.split("=")[1], {
         method: 'GET',
         headers: {
@@ -107,6 +109,12 @@ window.onload = async function(){
     });
 
     const context = await response.json();
+    console.log(context);
+
+    if(savedUserId !== context.context.deck.authorId && !context.context.deck.sharedUsers.includes(savedUserId)) {
+        location.href = "../dashboard";
+        return;
+    }
 
     if(context.context.deck.visibility === "PUBLIC") document.getElementById('desktop-sidebar-deck-type').classList.add('community');
     else if(context.context.deck.visibility === "SHARED") document.getElementById('desktop-sidebar-deck-type').classList.add('shared');
@@ -114,7 +122,6 @@ window.onload = async function(){
 
     document.getElementById('desktop-sidebar-deck-name').innerHTML = context.context.deck.name;
 
-    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
     const recentDeckResponse = await fetch('https://elephant-rearend.herokuapp.com/statistics/recentlyViewedDecks', {
         method: 'POST',
         headers: {
@@ -129,9 +136,6 @@ window.onload = async function(){
         }),
         mode: 'cors'
     });
-
-    const recentDeckContext = await recentDeckResponse.json();
-    console.log(recentDeckContext);
 
     const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + context.context.deck.authorId, {
         method: 'GET',
