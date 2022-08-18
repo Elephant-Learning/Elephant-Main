@@ -210,7 +210,11 @@ async function displayFlashcard(flashcardType, params){
     }
 
     if(params.search){
-        document.getElementById('search-results-main').appendChild(mainDiv);
+        if(flashcardType === "flashcard"){
+            document.getElementById('search-results-flashcards').appendChild(mainDiv);
+        } else if(flashcardType === "user"){
+            document.getElementById('search-results-users').appendChild(mainDiv);
+        }
     } else {
         document.getElementById('flashcards-list').appendChild(mainDiv);
     }

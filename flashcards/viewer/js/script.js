@@ -116,11 +116,17 @@ window.onload = async function(){
         return;
     }
 
+    for(let i = 0; i < context.context.deck.name.length; i++){
+        document.getElementById("desktop-sidebar-deck-name").innerHTML = context.context.deck.name.substring(0, i);
+        if(document.getElementById("desktop-sidebar-deck-name").clientWidth > 160) {
+            document.getElementById("desktop-sidebar-deck-name").innerHTML = context.context.deck.name.substring(0, i - 1) + "...";
+            break;
+        }
+    }
+
     if(context.context.deck.visibility === "PUBLIC") document.getElementById('desktop-sidebar-deck-type').classList.add('community');
     else if(context.context.deck.visibility === "SHARED") document.getElementById('desktop-sidebar-deck-type').classList.add('shared');
     else if(context.context.deck.visibility === "PRIVATE") document.getElementById('desktop-sidebar-deck-type').classList.add('personal');
-
-    document.getElementById('desktop-sidebar-deck-name').innerHTML = context.context.deck.name;
 
     const recentDeckResponse = await fetch('https://elephant-rearend.herokuapp.com/statistics/recentlyViewedDecks', {
         method: 'POST',

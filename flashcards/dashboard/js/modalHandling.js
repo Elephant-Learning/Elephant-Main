@@ -14,23 +14,19 @@ async function search(){
     document.getElementById('desktop-navbar-input').blur();
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
 
-    /*const deckResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/getByName', {
-        method: 'POST',
+    const deckResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/getByName?userId=' + savedUserId + '&name=' + document.getElementById('desktop-navbar-input').value, {
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type'
         },
-        body: JSON.stringify({
-            userId: savedUserId,
-            name: document.getElementById('desktop-navbar-input').value
-        }),
         mode: 'cors'
     })
 
     const deckContext = await deckResponse.json();
-    console.log(deckContext);*/
+    console.log(deckContext);
 
     const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
@@ -48,15 +44,25 @@ async function search(){
     let userLikedDecks = userContext.context.user.likedDecksIds
     let userSharedDecks = userContext.context.user.sharedDeckIds
     let userFriends = userContext.context.user.friendIds
-    /*let decks = deckContext.context.decks;
+    let decks = deckContext.context.decks;
 
-    removeAllChildNodes(document.getElementById('search-results-main'))*/
+    removeAllChildNodes(document.getElementById('search-results-flashcards'));
+    removeAllChildNodes(document.getElementById('search-results-users'));
 
     togglePageFlip(3, undefined);
 
-    /*for(let i = 0; i < decks.length; i++){
-        if(decks[i].visibility === "PUBLIC" || userSharedDecks.includes(decks[i].id) || decks[i].authorId === savedUserId) await displayFlashcard(decks[i].name, decks[i].authorId, decks[i].visibility, decks[i].id, userLikedDecks.includes(decks[i].id), true);
-    } document.getElementById('flashcards-display-test').innerHTML = "";*/
+    for(let i = 0; i < decks.length; i++){
+        //if(decks[i].visibility === "PUBLIC" || userSharedDecks.includes(decks[i].id) || decks[i].authorId === savedUserId)
+
+        await displayFlashcard("flashcard", {
+            name: decks[i].name,
+            author: decks[i].authorId,
+            type: decks[i].visibility,
+            deckID: decks[i].id,
+            favorite: userLikedDecks.includes(decks[i].id),
+            search: true
+        });
+    } document.getElementById('flashcards-display-test').innerHTML = "";
 
     const elephantUsersResponse = await fetch('https://elephant-rearend.herokuapp.com/login/userByName?name=' + document.getElementById('desktop-navbar-input').value, {
         method: 'GET',

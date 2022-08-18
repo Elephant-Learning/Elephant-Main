@@ -218,10 +218,22 @@
     margin-top:calc(var(--size) * 24px);
     margin-left:calc(var(--size) * 24px);
     display:flex;
-    flex-direction:row;
-    flex-wrap:wrap;
+    flex-direction:column;
     justify-content:flex-start;
     align-items:flex-start;
+    gap:calc(var(--size) * 12px);
+}
+
+#search-results-main > div{
+    display:flex;
+    flex-direction:column;
+    flex-wrap:wrap;
+    overflow-x:scroll;
+    overflow-y:hidden;
+    justify-content:flex-start;
+    align-items:flex-start;
+    height:calc(0.5 * (100vh - var(--size) * 182px) - var(--size) * 12px);
+    width:calc(100vw - var(--size) * 304px);
     gap:calc(var(--size) * 12px);
 }
 

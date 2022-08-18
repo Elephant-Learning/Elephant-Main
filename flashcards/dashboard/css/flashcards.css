@@ -78,7 +78,7 @@
     align-items:center;
 }
 
-.flashcard-sorting > p{
+.flashcard-sorting > p, #search-results-main > p{
     font-size:calc(var(--size) * 12px);
     color:gray;
     margin:0;
