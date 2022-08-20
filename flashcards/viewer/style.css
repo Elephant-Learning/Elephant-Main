@@ -418,10 +418,10 @@
     justify-content:flex-start;
     text-align:left;
     padding:calc(var(--size) * 24px);
-    background:var(--bg-color-1);
+    background:var(--light-gray);
     width:calc(var(--size) * 192px);
     border-radius:calc(var(--size) * 12px);
-    border:1px solid var(--light-border-color);
+    border:1px solid var(--dark-border-color);
     gap:calc(var(--size) * 6px);
 }
 
@@ -429,6 +429,7 @@
     font-size:calc(var(--size) * 12px);
     margin:0;
     font-weight:400;
+    color:lightgray;
 }
 
 .i-card > div:first-of-type ~ div:last-of-type{
@@ -448,7 +449,7 @@
 }
 
 .i-card > div:last-of-type > div > div{
-    border:1px solid var(--light-border-color);
+    border:1px solid var(--dark-border-color);
     width:calc(var(--size) * 16px);
     height:calc(var(--size) * 16px);
     border-radius:calc(var(--size) * 6px);
@@ -456,6 +457,7 @@
 
 .i-card > div:last-of-type > div > p{
     font-weight:700;
+    color:white;
 }
 
 #desktop-memorize-term-container{
@@ -601,4 +603,41 @@
 .desktop-memorize-options > img:hover{
     transform:scale(1.025);
     filter:invert(var(--image-invert));
+}
+
+.desktop-memorize-write{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    background:var(--bg-color-2);
+    gap:calc(var(--size) * 6px);
+    border:1px solid var(--light-border-color);
+    width:calc(100% - var(--size) * 64px);
+    border-radius:calc(var(--size) * 6px);
+}
+
+.desktop-memorize-write > div{
+    width:calc(var(--size) * 24px);
+    height:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 6px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+.desktop-memorize-write > div > img{
+    width:calc(var(--size) * 18px);
+    filter:invert(1);
+}
+
+.desktop-memorize-write > input{
+    width:calc(100% - var(--size) * 64px);
+    height:calc(var(--size) * 48px);
+    background:transparent;
+    border:none;
+    outline:none;
+    font-size:calc(var(--size) * 14px);
+    color:gray;
 }

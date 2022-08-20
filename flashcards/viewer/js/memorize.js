@@ -1,5 +1,5 @@
 let correntAnswerNumber = 0;
-let indexesIncomplete, indexesReviewed, indexesComplete;
+let indexesIncomplete, indexesReviewed, indexesComplete, memorizeWriteCorrectAnswers;
 let deckMaxDefinitions = 0;
 
 function memorizeCheckAnswer(index){
@@ -58,13 +58,8 @@ function createMemorizeOption(text, correct, deckId){
         if(correct){
             correntAnswerNumber--;
             if(correntAnswerNumber === 0){
-                if(indexesIncomplete.includes(deckId)){
-                    indexesIncomplete.splice(indexesIncomplete.indexOf(deckId), 1);
-                    indexesReviewed.push(deckId);
-                } else if(indexesReviewed.includes(deckId)){
-                    indexesReviewed.splice(indexesReviewed.indexOf(deckId), 1);
-                    indexesComplete.push(deckId);
-                }
+                indexesIncomplete.splice(indexesIncomplete.indexOf(deckId), 1);
+                indexesReviewed.push(deckId);
 
                 if(indexesReviewed.length === 0 && indexesIncomplete.length === 0) console.log("Fully Finished");
                 let nextRandomCard = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
@@ -73,7 +68,7 @@ function createMemorizeOption(text, correct, deckId){
                 document.getElementById('desktop-memorize-panel-questions-left-progress').style.background = "linear-gradient(135deg, var(--primary-accent) 0%, var(--primary-accent-gradient) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent-gradient) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) 100%)";
 
                 if(nextRandomCard >= indexesIncomplete.length){
-                    setupCard(indexesReviewed[nextRandomCard - indexesIncomplete.length]);
+                    setupWrite(indexesReviewed[nextRandomCard - indexesIncomplete.length]);
                 } else {
                     setupCard(indexesIncomplete[nextRandomCard]);
                 }
@@ -91,11 +86,93 @@ function skipQuestion(){
     let nextRandomCard = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
 
     if(nextRandomCard >= indexesIncomplete.length){
-        setupCard(indexesReviewed[nextRandomCard - indexesIncomplete.length]);
+        setupWrite(indexesReviewed[nextRandomCard - indexesIncomplete.length]);
     } else {
         setupCard(indexesIncomplete[nextRandomCard]);
     }
     document.getElementById('desktop-memorize-panel-questions-left').innerHTML = indexesIncomplete.length * 2 + indexesReviewed.length;
+}
+
+function setupWrite(deckIndex){
+    removeAllChildNodes(document.getElementById('desktop-memorize-definitions-list'));
+    document.getElementById('desktop-memorize-term').innerHTML = deck[deckIndex].term;
+
+    memorizeWriteCorrectAnswers = [];
+
+    console.log(deck[deckIndex].definitions.length, deck[deckIndex].definitions);
+
+    for(let i = 0; i < deck[deckIndex].definitions.length; i++){
+        memorizeWriteCorrectAnswers.push(deck[deckIndex].definitions[i].toLowerCase());
+        correntAnswerNumber++;
+
+        let newDiv = document.createElement('div');
+        let newImgDiv = document.createElement('div');
+        let newImg = document.createElement('img');
+        let newInput = document.createElement('input');
+
+        newImgDiv.classList.add('shared');
+        newImg.src = "./icons/minus.png"
+        newImg.id = "desktop-memorize-write-img-" + i.toString();
+        newImgDiv.id = "desktop-memorize-write-img-div-" + i.toString();
+        newInput.id = "desktop-memorize-write-input-" + i.toString();
+        newInput.classList.add("desktop-memorize-write-input");
+
+        newInput.addEventListener('keypress', function(e){
+            if(e.key !== "Enter" && e.key !== "Tab") return;
+            let inputValue = this.value.toLowerCase();
+
+            if(memorizeWriteCorrectAnswers.includes(inputValue)){
+                let correct = true;
+
+                document.querySelectorAll('.desktop-memorize-write-input').forEach(function(element){
+                    if(inputValue === element.value.toLowerCase()){
+                        let id = element.id.split('')
+                        id = id[id.length - 1];
+                        console.log(id);
+
+                        if(id != i) correct = false;
+                    }
+                })
+
+                if(correct){
+                    document.getElementById("desktop-memorize-write-img-div-" + i.toString()).className = "personal";
+                    document.getElementById("desktop-memorize-write-img-" + i.toString()).src = "./icons/correct.png";
+                    this.setAttribute('readonly', 'true');
+
+                    correntAnswerNumber--;
+                    if(correntAnswerNumber === 0){
+                        indexesReviewed.splice(indexesReviewed.indexOf(deckIndex), 1);
+                        indexesComplete.push(deckIndex);
+
+                        if(indexesReviewed.length === 0 && indexesIncomplete.length === 0) console.log("Fully Finished");
+                        let nextRandomCard = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
+
+                        document.getElementById('desktop-memorize-panel-questions-left').innerHTML = indexesIncomplete.length * 2 + indexesReviewed.length;
+                        document.getElementById('desktop-memorize-panel-questions-left-progress').style.background = "linear-gradient(135deg, var(--primary-accent) 0%, var(--primary-accent-gradient) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent-gradient) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) 100%)";
+
+                        if(nextRandomCard >= indexesIncomplete.length){
+                            setupWrite(indexesReviewed[nextRandomCard - indexesIncomplete.length]);
+                        } else {
+                            setupCard(indexesIncomplete[nextRandomCard]);
+                        }
+                    }
+                } else {
+                    document.getElementById("desktop-memorize-write-img-div-" + i.toString()).className = "shared";
+                    document.getElementById("desktop-memorize-write-img-" + i.toString()).src = "./icons/minus.png";
+                }
+            } else {
+                document.getElementById("desktop-memorize-write-img-div-" + i.toString()).className = "community";
+                document.getElementById("desktop-memorize-write-img-" + i.toString()).src = "./icons/wrong.png";
+            }
+        })
+
+        newImgDiv.appendChild(newImg);
+
+        newDiv.append(newImgDiv, newInput);
+        newDiv.classList.add('desktop-memorize-write');
+
+        document.getElementById('desktop-memorize-definitions-list').appendChild(newDiv);
+    }
 }
 
 function setupCard(deckIndex){
