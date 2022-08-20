@@ -562,7 +562,7 @@
     position:absolute;
     width:calc(var(--size) * 24px);
     height:calc(var(--size) * 24px);
-    background:var(--bg-color-2);
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
     border-radius:50%;
     border:1px solid var(--primary-accent);
     right:calc(var(--size) * -12px);
@@ -575,7 +575,7 @@
 
 .desktop-memorize-select-img > img{
     height:calc(var(--size) * 18px);
-    filter:invert(var(--image-invert));
+    filter:invert(1);
 }
 
 .desktop-memorize-definition:not(.desktop-memorize-definition-selected) > .desktop-memorize-select-img{

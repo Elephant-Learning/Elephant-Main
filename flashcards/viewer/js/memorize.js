@@ -1,6 +1,5 @@
 let correntAnswerNumber = 0;
-let indexesIncomplete, indexesReviewed, indexesComplete, memorizeWriteCorrectAnswers;
-let deckMaxDefinitions = 0;
+let indexesIncomplete, indexesReviewed, indexesComplete, memorizeWriteCorrectAnswers, deckMaxDefinitions;
 
 function memorizeCheckAnswer(index){
     document.querySelectorAll('.desktop-memorize-definition')[index].classList.add('desktop-memorize-definition-selected');
@@ -54,25 +53,33 @@ function createMemorizeOption(text, correct, deckId){
     newDiv.classList.add('desktop-memorize-definition');
 
     newDiv.addEventListener('click', function(e){
+        if(newDiv.classList.contains('desktop-memorize-definition-selected')) return;
+
         memorizeCheckAnswer(newDivIndex);
         if(correct){
             correntAnswerNumber--;
             if(correntAnswerNumber === 0){
-                indexesIncomplete.splice(indexesIncomplete.indexOf(deckId), 1);
-                indexesReviewed.push(deckId);
+                setTimeout(function(){
+                    indexesIncomplete.splice(indexesIncomplete.indexOf(deckId), 1);
+                    indexesReviewed.push(deckId);
 
-                if(indexesReviewed.length === 0 && indexesIncomplete.length === 0) console.log("Fully Finished");
-                let nextRandomCard = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
+                    if(indexesReviewed.length === 0 && indexesIncomplete.length === 0) console.log("Fully Finished");
+                    let nextRandomCard = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
 
-                document.getElementById('desktop-memorize-panel-questions-left').innerHTML = indexesIncomplete.length * 2 + indexesReviewed.length;
-                document.getElementById('desktop-memorize-panel-questions-left-progress').style.background = "linear-gradient(135deg, var(--primary-accent) 0%, var(--primary-accent-gradient) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent-gradient) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) 100%)";
+                    document.getElementById('desktop-memorize-panel-questions-left').innerHTML = indexesIncomplete.length * 2 + indexesReviewed.length;
+                    document.getElementById('desktop-memorize-panel-questions-left-progress').style.background = "linear-gradient(135deg, var(--primary-accent) 0%, var(--primary-accent-gradient) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent-gradient) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) 100%)";
 
-                if(nextRandomCard >= indexesIncomplete.length){
-                    setupWrite(indexesReviewed[nextRandomCard - indexesIncomplete.length]);
-                } else {
-                    setupCard(indexesIncomplete[nextRandomCard]);
-                }
+                    if(nextRandomCard >= indexesIncomplete.length){
+                        setupWrite(indexesReviewed[nextRandomCard - indexesIncomplete.length]);
+                    } else {
+                        setupCard(indexesIncomplete[nextRandomCard]);
+                    }
+                }, 0);
             }
+        } else {
+            document.querySelectorAll('.desktop-memorize-select-img')[newDivIndex].style.background = "linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient))";
+            document.querySelectorAll('.desktop-memorize-select-img')[newDivIndex].style.border = "1px solid var(--secondary-accent)";
+            document.querySelectorAll('.desktop-memorize-definition')[newDivIndex].style.border = "1px solid var(--secondary-accent)";
         }
     })
 
@@ -99,8 +106,6 @@ function setupWrite(deckIndex){
 
     memorizeWriteCorrectAnswers = [];
 
-    console.log(deck[deckIndex].definitions.length, deck[deckIndex].definitions);
-
     for(let i = 0; i < deck[deckIndex].definitions.length; i++){
         memorizeWriteCorrectAnswers.push(deck[deckIndex].definitions[i].toLowerCase());
         correntAnswerNumber++;
@@ -118,7 +123,7 @@ function setupWrite(deckIndex){
         newInput.classList.add("desktop-memorize-write-input");
 
         newInput.addEventListener('keypress', function(e){
-            if(e.key !== "Enter" && e.key !== "Tab") return;
+            if(e.key !== "Enter") return;
             let inputValue = this.value.toLowerCase();
 
             if(memorizeWriteCorrectAnswers.includes(inputValue)){
@@ -128,7 +133,6 @@ function setupWrite(deckIndex){
                     if(inputValue === element.value.toLowerCase()){
                         let id = element.id.split('')
                         id = id[id.length - 1];
-                        console.log(id);
 
                         if(id != i) correct = false;
                     }
@@ -141,20 +145,22 @@ function setupWrite(deckIndex){
 
                     correntAnswerNumber--;
                     if(correntAnswerNumber === 0){
-                        indexesReviewed.splice(indexesReviewed.indexOf(deckIndex), 1);
-                        indexesComplete.push(deckIndex);
+                        setTimeout(function(){
+                            indexesReviewed.splice(indexesReviewed.indexOf(deckIndex), 1);
+                            indexesComplete.push(deckIndex);
 
-                        if(indexesReviewed.length === 0 && indexesIncomplete.length === 0) console.log("Fully Finished");
-                        let nextRandomCard = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
+                            if(indexesReviewed.length === 0 && indexesIncomplete.length === 0) console.log("Fully Finished");
+                            let nextRandomCard = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
 
-                        document.getElementById('desktop-memorize-panel-questions-left').innerHTML = indexesIncomplete.length * 2 + indexesReviewed.length;
-                        document.getElementById('desktop-memorize-panel-questions-left-progress').style.background = "linear-gradient(135deg, var(--primary-accent) 0%, var(--primary-accent-gradient) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent-gradient) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) 100%)";
+                            document.getElementById('desktop-memorize-panel-questions-left').innerHTML = indexesIncomplete.length * 2 + indexesReviewed.length;
+                            document.getElementById('desktop-memorize-panel-questions-left-progress').style.background = "linear-gradient(135deg, var(--primary-accent) 0%, var(--primary-accent-gradient) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent-gradient) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) 100%)";
 
-                        if(nextRandomCard >= indexesIncomplete.length){
-                            setupWrite(indexesReviewed[nextRandomCard - indexesIncomplete.length]);
-                        } else {
-                            setupCard(indexesIncomplete[nextRandomCard]);
-                        }
+                            if(nextRandomCard >= indexesIncomplete.length){
+                                setupWrite(indexesReviewed[nextRandomCard - indexesIncomplete.length]);
+                            } else {
+                                setupCard(indexesIncomplete[nextRandomCard]);
+                            }
+                        }, 0);
                     }
                 } else {
                     document.getElementById("desktop-memorize-write-img-div-" + i.toString()).className = "shared";
@@ -164,6 +170,10 @@ function setupWrite(deckIndex){
                 document.getElementById("desktop-memorize-write-img-div-" + i.toString()).className = "community";
                 document.getElementById("desktop-memorize-write-img-" + i.toString()).src = "./icons/wrong.png";
             }
+
+            try{
+                document.getElementById('desktop-memorize-write-input-' + (i + 1)).focus();
+            } catch (e){}
         })
 
         newImgDiv.appendChild(newImg);
@@ -173,6 +183,8 @@ function setupWrite(deckIndex){
 
         document.getElementById('desktop-memorize-definitions-list').appendChild(newDiv);
     }
+
+    document.getElementById('desktop-memorize-write-input-0').focus();
 }
 
 function setupCard(deckIndex){
@@ -188,8 +200,7 @@ function setupCard(deckIndex){
     if(randomizedAnswers.length > 3) incorrectAnswerLength = randomizedAnswers.length * 2 + Math.floor(Math.random() * 2) - 1;
     else incorrectAnswerLength = randomizedAnswers.length * 2 + Math.floor(Math.random() * 2);
 
-    console.log(incorrectAnswerLength, deckMaxDefinitions);
-    if(incorrectAnswerLength > deckMaxDefinitions) incorrectAnswerLength = deckMaxDefinitions;
+    if(incorrectAnswerLength > deckMaxDefinitions.length) incorrectAnswerLength = deckMaxDefinitions.length;
 
     while(randomizedAnswers.length < incorrectAnswerLength){
         let randomAnswer = deck[Math.floor(Math.random() * deck.length)];
@@ -217,11 +228,12 @@ function initializeMemorize(){
     indexesIncomplete = [];
     indexesReviewed = [];
     indexesComplete = [];
+    deckMaxDefinitions = [];
 
     for(let i = 0; i < deck.length; i++){
         indexesIncomplete.push(i)
         for(let j = 0; j < deck[i].definitions.length; j++){
-            deckMaxDefinitions++;
+            if(!deckMaxDefinitions.includes(deck[i].definitions[j])) deckMaxDefinitions.push(deck[i].definitions[j]);
         }
     } document.getElementById('desktop-memorize-panel-questions-left').innerHTML = indexesIncomplete.length * 2 + indexesReviewed.length;
     setupCard(Math.floor(Math.random() * indexesIncomplete.length + indexesReviewed.length));
