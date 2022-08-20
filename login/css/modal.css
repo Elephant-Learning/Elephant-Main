@@ -1,0 +1,214 @@
+#desktop-location-modal{
+    bottom:24px;
+}
+
+#desktop-location-modal.inactive-modal{
+    right:-370px;
+}
+
+#desktop-location-modal:not(.inactive-modal){
+    right:24px;
+}
+
+.desktop-modal{
+    position:absolute;
+    background:var(--bg-color-1);
+    border:1px solid var(--light-border-color);
+    transition-duration:500ms;
+    padding:24px;
+    border-radius:16px;
+    width:320px;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:6px;
+    z-index:2;
+    cursor:default;
+}
+
+.desktop-modal-image-container{
+    width:64px;
+    height:64px;
+    margin-bottom:16px;
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    border-radius:50%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+#desktop-location-modal > div:first-of-type{
+    background:linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient));
+}
+
+.desktop-modal-image-container > img{
+    height:42px;
+    position:absolute;
+    left:36px;
+    filter:invert(1);
+}
+
+.desktop-modal > h1{
+    margin:0;
+    font-size:16px;
+}
+
+.desktop-modal > p{
+    font-size:12px;
+    margin: 0 0 12px;
+    color:gray;
+}
+
+.desktop-modal > h6{
+    font-size:12px;
+    font-weight:600;
+    margin: 6px 0 0;
+}
+
+.desktop-modal-input-container{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+    width:296px;
+    padding:0 12px;
+    border:1px solid var(--light-border-color);
+    border-radius:6px;
+    position:relative;
+}
+
+.desktop-modal-input-container > img:first-of-type{
+    height:18px;
+    filter:invert(0.5);
+}
+
+.desktop-modal-input-container > input{
+    width:268px;
+    height:32px;
+    color:gray;
+    font-size:12px;
+    outline:none;
+    border:none;
+    background:transparent;
+}
+
+.desktop-modal-input-container > img:last-of-type{
+    height:18px;
+    filter:invert(0.5);
+    position:absolute;
+    right:12px;
+    cursor:pointer;
+    transition-duration:250ms;
+}
+
+.desktop-modal-input-container > img:last-of-type:hover{
+    transform:scale(1.1);
+}
+
+.desktop-modal-input-container > input ~ img:last-of-type{
+    opacity:0;
+    visibility:hidden;
+}
+
+.desktop-modal-input-container > input:focus ~ img:last-of-type{
+    opacity:1;
+    visibility:visible;
+}
+
+.desktop-modal-buttons-container{
+    width:320px;
+    margin-top:6px;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+}
+
+#desktop-location-done{
+    width:100%;
+    border:none;
+    outline:none;
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    border-radius:12px;
+    transition-duration:250ms;
+    background:linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient));
+    padding:12px 0;
+    color:white;
+    cursor:pointer;
+    margin-top:6px;
+}
+
+.desktop-modal-buttons-container > button{
+    width:47.5%;
+    border:none;
+    outline:none;
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    border-radius:12px;
+    transition-duration:250ms;
+    cursor:pointer;
+}
+
+.desktop-modal-buttons-container > button:first-of-type{
+    background:transparent;
+    padding:11px 0;
+    border:1px solid gray;
+}
+
+.desktop-modal-buttons-container > button:last-of-type{
+    color:white;
+    padding:12px 0;
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+}
+
+.desktop-modal-buttons-container > button:first-of-type:hover:not(.desktop-modal-buttons-container > button:active), .desktop-modal-buttons-container > button:first-of-type:hover:not(.desktop-modal-buttons-container > button:active), #desktop-location-done:hover:not(#desktop-location-done:active){
+    box-shadow:0 0 12px 0 gray;
+}
+
+.desktop-modal-buttons-container > button:last-of-type:hover:not(.desktop-modal-buttons-container > button:active), .desktop-modal-buttons-container > button:last-of-type:hover:not(.desktop-modal-buttons-container > button:active){
+    box-shadow:0 0 12px 0 var(--primary-accent);
+}
+
+.desktop-modal-buttons-container > button:active, .desktop-modal-buttons-container > button:active, #desktop-location-done:active{
+    box-shadow:none;
+}
+
+#desktop-location-results{
+    max-height:128px;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+#desktop-location-results > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    width:calc(100% - 56px);
+    padding:9px 24px;
+    background:var(--bg-color-2);
+    border:1px solid var(--light-border-color);
+    gap:6px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+#desktop-location-results > div > img{
+    height:18px;
+    filter:invert(0.5);
+}
+
+#desktop-location-results > div > p{
+    margin:0;
+    color:gray;
+    font-size:12px;
+}

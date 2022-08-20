@@ -1,7 +1,7 @@
 let deckShowAmount = 10;
 let contextMenu = false;
 
-let pages = ["Elephant Flashcards", "Elephant Task Manager", "Chat Group", "Search Results", "Folder Editor", "Folder Viewer"];
+let pages = ["Elephant Flashcards", "Elephant Task Manager", "Chat Group", "Search Results", "Folder Viewer"];
 let randomChatMessage = ["Rearranging Your Cards Into Decks...", "Managing Your Tasks Prematurely...", "Closing Minecraft and Beginning To Work...", "Placing 3 Day Blocks on Discord...", "Contemplating Your Life Choices...", "Do You People Even Read This???", "Please be Patient... I'm new..."]
 
 let history = [];
@@ -109,7 +109,9 @@ function togglePageFlip(index, sidebar, link){
         return;
     }
 
-    document.getElementById('desktop-main-container-tab').innerHTML = pages[index];
+    if(index === 4) document.getElementById('desktop-main-container-tab').innerHTML = document.querySelectorAll('.desktop-sidebar-folder')[sidebar - document.querySelectorAll('.desktop-sidebar-category').length].children[1].textContent;
+    else document.getElementById('desktop-main-container-tab').innerHTML = pages[index];
+
     try{document.querySelector(".active-sidebar-category").classList.remove('active-sidebar-category')} catch{}
 
     if(!(sidebar === undefined)){
@@ -141,8 +143,21 @@ function togglePageFlip(index, sidebar, link){
     history.push([index, sidebar]);
 }
 
-function viewFolder(folderId, sidebarNum){
-    togglePageFlip(5, sidebarNum);
+async function viewFolder(folderId, sidebarNum){
+    togglePageFlip(4, sidebarNum);
+    const response = await fetch('https://elephant-rearend.herokuapp.com/folder/get?id=' + folderId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const context = await response.json();
+    console.log(context);
 }
 
 function sidebarFolder(title, folderId){

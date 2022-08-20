@@ -74,41 +74,57 @@
                 <div id="playlist-playing"></div>
             </div>
         </div>
-        <div id="desktop-friending-modal" class="inactive-modal">
-            <div id="friending-main-image-container">
+        <div id="desktop-friending-modal" class="inactive-modal desktop-modal">
+            <div id="friending-main-image-container" class="desktop-modal-image-container">
                 <img src="../icons/add_friend.png" alt="" id="friending-main-image">
             </div>
             <h1>Add Friends</h1>
             <p>Use Elephant to the fullest along with your study buddies to get the most out of Elephant!</p>
             <h6>Friend Email Addresses</h6>
-            <div id="friending-input-container">
+            <div id="friending-input-container" class="desktop-modal-input-container">
                 <img src="../icons/email.png" alt="">
                 <input type="text" id="friending-input">
             </div>
-            <div id="friending-buttons">
+            <div id="friending-buttons" class="desktop-modal-buttons-container">
                 <button id="friending-cancel" onclick="toggleFriendingModal(false)">Cancel</button>
                 <button id="friending-done" onclick="toggleFriendingModal(true)">Send</button>
             </div>
         </div>
-        <div id="desktop-folder-modal" class="inactive-modal">
-            <div id="folder-main-image-container">
+        <div id="desktop-folder-decks-modal" class="inactive-modal">
+            <div id="folder-decks-main-image-container">
+                <img src="../icons/add_friend.png" alt="" id="folder-decks-main-image">
+            </div>
+            <h1>Add Friends</h1>
+            <p>Use Elephant to the fullest along with your study buddies to get the most out of Elephant!</p>
+            <h6>Friend Email Addresses</h6>
+            <div id="folder-decks-input-container">
+                <img src="../icons/email.png" alt="">
+                <input type="text" id="folder-decks-input">
+            </div>
+            <!--<div id="folder-decks-buttons">
+                <button id="folder-decks-cancel" onclick="toggleFriendingModal(false)">Cancel</button>
+                <button id="folder-decks-done" onclick="toggleFriendingModal(true)">Send</button>
+            </div>-->
+        </div>
+        <div id="desktop-folder-modal" class="inactive-modal desktop-modal">
+            <div class="desktop-modal-image-container">
                 <img src="../icons/folder.png" alt="sdf" id="folder-main-image">
             </div>
             <h1>Create Folder</h1>
             <p>Create Elephant Folders and sort all decks to optimize your educational experience!</p>
             <h6>New Folder Name</h6>
-            <div id="folder-input-container">
+            <div id="folder-input-container" class="desktop-modal-input-container">
                 <img src="../icons/folder.png" alt="">
                 <input type="text" id="folder-input">
             </div>
-            <div id="folder-buttons">
+            <div id="folder-buttons" class="desktop-modal-buttons-container">
                 <button id="folder-cancel" onclick="toggleFolderModal(false)">Cancel</button>
                 <button id="folder-done" onclick="toggleFolderModal(true)">Create</button>
             </div>
         </div>
         <div id="desktop-navbar">
             <div id="desktop-main-image">
-                <a href="../dashboard"><img src="../../icons/elephant-400-400-pink-flashcards-01.png" alt="Elephant Logo"></a>
+                <a href="../dashboard"><img src="../../icons/elephant-400-400-pink-flashcards-02.png" alt="Elephant Logo"></a>
             </div>
             <div id="desktop-input-div">
                 <img src="../icons/search.png" alt="Search" id="desktop-input-img">
@@ -307,17 +323,27 @@
                             <div id="search-results-users"></div>
                         </div>
                     </div>
-                    <div class="desktop-tab" id="folder-editor"></div>
                     <div class="desktop-tab" id="folder-viewer">
                         <div id="folder-main-options">
                             <div onclick="createDeck()">
-                                <img src="../icons/add_file.png" alt="">
+                                <img src="../icons/edit_folder.png" alt="">
                                 <div>
                                     <h1>Edit Folder Decks</h1>
                                     <p>More Decks For Folder</p>
                                 </div>
-                                <img src="../icons/plus.png" alt="">
+                                <img src="../editor/icons/edit.png" alt="">
                             </div>
+                        </div>
+                        <div id="folder-main-container">
+                            <div class="flashcard-sorting">
+                                <p>Sort By:</p>
+                                <select onchange="">
+                                    <option value="0">Last Viewed</option>
+                                    <option value="1">Favorited</option>
+                                    <option value="2">Alphabetical</option>
+                                </select>
+                            </div>
+                            <div id="folder-flashcard-display"></div>
                         </div>
                     </div>
                     <div class="desktop-tab" id="administrator-portal"></div>

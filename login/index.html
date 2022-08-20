@@ -6,13 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Elephant - The Ultimate Student Suite</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modal.css">
 
     <link rel="icon" href="../icons/elephant-400-400-grayscale.png">
     <script src="js/codes.js" defer></script>
     <script src="js/script.js" defer></script>
 </head>
 <body>
+    <div id="desktop-location-modal" class="desktop-modal inactive-modal">
+        <div class="desktop-modal-image-container">
+            <img src="./icons/location.png">
+        </div>
+        <h1>Add Country</h1>
+        <p>Help us Elephant Developers focus on how to make Elephant better for you!</p>
+        <h6>Country Name</h6>
+        <div id="desktop-location-input-container" class="desktop-modal-input-container">
+            <img src="./icons/location.png" alt="">
+            <input type="text" id="desktop-location-input" onchange="updateLocationResults()">
+            <img src="./icons/search.png" alt="">
+        </div>
+        <div id="desktop-location-results"></div>
+        <button id="desktop-location-done" onclick="toggleFolderModal(true)">Done</button>
+    </div>
     <div id="desktop-wrapper">
         <div id="desktop-main-container">
             <div class="home-modal">
@@ -97,40 +113,7 @@
                     <input type="password" class="visibility-toggleable" placeholder="Password" id="individual-password">
                     <img src="./icons/invisible.png" class="visibility-toggler" onclick="toggleTextVisibility(1)">
                 </div>
-                <div class="input-div country-input">
-                    <div class="country-flag-code-input" onclick="toggleCountryCode(0)">
-                        <img src="https://countryflagsapi.com/svg/usa" class="country-flag-img">
-                        <img src="./icons/expand_down.png" alt="">
-                    </div>
-                    <div class="phone-number-input">
-                        <p class="country-flag-code-para">+1</p>
-                        <input type="number" class="country-flag-input">
-                    </div>
-                    <div class="country-code-search inactive-modal">
-                        <div class="country-code-main-search">
-                            <img src="./icons/location.png" alt="">
-                            <input type="text" placeholder="Search For Your Country" class="country-code-input" onchange="countryCodeInput(0)">
-                        </div>
-                        <div class="country-code-results">
-                            <div>
-                                <img class="country-code-results-img-1" alt="">
-                                <p class="country-code-results-p-1"></p>
-                            </div>
-                            <div>
-                                <img class="country-code-results-img-1" alt="">
-                                <p class="country-code-results-p-1"></p>
-                            </div>
-                            <div>
-                                <img class="country-code-results-img-1" alt="">
-                                <p class="country-code-results-p-1"></p>
-                            </div>
-                            <div>
-                                <img class="country-code-results-img-1" alt="">
-                                <p class="country-code-results-p-1"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <button class="desktop-location-add" onclick="toggleCountryModal()">Add Country of Residence</button>
                 <button id="individual-sign-up" class="blue-btn">Sign Up</button>
                 <div class="break"></div>
                 <button class="small-btn" onclick="togglePageFlip(1)">Select Different Account</button>
@@ -157,40 +140,7 @@
                     <input type="password" class="visibility-toggleable" placeholder="Classroom/Organization ID" id="student-school-id">
                     <img src="./icons/invisible.png" class="visibility-toggler" onclick="toggleTextVisibility(3)">
                 </div>
-                <div class="input-div country-input">
-                    <div class="country-flag-code-input" onclick="toggleCountryCode(1)">
-                        <img src="https://countryflagsapi.com/svg/usa" class="country-flag-img">
-                        <img src="./icons/expand_down.png" alt="">
-                    </div>
-                    <div class="phone-number-input">
-                        <p class="country-flag-code-para">+1</p>
-                        <input type="number" class="country-flag-input">
-                    </div>
-                    <div class="country-code-search inactive-modal">
-                        <div class="country-code-main-search">
-                            <img src="./icons/location.png" alt="">
-                            <input type="text" placeholder="Search For Your Country" class="country-code-input" onchange="countryCodeInput(1)">
-                        </div>
-                        <div class="country-code-results">
-                            <div>
-                                <img class="country-code-results-img-2" alt="">
-                                <p class="country-code-results-p-2"></p>
-                            </div>
-                            <div>
-                                <img class="country-code-results-img-2" alt="">
-                                <p class="country-code-results-p-2"></p>
-                            </div>
-                            <div>
-                                <img class="country-code-results-img-2" alt="">
-                                <p class="country-code-results-p-2"></p>
-                            </div>
-                            <div>
-                                <img class="country-code-results-img-2" alt="">
-                                <p class="country-code-results-p-2"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <button class="desktop-location-add" onclick="toggleCountryModal()">Add Country of Residence</button>
                 <button class="blue-btn" id="student-sign-up">Sign Up</button>
                 <div class="break"></div>
                 <button class="small-btn" onclick="togglePageFlip(1)">Select Different Account</button>
@@ -216,40 +166,7 @@
                     <img src="./icons/university.png" alt="">
                     <input type="text" placeholder="Classroom/Organization Name" id="instructor-school">
                 </div>
-                <div class="input-div country-input">
-                    <div class="country-flag-code-input" onclick="toggleCountryCode(2)">
-                        <img src="https://countryflagsapi.com/svg/usa" class="country-flag-img">
-                        <img src="./icons/expand_down.png" alt="">
-                    </div>
-                    <div class="phone-number-input">
-                        <p class="country-flag-code-para">+1</p>
-                        <input type="number" class="country-flag-input">
-                    </div>
-                    <div class="country-code-search inactive-modal">
-                        <div class="country-code-main-search">
-                            <img src="./icons/location.png" alt="">
-                            <input type="text" placeholder="Search For Your Country" class="country-code-input" onchange="countryCodeInput(2)">
-                        </div>
-                        <div class="country-code-results">
-                            <div>
-                                <img class="country-code-results-img-3" alt="">
-                                <p class="country-code-results-p-3"></p>
-                            </div>
-                            <div>
-                                <img class="country-code-results-img-3" alt="">
-                                <p class="country-code-results-p-3"></p>
-                            </div>
-                            <div>
-                                <img class="country-code-results-img-3" alt="">
-                                <p class="country-code-results-p-3"></p>
-                            </div>
-                            <div>
-                                <img class="country-code-results-img-3" alt="">
-                                <p class="country-code-results-p-3"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <button class="desktop-location-add" onclick="toggleCountryModal()">Add Country of Residence</button>
                 <button class="blue-btn" id="instructor-sign-up">Sign Up</button>
                 <div class="break"></div>
                 <button class="small-btn" onclick="togglePageFlip(1)">Select Different Account</button>

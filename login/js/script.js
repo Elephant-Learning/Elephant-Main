@@ -1,4 +1,5 @@
 let selectedSignUpOption;
+let selectedLocation;
 
 const UserTypes = {
     INDIVIDUAL: "INDIVIDUAL",
@@ -11,6 +12,7 @@ const User = function(){
     this.lastName = "";
     this.email = "";
     this.password = "";
+    this.countryCode = 0;
     this.type = "";
     this.profilePic = Math.floor(Math.random() * 47);
 
@@ -21,6 +23,61 @@ const User = function(){
     }
 }
 
+function selectCountries(index){
+    document.getElementById('desktop-location-modal').classList.add('inactive-modal');
+    selectedLocation = index;
+    document.querySelectorAll('.desktop-location-add')[selectedSignUpOption].innerHTML = "Currently Selected: " + COUNTRY_LIST[index];
+}
+
+function updateLocationResults(){
+    let filteredCountries = []
+
+    removeAllChildNodes(document.getElementById('desktop-location-results'))
+
+    for(let i = 0; i < COUNTRY_LIST.length; i++){
+        if(COUNTRY_LIST[i].includes(toTitleCase(document.getElementById('desktop-location-input').value))) filteredCountries.push(i)
+    }
+
+    for(let i = 0; i < filteredCountries.length; i++){
+        let newDiv = document.createElement('div');
+        let newImg = document.createElement('img');
+        let newPara = document.createElement('p');
+
+        newImg.src = "./icons/country.png";
+        newPara.innerHTML = COUNTRY_LIST[filteredCountries[i]];
+
+        newDiv.append(newImg, newPara);
+
+        newDiv.addEventListener('click', function(e){
+            this.remove();
+            selectCountries(filteredCountries[i])
+        })
+
+        document.getElementById('desktop-location-results').appendChild(newDiv);
+    }
+}
+
+function toTitleCase(str) {
+    return str.toLowerCase().split(/[- .]+/).map(function (word) {
+        return (word.charAt(0).toUpperCase() + word.slice(1));
+    }).join(' ');
+}
+
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
+function toggleCountryModal(){
+    if(document.getElementById('desktop-location-modal').classList.contains('inactive-modal')){
+        document.getElementById('desktop-location-modal').classList.remove('inactive-modal')
+        document.getElementById('desktop-location-input').value = "";
+        removeAllChildNodes(document.getElementById('desktop-location-results'));
+    } else {
+        document.getElementById('desktop-location-modal').classList.add('inactive-modal')
+    }
+}
 
 function toggleTextVisibility(index){
     if(document.querySelectorAll('.visibility-toggleable')[index].getAttribute('type') === "password"){
@@ -33,20 +90,8 @@ function toggleTextVisibility(index){
     document.querySelectorAll('.visibility-toggleable')[index].focus();
 }
 
-function login(){
-    // fetch userID based on information
-}
-
-function closeModals(){
-    document.querySelectorAll('.country-code-search').forEach(function(element){
-        if(!element.classList.contains('inactive-modal')) element.classList.add('inactive-modal')
-    })
-}
-
 function togglePageFlip(index){
     const colors = ["primary", "secondary", "secondary", "secondary", "secondary", "tertiary"];
-
-    closeModals();
 
     document.querySelectorAll(".desktop-tab").forEach(function(element){
         if(!element.classList.contains("inactive-tab")) element.classList.add("inactive-tab");
@@ -93,37 +138,6 @@ document.getElementById('sign-up-btn-1').onclick = function(){
     }
 }
 
-function countryCodeInput(index){
-    let searchedList = []
-
-    const inputValue = document.querySelectorAll('.country-code-input')[index].value;
-
-    for(let i = 0; i < countryCodes.length; i++){
-
-        if(countryCodes[i][1].includes(inputValue.charAt(0).toUpperCase() + inputValue.slice(1))){
-            searchedList.push(countryCodes[i]);
-        }
-    }
-
-    for(let i = 0; i < document.querySelectorAll('.country-code-results-img-' + (index + 1)).length; i++){
-        let randomCountry = searchedList[i];
-
-        if(i >= searchedList.length){
-            document.querySelectorAll('.country-code-results-img-' + (index + 1))[i].src = "./icons/white.png";
-
-            document.querySelectorAll('.country-code-results-p-' + (index + 1))[i].innerHTML = ""
-            document.querySelectorAll('.country-code-results-p-' + (index + 1))[i].parentElement.style.cursor = "default"
-        } else {
-            document.querySelectorAll('.country-code-results-img-' + (index + 1))[i].src = "https://countryflagsapi.com/svg/" + randomCountry[0];
-
-            if(!randomCountry[3]) document.querySelectorAll('.country-code-results-p-' + (index + 1))[i].innerHTML = randomCountry[1] + " (+" + randomCountry[2] + ")";
-            else document.querySelectorAll('.country-code-results-p-' + (index + 1))[i].innerHTML = randomCountry[3] + " (+" + randomCountry[2] + ")";
-            document.querySelectorAll('.country-code-results-p-' + (index + 1))[i].parentElement.setAttribute("onclick", "setCountryCode(" + countryCodes.indexOf(searchedList[i]) + ", " + index + ")");
-            document.querySelectorAll('.country-code-results-p-' + (index + 1))[i].parentElement.style.cursor = "pointer"
-        }
-    }
-}
-
 function setCountryCode(codeIndex, inputIndex){
     document.querySelectorAll('.country-flag-code-para')[inputIndex].innerHTML = "+" + countryCodes[codeIndex][2];
     document.querySelectorAll('.country-flag-img')[inputIndex].src = "https://countryflagsapi.com/svg/" + countryCodes[codeIndex][0];
@@ -143,56 +157,12 @@ function initialize(){
         element.style.background = "linear-gradient(135deg, var(--" + colors[2] + "-accent), var(--" + colors[2] + "-accent-gradient))";
     });
 
-    for(let i = 0; i < document.querySelectorAll('.country-code-search').length; i++){
-        for(let j = 0; j < document.querySelectorAll('.country-code-results-img-' + (i + 1)).length; j++){
-            let randomCountry = countryCodes[Math.floor(Math.random() * countryCodes.length)];
-
-            document.querySelectorAll('.country-code-results-img-' + (i + 1))[j].src = "https://countryflagsapi.com/svg/" + randomCountry[0];
-
-            if(!randomCountry[3]) document.querySelectorAll('.country-code-results-p-' + (i + 1))[j].innerHTML = randomCountry[1] + " (+" + randomCountry[2] + ")";
-            else document.querySelectorAll('.country-code-results-p-' + (i + 1))[j].innerHTML = randomCountry[3] + " (+" + randomCountry[2] + ")";
-
-            document.querySelectorAll('.country-code-results-p-' + (i + 1))[j].parentElement.style.cursor = "pointer"
-            document.querySelectorAll('.country-code-results-p-' + (i + 1))[i].parentElement.setAttribute("onclick", "setCountryCode(" + countryCodes.indexOf(randomCountry) + ", " + i + ")");
-        }
-    }
-
     if(Math.floor(Math.random() * 2) === 1) document.getElementById('student-account-pic').src = "./icons/student_nerd.png"
 
     togglePageFlip(0);
 }
 
-document.getElementById('login').onclick = function(){
-    //login code goes here
-}
-
-function toggleCountryCode(index){
-    if(document.querySelectorAll('.country-code-search')[index].classList.contains('inactive-modal')){
-        document.querySelectorAll('.country-code-search')[index].classList.remove('inactive-modal')
-    } else {
-        document.querySelectorAll('.country-code-search')[index].classList.add('inactive-modal')
-    }
-}
-
-function sendForm(email, fullName, type){
-
-    let form = document.createElement('form');
-    form.setAttribute('name', 'google-form');
-
-    let emailInput = document.createElement('input');
-    emailInput.value = email;
-    emailInput.setAttribute('name', "Emails");
-
-    let fullNameInput = document.createElement('input');
-    fullNameInput.value = fullName;
-    fullNameInput.setAttribute('name', "Names");
-
-    let typeInput = document.createElement('input');
-    typeInput.value = type;
-    typeInput.setAttribute('name', "User Type");
-
-    form.append(emailInput, fullNameInput, typeInput)
-}
+document.getElementById('login').onclick = login;
 
 document.getElementById('individual-sign-up').onclick = function(){
     const user = new User();
@@ -201,6 +171,7 @@ document.getElementById('individual-sign-up').onclick = function(){
     user.email = document.getElementById('individual-email').value;
     user.password = document.getElementById('individual-password').value;
     user.type = UserTypes.INDIVIDUAL;
+    user.countryCode = selectedLocation;
 
     signup(user);
 }
@@ -212,6 +183,7 @@ document.getElementById('student-sign-up').onclick = function(){
     user.email = document.getElementById('student-email').value;
     user.password = document.getElementById('student-password').value;
     user.type = UserTypes.STUDENT;
+    user.countryCode = selectedLocation;
 
     signup(user);
 }
@@ -223,7 +195,7 @@ document.getElementById('instructor-sign-up').onclick = function(){
     user.email = document.getElementById('instructor-email').value;
     user.password = document.getElementById('instructor-password').value;
     user.type = UserTypes.INSTRUCTOR;
-
+    user.countryCode = selectedLocation;
 
     signup(user)
 }

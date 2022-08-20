@@ -45,7 +45,7 @@
         </div>
         <div id="desktop-navbar">
             <div id="desktop-main-image">
-                <a href="../dashboard"><img src="../../icons/elephant-400-400-pink-flashcards-01.png" alt="Elephant Logo"></a>
+                <div onclick="leaveEditor('../dashboard')"><img src="../../icons/elephant-400-400-pink-flashcards-02.png" alt="Elephant Logo"></div>
             </div>
             <div id="desktop-input-div">
                 <img src="../icons/search.png" alt="Search" id="desktop-input-img">
@@ -117,7 +117,7 @@
                             </div>
                         </div>
                         <div class="profile-break"></div>
-                        <div onclick="localStorage.removeItem('savedUserId'); location.href = '../../login'">
+                        <div onclick="leaveEditor('../../login')">
                             <img src="../icons/logout.png">
                             <p>Log Out</p>
                         </div>
@@ -199,9 +199,9 @@
                 <div id="save-deck">
                     <img src="./icons/save.png" alt="">
                 </div>
-                <a href="../dashboard" id="back-btn">
+                <div onclick="leaveEditor('../dashboard')" id="back-btn">
                     <img src="../icons/back.png" alt="">
-                </a>
+                </div>
             </div>
             <div class="bottom-left-btns">
                 <div id="backpack-btn" onclick="toggleBackpackModal()">

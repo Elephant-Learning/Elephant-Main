@@ -18,7 +18,8 @@
 }
 
 *::-webkit-scrollbar{
-    width:calc(var(--size) * 8px);
+    height:8px;
+    width:8px;
     background:transparent;
 }
 
@@ -31,6 +32,8 @@ body{
     font-family: 'Montserrat', sans-serif;
     background:var(--bg-color-1);
     overflow:hidden;
+    width:100vw;
+    height:100vh;
     margin:0;
 }
 
@@ -50,6 +53,7 @@ input:-webkit-autofill:active{
     height:100vh;
     display:flex;
     flex-direction:row;
+    align-items:center;
 }
 
 #desktop-wrapper > div{
@@ -176,13 +180,16 @@ span.action-item{
     border:none;
     height:48px;
     border-radius:6px;
-    font-size:18px;
     letter-spacing:2px;
     text-transform:uppercase;
     cursor:pointer;
     transition-duration:250ms;
     margin-top:24px;
     font-weight:400;
+}
+
+.desktop-tab > button:not(.desktop-location-add):not(.small-btn){
+    font-size:18px;
 }
 
 .desktop-tab > button:not(.small-btn).inactive-button{
@@ -311,142 +318,8 @@ span.action-item{
     margin-bottom:24px;
 }
 
-.inactive-button{
-    background:red;
-}
-
-.country-input{
-    width:calc(20vw + 28px);
-    height:20px;
-}
-
-.country-flag-code-input{
-    width:72px;
-    background:var(--bg-color-1);
-    position:absolute;
-    left:0;
-    height:100%;
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    border-right:1px solid var(--light-border-color);
-}
-
-.country-flag-code-input > img:first-of-type{
-    height:14px;
-}
-
-.country-flag-code-input > img:last-of-type{
-    height:16px;
-    margin-left:4px;
-}
-
-.phone-number-input{
-    position:absolute;
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    left:80px;
-}
-
-input[type=number] {
-    -moz-appearance: textfield;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.phone-number-input > p{
-    color:darkgray;
-    font-size:14px;
-    width:56px;
-    text-align:right;
-    padding-right:4px;
-}
-
-.phone-number-input > input{
-    font-size:14px;
-    background:transparent;
-    outline:none;
-    color:gray;
-    border:none;
-    width:calc(20vw - 92px);
-}
-
-.country-code-search:not(.inactive-modal){
-    opacity:1;
-    visibility: visible;
-}
-
-.inactive-modal{
-    visibility:hidden;
-    opacity:0;
-}
-
-.country-code-search{
-    display:flex;
-    position:absolute;
-    flex-direction:column;
-    bottom:-216px;
-    left:-90px;
-    width:240px;
-    border:1px solid var(--light-border-color);
-    border-radius:6px;
-    background:var(--bg-color-1);
-    transition-duration:250ms;
-}
-
-.country-code-search > div{
-    display:flex;
-}
-
-.country-code-results{
-    display:flex;
-    flex-direction:column;
-}
-
-.country-code-results > div, .country-code-main-search{
-    display:flex;
-    flex-direction:row;
-    padding:12px 18px;
-    border-bottom:1px solid var(--light-border-color);
-    align-items:center;
-    gap:6px;
-}
-
-.country-code-results > div{
-    cursor:pointer;
-}
-
-.country-code-main-search > img{
-    height:18px;
-    filter:invert(0.5);
-}
-
-.country-code-main-search > input{
-    background:transparent;
-    border:none;
-    outline:none;
-    color:gray;
-    width:200px;
-}
-
-.country-code-results > div > img{
-    height:14px;
-    width:28px;
-    border:1px solid var(--light-border-color);
-}
-
-.country-code-results > div > p{
-    font-size:12px;
-    font-weight:500;
-    margin:0;
-    color:gray;
+.inactive-button {
+    background: red;
 }
 
 .home-modal{
@@ -484,4 +357,8 @@ input::-webkit-inner-spin-button {
 .home-modal > a > img{
     height:20px;
     filter:invert(1);
+}
+
+.desktop-location-add{
+    font-size:14px;
 }

@@ -72,6 +72,13 @@
     gap:calc(var(--size) * 12px);
 }
 
+#folder-main-container{
+    margin-left:calc(var(--size) * 24px);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+}
+
 .flashcard-sorting{
     display:flex;
     flex-direction:row;

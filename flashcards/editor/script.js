@@ -87,6 +87,29 @@ function deleteSharedFriend(index){
     document.querySelectorAll('.sharing-friends')[index].remove();
 }
 
+async function removeSharedFriend(userId){
+
+    console.log(editing);
+
+    const response = await fetch('https://elephant-rearend.herokuapp.com/deck/unshareDeck', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        body: JSON.stringify({
+           deckId: editing,
+           sharedUserId: userId
+        }),
+        mode: 'cors'
+    })
+
+    let context = await response.json();
+    console.log(context);
+}
+
 async function addSharedFriend(userId, init){
     let newDiv = document.createElement('div');
     let imageDiv = document.createElement('div');
@@ -95,6 +118,8 @@ async function addSharedFriend(userId, init){
     let nameText = document.createElement('h1');
     let emailText = document.createElement('p');
     let removeText = document.createElement('p');
+
+    if(userId === undefined) return;
 
     const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + userId, {
         method: 'GET',
@@ -122,7 +147,7 @@ async function addSharedFriend(userId, init){
         removeText.setAttribute('onclick', "addSharedFriend(" + userId + ", " + undefined + "); this.parentNode.remove()");
     } else {
         removeText.innerHTML = "Remove";
-        removeText.setAttribute('onclick', "addSharedFriend(" + userId + ", " + true + "); this.parentNode.remove()");
+        removeText.setAttribute('onclick', "removeSharedFriend(" + userId + "); addSharedFriend(" + userId + ", " + true + "); this.parentNode.remove()");
     }
 
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
@@ -431,6 +456,47 @@ function toggleSharingModal(){
     } else {
         document.getElementById('desktop-sharing-modal').classList.add('inactive-modal')
     }
+}
+
+async function leaveEditor(link){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
+    let exportedDeck = new Deck();
+    exportedDeck.name = document.getElementById('deck-name').textContent;
+
+    for(let i = 0; i < document.querySelectorAll('.flashcards-card').length; i++){
+        let definitions = [];
+
+        document.querySelectorAll(".flashcards-definition-input-" + (i + 1)).forEach(function(element){
+            definitions.push(element.value)
+        })
+
+        exportedDeck.terms[document.getElementById("flashcards-input-" + (i + 1)).value] = definitions;
+    }
+
+    console.log(exportedDeck.name === "New Elephant Deck", Object.keys(exportedDeck.terms).length === 1, Object.keys(exportedDeck.terms)[0] === "", exportedDeck.terms[Object.keys(exportedDeck.terms)[0]].length === 1, exportedDeck.terms[Object.keys(exportedDeck.terms)[0]][0] === "");
+
+    enableRedirect = false;
+    if(editing === undefined){
+        if(exportedDeck.name === "New Elephant Deck" && Object.keys(exportedDeck.terms).length === 1 && Object.keys(exportedDeck.terms)[0] === "" && exportedDeck.terms[Object.keys(exportedDeck.terms)[0]].length === 1 && exportedDeck.terms[Object.keys(exportedDeck.terms)[0]][0] === "") enableRedirect = true;
+    } else {
+        const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + editing, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        });
+
+        const context = await response.json();
+        console.log(context);
+    }
+
+
+    location.href = link
 }
 
 document.getElementById('save-deck').onclick = saveDeck;
