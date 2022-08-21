@@ -34,8 +34,8 @@
                 <div id="playlist-playing"></div>
             </div>
         </div>-->
-        <div id="desktop-backpack-modal" class="inactive-modal">
-            <div id="backpack-main-image-container">
+        <div id="desktop-backpack-modal" class="inactive-modal desktop-modal">
+            <div class="desktop-modal-image-container">
                 <img src="./icons/pack.png" alt="" id="backpack-main-image">
             </div>
             <h1>Your Backpack</h1>
@@ -142,17 +142,29 @@
                     </div>
                 </div>
                 <div id="add-to-folder" class="inactive-modal">
+                    <div id="folder-btn-hitbox" onclick="toggleFolderModal()"></div>
                     <img src="./icons/add_folder.png" alt="">
                     <p>Add To Folder</p>
                     <img src="./icons/expand.png" alt="">
+                    <div id="desktop-folder-modal" class="desktop-modal">
+                        <div class="desktop-modal-image-container">
+                            <img src="../icons/add_folder.png" alt="">
+                        </div>
+                        <h1>Add to Folder</h1>
+                        <p>Organize your Elephant Decks into neat and easy-to-use folders!</p>
+                        <h6>Folders</h6>
+                        <div id="folder-list">
+
+                        </div>
+                    </div>
                 </div>
                 <button id="publish-btn" class="inactive-modal"></button>
                 <div id="invite-btn" class="inactive-modal">
-                    <!--<div id="invite-btn-hitbox"></div>-->
-                    <img src="./icons/plus.png" alt="" onclick="toggleSharingModal()">
-                    <p onclick="toggleSharingModal()">Invite</p>
-                    <div id="desktop-sharing-modal" class="inactive-modal">
-                        <div id="sharing-main-image-container">
+                    <div id="invite-btn-hitbox" onclick="toggleSharingModal()"></div>
+                    <img src="./icons/plus.png" alt="">
+                    <p>Invite</p>
+                    <div id="desktop-sharing-modal" class="inactive-modal desktop-modal">
+                        <div class="desktop-modal-image-container">
                             <img src="./icons/share.png" alt="" id="sharing-main-image">
                         </div>
                         <h1>Share Deck With Friends</h1>
@@ -165,7 +177,7 @@
                             <img src="./icons/expand.png" alt="">
                             <div id="sharing-input-hitbox" onclick="toggleSharedInputList()"></div>
                             <div id="sharing-input-friends-list" class="inactive-modal">
-                                <div id="no-friends">LOL YOU HAVE NO FRIENDS</div>
+                                <div id="no-friends"></div>
                             </div>
                         </div>
                         <button id="sharing-done" onclick="toggleSharingModal()">Done</button>

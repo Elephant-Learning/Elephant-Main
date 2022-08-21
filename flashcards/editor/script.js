@@ -458,6 +458,14 @@ function toggleSharingModal(){
     }
 }
 
+function toggleFolderModal(){
+    if(document.getElementById('desktop-folder-modal').classList.contains('inactive-modal')){
+        document.getElementById('desktop-folder-modal').classList.remove('inactive-modal')
+    } else {
+        document.getElementById('desktop-folder-modal').classList.add('inactive-modal')
+    }
+}
+
 async function leaveEditor(link){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
 
@@ -763,6 +771,9 @@ async function initialize(user){
     } else user = user.context.user;
 
     await checkForEditing();
+
+    const noFriends = ["LOL YOU HAVE NO FRIENDS", "Imagine not having any friends", "Bruh you actually are friendless", "Well isn't this awkward", "Friend... more like end..."]
+    document.getElementById('no-friends').innerHTML = noFriends[Math.floor(Math.random() * noFriends.length)];
 
     if(editing === undefined){
         document.getElementById('deck-author-img').src = "../../icons/avatars/" + user.pfpId + ".png";
