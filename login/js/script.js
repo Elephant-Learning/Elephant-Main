@@ -157,7 +157,7 @@ function initialize(){
         element.style.background = "linear-gradient(135deg, var(--" + colors[2] + "-accent), var(--" + colors[2] + "-accent-gradient))";
     });
 
-    if(Math.floor(Math.random() * 2) === 1) document.getElementById('student-account-pic').src = "./icons/student_nerd.png"
+    if(Math.floor(Math.random() * 5) === 1) document.getElementById('student-account-pic').src = "./icons/student_nerd.png"
 
     togglePageFlip(0);
 }
@@ -219,6 +219,9 @@ window.onload = function(){
 }
 
 async function signup(data){
+    document.getElementById('desktop-loading-modal').classList.remove('inactive-modal');
+    document.getElementById('desktop-alert-modal').className = "desktop-modal inactive-modal";
+
     const response = await fetch('https://elephant-rearend.herokuapp.com/registration', {
         method: 'POST',
         headers: {
@@ -231,31 +234,43 @@ async function signup(data){
         mode: 'cors'
     });
     const content = await response.json();
-    console.log(content);
-    console.log(content.context.user.token.token)
 
-    const confirmResponse = await fetch('https://elephant-rearend.herokuapp.com/registration/confirm?token=' + content.context.user.token.token, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type'
-        },
-        mode: 'cors'
-    });
+    if(content.status === "FAILURE"){
+        document.getElementById('desktop-loading-modal').classList.add('inactive-modal');
+        document.getElementById('desktop-alert-header').innerHTML = "Unable to Login"
+        document.getElementById('desktop-alert-para').innerHTML = content.message;
 
-    const confirmContent = await confirmResponse.json();
-    console.log(confirmContent);
+        document.getElementById('desktop-alert-modal').classList.remove('inactive-modal')
+        setTimeout(function(){
+            document.getElementById('desktop-alert-modal').classList.add('inactive-modal')
+        }, 5000)
+    } else {
+        const confirmResponse = await fetch('https://elephant-rearend.herokuapp.com/registration/confirm?token=' + content.context.user.token.token, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        });
 
-    document.getElementById('login-username').value = data.email;
-    document.getElementById('login-password').value = data.password;
-    login();
+        const confirmContent = await confirmResponse.json();
+        console.log(confirmContent);
+
+        document.getElementById('login-username').value = data.email;
+        document.getElementById('login-password').value = data.password;
+        login();
+    }
 }
 
 document.getElementById('login').onclick = login;
 
 async function login(){
+    document.getElementById('desktop-loading-modal').classList.remove('inactive-modal');
+    document.getElementById('desktop-alert-modal').className = "desktop-modal inactive-modal";
+
     let email = document.getElementById('login-username').value;
     let password = document.getElementById('login-password').value;
 
@@ -281,8 +296,20 @@ async function login(){
     const content = await response.json();
     console.log(content)
 
-    localStorage.setItem('savedUserId', JSON.stringify(content.context.user.id));
-    location.href = "../flashcards/dashboard";
+    document.getElementById('desktop-loading-modal').classList.add('inactive-modal');
+
+    if(content.status === "FAILURE"){
+        document.getElementById('desktop-alert-header').innerHTML = "Unable to Login"
+        document.getElementById('desktop-alert-para').innerHTML = content.message;
+
+        document.getElementById('desktop-alert-modal').classList.remove('inactive-modal')
+        setTimeout(function(){
+            document.getElementById('desktop-alert-modal').classList.add('inactive-modal')
+        }, 5000)
+    } else {
+        localStorage.setItem('savedUserId', JSON.stringify(content.context.user.id));
+        location.href = "../flashcards/dashboard";
+    }
 }
 
 initialize();

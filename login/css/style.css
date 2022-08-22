@@ -362,3 +362,31 @@ span.action-item{
 .desktop-location-add{
     font-size:14px;
 }
+
+#desktop-loading-modal{
+    width:100vw;
+    height:100vh;
+    position:absolute;
+    top:0;
+    left:0;
+    background:rgba(0,0,0,0.5);
+    z-index:5;
+}
+
+#desktop-loading-modal.inactive-modal{
+    display:none;
+}
+
+#desktop-alert-modal{
+    position:absolute;
+    transition-duration:250ms;
+    bottom:12px;
+}
+
+#desktop-alert-modal:not(.inactive-modal){
+    right:12px;
+}
+
+#desktop-alert-modal.inactive-modal{
+    right:-400px;
+}
