@@ -345,9 +345,9 @@ async function displayFlashcardsManager(user){
         ele.lastChild.remove();
     }
 
-    for(let i = 0; i < user.statistics.recentlyViewedDeckIds.length; i++){
+    for(let i = 0; i < user.elephantUserStatistics.recentlyViewedDeckIds.length; i++){
 
-        const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + user.statistics.recentlyViewedDeckIds[i], {
+        const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + user.elephantUserStatistics.recentlyViewedDeckIds[i], {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
