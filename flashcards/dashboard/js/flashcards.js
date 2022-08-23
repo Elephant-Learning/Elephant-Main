@@ -37,7 +37,7 @@ async function displayFlashcard(flashcardType, params){
     let iconDiv = document.createElement('div');
     let icon = document.createElement('img');
 
-    if(flashcardType === "flashcard"){
+    if(flashcardType === "flashcard" || flashcardType === "folder"){
         if(params.type === "PRIVATE") params.type = "PERSONAL";
         else if(params.type === "PUBLIC") params.type = "COMMUNITY";
 
@@ -57,7 +57,7 @@ async function displayFlashcard(flashcardType, params){
     let authorText = document.createElement('p');
 
     let testSpace = document.getElementById('flashcards-display-test');
-    if(flashcardType === "flashcard"){
+    if(flashcardType === "flashcard" || flashcardType === "folder"){
         for(let i = 0; i < params.name.length; i++){
             testSpace.innerHTML = params.name.substring(0, i);
             if(testSpace.clientWidth > 180) {
@@ -102,7 +102,7 @@ async function displayFlashcard(flashcardType, params){
 
     let tag = document.createElement('p');
 
-    if(flashcardType === "flashcard"){
+    if(flashcardType === "flashcard" || flashcardType === "folder"){
         tag.innerHTML = params.type;
         tag.classList.add(params.type.toLowerCase() + "-flashcard");
     } else if(flashcardType === "user"){
@@ -112,7 +112,7 @@ async function displayFlashcard(flashcardType, params){
 
     let options = document.createElement('div');
 
-    if(flashcardType === "flashcard"){
+    if(flashcardType === "flashcard" || flashcardType === "folder"){
         let favoriteImg = document.createElement('img');
         let editImg = document.createElement('img');
         let deleteImg = document.createElement('img')
@@ -176,7 +176,7 @@ async function displayFlashcard(flashcardType, params){
 
     mainDiv.append(iconDiv, textDiv, tag, options);
     mainDiv.classList.add('flashcard-deck');
-    if(flashcardType === "flashcard"){
+    if(flashcardType === "flashcard" || flashcardType === "folder"){
         mainDiv.classList.add(params.type.toLowerCase() + "-flashcard-border");
         mainDiv.setAttribute('onclick', "location.href = '../viewer/?deck=" + params.deckID + "'");
         mainDiv.addEventListener('contextmenu', function(e){
@@ -215,8 +215,10 @@ async function displayFlashcard(flashcardType, params){
         } else if(flashcardType === "user"){
             document.getElementById('search-results-users').appendChild(mainDiv);
         }
-    } else {
+    } else if(flashcardType === "flashcard") {
         document.getElementById('flashcards-list').appendChild(mainDiv);
+    } else if(flashcardType === "folder"){
+        document.getElementById('folder-flashcard-display').appendChild(mainDiv);
     }
 }
 

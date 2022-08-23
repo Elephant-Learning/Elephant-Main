@@ -145,6 +145,9 @@ function togglePageFlip(index, sidebar, link){
 
 async function viewFolder(folderId, sidebarNum){
     togglePageFlip(4, sidebarNum);
+    removeAllChildNodes(document.getElementById('folder-flashcard-display'));
+
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
     const response = await fetch('https://elephant-rearend.herokuapp.com/folder/get?id=' + folderId, {
         method: 'GET',
         headers: {
@@ -158,6 +161,48 @@ async function viewFolder(folderId, sidebarNum){
 
     const context = await response.json();
     console.log(context);
+
+    const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const userContext = await userResponse.json();
+
+    let userLikedDecks = userContext.context.user.likedDecksIds;
+
+    for(let i = 0; i < context.context.folder.deckIds.length; i++){
+
+        const flashcard = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + context.context.folder.deckIds[i], {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        });
+
+        let flashcardContext = await flashcard.json();
+        flashcardContext = flashcardContext.context.deck
+        console.log(flashcardContext);
+
+        displayFlashcard("folder", {
+            name: flashcardContext.name,
+            author: flashcardContext.authorId,
+            type: flashcardContext.visibility,
+            deckID: flashcardContext.id,
+            favorite: userLikedDecks.includes(flashcardContext.id),
+            search: false
+        })
+    } document.getElementById('flashcards-display-test').innerHTML = "";
 }
 
 function sidebarFolder(title, folderId){

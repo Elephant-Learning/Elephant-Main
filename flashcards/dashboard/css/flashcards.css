@@ -159,13 +159,17 @@
     box-shadow:none;
 }
 
-#flashcards-list{
+#flashcards-list, #folder-flashcard-display{
     display:flex;
     flex-direction:row;
     flex-wrap:wrap;
     gap:calc(var(--size) * 12px);
     padding-bottom:calc(var(--size) * 48px);
     position:relative;
+}
+
+#folder-flashcard-display{
+    margin-top:calc(var(--size) * 12px);
 }
 
 #flashcards-display-test{

@@ -110,6 +110,76 @@ async function removeSharedFriend(userId){
     console.log(context);
 }
 
+async function deckToFolder(adding, folderId){
+    if(adding){
+        await fetch('https://elephant-rearend.herokuapp.com/folder/addDeck', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS, PUT',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                folderId: folderId,
+                deckId: editing
+            }),
+            mode: 'cors'
+        });
+    } else {
+        await fetch('https://elephant-rearend.herokuapp.com/folder/removeDeck', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                folderId: folderId,
+                deckId: editing
+            }),
+            mode: 'cors'
+        });
+    }
+
+    await refreshFolders()
+}
+
+async function createFolderOption(name, length, folderId, active){
+    let newDiv = document.createElement('div');
+    let imageDiv = document.createElement('div');
+    let image = document.createElement('img');
+    let textDiv = document.createElement('div');
+    let nameText = document.createElement('h1');
+    let lengthText = document.createElement('p');
+    let activeText = document.createElement('p');
+
+    image.src = "./icons/folder.png";
+    imageDiv.appendChild(image);
+
+    nameText.innerHTML = name;
+    lengthText.innerHTML = "Amount of Decks: " + length;
+
+    if(active){
+        activeText.innerHTML = "Remove";
+        activeText.addEventListener('click', function(e){
+            deckToFolder(false, folderId)
+        })
+    } else{
+        activeText.innerHTML = "Add";
+        activeText.addEventListener('click', function(e){
+            deckToFolder(true, folderId)
+        })
+    }
+
+    textDiv.append(nameText, lengthText);
+    newDiv.append(imageDiv, textDiv, activeText);
+    newDiv.classList.add('folder-option')
+
+    document.getElementById('folder-list').appendChild(newDiv);
+}
+
 async function addSharedFriend(userId, init){
     let newDiv = document.createElement('div');
     let imageDiv = document.createElement('div');
@@ -130,7 +200,7 @@ async function addSharedFriend(userId, init){
             'Access-Control-Allow-Headers': 'Content-Type'
         },
         mode: 'cors'
-    })
+    });
 
     let context = await response.json();
     context = context.context.user;
@@ -676,6 +746,28 @@ function toggleCardVisibility(visibility){
     }
 }
 
+async function refreshFolders(){
+    removeAllChildNodes(document.getElementById('folder-list'));
+
+    const savedUserId  = JSON.parse(localStorage.getItem('savedUserId'));
+    const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const userContext = await userResponse.json();
+
+    for(let i = 0; i < userContext.context.user.folders.length; i++){
+        createFolderOption(userContext.context.user.folders[i].name, userContext.context.user.folders[i].deckIds.length, userContext.context.user.folders[i].id, userContext.context.user.folders[i].deckIds.includes(editing));
+    }
+}
+
 async function checkForEditing(){
     try{
         if(document.location.href.split("?")[1].includes("deck=")) {
@@ -732,6 +824,8 @@ async function checkForEditing(){
             for(let i = 0; i < cards.length; i++){
                 createCard(cards[i].term, cards[i].definitions)
             }
+
+            await refreshFolders();
         }
     } catch(error) {
         document.getElementById('deck-privacy-div').innerHTML = "PERSONAL";

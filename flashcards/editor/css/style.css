@@ -281,7 +281,7 @@ html {
     background:linear-gradient(135deg, var(--tertiary-accent), var(--tertiary-accent-gradient)) !important;
 }
 
-#sharing-friends-list, #backpack-card-list, #sharing-friend-input-list{
+#sharing-friends-list, #backpack-card-list, #sharing-friend-input-list, #folder-list{
     display:flex;
     flex-direction:column;
     align-items:flex-start;
@@ -308,7 +308,7 @@ html {
     z-index:2;
 }
 
-.sharing-friends, .backpack-cards{
+.sharing-friends, .backpack-cards, .folder-option{
     display:flex;
     flex-direction:row;
     align-items:center;
@@ -317,7 +317,7 @@ html {
     width:calc(var(--size) * 320px);
 }
 
-.sharing-friends > div:first-of-type, .backpack-cards > div:first-of-type{
+.sharing-friends > div:first-of-type, .backpack-cards > div:first-of-type, .folder-option > div:first-of-type{
     width:calc(var(--size) * 30px);
     height:calc(var(--size) * 30px);
     display:flex;
@@ -328,6 +328,15 @@ html {
     border-radius:50%;
 }
 
+.folder-option > div:first-of-type{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+}
+
+.folder-option > div:first-of-type > img{
+    height:calc(var(--size) * 20px);
+    filter:invert(1);
+}
+
 .sharing-friends > div:first-of-type > img, .backpack-cards > div:first-of-type > img{
     height:calc(var(--size) * 20px);
 }
@@ -336,19 +345,20 @@ html {
     filter:invert(0.5)
 }
 
-.backpack-cards > div:nth-of-type(2){
+.backpack-cards > div:nth-of-type(2), .folder-option > div:nth-of-type(2){
     overflow-x:hidden;
     width:calc(var(--size) * 218px);
 }
 
-.backpack-cards > div:nth-of-type(2) *{
+.backpack-cards > div:nth-of-type(2) *, .folder-option > div:nth-of-type(2) *{
     white-space: nowrap
 }
 
 .backpack-cards > div:nth-of-type(2) > h1{
+
 }
 
-.sharing-friends > div:last-of-type > h1, .backpack-cards > div:nth-of-type(2) > h1{
+.sharing-friends > div:last-of-type > h1, .backpack-cards > div:nth-of-type(2) > h1, .folder-option > div:nth-of-type(2) > h1{
     font-size:calc(var(--size) * 12px);
     margin:0;
 }
@@ -364,7 +374,7 @@ html {
     height:calc(var(--size) * 14px);
 }
 
-.sharing-friends > div:last-of-type > p, .backpack-cards > div:nth-of-type(2) > div > p{
+.sharing-friends > div:last-of-type > p, .backpack-cards > div:nth-of-type(2) > div > p, .folder-option > div:nth-of-type(2) > p{
     font-size:calc(var(--size) * 12px);
     color:gray;
     margin:0;
@@ -390,7 +400,7 @@ html {
     transform:scale(1.1);
 }
 
-.sharing-friends > p{
+.sharing-friends > p, .folder-option > p{
     position:absolute;
     color:var(--primary-accent);
     cursor:pointer;

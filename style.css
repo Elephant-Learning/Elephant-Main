@@ -149,6 +149,7 @@ body *{
     font-size:48px;
     width:65vw;
     margin:0;
+    font-weight:700;
 }
 
 #desktop-main-container > p{
