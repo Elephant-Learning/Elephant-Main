@@ -4,7 +4,7 @@ let activeFlashcardCard = 0;
 
 function togglePageFlip(index, sidebar, link){
 
-    const pages = ["Deck Carousel", "Deck Memorize", "Deck Review", "Deck Statistics"];
+    const pages = ["Deck Carousel", "Deck Memorize", "Deck Review", "Deck Statistics", "Deck Cards"];
 
     if(link){
         window.location.href = link;
@@ -38,6 +38,118 @@ function togglePageFlip(index, sidebar, link){
                 item.classList.remove('inactive-modal')
             })
         } catch{}
+    }
+}
+
+async function addToBackpack(cardId){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
+    const response = await fetch('https://elephant-rearend.herokuapp.com/backpack/addCard', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS, PUT',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        body: JSON.stringify({
+            userId: savedUserId,
+            cardId: cardId
+        }),
+        mode: 'cors'
+    });
+
+    const context = await response.json();
+    console.log(context, cardId);
+}
+
+function createCard(term, definitions, cardId){
+    let newDiv = document.createElement('div');
+    let newNumber = document.createElement('p');
+    let copyrightDiv = document.createElement('div');
+    let cardTitle = document.createElement('input');
+    let definitionsDiv = document.createElement('div');
+    let footerDiv = document.createElement('div');
+
+    newNumber.innerHTML = (document.querySelectorAll('.flashcards-card').length + 1).toString();
+    newNumber.classList.add('flashcards-card-number');
+
+    let copyrightElephant = document.createElement('img');
+    let copyrightTextDiv = document.createElement('div');
+    let copyrightText = document.createElement('p');
+    let copyrightImg = document.createElement('img');
+
+    copyrightElephant.src = "../../icons/elephant-400-400-black.png";
+    copyrightText.innerHTML = "Elephant";
+    copyrightImg.src = "../editor/icons/copyright.png";
+    copyrightTextDiv.append(copyrightText, copyrightImg);
+
+    copyrightDiv.append(copyrightElephant, copyrightTextDiv);
+    copyrightDiv.classList.add('flashcards-card-copyright');
+
+    cardTitle.placeholder = "New Flashcard";
+    cardTitle.setAttribute('readonly', 'true');
+
+    if(term !== undefined) cardTitle.value = term;
+
+    cardTitle.id = "flashcards-input-" + (document.querySelectorAll('.flashcards-card').length + 1).toString();
+
+    if(definitions === undefined){
+        let answersDiv = document.createElement('div');
+        let definitionsInput = document.createElement('input');
+
+        definitionsInput.placeholder = "Definition";
+        definitionsInput.classList.add('flashcards-definition-input');
+        definitionsInput.classList.add('flashcards-definition-input-' + (document.querySelectorAll('.flashcards-card').length + 1).toString());
+        definitionsInput.setAttribute('readonly', 'true');
+
+        answersDiv.append(definitionsInput);
+        answersDiv.classList.add('flashcards-card-answers-div');
+
+        definitionsDiv.appendChild(answersDiv);
+    } else {
+        for(let i = 0; i < definitions.length; i++){
+            let answersDiv = document.createElement('div');
+            let definitionsInput = document.createElement('input');
+
+            definitionsInput.placeholder = "Definition";
+            definitionsInput.value = definitions[i];
+            definitionsInput.classList.add('flashcards-definition-input');
+            definitionsInput.classList.add('flashcards-definition-input-' + (document.querySelectorAll('.flashcards-card').length + 1).toString());
+            definitionsInput.setAttribute('readonly', 'true');
+
+            answersDiv.append(definitionsInput);
+            answersDiv.classList.add('flashcards-card-answers-div');
+
+            definitionsDiv.appendChild(answersDiv);
+        }
+    }
+
+    definitionsDiv.classList.add('flashcards-card-answers')
+    definitionsDiv.id = 'flashcards-card-answers-' + (document.querySelectorAll('.flashcards-card').length + 1).toString();
+
+    let footerRight = document.createElement('div');
+    let backpackImg = document.createElement('img');
+
+    backpackImg.src = "../editor/icons/pack.png";
+    backpackImg.setAttribute("onclick", "addToBackpack(" + cardId + ")");
+
+    footerRight.classList.add('flashcards-card-footer-right')
+    footerRight.append(backpackImg);
+
+    footerDiv.appendChild(footerRight);
+    footerDiv.classList.add('flashcards-card-footer');
+
+    newDiv.append(newNumber, copyrightDiv, cardTitle, definitionsDiv, footerDiv);
+    newDiv.classList.add('flashcards-card');
+
+    document.getElementById('flashcards-list').appendChild(newDiv);
+}
+
+function updateCardsList(){
+    console.log(deck);
+    for(let i = 0; i < deck.length; i++){
+        createCard(deck[i].term, deck[i].definitions, deck[i].id);
     }
 }
 
@@ -90,6 +202,8 @@ window.onload = async function(){
             }
         ];
 
+        document.getElementById('title').innerHTML = "Trivia | Elephant - The Ultimate Student Suite"
+        updateCardsList();
         updateFlashcard();
         initializeMemorize();
         return;
@@ -158,9 +272,11 @@ window.onload = async function(){
 
     document.getElementById('desktop-sidebar-deck-author-img').src = "../../icons/avatars/" + userContext.context.user.pfpId + ".png"
     document.getElementById('desktop-sidebar-deck-author').innerHTML = userContext.context.user.firstName + " " + userContext.context.user.lastName
+    document.getElementById('title').innerHTML = context.context.deck.name + " | Elephant - The Ultimate Student Suite";
 
     deck = context.context.deck.cards;
 
+    updateCardsList();
     updateFlashcard();
     initializeMemorize();
 }
@@ -191,6 +307,7 @@ async function locateUserInfo(){
     })
 
     const context = await response.json();
+    console.log(context);
     initialize(context)
 }
 

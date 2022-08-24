@@ -877,11 +877,14 @@ body *{
 
 .unavailable-sidebar-category{
     background:var(--light-border-color);
-    color:gray;
 }
 
 .unavailable-sidebar-category > div > img{
-    filter:invert(0.5);
+    filter:invert(0.5) !important;
+}
+
+.unavailable-sidebar-category > p{
+    color:gray !important;
 }
 
 .desktop-sidebar-category > div, .desktop-sidebar-folder > div{
@@ -893,7 +896,7 @@ body *{
 
 .desktop-sidebar-category > div > img, .desktop-sidebar-folder > div > img{
     height:calc(var(--size) * 18px);
-    filter:invert(1) brightness(var(--image-invert));
+    filter:invert(var(--image-invert));
 }
 
 .desktop-sidebar-category > p, .desktop-sidebar-folder > p{

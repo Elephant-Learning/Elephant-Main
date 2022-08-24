@@ -14,7 +14,6 @@ const User = function(){
     this.password = "";
     this.countryCode = 0;
     this.type = "";
-    this.profilePic = Math.floor(Math.random() * 47);
 
     this.updateName = function(fullname){
         fullname = fullname.split(' ');
@@ -222,6 +221,8 @@ async function signup(data){
     document.getElementById('desktop-loading-modal').classList.remove('inactive-modal');
     document.getElementById('desktop-alert-modal').className = "desktop-modal inactive-modal";
 
+    console.log(data);
+
     const response = await fetch('https://elephant-rearend.herokuapp.com/registration', {
         method: 'POST',
         headers: {
@@ -233,7 +234,9 @@ async function signup(data){
         body: JSON.stringify(data),
         mode: 'cors'
     });
+
     const content = await response.json();
+    console.log(content, data);
 
     if(content.status === "FAILURE"){
         document.getElementById('desktop-loading-modal').classList.add('inactive-modal');

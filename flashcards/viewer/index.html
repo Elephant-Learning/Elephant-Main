@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flashcards | Elephant - The Ultimate Student Suite</title>
+    <title id="title">Flashcards | Elephant - The Ultimate Student Suite</title>
 
     <link rel="icon" href="../../icons/elephant-400-400-grayscale.png">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../editor/css/list.css">
 
     <script src="../js/main.js" defer></script>
     <script src="js/script.js" defer></script>
@@ -124,13 +125,13 @@
             <div id="desktop-sidebar-categories">
                 <div class="desktop-sidebar-category active-sidebar-category" onclick="togglePageFlip(0, 0)">
                     <div>
-                        <img src="../icons/deck.png" alt="Recent">
+                        <img src="./icons/carousel.png" alt="Recent">
                     </div>
                     <p>Deck Carousel</p>
                 </div>
                 <div class="desktop-sidebar-category" onclick="togglePageFlip(1, 1, undefined)">
                     <div>
-                        <img src="../icons/flip.png" alt="Recent">
+                        <img src="./icons/memorize.png" alt="Recent">
                     </div>
                     <p>Deck Memorize</p>
                 </div>
@@ -140,13 +141,25 @@
                     </div>
                     <p>Deck Review</p>
                 </div>
+                <div class="desktop-sidebar-category unavailable-sidebar-category">
+                    <div>
+                        <img src="./icons/timer.png" alt="Recent">
+                    </div>
+                    <p>Deck Match</p>
+                </div>
                 <div class="desktop-sidebar-break"></div>
                 <h1>Information</h1>
-                <div class="desktop-sidebar-category" onclick="togglePageFlip(3, 3, undefined)">
+                <div class="desktop-sidebar-category" onclick="togglePageFlip(3, 4, undefined)">
                     <div>
                         <img src="./icons/statistics.png" alt="Recent">
                     </div>
                     <p>Deck Statistics</p>
+                </div>
+                <div class="desktop-sidebar-category" onclick="togglePageFlip(4, 5, undefined)">
+                    <div>
+                        <img src="../icons/deck.png" alt="Recent">
+                    </div>
+                    <p>Deck Cards</p>
                 </div>
             </div>
             <div id="desktop-sidebar-information">
@@ -218,10 +231,22 @@
                     </div>
                 </div>
                 <div class="desktop-tab" id="deck-review">
-                    c
+                    <div id="desktop-review-container">
+                        <div id="desktop-review-main">
+
+                        </div>
+                    </div>
+                    <div id="desktop-review-panel">
+
+                    </div>
                 </div>
                 <div class="desktop-tab" id="deck-statistics">
                     k
+                </div>
+                <div class="desktop-tab" id="deck-cards">
+                    <div id="flashcards-list" class="list">
+
+                    </div>
                 </div>
             </div>
             <div class="bottom-btns">

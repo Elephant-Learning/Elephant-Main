@@ -643,3 +643,47 @@
     font-size:calc(var(--size) * 14px);
     color:gray;
 }
+
+#desktop-review-container{
+    width:100%;
+    height:100%;
+    overflow-y:scroll;
+}
+
+#desktop-review-main{
+    width:calc(100vw - calc(var(--size) * 586px));
+    height:200vh;
+    margin:calc(var(--size) * 24px);
+    background:var(--bg-color-1);
+    border-radius:calc(var(--size) * 12px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    border:1px solid var(--light-border-color);
+}
+
+#desktop-review-panel{
+    width:calc(var(--size) * 208px);
+    height:calc(100vh - calc(var(--size) * 224px));
+    padding:calc(var(--size) * 24px);
+    border:1px solid var(--light-border-color);
+    background:var(--bg-color-1);
+    position:absolute;
+    right:calc(var(--size) * 24px);
+    top:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 12px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    text-align:center;
+}
+
+#flashcards-list{
+    width:calc(100% - var(--size) * 24px);
+    height:calc(100vh - calc(var(--size) * 128px));
+    padding:calc(var(--size) * 24px) calc(var(--size) * 12px);
+    overflow-y:scroll;
+}

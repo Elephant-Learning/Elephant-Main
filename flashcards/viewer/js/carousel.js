@@ -18,7 +18,7 @@ function toggleFlashcardFlip(){
 document.getElementById('desktop-flashcard-container').onclick = toggleFlashcardFlip;
 
 function changeFlashcard(direction){
-    if(direction === "left" && activeFlashcardCard >= 0){
+    if(direction === "left" && activeFlashcardCard > 0){
         activeFlashcardCard -= 1;
     } else if(direction === "right" && activeFlashcardCard < deck.length - 1){
         activeFlashcardCard += 1;

@@ -62,30 +62,6 @@
     width:100%;
 }
 
-.kanban > .flashcards-card > .flashcards-card-copyright > img, .list > .flashcards-card > .flashcards-card-copyright > img{
-    height:calc(var(--size) * 14px);
-    filter:invert(calc(-0.8 * var(--image-invert) + 0.9));
-}
-
-.kanban > .flashcards-card > .flashcards-card-copyright > div, .list > .flashcards-card > .flashcards-card-copyright > div{
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:flex-end;
-    gap:calc(var(--size) * 4px);
-}
-
-.kanban > .flashcards-card > .flashcards-card-copyright > div > p, .list > .flashcards-card > .flashcards-card-copyright > div > p{
-    font-size:calc(var(--size) * 10px);
-    color:lightgray;
-    margin:0;
-}
-
-.kanban > .flashcards-card > .flashcards-card-copyright > div > img, .list > .flashcards-card > .flashcards-card-copyright > div > img{
-    height:calc(var(--size) * 12px);
-    filter:invert(calc(-0.5 * var(--image-invert) + 0.75));
-}
-
 .kanban > .flashcards-card > input{
     font-size:calc(var(--size) * 14px);
     background:transparent;
