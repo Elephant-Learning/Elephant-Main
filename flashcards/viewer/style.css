@@ -651,15 +651,15 @@
 }
 
 #desktop-review-main{
-    width:calc(100vw - calc(var(--size) * 586px));
-    height:200vh;
+    width:calc(100vw - calc(var(--size) * 682px));
+    padding:calc(var(--size) * 48px);
     margin:calc(var(--size) * 24px);
     background:var(--bg-color-1);
     border-radius:calc(var(--size) * 12px);
     display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:center;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
     text-align:center;
     border:1px solid var(--light-border-color);
 }
@@ -679,6 +679,49 @@
     align-items:center;
     justify-content:flex-start;
     text-align:center;
+}
+
+#desktop-review-panel-bottom{
+    position:absolute;
+    bottom:calc(var(--size) * 24px);
+    width:calc(100% - var(--size) * 48px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-end;
+}
+
+#desktop-review-panel-bottom > button{
+    background:var(--light-gray);
+    padding:calc(var(--size) * 6px) 0;
+    border-radius:calc(var(--size) * 6px);
+    cursor:pointer;
+    font-size:calc(var(--size) * 12px);
+    text-transform:uppercase;
+    transition-duration:250ms;
+    font-weight:500;
+    color:white;
+    width:100%;
+}
+
+#desktop-review-panel-bottom > button:hover{
+    box-shadow:0 0 calc(var(--size) * 6px) 0 var(--light-gray);
+}
+
+#desktop-review-panel-bottom > button:active{
+    box-shadow:none;
+}
+
+#desktop-review-main > h1{
+    font-size:calc(var(--size) * 32px);
+    margin:0;
+    font-weight:700;
+}
+
+#desktop-review-main > h3{
+    font-size:calc(var(--size) * 14px);
+    font-weight:500;
+    margin:0;
 }
 
 #flashcards-list{

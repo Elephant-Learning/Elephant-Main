@@ -273,6 +273,7 @@ window.onload = async function(){
     document.getElementById('desktop-sidebar-deck-author-img').src = "../../icons/avatars/" + userContext.context.user.pfpId + ".png"
     document.getElementById('desktop-sidebar-deck-author').innerHTML = userContext.context.user.firstName + " " + userContext.context.user.lastName
     document.getElementById('title').innerHTML = context.context.deck.name + " | Elephant - The Ultimate Student Suite";
+    document.getElementById('desktop-review-deck-name').innerHTML = "Test Deck: " + context.context.deck.name;
 
     deck = context.context.deck.cards;
 

@@ -158,7 +158,24 @@
                         </div>
                     </div>
                 </div>
-                <button id="publish-btn" class="inactive-modal"></button>
+                <div id="publish-btn" class="inactive-modal">
+                    <div id="publish-btn-hitbox"></div>
+                    <img id="publish-image" src="./icons/plus.png" alt="">
+                    <p id="publish-text">Invite</p>
+                    <div id="desktop-publish-modal" class="inactive-modal desktop-modal">
+                        <div class="desktop-modal-image-container">
+                            <img src="./icons/share.png" alt="">
+                        </div>
+                        <h1>Share Deck With The World</h1>
+                        <p>You've already created your deck. Give the link to your friends so they can study too!</p>
+                        <h6>Share Link</h6>
+                        <div id="desktop-publish-input-container">
+                            <input type="text" id="desktop-publish-input" readonly>
+                            <img src="./icons/duplicate.png" alt="" onclick="copyPublishLink()">
+                        </div>
+                        <button id="publish-done" onclick="togglePublishModal(true)">Done</button>
+                    </div>
+                </div>
                 <div id="invite-btn" class="inactive-modal">
                     <div id="invite-btn-hitbox" onclick="toggleSharingModal()"></div>
                     <img src="./icons/plus.png" alt="">

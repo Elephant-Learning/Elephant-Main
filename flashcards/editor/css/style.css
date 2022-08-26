@@ -214,7 +214,7 @@ html {
     height:calc(var(--size) * 16px);
 }
 
-#invite-btn > p{
+#invite-btn > p, #publish-btn > p{
     margin:0;
     color:white;
 }
@@ -250,6 +250,14 @@ html {
     z-index:2;
     cursor:default;
     left:0;
+}
+
+#desktop-publish-modal{
+    position:absolute;
+    z-index:2;
+    left:calc(var(--size) * -130px);
+    top:calc(var(--size) * 48px);
+    transition-duration:0ms;
 }
 
 #desktop-folder-modal{
@@ -298,7 +306,7 @@ html {
     max-height:calc(var(--size) * 228px);
 }
 
-#sharing-input-hitbox, #invite-btn-hitbox, #folder-btn-hitbox{
+#sharing-input-hitbox, #invite-btn-hitbox, #folder-btn-hitbox, #publish-btn-hitbox{
     position:absolute;
     top:0;
     left:0;
@@ -410,13 +418,44 @@ html {
     right:calc(var(--size) * 12px);
 }
 
+#desktop-publish-input-container{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+}
+
+#desktop-publish-input-container > input{
+    background:var(--bg-color-2);
+    color:gray;
+    border:1px solid var(--light-border-color);
+    height:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 6px);
+    width:calc(100% - var(--size) * 60px);
+    outline:none;
+    padding:0 calc(var(--size) * 12px);
+    font-size:calc(var(--size) * 12px);
+}
+
+#desktop-publish-input-container > img{
+    transition-duration:250ms;
+    cursor:pointer;
+    filter:invert(0.5);
+    width:calc(var(--size) * 18px);
+}
+
+#desktop-publish-input-container > img:hover{
+    transform:scale(1.05);
+}
+
 #desktop-sharing-modal > h6{
     font-size:calc(var(--size) * 12px);
     font-weight:600;
     margin: calc(var(--size) * 12px) 0 0;
 }
 
-#sharing-done, #backpack-done{
+#sharing-done, #backpack-done, #publish-done{
     width:calc(var(--size) * 320px);
     color:white;
     border:none;
@@ -430,7 +469,7 @@ html {
     cursor:pointer;
 }
 
-#backpack-done{
+#backpack-done, #publish-done{
     margin-top:calc(var(--size) * 12px);
     background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
 }

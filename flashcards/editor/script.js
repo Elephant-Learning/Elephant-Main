@@ -43,6 +43,13 @@ function deleteCard(index){
    }
 }
 
+function copyPublishLink() {
+    const input = document.getElementById("desktop-publish-input");
+    input.select();
+    document.execCommand("copy");
+    document.getSelection().removeAllRanges()
+}
+
 async function publishDeck(){
     const response = await fetch('https://elephant-rearend.herokuapp.com/deck/visibility', {
         method: 'POST',
@@ -60,7 +67,10 @@ async function publishDeck(){
     })
 
     const context = await response.json();
+    togglePublishModal(false);
     toggleCardVisibility(context.context.deck.visibility)
+
+    document.getElementById('desktop-publish-input').value = "https://elephantsuite.me/flashcards/viewer/?deck=" + editing;
 }
 
 async function unpublishDeck(){
@@ -80,6 +90,7 @@ async function unpublishDeck(){
     })
 
     const context = await response.json();
+    togglePublishModal(true);
     toggleCardVisibility(context.context.deck.visibility)
 }
 
@@ -528,6 +539,14 @@ function toggleSharingModal(){
     }
 }
 
+function togglePublishModal(hidden){
+    if(!hidden){
+        document.getElementById('desktop-publish-modal').classList.remove('inactive-modal')
+    } else {
+        document.getElementById('desktop-publish-modal').classList.add('inactive-modal')
+    }
+}
+
 function toggleFolderModal(){
     if(document.getElementById('desktop-folder-modal').classList.contains('inactive-modal')){
         document.getElementById('desktop-folder-modal').classList.remove('inactive-modal')
@@ -699,16 +718,15 @@ async function saveDeck(){
 }
 
 function toggleCardVisibility(visibility){
-    removeAllChildNodes(document.getElementById('publish-btn'))
 
     if(visibility === "PRIVATE"){
         document.getElementById('deck-privacy-div').innerHTML = "PERSONAL";
         document.getElementById('deck-privacy-div').className = 'personal';
 
-        let publishBtnImg = document.createElement('img')
-        publishBtnImg.src = "./icons/upload.png";
-        document.getElementById('publish-btn').append(publishBtnImg, document.createTextNode("Publish"));
-        document.getElementById('publish-btn').setAttribute("onclick", "publishDeck()");
+        document.getElementById('publish-image').src = "./icons/upload.png";
+        document.getElementById('publish-text').innerHTML = "Publish"
+
+        document.getElementById('publish-btn-hitbox').setAttribute("onclick", "publishDeck()");
         try{
             document.getElementById('publish-btn').classList.remove('personal')
             document.getElementById('publish-btn').classList.add('community')
@@ -719,10 +737,10 @@ function toggleCardVisibility(visibility){
         document.getElementById('deck-privacy-div').innerHTML = "SHARED";
         document.getElementById('deck-privacy-div').className = 'shared';
 
-        let publishBtnImg = document.createElement('img')
-        publishBtnImg.src = "./icons/upload.png";
-        document.getElementById('publish-btn').append(publishBtnImg, document.createTextNode("Publish"))
-        document.getElementById('publish-btn').setAttribute("onclick", "publishDeck()")
+        document.getElementById('publish-image').src = "./icons/upload.png";
+        document.getElementById('publish-text').innerHTML = "Publish"
+        document.getElementById('publish-btn-hitbox').setAttribute("onclick", "publishDeck()");
+
         try{
             document.getElementById('publish-btn').classList.remove('personal')
             document.getElementById('publish-btn').classList.add('community')
@@ -733,10 +751,10 @@ function toggleCardVisibility(visibility){
         document.getElementById('deck-privacy-div').innerHTML = "COMMUNITY";
         document.getElementById('deck-privacy-div').className = 'community';
 
-        let publishBtnImg = document.createElement('img')
-        publishBtnImg.src = "./icons/download.png";
-        document.getElementById('publish-btn').append(publishBtnImg, document.createTextNode("Unpublish"));
-        document.getElementById('publish-btn').setAttribute("onclick", "unpublishDeck()");
+        document.getElementById('publish-image').src = "./icons/download.png";
+        document.getElementById('publish-text').innerHTML = "Unpublish"
+        document.getElementById('publish-btn-hitbox').setAttribute("onclick", "unpublishDeck()");
+
         try{
             document.getElementById('publish-btn').classList.remove('community')
             document.getElementById('publish-btn').classList.add('personal')
