@@ -380,7 +380,7 @@ function createBackpackCard(deck){
     let optionsDiv = document.createElement('div');
 
     let deckImg = document.createElement('img');
-    deckImg.src = "../icons/deck.png";
+    deckImg.src = "./icons/pack.png";
 
     imgDiv.appendChild(deckImg);
 
@@ -390,8 +390,8 @@ function createBackpackCard(deck){
     let authorText = document.createElement('p');
 
     deckName.innerHTML = deck.name;
-    authorImg.src = "../../icons/avatars/46.png";
-    authorText.innerHTML = "Elephant Student";
+    authorImg.src = "../icons/deck.png";
+    authorText.innerHTML = deck.deckName;
 
     authorDiv.append(authorImg, authorText);
     textDiv.append(deckName, authorDiv);
@@ -401,6 +401,11 @@ function createBackpackCard(deck){
 
     optionsUnpack.src = "./icons/unpack.png";
     optionsDelete.src = "./icons/delete.png";
+
+    optionsUnpack.addEventListener('click', function(e){
+        createCard(deck.name, deck.definitions)
+    })
+
     optionsDiv.append(optionsUnpack, optionsDelete);
 
     newDiv.append(imgDiv, textDiv, optionsDiv);
@@ -497,7 +502,8 @@ function createCard(term, definitions){
     backpackImg.setAttribute("onclick", "backpackCard(" + (document.querySelectorAll('.flashcards-card').length + 1) + ")")
 
     footerRight.classList.add('flashcards-card-footer-right')
-    footerRight.append(backpackImg, duplicateImg, deleteImg);
+    //footerRight.append(backpackImg, duplicateImg, deleteImg);
+    footerRight.append(duplicateImg, deleteImg);
 
     footerDiv.appendChild(footerRight);
     footerDiv.classList.add('flashcards-card-footer');
@@ -938,6 +944,14 @@ async function initialize(user){
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
 
+    for(let i = 0; i < user.backpack.cards.length; i++){
+        createBackpackCard({
+            name: user.backpack.cards[i].term,
+            deckName: user.backpack.cards[i].deckName,
+            definitions: user.backpack.cards[i].definitions
+        })
+    }
+
     console.log(user);
     let preferences = localStorage.getItem('preferences');
     console.log(preferences);
@@ -977,12 +991,6 @@ async function locateUserInfo(){
 
     const context = await response.json();
     initialize(context)
-}
-
-for(let i = 0; i < 20; i++){
-    createBackpackCard({
-        name: "Something"
-    })
 }
 
 locateUserInfo()
