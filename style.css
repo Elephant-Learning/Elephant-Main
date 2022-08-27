@@ -56,7 +56,6 @@ body *{
     display:flex;
     flex-direction:column;
     width:100vw;
-    height:100vh;
 }
 
 #desktop-navbar{
@@ -111,19 +110,38 @@ body *{
 }
 
 #desktop-main-container{
-    width:100vw;
+    width:calc(100vw - 256px);
     height:calc(100vh - 200px);
+    padding:0 128px;
     background:var(--dark-gray);
     position:relative;
     display:flex;
     flex-direction:row;
     align-items:center;
-    justify-content:center;
+    justify-content:space-between;
+}
+
+#desktop-main-container > div{
+    width:47.55%;
+}
+
+#desktop-main-container > div > h1{
+    color:white;
+    font-size:64px;
+    font-weight:900;
+    margin:0;
+}
+
+#desktop-main-container > div > h2{
+    font-size:18px;
+    color:gray;
+    text-transform:uppercase;
+    margin:0;
 }
 
 #desktop-benefits-container{
     position:relative;
-    height:500px;
+    height:10000px;
 }
 
 #desktop-top-container-wave{

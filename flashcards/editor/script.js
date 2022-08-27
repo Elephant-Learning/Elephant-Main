@@ -12,6 +12,16 @@ const Deck = function(){
     this.visibility = "PRIVATE";
 }
 
+const DeckComparison = function(){
+    this.name = "";
+    this.cards = [];
+}
+
+const Card = function(){
+    this.term = "";
+    this.definitions = [];
+}
+
 function deleteCard(index){
     let exportedDeck = new Deck();
     let untitledNums = 0;
@@ -555,26 +565,46 @@ function toggleFolderModal(){
     }
 }
 
+function isEqual(obj1, obj2) {
+    let props1 = Object.getOwnPropertyNames(obj1);
+    let props2 = Object.getOwnPropertyNames(obj2);
+    if (props1.length !== props2.length) {
+        return false;
+    }
+    for (let i = 0; i < props1.length; i++) {
+        let val1 = obj1[props1[i]];
+        let val2 = obj2[props1[i]];
+        let isObjects = isObject(val1) && isObject(val2);
+        if (isObjects && !isEqual(val1, val2) || !isObjects && val1 !== val2) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function isObject(object) {
+    return object != null && typeof object === 'object';
+}
+
 async function leaveEditor(link){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
 
-    let exportedDeck = new Deck();
-    exportedDeck.name = document.getElementById('deck-name').textContent;
-
-    for(let i = 0; i < document.querySelectorAll('.flashcards-card').length; i++){
-        let definitions = [];
-
-        document.querySelectorAll(".flashcards-definition-input-" + (i + 1)).forEach(function(element){
-            definitions.push(element.value)
-        })
-
-        exportedDeck.terms[document.getElementById("flashcards-input-" + (i + 1)).value] = definitions;
-    }
-
-    console.log(exportedDeck.name === "New Elephant Deck", Object.keys(exportedDeck.terms).length === 1, Object.keys(exportedDeck.terms)[0] === "", exportedDeck.terms[Object.keys(exportedDeck.terms)[0]].length === 1, exportedDeck.terms[Object.keys(exportedDeck.terms)[0]][0] === "");
-
     enableRedirect = false;
     if(editing === undefined){
+        let exportedDeck = new Deck();
+        exportedDeck.name = document.getElementById('deck-name').textContent;
+
+        for(let i = 0; i < document.querySelectorAll('.flashcards-card').length; i++){
+            let newCard = new Card();
+
+            document.querySelectorAll(".flashcards-definition-input-" + (i + 1)).forEach(function(element){
+                newCard.definitions.push(element.value)
+            })
+
+            newCard.term = document.getElementById("flashcards-input-" + (i + 1)).value;
+            exportedDeck.cards.push()
+        }
+
         if(exportedDeck.name === "New Elephant Deck" && Object.keys(exportedDeck.terms).length === 1 && Object.keys(exportedDeck.terms)[0] === "" && exportedDeck.terms[Object.keys(exportedDeck.terms)[0]].length === 1 && exportedDeck.terms[Object.keys(exportedDeck.terms)[0]][0] === "") enableRedirect = true;
     } else {
         const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + editing, {
@@ -588,12 +618,24 @@ async function leaveEditor(link){
             mode: 'cors'
         });
 
+        let exportedDeck = new DeckComparison();
+        exportedDeck.name = document.getElementById('deck-name').textContent;
+
+        for(let i = 0; i < document.querySelectorAll('.flashcards-card').length; i++){
+            let definitions = [];
+
+            document.querySelectorAll(".flashcards-definition-input-" + (i + 1)).forEach(function(element){
+                definitions.push(element.value)
+            })
+
+            exportedDeck.terms[document.getElementById("flashcards-input-" + (i + 1)).value] = definitions;
+        }
+
         const context = await response.json();
         console.log(context);
     }
 
-
-    location.href = link
+    //location.href = link
 }
 
 document.getElementById('save-deck').onclick = saveDeck;

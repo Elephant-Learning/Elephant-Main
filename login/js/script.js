@@ -213,8 +213,32 @@ document.querySelectorAll('.account-option-div').forEach(function(element){
     })
 })
 
-window.onload = function(){
-    if(document.location.href.split("?")[1] === "signup") togglePageFlip(1);
+window.onload = async function(){
+    let splitted = document.location.href.split("?")[1];
+
+    console.log(splitted.split("=")[1]);
+
+    if(splitted === "signup") togglePageFlip(1);
+    if(splitted.split("=")[0] === "confirm"){
+        const confirmResponse = await fetch('https://elephant-rearend.herokuapp.com/registration/confirm?token=' + splitted.split("=")[1], {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        });
+
+        const confirmContent = await confirmResponse.json();
+        console.log(confirmContent);
+
+        if(confirmContent.status === "SUCCESS"){
+            localStorage.setItem('savedUserId', JSON.stringify(confirmContent.context.user.id));
+            location.href = "../flashcards/dashboard";
+        }
+    }
 }
 
 async function signup(data){
@@ -247,24 +271,6 @@ async function signup(data){
         setTimeout(function(){
             document.getElementById('desktop-alert-modal').classList.add('inactive-modal')
         }, 5000)
-    } else {
-        const confirmResponse = await fetch('https://elephant-rearend.herokuapp.com/registration/confirm?token=' + content.context.user.token.token, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type'
-            },
-            mode: 'cors'
-        });
-
-        const confirmContent = await confirmResponse.json();
-        console.log(confirmContent);
-
-        document.getElementById('login-username').value = data.email;
-        document.getElementById('login-password').value = data.password;
-        login();
     }
 }
 
