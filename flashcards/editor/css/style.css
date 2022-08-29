@@ -298,6 +298,10 @@ html {
     overflow-y:scroll;
 }
 
+#backpack-card-list > div > div:nth-of-type(2) > div > img{
+    filter:invert(var(--image-invert));
+}
+
 #sharing-friends-list{
     max-height:calc(var(--size) * 152px);
 }

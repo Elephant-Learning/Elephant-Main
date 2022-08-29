@@ -369,8 +369,45 @@ function duplicateCard(index){
     createCard(document.getElementById('flashcards-input-' + index).value, definitions)
 }
 
-async function backpackCard(index){
+async function deleteBackpackCard(cardId, userId){
 
+    console.log(cardId, userId);
+
+    const response = await fetch('https://elephant-rearend.herokuapp.com/backpack/removeCard', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        body: JSON.stringify({
+            userId: userId,
+            cardId: cardId
+        }),
+        mode: 'cors'
+    })
+
+    const context = await response.json()
+    console.log(context);
+
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
+
+    const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    let user = await userResponse.json();
+    user = user.context.user;
+
+    refreshBackpack(user);
 }
 
 function createBackpackCard(deck){
@@ -404,6 +441,10 @@ function createBackpackCard(deck){
 
     optionsUnpack.addEventListener('click', function(e){
         createCard(deck.name, deck.definitions)
+    })
+
+    optionsDelete.addEventListener('click', function(e){
+        deleteBackpackCard(deck.id, deck.userId);
     })
 
     optionsDiv.append(optionsUnpack, optionsDelete);
@@ -942,6 +983,20 @@ window.addEventListener("beforeunload", function(e){
     if(!enableRedirect) e.returnValue = 'Are you sure you want to leave?';
 })
 
+function refreshBackpack(user){
+    removeAllChildNodes(document.getElementById('backpack-card-list'))
+
+    for(let i = 0; i < user.backpack.cards.length; i++){
+        createBackpackCard({
+            name: user.backpack.cards[i].term,
+            deckName: user.backpack.cards[i].deckName,
+            definitions: user.backpack.cards[i].definitions,
+            id: user.backpack.cards[i].id,
+            userId: user.id
+        })
+    }
+}
+
 async function initialize(user){
 
     if(user.status === "FAILURE") {
@@ -962,13 +1017,7 @@ async function initialize(user){
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
 
-    for(let i = 0; i < user.backpack.cards.length; i++){
-        createBackpackCard({
-            name: user.backpack.cards[i].term,
-            deckName: user.backpack.cards[i].deckName,
-            definitions: user.backpack.cards[i].definitions
-        })
-    }
+    refreshBackpack(user);
 
     console.log(user);
     let preferences = localStorage.getItem('preferences');
