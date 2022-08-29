@@ -528,8 +528,6 @@ function displayAlert(index, content){
             else refactoredContent = errorTypes[content[i][1]] + (content[i][0] + 1)
         }
 
-        console.log(refactoredContent);
-
         document.querySelectorAll('.desktop-alert-desc')[index].innerHTML = "Please Correct The Following Errors: " + refactoredContent;
     }
 
@@ -597,7 +595,7 @@ async function leaveEditor(link){
 
     enableRedirect = false;
     if(editing === undefined){
-        let exportedDeck = new Deck();
+        let exportedDeck = new DeckComparison();
         exportedDeck.name = document.getElementById('deck-name').textContent;
 
         for(let i = 0; i < document.querySelectorAll('.flashcards-card').length; i++){
@@ -608,10 +606,18 @@ async function leaveEditor(link){
             })
 
             newCard.term = document.getElementById("flashcards-input-" + (i + 1)).value;
-            exportedDeck.cards.push()
+
+            exportedDeck.cards.push(newCard)
         }
 
-        if(exportedDeck.name === "New Elephant Deck" && Object.keys(exportedDeck.terms).length === 1 && Object.keys(exportedDeck.terms)[0] === "" && exportedDeck.terms[Object.keys(exportedDeck.terms)[0]].length === 1 && exportedDeck.terms[Object.keys(exportedDeck.terms)[0]][0] === "") enableRedirect = true;
+        if(exportedDeck.name === "New Elephant Deck" || exportedDeck.name === ""){
+            if(exportedDeck.cards.length === 0) enableRedirect = true;
+            else if(exportedDeck.cards.length === 1 && exportedDeck.cards[0].term === ''){
+                if(exportedDeck.cards[0].definitions.length === 0) enableRedirect = true;
+                else if(exportedDeck.cards[0].definitions.length === 1 && exportedDeck.cards[0].definitions[0] === '') enableRedirect = true;
+            }
+        }
+
     } else {
         const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + editing, {
             method: 'GET',
@@ -628,20 +634,37 @@ async function leaveEditor(link){
         exportedDeck.name = document.getElementById('deck-name').textContent;
 
         for(let i = 0; i < document.querySelectorAll('.flashcards-card').length; i++){
-            let definitions = [];
+            let newCard = new Card();
 
             document.querySelectorAll(".flashcards-definition-input-" + (i + 1)).forEach(function(element){
-                definitions.push(element.value)
+                newCard.definitions.push(element.value)
             })
 
-            exportedDeck.terms[document.getElementById("flashcards-input-" + (i + 1)).value] = definitions;
+            newCard.term = document.getElementById("flashcards-input-" + (i + 1)).value;
+
+            exportedDeck.cards.push(newCard);
         }
 
         const context = await response.json();
-        console.log(context);
+        const deck = context.context.deck;
+
+        let savedDeck = new DeckComparison();
+        savedDeck.name = deck.name;
+
+        for(let i = 0; i < deck.cards.length; i++){
+            let newCard = new Card();
+
+            newCard.term = deck.cards[i].term
+            newCard.definitions = deck.cards[i].definitions;
+
+            savedDeck.cards.push(newCard);
+        }
+
+        if(isEqual(savedDeck, exportedDeck)) enableRedirect = true;
+
     }
 
-    //location.href = link
+    location.href = link
 }
 
 document.getElementById('save-deck').onclick = saveDeck;
@@ -669,8 +692,6 @@ async function saveDeck(){
         exportedDeck.terms[document.getElementById("flashcards-input-" + (i + 1)).value] = definitions;
     }
 
-    console.log(exportedDeck)
-
     if(errors.length === 0) {
         if(editing === undefined){
             const response = await fetch('https://elephant-rearend.herokuapp.com/deck/create', {
@@ -685,8 +706,7 @@ async function saveDeck(){
                 mode: 'cors'
             })
 
-            const context = await response.json();
-            console.log(context);
+            const context = await response.json()
 
             const recentDeckResponse = await fetch('https://elephant-rearend.herokuapp.com/statistics/recentlyViewedDecks', {
                 method: 'POST',
@@ -704,7 +724,6 @@ async function saveDeck(){
             });
 
             const recentDeckContext = await recentDeckResponse.json();
-            console.log(recentDeckContext);
 
             enableRedirect = true;
             location.href = "../editor/?deck=" + context.context.deck.id;
@@ -755,7 +774,6 @@ async function saveDeck(){
             });
 
             const recentDeckContext = await recentDeckResponse.json();
-            console.log(recentDeckContext);
 
             enableRedirect = true;
             location.href = "../dashboard"
