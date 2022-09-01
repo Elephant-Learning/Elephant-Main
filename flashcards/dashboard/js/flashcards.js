@@ -131,7 +131,7 @@ async function displayFlashcard(flashcardType, params){
         favoriteImg.addEventListener('click', function(e){
             e.preventDefault();
             e.stopPropagation();
-            favoriteDeck(this, params.deckID)
+            favoriteDeck(this, params.deckID, params.name, params.author);
         })
 
         editImg.addEventListener('click', function(e){
@@ -245,14 +245,14 @@ function editFlashcard(id){
     location.href = "../editor/?deck=" + id;
 }
 
-async function favoriteDeck(elem, id){
+async function favoriteDeck(elem, id, deck, author){
     if(elem.classList.contains('unloved')){
         elem.src = "../icons/filled_heart.png";
         elem.classList.remove('unloved');
         elem.classList.add('loved')
 
         const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
-        const response = await fetch('https://elephant-rearend.herokuapp.com/deck/like', {
+        const deckLikeResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/like', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -266,6 +266,26 @@ async function favoriteDeck(elem, id){
             }),
             mode: 'cors'
         })
+
+        /*const response = await fetch('https://elephant-rearend.herokuapp.com/notifications/sendLikedDeck', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                recipientId: author,
+                deckId: id,
+                type: "LIKED_DECK",
+                message: "Your Deck, " + deck + ", was liked by bruh"
+            }),
+            mode: 'cors'
+        })
+
+        const context = await response.json();
+        console.log(context);*/
 
     } else {
         elem.src = "../icons/unfilled_heart.png";

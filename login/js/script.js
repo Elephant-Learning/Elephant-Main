@@ -216,8 +216,6 @@ document.querySelectorAll('.account-option-div').forEach(function(element){
 window.onload = async function(){
     let splitted = document.location.href.split("?")[1];
 
-    console.log(splitted.split("=")[1]);
-
     if(splitted === "signup") togglePageFlip(1);
     if(splitted.split("=")[0] === "confirm"){
         const confirmResponse = await fetch('https://elephant-rearend.herokuapp.com/registration/confirm?token=' + splitted.split("=")[1], {
@@ -232,11 +230,19 @@ window.onload = async function(){
         });
 
         const confirmContent = await confirmResponse.json();
-        console.log(confirmContent);
 
         if(confirmContent.status === "SUCCESS"){
             localStorage.setItem('savedUserId', JSON.stringify(confirmContent.context.user.id));
             location.href = "../flashcards/dashboard";
+        } else if(confirmContent.status === "FAILURE"){
+            document.getElementById('desktop-loading-modal').classList.add('inactive-modal');
+            document.getElementById('desktop-alert-header').innerHTML = "Invalid/Expired Token"
+            document.getElementById('desktop-alert-para').innerHTML = confirmContent.message;
+
+            document.getElementById('desktop-alert-modal').classList.remove('inactive-modal')
+            setTimeout(function(){
+                document.getElementById('desktop-alert-modal').classList.add('inactive-modal')
+            }, 5000);
         }
     }
 }
@@ -260,11 +266,28 @@ async function signup(data){
     });
 
     const content = await response.json();
-    console.log(content, data);
 
     if(content.status === "FAILURE"){
         document.getElementById('desktop-loading-modal').classList.add('inactive-modal');
         document.getElementById('desktop-alert-header').innerHTML = "Unable to Login"
+        document.getElementById('desktop-alert-para').innerHTML = content.message;
+
+        document.getElementById('desktop-alert-modal').classList.remove('inactive-modal')
+        setTimeout(function(){
+            document.getElementById('desktop-alert-modal').classList.add('inactive-modal')
+        }, 5000)
+    } else if(content.status === "SUCCESS"){
+        document.getElementById('desktop-loading-modal').classList.add('inactive-modal');
+        document.getElementById('desktop-alert-header').innerHTML = "Confirmation Token Sent"
+        document.getElementById('desktop-alert-para').innerHTML = content.message;
+
+        document.getElementById('desktop-alert-modal').classList.remove('inactive-modal')
+        setTimeout(function(){
+            document.getElementById('desktop-alert-modal').classList.add('inactive-modal')
+        }, 5000)
+    } else if(content.status === "DEFER"){
+        document.getElementById('desktop-loading-modal').classList.add('inactive-modal');
+        document.getElementById('desktop-alert-header').innerHTML = "Check Your Email"
         document.getElementById('desktop-alert-para').innerHTML = content.message;
 
         document.getElementById('desktop-alert-modal').classList.remove('inactive-modal')
