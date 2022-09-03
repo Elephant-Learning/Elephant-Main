@@ -1021,7 +1021,6 @@ async function initialize(user){
 
     console.log(user);
     let preferences = localStorage.getItem('preferences');
-    console.log(preferences);
     preferences = JSON.parse(preferences)
 
     for(let i = 0; i < user.friendIds.length; i++){

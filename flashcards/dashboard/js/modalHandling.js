@@ -205,6 +205,39 @@ async function viewFolder(folderId, sidebarNum){
     } document.getElementById('flashcards-display-test').innerHTML = "";
 }
 
+async function refreshFolders(){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
+    const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const userContext = await userResponse.json();
+    displayFolders(userContext.context.user);
+}
+
+async function deleteFolder(folderId){
+    const response = await fetch('https://elephant-rearend.herokuapp.com/folder/delete?id=' + folderId, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    refreshFolders()
+}
+
 function sidebarFolder(title, folderId){
     let newDiv = document.createElement('div');
     let imgDiv = document.createElement('div');
@@ -233,7 +266,7 @@ function sidebarFolder(title, folderId){
         let options = [
             ["folder", "Open Folder", "viewFolder(" + folderId + ", " + (folderAmount + document.querySelectorAll('.desktop-sidebar-category').length - 1) + ")"],
             ["../editor/icons/edit", "Edit Folder", ""],
-            ["delete", "Delete Folder", ""]
+            ["delete", "Delete Folder", "deleteFolder(" + folderId + ")"]
         ]
 
         contextMenuOptions(options)
@@ -297,7 +330,12 @@ function contextMenuOptions(options){
 async function toggleFolderModal(create){
     if(document.getElementById('desktop-folder-modal').classList.contains('inactive-modal')){
         document.getElementById('folder-input').value = ""
-        document.getElementById('desktop-folder-modal').classList.remove('inactive-modal')
+        document.getElementById('desktop-folder-modal').classList.remove('inactive-modal');
+        document.getElementById('folder-input').focus();
+        setTimeout(function(){ document.getElementById('folder-input').focus({
+            preventScroll: true
+        }); }, 10);
+        console.log(document.getElementById('folder-input'))
     } else {
         if(create){
             const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));

@@ -14,7 +14,7 @@ function setupMusic(){
     }
 }
 
-setupMusic()
+//setupMusic()
 
 function toggleTheme(themeIndex){
     let root = document.querySelector(":root");
@@ -240,7 +240,7 @@ async function toggleFriendingModal(send){
 }
 
 function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
+    while(parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
 }

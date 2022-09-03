@@ -8,7 +8,8 @@
 
     <link rel="icon" href="../../icons/elephant-400-400-grayscale.png">
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/memorize.css">
     <link rel="stylesheet" href="../editor/css/list.css">
 
     <script src="../js/main.js" defer></script>
@@ -193,13 +194,40 @@
                 </div>
                 <div class="desktop-tab" id="deck-memorize">
                     <div id="desktop-memorize-main">
-                        <div id="desktop-memorize-term-container">
-                            <h1 id="desktop-memorize-term"></h1>
-                            <div id="desktop-memorize-term-buttons">
-                                <button id="desktop-memorize-skip">Skip Question</button>
+                        <div id="desktop-memorize-main-list" class="desktop-memorize-item">
+                            <div id="desktop-memorize-term-container">
+                                <h1 id="desktop-memorize-term"></h1>
+                                <div id="desktop-memorize-term-buttons">
+                                    <button id="desktop-memorize-skip">Skip Question</button>
+                                </div>
                             </div>
+                            <div id="desktop-memorize-definitions-list"></div>
                         </div>
-                        <div id="desktop-memorize-definitions-list"></div>
+                        <div class="desktop-memorize-item" id="desktop-memorize-incorrect">
+                            <h1>Incorrectly Answered</h1>
+                        </div>
+                        <div class="desktop-memorize-item active-memorize-item" id="desktop-memorize-complete">
+                            <div>
+                                <img src="./icons/confetti.png" alt="">
+                            </div>
+                            <h1>Nice Work</h1>
+                            <p id="desktop-memorize-complete-text">You answered __ questions correctly out of __ questions</p>
+                            <div id="desktop-memorize-badges">
+                                <div class="desktop-memorize-badge">
+                                    <div>
+                                        <img src="./icons/trophy.png" alt="">
+                                    </div>
+                                    <p>Scored over 80%</p>
+                                </div>
+                                <div class="desktop-memorize-badge">
+                                    <div>
+                                        <img src="./icons/trophy.png" alt="">
+                                    </div>
+                                    <p>Scored over 80% twice in a row</p>
+                                </div>
+                            </div>
+                            <button>Try Again</button>
+                        </div>
                     </div>
                     <div id="desktop-memorize-panel">
                         <div id="desktop-memorize-panel-questions-left-container">

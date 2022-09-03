@@ -131,7 +131,7 @@ async function displayFlashcard(flashcardType, params){
         favoriteImg.addEventListener('click', function(e){
             e.preventDefault();
             e.stopPropagation();
-            favoriteDeck(this, params.deckID, params.name, params.author);
+            favoriteDeck(this, params.deckID, params.name, params.author, params.type);
         })
 
         editImg.addEventListener('click', function(e){
@@ -249,7 +249,7 @@ async function favoriteDeck(elem, id, deck, author){
     if(elem.classList.contains('unloved')){
         elem.src = "../icons/filled_heart.png";
         elem.classList.remove('unloved');
-        elem.classList.add('loved')
+        elem.classList.add('loved');
 
         const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
         const deckLikeResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/like', {
