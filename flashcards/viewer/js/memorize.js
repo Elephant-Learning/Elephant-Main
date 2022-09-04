@@ -1,5 +1,7 @@
 let correntAnswerNumber = 0;
-let indexesIncomplete, indexesReviewed, indexesComplete, memorizeWriteCorrectAnswers, deckMaxDefinitions;
+let indexesIncomplete, indexesReviewed, indexesComplete, memorizeWriteCorrectAnswers, deckMaxDefinitions, answeredQuestions, answeredCorrectly;
+
+let unableToAnswer = false;
 
 function memorizeCheckAnswer(index){
     document.querySelectorAll('.desktop-memorize-definition')[index].classList.add('desktop-memorize-definition-selected');
@@ -21,6 +23,30 @@ function shuffleArray(array) {
     }
 
     return array;
+}
+
+function refreshMemorizePanel(){
+    document.getElementById('desktop-memorize-panel-questions-left').innerHTML = indexesIncomplete.length * 2 + indexesReviewed.length;
+    document.getElementById('desktop-memorize-panel-questions-left-progress').style.background = "linear-gradient(135deg, var(--primary-accent) 0%, var(--primary-accent-gradient) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent-gradient) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) 100%)";
+}
+
+function incorrectBtn(){
+    document.querySelector('.active-memorize-item').classList.remove('active-memorize-item');
+    document.getElementById('desktop-memorize-main-list').classList.add('active-memorize-item');
+    unableToAnswer = false;
+    skipQuestion();
+}
+
+function askMemorizeQuestion(){
+    let nextRandomCard = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
+
+    refreshMemorizePanel()
+
+    if(nextRandomCard >= indexesIncomplete.length){
+        setupWrite(indexesReviewed[nextRandomCard - indexesIncomplete.length]);
+    } else {
+        setupCard(indexesIncomplete[nextRandomCard]);
+    }
 }
 
 function createMemorizeOption(text, correct, deckId){
@@ -53,33 +79,49 @@ function createMemorizeOption(text, correct, deckId){
     newDiv.classList.add('desktop-memorize-definition');
 
     newDiv.addEventListener('click', function(e){
-        if(newDiv.classList.contains('desktop-memorize-definition-selected')) return;
+        if(newDiv.classList.contains('desktop-memorize-definition-selected') || unableToAnswer) return;
 
         memorizeCheckAnswer(newDivIndex);
         if(correct){
             correntAnswerNumber--;
             if(correntAnswerNumber === 0){
+                answeredQuestions++;
+                answeredCorrectly++;
+
                 setTimeout(function(){
                     indexesIncomplete.splice(indexesIncomplete.indexOf(deckId), 1);
                     indexesReviewed.push(deckId);
 
-                    if(indexesReviewed.length === 0 && indexesIncomplete.length === 0) console.log("Fully Finished");
-                    let nextRandomCard = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
-
-                    document.getElementById('desktop-memorize-panel-questions-left').innerHTML = indexesIncomplete.length * 2 + indexesReviewed.length;
-                    document.getElementById('desktop-memorize-panel-questions-left-progress').style.background = "linear-gradient(135deg, var(--primary-accent) 0%, var(--primary-accent-gradient) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent-gradient) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) 100%)";
-
-                    if(nextRandomCard >= indexesIncomplete.length){
-                        setupWrite(indexesReviewed[nextRandomCard - indexesIncomplete.length]);
-                    } else {
-                        setupCard(indexesIncomplete[nextRandomCard]);
-                    }
+                    askMemorizeQuestion()
                 }, 0);
             }
         } else {
             document.querySelectorAll('.desktop-memorize-select-img')[newDivIndex].style.background = "linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient))";
             document.querySelectorAll('.desktop-memorize-select-img')[newDivIndex].style.border = "1px solid var(--secondary-accent)";
             document.querySelectorAll('.desktop-memorize-definition')[newDivIndex].style.border = "1px solid var(--secondary-accent)";
+            unableToAnswer = true;
+            answeredQuestions++;
+
+            if(deck[deckId].definitions.length > 1){
+                document.getElementById('desktop-memorize-incorrect-para').innerHTML = "The answers to the term '" + deck[deckId].term + "' are:"
+            } else {
+                document.getElementById('desktop-memorize-incorrect-para').innerHTML = "The answer to the term '" + deck[deckId].term + "' is:"
+            }
+
+            for(let i = 0; i < deck[deckId].definitions.length; i++){
+                let newDefinition = document.createElement('div');
+                let newDefPara = document.createElement('p');
+
+                newDefPara.innerHTML = deck[deckId].definitions[i];
+
+                newDefinition.appendChild(newDefPara);
+                document.getElementById("desktop-memorize-incorrect-list").appendChild(newDefinition);
+            }
+
+            setTimeout(function(e){
+                document.querySelector('.active-memorize-item').classList.remove('active-memorize-item');
+                document.getElementById('desktop-memorize-incorrect').classList.add('active-memorize-item');
+            }, 500)
         }
     })
 
@@ -145,21 +187,40 @@ function setupWrite(deckIndex){
 
                     correntAnswerNumber--;
                     if(correntAnswerNumber === 0){
+                        answeredQuestions++;
+                        answeredCorrectly++;
+
                         setTimeout(function(){
                             indexesReviewed.splice(indexesReviewed.indexOf(deckIndex), 1);
                             indexesComplete.push(deckIndex);
 
-                            if(indexesReviewed.length === 0 && indexesIncomplete.length === 0) console.log("Fully Finished");
-                            let nextRandomCard = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
+                            if(indexesReviewed.length === 0 && indexesIncomplete.length === 0){
+                                refreshMemorizePanel();
 
-                            document.getElementById('desktop-memorize-panel-questions-left').innerHTML = indexesIncomplete.length * 2 + indexesReviewed.length;
-                            document.getElementById('desktop-memorize-panel-questions-left-progress').style.background = "linear-gradient(135deg, var(--primary-accent) 0%, var(--primary-accent-gradient) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent-gradient) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) 100%)";
+                                setTimeout(function(){
+                                    const appreciations = ["Nice Work", "Great Work", "Great Job", "Awesome Stuff", "Congratulations", "Nice Job", "Good Stuff"];
+                                    //Badges index 0: level (1-3), name, condition
 
-                            if(nextRandomCard >= indexesIncomplete.length){
-                                setupWrite(indexesReviewed[nextRandomCard - indexesIncomplete.length]);
-                            } else {
-                                setupCard(indexesIncomplete[nextRandomCard]);
+                                    const badges = [
+                                        [3, "Scored over 50%", answeredCorrectly / answeredQuestions >= 0.5],
+                                        [2, "Scored over 80%", answeredCorrectly / answeredQuestions >= 0.8],
+                                        [1, "Scored 100%", answeredCorrectly / answeredQuestions === 1],
+                                    ]
+
+                                    for(let i = 0; i < badges.length; i++){
+                                        if(badges[i][2]) createBadge(badges[i][0], badges[i][1]);
+                                    }
+
+                                    document.getElementById('desktop-memorize-complete-header').innerHTML = appreciations[Math.floor(Math.random() * appreciations.length)]
+                                    document.getElementById('desktop-memorize-complete-text').innerHTML = "You answered " + answeredCorrectly + " questions correctly out of " + answeredQuestions + " questions!"
+                                    document.querySelector('.active-memorize-item').classList.remove('active-memorize-item');
+                                    document.getElementById('desktop-memorize-complete').classList.add('active-memorize-item');
+                                }, 500)
+
+                                return;
                             }
+
+                            askMemorizeQuestion();
                         }, 0);
                     }
                 } else {
@@ -185,6 +246,26 @@ function setupWrite(deckIndex){
     }
 
     document.getElementById('desktop-memorize-write-input-0').focus();
+}
+
+function createBadge(level, name){
+    let newDiv = document.createElement('div');
+    let imgDiv = document.createElement('div');
+    let img = document.createElement('img');
+    let para = document.createElement('p');
+
+    if(level === 1) imgDiv.style.background = "linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient))";
+    else if(level === 2) imgDiv.style.background = "linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient))";
+    else if(level === 3) imgDiv.style.background = "linear-gradient(135deg, var(--tertiary-accent), var(--tertiary-accent-gradient))";
+
+    img.src = "./icons/trophy.png";
+    para.innerHTML = name;
+
+    imgDiv.appendChild(img);
+    newDiv.append(imgDiv, para);
+    newDiv.classList.add('desktop-memorize-badge');
+
+    document.getElementById('desktop-memorize-badges').appendChild(newDiv);
 }
 
 function setupCard(deckIndex){
@@ -229,6 +310,14 @@ function initializeMemorize(){
     indexesReviewed = [];
     indexesComplete = [];
     deckMaxDefinitions = [];
+    answeredQuestions = 0;
+    answeredCorrectly = 0;
+
+    document.querySelectorAll('.active-memorize-item').forEach(function(element){
+        element.classList.remove('active-memorize-item');
+    })
+
+    removeAllChildNodes(document.getElementById('desktop-memorize-badges'));
 
     for(let i = 0; i < deck.length; i++){
         indexesIncomplete.push(i)
@@ -236,5 +325,9 @@ function initializeMemorize(){
             if(!deckMaxDefinitions.includes(deck[i].definitions[j])) deckMaxDefinitions.push(deck[i].definitions[j]);
         }
     } document.getElementById('desktop-memorize-panel-questions-left').innerHTML = indexesIncomplete.length * 2 + indexesReviewed.length;
+    document.getElementById('desktop-memorize-main-list').classList.add('active-memorize-item')
+
+    refreshMemorizePanel();
+
     setupCard(Math.floor(Math.random() * indexesIncomplete.length + indexesReviewed.length));
 }

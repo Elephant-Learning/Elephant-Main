@@ -205,28 +205,18 @@
                         </div>
                         <div class="desktop-memorize-item" id="desktop-memorize-incorrect">
                             <h1>Incorrectly Answered</h1>
+                            <p id="desktop-memorize-incorrect-para"></p>
+                            <div id="desktop-memorize-incorrect-list"></div>
+                            <button onclick="incorrectBtn()">Got It, Thanks!</button>
                         </div>
-                        <div class="desktop-memorize-item active-memorize-item" id="desktop-memorize-complete">
+                        <div class="desktop-memorize-item" id="desktop-memorize-complete">
                             <div>
                                 <img src="./icons/confetti.png" alt="">
                             </div>
-                            <h1>Nice Work</h1>
+                            <h1 id="desktop-memorize-complete-header">Nice Work</h1>
                             <p id="desktop-memorize-complete-text">You answered __ questions correctly out of __ questions</p>
-                            <div id="desktop-memorize-badges">
-                                <div class="desktop-memorize-badge">
-                                    <div>
-                                        <img src="./icons/trophy.png" alt="">
-                                    </div>
-                                    <p>Scored over 80%</p>
-                                </div>
-                                <div class="desktop-memorize-badge">
-                                    <div>
-                                        <img src="./icons/trophy.png" alt="">
-                                    </div>
-                                    <p>Scored over 80% twice in a row</p>
-                                </div>
-                            </div>
-                            <button>Try Again</button>
+                            <div id="desktop-memorize-badges"></div>
+                            <button onclick="initializeMemorize()">Try Again</button>
                         </div>
                     </div>
                     <div id="desktop-memorize-panel">

@@ -157,6 +157,8 @@
     align-items:center;
     justify-content:center;
     position:absolute;
+    top:0;
+    left:0;
     transition-duration:250ms;
 }
 
@@ -215,6 +217,10 @@
 #desktop-memorize-skip{
     border:1px solid var(--dark-border-color);
     background:var(--light-gray);
+    font-size:calc(var(--size) * 14px);
+    font-weight:500;
+    text-transform:uppercase;
+    letter-spacing:1px;
     color:white;
 }
 
@@ -392,7 +398,7 @@
 
 #desktop-memorize-complete > div:last-of-type{
     display:flex;
-    flex-direction:row;
+    flex-direction:row-reverse;
     gap:calc(var(--size) * 12px);
     margin-bottom:calc(var(--size) * 24px);
 }
@@ -418,7 +424,6 @@
     flex-direction:row;
     align-items:center;
     justify-content:center;
-    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
 }
 
 .desktop-memorize-badge > div > img{
@@ -448,3 +453,67 @@
     transition-duration:250ms;
 }
 
+#desktop-memorize-complete > button:hover, #desktop-memorize-incorrect > button:hover{
+    box-shadow:0 0 calc(var(--size) * 6px) 0 var(--light-gray);
+}
+
+#desktop-memorize-complete > button:active, #desktop-memorize-incorrect > button:active{
+    box-shadow:none;
+}
+
+#desktop-memorize-incorrect{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    padding:calc(var(--size) * 24px);
+    width:calc(100% - var(--size) * 48px);
+    height:calc(100% - var(--size) * 48px);
+}
+
+#desktop-memorize-incorrect > h1{
+    margin:0;
+    font-size:calc(var(--size) * 24px);
+    font-weight:700;
+}
+
+#desktop-memorize-incorrect > p{
+    margin:0;
+    font-size:calc(var(--size) * 14px);
+    font-weight:400;
+}
+
+#desktop-memorize-incorrect-list{
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 12px);
+    margin:calc(var(--size) * 12px) 0;
+}
+
+#desktop-memorize-incorrect-list > div{
+    padding:calc(var(--size) * 12px) calc(var(--size) * 36px);
+    background:var(--bg-color-2);
+    border-radius:calc(var(--size) * 6px);
+    border:1px solid var(--light-border-color);
+}
+
+#desktop-memorize-incorrect-list > div > p{
+    margin:0;
+    color:gray;
+    font-size:calc(var(--size) * 14px);
+    cursor:default;
+}
+
+#desktop-memorize-incorrect > button{
+    width:calc(var(--size) * 256px);
+    color:white;
+    background:var(--light-gray);
+    border-radius:calc(var(--size) * 6px);
+    padding:calc(var(--size) * 6px) 0;
+    border:1px solid var(--dark-border-color);
+    transition-duration: 250ms;
+    outline:none;
+    cursor:pointer;
+}
