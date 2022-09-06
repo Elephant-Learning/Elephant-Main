@@ -113,6 +113,7 @@ async function displayFlashcard(flashcardType, params){
     let options = document.createElement('div');
 
     if(flashcardType === "flashcard" || flashcardType === "folder"){
+        let favoriteDiv = document.createElement('div');
         let favoriteImg = document.createElement('img');
         let editImg = document.createElement('img');
         let deleteImg = document.createElement('img')
@@ -127,6 +128,10 @@ async function displayFlashcard(flashcardType, params){
 
         editImg.src = "../editor/icons/edit.png";
         deleteImg.src = "../icons/delete.png";
+
+        let favoriteNumDiv = document.createElement('div');
+        favoriteNumDiv.innerHTML = params.likesNumber;
+        favoriteNumDiv.id = "favorite-number-" + params.deckID;
 
         favoriteImg.addEventListener('click', function(e){
             e.preventDefault();
@@ -146,10 +151,16 @@ async function displayFlashcard(flashcardType, params){
             deleteDeck(params.deckID);
         });
 
-        if(params.author === savedUserId){
-            options.append(editImg, favoriteImg, deleteImg);
+        if(!params.search){
+            favoriteDiv.append(favoriteImg, favoriteNumDiv)
         } else {
-            options.append(favoriteImg);
+            favoriteDiv.append(favoriteImg)
+        }
+
+        if(params.author === savedUserId){
+            options.append(editImg, favoriteDiv, deleteImg);
+        } else {
+            options.append(favoriteDiv);
         }
     } else if(flashcardType === "user"){
         let friendImg = document.createElement('img');
@@ -246,12 +257,13 @@ function editFlashcard(id){
 }
 
 async function favoriteDeck(elem, id, deck, author){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
     if(elem.classList.contains('unloved')){
         elem.src = "../icons/filled_heart.png";
         elem.classList.remove('unloved');
         elem.classList.add('loved');
 
-        const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
         const deckLikeResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/like', {
             method: 'POST',
             headers: {
@@ -266,6 +278,10 @@ async function favoriteDeck(elem, id, deck, author){
             }),
             mode: 'cors'
         })
+
+        const deckLikeContext = await deckLikeResponse.json()
+
+        console.log(deckLikeContext);
 
         /*const response = await fetch('https://elephant-rearend.herokuapp.com/notifications/sendLikedDeck', {
             method: 'POST',
@@ -287,12 +303,14 @@ async function favoriteDeck(elem, id, deck, author){
         const context = await response.json();
         console.log(context);*/
 
+        try {
+            document.getElementById('favorite-number-' + id).innerHTML = (parseInt(document.getElementById('favorite-number-' + id).textContent) + 1).toString();
+        } catch (e){}
     } else {
         elem.src = "../icons/unfilled_heart.png";
         elem.classList.add('unloved');
         elem.classList.remove('loved')
 
-        const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
         const response = await fetch('https://elephant-rearend.herokuapp.com/deck/unlike', {
             method: 'POST',
             headers: {
@@ -307,6 +325,10 @@ async function favoriteDeck(elem, id, deck, author){
             }),
             mode: 'cors'
         })
+
+        try {
+            document.getElementById('favorite-number-' + id).innerHTML = (parseInt(document.getElementById('favorite-number-' + id).textContent) - 1).toString();
+        } catch (e){}
     }
 }
 

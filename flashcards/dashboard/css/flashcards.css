@@ -293,15 +293,61 @@
     right:calc(var(--size) * 18px);
 }
 
-.flashcard-deck > div:last-of-type > img{
+.flashcard-deck > div:last-of-type > img, .flashcard-deck > div:last-of-type > div > img{
     height:calc(var(--size) * 18px);
     filter:invert(var(--image-invert));
     transition-duration:250ms;
     cursor:pointer;
 }
 
-.flashcard-deck > div:last-of-type > img:hover{
+.flashcard-deck > div:last-of-type > img:hover, .flashcard-deck > div:last-of-type > div > img:hover{
     transform:scale(1.1);
+}
+
+.flashcard-deck > div:last-of-type > div{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    position:relative;
+}
+
+.flashcard-deck > div:last-of-type > div > div{
+    position:absolute;
+    bottom:calc(var(--size) * 24px);
+    background:var(--light-gray);
+    padding:calc(var(--size) * 6px) calc(var(--size) * 24px);
+    font-size:calc(var(--size) * 12px);
+    border-radius:6px;
+    border:1px solid var(--dark-border-color);
+    transition-duration:250ms;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    transition-delay:0ms;
+    opacity:0;
+    visibility:hidden;
+    color:white;
+    z-index:3;
+}
+
+.flashcard-deck > div:last-of-type > div > img:hover ~ div{
+    visibility:visible;
+    transition-delay:500ms;
+    opacity:1;
+}
+
+.flashcard-deck > div:last-of-type > div > div::after{
+    content:'';
+    position:absolute;
+    top:calc(var(--size) * 27px);
+    z-index:2;
+    width: 0;
+    height: 0;
+    border-left: calc(var(--size) * 8px) solid transparent;
+    border-right: calc(var(--size) * 8px) solid transparent;
+    border-top: calc(var(--size) * 6px) solid var(--light-gray);
 }
 
 #flashcards-viewer-main{

@@ -14,7 +14,7 @@ async function search(){
     document.getElementById('desktop-navbar-input').blur();
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
 
-    const deckResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/getByName?userId=' + savedUserId + '&name=' + document.getElementById('desktop-navbar-input').value, {
+    const deckResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/getByName?name=' + document.getElementById('desktop-navbar-input').value + '&userId=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -51,6 +51,8 @@ async function search(){
 
     togglePageFlip(3, undefined);
 
+    console.log(decks);
+
     for(let i = 0; i < decks.length; i++){
         //if(decks[i].visibility === "PUBLIC" || userSharedDecks.includes(decks[i].id) || decks[i].authorId === savedUserId)
 
@@ -60,11 +62,12 @@ async function search(){
             type: decks[i].visibility,
             deckID: decks[i].id,
             favorite: userLikedDecks.includes(decks[i].id),
+            likesNumber: decks[i].numberOfLikes,
             search: true
         });
     } document.getElementById('flashcards-display-test').innerHTML = "";
 
-    const elephantUsersResponse = await fetch('https://elephant-rearend.herokuapp.com/login/userByName?name=' + document.getElementById('desktop-navbar-input').value, {
+    const elephantUsersResponse = await fetch('https://elephant-rearend.herokuapp.com/login/userByName?name=' + document.getElementById('desktop-navbar-input').value + '&userId=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -200,6 +203,7 @@ async function viewFolder(folderId, sidebarNum){
             type: flashcardContext.visibility,
             deckID: flashcardContext.id,
             favorite: userLikedDecks.includes(flashcardContext.id),
+            likesNumber: flashcardContext.numberOfLikes,
             search: false
         })
     } document.getElementById('flashcards-display-test').innerHTML = "";
@@ -443,6 +447,8 @@ async function displayFlashcardsManager(user){
 
         const context = await response.json();
 
+        console.log(context.context.deck);
+
         if(document.getElementById('flashcards-view-sorting').value === "1" && context.context.deck.authorId === user.id){
             await displayFlashcard("flashcard", {
                 name: context.context.deck.name,
@@ -450,6 +456,7 @@ async function displayFlashcardsManager(user){
                 type: context.context.deck.visibility,
                 deckID: context.context.deck.id,
                 favorite: user.likedDecksIds.includes(context.context.deck.id),
+                likesNumber: context.context.deck.numberOfLikes,
                 search: false
             });
         } else if(document.getElementById('flashcards-view-sorting').value === "2" && user.sharedDeckIds.includes(context.context.deck.id)){
@@ -459,6 +466,7 @@ async function displayFlashcardsManager(user){
                 type: context.context.deck.visibility,
                 deckID: context.context.deck.id,
                 favorite: user.likedDecksIds.includes(context.context.deck.id),
+                likesNumber: context.context.deck.numberOfLikes,
                 search: false
             });
         } else if(document.getElementById('flashcards-view-sorting').value === "0") {
@@ -468,6 +476,7 @@ async function displayFlashcardsManager(user){
                 type: context.context.deck.visibility,
                 deckID: context.context.deck.id,
                 favorite: user.likedDecksIds.includes(context.context.deck.id),
+                likesNumber: context.context.deck.numberOfLikes,
                 search: false
             });
         }
