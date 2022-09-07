@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../flashcards/css/main.css">
     <link rel="stylesheet" href="style.css">
 
+    <script src="../login/js/codes.js"></script>
     <script src="../flashcards/js/main.js" defer></script>
     <script src="script.js" defer></script>
 </head>
@@ -187,7 +188,7 @@
                     </div>
                     <p>Flashcards</p>
                 </div>
-                <div id="desktop-sidebar-employee" class="desktop-sidebar-category" onclick="togglePageFlip(9, 1)">
+                <div id="desktop-sidebar-employee" class="desktop-sidebar-category inactive-modal" onclick="togglePageFlip(9, 1)">
                     <div>
                         <img src="../flashcards/icons/admin.png" alt="Recent">
                     </div>
@@ -216,12 +217,19 @@
                                 <img src="../flashcards/icons/email.png" alt="">
                                 <p id="my-profile-email"></p>
                             </div>
+                            <div class="my-profile-information">
+                                <img src="../login/icons/location.png" alt="">
+                                <p id="my-profile-location"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div id="my-profile-options">
                     <button id="pfp-change-btn" onclick="toggleAvatarModal()">Change Profile Picture</button>
                     <button id="delete-acc-btn" onclick="deleteAccount()">Delete Account</button>
+                </div>
+                <div id="my-profile-misc">
+                    <div id="my-profile-friends"></div>
                 </div>
             </div>
         </div>

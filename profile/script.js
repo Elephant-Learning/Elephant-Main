@@ -38,9 +38,18 @@ async function initialize(user){
         location.href = "../../login"
     } else user = user.context.user;
 
-    if(user.type !== "EMPLOYEE"){
-        document.getElementById('desktop-sidebar-employee').classList.add('inactive-modal')
+    if(user.type === "EMPLOYEE"){
+        document.getElementById('desktop-sidebar-employee').classList.remove('inactive-modal')
     }
+
+    console.log(user);
+
+    removeAllChildNodes(document.getElementById('my-profile-friends'));
+
+    let newHeader = document.createElement('h1')
+    newHeader.innerHTML = "Friends"
+
+    document.getElementById('my-profile-friends').appendChild(newHeader);
 
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png"
     document.getElementById('my-profile-img').src = "../../icons/avatars/" + user.pfpId + ".png"
@@ -50,6 +59,38 @@ async function initialize(user){
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
     document.getElementById('my-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
     document.getElementById('my-profile-email').innerHTML = user.email;
+    document.getElementById('my-profile-location').innerHTML = COUNTRY_LIST[user.countryCode];
+
+    for(let i = 0; i < user.friendIds.length; i++){
+        const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + user.friendIds[i], {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        })
+
+        let context = await response.json();
+        context = context.context.user;
+
+        let newDiv = document.createElement('div');
+        let newImg = document.createElement('img');
+        let newTxtDiv = document.createElement('div');
+        let newName = document.createElement('h1');
+        let newEmail = document.createElement('p');
+
+        newImg.src = "../icons/avatars/" + context.pfpId + ".png";
+        newName.innerHTML = context.firstName + " " + context.lastName;
+        newEmail.innerHTML = context.email;
+
+        newTxtDiv.append(newName, newEmail);
+        newDiv.append(newImg, newTxtDiv);
+
+        document.getElementById('my-profile-friends').appendChild(newDiv);
+    }
 
     selectedProfile = user.pfpId;
 

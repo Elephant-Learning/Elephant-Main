@@ -108,6 +108,8 @@ function createMemorizeOption(text, correct, deckId){
                 document.getElementById('desktop-memorize-incorrect-para').innerHTML = "The answer to the term '" + deck[deckId].term + "' is:"
             }
 
+            removeAllChildNodes(document.getElementById("desktop-memorize-incorrect-list"))
+
             for(let i = 0; i < deck[deckId].definitions.length; i++){
                 let newDefinition = document.createElement('div');
                 let newDefPara = document.createElement('p');

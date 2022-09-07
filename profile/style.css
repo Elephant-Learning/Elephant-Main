@@ -23,8 +23,12 @@
 
 #desktop-profile-section{
     position:absolute;
-    top:calc(var(--size) * 72px);
+    top:calc(var(--size) * 48px);
     left:calc(var(--size) * 280px);
+    overflow-y:scroll;
+    padding-top:calc(var(--size) * 24px);
+    height:calc(100vh - var(--size) * 121px);
+    width:calc(100vw - var(--size) * 280px);
 }
 
 #my-profile-image-container{
@@ -245,4 +249,53 @@
 
 .selected-avatar-img{
     border:1px solid var(--primary-accent);
+}
+
+#my-profile-misc{
+    display:flex;
+    flex-direction:row;
+    gap:calc(var(--size) * 24px);
+    margin-top:calc(var(--size) * 24px);
+}
+
+#my-profile-friends{
+    background:var(--bg-color-1);
+    border:1px solid var(--light-border-color);
+    padding:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 12px);
+    display:flex;
+    flex-direction:column;
+    gap:calc(var(--size) * 6px);
+}
+
+#my-profile-friends > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:calc(var(--size) * 8px);
+}
+
+#my-profile-friends > h1{
+    font-size:calc(var(--size) * 12px);
+    margin: 0 0 calc(var(--size) * 6px);
+}
+
+#my-profile-friends > div p, #my-profile-friends > div h1{
+    max-width:calc(var(--size) * 256px);
+    overflow-x:hidden;
+}
+
+#my-profile-friends > div > img{
+    height:calc(var(--size) * 28px);
+}
+
+#my-profile-friends > div > div > h1{
+    font-size:calc(var(--size) * 14px);
+    margin:0;
+}
+
+#my-profile-friends > div > div > p{
+    font-size:calc(var(--size) * 12px);
+    margin:0;
+    color:gray;
 }
