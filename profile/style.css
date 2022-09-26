@@ -258,7 +258,7 @@
     margin-top:calc(var(--size) * 24px);
 }
 
-#my-profile-friends{
+#my-profile-misc > div{
     background:var(--bg-color-1);
     border:1px solid var(--light-border-color);
     padding:calc(var(--size) * 24px);
@@ -266,36 +266,41 @@
     display:flex;
     flex-direction:column;
     gap:calc(var(--size) * 6px);
+    height:auto;
 }
 
-#my-profile-friends > div{
+#my-profile-misc > div > div{
     display:flex;
     flex-direction:row;
     align-items:center;
     gap:calc(var(--size) * 8px);
 }
 
-#my-profile-friends > h1{
+#my-profile-misc > div > h1{
     font-size:calc(var(--size) * 12px);
     margin: 0 0 calc(var(--size) * 6px);
 }
 
-#my-profile-friends > div p, #my-profile-friends > div h1{
+#my-profile-misc > div > div p, #my-profile-misc > div > div h1{
     max-width:calc(var(--size) * 256px);
     overflow-x:hidden;
 }
 
-#my-profile-friends > div > img{
-    height:calc(var(--size) * 28px);
+#my-profile-misc > div > div > img{
+    height:calc(var(--size) * 18px);
 }
 
-#my-profile-friends > div > div > h1{
-    font-size:calc(var(--size) * 14px);
-    margin:0;
-}
-
-#my-profile-friends > div > div > p{
+#my-profile-misc > div > div > div > h1{
     font-size:calc(var(--size) * 12px);
     margin:0;
+}
+
+#my-profile-misc > div > div > div > p{
+    font-size:calc(var(--size) * 10px);
+    margin:0;
     color:gray;
+}
+
+#my-profile-decks > div > img{
+    filter:invert(var(--image-invert));
 }

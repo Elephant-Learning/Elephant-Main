@@ -46,10 +46,13 @@ async function initialize(user){
 
     removeAllChildNodes(document.getElementById('my-profile-friends'));
 
-    let newHeader = document.createElement('h1')
+    let newHeader = document.createElement('h1');
+    let newDeckHeader = document.createElement('h1')
+    newDeckHeader.innerHTML = "Elephant Decks"
     newHeader.innerHTML = "Friends"
 
     document.getElementById('my-profile-friends').appendChild(newHeader);
+    document.getElementById('my-profile-decks').appendChild(newDeckHeader);
 
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png"
     document.getElementById('my-profile-img').src = "../../icons/avatars/" + user.pfpId + ".png"
@@ -90,6 +93,23 @@ async function initialize(user){
         newDiv.append(newImg, newTxtDiv);
 
         document.getElementById('my-profile-friends').appendChild(newDiv);
+    }
+
+    for(let i = 0; i < user.decks.length; i++){
+        let newDiv = document.createElement('div');
+        let newImg = document.createElement('img');
+        let newTxtDiv = document.createElement('div');
+        let newName = document.createElement('h1');
+        let newEmail = document.createElement('p');
+
+        newImg.src = "../flashcards/icons/deck.png";
+        newName.innerHTML = user.decks[i].name;
+        newEmail.innerHTML =  "Created: " + computeTime(user.decks[i].created);
+
+        newTxtDiv.append(newName, newEmail);
+        newDiv.append(newImg, newTxtDiv);
+
+        document.getElementById('my-profile-decks').appendChild(newDiv);
     }
 
     selectedProfile = user.pfpId;

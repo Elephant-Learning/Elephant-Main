@@ -269,7 +269,7 @@ function sidebarFolder(title, folderId){
 
         let options = [
             ["folder", "Open Folder", "viewFolder(" + folderId + ", " + (folderAmount + document.querySelectorAll('.desktop-sidebar-category').length - 1) + ")"],
-            ["../editor/icons/edit", "Edit Folder", ""],
+            //["../editor/icons/edit", "Edit Folder", ""],
             ["delete", "Delete Folder", "deleteFolder(" + folderId + ")"]
         ]
 
