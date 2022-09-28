@@ -65,7 +65,7 @@ async function search(){
             likesNumber: decks[i].numberOfLikes,
             search: true
         });
-    } document.getElementById('flashcards-display-test').innerHTML = "";
+    }
 
     const elephantUsersResponse = await fetch('https://elephant-rearend.herokuapp.com/login/userByName?name=' + document.getElementById('desktop-navbar-input').value + '&userId=' + savedUserId, {
         method: 'GET',
@@ -206,7 +206,7 @@ async function viewFolder(folderId, sidebarNum){
             likesNumber: flashcardContext.numberOfLikes,
             search: false
         })
-    } document.getElementById('flashcards-display-test').innerHTML = "";
+    }
 }
 
 async function refreshFolders(){
@@ -480,7 +480,7 @@ async function displayFlashcardsManager(user){
         }
 
         if(!document.getElementById('no-flashcards').classList.contains('inactive-modal')) document.getElementById('no-flashcards').classList.add('inactive-modal');
-    } document.getElementById('flashcards-display-test').innerHTML = "";
+    }
 
     if(user.decks.length > deckShowAmount){
         let newBtn = document.createElement('button');

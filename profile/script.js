@@ -42,9 +42,10 @@ async function initialize(user){
         document.getElementById('desktop-sidebar-employee').classList.remove('inactive-modal')
     }
 
-    console.log(user);
+    //console.log(user);
 
     removeAllChildNodes(document.getElementById('my-profile-friends'));
+    removeAllChildNodes(document.getElementById('my-profile-decks'));
 
     let newHeader = document.createElement('h1');
     let newDeckHeader = document.createElement('h1')

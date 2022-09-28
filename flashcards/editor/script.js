@@ -995,6 +995,16 @@ function refreshBackpack(user){
             userId: user.id
         })
     }
+
+    console.log(user.backpack.cards.length)
+
+    if(user.backpack.cards.length === 0){
+        const noCards = ["Well, this is unfortunate", "Dude, this is awkward", "Can this be more empty?", "Backpack Feeling Useless :("]
+
+        let newPara = document.createElement('p');
+        newPara.innerHTML = noCards[Math.floor(Math.random() * noCards.length)];
+        document.getElementById('backpack-card-list').appendChild(newPara);
+    }
 }
 
 async function initialize(user){

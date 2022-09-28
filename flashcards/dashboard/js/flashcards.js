@@ -230,7 +230,7 @@ async function displayFlashcard(flashcardType, params){
         document.getElementById('flashcards-list').appendChild(mainDiv);
     } else if(flashcardType === "folder"){
         document.getElementById('folder-flashcard-display').appendChild(mainDiv);
-    }
+    } document.getElementById('flashcards-display-test').innerHTML = "";
 }
 
 async function deleteDeck(id){
