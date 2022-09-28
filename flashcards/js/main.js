@@ -294,65 +294,70 @@ async function notificationsManager(user){
 
     for(let i = 0; i < user.notifications.length; i++){
         if(user.notifications[i].type === "FRIEND_REQUEST"){
-            const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + user.notifications[i].senderId, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                    'Access-Control-Allow-Headers': 'Content-Type'
-                },
-                mode: 'cors'
-            })
+            try{
+                const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + user.notifications[i].senderId, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type'
+                    },
+                    mode: 'cors'
+                })
 
-            const context = await response.json();
+                const context = await response.json();
 
-            createNotification("friend", {
-                name: context.context.user.firstName + " " + context.context.user.lastName,
-                pfpId: context.context.user.pfpId,
-                senderId: user.notifications[i].senderId,
-                time: user.notifications[i].time,
-                notificationId: user.notifications[i].id
-            })
+                createNotification("friend", {
+                    name: context.context.user.firstName + " " + context.context.user.lastName,
+                    pfpId: context.context.user.pfpId,
+                    senderId: user.notifications[i].senderId,
+                    time: user.notifications[i].time,
+                    notificationId: user.notifications[i].id
+                })
+            } catch(e){
+
+            }
         } else if(user.notifications[i].type === "SHARED_DECK"){
-            const responseCreator = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + user.notifications[i].senderId, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                    'Access-Control-Allow-Headers': 'Content-Type'
-                },
-                mode: 'cors'
-            })
+            try{
+                const responseCreator = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + user.notifications[i].senderId, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type'
+                    },
+                    mode: 'cors'
+                })
 
-            const contextCreator = await responseCreator.json();
+                const contextCreator = await responseCreator.json();
 
-            const responseDeck = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + user.notifications[i].deckId, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                    'Access-Control-Allow-Headers': 'Content-Type'
-                },
-                mode: 'cors'
-            })
+                const responseDeck = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + user.notifications[i].deckId, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type'
+                    },
+                    mode: 'cors'
+                })
 
-            const contextDeck = await responseDeck.json();
+                const contextDeck = await responseDeck.json();
 
-            createNotification("deckShared", {
-                sender: contextCreator.context.user.firstName + " " + contextCreator.context.user.lastName,
-                deckName: contextDeck.context.deck.name,
-                deckId: user.notifications[i].deckId,
-                time: user.notifications[i].time,
-                pfpId: contextCreator.context.user.pfpId,
-                notificationId: user.notifications[i].id
-            })
+                createNotification("deckShared", {
+                    sender: contextCreator.context.user.firstName + " " + contextCreator.context.user.lastName,
+                    deckName: contextDeck.context.deck.name,
+                    deckId: user.notifications[i].deckId,
+                    time: user.notifications[i].time,
+                    pfpId: contextCreator.context.user.pfpId,
+                    notificationId: user.notifications[i].id
+                })
+            } catch(e){}
         }
     }
 
-    console.log(user.notifications.length);
     if(user.notifications.length > 0){
         let newDiv = document.createElement('div');
         newDiv.id = "desktop-notification-icon"

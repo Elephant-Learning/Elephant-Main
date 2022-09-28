@@ -447,8 +447,6 @@ async function displayFlashcardsManager(user){
 
         const context = await response.json();
 
-        console.log(context.context.deck);
-
         if(document.getElementById('flashcards-view-sorting').value === "1" && context.context.deck.authorId === user.id){
             await displayFlashcard("flashcard", {
                 name: context.context.deck.name,
@@ -546,7 +544,7 @@ async function initialize(user){
 
     closeNews()
 
-    console.log(user);
+    //console.log(user);
 
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png";
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
