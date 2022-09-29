@@ -283,7 +283,9 @@ window.onload = async function(){
 }
 
 function initialize(user){
-    if(user.status === "FAILURE") {
+    console.log(user);
+
+    if(user.status === "FAILURE" || user.error === "Bad Request") {
         location.href = "../../../login"
     } else user = user.context.user;
 

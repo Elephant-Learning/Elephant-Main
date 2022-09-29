@@ -518,7 +518,7 @@ async function displayFolders(user){
 }
 
 async function initialize(user){
-    if(user.status === "FAILURE") {
+    if(user.status === "FAILURE" || user.error === "Bad Request") {
         location.href = "../../../login"
     } else user = user.context.user
 

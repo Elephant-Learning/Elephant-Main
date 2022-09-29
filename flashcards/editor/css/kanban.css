@@ -90,6 +90,7 @@
 
 .kanban > .flashcards-card > .flashcards-card-answers > .flashcards-card-answers-div{
     position:relative;
+    width:calc(var(--size) * 256px);
 }
 
 .kanban > .flashcards-card > .flashcards-card-answers > .flashcards-card-answers-div > input{
