@@ -2,6 +2,7 @@ const visibilityOptions = ["PRIVATE", "SHARED", "PUBLIC"]
 
 let controlActive = false;
 let enableRedirect = true;
+let ableToSave = true;
 let selectedVisibility = 0;
 let editing;
 
@@ -711,6 +712,10 @@ async function leaveEditor(link){
 document.getElementById('save-deck').onclick = saveDeck;
 
 async function saveDeck(){
+    if(!ableToSave) return;
+
+    ableToSave = false;
+
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
 
     let exportedDeck = new Deck();
@@ -821,7 +826,10 @@ async function saveDeck(){
         }
 
         enableRedirect = true;
-    } else displayAlert(0, errors);
+    } else {
+        displayAlert(0, errors);
+        ableToSave = true;
+    }
 }
 
 function toggleCardVisibility(visibility){

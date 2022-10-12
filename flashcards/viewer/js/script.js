@@ -202,6 +202,8 @@ window.onload = async function(){
             }
         ];
 
+        document.getElementById('discord-embed-title').setAttribute('content', "Trivia");
+        document.getElementById('discord-embed-desc').setAttribute('content', "Trivia - By Elephant Devs");
         document.getElementById('title').innerHTML = "Trivia | Elephant - The Ultimate Student Suite"
         updateCardsList();
         updateFlashcard();
@@ -270,6 +272,8 @@ window.onload = async function(){
 
     const userContext = await userResponse.json()
 
+    document.getElementById('discord-embed-title').setAttribute('content', context.context.deck.name);
+    document.getElementById('discord-embed-desc').setAttribute('content', context.context.deck.name + " - By " + userContext.context.user.firstName + " " + userContext.context.user.lastName);
     document.getElementById('desktop-sidebar-deck-author-img').src = "../../icons/avatars/" + userContext.context.user.pfpId + ".png"
     document.getElementById('desktop-sidebar-deck-author').innerHTML = userContext.context.user.firstName + " " + userContext.context.user.lastName
     document.getElementById('title').innerHTML = context.context.deck.name + " | Elephant - The Ultimate Student Suite";
