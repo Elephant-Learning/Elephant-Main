@@ -1,0 +1,121 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+@media (min-width: 1800px) {
+    .MainNav {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 5vh;
+        justify-content: center;
+        align-items: center;
+    }
+    .NavItem {
+        margin: 2.5%;
+        font-family: Montserrat;
+        font-weight: 400;
+        text-decoration: none;
+    }
+    .TextDecorationNone {
+        text-decoration: none;
+    }
+    .NavMainLogo {
+        height: 50%;    
+    }
+    .LogoShrinkAndFade {
+        animation: logoShrinkAndFade 10s;
+    }
+    .SearchLogo {
+        height: 40%;
+    }
+    .NavText {
+        transition: color 250ms ease-in-out;
+    }
+    .CreateHeading {
+        color: #ed1970;
+    }
+    .MemorizeHeading {
+        color: #e86ba4;
+    }
+    .SupportHeading {
+        color: #e98cba;
+    }
+    .CreateHeading:hover {
+        color: #ff006a;
+    }
+    .MemorizeHeading:hover {
+        color: #ed1970;
+    }
+    .SupportHeading:hover {
+        color: #e86ba4;
+    }
+    .NavMainLogo:hover {
+        cursor: pointer;
+    }
+    #SearchButton {
+        cursor: pointer;
+    }
+}
+
+.TextShrinkAndFade {
+    animation: textShrinkAndFade 10s;
+}
+
+.HiddenElement {
+    visibility: hidden;
+}
+
+@keyframes logoShrinkAndFade {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    } 
+    25% {
+        transform: scale(0.875);
+    }
+    50% {
+        transform: scale(0.75);
+    }
+    75% {
+        transform: scale(0.5);
+    }
+    87.5% {
+        transform: scale(0.293);
+    }
+    93.75% {
+        transform: scale(0.1594);
+    }
+    100% {
+        transform: scale(0);
+    }
+
+}
+
+@keyframes textShrinkAndFade {
+    0% {
+        font-size: 100%;
+        opacity: 1;
+    } 
+    25% {
+        font-size: 0.9375;
+    }
+    50% {
+        font-size: 0.875;
+    }
+    75% {
+        font-size: 0.75;
+    }
+    87.5% {
+        font-size: 0.5;
+    }
+    93.75% {
+        font-size: 0.25;
+    }
+    100% {
+        font-size: 0;
+    }
+}
