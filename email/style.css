@@ -77,15 +77,23 @@ body *{
     gap:16px;
 }
 
-#main-wrapper > div > button, #button-container > button{
+#main-wrapper > div > button, #button-container-buttons > button{
     flex-shrink:0;
-    background:var(--dark-gray);
     color:white;
     font-weight:700;
     text-transform:uppercase;
     font-size:12px;
     height:32px;
     border-radius:16px;
+    border:none;
+}
+
+#main-wrapper > div > button, #button-container-buttons > button:not(.accent-button){
+    background:var(--dark-gray);
+}
+
+.accent-button{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
 }
 
 #main-wrapper > div > button{
@@ -95,11 +103,19 @@ body *{
     border-radius:16px;
 }
 
-#button-container > button{
+#button-container-buttons > button{
     width:260px;
     font-size:14px;
     height:36px;
     border-radius:18px;
+}
+
+#button-container-buttons{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    gap:24px;
 }
 
 #main-wrapper > div > h6{
