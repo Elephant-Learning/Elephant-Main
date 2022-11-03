@@ -1,5 +1,6 @@
 let selectedSignUpOption;
 let selectedLocation;
+let passwordResetToken;
 
 const UserTypes = {
     INDIVIDUAL: "INDIVIDUAL",
@@ -90,7 +91,7 @@ function toggleTextVisibility(index){
 }
 
 function togglePageFlip(index){
-    const colors = ["primary", "secondary", "secondary", "secondary", "secondary", "tertiary"];
+    const colors = ["primary", "secondary", "secondary", "secondary", "secondary", "tertiary", "tertiary"];
 
     document.querySelectorAll(".desktop-tab").forEach(function(element){
         if(!element.classList.contains("inactive-tab")) element.classList.add("inactive-tab");
@@ -135,6 +136,10 @@ document.getElementById('sign-up-btn-1').onclick = function(){
     if(!document.getElementById('sign-up-btn-1').classList.contains('inactive-button')){
         togglePageFlip(selectedSignUpOption + 2)
     }
+}
+
+function resetPassword(){
+
 }
 
 function setCountryCode(codeIndex, inputIndex){
@@ -217,7 +222,10 @@ window.onload = async function(){
     let splitted = document.location.href.split("?")[1];
 
     if(splitted === "signup") togglePageFlip(1);
-    if(splitted.split("=")[0] === "confirm"){
+    if(splitted.split("=")[0] === "reset") {
+        togglePageFlip(6);
+        passwordResetToken = splitted.split("=")[1]
+    } if(splitted.split("=")[0] === "confirm"){
         const confirmResponse = await fetch('https://elephant-rearend.herokuapp.com/registration/confirm?token=' + splitted.split("=")[1], {
             method: 'POST',
             headers: {

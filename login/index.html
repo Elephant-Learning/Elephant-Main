@@ -192,6 +192,24 @@
                 <div class="break"></div>
                 <button class="small-btn" onclick="togglePageFlip(0)">I Remember It Now</button>
             </div>
+            <div class="desktop-tab">
+                <img src="../icons/elephant-400-400-grayscale.png" alt="">
+                <h1>Reset Your Password</h1>
+                <p>Enter your new password details and continue learning!</p>
+                <div class="input-div">
+                    <img src="./icons/password.png" alt="">
+                    <input type="password" class="visibility-toggleable" placeholder="New Password" id="reset-password">
+                    <img src="./icons/invisible.png" class="visibility-toggler" onclick="toggleTextVisibility(5)">
+                </div>
+                <div class="input-div">
+                    <img src="./icons/password.png" alt="">
+                    <input type="password" class="visibility-toggleable" placeholder="Confirm New Password" id="reset-password-2">
+                    <img src="./icons/invisible.png" class="visibility-toggler" onclick="toggleTextVisibility(5)">
+                </div>
+                <button class="orange-btn" onclick="resetPassword()">Change Password</button>
+                <div class="break"></div>
+                <button class="small-btn" onclick="togglePageFlip(0)">Cancel Password Change</button>
+            </div>
         </div>
         <div id="desktop-color-container"></div>
     </div>
