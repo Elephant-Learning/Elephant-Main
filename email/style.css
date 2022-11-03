@@ -108,6 +108,7 @@ body *{
     font-size:14px;
     height:36px;
     border-radius:18px;
+    cursor:pointer;
 }
 
 #button-container-buttons{
@@ -135,6 +136,10 @@ body *{
     background:var(--bg-color-1);
     padding:32px 0;
     gap:16px;
+}
+
+#button-container > *{
+    max-width:536px;
 }
 
 #button-container > h2{
