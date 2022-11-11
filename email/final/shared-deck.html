@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Deck Shared</title>
+
+  <style>
+    body{
+      font-family: 'Montserrat', sans-serif;
+      background:#f6f7fb;
+      display:flex;
+      flex-direction:row;
+      align-items:flex-start;
+      justify-content:center;
+      margin:0;
+    }
+
+    body *{
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    #desktop-wrapper{
+      width:600px;
+      display:flex;
+      flex-direction:column;
+    }
+
+    #desktop-wrapper > a > img{
+      width:600px;
+    }
+
+    #button-container-buttons > button{
+      flex-shrink:0;
+      color:white;
+      font-weight:700;
+      text-transform:uppercase;
+      font-size:12px;
+      height:32px;
+      border-radius:16px;
+      border:none;
+    }
+
+    #button-container-buttons > button:not(.accent-button){
+      background:#1e1e1e;
+    }
+
+    .accent-button{
+      background:linear-gradient(135deg, #fe599d, #f30096);
+    }
+
+    #main-wrapper > div > button{
+      width:236px;
+      font-size:12px;
+      height:32px;
+      border-radius:16px;
+    }
+
+    #button-container-buttons > button{
+      width:260px;
+      font-size:14px;
+      height:36px;
+      border-radius:18px;
+      cursor:pointer;
+    }
+
+    #button-container-buttons{
+      display:flex;
+      flex-direction:row;
+      align-items:center;
+      justify-content:center;
+      gap:24px;
+    }
+
+    #main-wrapper > div > h6{
+      color:gray;
+      font-weight:500;
+      margin:0;
+      font-size:9px;
+    }
+
+    #button-container{
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      text-align:center;
+      background:white;
+      padding:32px 0;
+      gap:16px;
+    }
+
+    #button-container > h2{
+      font-size:16px;
+      margin:0;
+    }
+
+    #button-container > p{
+      font-size:9px;
+      width:500px;
+      margin:0;
+    }
+  </style>
+</head>
+<body>
+<div id="desktop-wrapper">
+  <a href="#" id="main-link">
+    <img src="shared-header.png" alt="">
+  </a>
+  <div id="button-container">
+    <h2 id="name">Ronak Kothari shared "Business Management Terms" with you</h2>
+    <div id="button-container-buttons">
+      <button id="button">View Deck</button>
+    </div>
+    <p>Clicking the above button will automatically add the viewed deck to your dashboard if you are logged in. Please note that this may not be desired, so for more options visit the website directly.</p>
+  </div>
+  <a href="https://elephantsuite.me">
+    <img src="shared-footer.png" alt="">
+  </a>
+</div>
+</body>
+</html>
