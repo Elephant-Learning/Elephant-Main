@@ -220,6 +220,8 @@ async function displayFlashcard(flashcardType, params){
         mainDiv.classList.add("user-flashcard");
     }
 
+    mainDiv.classList.add("faded-out");
+
     if(params.search){
         if(flashcardType === "flashcard"){
             document.getElementById('search-results-flashcards').appendChild(mainDiv);
@@ -231,6 +233,10 @@ async function displayFlashcard(flashcardType, params){
     } else if(flashcardType === "folder"){
         document.getElementById('folder-flashcard-display').appendChild(mainDiv);
     } document.getElementById('flashcards-display-test').innerHTML = "";
+
+    requestAnimationFrame(() => {
+        mainDiv.classList.remove("faded-out")
+    })
 }
 
 async function deleteDeck(id){
