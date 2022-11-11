@@ -134,6 +134,9 @@ document.getElementById('desktop-memorize-skip').onclick = skipQuestion;
 
 function skipQuestion(){
     correntAnswerNumber = 0;
+
+    console.log("IF WRITE, THEN GO BACK A STAGE")
+
     let nextRandomCard = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
 
     if(nextRandomCard >= indexesIncomplete.length){

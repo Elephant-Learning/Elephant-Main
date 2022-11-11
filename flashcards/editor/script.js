@@ -319,6 +319,8 @@ function toggleDisplayView(index){
         document.getElementById('desktop-main-container').classList.add('kanban');
     } else if(index === 1){
         document.getElementById('desktop-main-container').classList.add('list');
+    } else if(index === 2){
+        document.getElementById('desktop-main-container').classList.add('presentation')
     }
 
     let preferences = localStorage.getItem('preferences');

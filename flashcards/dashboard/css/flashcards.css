@@ -191,8 +191,13 @@
     gap:calc(var(--size) * 18px);
     position:relative;
     width:calc(var(--size) * 445px);
-    transition-duration:250ms;
     cursor:pointer;
+    transition: opacity 500ms;
+    will-change: opacity;
+}
+
+.flashcard-deck.faded-out{
+    opacity:0;
 }
 
 .personal-flashcard-border:hover{

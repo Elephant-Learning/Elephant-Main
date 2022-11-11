@@ -1,0 +1,174 @@
+.presentation{
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 18px);
+    width:100vw;
+    overflow-x:scroll;
+}
+
+.presentation > #flashcards-add-card{
+    width:calc(var(--size) * 256px);
+    flex-shrink:0;
+    border:calc(var(--size) * 1px) dashed gray;
+    border-radius:calc(var(--size) * 6px);
+    padding:0 calc(var(--size) * 12px);
+    height:calc(var(--size) * 48px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    color:gray;
+    font-size:calc(var(--size) * 14px);
+    cursor:pointer;
+    transition-duration:250ms;
+}
+
+.presentation > #flashcards-add-card:hover, .presentation > .flashcards-card > .flashcards-card-answers > button:hover{
+    font-size:calc(var(--size) * 15px);
+}
+
+.presentation > .flashcards-card{
+    width:calc(var(--size) * 256px);
+    background:var(--bg-color-1);
+    border:1px solid var(--light-border-color);
+    border-radius:calc(var(--size) * 6px);
+    padding:calc(var(--size) * 6px) calc(var(--size) * 12px);
+    position:relative;
+}
+
+.presentation > .flashcards-card > .flashcards-card-number{
+    position:absolute;
+    width:calc(var(--size) * 20px);
+    height:calc(var(--size) * 20px);
+    top:calc(var(--size) * -24px);
+    left:calc(var(--size) * -8px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:calc(var(--size) * 12px);
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+}
+
+.presentation > .flashcards-card > .flashcards-card-copyright{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+}
+
+.presentation > .flashcards-card > input{
+    font-size:calc(var(--size) * 14px);
+    background:transparent;
+    outline:none;
+    border:none;
+    width:calc(var(--size) * 256px);
+    padding:calc(var(--size) * 6px) 0;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.presentation > .flashcards-card > input:focus{
+    cursor:text;
+}
+
+.presentation > .flashcards-card > input::placeholder{
+    color:gray;
+}
+
+.presentation > .flashcards-card > .flashcards-card-answers{
+    width:256px;
+    display:flex;
+    flex-direction:column;
+    gap:calc(var(--size) * 8px);
+}
+
+.presentation > .flashcards-card > .flashcards-card-answers > .flashcards-card-answers-div{
+    position:relative;
+    width:calc(var(--size) * 256px);
+}
+
+.presentation > .flashcards-card > .flashcards-card-answers > .flashcards-card-answers-div > input{
+    width:calc(var(--size) * 216px);
+    background:var(--bg-color-2);
+    border:1px solid var(--light-border-color);
+    outline:none;
+    padding:calc(var(--size) * 8px) calc(var(--size) * 28px) calc(var(--size) * 8px) calc(var(--size) * 12px);
+    border-radius:calc(var(--size) * 6px);
+    font-size:calc(var(--size) * 12px);
+    color:gray;
+}
+
+.presentation > .flashcards-card > .flashcards-card-answers > .flashcards-card-answers-div > img{
+    position:absolute;
+    height:calc(var(--size) * 14px);
+    top:calc(var(--size) * 9px);
+    right:calc(var(--size) * 6px);
+    cursor:pointer;
+    filter:invert(0.5);
+    transition-duration:125ms;
+    opacity:0;
+    visibility:hidden;
+}
+
+.presentation > .flashcards-card > .flashcards-card-answers > .flashcards-card-answers-div > input:focus ~ img{
+    opacity:1;
+    visibility:visible;
+}
+
+.presentation > .flashcards-card > .flashcards-card-answers > .flashcards-card-answers-div > img:hover{
+    transform:scale(1.1);
+}
+
+.presentation > .flashcards-card > .flashcards-card-answers > .flashcards-card-answers-div > input::placeholder, .list > .flashcards-card > .flashcards-card-answers > .flashcards-card-answers-div > input::placeholder{
+    color:var(--primary-accent);
+}
+
+.presentation > .flashcards-card > .flashcards-card-answers > button{
+    width:calc(var(--size) * 256px);
+    border:calc(var(--size) * 1px) dashed gray;
+    color:gray;
+    background:transparent;
+    cursor:pointer;
+    height:calc(var(--size) * 36px);
+    font-size:calc(var(--size) * 14px);
+    border-radius:calc(var(--size) * 6px);
+    transition-duration:250ms;
+    outline:none;
+}
+
+.presentation > .flashcards-card > .flashcards-card-footer {
+    position:relative;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    width:calc(var(--size) * 256px);
+    height:calc(var(--size) * 24px);
+    margin-top:calc(var(--size) * 8px);
+}
+
+.presentation > .flashcards-card > .flashcards-card-footer > .flashcards-card-footer-right{
+    position:absolute;
+    right:0;
+    display:flex;
+    align-items:center;
+    gap:calc(var(--size) * 6px);
+    justify-content:center;
+}
+
+.presentation > .flashcards-card > .flashcards-card-footer > .flashcards-card-footer-right > img{
+    height:calc(var(--size) * 18px);
+    filter:invert(0.5);
+    cursor:pointer;
+    transition-duration:125ms;
+}
+
+.presentation > .flashcards-card > .flashcards-card-footer > .flashcards-card-footer-right > img:hover{
+    transform:scale(1.1);
+}

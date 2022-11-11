@@ -1,5 +1,6 @@
 let selectedSignUpOption;
 let selectedLocation;
+let activePage;
 let passwordResetToken;
 
 const UserTypes = {
@@ -95,9 +96,10 @@ function togglePageFlip(index){
 
     document.querySelectorAll(".desktop-tab").forEach(function(element){
         if(!element.classList.contains("inactive-tab")) element.classList.add("inactive-tab");
-    })
+    });
     document.querySelectorAll(".desktop-tab")[index].classList.remove("inactive-tab");
     document.getElementById('desktop-color-container').style.background = "linear-gradient(135deg, var(--" + colors[index] + "-accent), var(--" + colors[index] + "-accent-gradient))";
+    activePage = index;
 }
 
 function selectSignUpOption(index){
@@ -168,7 +170,11 @@ function initialize(){
 
 document.getElementById('login').onclick = login;
 
-document.getElementById('individual-sign-up').onclick = function(){
+document.getElementById('individual-sign-up').onclick = signupIndividual;
+document.getElementById('student-sign-up').onclick = signupStudent;
+document.getElementById('instructor-sign-up').onclick = signupInstructor;
+
+function signupIndividual(){
     const user = new User();
 
     user.updateName(document.getElementById('individual-name').value);
@@ -180,7 +186,7 @@ document.getElementById('individual-sign-up').onclick = function(){
     signup(user);
 }
 
-document.getElementById('student-sign-up').onclick = function(){
+function signupStudent(){
     const user = new User();
 
     user.updateName(document.getElementById('student-name').value);
@@ -192,7 +198,7 @@ document.getElementById('student-sign-up').onclick = function(){
     signup(user);
 }
 
-document.getElementById('instructor-sign-up').onclick = function(){
+function signupInstructor(){
     const user = new User();
 
     user.updateName(document.getElementById('instructor-name').value);
@@ -216,6 +222,15 @@ document.querySelectorAll('.account-option-div').forEach(function(element){
         let click = new Audio('./sounds/click.mp3')
         click.play();
     })
+})
+
+document.addEventListener('keydown', function(e){
+    if(e.keyCode === 13){
+        if(activePage === 0) login();
+        else if(activePage === 2) signupIndividual();
+        else if(activePage === 3) signupStudent();
+        else if(activePage === 4) signupInstructor();
+    }
 })
 
 window.onload = async function(){
