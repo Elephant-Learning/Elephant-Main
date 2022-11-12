@@ -166,6 +166,7 @@ function initialize(){
     if(Math.floor(Math.random() * 5) === 1) document.getElementById('student-account-pic').src = "./icons/student_nerd.png"
 
     togglePageFlip(0);
+    window.scrollTo(0,0);
 }
 
 document.getElementById('login').onclick = login;
@@ -224,8 +225,18 @@ document.querySelectorAll('.account-option-div').forEach(function(element){
     })
 })
 
+document.getElementById('checkbox').onclick = function(){
+    if(document.getElementById('checkbox').classList.contains('unchecked')){
+        document.getElementById('checkbox').classList.remove('unchecked');
+        document.getElementById('checkbox').classList.add('checked');
+    } else {
+        document.getElementById('checkbox').classList.remove('checked');
+        document.getElementById('checkbox').classList.add('unchecked');
+    }
+}
+
 document.addEventListener('keydown', function(e){
-    if(e.keyCode === 13){
+    if(e.keyCode === 13 && document.getElementById('desktop-location-input') !== document.activeElement){
         if(activePage === 0) login();
         else if(activePage === 2) signupIndividual();
         else if(activePage === 3) signupStudent();
@@ -363,7 +374,9 @@ async function login(){
         }, 5000)
     } else {
         localStorage.setItem('savedUserId', JSON.stringify(content.context.user.id));
-        location.href = "../flashcards/dashboard";
+        if(document.getElementById('checkbox').classList.contains('checked')){
+            localStorage.setItem('autoLogin', JSON.stringify(true));
+        } location.href = "../flashcards/dashboard";
     }
 }
 
