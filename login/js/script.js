@@ -163,7 +163,8 @@ function initialize(){
         element.style.background = "linear-gradient(135deg, var(--" + colors[2] + "-accent), var(--" + colors[2] + "-accent-gradient))";
     });
 
-    if(Math.floor(Math.random() * 5) === 1) document.getElementById('student-account-pic').src = "./icons/student_nerd.png"
+    if(Math.floor(Math.random() * 5) === 1) document.getElementById('student-account-pic').src = "./icons/student_nerd.png";
+    localStorage.setItem("autoLogin", JSON.stringify(false));
 
     togglePageFlip(0);
     window.scrollTo(0,0);
