@@ -230,15 +230,17 @@
     flex-wrap:wrap;
     overflow-x:scroll;
     overflow-y:hidden;
-    justify-content:flex-start;
-    align-items:flex-start;
+    justify-content:flex-start !important;
+    align-items:flex-start !important;
     height:calc(0.5 * (100vh - var(--size) * 182px) - var(--size) * 12px);
     width:calc(100vw - var(--size) * 304px);
     gap:calc(var(--size) * 12px);
+    align-content: flex-start;
 }
 
 #flashcards-display-test{
     color:var(--bg-color-2);
+    font-size:14px !important;
 }
 
 #invite-btn-hitbox{

@@ -468,7 +468,7 @@ async function displayFlashcardsManager(user){
 
         console.log(context.name);
 
-        if((document.getElementById('flashcards-view-sorting').value === "1" && context.context.deck.authorId === user.id) || (document.getElementById('flashcards-view-sorting').value === "2" && user.sharedDeckIds.includes(context.context.deck.id) || (document.getElementById('flashcards-view-sorting').value === "0"))){
+        if((document.getElementById('flashcards-view-sorting').value === "1" && context.authorId === user.id) || (document.getElementById('flashcards-view-sorting').value === "2" && user.sharedDeckIds.includes(context.id) || (document.getElementById('flashcards-view-sorting').value === "0"))){
             if(context.authorId === user.id){
                 await displayFlashcard("flashcard", {
                     name: context.name,
