@@ -66,22 +66,28 @@ async function displayFlashcard(flashcardType, params){
             }
         }
 
-        const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + params.author, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type'
-            },
-            mode: 'cors'
-        })
+        if(params.authorName !== undefined && params.authorPfp !== undefined){
+            authorText.innerHTML = params.authorName;
+            authorImg.src = "../../icons/avatars/" + params.authorPfp + ".png";
+        } else {
+            const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + params.author, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                mode: 'cors'
+            })
 
-        const content = await response.json();
+            const content = await response.json();
+
+            authorText.innerHTML = content.context.user.firstName + " " + content.context.user.lastName;
+            authorImg.src = "../../icons/avatars/" + content.context.user.pfpId + ".png";
+        }
 
         nameText.innerHTML = params.name
-        authorText.innerHTML = content.context.user.firstName + " " + content.context.user.lastName;
-        authorImg.src = "../../icons/avatars/" + content.context.user.pfpId + ".png";
         authorDiv.append(authorImg, authorText);
     } else if(flashcardType === "user") {
         for(let i = 0; i < params.name.length; i++){

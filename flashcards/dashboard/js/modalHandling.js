@@ -427,56 +427,71 @@ function min(num1, num2){
 async function displayFlashcardsManager(user){
 
     let ele = document.getElementById('flashcards-list');
+    let userDecks = [];
 
     while(ele.lastChild) {
         ele.lastChild.remove();
     }
 
+    for(let i = 0; i < user.decks.length; i++){
+        userDecks.push(user.decks[i].id);
+    }
+
     for(let i = 0; i < user.elephantUserStatistics.recentlyViewedDeckIds.length; i++){
 
-        const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + user.elephantUserStatistics.recentlyViewedDeckIds[i], {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type'
-            },
-            mode: 'cors'
-        });
+        let context;
 
-        const context = await response.json();
+        if(userDecks.includes(user.elephantUserStatistics.recentlyViewedDeckIds[i])){
+            let deckIndex = userDecks.indexOf(user.elephantUserStatistics.recentlyViewedDeckIds[i]);
+            context = {
+                name: user.decks[deckIndex].name,
+                authorId: user.decks[deckIndex].authorId,
+                visibility: user.decks[deckIndex].visibility,
+                id: user.decks[deckIndex].id,
+                likesNumber: user.decks[deckIndex].numberOfLikes
+            }
+        } else {
+            const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + user.elephantUserStatistics.recentlyViewedDeckIds[i], {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                mode: 'cors'
+            });
 
-        if(document.getElementById('flashcards-view-sorting').value === "1" && context.context.deck.authorId === user.id){
-            await displayFlashcard("flashcard", {
-                name: context.context.deck.name,
-                author: context.context.deck.authorId,
-                type: context.context.deck.visibility,
-                deckID: context.context.deck.id,
-                favorite: user.likedDecksIds.includes(context.context.deck.id),
-                likesNumber: context.context.deck.numberOfLikes,
-                search: false
-            });
-        } else if(document.getElementById('flashcards-view-sorting').value === "2" && user.sharedDeckIds.includes(context.context.deck.id)){
-            await displayFlashcard("flashcard", {
-                name: context.context.deck.name,
-                author: context.context.deck.authorId,
-                type: context.context.deck.visibility,
-                deckID: context.context.deck.id,
-                favorite: user.likedDecksIds.includes(context.context.deck.id),
-                likesNumber: context.context.deck.numberOfLikes,
-                search: false
-            });
-        } else if(document.getElementById('flashcards-view-sorting').value === "0") {
-            await displayFlashcard("flashcard", {
-                name: context.context.deck.name,
-                author: context.context.deck.authorId,
-                type: context.context.deck.visibility,
-                deckID: context.context.deck.id,
-                favorite: user.likedDecksIds.includes(context.context.deck.id),
-                likesNumber: context.context.deck.numberOfLikes,
-                search: false
-            });
+            context = await response.json();
+            context = context.context.deck;
+        }
+
+        console.log(context.name);
+
+        if((document.getElementById('flashcards-view-sorting').value === "1" && context.context.deck.authorId === user.id) || (document.getElementById('flashcards-view-sorting').value === "2" && user.sharedDeckIds.includes(context.context.deck.id) || (document.getElementById('flashcards-view-sorting').value === "0"))){
+            if(context.authorId === user.id){
+                await displayFlashcard("flashcard", {
+                    name: context.name,
+                    author: context.authorId,
+                    authorName: user.firstName + " " + user.lastName,
+                    authorPfp: user.pfpId,
+                    type: context.visibility,
+                    deckID: context.id,
+                    favorite: user.likedDecksIds.includes(context.id),
+                    likesNumber: context.numberOfLikes,
+                    search: false
+                });
+            } else {
+                await displayFlashcard("flashcard", {
+                    name: context.name,
+                    author: context.authorId,
+                    type: context.visibility,
+                    deckID: context.id,
+                    favorite: user.likedDecksIds.includes(context.id),
+                    likesNumber: context.numberOfLikes,
+                    search: false
+                });
+            }
         }
 
         if(!document.getElementById('no-flashcards').classList.contains('inactive-modal')) document.getElementById('no-flashcards').classList.add('inactive-modal');
@@ -544,12 +559,11 @@ async function initialize(user){
 
     closeNews()
 
-    //console.log(user);
+    console.log(user);
 
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png";
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
-
     document.getElementById('desktop-profile-user-img').src = "../icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
 
     await notificationsManager(user);
