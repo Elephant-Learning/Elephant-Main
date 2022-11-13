@@ -1,3 +1,80 @@
+#delete-login-modal-bg{
+    width:100vw;
+    height:100vh;
+    position:absolute;
+    top:0;
+    left:0;
+    background:rgba(0,0,0,0.5);
+    z-index:5;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+#delete-login-modal{
+    background:var(--bg-color-1);
+    padding:calc(var(--size) * 24px);
+    border:1px solid var(--light-border-color);
+    border-radius:calc(var(--size) * 12px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    width:calc(var(--size) * 256px);
+    gap:calc(var(--size) * 6px);
+}
+
+#delete-login-modal > div:first-of-type{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    width:calc(var(--size) * 48px);
+    height:calc(var(--size) * 48px);
+    border-radius:calc(var(--size) * 24px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+#delete-login-modal > div:first-of-type > img{
+    height:calc(var(--size) * 28px);
+    filter:invert(1);
+}
+
+#delete-login-modal > h1{
+    margin: calc(var(--size) * 32px) 0 0;
+    font-size:calc(var(--size) * 18px);
+}
+
+#delete-login-modal > p{
+    margin: 0 0 calc(var(--size) * 32px);
+    font-size:calc(var(--size) * 13px);
+    color:gray;
+}
+
+#delete-login-modal > button{
+    width:100%;
+    padding:calc(var(--size) * 6px) 0;
+    border:none;
+    border-radius:calc(var(--size) * 6px);
+    background:var(--bg-color-2);
+    color:gray;
+    text-transform:uppercase;
+    transition-duration:250ms;
+    cursor:pointer;
+}
+
+#delete-login-modal > button:first-of-type:hover{
+    background:var(--light-gray);
+    color:white;
+}
+
+#delete-login-modal > button:last-of-type:hover{
+    background:var(--primary-accent);
+    color:white;
+}
+
 #desktop-main-container{
     width:calc(100vw - calc(var(--size) * 256px));
     height:calc(100vh - calc(var(--size) * 48px));

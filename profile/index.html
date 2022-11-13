@@ -15,6 +15,17 @@
     <script src="script.js" defer></script>
 </head>
 <body>
+<div id="delete-login-modal-bg" class="inactive-modal">
+    <div id="delete-login-modal">
+        <div>
+            <img src="./icons/cry.png" alt="">
+        </div>
+        <h1>Wait! Don't Go!</h1>
+        <p>You cannot undo this. By continuing, you'll lose 8 friends and 12 decks.</p>
+        <button id="delete-login-back" onclick="toggleDeleteModal()">Go Back</button>
+        <button id="delete-login-proceed" onclick="deleteAccount()">Delete Anyway</button>
+    </div>
+</div>
 <div id="desktop-wrapper">
     <div id="desktop-notifications-modal" class="inactive-modal">
         <div id="desktop-notifications-header">
@@ -170,7 +181,7 @@
                         </div>
                     </div>
                     <div class="profile-break"></div>
-                    <div onclick="localStorage.removeItem('savedUserId'); location.href = '../../login'">
+                    <div onclick="localStorage.removeItem('savedUserId'); location.href = '../login'">
                         <img src="../flashcards/icons/logout.png">
                         <p>Log Out</p>
                     </div>
@@ -221,12 +232,16 @@
                                 <img src="../login/icons/location.png" alt="">
                                 <p id="my-profile-location"></p>
                             </div>
+                            <div class="my-profile-information">
+                                <img src="../flashcards/icons/fire.png" alt="">
+                                <p id="my-profile-streak"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div id="my-profile-options">
                     <button id="pfp-change-btn" onclick="toggleAvatarModal()">Change Profile Picture</button>
-                    <button id="delete-acc-btn" onclick="deleteAccount()">Delete Account</button>
+                    <button id="delete-acc-btn" onclick="toggleDeleteModal()">Delete Account</button>
                 </div>
                 <div id="my-profile-misc">
                     <div id="my-profile-friends"></div>
@@ -236,8 +251,8 @@
         </div>
     </div>
 </div>
-<div id="mobile-wrapper">
+<!--<div id="mobile-wrapper">
     mobile version not released...
-</div>
+</div>-->
 </body>
 </html>

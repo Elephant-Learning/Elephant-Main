@@ -26,6 +26,14 @@ async function toggleAvatarModal(){
     }
 }
 
+function toggleDeleteModal(){
+    if(document.getElementById('delete-login-modal-bg').classList.contains("inactive-modal")){
+        document.getElementById('delete-login-modal-bg').classList.remove("inactive-modal")
+    } else {
+        document.getElementById('delete-login-modal-bg').classList.add("inactive-modal")
+    }
+}
+
 function selectPfp(index){
     selectedProfile = index;
     document.getElementById('desktop-avatar-current').src = "../../icons/avatars/" + index + ".png";
@@ -35,7 +43,7 @@ function selectPfp(index){
 
 async function initialize(user){
     if(user.status === "FAILURE") {
-        location.href = "../../login"
+        location.href = "../login"
     } else user = user.context.user;
 
     if(user.type === "EMPLOYEE"){
@@ -64,6 +72,8 @@ async function initialize(user){
     document.getElementById('my-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
     document.getElementById('my-profile-email').innerHTML = user.email;
     document.getElementById('my-profile-location').innerHTML = COUNTRY_LIST[user.countryCode];
+    if(user.elephantUserStatistics.daysStreak === 1) document.getElementById('my-profile-streak').innerHTML = user.elephantUserStatistics.daysStreak + " Day Streak";
+    else document.getElementById('my-profile-streak').innerHTML = user.elephantUserStatistics.daysStreak + " Days Streak";
 
     for(let i = 0; i < user.friendIds.length; i++){
         const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + user.friendIds[i], {
@@ -148,10 +158,11 @@ async function deleteAccount(){
         mode: 'cors'
     })
 
-    location.href = "../../login"
+    location.href = "../login"
 }
 
 async function locateUserInfo(){
+    window.scrollTo(0, 0);
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
     const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
