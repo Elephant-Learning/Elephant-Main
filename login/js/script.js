@@ -1,7 +1,6 @@
 let selectedSignUpOption;
 let selectedLocation;
 let activePage;
-let passwordResetToken;
 
 const UserTypes = {
     INDIVIDUAL: "INDIVIDUAL",
@@ -140,8 +139,81 @@ document.getElementById('sign-up-btn-1').onclick = function(){
     }
 }
 
-function resetPassword(){
+async function resetPasswordEmail(){
+    const email = document.getElementById('send-password-email').value;
 
+    const responseEmail = await fetch('https://elephant-rearend.herokuapp.com/login/userByEmail?email=' + email, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    });
+
+    const contentEmail = await responseEmail.json();
+
+    document.getElementById('desktop-loading-modal').classList.add('inactive-modal');
+
+    if(contentEmail.status === "SUCCESS"){
+        const responsePass = await fetch('https://elephant-rearend.herokuapp.com/password/sendEmail?id=' + contentEmail.context.user.id, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        });
+
+        const contentPass = await responsePass.json();
+        document.getElementById('desktop-alert-header').innerHTML = "Check Your Email"
+        console.log(contentPass);
+    } else if(contentEmail.status === "FAILURE") document.getElementById('desktop-alert-header').innerHTML = "Email Not Found"
+
+    document.getElementById('desktop-alert-para').innerHTML = contentEmail.message;
+
+    document.getElementById('desktop-alert-modal').classList.remove('inactive-modal')
+    setTimeout(function(){
+        document.getElementById('desktop-alert-modal').classList.add('inactive-modal')
+    }, 5000);
+}
+
+async function resetPassword(resetPasswordToken){
+    let password = document.getElementById('reset-password').value;
+
+    document.getElementById('desktop-loading-modal').classList.add('inactive-modal');
+
+    if(password === document.getElementById('reset-password-2').value){
+        const response = await fetch('https://elephant-rearend.herokuapp.com/password/resetPassword', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                token: resetPasswordToken,
+                newPassword: password
+            }),
+            mode: 'cors'
+        });
+
+        const content = await response.json();
+        console.log(content);
+    } else {
+        document.getElementById('desktop-alert-header').innerHTML = "Passwords don't match"
+        document.getElementById('desktop-alert-para').innerHTML = "Please retype your passwords so that they match.";
+    }
+
+    document.getElementById('desktop-alert-modal').classList.remove('inactive-modal')
+    setTimeout(function(){
+        document.getElementById('desktop-alert-modal').classList.add('inactive-modal')
+    }, 5000);
 }
 
 function setCountryCode(codeIndex, inputIndex){
@@ -251,7 +323,7 @@ window.onload = async function(){
     if(splitted === "signup") togglePageFlip(1);
     if(splitted.split("=")[0] === "reset") {
         togglePageFlip(6);
-        passwordResetToken = splitted.split("=")[1]
+        document.getElementById('reset-password-btn').setAttribute('onclick', "resetPassword(" + splitted.split("=")[1] + ")")
     } if(splitted.split("=")[0] === "confirm"){
         const confirmResponse = await fetch('https://elephant-rearend.herokuapp.com/registration/confirm?token=' + splitted.split("=")[1], {
             method: 'POST',
@@ -310,7 +382,7 @@ async function signup(data){
         document.getElementById('desktop-alert-modal').classList.remove('inactive-modal')
         setTimeout(function(){
             document.getElementById('desktop-alert-modal').classList.add('inactive-modal')
-        }, 5000)
+        }, 5000);
     } else if(content.status === "SUCCESS"){
         document.getElementById('desktop-loading-modal').classList.add('inactive-modal');
         document.getElementById('desktop-alert-header').innerHTML = "Confirmation Token Sent"

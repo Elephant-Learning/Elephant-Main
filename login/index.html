@@ -194,9 +194,9 @@
                 <p>Do not worry! We will help you reset your password.</p>
                 <div class="input-div">
                     <img src="./icons/email.png" alt="">
-                    <input type="email" placeholder="Email">
+                    <input type="email" placeholder="Email" id="send-password-email">
                 </div>
-                <button class="orange-btn">Reset Password</button>
+                <button class="orange-btn" onclick="resetPasswordEmail()">Reset Password</button>
                 <div class="break"></div>
                 <button class="small-btn" onclick="togglePageFlip(0)">I Remember It Now</button>
             </div>
@@ -214,7 +214,7 @@
                     <input type="password" class="visibility-toggleable" placeholder="Confirm New Password" id="reset-password-2">
                     <img src="./icons/invisible.png" class="visibility-toggler" onclick="toggleTextVisibility(6)">
                 </div>
-                <button class="orange-btn" onclick="resetPassword()">Change Password</button>
+                <button class="orange-btn" id="reset-password-btn">Change Password</button>
                 <div class="break"></div>
                 <button class="small-btn" onclick="togglePageFlip(0)">Cancel Password Change</button>
             </div>
