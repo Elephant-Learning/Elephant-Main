@@ -28,6 +28,7 @@ async function toggleAvatarModal(){
 
 function toggleDeleteModal(){
     if(document.getElementById('delete-login-modal-bg').classList.contains("inactive-modal")){
+        document.getElementById('confirm-password-delete-input').value = "";
         document.getElementById('delete-login-modal-bg').classList.remove("inactive-modal")
     } else {
         document.getElementById('delete-login-modal-bg').classList.add("inactive-modal")
@@ -74,6 +75,8 @@ async function initialize(user){
     document.getElementById('my-profile-location').innerHTML = COUNTRY_LIST[user.countryCode];
     if(user.elephantUserStatistics.daysStreak === 1) document.getElementById('my-profile-streak').innerHTML = user.elephantUserStatistics.daysStreak + " Day Streak";
     else document.getElementById('my-profile-streak').innerHTML = user.elephantUserStatistics.daysStreak + " Days Streak";
+
+    document.getElementById('delete-acc-text').innerHTML = "You cannot undo this. By continuing, you'll lose " + user.friendIds.length + " friends and " + user.decks.length + " decks."
 
     for(let i = 0; i < user.friendIds.length; i++){
         const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + user.friendIds[i], {
@@ -147,7 +150,7 @@ async function initialize(user){
 
 async function deleteAccount(){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
-    const response = await fetch('https://elephant-rearend.herokuapp.com/registration/delete?id=' + savedUserId, {
+    const response = await fetch('https://elephant-rearend.herokuapp.com/registration/delete', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -155,10 +158,23 @@ async function deleteAccount(){
             'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type'
         },
+        body: JSON.stringify({
+            id: savedUserId,
+            password: document.getElementById('confirm-password-delete-input').value
+        }),
         mode: 'cors'
     })
 
-    location.href = "../login"
+    const content = await response.json();
+    console.log(content);
+
+    if(content.status === "SUCCESS"){
+        location.href = "../login"
+    } else {
+        document.getElementById('confirm-password-delete-input').style.border = "1px solid var(--primary-accent)";
+    }
+
+    //location.href = "../login"
 }
 
 async function locateUserInfo(){

@@ -975,7 +975,7 @@ document.addEventListener('keydown', function(e){
     if(e.keyCode === 68 && controlActive){
         e.preventDefault();
         if(document.activeElement.classList.contains('flashcards-definition-input')){
-            addDefinition(document.activeElement.classList[1].slice(-1))
+            addDefinition(document.activeElement.classList[1].split("-")[3])
         }
     } if(e.keyCode === 13 ** !controlActive){
         e.preventDefault();

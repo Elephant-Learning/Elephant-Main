@@ -75,6 +75,21 @@
     color:white;
 }
 
+#delete-login-modal > input{
+    width:calc(100% - var(--size) * 12px);
+    border:1px solid var(--light-border-color);
+    height:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 6px);
+    padding:0 calc(var(--size) * 6px);
+    color:gray;
+    outline:none;
+    margin-bottom:calc(var(--size) * 12px);
+}
+
+#delete-login-modal > input:focus{
+    border:1px solid var(--dark-gray);
+}
+
 #desktop-main-container{
     width:calc(100vw - calc(var(--size) * 256px));
     height:calc(100vh - calc(var(--size) * 48px));

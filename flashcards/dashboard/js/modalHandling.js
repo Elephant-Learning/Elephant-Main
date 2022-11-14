@@ -448,7 +448,7 @@ async function displayFlashcardsManager(user){
                 authorId: user.decks[deckIndex].authorId,
                 visibility: user.decks[deckIndex].visibility,
                 id: user.decks[deckIndex].id,
-                likesNumber: user.decks[deckIndex].numberOfLikes
+                numberOfLikes: user.decks[deckIndex].numberOfLikes
             }
         } else {
             const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + user.elephantUserStatistics.recentlyViewedDeckIds[i], {
