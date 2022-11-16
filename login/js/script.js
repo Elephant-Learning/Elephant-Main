@@ -205,6 +205,16 @@ async function resetPassword(resetPasswordToken){
 
         const content = await response.json();
         console.log(content);
+
+        if(content.status === "SUCCESS"){
+            document.getElementById('desktop-alert-header').innerHTML = "Password successfully changed!"
+            document.getElementById('desktop-alert-para').innerHTML = "Go ahead and login with new password.";
+            togglePageFlip(0);
+        } else {
+            document.getElementById('desktop-alert-header').innerHTML = "Something Went Wrong"
+            document.getElementById('desktop-alert-para').innerHTML = content.message;
+        }
+
     } else {
         document.getElementById('desktop-alert-header').innerHTML = "Passwords don't match"
         document.getElementById('desktop-alert-para').innerHTML = "Please retype your passwords so that they match.";
@@ -323,7 +333,8 @@ window.onload = async function(){
     if(splitted === "signup") togglePageFlip(1);
     if(splitted.split("=")[0] === "reset") {
         togglePageFlip(6);
-        document.getElementById('reset-password-btn').setAttribute('onclick', "resetPassword(" + splitted.split("=")[1] + ")")
+        console.log(splitted.split("=")[1]);
+        document.getElementById('reset-password-btn').setAttribute('onclick', "resetPassword('" + splitted.split("=")[1] + "')")
     } if(splitted.split("=")[0] === "confirm"){
         const confirmResponse = await fetch('https://elephant-rearend.herokuapp.com/registration/confirm?token=' + splitted.split("=")[1], {
             method: 'POST',
