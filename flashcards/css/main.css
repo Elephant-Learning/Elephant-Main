@@ -776,7 +776,7 @@ body *{
     padding:calc(var(--size) * 12px) 0;
 }
 
-.desktop-sidebar-category, .desktop-sidebar-folder{
+.desktop-sidebar-category, .desktop-sidebar-folder, .desktop-sidebar-category-2{
     width:calc(var(--size) * 256px);
     display:flex;
     align-items:center;
@@ -785,7 +785,7 @@ body *{
     cursor:pointer;
 }
 
-.desktop-sidebar-category:not(.active-sidebar-category):not(.unavailable-sidebar-category):hover, .desktop-sidebar-folder:not(.active-sidebar-category):hover {
+.desktop-sidebar-category:not(.active-sidebar-category):not(.unavailable-sidebar-category):hover, .desktop-sidebar-category-2:not(.active-sidebar-category):not(.unavailable-sidebar-category):hover, .desktop-sidebar-folder:not(.active-sidebar-category):hover {
     background:var(--hover-light)
 }
 
@@ -801,19 +801,19 @@ body *{
     color:gray !important;
 }
 
-.desktop-sidebar-category > div, .desktop-sidebar-folder > div{
+.desktop-sidebar-category > div, .desktop-sidebar-folder > div, .desktop-sidebar-category-2 > div{
     width:calc(var(--size) * 48px);
     display:flex;
     flex-direction:row;
     justify-content:center;
 }
 
-.desktop-sidebar-category > div > img, .desktop-sidebar-folder > div > img{
+.desktop-sidebar-category > div > img, .desktop-sidebar-folder > div > img, .desktop-sidebar-category-2 > div > img{
     height:calc(var(--size) * 18px);
     filter:invert(var(--image-invert));
 }
 
-.desktop-sidebar-category > p, .desktop-sidebar-folder > p{
+.desktop-sidebar-category > p, .desktop-sidebar-folder > p, .desktop-sidebar-category-2 > p{
     margin:0;
     font-size:calc(var(--size) * 12px);
     font-weight:400;
