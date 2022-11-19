@@ -7,6 +7,26 @@ function memorizeCheckAnswer(index){
     document.querySelectorAll('.desktop-memorize-definition')[index].classList.add('desktop-memorize-definition-selected');
 }
 
+function memorizeSetting(setting){
+    if(document.querySelectorAll('.desktop-memorize-setting-checkbox')[setting].classList.contains("unchecked")){
+        document.querySelectorAll('.desktop-memorize-setting-checkbox')[setting].classList.remove("unchecked")
+        document.querySelectorAll('.desktop-memorize-setting-checkbox')[setting].classList.add("checked")
+    } else {
+        document.querySelectorAll('.desktop-memorize-setting-checkbox')[setting].classList.add("unchecked")
+        document.querySelectorAll('.desktop-memorize-setting-checkbox')[setting].classList.remove("checked")
+    }
+}
+
+function toggleMemorizeSettingsModal(){
+    if(document.getElementById('desktop-memorize-settings').classList.contains("expanded")){
+        document.getElementById('desktop-memorize-settings').classList.remove("expanded");
+        document.getElementById('desktop-memorize-settings').classList.add("shrunk");
+    } else {
+        document.getElementById('desktop-memorize-settings').classList.add("expanded");
+        document.getElementById('desktop-memorize-settings').classList.remove("shrunk");
+    }
+}
+
 function shuffleArray(array) {
     let currentIndex = array.length,  randomIndex;
 

@@ -293,6 +293,13 @@ function initialize(user){
         location.href = "../../../login"
     } else user = user.context.user;
 
+    let memorizeSettings = 0;
+
+    document.querySelectorAll(".desktop-memorize-setting-checkbox").forEach(function(element){
+        element.setAttribute("onclick", "memorizeSetting(" + memorizeSettings + ")");
+        memorizeSettings++;
+    });
+
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png";
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
