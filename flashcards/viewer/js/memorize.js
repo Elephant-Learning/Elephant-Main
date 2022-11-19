@@ -1,5 +1,5 @@
 let correntAnswerNumber = 0;
-let indexesIncomplete, indexesReviewed, indexesComplete, memorizeWriteCorrectAnswers, deckMaxDefinitions, answeredQuestions, answeredCorrectly;
+let indexesIncomplete, indexesReviewed, indexesComplete, memorizeWriteCorrectAnswers, deckMaxDefinitions, answeredQuestions, answeredCorrectly, currentQuestionIndex;
 
 let unableToAnswer = false;
 
@@ -38,14 +38,15 @@ function incorrectBtn(){
 }
 
 function askMemorizeQuestion(){
-    let nextRandomCard = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
+    currentQuestionIndex = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
+    console.log(currentQuestionIndex, indexesIncomplete.length);
 
     refreshMemorizePanel()
 
-    if(nextRandomCard >= indexesIncomplete.length){
-        setupWrite(indexesReviewed[nextRandomCard - indexesIncomplete.length]);
+    if(currentQuestionIndex >= indexesIncomplete.length){
+        setupWrite(indexesReviewed[currentQuestionIndex - indexesIncomplete.length]);
     } else {
-        setupCard(indexesIncomplete[nextRandomCard]);
+        setupCard(indexesIncomplete[currentQuestionIndex]);
     }
 }
 
@@ -134,16 +135,15 @@ document.getElementById('desktop-memorize-skip').onclick = skipQuestion;
 
 function skipQuestion(){
     correntAnswerNumber = 0;
+    answeredQuestions++;
 
-    console.log("IF WRITE, THEN GO BACK A STAGE")
-
-    let nextRandomCard = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
-
-    if(nextRandomCard >= indexesIncomplete.length){
-        setupWrite(indexesReviewed[nextRandomCard - indexesIncomplete.length]);
-    } else {
-        setupCard(indexesIncomplete[nextRandomCard]);
+    if(currentQuestionIndex >= indexesIncomplete.length){
+        let deckId = indexesReviewed[currentQuestionIndex - indexesIncomplete.length];
+        indexesReviewed.splice(indexesReviewed.indexOf(deckId), 1);
+        indexesIncomplete.push(deckId);
     }
+
+    askMemorizeQuestion();
     document.getElementById('desktop-memorize-panel-questions-left').innerHTML = indexesIncomplete.length * 2 + indexesReviewed.length;
 }
 
@@ -317,6 +317,7 @@ function initializeMemorize(){
     deckMaxDefinitions = [];
     answeredQuestions = 0;
     answeredCorrectly = 0;
+    currentQuestionIndex = 0;
 
     document.querySelectorAll('.active-memorize-item').forEach(function(element){
         element.classList.remove('active-memorize-item');
