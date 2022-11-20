@@ -297,29 +297,54 @@ function setupCard(deckIndex){
     removeAllChildNodes(document.getElementById('desktop-memorize-definitions-list'));
 
     let randomizedAnswers = [], incorrectAnswerLength;
-    document.getElementById('desktop-memorize-term').innerHTML = deck[deckIndex].term;
 
-    for(let i = 0; i < deck[deckIndex].definitions.length; i++){
-        randomizedAnswers.push([deck[deckIndex].definitions[i], true]);
-    }
+    if(document.querySelectorAll(".desktop-memorize-setting-checkbox")[0].classList.contains("checked")){
+        let termString = toTitleCase(deck[deckIndex].definitions[0]);
 
-    if(randomizedAnswers.length > 3) incorrectAnswerLength = randomizedAnswers.length * 2 + Math.floor(Math.random() * 2) - 1;
-    else incorrectAnswerLength = randomizedAnswers.length * 2 + Math.floor(Math.random() * 2);
+        for(let i = 1; i < deck[deckIndex].definitions.length; i++) termString += "; " + toTitleCase(deck[deckIndex].definitions[i]);
+        document.getElementById('desktop-memorize-term').innerHTML = termString;
 
-    if(incorrectAnswerLength > deckMaxDefinitions.length) incorrectAnswerLength = deckMaxDefinitions.length;
+        randomizedAnswers.push([deck[deckIndex].term, true]);
 
-    while(randomizedAnswers.length < incorrectAnswerLength){
-        let randomAnswer = deck[Math.floor(Math.random() * deck.length)];
-        randomAnswer = randomAnswer.definitions[Math.floor(Math.random() * randomAnswer.definitions.length)];
+        while(randomizedAnswers.length < 4){
+            let randomAnswer = deck[Math.floor(Math.random() * deck.length)].term;
 
-        let answerAlreadyThere = false;
+            let answerAlreadyThere = false;
 
-        for(let i = 0; i < randomizedAnswers.length; i++){
-            if(randomAnswer === randomizedAnswers[i][0]) answerAlreadyThere = true;
+            for(let i = 0; i < randomizedAnswers.length; i++){
+                if(randomAnswer === randomizedAnswers[i][0]) answerAlreadyThere = true;
+            }
+
+            if(!answerAlreadyThere){
+                randomizedAnswers.push([randomAnswer, false])
+            }
         }
 
-        if(!answerAlreadyThere){
-            randomizedAnswers.push([randomAnswer, false])
+    } else {
+        document.getElementById('desktop-memorize-term').innerHTML = deck[deckIndex].term;
+
+        for(let i = 0; i < deck[deckIndex].definitions.length; i++){
+            randomizedAnswers.push([deck[deckIndex].definitions[i], true]);
+        }
+
+        if(randomizedAnswers.length > 3) incorrectAnswerLength = randomizedAnswers.length * 2 + Math.floor(Math.random() * 2) - 1;
+        else incorrectAnswerLength = randomizedAnswers.length * 2 + Math.floor(Math.random() * 2);
+
+        if(incorrectAnswerLength > deckMaxDefinitions.length) incorrectAnswerLength = deckMaxDefinitions.length;
+
+        while(randomizedAnswers.length < incorrectAnswerLength){
+            let randomAnswer = deck[Math.floor(Math.random() * deck.length)];
+            randomAnswer = randomAnswer.definitions[Math.floor(Math.random() * randomAnswer.definitions.length)];
+
+            let answerAlreadyThere = false;
+
+            for(let i = 0; i < randomizedAnswers.length; i++){
+                if(randomAnswer === randomizedAnswers[i][0]) answerAlreadyThere = true;
+            }
+
+            if(!answerAlreadyThere){
+                randomizedAnswers.push([randomAnswer, false])
+            }
         }
     }
 
@@ -336,7 +361,7 @@ function initializeMemorize(){
     indexesComplete = [];
     deckMaxDefinitions = [];
     memorizeSettings = [];
-    answeredQuestions = 0;
+    answeredQuestions = -1;
     answeredCorrectly = 0;
     currentQuestionIndex = 0;
 
@@ -352,7 +377,9 @@ function initializeMemorize(){
     });
 
     for(let i = 0; i < deck.length; i++){
-        indexesIncomplete.push(i)
+        if(document.querySelectorAll(".desktop-memorize-setting-checkbox")[1].classList.contains("unchecked")) indexesIncomplete.push(i);
+        else indexesReviewed.push(i);
+
         for(let j = 0; j < deck[i].definitions.length; j++){
             if(!deckMaxDefinitions.includes(deck[i].definitions[j])) deckMaxDefinitions.push(deck[i].definitions[j]);
         }
@@ -361,5 +388,8 @@ function initializeMemorize(){
 
     refreshMemorizePanel();
 
-    setupCard(Math.floor(Math.random() * indexesIncomplete.length + indexesReviewed.length));
+    /*if(document.querySelectorAll(".desktop-memorize-setting-checkbox")[1].classList.contains("unchecked")) setupCard(Math.floor(Math.random() * indexesIncomplete.length));
+    else setupWrite(Math.floor(Math.random() * indexesReviewed.length));*/
+
+    skipQuestion();
 }
