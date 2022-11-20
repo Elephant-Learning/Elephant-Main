@@ -229,7 +229,7 @@
                             <h1 id="desktop-memorize-panel-questions-left"></h1>
                             <p>Questions Left</p>
                             <div id="desktop-memorize-panel-questions-left-progress">
-                                <div class="i-card" id="desktop-memorize-panel-questions-left-information">
+                                <!--<div class="i-card" id="desktop-memorize-panel-questions-left-information">
                                     <div>
                                         <img src="./icons/information.png" alt="">
                                     </div>
@@ -248,9 +248,38 @@
                                             <p>Memorized</p>
                                         </div>
                                     </div>
+                                </div>-->
+                            </div>
+                        </div>
+                        <div id="desktop-memorize-settings" class="shrunk">
+                            <div id="desktop-memorize-settings-tab-header" onclick="toggleMemorizeSettingsModal();">
+                                <img src="./icons/expand.png" alt="">
+                                <h1>Settings</h1>
+                            </div>
+                            <div id="desktop-memorize-settings-tab-body">
+                                <div class="desktop-memorize-setting">
+                                    <div>
+                                        <img src="./icons/swap.png" alt="">
+                                        <div>
+                                            <h1>Test On Term</h1>
+                                            <p>Provides the definition and asks the for term</p>
+                                        </div>
+                                    </div>
+                                    <div class="desktop-memorize-setting-checkbox unchecked"><div></div></div>
+                                </div>
+                                <div class="desktop-memorize-setting">
+                                    <div>
+                                        <img src="./icons/write.png" alt="">
+                                        <div>
+                                            <h1>Disable Choice</h1>
+                                            <p>Only written questions will be asked</p>
+                                        </div>
+                                    </div>
+                                    <div class="desktop-memorize-setting-checkbox unchecked"><div></div></div>
                                 </div>
                             </div>
                         </div>
+                        <button id="deck-memorize-reset" onclick="initializeMemorize()">Reset</button>
                     </div>
                 </div>
                 <div class="desktop-tab" id="deck-review">

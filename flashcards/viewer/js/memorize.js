@@ -1,10 +1,30 @@
 let correntAnswerNumber = 0;
-let indexesIncomplete, indexesReviewed, indexesComplete, memorizeWriteCorrectAnswers, deckMaxDefinitions, answeredQuestions, answeredCorrectly;
+let indexesIncomplete, indexesReviewed, indexesComplete, memorizeWriteCorrectAnswers, deckMaxDefinitions, answeredQuestions, answeredCorrectly, currentQuestionIndex, memorizeSettings;
 
 let unableToAnswer = false;
 
 function memorizeCheckAnswer(index){
     document.querySelectorAll('.desktop-memorize-definition')[index].classList.add('desktop-memorize-definition-selected');
+}
+
+function memorizeSetting(setting){
+    if(document.querySelectorAll('.desktop-memorize-setting-checkbox')[setting].classList.contains("unchecked")){
+        document.querySelectorAll('.desktop-memorize-setting-checkbox')[setting].classList.remove("unchecked")
+        document.querySelectorAll('.desktop-memorize-setting-checkbox')[setting].classList.add("checked")
+    } else {
+        document.querySelectorAll('.desktop-memorize-setting-checkbox')[setting].classList.add("unchecked")
+        document.querySelectorAll('.desktop-memorize-setting-checkbox')[setting].classList.remove("checked")
+    }
+}
+
+function toggleMemorizeSettingsModal(){
+    if(document.getElementById('desktop-memorize-settings').classList.contains("expanded")){
+        document.getElementById('desktop-memorize-settings').classList.remove("expanded");
+        document.getElementById('desktop-memorize-settings').classList.add("shrunk");
+    } else {
+        document.getElementById('desktop-memorize-settings').classList.add("expanded");
+        document.getElementById('desktop-memorize-settings').classList.remove("shrunk");
+    }
 }
 
 function shuffleArray(array) {
@@ -38,14 +58,15 @@ function incorrectBtn(){
 }
 
 function askMemorizeQuestion(){
-    let nextRandomCard = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
+    currentQuestionIndex = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
+    console.log(currentQuestionIndex, indexesIncomplete.length);
 
     refreshMemorizePanel()
 
-    if(nextRandomCard >= indexesIncomplete.length){
-        setupWrite(indexesReviewed[nextRandomCard - indexesIncomplete.length]);
+    if(currentQuestionIndex >= indexesIncomplete.length){
+        setupWrite(indexesReviewed[currentQuestionIndex - indexesIncomplete.length]);
     } else {
-        setupCard(indexesIncomplete[nextRandomCard]);
+        setupCard(indexesIncomplete[currentQuestionIndex]);
     }
 }
 
@@ -134,16 +155,15 @@ document.getElementById('desktop-memorize-skip').onclick = skipQuestion;
 
 function skipQuestion(){
     correntAnswerNumber = 0;
+    answeredQuestions++;
 
-    console.log("IF WRITE, THEN GO BACK A STAGE")
-
-    let nextRandomCard = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
-
-    if(nextRandomCard >= indexesIncomplete.length){
-        setupWrite(indexesReviewed[nextRandomCard - indexesIncomplete.length]);
-    } else {
-        setupCard(indexesIncomplete[nextRandomCard]);
+    if(currentQuestionIndex >= indexesIncomplete.length){
+        let deckId = indexesReviewed[currentQuestionIndex - indexesIncomplete.length];
+        indexesReviewed.splice(indexesReviewed.indexOf(deckId), 1);
+        indexesIncomplete.push(deckId);
     }
+
+    askMemorizeQuestion();
     document.getElementById('desktop-memorize-panel-questions-left').innerHTML = indexesIncomplete.length * 2 + indexesReviewed.length;
 }
 
@@ -277,29 +297,54 @@ function setupCard(deckIndex){
     removeAllChildNodes(document.getElementById('desktop-memorize-definitions-list'));
 
     let randomizedAnswers = [], incorrectAnswerLength;
-    document.getElementById('desktop-memorize-term').innerHTML = deck[deckIndex].term;
 
-    for(let i = 0; i < deck[deckIndex].definitions.length; i++){
-        randomizedAnswers.push([deck[deckIndex].definitions[i], true]);
-    }
+    if(document.querySelectorAll(".desktop-memorize-setting-checkbox")[0].classList.contains("checked")){
+        let termString = toTitleCase(deck[deckIndex].definitions[0]);
 
-    if(randomizedAnswers.length > 3) incorrectAnswerLength = randomizedAnswers.length * 2 + Math.floor(Math.random() * 2) - 1;
-    else incorrectAnswerLength = randomizedAnswers.length * 2 + Math.floor(Math.random() * 2);
+        for(let i = 1; i < deck[deckIndex].definitions.length; i++) termString += "; " + toTitleCase(deck[deckIndex].definitions[i]);
+        document.getElementById('desktop-memorize-term').innerHTML = termString;
 
-    if(incorrectAnswerLength > deckMaxDefinitions.length) incorrectAnswerLength = deckMaxDefinitions.length;
+        randomizedAnswers.push([deck[deckIndex].term, true]);
 
-    while(randomizedAnswers.length < incorrectAnswerLength){
-        let randomAnswer = deck[Math.floor(Math.random() * deck.length)];
-        randomAnswer = randomAnswer.definitions[Math.floor(Math.random() * randomAnswer.definitions.length)];
+        while(randomizedAnswers.length < 4){
+            let randomAnswer = deck[Math.floor(Math.random() * deck.length)].term;
 
-        let answerAlreadyThere = false;
+            let answerAlreadyThere = false;
 
-        for(let i = 0; i < randomizedAnswers.length; i++){
-            if(randomAnswer === randomizedAnswers[i][0]) answerAlreadyThere = true;
+            for(let i = 0; i < randomizedAnswers.length; i++){
+                if(randomAnswer === randomizedAnswers[i][0]) answerAlreadyThere = true;
+            }
+
+            if(!answerAlreadyThere){
+                randomizedAnswers.push([randomAnswer, false])
+            }
         }
 
-        if(!answerAlreadyThere){
-            randomizedAnswers.push([randomAnswer, false])
+    } else {
+        document.getElementById('desktop-memorize-term').innerHTML = deck[deckIndex].term;
+
+        for(let i = 0; i < deck[deckIndex].definitions.length; i++){
+            randomizedAnswers.push([deck[deckIndex].definitions[i], true]);
+        }
+
+        if(randomizedAnswers.length > 3) incorrectAnswerLength = randomizedAnswers.length * 2 + Math.floor(Math.random() * 2) - 1;
+        else incorrectAnswerLength = randomizedAnswers.length * 2 + Math.floor(Math.random() * 2);
+
+        if(incorrectAnswerLength > deckMaxDefinitions.length) incorrectAnswerLength = deckMaxDefinitions.length;
+
+        while(randomizedAnswers.length < incorrectAnswerLength){
+            let randomAnswer = deck[Math.floor(Math.random() * deck.length)];
+            randomAnswer = randomAnswer.definitions[Math.floor(Math.random() * randomAnswer.definitions.length)];
+
+            let answerAlreadyThere = false;
+
+            for(let i = 0; i < randomizedAnswers.length; i++){
+                if(randomAnswer === randomizedAnswers[i][0]) answerAlreadyThere = true;
+            }
+
+            if(!answerAlreadyThere){
+                randomizedAnswers.push([randomAnswer, false])
+            }
         }
     }
 
@@ -315,8 +360,10 @@ function initializeMemorize(){
     indexesReviewed = [];
     indexesComplete = [];
     deckMaxDefinitions = [];
-    answeredQuestions = 0;
+    memorizeSettings = [];
+    answeredQuestions = -1;
     answeredCorrectly = 0;
+    currentQuestionIndex = 0;
 
     document.querySelectorAll('.active-memorize-item').forEach(function(element){
         element.classList.remove('active-memorize-item');
@@ -324,8 +371,15 @@ function initializeMemorize(){
 
     removeAllChildNodes(document.getElementById('desktop-memorize-badges'));
 
+    document.querySelectorAll(".desktop-memorize-setting-checkbox").forEach(function(element){
+        if(element.classList.contains("unchecked")) memorizeSettings.push(0);
+        else memorizeSettings.push(1);
+    });
+
     for(let i = 0; i < deck.length; i++){
-        indexesIncomplete.push(i)
+        if(document.querySelectorAll(".desktop-memorize-setting-checkbox")[1].classList.contains("unchecked")) indexesIncomplete.push(i);
+        else indexesReviewed.push(i);
+
         for(let j = 0; j < deck[i].definitions.length; j++){
             if(!deckMaxDefinitions.includes(deck[i].definitions[j])) deckMaxDefinitions.push(deck[i].definitions[j]);
         }
@@ -334,5 +388,8 @@ function initializeMemorize(){
 
     refreshMemorizePanel();
 
-    setupCard(Math.floor(Math.random() * indexesIncomplete.length + indexesReviewed.length));
+    /*if(document.querySelectorAll(".desktop-memorize-setting-checkbox")[1].classList.contains("unchecked")) setupCard(Math.floor(Math.random() * indexesIncomplete.length));
+    else setupWrite(Math.floor(Math.random() * indexesReviewed.length));*/
+
+    skipQuestion();
 }
