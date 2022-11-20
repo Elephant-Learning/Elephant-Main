@@ -1,5 +1,5 @@
 let correntAnswerNumber = 0;
-let indexesIncomplete, indexesReviewed, indexesComplete, memorizeWriteCorrectAnswers, deckMaxDefinitions, answeredQuestions, answeredCorrectly, currentQuestionIndex;
+let indexesIncomplete, indexesReviewed, indexesComplete, memorizeWriteCorrectAnswers, deckMaxDefinitions, answeredQuestions, answeredCorrectly, currentQuestionIndex, memorizeSettings;
 
 let unableToAnswer = false;
 
@@ -335,6 +335,7 @@ function initializeMemorize(){
     indexesReviewed = [];
     indexesComplete = [];
     deckMaxDefinitions = [];
+    memorizeSettings = [];
     answeredQuestions = 0;
     answeredCorrectly = 0;
     currentQuestionIndex = 0;
@@ -344,6 +345,11 @@ function initializeMemorize(){
     })
 
     removeAllChildNodes(document.getElementById('desktop-memorize-badges'));
+
+    document.querySelectorAll(".desktop-memorize-setting-checkbox").forEach(function(element){
+        if(element.classList.contains("unchecked")) memorizeSettings.push(0);
+        else memorizeSettings.push(1);
+    });
 
     for(let i = 0; i < deck.length; i++){
         indexesIncomplete.push(i)
