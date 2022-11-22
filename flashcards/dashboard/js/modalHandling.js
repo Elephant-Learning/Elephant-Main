@@ -14,6 +14,9 @@ async function search(){
     document.getElementById('desktop-navbar-input').blur();
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
 
+    document.getElementById("search-decks-para").innerHTML = "Decks"
+    document.getElementById("search-users-para").innerHTML = "Users"
+
     const deckResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/getByName?name=' + document.getElementById('desktop-navbar-input').value + '&userId=' + savedUserId, {
         method: 'GET',
         headers: {
@@ -41,9 +44,9 @@ async function search(){
 
     const userContext = await userResponse.json();
 
-    let userLikedDecks = userContext.context.user.likedDecksIds
-    let userSharedDecks = userContext.context.user.sharedDeckIds
-    let userFriends = userContext.context.user.friendIds
+    let userLikedDecks = userContext.context.user.likedDecksIds;
+    let userSharedDecks = userContext.context.user.sharedDeckIds;
+    let userFriends = userContext.context.user.friendIds;
     let decks = deckContext.context.decks;
 
     removeAllChildNodes(document.getElementById('search-results-flashcards'));
@@ -51,7 +54,24 @@ async function search(){
 
     togglePageFlip(3, undefined);
 
-    console.log(decks);
+    //console.log(decks);
+
+    const elephantUsersResponse = await fetch('https://elephant-rearend.herokuapp.com/login/userByName?name=' + document.getElementById('desktop-navbar-input').value + '&userId=' + savedUserId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    });
+
+    const elephantUsersContext = await elephantUsersResponse.json();
+    //console.log(elephantUsersContext);
+
+    document.getElementById("search-decks-para").innerHTML = "Decks - " + decks.length;
+    document.getElementById("search-users-para").innerHTML = "Users - " + elephantUsersContext.context.users.length;
 
     for(let i = 0; i < decks.length; i++){
         //if(decks[i].visibility === "PUBLIC" || userSharedDecks.includes(decks[i].id) || decks[i].authorId === savedUserId)
@@ -66,20 +86,6 @@ async function search(){
             search: true
         });
     }
-
-    const elephantUsersResponse = await fetch('https://elephant-rearend.herokuapp.com/login/userByName?name=' + document.getElementById('desktop-navbar-input').value + '&userId=' + savedUserId, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type'
-        },
-        mode: 'cors'
-    });
-
-    const elephantUsersContext = await elephantUsersResponse.json();
-    console.log(elephantUsersContext);
 
     for(let i = 0; i < elephantUsersContext.context.users.length; i++){
         if(!(elephantUsersContext.context.users[i].id === savedUserId)){
