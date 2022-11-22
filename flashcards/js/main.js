@@ -20,7 +20,7 @@ function toggleTheme(themeIndex){
     let root = document.querySelector(":root");
 
     if(themeIndex === 1){
-        root.style.setProperty('--text-color', 'white');
+        /*root.style.setProperty('--text-color', 'white');
         root.style.setProperty("--bg-color-1", "#25282d");
         root.style.setProperty("--bg-color-2", "#1a1b1e")
         root.style.setProperty("--light-border-color", "#2e3138");
@@ -31,6 +31,24 @@ function toggleTheme(themeIndex){
         root.style.setProperty("--hover-light", "#171717");
         root.style.setProperty("--image-invert", "0.75");
         root.style.setProperty("--light-accent", "#383a42");
+        root.style.setProperty("--primary-accent", "#e32b78");
+        root.style.setProperty("--primary-accent-gradient", "#b11074");
+        root.style.setProperty("--secondary-accent", "#0d87c5");
+        root.style.setProperty("--secondary-accent-gradient", "#27b4b9");
+        root.style.setProperty("--tertiary-accent", "#db7735");
+        root.style.setProperty("--tertiary-accent-gradient", "#d47d39");*/
+
+        root.style.setProperty('--text-color', 'white');
+        root.style.setProperty("--bg-color-1", "#161b22");
+        root.style.setProperty("--bg-color-2", "#0d1117")
+        root.style.setProperty("--light-border-color", "#21262d");
+        root.style.setProperty("--dark-border-color", "#21262d");
+        root.style.setProperty("--dark-gray", "black");
+        root.style.setProperty("--light-gray", "#010409");
+        root.style.setProperty("--hover-dark", "#16171a");
+        root.style.setProperty("--hover-light", "#171717");
+        root.style.setProperty("--image-invert", "0.75");
+        root.style.setProperty("--light-accent", "#30363d");
         root.style.setProperty("--primary-accent", "#e32b78");
         root.style.setProperty("--primary-accent-gradient", "#b11074");
         root.style.setProperty("--secondary-accent", "#0d87c5");

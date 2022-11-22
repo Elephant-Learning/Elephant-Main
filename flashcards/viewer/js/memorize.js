@@ -169,18 +169,23 @@ function skipQuestion(){
 
 function setupWrite(deckIndex){
     removeAllChildNodes(document.getElementById('desktop-memorize-definitions-list'));
-    document.getElementById('desktop-memorize-term').innerHTML = deck[deckIndex].term;
 
     memorizeWriteCorrectAnswers = [];
 
-    for(let i = 0; i < deck[deckIndex].definitions.length; i++){
-        memorizeWriteCorrectAnswers.push(deck[deckIndex].definitions[i].toLowerCase());
+    if(document.querySelectorAll(".desktop-memorize-setting-checkbox")[0].classList.contains("checked")){
+        let termString = toTitleCase(deck[deckIndex].definitions[0]);
+
+        for(let i = 1; i < deck[deckIndex].definitions.length; i++) termString += "; " + toTitleCase(deck[deckIndex].definitions[i]);
+        document.getElementById('desktop-memorize-term').innerHTML = termString;
+
+        memorizeWriteCorrectAnswers.push(deck[deckIndex].term.toLowerCase());
         correntAnswerNumber++;
 
         let newDiv = document.createElement('div');
         let newImgDiv = document.createElement('div');
         let newImg = document.createElement('img');
         let newInput = document.createElement('input');
+        let i = 0;
 
         newImgDiv.classList.add('shared');
         newImg.src = "./icons/minus.png"
@@ -268,6 +273,107 @@ function setupWrite(deckIndex){
         newDiv.classList.add('desktop-memorize-write');
 
         document.getElementById('desktop-memorize-definitions-list').appendChild(newDiv);
+
+
+    } else {
+        document.getElementById('desktop-memorize-term').innerHTML = deck[deckIndex].term;
+
+        for(let i = 0; i < deck[deckIndex].definitions.length; i++){
+            memorizeWriteCorrectAnswers.push(deck[deckIndex].definitions[i].toLowerCase());
+            correntAnswerNumber++;
+
+            let newDiv = document.createElement('div');
+            let newImgDiv = document.createElement('div');
+            let newImg = document.createElement('img');
+            let newInput = document.createElement('input');
+
+            newImgDiv.classList.add('shared');
+            newImg.src = "./icons/minus.png"
+            newImg.id = "desktop-memorize-write-img-" + i.toString();
+            newImgDiv.id = "desktop-memorize-write-img-div-" + i.toString();
+            newInput.id = "desktop-memorize-write-input-" + i.toString();
+            newInput.classList.add("desktop-memorize-write-input");
+
+            newInput.addEventListener('keypress', function(e){
+                if(e.key !== "Enter") return;
+                let inputValue = this.value.toLowerCase();
+
+                if(memorizeWriteCorrectAnswers.includes(inputValue)){
+                    let correct = true;
+
+                    document.querySelectorAll('.desktop-memorize-write-input').forEach(function(element){
+                        if(inputValue === element.value.toLowerCase()){
+                            let id = element.id.split('')
+                            id = id[id.length - 1];
+
+                            if(id != i) correct = false;
+                        }
+                    })
+
+                    if(correct){
+                        document.getElementById("desktop-memorize-write-img-div-" + i.toString()).className = "personal";
+                        document.getElementById("desktop-memorize-write-img-" + i.toString()).src = "./icons/correct.png";
+                        this.setAttribute('readonly', 'true');
+
+                        correntAnswerNumber--;
+                        if(correntAnswerNumber === 0){
+                            answeredQuestions++;
+                            answeredCorrectly++;
+
+                            setTimeout(function(){
+                                indexesReviewed.splice(indexesReviewed.indexOf(deckIndex), 1);
+                                indexesComplete.push(deckIndex);
+
+                                if(indexesReviewed.length === 0 && indexesIncomplete.length === 0){
+                                    refreshMemorizePanel();
+
+                                    setTimeout(function(){
+                                        const appreciations = ["Nice Work", "Great Work", "Great Job", "Awesome Stuff", "Congratulations", "Nice Job", "Good Stuff"];
+                                        //Badges index 0: level (1-3), name, condition
+
+                                        const badges = [
+                                            [3, "Scored over 50%", answeredCorrectly / answeredQuestions >= 0.5],
+                                            [2, "Scored over 80%", answeredCorrectly / answeredQuestions >= 0.8],
+                                            [1, "Scored 100%", answeredCorrectly / answeredQuestions === 1],
+                                        ]
+
+                                        for(let i = 0; i < badges.length; i++){
+                                            if(badges[i][2]) createBadge(badges[i][0], badges[i][1]);
+                                        }
+
+                                        document.getElementById('desktop-memorize-complete-header').innerHTML = appreciations[Math.floor(Math.random() * appreciations.length)]
+                                        document.getElementById('desktop-memorize-complete-text').innerHTML = "You answered " + answeredCorrectly + " questions correctly out of " + answeredQuestions + " questions!"
+                                        document.querySelector('.active-memorize-item').classList.remove('active-memorize-item');
+                                        document.getElementById('desktop-memorize-complete').classList.add('active-memorize-item');
+                                    }, 500)
+
+                                    return;
+                                }
+
+                                askMemorizeQuestion();
+                            }, 0);
+                        }
+                    } else {
+                        document.getElementById("desktop-memorize-write-img-div-" + i.toString()).className = "shared";
+                        document.getElementById("desktop-memorize-write-img-" + i.toString()).src = "./icons/minus.png";
+                    }
+                } else {
+                    document.getElementById("desktop-memorize-write-img-div-" + i.toString()).className = "community";
+                    document.getElementById("desktop-memorize-write-img-" + i.toString()).src = "./icons/wrong.png";
+                }
+
+                try{
+                    document.getElementById('desktop-memorize-write-input-' + (i + 1)).focus();
+                } catch (e){}
+            })
+
+            newImgDiv.appendChild(newImg);
+
+            newDiv.append(newImgDiv, newInput);
+            newDiv.classList.add('desktop-memorize-write');
+
+            document.getElementById('desktop-memorize-definitions-list').appendChild(newDiv);
+        }
     }
 
     document.getElementById('desktop-memorize-write-input-0').focus();
