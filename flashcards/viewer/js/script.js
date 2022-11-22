@@ -230,6 +230,9 @@ window.onload = async function(){
     if(savedUserId !== context.context.deck.authorId && !context.context.deck.sharedUsers.includes(savedUserId) && context.context.deck.visibility !== "PUBLIC") {
         location.href = "../dashboard";
         return;
+    } else if(savedUserId === context.context.deck.authorId){
+        document.getElementById('edit-btn').classList.remove("inactive-modal");
+        document.getElementById('edit-btn').setAttribute("href", "../editor/?deck=" + context.context.deck.id);
     }
 
     for(let i = 0; i < context.context.deck.name.length; i++){

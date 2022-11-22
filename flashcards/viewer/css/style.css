@@ -223,6 +223,15 @@
     display:none;
 }
 
+.prevent-select {
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -khtml-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+}
+
 #desktop-flashcard-container{
     width:calc(100vw - calc(var(--size) * 306px));
     height:calc(100vh - calc(var(--size) * 176px));
@@ -238,7 +247,7 @@
     text-align:center;
     cursor:pointer;
     border:1px solid var(--light-border-color);
-    transition-duration:250ms;
+    transition-duration:125ms;
 }
 
 #desktop-flashcard-container.flipped{

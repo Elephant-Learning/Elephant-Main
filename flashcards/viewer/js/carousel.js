@@ -12,7 +12,7 @@ function toggleFlashcardFlip(){
 
         document.getElementById('desktop-flashcard-container').classList.add('unflipped');
         document.getElementById('desktop-flashcard-container').classList.remove('flipped');
-    }, 250);
+    }, 125);
 }
 
 document.getElementById('desktop-flashcard-container').onclick = toggleFlashcardFlip;
@@ -29,10 +29,12 @@ function changeFlashcard(direction){
 
 function updateFlashcard(){
     document.getElementById('desktop-flashcard-main-header').innerHTML = deck[activeFlashcardCard].term;
+    document.getElementById('desktop-flashcard-main').classList.add("prevent-select");
     removeAllChildNodes(document.getElementById('desktop-flashcard-answers'));
     for(let i = 0; i < deck[activeFlashcardCard].definitions.length; i++){
         let newPara = document.createElement('p');
-        newPara.innerHTML = toTitleCase(deck[activeFlashcardCard].definitions[i]);
+        newPara.innerHTML = toTitleCase(deck[activeFlashcardCard].definitions[i])
+        newPara.classList.add("prevent-select");
         document.getElementById('desktop-flashcard-answers').appendChild(newPara);
     }
 

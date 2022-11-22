@@ -189,8 +189,8 @@
                 <div class="desktop-tab" id="deck-carousel">
                     <div id="desktop-flashcard-container" class="unflipped">
                         <div id="desktop-flashcard-main">
-                            <h1 id="desktop-flashcard-main-header"></h1>
-                            <div id="desktop-flashcard-answers"></div>
+                            <h1 id="desktop-flashcard-main-header" class="prevent-select"></h1>
+                            <div id="desktop-flashcard-answers" class="prevent-select"></div>
                         </div>
                     </div>
                     <div id="desktop-flashcard-options">
@@ -353,7 +353,10 @@
                 </div>
             </div>
             <div class="bottom-btns">
-                <a href="../dashboard" id="back-btn">
+                <a href="../editor/" id="edit-btn" class="inactive-modal">
+                    <img src="../editor/icons/edit.png" alt="">
+                </a>
+                <a href="../dashboard/" id="back-btn">
                     <img src="../icons/back.png" alt="">
                 </a>
             </div>
