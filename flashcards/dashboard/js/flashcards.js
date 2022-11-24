@@ -210,6 +210,7 @@ async function displayFlashcard(flashcardType, params){
                 cmOptions = [
                     ["view", "View Deck", "location.href = '../viewer/?deck=" + params.deckID + "'"],
                     ["../editor/icons/edit", "Edit Deck", "editFlashcard(" + params.deckID + ")"],
+                    ["history", "Remove From History", "removeHistory(" + params.deckID + ")"],
                     ["delete", "Delete Deck", "deleteDeck(" + params.deckID + ")"]
                 ]
             } else {
@@ -243,6 +244,10 @@ async function displayFlashcard(flashcardType, params){
     requestAnimationFrame(() => {
         mainDiv.classList.remove("faded-out")
     })
+}
+
+async function removeHistory(id){
+    
 }
 
 async function deleteDeck(id){

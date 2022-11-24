@@ -446,6 +446,7 @@ async function displayFlashcardsManager(user){
     for(let i = 0; i < user.elephantUserStatistics.recentlyViewedDeckIds.length; i++){
 
         let context;
+        let success = true;
 
         if(userDecks.includes(user.elephantUserStatistics.recentlyViewedDeckIds[i])){
             let deckIndex = userDecks.indexOf(user.elephantUserStatistics.recentlyViewedDeckIds[i]);
@@ -469,36 +470,46 @@ async function displayFlashcardsManager(user){
             });
 
             context = await response.json();
-            context = context.context.deck;
-        }
+            console.log(context);
 
-        if((document.getElementById('flashcards-view-sorting').value === "1" && context.authorId === user.id) || (document.getElementById('flashcards-view-sorting').value === "2" && user.sharedDeckIds.includes(context.id) || (document.getElementById('flashcards-view-sorting').value === "0"))){
-            if(context.authorId === user.id){
-                await displayFlashcard("flashcard", {
-                    name: context.name,
-                    author: context.authorId,
-                    authorName: user.firstName + " " + user.lastName,
-                    authorPfp: user.pfpId,
-                    type: context.visibility,
-                    deckID: context.id,
-                    favorite: user.likedDecksIds.includes(context.id),
-                    likesNumber: context.numberOfLikes,
-                    search: false
-                });
+            if(context.status === "SUCCESS"){
+                context = context.context.deck;
             } else {
-                await displayFlashcard("flashcard", {
-                    name: context.name,
-                    author: context.authorId,
-                    type: context.visibility,
-                    deckID: context.id,
-                    favorite: user.likedDecksIds.includes(context.id),
-                    likesNumber: context.numberOfLikes,
-                    search: false
-                });
+                success = false;
             }
         }
 
-        if(!document.getElementById('no-flashcards').classList.contains('inactive-modal')) document.getElementById('no-flashcards').classList.add('inactive-modal');
+        console.log(success);
+
+        if(success){
+            if((context !== undefined && document.getElementById('flashcards-view-sorting').value === "1" && context.authorId === user.id) || (document.getElementById('flashcards-view-sorting').value === "2" && user.sharedDeckIds.includes(context.id) || (document.getElementById('flashcards-view-sorting').value === "0"))){
+                if(context.authorId === user.id){
+                    await displayFlashcard("flashcard", {
+                        name: context.name,
+                        author: context.authorId,
+                        authorName: user.firstName + " " + user.lastName,
+                        authorPfp: user.pfpId,
+                        type: context.visibility,
+                        deckID: context.id,
+                        favorite: user.likedDecksIds.includes(context.id),
+                        likesNumber: context.numberOfLikes,
+                        search: false
+                    });
+                } else {
+                    await displayFlashcard("flashcard", {
+                        name: context.name,
+                        author: context.authorId,
+                        type: context.visibility,
+                        deckID: context.id,
+                        favorite: user.likedDecksIds.includes(context.id),
+                        likesNumber: context.numberOfLikes,
+                        search: false
+                    });
+                }
+            }
+
+            if(!document.getElementById('no-flashcards').classList.contains('inactive-modal')) document.getElementById('no-flashcards').classList.add('inactive-modal');
+        }
     }
 
     if(user.decks.length > deckShowAmount){
@@ -629,3 +640,10 @@ async function locateUserInfo(){
 }
 
 locateUserInfo()
+
+
+console.log(HtmlSanitizer.SanitizeHtml("<div><script>alert('xss!');</sc" + "ript>Something</div>"))
+
+
+htmlTExt = "<div><script>alert('xss!');</sc" + "ript>Something</div>"
+console.log(htmlTExt.replace(/(&lt;([^>]+)>)/gi, ""));
