@@ -17,7 +17,7 @@ async function search(){
     document.getElementById("search-decks-para").innerHTML = "Decks"
     document.getElementById("search-users-para").innerHTML = "Users"
 
-    const deckResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/getByName?name=' + document.getElementById('desktop-navbar-input').value + '&userId=' + savedUserId, {
+    const deckResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/getByName?name=' + document.getElementById('desktop-navbar-input').value + '&userId=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ async function search(){
     const deckContext = await deckResponse.json();
     console.log(deckContext);
 
-    const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+    const userResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ async function search(){
 
     //console.log(decks);
 
-    const elephantUsersResponse = await fetch('https://elephant-rearend.herokuapp.com/login/userByName?name=' + document.getElementById('desktop-navbar-input').value + '&userId=' + savedUserId, {
+    const elephantUsersResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/login/userByName?name=' + document.getElementById('desktop-navbar-input').value + '&userId=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -157,7 +157,7 @@ async function viewFolder(folderId, sidebarNum){
     removeAllChildNodes(document.getElementById('folder-flashcard-display'));
 
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
-    const response = await fetch('https://elephant-rearend.herokuapp.com/folder/get?id=' + folderId, {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/folder/get?id=' + folderId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -171,7 +171,7 @@ async function viewFolder(folderId, sidebarNum){
     const context = await response.json();
     console.log(context);
 
-    const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+    const userResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -188,7 +188,7 @@ async function viewFolder(folderId, sidebarNum){
 
     for(let i = 0; i < context.context.folder.deckIds.length; i++){
 
-        const flashcard = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + context.context.folder.deckIds[i], {
+        const flashcard = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/get?id=' + context.context.folder.deckIds[i], {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -218,7 +218,7 @@ async function viewFolder(folderId, sidebarNum){
 async function refreshFolders(){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
 
-    const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+    const userResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -234,7 +234,7 @@ async function refreshFolders(){
 }
 
 async function deleteFolder(folderId){
-    const response = await fetch('https://elephant-rearend.herokuapp.com/folder/delete?id=' + folderId, {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/folder/delete?id=' + folderId, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -349,7 +349,7 @@ async function toggleFolderModal(create){
     } else {
         if(create){
             const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
-            const response = await fetch('https://elephant-rearend.herokuapp.com/folder/create', {
+            const response = await fetch('https://elephantsuite-rearend.herokuapp.com/folder/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -368,7 +368,7 @@ async function toggleFolderModal(create){
             const context = await response.json();
             console.log(context);
 
-            const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+            const userResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -458,7 +458,7 @@ async function displayFlashcardsManager(user){
                 numberOfLikes: user.decks[deckIndex].numberOfLikes
             }
         } else {
-            const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + user.elephantUserStatistics.recentlyViewedDeckIds[i], {
+            const response = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/get?id=' + user.elephantUserStatistics.recentlyViewedDeckIds[i], {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -523,7 +523,7 @@ async function displayFlashcardsManager(user){
 
 async function refreshFlashcards(){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
-    const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -624,7 +624,7 @@ async function locateUserInfo(){
 
     if(!savedUserId  && savedUserId !== 0) location.href = "../../../login";
 
-    const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

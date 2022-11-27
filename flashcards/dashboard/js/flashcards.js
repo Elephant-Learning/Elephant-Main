@@ -70,7 +70,7 @@ async function displayFlashcard(flashcardType, params){
             authorText.innerHTML = params.authorName;
             authorImg.src = "../../icons/avatars/" + params.authorPfp + ".png";
         } else {
-            const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + params.author, {
+            const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + params.author, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -251,7 +251,7 @@ async function removeHistory(id){
 }
 
 async function deleteDeck(id){
-    const response = await fetch('https://elephant-rearend.herokuapp.com/deck/delete?id=' + id, {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/delete?id=' + id, {
         headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
@@ -281,7 +281,7 @@ async function favoriteDeck(elem, id, deck, author){
         elem.classList.remove('unloved');
         elem.classList.add('loved');
 
-        const deckLikeResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/like', {
+        const deckLikeResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/like', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -300,7 +300,7 @@ async function favoriteDeck(elem, id, deck, author){
 
         console.log(deckLikeContext);
 
-        /*const response = await fetch('https://elephant-rearend.herokuapp.com/notifications/sendLikedDeck', {
+        /*const response = await fetch('https://elephantsuite-rearend.herokuapp.com/notifications/sendLikedDeck', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -328,7 +328,7 @@ async function favoriteDeck(elem, id, deck, author){
         elem.classList.add('unloved');
         elem.classList.remove('loved')
 
-        const response = await fetch('https://elephant-rearend.herokuapp.com/deck/unlike', {
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/unlike', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

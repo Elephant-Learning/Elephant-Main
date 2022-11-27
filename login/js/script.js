@@ -142,7 +142,7 @@ document.getElementById('sign-up-btn-1').onclick = function(){
 async function resetPasswordEmail(){
     const email = document.getElementById('send-password-email').value;
 
-    const responseEmail = await fetch('https://elephant-rearend.herokuapp.com/login/userByEmail?email=' + email, {
+    const responseEmail = await fetch('https://elephantsuite-rearend.herokuapp.com/login/userByEmail?email=' + email, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ async function resetPasswordEmail(){
     document.getElementById('desktop-loading-modal').classList.add('inactive-modal');
 
     if(contentEmail.status === "SUCCESS"){
-        const responsePass = await fetch('https://elephant-rearend.herokuapp.com/password/sendEmail?id=' + contentEmail.context.user.id, {
+        const responsePass = await fetch('https://elephantsuite-rearend.herokuapp.com/password/sendEmail?id=' + contentEmail.context.user.id, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -188,7 +188,7 @@ async function resetPassword(resetPasswordToken){
     document.getElementById('desktop-loading-modal').classList.add('inactive-modal');
 
     if(password === document.getElementById('reset-password-2').value){
-        const response = await fetch('https://elephant-rearend.herokuapp.com/password/resetPassword', {
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/password/resetPassword', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -336,7 +336,7 @@ window.onload = async function(){
         console.log(splitted.split("=")[1]);
         document.getElementById('reset-password-btn').setAttribute('onclick', "resetPassword('" + splitted.split("=")[1] + "')")
     } if(splitted.split("=")[0] === "confirm"){
-        const confirmResponse = await fetch('https://elephant-rearend.herokuapp.com/registration/confirm?token=' + splitted.split("=")[1], {
+        const confirmResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/registration/confirm?token=' + splitted.split("=")[1], {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -371,7 +371,7 @@ async function signup(data){
 
     console.log(data);
 
-    const response = await fetch('https://elephant-rearend.herokuapp.com/registration', {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/registration', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -429,7 +429,7 @@ async function login(){
         "password": password
     }));
 
-    const response = await fetch('https://elephant-rearend.herokuapp.com/login', {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
