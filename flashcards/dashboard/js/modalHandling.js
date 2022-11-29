@@ -8,7 +8,7 @@ let history = [];
 
 let folderAmount = 0;
 
-const flashcardsVersion = "v1.0.0"
+const flashcardsVersion = "v1.0.0";
 
 async function search(){
     document.getElementById('desktop-navbar-input').blur();
@@ -622,4 +622,15 @@ async function locateUserInfo(){
     initialize(context)
 }
 
+<<<<<<< Updated upstream
 locateUserInfo()
+=======
+locateUserInfo();
+
+
+console.log(HtmlSanitizer.SanitizeHtml("<div><script>alert('xss!');</sc" + "ript>Something</div>"));
+
+
+htmlTExt = "<div><script>alert('xss!');</sc" + "ript>Something</div>"
+console.log(htmlTExt.replace(/(&lt;([^>]+)>)/gi, ""));
+>>>>>>> Stashed changes
