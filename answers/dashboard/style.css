@@ -1,0 +1,244 @@
+#desktop-main-container{
+    width:calc(100vw - calc(var(--size) * 256px));
+    height:calc(100vh - calc(var(--size) * 48px));
+}
+
+#desktop-main-container-tab{
+    font-size:calc(var(--size) * 12px);
+    width:calc(100% - var(--size) * 48px);
+    padding:calc(var(--size) * 14px) calc(var(--size) * 24px);
+    font-weight:600;
+    border-bottom:1px solid var(--light-border-color);
+    margin:0;
+    position:absolute;
+    top:0;
+}
+
+#desktop-answers-dashboard{
+    position:absolute;
+    top:calc(var(--size) * 44px);
+    left:calc(var(--size) * 256px);
+    width:calc(100vw - var(--size) * 256px);
+    height:calc(100vh - var(--size) * 92px);
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:flex-start;
+}
+
+#flashcards-main-options{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    flex-wrap:wrap;
+    gap:calc(var(--size) * 24px);
+    margin:calc(var(--size) * 24px);
+    width:calc(100vw - calc(var(--size) * 561px));
+}
+
+#desktop-answers-sidebar{
+    border-left:1px solid var(--light-border-color);
+    width:calc(var(--size) * 256px);
+    height:calc(100vh - var(--size) * 116px);
+    padding-top:calc(var(--size) * 24px);
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
+
+}
+
+#flashcards-main-options > div:not(.options-display){
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--light-border-color);
+    gap:calc(var(--size) * 18px);
+    padding:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 6px);
+    background:var(--bg-color-1);
+    transition-duration:250ms;
+    cursor:pointer;
+}
+
+#flashcards-main-options > div:not(.options-display):hover{
+    border:1px solid var(--primary-accent);
+}
+
+#flashcards-main-options > div:not(.options-display) > img:first-of-type{
+    height:calc(var(--size) * 30px);
+    filter:invert(1) brightness(var(--image-invert));
+}
+
+#flashcards-main-options > div:not(.options-display) > div > h1{
+    font-size:calc(var(--size) * 14px);
+    font-weight:600;
+    margin:0;
+    cursor:pointer;
+}
+
+#flashcards-main-options > div:not(.options-display) > div > p{
+    font-size:calc(var(--size) * 12px);
+    margin:0;
+    color:gray;
+    cursor:pointer;
+}
+
+#flashcards-main-options > div:not(.options-display) > img:last-of-type{
+    height:calc(var(--size) * 18px);
+    margin-left:calc(var(--size) * 18px);
+    filter:invert(1) brightness(var(--image-invert));
+}
+
+.options-display{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:var(--bg-color-1);
+    padding:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 6px);
+    border:1px solid var(--light-border-color);
+    transition-duration:250ms;
+    width:calc(var(--size) * 160px);
+    cursor:default;
+}
+
+.options-display > h1{
+    margin:0;
+    font-size:calc(var(--size) * 48px);
+}
+
+.options-display > p{
+    text-transform:uppercase;
+    font-size:calc(var(--size) * 10px);
+    margin:0;
+    color:gray;
+}
+
+.desktop-answers-sidebar-break{
+    width:calc(var(--size) * 208px);
+    height:1px;
+    background:var(--light-border-color);
+    margin: calc(var(--size) * 24px) 0;
+}
+
+#desktop-answers-sidebar > h1{
+    margin:0;
+    font-size:calc(var(--size) * 12px);
+}
+
+#desktop-answers-sidebar-list{
+    margin-top:calc(var(--size) * 24px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 12px);
+}
+
+.unanswered > div:nth-of-type(2){
+    background:var(--light-border-color);
+    color:gray;
+}
+
+.new-updates > div:nth-of-type(2){
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    color:white;
+}
+
+.resolved > div:nth-of-type(2){
+    background:linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient));
+    color:white;
+}
+
+.desktop-answers-sidebar-element{
+    background:var(--bg-color-1);
+    width:calc(var(--size) * 184px);
+    margin-right:calc(var(--size) * 12px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:calc(var(--size) * 6px);
+    border-radius:calc(var(--size) * 6px);
+    border:1px solid var(--bg-color-1);
+    padding: calc(var(--size) * 12px) calc(var(--size) * 12px) calc(var(--size) * 12px) 0;
+    cursor:pointer;
+    transition-duration:250ms;
+    position:relative;
+}
+
+.unanswered:hover, .unanswered:hover > div:last-of-type{
+    border:1px solid var(--light-border-color);
+}
+
+.new-updates:hover, .new-updates:hover > div:last-of-type{
+    border:1px solid var(--primary-accent);
+}
+
+.resolved:hover, .resolved:hover > div:last-of-type{
+    border:1px solid var(--secondary-accent);
+}
+
+.desktop-answers-sidebar-element > div:first-of-type{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 6px);
+    width:calc(var(--size) * 160px);
+}
+
+.desktop-answers-sidebar-element > div:first-of-type > img{
+    height:calc(var(--size) * 16px);
+    filter:invert(var(--image-invert));
+}
+
+.desktop-answers-sidebar-element > div:first-of-type > h1{
+    margin:0;
+    font-size:calc(var(--size) * 12px);
+    color:black;
+    filter:invert(1) brightness(var(--image-invert));
+}
+
+.desktop-answers-sidebar-element > div:nth-of-type(2){
+    text-transform:uppercase;
+    font-weight:700;
+    font-size:calc(var(--size) * 10px);
+    padding:calc(var(--size) * 4px) 0;
+    width:calc(var(--size) * 160px);
+    text-align:center;
+    border-radius:calc(var(--size) * 6px);
+}
+
+.desktop-answers-sidebar-element > div:last-of-type{
+    position:absolute;
+    height:calc(var(--size) * 36px);
+    padding:calc(var(--size) * 6px) 0;
+    width:calc(var(--size) * 24px);
+    background:var(--bg-color-1);
+    border:1px solid var(--bg-color-1);
+    right:calc(var(--size) * -12px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:space-between;
+    border-radius:calc(var(--size) * 6px);
+    cursor:default;
+    transition-duration:250ms;
+}
+
+.desktop-answers-sidebar-element > div:last-of-type > img{
+    width:calc(var(--size) * 16px);
+    filter:invert(0.5);
+    transition-duration:250ms;
+    cursor:pointer;
+}
+
+.desktop-answers-sidebar-element > div:last-of-type > img:hover{
+    transform:scale(1.1);
+}

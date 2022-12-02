@@ -533,7 +533,7 @@ async function displayFolders(user){
 async function initialize(user){
     if(user.status === "FAILURE" || user.error === "Bad Request") {
         location.href = "../../../login"
-    } else user = user.context.user
+    } else user = user.context.user;
 
     const emojis_refactored = ["confused", "cool", "happy", "laugh", "nerd", "neutral", "unamused", "uwu", "wink"];
 
@@ -622,15 +622,4 @@ async function locateUserInfo(){
     initialize(context)
 }
 
-<<<<<<< Updated upstream
-locateUserInfo()
-=======
 locateUserInfo();
-
-
-console.log(HtmlSanitizer.SanitizeHtml("<div><script>alert('xss!');</sc" + "ript>Something</div>"));
-
-
-htmlTExt = "<div><script>alert('xss!');</sc" + "ript>Something</div>"
-console.log(htmlTExt.replace(/(&lt;([^>]+)>)/gi, ""));
->>>>>>> Stashed changes
