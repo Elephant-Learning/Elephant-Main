@@ -7,7 +7,7 @@ async function toggleAvatarModal(){
         document.getElementById('desktop-avatar-container').classList.add('inactive-modal');
 
         const savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
-        const response = await fetch('https://elephant-rearend.herokuapp.com/misc/pfpid', {
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/misc/pfpid', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ async function initialize(user){
     document.getElementById('delete-acc-text').innerHTML = "You cannot undo this. By continuing, you'll lose " + user.friendIds.length + " friends and " + user.decks.length + " decks."
 
     for(let i = 0; i < user.friendIds.length; i++){
-        const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + user.friendIds[i], {
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + user.friendIds[i], {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -150,7 +150,7 @@ async function initialize(user){
 
 async function deleteAccount(){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
-    const response = await fetch('https://elephant-rearend.herokuapp.com/registration/delete', {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/registration/delete', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -180,7 +180,7 @@ async function deleteAccount(){
 async function locateUserInfo(){
     window.scrollTo(0, 0);
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
-    const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

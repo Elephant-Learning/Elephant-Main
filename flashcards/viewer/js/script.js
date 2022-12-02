@@ -44,7 +44,7 @@ function togglePageFlip(index, sidebar, link){
 async function addToBackpack(cardId){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
 
-    const response = await fetch('https://elephant-rearend.herokuapp.com/backpack/addCard', {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/backpack/addCard', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -213,7 +213,7 @@ window.onload = async function(){
 
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
 
-    const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + document.location.href.split("=")[1], {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/get?id=' + document.location.href.split("=")[1], {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -247,7 +247,7 @@ window.onload = async function(){
     else if(context.context.deck.visibility === "SHARED") document.getElementById('desktop-sidebar-deck-type').classList.add('shared');
     else if(context.context.deck.visibility === "PRIVATE") document.getElementById('desktop-sidebar-deck-type').classList.add('personal');
 
-    const recentDeckResponse = await fetch('https://elephant-rearend.herokuapp.com/statistics/recentlyViewedDecks', {
+    const recentDeckResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/statistics/recentlyViewedDecks', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -262,7 +262,7 @@ window.onload = async function(){
         mode: 'cors'
     });
 
-    const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + context.context.deck.authorId, {
+    const userResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + context.context.deck.authorId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -312,7 +312,7 @@ function initialize(user){
 
 async function locateUserInfo(){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
-    const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
