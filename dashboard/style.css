@@ -1,0 +1,15 @@
+#desktop-main-container{
+    width:calc(100vw - calc(var(--size) * 256px));
+    height:calc(100vh - calc(var(--size) * 48px));
+}
+
+#desktop-main-container-tab{
+    font-size:calc(var(--size) * 12px);
+    width:calc(100% - var(--size) * 48px);
+    padding:calc(var(--size) * 14px) calc(var(--size) * 24px);
+    font-weight:600;
+    border-bottom:1px solid var(--light-border-color);
+    margin:0;
+    position:absolute;
+    top:0;
+}

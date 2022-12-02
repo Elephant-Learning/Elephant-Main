@@ -613,6 +613,13 @@ function toggleFolderModal(){
     }
 }
 
+function nameCheck(){
+    if(document.getElementById('deck-name').textContent.replace(/\s/g, '') === "") document.getElementById('deck-name').style.background = "linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient))";
+    else document.getElementById('deck-name').style.background = "transparent";
+
+    console.log(document.getElementById('deck-name').textContent.replace(/\s/g, ''));
+}
+
 function isEqual(obj1, obj2) {
     let props1 = Object.getOwnPropertyNames(obj1);
     let props2 = Object.getOwnPropertyNames(obj2);
@@ -1017,6 +1024,24 @@ function refreshBackpack(user){
     }
 }
 
+function fix_onChange_editable_elements()
+{
+    var tags = document.querySelectorAll('[contenteditable=true][onChange]');//(requires FF 3.1+, Safari 3.1+, IE8+)
+    for (var i=tags.length-1; i>=0; i--) if (typeof(tags[i].onblur)!='function')
+    {
+        tags[i].onfocus = function()
+        {
+            this.data_orig=this.innerHTML;
+        };
+        tags[i].onblur = function()
+        {
+            if (this.innerHTML != this.data_orig)
+                this.onchange();
+            delete this.data_orig;
+        };
+    }
+}
+
 async function initialize(user){
 
     if(user.status === "FAILURE" || user.error === "Bad Request") {
@@ -1076,7 +1101,8 @@ async function locateUserInfo(){
     })
 
     const context = await response.json();
-    initialize(context)
+    fix_onChange_editable_elements();
+    await initialize(context)
 }
 
 locateUserInfo()

@@ -8,7 +8,7 @@ let history = [];
 
 let folderAmount = 0;
 
-const flashcardsVersion = "v1.0.0"
+const flashcardsVersion = "v1.0.0";
 
 async function search(){
     document.getElementById('desktop-navbar-input').blur();
@@ -550,7 +550,7 @@ async function displayFolders(user){
 async function initialize(user){
     if(user.status === "FAILURE" || user.error === "Bad Request") {
         location.href = "../../../login"
-    } else user = user.context.user
+    } else user = user.context.user;
 
     const emojis_refactored = ["confused", "cool", "happy", "laugh", "nerd", "neutral", "unamused", "uwu", "wink"];
 
@@ -639,7 +639,7 @@ async function locateUserInfo(){
     initialize(context)
 }
 
-locateUserInfo()
+locateUserInfo();
 
 
 console.log(HtmlSanitizer.SanitizeHtml("<div><script>alert('xss!');</sc" + "ript>Something</div>"))
