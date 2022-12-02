@@ -131,7 +131,7 @@
             <div id="editor-tools">
                 <div id="editor-tools-left">
                     <div id="deck-info-tools">
-                        <h1 contenteditable="true" id="deck-name" onclick=""></h1>
+                        <h1 contenteditable="true" id="deck-name" onclick="document.execCommand('selectAll',false,null)" onchange="nameCheck()"></h1>
                         <div class="deck-info-tools-option" onclick="document.getElementById('deck-name').focus(); document.execCommand('selectAll',false,null)">
                             <img src="./icons/edit.png" alt="Edit">
                         </div>
