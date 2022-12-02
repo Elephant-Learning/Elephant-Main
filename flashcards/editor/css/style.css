@@ -92,11 +92,13 @@ html {
     cursor:pointer;
     outline:none;
     font-weight:700;
+    min-width:calc(var(--size) * 64px);
     margin:0;
 }
 
 #deck-info-tools > h1:focus{
     cursor:text;
+    background:var(--light-border-color);
 }
 
 .deck-info-tools-option{
