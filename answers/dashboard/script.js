@@ -28,7 +28,7 @@ async function locateUserInfo(){
 
     if(!savedUserId  && savedUserId !== 0) location.href = "../../../login";
 
-    const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
