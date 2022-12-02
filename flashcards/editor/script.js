@@ -62,7 +62,7 @@ function copyPublishLink() {
 }
 
 async function publishDeck(){
-    const response = await fetch('https://elephant-rearend.herokuapp.com/deck/visibility', {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/visibility', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ async function publishDeck(){
 }
 
 async function unpublishDeck(){
-    const response = await fetch('https://elephant-rearend.herokuapp.com/deck/visibility', {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/visibility', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -113,7 +113,7 @@ async function removeSharedFriend(userId){
 
     console.log(editing);
 
-    const response = await fetch('https://elephant-rearend.herokuapp.com/deck/unshareDeck', {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/unshareDeck', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ async function removeSharedFriend(userId){
 
 async function deckToFolder(adding, folderId){
     if(adding){
-        await fetch('https://elephant-rearend.herokuapp.com/folder/addDeck', {
+        await fetch('https://elephantsuite-rearend.herokuapp.com/folder/addDeck', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -149,7 +149,7 @@ async function deckToFolder(adding, folderId){
             mode: 'cors'
         });
     } else {
-        await fetch('https://elephant-rearend.herokuapp.com/folder/removeDeck', {
+        await fetch('https://elephantsuite-rearend.herokuapp.com/folder/removeDeck', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -213,7 +213,7 @@ async function addSharedFriend(userId, init){
 
     if(userId === undefined) return;
 
-    const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + userId, {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + userId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -245,7 +245,7 @@ async function addSharedFriend(userId, init){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
     if(init === undefined){
 
-        const responseDeck = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + editing, {
+        const responseDeck = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/get?id=' + editing, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -259,7 +259,7 @@ async function addSharedFriend(userId, init){
         const contextDeck = await responseDeck.json();
 
         if(contextDeck.context.deck.visibility !== "SHARED"){
-            const response = await fetch('https://elephant-rearend.herokuapp.com/deck/visibility', {
+            const response = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/visibility', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -278,7 +278,7 @@ async function addSharedFriend(userId, init){
             toggleCardVisibility(context.context.deck.visibility);
         }
 
-        const response = await fetch('https://elephant-rearend.herokuapp.com/notifications/sendSharedDeck', {
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/notifications/sendSharedDeck', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -376,7 +376,7 @@ async function deleteBackpackCard(cardId, userId){
 
     console.log(cardId, userId);
 
-    const response = await fetch('https://elephant-rearend.herokuapp.com/backpack/removeCard', {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/backpack/removeCard', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -396,7 +396,7 @@ async function deleteBackpackCard(cardId, userId){
 
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
 
-    const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+    const userResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -663,7 +663,7 @@ async function leaveEditor(link){
         }
 
     } else {
-        const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + editing, {
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/get?id=' + editing, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -742,7 +742,7 @@ async function saveDeck(){
 
     if(errors.length === 0) {
         if(editing === undefined){
-            const response = await fetch('https://elephant-rearend.herokuapp.com/deck/create', {
+            const response = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -756,7 +756,7 @@ async function saveDeck(){
 
             const context = await response.json()
 
-            const recentDeckResponse = await fetch('https://elephant-rearend.herokuapp.com/statistics/recentlyViewedDecks', {
+            const recentDeckResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/statistics/recentlyViewedDecks', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -776,7 +776,7 @@ async function saveDeck(){
             enableRedirect = true;
             location.href = "../editor/?deck=" + context.context.deck.id;
         } else {
-            const nameResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/rename', {
+            const nameResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/rename', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -791,7 +791,7 @@ async function saveDeck(){
                 mode: 'cors'
             });
 
-            const termsResponse = await fetch('https://elephant-rearend.herokuapp.com/deck/resetTerms', {
+            const termsResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/resetTerms', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -806,7 +806,7 @@ async function saveDeck(){
                 mode: 'cors'
             });
 
-            const recentDeckResponse = await fetch('https://elephant-rearend.herokuapp.com/statistics/recentlyViewedDecks', {
+            const recentDeckResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/statistics/recentlyViewedDecks', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -885,7 +885,7 @@ async function refreshFolders(){
     removeAllChildNodes(document.getElementById('folder-list'));
 
     const savedUserId  = JSON.parse(localStorage.getItem('savedUserId'));
-    const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+    const userResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -911,7 +911,7 @@ async function checkForEditing(){
             document.getElementById('invite-btn').classList.remove('inactive-modal');
             document.getElementById('publish-btn').classList.remove('inactive-modal');
 
-            const response = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + document.location.href.split("=")[1], {
+            const response = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/get?id=' + document.location.href.split("=")[1], {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -934,7 +934,7 @@ async function checkForEditing(){
             editing = cards.id;
             document.getElementById('deck-name').innerHTML = cards.name;
 
-            const authorResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + cards.authorId, {
+            const authorResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + cards.authorId, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1064,7 +1064,7 @@ async function locateUserInfo(){
     }
 
     if(!savedUserId  && savedUserId !== 0) location.href = "../../login";
-    const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

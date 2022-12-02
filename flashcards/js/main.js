@@ -149,7 +149,7 @@ async function friendUser(friending, friendId, notificationId){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
 
     if(friending){
-        const friendingResponse = await fetch('https://elephant-rearend.herokuapp.com/friends/add', {
+        const friendingResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/friends/add', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -168,7 +168,7 @@ async function friendUser(friending, friendId, notificationId){
         console.log(friendingContext);
     }
 
-    const notificationDeletionResponse = await fetch('https://elephant-rearend.herokuapp.com/notifications/delete?id=' + notificationId, {
+    const notificationDeletionResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/notifications/delete?id=' + notificationId, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -182,7 +182,7 @@ async function friendUser(friending, friendId, notificationId){
     const notificationDeletionContext = await notificationDeletionResponse.json();
     console.log(notificationDeletionContext);
 
-    const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+    const userResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -204,7 +204,7 @@ async function toggleFriendingModal(send){
         document.getElementById('desktop-friending-modal').classList.remove('inactive-modal')
     } else {
         if(send){
-            const response = await fetch('https://elephant-rearend.herokuapp.com/login/userByEmail?email=' + document.getElementById('friending-input').value, {
+            const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/userByEmail?email=' + document.getElementById('friending-input').value, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -220,7 +220,7 @@ async function toggleFriendingModal(send){
 
             if(context.status === "SUCCESS"){
                 const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
-                const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+                const userResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -233,7 +233,7 @@ async function toggleFriendingModal(send){
 
                 const userContext = await userResponse.json();
 
-                const notificationResponse = await fetch('https://elephant-rearend.herokuapp.com/notifications/sendFriendRequest', {
+                const notificationResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/notifications/sendFriendRequest', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -265,7 +265,7 @@ function removeAllChildNodes(parent) {
 
 async function refreshNotifications(){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
-    const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -313,7 +313,7 @@ async function notificationsManager(user){
     for(let i = 0; i < user.notifications.length; i++){
         if(user.notifications[i].type === "FRIEND_REQUEST"){
             try{
-                const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + user.notifications[i].senderId, {
+                const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + user.notifications[i].senderId, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -338,7 +338,7 @@ async function notificationsManager(user){
             }
         } else if(user.notifications[i].type === "SHARED_DECK"){
             try{
-                const responseCreator = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + user.notifications[i].senderId, {
+                const responseCreator = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + user.notifications[i].senderId, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -351,7 +351,7 @@ async function notificationsManager(user){
 
                 const contextCreator = await responseCreator.json();
 
-                const responseDeck = await fetch('https://elephant-rearend.herokuapp.com/deck/get?id=' + user.notifications[i].deckId, {
+                const responseDeck = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/get?id=' + user.notifications[i].deckId, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -419,7 +419,7 @@ async function addDeckShared(deckID, adding, notificationId){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
 
     if(adding){
-        const response = await fetch('https://elephant-rearend.herokuapp.com/deck/shareDeck', {
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/shareDeck', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -438,7 +438,7 @@ async function addDeckShared(deckID, adding, notificationId){
         console.log(context);
     }
 
-    const notificationDeletionResponse = await fetch('https://elephant-rearend.herokuapp.com/notifications/delete?id=' + notificationId, {
+    const notificationDeletionResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/notifications/delete?id=' + notificationId, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -455,7 +455,7 @@ async function addDeckShared(deckID, adding, notificationId){
     if(adding){
         location.href = "../viewer/?deck=" + deckID;
     } else {
-        const userResponse = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+        const userResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
