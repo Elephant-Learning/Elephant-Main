@@ -3,6 +3,43 @@
     height:calc(100vh - calc(var(--size) * 48px));
 }
 
+#desktop-bottom-buttons{
+    position:absolute;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:calc(var(--size) * 12px);
+    bottom:calc(var(--size) * 12px);
+    right:calc(var(--size) * 12px);
+}
+
+.desktop-bottom-btn{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    background:var(--dark-gray);
+    width:calc(var(--size) * 36px);
+    height:calc(var(--size) * 36px);
+    border-radius:50%;
+    cursor:pointer;
+    transition-duration:250ms;
+}
+
+.desktop-bottom-btn:not(.inactive-modal){
+    opacity:1;
+    visibility:visible;
+}
+
+.desktop-bottom-btn > img{
+    height:calc(var(--size) * 20px);
+    filter:invert(1);
+}
+
+.desktop-bottom-btn:hover{
+    box-shadow:0 0 calc(var(--size) * 6px) 0 var(--dark-gray);
+}
+
 #desktop-main-container-tab{
     font-size:calc(var(--size) * 12px);
     width:calc(100% - var(--size) * 48px);
@@ -172,16 +209,8 @@
     position:relative;
 }
 
-.unanswered:hover, .unanswered:hover > div:last-of-type{
-    border:1px solid var(--light-border-color);
-}
-
-.new-updates:hover, .new-updates:hover > div:last-of-type{
-    border:1px solid var(--primary-accent);
-}
-
-.resolved:hover, .resolved:hover > div:last-of-type{
-    border:1px solid var(--secondary-accent);
+.desktop-answers-sidebar-element:hover, .desktop-answers-sidebar-element:hover > div:last-of-type{
+    box-shadow:0 0 calc(var(--size) * 6px) 0 var(--light-border-color);
 }
 
 .desktop-answers-sidebar-element > div:first-of-type{
@@ -203,6 +232,9 @@
     font-size:calc(var(--size) * 12px);
     color:black;
     filter:invert(1) brightness(var(--image-invert));
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
 }
 
 .desktop-answers-sidebar-element > div:nth-of-type(2){

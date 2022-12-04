@@ -1,0 +1,172 @@
+#desktop-parent-container{
+    width:100vw;
+    height:calc(100vh - calc(var(--size) * 48px));
+    background:blue;
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:flex-start;
+}
+
+#desktop-bottom-buttons{
+    position:absolute;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:calc(var(--size) * 12px);
+    bottom:calc(var(--size) * 12px);
+    right:calc(var(--size) * 12px);
+}
+
+.desktop-bottom-btn{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    background:var(--dark-gray);
+    width:calc(var(--size) * 36px);
+    height:calc(var(--size) * 36px);
+    border-radius:50%;
+    cursor:pointer;
+    transition-duration:250ms;
+}
+
+.desktop-bottom-btn:not(.inactive-modal){
+    opacity:1;
+    visibility:visible;
+}
+
+.desktop-bottom-btn > img{
+    height:calc(var(--size) * 20px);
+    filter:invert(1);
+}
+
+.desktop-bottom-btn:hover{
+    box-shadow:0 0 calc(var(--size) * 6px) 0 var(--dark-gray);
+}
+
+#editor-tools{
+    width:calc(var(--size) * 256px);
+    padding:calc(var(--size) * 24px);
+    background:var(--bg-color-1);
+    border-left:1px solid var(--light-border-color);
+    height:calc(100% - var(--size) * 48px);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 12px);
+}
+
+#editor-tools > h1{
+    font-size:calc(var(--size) * 12px);
+    margin:0;
+}
+
+#editor-tools > h2{
+    font-size:calc(var(--size) * 12px);
+    color:gray;
+    margin:0;
+}
+
+#editor-add-text-panel, #editor-add-style-panel, #editor-add-lists-panel, #editor-add-tools-panel{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 12px);
+    width:100%;
+    flex-wrap:wrap;
+}
+
+#editor-add-text-panel > div, #editor-add-style-panel > div{
+    width:calc(var(--size) * 48px);
+}
+
+#editor-add-lists-panel > div, #editor-add-tools-panel > div{
+    padding:0 calc(var(--size) * 24px);
+}
+
+#editor-add-text-panel > div, #editor-add-style-panel > div, #editor-add-lists-panel > div, #editor-add-tools-panel > div{
+    border:1px solid var(--light-border-color);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    height:calc(var(--size) * 36px);
+    border-radius:calc(var(--size) * 6px);
+    font-weight:700;
+    font-size:calc(var(--size) * 12px);
+    gap:calc(var(--size) * 6px);
+    cursor:pointer;
+    transition-duration:250ms;
+}
+
+#editor-add-text-panel > .active, #editor-add-style-panel > .active, #editor-add-lists-panel > .active, #editor-add-tools-panel > .active{
+    background:var(--bg-color-2);
+}
+
+#editor-add-lists-panel > div > img, #editor-add-tools-panel > div > img{
+    height:calc(var(--size) * 16px);
+}
+
+#question-panel{
+    width:calc(100vw - var(--size) * 355px);
+    margin: calc(var(--size) * 24px) calc(var(--size) * 24px) 0;
+    padding: calc(var(--size) * 24px) calc(var(--size) * 24px) 0;
+    height:calc(100% - var(--size) * 49px);
+    background:var(--bg-color-1);
+    border-radius:calc(var(--size) * 12px);
+    border:1px solid var(--light-border-color);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 24px);
+    border-bottom:none;
+}
+
+#question-header{
+    margin:0;
+    font-size:calc(var(--size) * 24px);
+    outline:none;
+    cursor:text;
+    padding-bottom:calc(var(--size) * 12px);
+    border-bottom:1px solid var(--light-border-color);
+    width:100%;
+}
+
+#question-text-editor{
+    outline:none;
+    border:1px solid var(--light-border-color);
+    border-radius:calc(var(--size) * 12px);
+    height:calc(100% - var(--size) * 84px);
+    padding:calc(var(--size) * 12px);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 12px);
+    width:calc(100% - var(--size) * 24px);
+}
+
+#question-text-editor > *{
+    margin:0;
+}
+
+#question-text-editor > h1{
+    font-size:calc(var(--size) * 14px);
+}
+
+#question-text-editor > h2{
+    font-size:calc(var(--size) * 12px);
+}
+
+#question-text-editor > h3{
+    font-size:calc(var(--size) * 10px);
+}
+
+#question-text-editor > p{
+    font-size:calc(var(--size) * 12px);
+    color:gray;
+}

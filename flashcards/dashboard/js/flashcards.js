@@ -56,16 +56,7 @@ async function displayFlashcard(flashcardType, params){
     let authorImg = document.createElement('img');
     let authorText = document.createElement('p');
 
-    let testSpace = document.getElementById('flashcards-display-test');
     if(flashcardType === "flashcard" || flashcardType === "folder"){
-        for(let i = 0; i < params.name.length; i++){
-            testSpace.innerHTML = params.name.substring(0, i);
-            if(testSpace.clientWidth > 180) {
-                params.name = params.name.substring(0, i - 1) + "...";
-                break;
-            }
-        }
-
         if(params.authorName !== undefined && params.authorPfp !== undefined){
             authorText.innerHTML = params.authorName;
             authorImg.src = "../../icons/avatars/" + params.authorPfp + ".png";
@@ -90,14 +81,6 @@ async function displayFlashcard(flashcardType, params){
         nameText.innerHTML = params.name
         authorDiv.append(authorImg, authorText);
     } else if(flashcardType === "user") {
-        for(let i = 0; i < params.name.length; i++){
-            testSpace.innerHTML = params.name.substring(0, i);
-            if(testSpace.clientWidth > 180) {
-                params.name = params.name.substring(0, i - 1) + "...";
-                break;
-            }
-        }
-
         nameText.innerHTML = params.name;
         authorText.innerHTML = params.email;
         authorDiv.appendChild(authorText);

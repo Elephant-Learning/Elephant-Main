@@ -21,7 +21,7 @@ async function initialize(user){
 async function locateUserInfo(){
     window.scrollTo(0, 0);
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
-    const response = await fetch('https://elephant-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

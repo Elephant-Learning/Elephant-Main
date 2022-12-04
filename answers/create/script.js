@@ -1,3 +1,32 @@
+function functionNameCuzIMTOOLAZY(elementSearch){
+    let elements = ['p', 'h1', 'h2', 'h3'];
+
+    console.log(elementSearch);
+
+    document.querySelectorAll('.text-element-btn').forEach(function(element){
+        if(element.classList.contains("active")) element.classList.remove('active');
+    })
+
+    document.querySelectorAll('.text-element-btn')[elements.indexOf(elementSearch)].classList.add('active');
+}
+
+function addElementToEditor(elementType){
+    let newElement = document.createElement(elementType);
+    newElement.innerHTML = "Su madre";
+
+    newElement.setAttribute("onclick", "functionNameCuzIMTOOLAZY('" + elementType + "')")
+
+    document.getElementById('question-text-editor').appendChild(newElement);
+}
+
+function leaveEditor(){
+    location.href = "../dashboard";
+}
+
+function askQuestion(){
+
+}
+
 async function initialize(user){
     if(user.status === "FAILURE" || user.error === "Bad Request") {
         location.href = "../../../login"
@@ -5,10 +34,6 @@ async function initialize(user){
     console.log(user);
 
     const emojis_refactored = ["confused", "cool", "happy", "laugh", "nerd", "neutral", "unamused", "uwu", "wink"];
-
-    if(user.type !== "EMPLOYEE"){
-        document.getElementById('desktop-sidebar-employee').classList.add('inactive-modal')
-    }
 
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png";
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;

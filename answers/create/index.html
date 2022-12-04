@@ -15,12 +15,12 @@
     <div id="desktop-container">
         <div id="desktop-navbar">
             <div id="desktop-main-image">
-                <div onclick="leaveEditor('../dashboard')"><img src="../../icons/elephant-400-400-white.png" alt="Elephant Logo"></div>
+                <div onclick="leaveEditor('../dashboard')"><img src="../../icons/elephant-answers-3.png" alt="Elephant Logo"></div>
             </div>
-            <div id="desktop-input-div">
+            <!--<div id="desktop-input-div">
                 <img src="../../flashcards/icons/search.png" alt="Search" id="desktop-input-img">
                 <input type="text" id="desktop-navbar-input" placeholder="Search Decks, Users, Classrooms">
-            </div>
+            </div>-->
             <div id="desktop-navbar-right">
                 <!--<div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
                     <img src="../icons/music.png" alt="Notifications">
@@ -97,7 +97,58 @@
             </div>
         </div>
         <div id="desktop-parent-container">
-            
+            <div id="question-panel">
+                <h1 id="question-header" contenteditable="true">Question Title</h1>
+                <div id="question-text-editor" contenteditable="true">
+                    <p>Cringe</p>
+                </div>
+            </div>
+            <div id="editor-tools">
+                <h1>Editor Tools</h1>
+                <h2>Text Styles</h2>
+                <div id="editor-add-text-panel">
+                    <div onclick="addElementToEditor('p');" class="text-element-btn">P</div>
+                    <div onclick="addElementToEditor('h1');" class="text-element-btn">H1</div>
+                    <div onclick="addElementToEditor('h2');" class="text-element-btn">H2</div>
+                    <div onclick="addElementToEditor('h3');" class="text-element-btn">H3</div>
+                </div>
+                <h2>Text Decorations</h2>
+                <div id="editor-add-style-panel">
+                    <div style="font-weight:900;" class="active">B</div>
+                    <div style="font-style:italic;">I</div>
+                    <div style="text-decoration:underline;">U</div>
+                </div>
+                <h2>Lists</h2>
+                <div id="editor-add-lists-panel">
+                    <div>
+                        <img src="./icons/unordered-list.png" alt="">
+                        <p>Bulleted List</p>
+                    </div>
+                    <div>
+                        <img src="./icons/ordered-list.png" alt="">
+                        <p>Numbered List</p>
+                    </div>
+                </div>
+                <h2>Additional Tools</h2>
+                <div id="editor-add-tools-panel">
+                    <div>
+                        <img src="./icons/link.png" alt="">
+                        <p>Link</p>
+                    </div>
+                    <div>
+                        <img src="./icons/code.png" alt="">
+                        <p>Code</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="desktop-bottom-buttons">
+            <div class="desktop-bottom-btn" onclick="askQuestion();">
+                <img src="../../flashcards/editor/icons/save.png" alt="">
+            </div>
+            <div class="desktop-bottom-btn" onclick="leaveEditor();">
+                <img src="../../flashcards/icons/back.png" alt="">
+            </div>
         </div>
     </div>
 </body>
