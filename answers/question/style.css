@@ -1,0 +1,46 @@
+#desktop-parent-container{
+    width:100vw;
+    height:calc(100vh - calc(var(--size) * 48px));
+    background:blue;
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:flex-start;
+}
+
+#desktop-bottom-buttons{
+    position:absolute;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:calc(var(--size) * 12px);
+    bottom:calc(var(--size) * 12px);
+    right:calc(var(--size) * 12px);
+}
+
+.desktop-bottom-btn{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    background:var(--dark-gray);
+    width:calc(var(--size) * 36px);
+    height:calc(var(--size) * 36px);
+    border-radius:50%;
+    cursor:pointer;
+    transition-duration:250ms;
+}
+
+.desktop-bottom-btn:not(.inactive-modal){
+    opacity:1;
+    visibility:visible;
+}
+
+.desktop-bottom-btn > img{
+    height:calc(var(--size) * 20px);
+    filter:invert(1);
+}
+
+.desktop-bottom-btn:hover{
+    box-shadow:0 0 calc(var(--size) * 6px) 0 var(--dark-gray);
+}

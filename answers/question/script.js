@@ -1,32 +1,3 @@
-function addElement(elementSearch){
-    let elements = ['p', 'h1', 'h2', 'h3'];
-
-    console.log(elementSearch);
-
-    document.querySelectorAll('.text-element-btn').forEach(function(element){
-        if(element.classList.contains("active")) element.classList.remove('active');
-    })
-
-    document.querySelectorAll('.text-element-btn')[elements.indexOf(elementSearch)].classList.add('active');
-}
-
-function addElementToEditor(elementType){
-    let newElement = document.createElement(elementType);
-    newElement.innerHTML = "Su madre";
-
-    newElement.setAttribute("onclick", "addElement('" + elementType + "')")
-
-    document.getElementById('question-text-editor').appendChild(newElement);
-}
-
-function leaveEditor(){
-    location.href = "../dashboard";
-}
-
-function askQuestion(){
-
-}
-
 async function initialize(user){
     if(user.status === "FAILURE" || user.error === "Bad Request") {
         location.href = "../../../login"
