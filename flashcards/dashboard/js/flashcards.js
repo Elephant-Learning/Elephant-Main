@@ -206,11 +206,11 @@ async function displayFlashcard(flashcardType, params){
 
             let cmOptions = []
 
-            if(params.author === savedUserId){
+            if(params.author === savedUserId || admin == true){
                 cmOptions = [
                     ["view", "View Deck", "location.href = '../viewer/?deck=" + params.deckID + "'"],
                     ["../editor/icons/edit", "Edit Deck", "editFlashcard(" + params.deckID + ")"],
-                    ["history", "Remove From History", "removeHistory(" + params.deckID + ")"],
+                    //["history", "Remove From History", "removeHistory(" + params.deckID + ")"],
                     ["delete", "Delete Deck", "deleteDeck(" + params.deckID + ")"]
                 ]
             } else {
