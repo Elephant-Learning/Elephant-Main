@@ -431,6 +431,11 @@ function min(num1, num2){
     else return num1
 }
 
+function displayMoreFlashcards(){
+    deckShowAmount += 10;
+    refreshFlashcards();
+}
+
 async function displayFlashcardsManager(user){
 
     let ele = document.getElementById('flashcards-list');
@@ -444,7 +449,7 @@ async function displayFlashcardsManager(user){
         userDecks.push(user.decks[i].id);
     }
 
-    for(let i = 0; i < user.elephantUserStatistics.recentlyViewedDeckIds.length; i++){
+    for(let i = 0; i < min(user.elephantUserStatistics.recentlyViewedDeckIds.length, deckShowAmount + 1); i++){
 
         let context;
         let success = true;
@@ -513,7 +518,7 @@ async function displayFlashcardsManager(user){
         }
     }
 
-    if(user.decks.length > deckShowAmount){
+    if(user.elephantUserStatistics.recentlyViewedDeckIds.length > deckShowAmount){
         let newBtn = document.createElement('button');
         newBtn.innerHTML = "Show More";
         newBtn.setAttribute("onclick", "displayMoreFlashcards()");
