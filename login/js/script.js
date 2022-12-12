@@ -38,22 +38,33 @@ function updateLocationResults(){
         if(COUNTRY_LIST[i].includes(toTitleCase(document.getElementById('desktop-location-input').value))) filteredCountries.push(i)
     }
 
-    for(let i = 0; i < filteredCountries.length; i++){
+    if(filteredCountries.length == 0){
         let newDiv = document.createElement('div');
-        let newImg = document.createElement('img');
         let newPara = document.createElement('p');
+        newPara.innerHTML = "No Countries Found";
 
-        newImg.src = "./icons/country.png";
-        newPara.innerHTML = COUNTRY_LIST[filteredCountries[i]];
-
-        newDiv.append(newImg, newPara);
-
-        newDiv.addEventListener('click', function(e){
-            this.remove();
-            selectCountries(filteredCountries[i])
-        })
+        newDiv.appendChild(newPara);
+        newDiv.classList.add("no-countries");
 
         document.getElementById('desktop-location-results').appendChild(newDiv);
+    } else {
+        for(let i = 0; i < filteredCountries.length; i++){
+            let newDiv = document.createElement('div');
+            let newImg = document.createElement('img');
+            let newPara = document.createElement('p');
+
+            newImg.src = "./icons/country.png";
+            newPara.innerHTML = COUNTRY_LIST[filteredCountries[i]];
+
+            newDiv.append(newImg, newPara);
+
+            newDiv.addEventListener('click', function(e){
+                this.remove();
+                selectCountries(filteredCountries[i])
+            })
+
+            document.getElementById('desktop-location-results').appendChild(newDiv);
+        }
     }
 }
 
