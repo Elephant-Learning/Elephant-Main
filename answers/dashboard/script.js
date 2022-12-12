@@ -33,6 +33,41 @@ function createUserQuestion(title, status, id){
     document.getElementById('desktop-answers-sidebar-list').appendChild(newDiv);
 }
 
+function elemClicked(index){
+    if(document.querySelectorAll('.answers-elem')[index].classList.contains('active-answers-elem')){
+        console.log("wow")
+    } else {
+        try{document.querySelector('.active-answers-elem').classList.remove('active-answers-elem')} catch(e){console.log(e)}
+        document.querySelectorAll('.answers-elem')[index].classList.add("active-answers-elem");
+    }
+}
+
+function createQuestion(name, tagsList, dateModified){
+    let newDiv = document.createElement('div');
+    newDiv.classList.add("answers-elem");
+    newDiv.setAttribute("onclick", "elemClicked(" + document.querySelectorAll('.answers-elem').length + ")")
+
+    let newImg = document.createElement('img');
+    let newHeader = document.createElement('h1');
+
+    newImg.setAttribute('src', "../icons/answers.png");
+    newHeader.innerHTML = name;
+
+    let newTagsDiv = document.createElement('div');
+
+    for(let i = 0; i < tagsList.length; i++){
+        let newPara = document.createElement('p');
+        newPara.innerHTML = tags[tagsList[i]];
+        newTagsDiv.appendChild(newPara);
+    }
+
+    let datePara = document.createElement('p');
+    datePara.innerHTML = dateModified
+
+    newDiv.append(newImg, newHeader, newTagsDiv, datePara);
+    document.getElementById('answers-list').appendChild(newDiv);
+}
+
 async function initialize(user){
     if(user.status === "FAILURE" || user.error === "Bad Request") {
         location.href = "../../../login"
@@ -53,6 +88,13 @@ async function initialize(user){
     createUserQuestion("Why is Napoleon respected in French History", 0, 0);
     createUserQuestion("How to calculate the derivative of an equation?", 1, 1);
     createUserQuestion("How to program using DrawingPanel", 2, 2);
+
+    createQuestion("Why did the chicken cross the road?", [2,3,5,6], "2 Weeks Ago");
+    createQuestion("Why did your mother sleep with my dad?", [2,5,6], "2 Weeks Ago");
+    createQuestion("How to add two letters?", [2,4,6], "2 Weeks Ago");
+    createQuestion("How to write a good question title?", [1,3,4,5], "2 Weeks Ago");
+    createQuestion("Will making marijuana illegal solve the drug issues America is facing?", [1,3,4], "2 Weeks Ago");
+
 }
 
 async function locateUserInfo(){

@@ -274,3 +274,111 @@
 .desktop-answers-sidebar-element > div:last-of-type > img:hover{
     transform:scale(1.1);
 }
+
+#answers-list-container{
+    width:calc(100vw - var(--size) * 304px);
+    height:calc(100vh - var(--size) * 222px);
+    padding-left:calc(var(--size) * 24px);
+    padding-right:calc(var(--size) * 24px);
+}
+
+
+#answers-list-headers{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    position:relative;
+    width:100%;
+    background:blue;
+}
+
+#answers-list-headers > p:first-of-type{
+    left:calc(var(--size) * 24px);
+}
+
+#answers-list-headers > p:nth-of-type(2){
+    right:calc(33% + var(--size) * 100px);
+}
+
+#answers-list-headers > p:last-of-type{
+    right:calc(var(--size) * 24px);
+}
+
+#answers-list-headers > p{
+    font-size:calc(var(--size) * 12px);
+    position:absolute;
+    margin:0;
+    color:gray;
+}
+
+#answers-list{
+    display:flex;
+    flex-direction:column;
+}
+
+#answers-list > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    position:relative;
+    top:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 6px);
+    height:calc(var(--size) * 42px);
+}
+
+.answers-elem{
+    cursor:default !important;
+}
+
+.active-answers-elem{
+    cursor:pointer !important;
+}
+
+.active-answers-elem{
+    background:var(--light-accent);
+}
+
+#answers-list > div > img{
+    position:absolute;
+    left:calc(var(--size) * 12px);
+    width:calc(var(--size) * 16px);
+}
+
+#answers-list > div > h1{
+    position:absolute;
+    left:calc(var(--size) * 36px);
+    width:calc(67% - var(--size) * 48px);
+    margin:0;
+    font-size:calc(var(--size) * 14px);
+    font-weight:500;
+}
+
+#answers-list > div > div{
+    position:absolute;
+    right:calc(var(--size) * 128px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:calc(var(--size) * 6px);
+    overflow-x:hidden;
+    width:33%;
+}
+
+#answers-list > div > div > p{
+    font-size:calc(var(--size) * 10px);
+    padding:calc(var(--size) * 2px) calc(var(--size) * 6px);
+    flex-shrink:0;
+    border:1px solid var(--light-border-color);
+    border-radius:calc(var(--size) * 6px);
+    background:var(--light-gray);
+    margin:0;
+    color:white;
+}
+
+#answers-list > div > p{
+    margin:0;
+    position:absolute;
+    right:calc(var(--size) * 12px);
+    font-size:calc(var(--size) * 12px);
+    font-weight:600;
+}

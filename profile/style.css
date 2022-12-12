@@ -346,6 +346,8 @@
 #my-profile-misc{
     display:flex;
     flex-direction:row;
+    align-items: flex-start;
+    justify-content:flex-start;
     gap:calc(var(--size) * 24px);
     margin-top:calc(var(--size) * 24px);
 }
@@ -358,6 +360,7 @@
     display:flex;
     flex-direction:column;
     gap:calc(var(--size) * 6px);
+    flex-shrink:0;
     height:auto;
 }
 
