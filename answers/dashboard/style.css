@@ -57,328 +57,187 @@
     left:calc(var(--size) * 256px);
     width:calc(100vw - var(--size) * 256px);
     height:calc(100vh - var(--size) * 92px);
+    overflow-y:scroll !important;
+    overflow-x:hidden;
     display:flex;
     flex-direction:row;
     align-items:flex-start;
     justify-content:flex-start;
 }
 
-#flashcards-main-options{
+#desktop-answers-main{
+    width:calc(100% - var(--size) * 328px);
     display:flex;
-    flex-direction:row;
+    flex-direction:column;
     align-items:center;
     justify-content:flex-start;
-    flex-wrap:wrap;
     gap:calc(var(--size) * 24px);
-    margin:calc(var(--size) * 24px);
-    width:calc(100vw - calc(var(--size) * 561px));
+    padding: calc(var(--size) * 24px) calc(var(--size) * 12px) calc(var(--size) * 24px) calc(var(--size) * 24px);
 }
 
 #desktop-answers-sidebar{
-    border-left:1px solid var(--light-border-color);
     width:calc(var(--size) * 256px);
-    height:calc(100vh - var(--size) * 116px);
-    padding-top:calc(var(--size) * 24px);
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
-    align-items:center;
-
+    height:calc(100% - var(--size) * 48px);
+    padding: calc(var(--size) * 24px) calc(var(--size) * 24px) calc(var(--size) * 24px) calc(var(--size) * 12px);
+    position:sticky;
+    top:0;
 }
 
-#flashcards-main-options > div:not(.options-display){
+#ask-new-btn{
+    background:var(--bg-color-1);
+    cursor:pointer;
+    border-radius:calc(var(--size) * 6px);
     display:flex;
     flex-direction:row;
     align-items:center;
     justify-content:center;
-    border:1px solid var(--light-border-color);
-    gap:calc(var(--size) * 18px);
-    padding:calc(var(--size) * 24px);
-    border-radius:calc(var(--size) * 6px);
-    background:var(--bg-color-1);
+    height:calc(var(--size) * 48px);
+    gap:calc(var(--size) * 6px);
     transition-duration:250ms;
-    cursor:pointer;
+    border:1px solid var(--light-border-color);
 }
 
-#flashcards-main-options > div:not(.options-display):hover{
-    border:1px solid var(--primary-accent);
+#ask-new-btn:hover{
+    transform:scale(1.025);
 }
 
-#flashcards-main-options > div:not(.options-display) > img:first-of-type{
-    height:calc(var(--size) * 30px);
-    filter:invert(1) brightness(var(--image-invert));
+#ask-new-btn:active{
+    transform:none;
 }
 
-#flashcards-main-options > div:not(.options-display) > div > h1{
-    font-size:calc(var(--size) * 14px);
-    font-weight:600;
+#ask-new-btn > img{
+    height:calc(var(--size) * 16px);
+}
+
+#ask-new-btn > p{
     margin:0;
-    cursor:pointer;
-}
-
-#flashcards-main-options > div:not(.options-display) > div > p{
     font-size:calc(var(--size) * 12px);
-    margin:0;
-    color:gray;
-    cursor:pointer;
+    font-weight:500;
 }
 
-#flashcards-main-options > div:not(.options-display) > img:last-of-type{
-    height:calc(var(--size) * 18px);
-    margin-left:calc(var(--size) * 18px);
-    filter:invert(1) brightness(var(--image-invert));
+#desktop-answers-main > div{
+    width:calc(100% - var(--size) * 2px);
+    border:1px solid var(--light-border-color);
+    background:var(--bg-color-1);
+    border-radius:calc(var(--size) * 6px);
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:flex-start;
 }
 
-.options-display{
+#desktop-answers-main > div > div:first-of-type{
+    width:calc(var(--size) * 64px);
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:center;
-    text-align:center;
-    background:var(--bg-color-1);
-    padding:calc(var(--size) * 24px);
-    border-radius:calc(var(--size) * 6px);
-    border:1px solid var(--light-border-color);
+    justify-content:flex-start;
+    padding:calc(var(--size) * 24px) 0;
+    gap:calc(var(--size) * 6px);
+}
+
+#desktop-answers-main > div > div:first-of-type > img{
+    width:calc(var(--size) * 24px);
+    filter:invert(0.5);
+    cursor:pointer;
     transition-duration:250ms;
-    width:calc(var(--size) * 160px);
-    cursor:default;
 }
 
-.options-display > h1{
-    margin:0;
-    font-size:calc(var(--size) * 48px);
+#desktop-answers-main > div > div:first-of-type > img:hover{
+    transform:scale(1.05);
 }
 
-.options-display > p{
-    text-transform:uppercase;
-    font-size:calc(var(--size) * 10px);
-    margin:0;
+#desktop-answers-main > div > div:first-of-type > p{
+    font-size:calc(var(--size) * 12px);
+    font-weight:500;
     color:gray;
-}
-
-.desktop-answers-sidebar-break{
-    width:calc(var(--size) * 208px);
-    height:1px;
-    background:var(--light-border-color);
-    margin: calc(var(--size) * 24px) 0;
-}
-
-#desktop-answers-sidebar > h1{
     margin:0;
+}
+
+#desktop-answers-main > div > div:last-of-type{
+    padding:calc(var(--size) * 24px);
+    width:calc(100% - var(--size) * 113px);
+    border-left:1px solid var(--light-border-color);
+}
+
+#desktop-answers-main > div > div:last-of-type > h1{
+    margin:0;
+    font-size:calc(var(--size) * 24px);
+}
+
+#desktop-answers-main > div > div:last-of-type > p{
+    color:gray;
     font-size:calc(var(--size) * 12px);
 }
 
-#desktop-answers-sidebar-list{
-    margin-top:calc(var(--size) * 24px);
+#desktop-answers-main > div > div:last-of-type > div:first-of-type{
     display:flex;
-    flex-direction:column;
+    flex-direction:row;
     align-items:center;
     justify-content:flex-start;
     gap:calc(var(--size) * 12px);
 }
 
-.unanswered > div:nth-of-type(2){
+#desktop-answers-main > div > div:last-of-type > div:first-of-type > p{
+    transition-duration:250ms;
+    font-size:calc(var(--size) * 12px);
+    padding:calc(var(--size) * 4px) calc(var(--size) * 12px);
+    background:var(--bg-color-2);
+    border-radius:calc(var(--size) * 6px);
+    margin:0;
+    font-weight:500;
+    cursor:default;
+}
+
+#desktop-answers-main > div > div:last-of-type > div:first-of-type > p:hover{
+    background:var(--light-gray);
+    color:white;
+}
+
+#desktop-answers-main > div > div:last-of-type > div:nth-of-type(2){
+    width:100%;
+    height:1px;
     background:var(--light-border-color);
-    color:gray;
+    margin:calc(var(--size) * 16px) 0;
 }
 
-.new-updates > div:nth-of-type(2){
-    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
-    color:white;
-}
-
-.resolved > div:nth-of-type(2){
-    background:linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient));
-    color:white;
-}
-
-.desktop-answers-sidebar-element{
-    background:var(--bg-color-1);
-    width:calc(var(--size) * 184px);
-    margin-right:calc(var(--size) * 12px);
+#desktop-answers-main > div > div:last-of-type > div:last-of-type{
     display:flex;
-    flex-direction:column;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+}
+
+#desktop-answers-main > div > div:last-of-type > div:last-of-type > div{
+    display:flex;
+    flex-direction:row;
     align-items:center;
     justify-content:center;
     gap:calc(var(--size) * 6px);
-    border-radius:calc(var(--size) * 6px);
-    border:1px solid var(--bg-color-1);
-    padding: calc(var(--size) * 12px) calc(var(--size) * 12px) calc(var(--size) * 12px) 0;
-    cursor:pointer;
-    transition-duration:250ms;
-    position:relative;
 }
 
-.desktop-answers-sidebar-element:hover, .desktop-answers-sidebar-element:hover > div:last-of-type{
-    box-shadow:0 0 calc(var(--size) * 6px) 0 var(--light-border-color);
+#desktop-answers-main > div > div:last-of-type > div:last-of-type > div > img{
+    height:calc(var(--size) * 18px);
 }
 
-.desktop-answers-sidebar-element > div:first-of-type{
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:flex-start;
-    gap:calc(var(--size) * 6px);
-    width:calc(var(--size) * 160px);
-}
-
-.desktop-answers-sidebar-element > div:first-of-type > img{
-    height:calc(var(--size) * 16px);
-    filter:invert(var(--image-invert));
-}
-
-.desktop-answers-sidebar-element > div:first-of-type > h1{
-    margin:0;
+#desktop-answers-main > div > div:last-of-type > div:last-of-type > div > p{
     font-size:calc(var(--size) * 12px);
-    color:black;
-    filter:invert(1) brightness(var(--image-invert));
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow:ellipsis;
-}
-
-.desktop-answers-sidebar-element > div:nth-of-type(2){
-    text-transform:uppercase;
-    font-weight:700;
-    font-size:calc(var(--size) * 10px);
-    padding:calc(var(--size) * 4px) 0;
-    width:calc(var(--size) * 160px);
-    text-align:center;
-    border-radius:calc(var(--size) * 6px);
-}
-
-.desktop-answers-sidebar-element > div:last-of-type{
-    position:absolute;
-    height:calc(var(--size) * 36px);
-    padding:calc(var(--size) * 6px) 0;
-    width:calc(var(--size) * 24px);
-    background:var(--bg-color-1);
-    border:1px solid var(--bg-color-1);
-    right:calc(var(--size) * -12px);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:space-between;
-    border-radius:calc(var(--size) * 6px);
-    cursor:default;
-    transition-duration:250ms;
-}
-
-.desktop-answers-sidebar-element > div:last-of-type > img{
-    width:calc(var(--size) * 16px);
-    filter:invert(0.5);
-    transition-duration:250ms;
-    cursor:pointer;
-}
-
-.desktop-answers-sidebar-element > div:last-of-type > img:hover{
-    transform:scale(1.1);
-}
-
-#answers-list-container{
-    width:calc(100vw - var(--size) * 304px);
-    height:calc(100vh - var(--size) * 222px);
-    padding-left:calc(var(--size) * 24px);
-    padding-right:calc(var(--size) * 24px);
-}
-
-
-#answers-list-headers{
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    position:relative;
-    width:100%;
-    background:blue;
-}
-
-#answers-list-headers > p:first-of-type{
-    left:calc(var(--size) * 24px);
-}
-
-#answers-list-headers > p:nth-of-type(2){
-    right:calc(33% + var(--size) * 100px);
-}
-
-#answers-list-headers > p:last-of-type{
-    right:calc(var(--size) * 24px);
-}
-
-#answers-list-headers > p{
-    font-size:calc(var(--size) * 12px);
-    position:absolute;
     margin:0;
+}
+
+#desktop-answers-main > div > div:last-of-type > div:last-of-type > div:first-of-type > p:last-of-type{
+    margin-left:calc(var(--size) * 24px);
     color:gray;
 }
 
-#answers-list{
-    display:flex;
-    flex-direction:column;
+#desktop-answers-main > div > div:last-of-type > div:last-of-type > div:last-of-type{
+    cursor:pointer;
 }
 
-#answers-list > div{
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    position:relative;
-    top:calc(var(--size) * 24px);
-    border-radius:calc(var(--size) * 6px);
-    height:calc(var(--size) * 42px);
+#desktop-answers-main > div > div:last-of-type > div:last-of-type > div:last-of-type > img{
+    transition-duration:250ms;
 }
 
-.answers-elem{
-    cursor:default !important;
-}
-
-.active-answers-elem{
-    cursor:pointer !important;
-}
-
-.active-answers-elem{
-    background:var(--light-accent);
-}
-
-#answers-list > div > img{
-    position:absolute;
-    left:calc(var(--size) * 12px);
-    width:calc(var(--size) * 16px);
-}
-
-#answers-list > div > h1{
-    position:absolute;
-    left:calc(var(--size) * 36px);
-    width:calc(67% - var(--size) * 48px);
-    margin:0;
-    font-size:calc(var(--size) * 14px);
-    font-weight:500;
-}
-
-#answers-list > div > div{
-    position:absolute;
-    right:calc(var(--size) * 128px);
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    gap:calc(var(--size) * 6px);
-    overflow-x:hidden;
-    width:33%;
-}
-
-#answers-list > div > div > p{
-    font-size:calc(var(--size) * 10px);
-    padding:calc(var(--size) * 2px) calc(var(--size) * 6px);
-    flex-shrink:0;
-    border:1px solid var(--light-border-color);
-    border-radius:calc(var(--size) * 6px);
-    background:var(--light-gray);
-    margin:0;
-    color:white;
-}
-
-#answers-list > div > p{
-    margin:0;
-    position:absolute;
-    right:calc(var(--size) * 12px);
-    font-size:calc(var(--size) * 12px);
-    font-weight:600;
+#desktop-answers-main > div > div:last-of-type > div:last-of-type > div:last-of-type:hover > img{
+    transform:scale(1.05);
 }

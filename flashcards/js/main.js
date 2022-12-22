@@ -60,10 +60,11 @@ function toggleTheme(themeIndex){
         root.style.setProperty("--bg-color-1", "#ffffff");
         root.style.setProperty("--bg-color-2", "#f6f7fb")
         root.style.setProperty("--light-border-color", "#ebebeb");
-        root.style.setProperty("--dark-gray", "#1e1e1e");
-        root.style.setProperty("--light-gray", "#2c2c2c");
-        root.style.setProperty("--hover-dark", "#0f0f0f");
-        root.style.setProperty("--hover-light", "#f5f5f5");
+        root.style.setProperty("--dark-border-color", "#21262d");
+        root.style.setProperty("--dark-gray", "black");
+        root.style.setProperty("--light-gray", "#010409");
+        root.style.setProperty("--hover-dark", "#16171a");
+        root.style.setProperty("--hover-light", "#171717");
         root.style.setProperty("--image-invert", "0");
         root.style.setProperty("--light-accent", "#ffedf6");
         root.style.setProperty("--primary-accent", "#fe599d");
