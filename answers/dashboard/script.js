@@ -1,3 +1,58 @@
+function createQuestion(title, tagsArray, text, authorName, authorPfpId, timeAgo, commentAmount, likeAmount){
+    let newDiv = document.createElement('div');
+
+    let heartDiv = document.createElement('div');
+    let heartImg = document.createElement('img');
+    let heartText = document.createElement('p');
+
+    heartImg.src = "../../flashcards/icons/unfilled_heart.png";
+    heartText.innerHTML = likeAmount;
+
+    heartDiv.append(heartImg, heartText);
+
+    let mainDiv = document.createElement('div');
+    let questionTitle = document.createElement('h1');
+    let questionText = document.createElement('p');
+    let tagsList = document.createElement('div');
+    let breakDiv = document.createElement('div');
+    let footerDiv = document.createElement('div');
+
+    questionTitle.innerHTML = title;
+    questionText.innerHTML = text;
+
+    for(let i = 0; i < tagsArray.length; i++){
+        let newTag = document.createElement('p');
+        newTag.innerHTML = tags[tagsArray[i]];
+        tagsList.appendChild(newTag);
+    }
+
+    let authorDiv = document.createElement('div');
+    let authorImg = document.createElement('img');
+    let authorNameP = document.createElement('p');
+    let timeAgoP = document.createElement('p');
+
+    authorImg.src = "../../icons/avatars/" + authorPfpId + ".png";
+    authorNameP.innerHTML = authorName;
+    timeAgo.innerHTML = timeAgo;
+
+    authorDiv.append(authorImg, authorNameP, timeAgoP);
+
+    let commentDiv = document.createElement('div');
+    let commentImg = document.createElement('img');
+    let commentText = document.createElement('p');
+
+    commentImg.src = "./icons/comment.png";
+    commentText.innerHTML = commentAmount;
+
+    commentDiv.append(commentImg, commentText);
+    footerDiv.append(authorDiv, commentDiv);
+
+    mainDiv.append(questionTitle, questionText, tagsList, breakDiv, footerDiv);
+    newDiv.append(heartDiv, mainDiv);
+
+    document.getElementById('desktop-answers-main').appendChild(newDiv);
+}
+
 async function initialize(user){
     if(user.status === "FAILURE" || user.error === "Bad Request") {
         location.href = "../../../login"
@@ -15,15 +70,11 @@ async function initialize(user){
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
     document.getElementById('desktop-profile-user-img').src = "../../flashcards/icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
 
-    createUserQuestion("Why is Napoleon respected in French History", 0, 0);
-    createUserQuestion("How to calculate the derivative of an equation?", 1, 1);
-    createUserQuestion("How to program using DrawingPanel", 2, 2);
-
-    createQuestion("Why did the chicken cross the road?", [2,3,5,6], "2 Weeks Ago");
-    createQuestion("Why did your mother sleep with my dad?", [2,5,6], "2 Weeks Ago");
-    createQuestion("How to add two letters?", [2,4,6], "2 Weeks Ago");
-    createQuestion("How to write a good question title?", [1,3,4,5], "2 Weeks Ago");
-    createQuestion("Will making marijuana illegal solve the drug issues America is facing?", [1,3,4], "2 Weeks Ago");
+    createQuestion("Why did the chicken cross the road?", [2,3,5,6], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Ronak Kothari", 45, "Posted 12+ Hours Ago", 50, 123);
+    createQuestion("Why did your mother sleep with my dad?", [2,5,6], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Ronak Kothari", 45, "Posted 1 Week Ago", 50, 123);
+    createQuestion("How to add two letters?", [2,4,6], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Shrihun Sankepally", 41, "Posted 2 Weeks Ago", 50, 123);
+    createQuestion("How to write a good question title?", [1,3,4,5], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Shrihun Sankepally", 41, "Posted 3+ Hours Ago", 50, 123);
+    createQuestion("Will making marijuana illegal solve the drug issues America is facing?", [1,3,4], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Ronak Kothari", 45, "Posted 3 Weeks Ago", 50, 123);
 
 }
 
