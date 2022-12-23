@@ -1,4 +1,16 @@
-function createQuestion(title, tagsArray, text, authorName, authorPfpId, timeAgo, commentAmount, likeAmount){
+function heartDeck(deckId, image){
+    if(image.classList.contains("unliked")){
+        image.src = "../../flashcards/icons/filled_heart.png";
+        image.classList.remove("unliked");
+        image.classList.add("liked");
+    } else {
+        image.src = "../../flashcards/icons/unfilled_heart.png";
+        image.classList.add("unliked");
+        image.classList.remove("liked");
+    }
+}
+
+function createQuestion(title, tagsArray, text, authorName, authorPfpId, timeAgo, commentAmount, likeAmount, liked){
     let newDiv = document.createElement('div');
 
     let heartDiv = document.createElement('div');
@@ -7,6 +19,11 @@ function createQuestion(title, tagsArray, text, authorName, authorPfpId, timeAgo
 
     heartImg.src = "../../flashcards/icons/unfilled_heart.png";
     heartText.innerHTML = likeAmount;
+
+    if(liked) heartImg.classList.add("liked");
+    else heartImg.classList.add("unliked");
+
+    heartImg.setAttribute("onclick", "heartDeck(0, this)")
 
     heartDiv.append(heartImg, heartText);
 
@@ -70,12 +87,13 @@ async function initialize(user){
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
     document.getElementById('desktop-profile-user-img').src = "../../flashcards/icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
 
-    createQuestion("Why did the chicken cross the road?", [2,3,5,6], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Ronak Kothari", 45, "Posted 12+ Hours Ago", 50, 123);
-    createQuestion("Why did your mother sleep with my dad?", [2,5,6], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Ronak Kothari", 45, "Posted 1 Week Ago", 50, 123);
-    createQuestion("How to add two letters?", [2,4,6], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Shrihun Sankepally", 41, "Posted 2 Weeks Ago", 50, 123);
-    createQuestion("How to write a good question title?", [1,3,4,5], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Shrihun Sankepally", 41, "Posted 3+ Hours Ago", 50, 123);
-    createQuestion("Will making marijuana illegal solve the drug issues America is facing?", [1,3,4], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Ronak Kothari", 45, "Posted 3 Weeks Ago", 50, 123);
+    createQuestion("Why did the chicken cross the road?", [2,3,5,6], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Ronak Kothari", 45, "Posted 12+ Hours Ago", 50, 123, false);
+    createQuestion("Why did your mother sleep with my dad?", [2,5,6], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Ronak Kothari", 45, "Posted 1 Week Ago", 50, 123, false);
+    createQuestion("How to add two letters?", [2,4,6], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Shrihun Sankepally", 41, "Posted 2 Weeks Ago", 50, 123, false);
+    createQuestion("How to write a good question title?", [1,3,4,5], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Shrihun Sankepally", 41, "Posted 3+ Hours Ago", 50, 123, false);
+    createQuestion("Will making marijuana illegal solve the drug issues America is facing?", [1,3,4], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Ronak Kothari", 45, "Posted 3 Weeks Ago", 50, 123, false);
 
+    document.getElementById('loading-div').classList.add('inactive-modal');
 }
 
 async function locateUserInfo(){
