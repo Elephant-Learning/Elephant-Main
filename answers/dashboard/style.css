@@ -198,7 +198,7 @@
 }
 
 #desktop-answers-main > div:not(#loading-div) > div:last-of-type > div:first-of-type > p:hover{
-    background:var(--light-gray);
+    background:var(--primary-accent);
     color:white;
 }
 
@@ -271,9 +271,20 @@
     display:none;
 }
 
+@keyframes flashImg {
+    from{
+        filter:brightness(1) saturate(0);
+    } 50%{
+        filter:brightness(1.5) saturate(0);
+    } to{
+        filter:brightness(1) saturate(0);
+    }
+}
+
 #loading-div > img{
     height:calc(var(--size) * 128px);
     filter:saturate(0);
+    animation:flashImg 3s infinite;
 }
 
 #loading-div > p{

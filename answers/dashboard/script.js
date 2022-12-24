@@ -97,6 +97,9 @@ async function initialize(user){
 }
 
 async function locateUserInfo(){
+    const loadingText = ["Loading your custom feed. Sit tight!", "Your daily dose of problems coming right up!", "Man students have so many issues... it's amusing!", "Fetching your updated feed. Give me a moment.", "Do people even read this text?", "Everyone cares about the students' problems.. nobody asks about mine :("]
+
+    document.getElementById('loading-text').innerHTML = loadingText[Math.floor(Math.random() * loadingText.length)];
 
     let savedUserId;
 
