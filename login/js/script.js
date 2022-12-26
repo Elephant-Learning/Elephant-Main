@@ -151,6 +151,9 @@ document.getElementById('sign-up-btn-1').onclick = function(){
 }
 
 async function resetPasswordEmail(){
+    document.getElementById('desktop-loading-modal').classList.remove('inactive-modal');
+    document.getElementById('desktop-alert-modal').className = "desktop-modal inactive-modal";
+
     const email = document.getElementById('send-password-email').value;
 
     const responseEmail = await fetch('https://elephantsuite-rearend.herokuapp.com/login/userByEmail?email=' + email, {
@@ -165,8 +168,6 @@ async function resetPasswordEmail(){
     });
 
     const contentEmail = await responseEmail.json();
-
-    document.getElementById('desktop-loading-modal').classList.add('inactive-modal');
 
     if(contentEmail.status === "SUCCESS"){
         const responsePass = await fetch('https://elephantsuite-rearend.herokuapp.com/password/sendEmail?id=' + contentEmail.context.user.id, {
@@ -186,7 +187,7 @@ async function resetPasswordEmail(){
     } else if(contentEmail.status === "FAILURE") document.getElementById('desktop-alert-header').innerHTML = "Email Not Found"
 
     document.getElementById('desktop-alert-para').innerHTML = contentEmail.message;
-
+    document.getElementById('desktop-loading-modal').classList.add('inactive-modal');
     document.getElementById('desktop-alert-modal').classList.remove('inactive-modal')
     setTimeout(function(){
         document.getElementById('desktop-alert-modal').classList.add('inactive-modal')
@@ -276,7 +277,8 @@ function signupIndividual(){
     user.email = document.getElementById('individual-email').value;
     user.password = document.getElementById('individual-password').value;
     user.type = UserTypes.INDIVIDUAL;
-    user.countryCode = selectedLocation;
+    //user.countryCode = selectedLocation;
+    user.countryCode = 252;
 
     signup(user);
 }
@@ -288,7 +290,8 @@ function signupStudent(){
     user.email = document.getElementById('student-email').value;
     user.password = document.getElementById('student-password').value;
     user.type = UserTypes.STUDENT;
-    user.countryCode = selectedLocation;
+    //user.countryCode = selectedLocation;
+    user.countryCode = 252;
 
     signup(user);
 }
@@ -300,7 +303,8 @@ function signupInstructor(){
     user.email = document.getElementById('instructor-email').value;
     user.password = document.getElementById('instructor-password').value;
     user.type = UserTypes.INSTRUCTOR;
-    user.countryCode = selectedLocation;
+    //user.countryCode = selectedLocation;
+    user.countryCode = 252;
 
     signup(user)
 }

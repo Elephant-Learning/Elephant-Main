@@ -250,5 +250,6 @@ const COUNTRY_LIST = [
     "Western Sahara",
     "Yemen",
     "Zambia",
-    "Zimbabwe"
+    "Zimbabwe",
+    "N/A"
 ];
