@@ -351,7 +351,7 @@ window.onload = async function(){
 
         if(confirmContent.status === "SUCCESS"){
             localStorage.setItem('savedUserId', JSON.stringify(confirmContent.context.user.id));
-            location.href = "../flashcards/dashboard";
+            location.href = "../dashboard";
         } else if(confirmContent.status === "FAILURE"){
             document.getElementById('desktop-loading-modal').classList.add('inactive-modal');
             document.getElementById('desktop-alert-header').innerHTML = "Invalid/Expired Token"
@@ -460,7 +460,7 @@ async function login(){
         localStorage.setItem('savedUserId', JSON.stringify(content.context.user.id));
         if(document.getElementById('checkbox').classList.contains('checked')){
             localStorage.setItem('autoLogin', JSON.stringify(true));
-        } location.href = "../flashcards/dashboard";
+        } location.href = "../dashboard";
     }
 }
 

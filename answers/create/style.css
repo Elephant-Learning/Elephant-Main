@@ -114,9 +114,9 @@
     width:calc(100vw - var(--size) * 355px);
     margin: calc(var(--size) * 24px) calc(var(--size) * 24px) 0;
     padding: calc(var(--size) * 24px) calc(var(--size) * 24px) 0;
-    height:calc(100% - var(--size) * 49px);
+    height:calc(100% - var(--size) * 50px);
     background:var(--bg-color-1);
-    border-radius:calc(var(--size) * 12px);
+    border-radius:calc(var(--size) * 12px) calc(var(--size) * 12px) 0 0;
     border:1px solid var(--light-border-color);
     display:flex;
     flex-direction:column;
@@ -127,27 +127,34 @@
 }
 
 #question-header{
-    margin:0;
     font-size:calc(var(--size) * 24px);
     outline:none;
+    border:none;
     cursor:text;
-    padding-bottom:calc(var(--size) * 12px);
+    margin-bottom:calc(var(--size) * 12px);
     border-bottom:1px solid var(--light-border-color);
+    font-weight:700;
     width:100%;
 }
 
 #question-text-editor{
     outline:none;
     border:1px solid var(--light-border-color);
-    border-radius:calc(var(--size) * 12px);
+    border-radius:calc(var(--size) * 12px) calc(var(--size) * 12px) 0 0;
     height:calc(100% - var(--size) * 84px);
     padding:calc(var(--size) * 12px);
+    border-bottom:none;
     display:flex;
     flex-direction:column;
     align-items:flex-start;
     justify-content:flex-start;
     gap:calc(var(--size) * 12px);
     width:calc(100% - var(--size) * 24px);
+    overflow-y:scroll;
+}
+
+#question-text-editor:empty:not(:focus):before {
+    content:"Enter Text";
 }
 
 #question-text-editor > *{

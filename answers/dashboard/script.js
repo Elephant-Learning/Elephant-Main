@@ -72,7 +72,7 @@ function createQuestion(title, tagsArray, text, authorName, authorPfpId, timeAgo
 
 async function initialize(user){
     if(user.status === "FAILURE" || user.error === "Bad Request") {
-        location.href = "../../../login"
+        location.href = "../../login"
     } else user = user.context.user;
     console.log(user);
 
@@ -106,10 +106,10 @@ async function locateUserInfo(){
     try{
         savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
     } catch {
-        location.href = "../../../login";
+        location.href = "../../login";
     }
 
-    if(!savedUserId  && savedUserId !== 0) location.href = "../../../login";
+    if(!savedUserId  && savedUserId !== 0) location.href = "../../login";
 
     const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',

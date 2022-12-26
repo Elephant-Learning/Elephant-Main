@@ -1,7 +1,6 @@
 #desktop-parent-container{
     width:100vw;
     height:calc(100vh - calc(var(--size) * 48px));
-    background:blue;
     display:flex;
     flex-direction:row;
     align-items:flex-start;
@@ -43,4 +42,44 @@
 
 .desktop-bottom-btn:hover{
     box-shadow:0 0 calc(var(--size) * 6px) 0 var(--dark-gray);
+}
+
+#desktop-parent-sidebar{
+    width:calc(var(--size) * 256px);
+    padding:calc(var(--size) * 24px);
+    background:var(--bg-color-1);
+    border-left:1px solid var(--light-border-color);
+    height:calc(100% - var(--size) * 48px);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 12px);
+}
+
+#desktop-parent-main{
+    width:calc(100vw - var(--size) * 355px);
+    margin: calc(var(--size) * 24px) calc(var(--size) * 24px) 0;
+    padding: calc(var(--size) * 24px) calc(var(--size) * 24px) 0;
+    height:calc(100% - var(--size) * 50px);
+    background:var(--bg-color-1);
+    border-radius: calc(var(--size) * 12px) calc(var(--size) * 12px) 0 0;
+    border:1px solid var(--light-border-color);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 24px);
+    border-bottom:none;
+}
+
+#desktop-parent-sidebar > h1{
+    font-size:calc(var(--size) * 12px);
+    margin:0;
+}
+
+#desktop-parent-sidebar > h2{
+    font-size:calc(var(--size) * 12px);
+    color:gray;
+    margin:0;
 }

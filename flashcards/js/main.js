@@ -64,7 +64,7 @@ function toggleTheme(themeIndex){
         root.style.setProperty("--dark-gray", "black");
         root.style.setProperty("--light-gray", "#010409");
         root.style.setProperty("--hover-dark", "#16171a");
-        root.style.setProperty("--hover-light", "#171717");
+        root.style.setProperty("--hover-light", "#f5f5f5");
         root.style.setProperty("--image-invert", "0");
         root.style.setProperty("--light-accent", "#ffedf6");
         root.style.setProperty("--primary-accent", "#fe599d");

@@ -64,22 +64,22 @@
                             <p>Accessibility Zoom</p>
                             <img src="../../flashcards/icons/expand-right.png" alt="">
                             <div class="profile-sub-modal">
-                                <div onclick="toggleSizeSetting(0)">
+                                <div onclick="toggleSizeSetting(0); recalculateTextfieldSize();">
                                     <img src="../../flashcards/icons/zoom_out.png" alt="">
                                     <p>75%</p>
                                     <img src="../../flashcards/icons/check.png" alt="" class="profile-zoom-check-img">
                                 </div>
-                                <div onclick="toggleSizeSetting(1)">
+                                <div onclick="toggleSizeSetting(1); recalculateTextfieldSize();">
                                     <img src="../../flashcards/icons/search.png" alt="">
                                     <p>100%</p>
                                     <img src="../../flashcards/icons/check.png" alt="" class="profile-zoom-check-img">
                                 </div>
-                                <div onclick="toggleSizeSetting(2)">
+                                <div onclick="toggleSizeSetting(2); recalculateTextfieldSize();">
                                     <img src="../../flashcards/icons/zoom_in.png" alt="">
                                     <p>125%</p>
                                     <img src="../../flashcards/icons/check.png" alt="" class="profile-zoom-check-img">
                                 </div>
-                                <div onclick="toggleSizeSetting(3)">
+                                <div onclick="toggleSizeSetting(3); recalculateTextfieldSize();">
                                     <img src="../../flashcards/icons/zoom_in.png" alt="">
                                     <p>150%</p>
                                     <img src="../../flashcards/icons/check.png" alt="" class="profile-zoom-check-img">
@@ -98,33 +98,31 @@
         </div>
         <div id="desktop-parent-container">
             <div id="question-panel">
-                <h1 id="question-header" contenteditable="true">Question Title</h1>
-                <div id="question-text-editor" contenteditable="true">
-                    <p>Cringe</p>
-                </div>
+                <input id="question-header" placeholder="Question Title">
+                <iframe id="question-text-editor" name="textField"></iframe>
             </div>
             <div id="editor-tools">
                 <h1>Editor Tools</h1>
-                <h2>Text Styles</h2>
+                <!--<h2>Text Styles</h2>
                 <div id="editor-add-text-panel">
-                    <div onclick="addElementToEditor('p');" class="text-element-btn">P</div>
-                    <div onclick="addElementToEditor('h1');" class="text-element-btn">H1</div>
-                    <div onclick="addElementToEditor('h2');" class="text-element-btn">H2</div>
-                    <div onclick="addElementToEditor('h3');" class="text-element-btn">H3</div>
-                </div>
+                    <div class="text-element-btn sidebar-elem-btn">P</div>
+                    <div class="text-element-btn sidebar-elem-btn">H1</div>
+                    <div class="text-element-btn sidebar-elem-btn">H2</div>
+                    <div class="text-element-btn sidebar-elem-btn">H3</div>
+                </div>-->
                 <h2>Text Decorations</h2>
                 <div id="editor-add-style-panel">
-                    <div style="font-weight:900;" class="active">B</div>
-                    <div style="font-style:italic;">I</div>
-                    <div style="text-decoration:underline;">U</div>
+                    <div style="font-weight:900;" class="sidebar-elem-btn">B</div>
+                    <div style="font-style:italic;" class="sidebar-elem-btn">I</div>
+                    <div style="text-decoration:underline;" class="sidebar-elem-btn">U</div>
                 </div>
                 <h2>Lists</h2>
                 <div id="editor-add-lists-panel">
-                    <div>
+                    <div class="sidebar-elem-btn">
                         <img src="./icons/unordered-list.png" alt="">
                         <p>Bulleted List</p>
                     </div>
-                    <div>
+                    <div class="sidebar-elem-btn">
                         <img src="./icons/ordered-list.png" alt="">
                         <p>Numbered List</p>
                     </div>

@@ -15,7 +15,7 @@
 <div id="desktop-wrapper">
     <div id="desktop-navbar">
         <div id="desktop-main-image">
-            <div onclick="leaveEditor('../dashboard')"><img src="../../icons/elephant-answers-3.png" alt="Elephant Logo"></div>
+            <div onclick="location.href = '../dashboard/'"><img src="../../icons/elephant-answers-3.png" alt="Elephant Logo"></div>
         </div>
         <!--<div id="desktop-input-div">
             <img src="../../flashcards/icons/search.png" alt="Search" id="desktop-input-img">
@@ -87,7 +87,7 @@
                         </div>
                     </div>
                     <div class="profile-break"></div>
-                    <div onclick="leaveEditor('../../login')">
+                    <div onclick="location.href = '../dashboard/'">
                         <img src="../../flashcards/icons/logout.png">
                         <p>Log Out</p>
                     </div>
@@ -97,10 +97,16 @@
         </div>
     </div>
     <div id="desktop-parent-container">
-
+        <div id="desktop-parent-main">
+            <h1 id="question-title"></h1>
+        </div>
+        <div id="desktop-parent-sidebar">
+            <h1>Question Details</h1>
+            <h2>Top Contributors</h2>
+        </div>
     </div>
     <div id="desktop-bottom-buttons">
-        <div class="desktop-bottom-btn" onclick="leaveEditor();">
+        <div class="desktop-bottom-btn" onclick="location.href = '../dashboard/'">
             <img src="../../flashcards/icons/back.png" alt="">
         </div>
     </div>

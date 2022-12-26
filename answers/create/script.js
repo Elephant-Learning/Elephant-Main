@@ -1,22 +1,30 @@
-function addElement(elementSearch){
-    let elements = ['p', 'h1', 'h2', 'h3'];
+function alterEditor(alterIndex){
+    if(alterIndex === 0){
+        textField.document.execCommand("bold", false, null);
+        document.querySelectorAll(".sidebar-elem-btn")[alterIndex].classList.toggle("active");
+    } else if(alterIndex === 1){
+        textField.document.execCommand("italic", false, null);
+        document.querySelectorAll(".sidebar-elem-btn")[alterIndex].classList.toggle("active");
+    } else if(alterIndex === 2){
+        textField.document.execCommand("underline", false, null);
+        document.querySelectorAll(".sidebar-elem-btn")[alterIndex].classList.toggle("active");
+    } else if(alterIndex === 3){
+        textField.document.execCommand("insertUnorderedList", false, null);
+        document.querySelectorAll(".sidebar-elem-btn")[alterIndex].classList.toggle("active");
 
-    console.log(elementSearch);
+        if(document.querySelectorAll(".sidebar-elem-btn")[4].classList.contains("active")) document.querySelectorAll(".sidebar-elem-btn")[4].classList.remove("active");
+    } else if(alterIndex === 4){
+        textField.document.execCommand("insertOrderedList", false, null);
+        document.querySelectorAll(".sidebar-elem-btn")[alterIndex].classList.toggle("active");
 
-    document.querySelectorAll('.text-element-btn').forEach(function(element){
-        if(element.classList.contains("active")) element.classList.remove('active');
-    })
+        if(document.querySelectorAll(".sidebar-elem-btn")[3].classList.contains("active")) document.querySelectorAll(".sidebar-elem-btn")[3].classList.remove("active");
+    }
 
-    document.querySelectorAll('.text-element-btn')[elements.indexOf(elementSearch)].classList.add('active');
+    console.log(alterIndex);
 }
 
-function addElementToEditor(elementType){
-    let newElement = document.createElement(elementType);
-    newElement.innerHTML = "Su madre";
-
-    newElement.setAttribute("onclick", "addElement('" + elementType + "')")
-
-    document.getElementById('question-text-editor').appendChild(newElement);
+function recalculateTextfieldSize(){
+    textField.document.body.style.fontSize = getComputedStyle(document.querySelector(':root')).getPropertyValue("--size") * 12 + "px";
 }
 
 function leaveEditor(){
@@ -29,9 +37,22 @@ function askQuestion(){
 
 async function initialize(user){
     if(user.status === "FAILURE" || user.error === "Bad Request") {
-        location.href = "../../../login"
+        location.href = "../../login"
     } else user = user.context.user;
     console.log(user);
+
+    textField.document.designMode = "On";
+    textField.document.body.style.fontFamily = '"Montserrat", sans-serif';
+    recalculateTextfieldSize();
+    textField.document.body.style.color = "gray";
+
+    for(let i = 0; i < document.querySelectorAll('.sidebar-elem-btn').length; i++){
+        document.querySelectorAll('.sidebar-elem-btn')[i].addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            alterEditor(i);
+        })
+    }
 
     const emojis_refactored = ["confused", "cool", "happy", "laugh", "nerd", "neutral", "unamused", "uwu", "wink"];
 
@@ -48,10 +69,10 @@ async function locateUserInfo(){
     try{
         savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
     } catch {
-        location.href = "../../../login";
+        location.href = "../../login";
     }
 
-    if(!savedUserId  && savedUserId !== 0) location.href = "../../../login";
+    if(!savedUserId  && savedUserId !== 0) location.href = "../../login";
 
     const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
