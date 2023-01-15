@@ -1,0 +1,187 @@
+#footer{
+    display:flex;
+    flex-direction:column;
+    width:100vw;
+    padding:0;
+}
+
+#footer > div:first-of-type{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+    width:84vw;
+    padding:64px 8vw;
+}
+
+#footer > div:first-of-type > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:24px;
+}
+
+#footer > div:first-of-type > div > img{
+    height:48px;
+}
+
+#footer > div:first-of-type > div > div{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+#footer > div:first-of-type > div > div > h1{
+    font-size:28px;
+    color:white;
+    margin:0;
+    width:38vw;
+}
+
+#footer  div:first-of-type > div > div > p{
+    width:38vw;
+    color:white;
+    margin:0;
+    font-size:13px;
+}
+
+#footer > div:first-of-type > a{
+    color:white;
+    text-transform:uppercase;
+    text-decoration:none;
+    outline:2px solid white;
+    padding:6px 18px;
+    font-size:14px;
+    font-weight:700;
+    border-radius:40px;
+    cursor:pointer;
+}
+
+#footer > div:last-of-type{
+    background:var(--light-gray);
+    width:84vw;
+    padding:128px 8vw;
+}
+
+#footer > div:last-of-type > div:first-of-type{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:flex-start;
+}
+
+#footer > div:last-of-type > div:first-of-type > div:first-of-type{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:6px;
+}
+
+#footer > div:last-of-type > div:first-of-type > div:first-of-type > div:first-of-type{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:12px;
+}
+
+#footer > div:last-of-type > div:first-of-type > div:first-of-type > div:first-of-type > img{
+    height:24px;
+}
+
+#footer > div:last-of-type > div:first-of-type > div:first-of-type > div:first-of-type > h1{
+    font-size:24px;
+    margin:0;
+    color:white;
+}
+
+#footer > div:last-of-type > div:first-of-type > div:first-of-type > p{
+    font-size:12px;
+    width:32vw;
+    color:gray;
+}
+
+#footer > div:last-of-type > div:first-of-type > div:first-of-type > div:last-of-type{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    margin-left:12px;
+}
+
+#footer > div:last-of-type > div:first-of-type > div:first-of-type > div:last-of-type > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:13px;
+}
+
+#footer > div:last-of-type > div:first-of-type > div:first-of-type > div:last-of-type > div > img{
+    filter:invert(0.75);
+    height:18px;
+}
+
+#footer > div:last-of-type > div:first-of-type > div:first-of-type > div:last-of-type > div > p{
+    font-size:13px;
+    margin:0;
+    color:gray;
+}
+
+#footer > div:last-of-type > div:first-of-type > div:last-of-type{
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:flex-end;
+    gap:48px;
+}
+
+#footer > div:last-of-type > div:first-of-type > div:last-of-type > div{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+#footer > div:last-of-type > div:first-of-type > div:last-of-type > div > h1{
+    font-size:14px;
+    color:white;
+    margin:0;
+}
+
+#footer > div:last-of-type > div:first-of-type > div:last-of-type > div > a{
+    transition-duration:250ms;
+    color:gray;
+    text-decoration:none;
+    font-size:13px;
+    margin:0;
+}
+
+#footer > div:last-of-type > div:first-of-type > div:last-of-type > div > a:hover{
+    color:white;
+}
+
+#footer > div:last-of-type > div:nth-of-type(2){
+    width:100%;
+    height:1px;
+    background-color:gray;
+    margin:48px 0 24px 0;
+}
+
+#footer > div:last-of-type > div:last-of-type{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+}
+
+#footer > div:last-of-type > div:last-of-type > div > p{
+    margin:0;
+    color:gray;
+    font-size:12px;
+}
+
+#footer > div:last-of-type > div:last-of-type > div > a > img{
+    filter:invert(1);
+    height:18px;
+}

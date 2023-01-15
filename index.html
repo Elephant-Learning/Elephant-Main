@@ -14,26 +14,32 @@
 
     <link rel="icon" href="icons/elephant-400-400-grayscale.png" class="icon">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="footer.css">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7659700279033478"
      crossorigin="anonymous"></script>
     <script src="dependencies/faviconGenerator.js" defer></script>
+    <script src="navbar.js" defer></script>
     <script src="script.js" defer></script>
 </head>
 <body>
     <div id="main-wrapper">
         <div id="navbar">
-            <div id="navbar-left">
-                <img src="./icons/elephant-400-400-grayscale.png" alt="">
-                <div>
-                    <h1>Elephant</h1>
-                    <p>The Ultimate Student Suite</p>
+            <div>
+                <p id="navbar-prefix">./</p>
+                <a href="./"><img src="./icons/elephant-400-400-pink-02.png" alt="" id="navbar-image"></a>
+                <div class="navbar-dropdown">
+                    <p>Services</p>
+                    <img src="./flashcards/viewer/icons/expand.png" alt="">
+                </div>
+                <div class="navbar-dropdown">
+                    <p>About Elephant</p>
+                    <img src="./flashcards/viewer/icons/expand.png" alt="">
                 </div>
             </div>
-            <div id="navbar-right">
-                <a href="">About Us</a>
-                <a href="./login/">Login</a>
-                <a href="./login/?signup" class="large-navbar">Sign Up</a>
+            <div>
+                <a href="./login/?signup" id="login-link">Sign Up</a>
             </div>
         </div>
         <div id="main-container">
@@ -194,6 +200,59 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <div>
+                <div>
+                    <img src="../../icons/elephant-400-400-white.png" alt="">
+                    <div>
+                        <h1>Join Elephant Today</h1>
+                        <p>Sign up for our online educational service and gain access to high-quality educational products that will help you excel in educational journey.</p>
+                    </div>
+                </div>
+                <a href="../../login/?signup">Join Elephant</a>
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            <img src="../../icons/elephant-400-400-white.png" alt="">
+                            <h1>Elephant</h1>
+                        </div>
+                        <p>Elephant provides accessible, high-quality educational products and services that empower individuals to achieve their goals and reach their full potential.</p>
+                        <div>
+                            <div>
+                                <img src="../../icons/landing/phone.png" alt="">
+                                <p>+1 (425) 289-9748</p>
+                            </div>
+                            <div>
+                                <img src="../../icons/landing/email.png" alt="">
+                                <p>elephantsuitenoreply@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <h1>Services</h1>
+                            <a href="../../services/flip/">Flip</a>
+                        </div>
+                        <div>
+                            <h1>About Us</h1>
+                            <a href="./">Our Mission</a>
+                            <a href="../employees/">Employee Directory</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="footer-line"></div>
+                <div>
+                    <div>
+                        <p>© 2023 Kothari Enterprises LLC</p>
+                    </div>
+                    <div>
+                        <a href="https://www.instagram.com/elephantsuite/"><img src="../../icons/landing/instagram.png" alt=""></a>
                     </div>
                 </div>
             </div>
