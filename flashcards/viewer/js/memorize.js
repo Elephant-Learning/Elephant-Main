@@ -157,7 +157,7 @@ function skipQuestion(){
     correntAnswerNumber = 0;
     answeredQuestions++;
 
-    if(currentQuestionIndex >= indexesIncomplete.length){
+    if(currentQuestionIndex >= indexesIncomplete.length && memorizeSettings[1] == 0){
         let deckId = indexesReviewed[currentQuestionIndex - indexesIncomplete.length];
         indexesReviewed.splice(indexesReviewed.indexOf(deckId), 1);
         indexesIncomplete.push(deckId);
@@ -172,7 +172,7 @@ function setupWrite(deckIndex){
 
     memorizeWriteCorrectAnswers = [];
 
-    if(document.querySelectorAll(".desktop-memorize-setting-checkbox")[0].classList.contains("checked")){
+    if(memorizeSettings[0] == 1){
         let termString = toTitleCase(deck[deckIndex].definitions[0]);
 
         for(let i = 1; i < deck[deckIndex].definitions.length; i++) termString += "; " + toTitleCase(deck[deckIndex].definitions[i]);
@@ -404,7 +404,7 @@ function setupCard(deckIndex){
 
     let randomizedAnswers = [], incorrectAnswerLength;
 
-    if(document.querySelectorAll(".desktop-memorize-setting-checkbox")[0].classList.contains("checked")){
+    if(memorizeSettings[0] == 1){
         let termString = toTitleCase(deck[deckIndex].definitions[0]);
 
         for(let i = 1; i < deck[deckIndex].definitions.length; i++) termString += "; " + toTitleCase(deck[deckIndex].definitions[i]);
@@ -483,7 +483,9 @@ function initializeMemorize(){
     });
 
     for(let i = 0; i < deck.length; i++){
-        if(document.querySelectorAll(".desktop-memorize-setting-checkbox")[1].classList.contains("unchecked")) indexesIncomplete.push(i);
+        console.log(i, memorizeSettings[1], indexesIncomplete, indexesReviewed);
+
+        if(memorizeSettings[1] == 0) indexesIncomplete.push(i);
         else indexesReviewed.push(i);
 
         for(let j = 0; j < deck[i].definitions.length; j++){

@@ -1,5 +1,6 @@
 let deckShowAmount = 10;
 let contextMenu = false;
+let admin = false;
 
 let pages = ["Elephant Flashcards", "Elephant Task Manager", "Chat Group", "Search Results", "Folder Viewer"];
 let randomChatMessage = ["Rearranging Your Cards Into Decks...", "Managing Your Tasks Prematurely...", "Closing Minecraft and Beginning To Work...", "Placing 3 Day Blocks on Discord...", "Contemplating Your Life Choices...", "Do You People Even Read This???", "Please be Patient... I'm new...", "Flashing My Cards... wait...", "More Like Elephant Sweet...", "Not Asleep I Swear...", "Regretting Not Taking Job At Subway..."]
@@ -430,6 +431,11 @@ function min(num1, num2){
     else return num1
 }
 
+function displayMoreFlashcards(){
+    deckShowAmount += 10;
+    refreshFlashcards();
+}
+
 async function displayFlashcardsManager(user){
 
     let ele = document.getElementById('flashcards-list');
@@ -443,7 +449,7 @@ async function displayFlashcardsManager(user){
         userDecks.push(user.decks[i].id);
     }
 
-    for(let i = 0; i < user.elephantUserStatistics.recentlyViewedDeckIds.length; i++){
+    for(let i = 0; i < min(user.elephantUserStatistics.recentlyViewedDeckIds.length, deckShowAmount + 1); i++){
 
         let context;
         let success = true;
@@ -512,7 +518,7 @@ async function displayFlashcardsManager(user){
         }
     }
 
-    if(user.decks.length > deckShowAmount){
+    if(user.elephantUserStatistics.recentlyViewedDeckIds.length > deckShowAmount){
         let newBtn = document.createElement('button');
         newBtn.innerHTML = "Show More";
         newBtn.setAttribute("onclick", "displayMoreFlashcards()");
@@ -556,6 +562,7 @@ async function initialize(user){
 
     if(user.type !== "EMPLOYEE"){
         document.getElementById('desktop-sidebar-employee').classList.add('inactive-modal')
+        admin = true;
     }
 
     displayFolders(user)
@@ -636,7 +643,7 @@ async function locateUserInfo(){
     })
 
     const context = await response.json();
-    initialize(context)
+    initialize(context);
 }
 
 locateUserInfo();

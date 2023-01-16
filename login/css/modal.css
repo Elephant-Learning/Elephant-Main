@@ -188,7 +188,7 @@
     gap:6px;
 }
 
-#desktop-location-results > div{
+#desktop-location-results > div:not(.no-countries){
     display:flex;
     flex-direction:row;
     align-items:center;
@@ -202,13 +202,28 @@
     cursor:pointer;
 }
 
-#desktop-location-results > div > img{
+#desktop-location-results > div:not(.no-countries) > img{
     height:18px;
     filter:invert(0.5);
 }
 
-#desktop-location-results > div > p{
+#desktop-location-results > div:not(.no-countries) > p{
     margin:0;
     color:gray;
     font-size:12px;
+}
+
+.no-countries{
+    width:100%;
+    padding:12px;
+    text-align:center;
+    border:1px dashed var(--light-border-color);
+    border-radius:6px;
+    margin:12px 0;
+}
+
+.no-countries > p{
+    margin:0;
+    font-size:12px;
+    color:gray;
 }
