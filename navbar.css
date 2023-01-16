@@ -14,12 +14,12 @@
     flex-direction:row;
     align-items:center;
     justify-content:center;
-    gap:24px;
+    gap:18px;
 }
 
 #navbar > div:first-of-type > a > img:first-of-type{
     height:28px;
-    margin-right:24px;
+    margin-right:36px;
 }
 
 #navbar > div:first-of-type > h1{

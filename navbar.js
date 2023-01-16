@@ -16,16 +16,12 @@ async function initializeNavbar(prefix){
             const context = await response.json();
 
             document.getElementById("login-link").innerHTML = "Login as " + context.context.user.firstName;
-            document.getElementById("login-link").setAttribute("href", prefix + "flashcards/dashboard/")
-
-            console.log("sdfj")
+            document.getElementById("login-link").setAttribute("href", prefix + "flashcards/dashboard/");
         }
     } catch {
         console.log("I still hate fleet");
         console.log(JSON.parse(localStorage.getItem('autoLogin')))
     }
-
-    console.log("Df")
 }
 
 initializeNavbar(document.getElementById('navbar-prefix').innerHTML);
