@@ -25,6 +25,10 @@ html {
     left:calc(var(--size) * 12px);
 }
 
+.bottom-btns > a.inactive-modal, .bottom-btns > div.inactive-modal, .bottom-left-btns > a.inactive-modal, .bottom-left-btns > div.inactive-modal{
+    display:none;
+}
+
 .bottom-btns > a, .bottom-btns > div, .bottom-left-btns > a, .bottom-left-btns > div{
     width:calc(var(--size) * 36px);
     height:calc(var(--size) * 36px);

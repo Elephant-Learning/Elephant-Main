@@ -47,7 +47,31 @@ function shuffleArray(array) {
 
 function refreshMemorizePanel(){
     document.getElementById('desktop-memorize-panel-questions-left').innerHTML = indexesIncomplete.length * 2 + indexesReviewed.length;
-    document.getElementById('desktop-memorize-panel-questions-left-progress').style.background = "linear-gradient(135deg, var(--primary-accent) 0%, var(--primary-accent-gradient) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent) " + (100 * indexesComplete.length / deck.length) + "%, var(--secondary-accent-gradient) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) " + (100 * (indexesReviewed.length + indexesComplete.length) / deck.length) + "%, var(--bg-color-1) 100%)";
+
+
+    let reviewedPercentageOld, completePercentageOld, reviewedPercentageNew, completePercentageNew;
+
+    try{
+        completePercentageOld = parseInt(document.getElementById('desktop-memorize-panel-questions-left-progress').style.background.split(" ")[4].slice(0, -2));
+        reviewedPercentageOld = parseInt(document.getElementById('desktop-memorize-panel-questions-left-progress').style.background.split(" ")[8].slice(0, -2));
+    } catch(e){
+        completePercentageOld = 0;
+        reviewedPercentageOld = 0;
+    }
+
+    completePercentageNew = (100 * indexesComplete.length / deck.length);
+    reviewedPercentageNew = (100 * (indexesReviewed.length + indexesComplete.length) / deck.length)
+
+    const speedControl = 50;
+    let i = 0;
+
+    let animation = setInterval(function(){
+        if(i > speedControl) clearInterval(animation);
+        else{
+            document.getElementById('desktop-memorize-panel-questions-left-progress').style.background = "linear-gradient(135deg, var(--primary-accent) 0%, var(--primary-accent-gradient) " + (completePercentageOld + i * (completePercentageNew - completePercentageOld) / speedControl) + "%, var(--secondary-accent) " + (completePercentageOld + i * (completePercentageNew - completePercentageOld) / speedControl) + "%, var(--secondary-accent-gradient) " + (reviewedPercentageOld + i * (reviewedPercentageNew - reviewedPercentageOld) / speedControl) + "%, var(--bg-color-1) " + (reviewedPercentageOld + i * (reviewedPercentageNew - reviewedPercentageOld) / speedControl) + "%, var(--bg-color-1) 100%)";
+            i++;
+        }
+    }, 10)
 }
 
 function incorrectBtn(){
@@ -59,7 +83,6 @@ function incorrectBtn(){
 
 function askMemorizeQuestion(){
     currentQuestionIndex = Math.floor(Math.random() * (indexesIncomplete.length + indexesReviewed.length));
-    console.log(currentQuestionIndex, indexesIncomplete.length);
 
     refreshMemorizePanel()
 
