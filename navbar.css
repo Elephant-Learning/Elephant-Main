@@ -1,6 +1,6 @@
 #navbar{
-    height:60px;
-    background:var(--bg-color-1);
+    height:50px;
+    background:var(--dark-gray);
     width:84vw;
     padding:0 8vw;
     display:flex;
@@ -15,6 +15,7 @@
     align-items:center;
     justify-content:center;
     gap:18px;
+    color:white;
 }
 
 #navbar > div:first-of-type > a > img:first-of-type{
@@ -48,6 +49,7 @@
 
 .navbar-dropdown > img{
     height:20px;
+    filter:invert(1);
 }
 
 .navbar-dropdown:not(.active-dropdown) > img{
