@@ -26,6 +26,10 @@ async function toggleAvatarModal(){
     }
 }
 
+function toggleTagsModal(){
+
+}
+
 function toggleDeleteModal(){
     if(document.getElementById('delete-login-modal-bg').classList.contains("inactive-modal")){
         document.getElementById('confirm-password-delete-input').value = "";

@@ -31,8 +31,30 @@ function leaveEditor(){
     location.href = "../dashboard";
 }
 
-function askQuestion(){
+async function askQuestion(){
+    let savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
 
+    const content = document.getElementById("question-text-editor").contentDocument.body.innerHTML;
+    console.log(content);
+
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/create', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        body: JSON.stringify({
+            title: document.getElementById('question-header').value,
+            description: content,
+            userId: savedUserId
+        }),
+        mode: 'cors'
+    })
+
+    const context = await response.json();
+    console.log(context);
 }
 
 async function initialize(user){

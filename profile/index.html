@@ -21,7 +21,7 @@
             <img src="./icons/cry.png" alt="">
         </div>
         <h1>Wait! Don't Go!</h1>
-        <p id="delete-acc-text">You cannot undo this. By continuing, you'll lose 8 friends and 12 decks.</p>
+        <p id="delete-acc-text"></p>
         <input type="password" id="confirm-password-delete-input" placeholder="Confirm Password To Delete">
         <button id="delete-login-back" onclick="toggleDeleteModal()">Go Back</button>
         <button id="delete-login-proceed" onclick="deleteAccount()">Delete Anyway</button>
@@ -250,11 +250,16 @@
                                 <img src="../flashcards/icons/fire.png" alt="">
                                 <p id="my-profile-streak"></p>
                             </div>
+                            <div class="my-profile-information">
+                                <img src="./icons/tags.png" alt="">
+                                <p id="my-profile-tags">Arts & Humanities, Science, Mathematics</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div id="my-profile-options">
                     <button id="pfp-change-btn" onclick="toggleAvatarModal()">Change Profile Picture</button>
+                    <button id="tags-change-btn" onclick="toggleTagsModal()">Edit Your Tags</button>
                     <button id="delete-acc-btn" onclick="toggleDeleteModal()">Delete Account</button>
                 </div>
                 <div id="my-profile-misc">
