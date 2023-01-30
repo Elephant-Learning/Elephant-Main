@@ -1,5 +1,5 @@
 async function initialize(){
-    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/misc/totalUsersAndCards', {
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/misc/numericalInformation', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -14,7 +14,8 @@ async function initialize(){
     console.log(context);
 
     document.querySelectorAll(".numbers-label")[0].innerHTML = context.context.users;
-    document.querySelectorAll(".numbers-label")[1].innerHTML = context.context.cards;
+    document.querySelectorAll(".numbers-label")[1].innerHTML = context.context.decks;
+    document.querySelectorAll(".numbers-label")[2].innerHTML = context.context.answeredQuestions;
 }
 
 initialize();
