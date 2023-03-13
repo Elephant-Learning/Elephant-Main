@@ -37,6 +37,14 @@ async function askQuestion(){
     const content = document.getElementById("question-text-editor").contentDocument.body.innerHTML;
     console.log(content);
 
+    const bodyJSON = JSON.stringify({
+        title: document.getElementById('question-header').value,
+        description: content,
+        userId: savedUserId
+    })
+
+    console.log(bodyJSON);
+
     const response = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/create', {
         method: 'POST',
         headers: {
@@ -45,11 +53,7 @@ async function askQuestion(){
             'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type'
         },
-        body: JSON.stringify({
-            title: document.getElementById('question-header').value,
-            description: content,
-            userId: savedUserId
-        }),
+        body: bodyJSON,
         mode: 'cors'
     })
 
@@ -108,6 +112,8 @@ async function locateUserInfo(){
     })
 
     const context = await response.json();
+    console.log(context);
+
     await initialize(context)
 }
 
