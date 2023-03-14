@@ -939,6 +939,9 @@ async function checkForEditing(){
             toggleCardVisibility(cards.visibility)
 
             editing = cards.id;
+
+            document.getElementById('view-deck').classList.remove("inactive-modal");
+            document.getElementById('view-deck').setAttribute("onclick", "leaveEditor('../viewer/?deck=" + cards.id + "')")
             document.getElementById('deck-name').innerHTML = cards.name;
 
             const authorResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + cards.authorId, {

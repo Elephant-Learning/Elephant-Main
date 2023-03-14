@@ -1,6 +1,6 @@
 #navbar{
-    height:60px;
-    background:var(--bg-color-1);
+    height:50px;
+    background:var(--dark-gray);
     width:84vw;
     padding:0 8vw;
     display:flex;
@@ -15,6 +15,7 @@
     align-items:center;
     justify-content:center;
     gap:18px;
+    color:white;
 }
 
 #navbar > div:first-of-type > a > img:first-of-type{
@@ -37,9 +38,122 @@
     font-weight:600;
     font-size:13px;
     cursor:pointer;
+    color:gray;
+    transition-duration:250ms;
 }
 
-#navbar a{
+.navbar-dropdown > p:hover{
+    color:white;
+}
+
+.navbar-subcontainer{
+    visibility:hidden;
+    transition-delay:500ms;
+    transition-duration:250ms;
+    position:absolute;
+    width:100vw;
+    background:var(--light-gray);
+    top:50px;
+    left:0;
+    cursor:default;
+    opacity:0;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+}
+
+.navbar-subcontainer > div:first-of-type{
+    width:calc(84vw - 385px);
+    padding:32px 8vw;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:12px;
+}
+
+.navbar-subcontainer-row{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:18px;
+}
+
+.navbar-subcontainer-row > p{
+    font-size:14px;
+    font-weight:700;
+    width:calc(84vw - 385px);
+    border-bottom:1px solid gray;
+    padding-bottom:6px;
+    margin:0;
+}
+
+.navbar-subcontainer-row > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:24px;
+}
+
+.navbar-subcontainer-row > div > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    gap:6px;
+}
+
+.navbar-subcontainer-row > div > div > img{
+    height:18px;
+    filter:invert(0.5);
+}
+
+.navbar-subcontainer-row > div > div:hover > img{
+    filter: invert(55%) sepia(18%) saturate(6750%) hue-rotate(304deg) brightness(101%) contrast(99%);
+}
+
+.navbar-subcontainer-row > div > div > p{
+    color:gray;
+    font-weight:600;
+    font-size:14px;
+    transition-duration:250ms;
+    margin:0;
+}
+
+.navbar-subcontainer-row > div > div:hover > p{
+    color:var(--primary-accent);
+}
+
+.navbar-subcontainer > div:last-of-type{
+    width:336px;
+    border-right:1px solid var(--dark-gray);
+    background:var(--dark-border-color);
+    padding:24px;
+}
+
+.navbar-subcontainer > div:last-of-type > a{
+    width:336px;
+    height:48px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    font-size:16px;
+    font-weight:700;
+    text-decoration:none;
+    border-radius:12px;
+}
+
+.navbar-dropdown > p:hover ~ .navbar-subcontainer, .navbar-subcontainer:hover{
+    visibility:visible !important;
+    opacity:1 !important;
+}
+
+#navbar a:not(.navbar-subcontainer > div > a){
     font-size:12px;
     color:var(--primary-accent);
     font-weight:600;
@@ -48,6 +162,7 @@
 
 .navbar-dropdown > img{
     height:20px;
+    filter:invert(1);
 }
 
 .navbar-dropdown:not(.active-dropdown) > img{
