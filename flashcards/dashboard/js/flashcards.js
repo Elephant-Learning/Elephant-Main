@@ -44,6 +44,11 @@ async function displayFlashcard(flashcardType, params){
         icon.src = "../icons/file.png";
         iconDiv.classList.add(params.type.toLowerCase() + "-flashcard");
     } else if(flashcardType === "user"){
+        if(params.type == "INDIVIDUAL") iconDiv.classList.add("personal-flashcard");
+        else if(params.type == "STUDENT") iconDiv.classList.add("community-flashcard");
+        else if(params.type == "INSTRUCTOR") iconDiv.classList.add("shared-flashcard");
+        else iconDiv.classList.add("other-flashcard");
+
         icon.src = "../../icons/avatars/" + params.pfpId + ".png";
         iconDiv.classList.add("personal-flashcard");
     }
@@ -95,8 +100,12 @@ async function displayFlashcard(flashcardType, params){
         tag.innerHTML = params.type;
         tag.classList.add(params.type.toLowerCase() + "-flashcard");
     } else if(flashcardType === "user"){
+        if(params.type == "INDIVIDUAL") tag.classList.add("personal-flashcard");
+        else if(params.type == "STUDENT") tag.classList.add("community-flashcard");
+        else if(params.type == "INSTRUCTOR") tag.classList.add("shared-flashcard");
+        else tag.classList.add("other-flashcard");
+
         tag.innerHTML = params.type;
-        tag.classList.add("personal-flashcard");
     }
 
     let options = document.createElement('div');
@@ -206,7 +215,11 @@ async function displayFlashcard(flashcardType, params){
             toggleContextMenu(true, e);
         })
     } else if(flashcardType === "user"){
-        mainDiv.classList.add("personal-flashcard-border");
+        if(params.type == "INDIVIDUAL") mainDiv.classList.add("personal-flashcard-border");
+        else if(params.type == "STUDENT") mainDiv.classList.add("community-flashcard-border");
+        else if(params.type == "INSTRUCTOR") mainDiv.classList.add("shared-flashcard-border");
+        else mainDiv.classList.add("other-flashcard-border");
+
         mainDiv.classList.add("user-flashcard");
     }
 

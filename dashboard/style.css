@@ -13,3 +13,105 @@
     position:absolute;
     top:0;
 }
+
+#my-dashboard{
+    position:absolute;
+    top:calc(var(--size) * 44px);
+    left:calc(var(--size) * 256px);
+    width:calc(100vw - var(--size) * 256px);
+    height:calc(100vh - var(--size) * 92px);
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:flex-start;
+    overflow-y:scroll !important;
+    overflow-x:hidden;
+}
+
+#dashboard-left{
+    width:calc(100% - var(--size) * 328px);
+    padding: calc(var(--size) * 24px) calc(var(--size) * 12px) calc(var(--size) * 24px) calc(var(--size) * 24px);
+    height:20px;
+}
+
+#dashboard-right{
+    width:calc(var(--size) * 256px);
+    padding: calc(var(--size) * 24px) calc(var(--size) * 24px) calc(var(--size) * 24px) calc(var(--size) * 12px);
+    position:sticky;
+    top:0;
+}
+
+#profile-at-glance{
+    width:calc(100% - var(--size) * 24px);
+    padding: calc(var(--size) * 108px) calc(var(--size) * 12px) calc(var(--size) * 12px);
+    background:var(--bg-color-1);
+    border-radius:calc(var(--size) * 6px);
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+#profile-banner{
+    width:calc(var(--size) * 256px);
+    height:calc(var(--size) * 64px);
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+#profile-image-container{
+    position:absolute;
+    width:calc(var(--size) * 64px);
+    height:calc(var(--size) * 64px);
+    background:var(--bg-color-1);
+    top:calc(var(--size) * 32px);
+    left:calc(var(--size) * 96px);
+    border-radius:50%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+#profile-image-container > img{
+    height:calc(var(--size) * 36px);
+}
+
+#profile-name{
+    font-size:calc(var(--size) * 16px);
+    margin:0;
+}
+
+#profile-desc{
+    font-size:calc(var(--size) * 12px);
+    color:gray;
+    margin:0;
+}
+
+.profile-divider{
+    margin:calc(var(--size) * 24px) 0;
+    background:var(--light-border-color);
+    height:1px;
+    width:100%;
+}
+
+.community-banner{
+    background:linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient));
+}
+
+.shared-banner{
+    /*background:linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient));*/
+    background:linear-gradient(135deg, var(--tertiary-accent), var(--tertiary-accent-gradient));
+}
+
+.personal-banner{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+}
+
+.other-banner{
+    background:linear-gradient(135deg, var(--quaternary-accent), var(--quaternary-accent-gradient));
+}

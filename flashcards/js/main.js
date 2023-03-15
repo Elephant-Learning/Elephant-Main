@@ -55,6 +55,8 @@ function toggleTheme(themeIndex){
         root.style.setProperty("--secondary-accent-gradient", "#27b4b9");
         root.style.setProperty("--tertiary-accent", "#db7735");
         root.style.setProperty("--tertiary-accent-gradient", "#d47d39");
+        root.style.setProperty("--quaternary-accent", "#0ac260");
+        root.style.setProperty("--quaternary-accent-gradient", "#1b985b");
     } else if(themeIndex === 0){
         root.style.setProperty('--text-color', 'black');
         root.style.setProperty("--bg-color-1", "#ffffff");
@@ -73,6 +75,8 @@ function toggleTheme(themeIndex){
         root.style.setProperty("--secondary-accent-gradient", "#31d6dc");
         root.style.setProperty("--tertiary-accent", "#f8680a");
         root.style.setProperty("--tertiary-accent-gradient", "#fa8d37");
+        root.style.setProperty("--quaternary-accent", "#00ff77");
+        root.style.setProperty("--quaternary-accent-gradient", "#19cf77");
     } else if(themeIndex === 2){
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) toggleTheme(1);
         else toggleTheme(0)

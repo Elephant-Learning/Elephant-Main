@@ -3,16 +3,23 @@ async function initialize(user){
         location.href = "../login"
     } else user = user.context.user;
 
-    if(user.type === "EMPLOYEE"){
+    if(user.type === "ADMIN"){
         document.getElementById('desktop-sidebar-employee').classList.remove('inactive-modal')
     }
 
     //console.log(user);
 
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png"
+    document.getElementById('profile-image').src = "../../icons/avatars/" + user.pfpId + ".png"
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
+    document.getElementById('profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
+    document.getElementById('profile-desc').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
 
+    if(user.type == "INDIVIDUAL") document.getElementById("profile-banner").classList.add("personal-banner");
+    else if(user.type == "STUDENT") document.getElementById("profile-banner").classList.add("community-banner");
+    else if(user.type == "INSTRUCTOR") document.getElementById("profile-banner").classList.add("shared-banner");
+    else document.getElementById("profile-banner").classList.add("other-banner");
 
     await notificationsManager(user);
     toggleNotificationTab(0);

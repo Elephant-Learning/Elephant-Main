@@ -17,8 +17,10 @@
     --secondary-accent-gradient:#31d6dc;
     --tertiary-accent:#f8680a;
     --tertiary-accent-gradient:#fa8d37;
-    /*--tertiary-accent:#00ff6e;
-    --tertiary-accent-gradient:#31dc53;*/
+    --quaternary-accent:#00ff77;
+    --quaternary-accent-gradient:#19cf77;
+        /*--tertiary-accent:#00ff6e;
+        --tertiary-accent-gradient:#31dc53;*/
     --accent-highlight:#f30096;
     --light-accent:#ffedf6;
     --size:1;

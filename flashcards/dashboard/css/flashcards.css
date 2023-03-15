@@ -212,6 +212,10 @@
     border:1px solid var(--tertiary-accent);
 }
 
+.other-flashcard-border:hover{
+    border:1px solid var(--quaternary-accent);
+}
+
 .flashcard-deck:hover{
     /*box-shadow:0 0 calc(var(--size) * 16px) 0 var(--hover-light);
     transform:scale(1.025);*/
@@ -291,6 +295,10 @@
 
 .personal-flashcard{
     background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+}
+
+.other-flashcard{
+    background:linear-gradient(135deg, var(--quaternary-accent), var(--quaternary-accent-gradient));
 }
 
 .flashcard-deck > div:last-of-type{

@@ -3,6 +3,48 @@ let indexesIncomplete, indexesReviewed, indexesComplete, memorizeWriteCorrectAns
 
 let unableToAnswer = false;
 
+async function incrementWrong(cardIndex){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/statistics/card/answeredWrong', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        body: JSON.stringify({
+            userId: savedUserId,
+            cardId: cardIndex
+        }),
+        mode: 'cors'
+    });
+
+    /*const context = await response.json();
+    console.log(context);*/
+}
+
+async function incrementRight(cardIndex){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/statistics/card/answeredRight', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        body: JSON.stringify({
+            userId: savedUserId,
+            cardId: cardIndex
+        }),
+        mode: 'cors'
+    });
+
+    /*const context = await response.json();
+    console.log(context);*/
+}
+
 function memorizeCheckAnswer(index){
     document.querySelectorAll('.desktop-memorize-definition')[index].classList.add('desktop-memorize-definition-selected');
 }
@@ -152,6 +194,8 @@ function createMemorizeOption(text, correct, deckId){
                 document.getElementById('desktop-memorize-incorrect-para').innerHTML = "The answer to the term '" + deck[deckId].term + "' is:"
             }
 
+            incrementWrong(deck[deckId].id);
+
             removeAllChildNodes(document.getElementById("desktop-memorize-incorrect-list"))
 
             for(let i = 0; i < deck[deckId].definitions.length; i++){
@@ -242,6 +286,8 @@ function setupWrite(deckIndex){
                     if(correntAnswerNumber === 0){
                         answeredQuestions++;
                         answeredCorrectly++;
+
+                        incrementRight(deck[deckIndex].id);
 
                         setTimeout(function(){
                             indexesReviewed.splice(indexesReviewed.indexOf(deckIndex), 1);
@@ -342,6 +388,8 @@ function setupWrite(deckIndex){
                         if(correntAnswerNumber === 0){
                             answeredQuestions++;
                             answeredCorrectly++;
+
+                            incrementRight(deck[deckIndex].id);
 
                             setTimeout(function(){
                                 indexesReviewed.splice(indexesReviewed.indexOf(deckIndex), 1);
@@ -506,7 +554,7 @@ function initializeMemorize(){
     });
 
     for(let i = 0; i < deck.length; i++){
-        console.log(i, memorizeSettings[1], indexesIncomplete, indexesReviewed);
+        //console.log(i, memorizeSettings[1], indexesIncomplete, indexesReviewed);
 
         if(memorizeSettings[1] == 0) indexesIncomplete.push(i);
         else indexesReviewed.push(i);

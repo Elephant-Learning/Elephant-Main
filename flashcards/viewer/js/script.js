@@ -153,6 +153,72 @@ function updateCardsList(){
     }
 }
 
+function updateDeckStatistics(userStatistics, deck){
+
+    const deckCardIds = [];
+    const deckCardInfo = [];
+
+    console.log(userStatistics, deck);
+    removeAllChildNodes(document.getElementById("incorrect-column"));
+    removeAllChildNodes(document.getElementById("lol-no-column"));
+    removeAllChildNodes(document.getElementById("correct-column"));
+
+    for(let i = 0; i < deck.length; i++){
+        deckCardIds.push(deck[i].id);
+        deckCardInfo.push({
+            term: deck[i].term,
+            definitions: deck[i].definitions
+        });
+    }
+
+    for(let i = 0; i < Object.keys(userStatistics).length; i++){
+        if(deckCardIds.includes(Object.values(userStatistics)[i].cardId)){
+            let newDiv = document.createElement("div");
+            let newHeader = document.createElement("h1");
+            let newPara = document.createElement("p");
+            let definitionsString = "";
+
+            newHeader.innerHTML = deckCardInfo[deckCardIds.indexOf(Object.values(userStatistics)[i].cardId)].term
+
+            for(let j = 0; j < deckCardInfo[deckCardIds.indexOf(Object.values(userStatistics)[i].cardId)].definitions.length; j++) definitionsString += ", " + deckCardInfo[deckCardIds.indexOf(Object.values(userStatistics)[i].cardId)].definitions[j]
+
+            newPara.innerHTML = definitionsString.substring(2);
+
+            newDiv.append(newHeader, newPara);
+
+            if(Object.values(userStatistics)[i].answeredRight === 0 && Object.values(userStatistics)[i].answeredWRong === 0) document.getElementById("lol-no-column").appendChild(newDiv);
+            else {
+                try{
+                    if(Object.values(userStatistics)[i].answeredRight / Object.values(userStatistics)[i].answeredWrong >= 1.75) document.getElementById("correct-column").appendChild(newDiv);
+                    else document.getElementById("incorrect-column").appendChild(newDiv);
+                } catch(e){
+                    document.getElementById("correct-column").appendChild(newDiv);
+                }
+            }
+
+            deckCardIds.splice(i, 1);
+            deckCardInfo.splice(i, 1);
+        }
+    }
+
+    for(let i = 0; i < deckCardInfo.length; i++){
+        let newDiv = document.createElement("div");
+        let newHeader = document.createElement("h1");
+        let newPara = document.createElement("p");
+        let definitionsString = "";
+
+        newHeader.innerHTML = deckCardInfo[i].term
+
+        for(let j = 0; j < deckCardInfo[i].definitions.length; j++) definitionsString += ", " + deckCardInfo[i].definitions[j]
+
+        newPara.innerHTML = definitionsString.substring(2);
+
+        newDiv.append(newHeader, newPara);
+
+        document.getElementById("lol-no-column").appendChild(newDiv);
+    }
+}
+
 window.onload = async function(){
     let deckInt = false;
 
@@ -286,6 +352,7 @@ window.onload = async function(){
 
     updateCardsList();
     updateFlashcard();
+    updateDeckStatistics(userContext.context.user.elephantUserStatistics.cardStatistics, deck);
     initializeMemorize();
 }
 

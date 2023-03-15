@@ -16,7 +16,7 @@ async function initializeNavbar(prefix){
             const context = await response.json();
 
             document.getElementById("login-link").innerHTML = "Login as " + context.context.user.firstName;
-            document.getElementById("login-link").setAttribute("href", prefix + "flashcards/dashboard/");
+            document.getElementById("login-link").setAttribute("href", prefix + "/dashboard/");
         }
     } catch {
         console.log("I still hate fleet");
