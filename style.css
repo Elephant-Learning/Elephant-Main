@@ -193,3 +193,19 @@ body *{
     align-items:flex-start;
     justify-content:space-between;
 }
+
+#content-container > div{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    width:40vw;
+    height:512px;
+    border-radius:16px;
+}
+
+#content-container > div:nth-of-type(2){
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
