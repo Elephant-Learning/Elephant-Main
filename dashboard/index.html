@@ -15,6 +15,13 @@
 </head>
 <body>
     <div id="desktop-wrapper">
+        <div id="desktop-loader-container">
+            <div id="desktop-loader-bg-left"></div>
+            <div id="desktop-loader"></div>
+            <img src="../../icons/elephant-400-400-white.png" alt="Loading Ain't Loading" id="desktop-loader-img">
+            <div id="desktop-loader-bg-right"></div>
+            <p id="desktop-loader-text"></p>
+        </div>
         <div id="desktop-notifications-modal" class="inactive-modal">
             <div id="desktop-notifications-header">
                 <h1>Notifications</h1>
@@ -169,7 +176,26 @@
                 </div>
                 <p id="desktop-main-container-tab">My Dashboard</p>
                 <div id="my-dashboard">
-                    <div id="dashboard-left"></div>
+                    <div id="dashboard-left">
+                        <div id="quick-buttons">
+                            <a href="../flashcards/dashboard/">
+                                <div></div>
+                                <img src="../flashcards/icons/deck.png" alt="">
+                                <div>
+                                    <h1>Flip</h1>
+                                    <p>Random Amazing Slogan</p>
+                                </div>
+                            </a>
+                            <a href="../answers/dashboard/">
+                                <div></div>
+                                <img src="../answers/icons/answers.png" alt="">
+                                <div>
+                                    <h1>Answers</h1>
+                                    <p>Random Amazing Slogan</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                     <div id="dashboard-right">
                         <div id="profile-at-glance">
                             <div id="profile-banner"></div>
@@ -179,6 +205,23 @@
                             <h1 id="profile-name"></h1>
                             <p id="profile-desc"></p>
                             <div class="profile-divider"></div>
+                            <div class="profile-information">
+                                <img src="../flashcards/icons/email.png" alt="">
+                                <p id="profile-email"></p>
+                            </div>
+                            <div class="profile-information">
+                                <img src="../flashcards/icons/fire.png" alt="">
+                                <p id="profile-streak"></p>
+                            </div>
+                            <div class="profile-divider"></div>
+                            <div class="profile-information">
+                                <img src="../flashcards/icons/deck.png" alt="">
+                                <p id="profile-decks"></p>
+                            </div>
+                            <div class="profile-information">
+                                <img src="../answers/icons/answers.png" alt="">
+                                <p id="profile-answers"></p>
+                            </div>
                         </div>
                     </div>
                 </div>

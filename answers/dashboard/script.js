@@ -87,6 +87,8 @@ async function initialize(user){
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
     document.getElementById('desktop-profile-user-img').src = "../../flashcards/icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
 
+    closeLoader();
+
     createQuestion("Why did the chicken cross the road?", [2,3,5,6], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Ronak Kothari", 45, "Posted 12+ Hours Ago", 50, 123, false);
     createQuestion("Why did your mother sleep with my dad?", [2,5,6], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Ronak Kothari", 45, "Posted 1 Week Ago", 50, 123, false);
     createQuestion("How to add two letters?", [2,4,6], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Shrihun Sankepally", 41, "Posted 2 Weeks Ago", 50, 123, false);
@@ -95,6 +97,17 @@ async function initialize(user){
 
     document.getElementById('loading-div').classList.add('inactive-modal');
 }
+
+//toggle Loading Bar
+let randomChatMessage = ["Rearranging Your Cards Into Decks...", "Managing Your Tasks Prematurely...", "Closing Minecraft and Beginning To Work...", "Placing 3 Day Blocks on Discord...", "Contemplating Your Life Choices...", "Do You People Even Read This???", "Please be Patient... I'm new...", "Flashing My Cards... wait...", "More Like Elephant Sweet...", "Not Asleep I Swear...", "Regretting Not Taking Job At Subway..."]
+
+function closeLoader(){
+    document.getElementById('desktop-loader-container').classList.add('inactive-modal')
+}
+
+document.addEventListener('DOMContentLoaded', function(e){
+    document.getElementById('desktop-loader-text').innerHTML = randomChatMessage[Math.floor(Math.random() * randomChatMessage.length)];
+})
 
 async function locateUserInfo(){
     const loadingText = ["Loading your custom feed. Sit tight!", "Your daily dose of problems coming right up!", "Man students have so many issues... it's amusing!", "Fetching your updated feed. Give me a moment.", "Do people even read this text?", "Everyone cares about the students' problems.. nobody asks about mine :("]

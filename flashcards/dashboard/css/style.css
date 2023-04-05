@@ -77,76 +77,6 @@
     font-weight:600;
 }
 
-#desktop-loader-container:not(.inactive-modal){
-    opacity:1;
-    visibility: visible;
-}
-
-#desktop-loader-container{
-    transition-duration:500ms;
-    position:absolute;
-    z-index:5;
-    top:0;
-    left:0;
-    width:100vw;
-    height:100vh;
-    overflow:hidden;
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:center;
-}
-
-#desktop-loader-bg-left{
-    background:var(--dark-gray);
-    width:50vw;
-    height:100vh;
-    position:absolute;
-    left:0;
-    z-index:6;
-}
-
-#desktop-loader-bg-right{
-    background:var(--dark-gray);
-    width:50vw;
-    height:100vh;
-    position:absolute;
-    right:0;
-    z-index:6;
-}
-
-#desktop-loader{
-    width:30vmin;
-    height:30vmin;
-    background:linear-gradient(135deg, var(--primary-accent) 50%, var(--accent-highlight) 50%);
-    z-index:7;
-    border-radius:50%;
-    box-shadow:0 0 5vmin 0 black;
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:center;
-    animation-name:loaderRotate;
-    animation-duration:2500ms;
-    animation-iteration-count:infinite;
-}
-
-#desktop-loader-img{
-    height:17.5vmin;
-    position:absolute;
-    animation-name:elephantZoom;
-    animation-duration:2500ms;
-    animation-iteration-count:infinite;
-    z-index:7;
-}
-
-#desktop-loader-text{
-    position:absolute;
-    z-index:7;
-    color:white;
-    bottom:27.5vmin;
-}
-
 #desktop-bottom-buttons{
     position:absolute;
     display:flex;
@@ -182,24 +112,6 @@
 
 .desktop-bottom-btn:hover{
     box-shadow:0 0 calc(var(--size) * 6px) 0 var(--dark-gray);
-}
-
-@keyframes loaderRotate{
-    from{
-        transform:rotate(0deg);
-    } to {
-        transform:rotate(2880deg)
-    }
-}
-
-@keyframes elephantZoom{
-    from{
-        transform:scale(1);
-    } 50%{
-        transform:scale(1.1);
-    } to{
-        transform:scale(1);
-    }
 }
 
 #desktop-folder-modal:not(.inactive-modal){
