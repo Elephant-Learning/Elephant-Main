@@ -112,7 +112,7 @@
     position:relative;
     overflow:hidden;
     border-radius:calc(var(--size) * 6px);
-    gap:calc(var(--size) * 12px);
+    gap:calc(var(--size) * 16px);
     cursor:pointer;
     transition-duration:250ms;
     text-decoration:none;
@@ -129,6 +129,7 @@
     position:absolute;
     top:0;
     left:0;
+    display:none;
 }
 
 #quick-buttons > a > img{
@@ -149,6 +150,84 @@
     font-size:calc(var(--size) * 12px);
     color:gray;
     margin:0;
+}
+
+#dashboard-left > h1{
+    font-size:calc(var(--size) * 16px);
+    margin: calc(var(--size) * 16px) 0 0;
+}
+
+#dashboard-left > h2{
+    font-size:calc(var(--size) * 14px);
+    margin: calc(var(--size) * 12px) 0;
+}
+
+.recent-activity-div{
+    height:calc(var(--size) * 256px);
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 12px);
+    flex-wrap:wrap;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    padding:calc(var(--size) * 12px);
+}
+
+.recent-activity-div > a{
+    background:var(--bg-color-1);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 18px);
+    padding:calc(var(--size) * 18px);
+    border:1px solid var(--light-border-color);
+    border-radius:calc(var(--size) * 6px);
+    text-decoration:none;
+    cursor:pointer;
+    transition-duration:250ms;
+}
+
+.recent-activity-div > a:hover{
+    box-shadow:0 0 calc(var(--size) * 6px) 0 gray;
+}
+
+.recent-activity-div > a > div:first-of-type{
+    width:calc(var(--size) * 28px);
+    height:calc(var(--size) * 28px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+}
+
+.recent-activity-div > a > div:first-of-type > img{
+    filter:invert(1);
+    height:calc(var(--size) * 16px);
+}
+
+.recent-activity-div > a > div:last-of-type {
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    overflow-x:hidden;
+    width:calc(var(--size) * 256px);
+    /*gap:calc(var(--size) * 6px);*/
+}
+
+.recent-activity-div > a > div:last-of-type > h1{
+    font-size:calc(var(--size) * 14px);
+    margin:0;
+}
+
+.recent-activity-div > a > div:last-of-type > p{
+    font-size:calc(var(--size) * 10px);
+    margin:0;
+    color:gray;
 }
 
 .profile-divider{
@@ -194,4 +273,15 @@
     margin:0;
     font-size:calc(var(--size) * 12px);
     color:gray;
+}
+
+#new-user-modal-bg{
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:5;
+    width:100vw;
+    height:100vh;
+    backdrop-filter:blur(calc(var(--size) * 5px));
+    background:rgba(255,255,255,0.5)
 }

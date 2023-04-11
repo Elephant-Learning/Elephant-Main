@@ -1,7 +1,57 @@
+let mainColor;
+
+function min(int1, int2){
+    if(int1 < int2) return int1;
+    else return int2;
+}
+
+function pushIndexToFront(array, index){
+    let newArray = [];
+
+    newArray.push(array[index]);
+
+    for(let i = 0; i < array.length; i++) if(i !== index) newArray.push(array[i]);
+
+    return newArray;
+}
+
+function addCard(params, type){
+    const images = ["../flashcards/icons/deck.png", "../answers/icons/answers.png"];
+
+    let newLink = document.createElement("a");
+    let imageDiv = document.createElement('div');
+    let textDiv = document.createElement('div');
+
+    let newImage = document.createElement('img');
+    newImage.src = images[type];
+
+    let newHeader = document.createElement('h1');
+    let newPara = document.createElement('p');
+
+    if(type === 0){
+        newHeader.innerHTML = params.name;
+        newPara.innerHTML = computeTime(params.created);
+    } else if(type === 1){
+        newHeader.innerHTML = params.title;
+        newPara.innerHTML = params.description;
+    }
+
+    imageDiv.appendChild(newImage);
+    imageDiv.classList.add(mainColor);
+    textDiv.append(newHeader, newPara);
+
+    newLink.append(imageDiv, textDiv);
+    if(type === 0) newLink.setAttribute("href", "../flashcards/viewer/?deck=" + params.id);
+    else if(type === 1) newLink.setAttribute("href", "../answers/question/?id=" + params.id)
+    document.querySelectorAll('.recent-activity-div')[type].appendChild(newLink);
+}
+
 async function initialize(user){
     if(user.status === "FAILURE") {
         location.href = "../login"
     } else user = user.context.user;
+
+    if(user.newUser) document.getElementById('new-user-modal-bg').classList.remove('inactive-modal');
 
     if(user.type === "ADMIN"){
         document.getElementById('desktop-sidebar-employee').classList.remove('inactive-modal')
@@ -26,10 +76,31 @@ async function initialize(user){
     document.getElementById('profile-decks').innerHTML = user.decks.length + " decks";
     document.getElementById('profile-answers').innerHTML = user.answers.length + " questions";
 
-    if(user.type === "INDIVIDUAL") document.getElementById("profile-banner").classList.add("personal-banner");
-    else if(user.type === "STUDENT") document.getElementById("profile-banner").classList.add("community-banner");
-    else if(user.type === "INSTRUCTOR") document.getElementById("profile-banner").classList.add("shared-banner");
-    else document.getElementById("profile-banner").classList.add("other-banner");
+    if(user.type === "INDIVIDUAL") mainColor = "personal-banner";
+    else if(user.type === "STUDENT") mainColor = "community-banner";
+    else if(user.type === "INSTRUCTOR") mainColor = "shared-banner";
+    else mainColor = "other-banner";
+
+    let userDecks = user.decks;
+    let userDeckIds = [];
+
+    for(let i = 0; i < userDecks.length; i++) userDeckIds.push(userDecks[i].id);
+
+    for(let i = user.elephantUserStatistics.recentlyViewedDeckIds.length - 1; i >= 0; i--){
+        if(userDeckIds.includes(user.elephantUserStatistics.recentlyViewedDeckIds[i])){
+            userDecks = pushIndexToFront(userDecks, userDeckIds.indexOf(user.elephantUserStatistics.recentlyViewedDeckIds[i]));
+        }
+    }
+
+    for(let i = 0; i < min(userDecks.length, 10); i++){
+        addCard(userDecks[i], 0);
+    }
+
+    for(let i = 0; i < min(user.answers.length, 10); i++){
+        addCard(user.answers[i], 1);
+    }
+
+    document.getElementById("profile-banner").classList.add(mainColor)
 
     await notificationsManager(user);
     toggleNotificationTab(0);
