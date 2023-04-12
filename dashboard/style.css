@@ -134,6 +134,7 @@
 
 #quick-buttons > a > img{
     height:calc(var(--size) * 24px);
+    filter:invert(var(--image-invert));
 }
 
 #quick-buttons > a > div:nth-of-type(2){

@@ -71,7 +71,9 @@ function addCard(params, type){
 async function initialize(user){
     if(user.status === "FAILURE") {
         location.href = "../login"
-    } else user = user.context.user;
+    } else try{
+        user = user.context.user;
+    } catch(e){ location.href = "../login"};
 
     if(user.newUser) document.getElementById('new-user-modal-bg').classList.remove('inactive-modal');
 
