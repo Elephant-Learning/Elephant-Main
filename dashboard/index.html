@@ -25,15 +25,20 @@
         <div id="new-user-modal-bg" class="inactive-modal">
             <div id="new-user-modal">
                 <div id="new-user-video-container">
-                    <div>
-                        <img src="../images/larger-main.png" alt="">
+                    <div class="video-container-child active-video-container-child" onclick="playVideo()">
+                        <div></div>
                         <div>
-                            <img src="./" alt="">
+                            <img src="./icons/play.png" alt="">
                         </div>
                     </div>
-                    <div>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/jBCh7LNYyjg?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <div class="video-container-child">
+                        <iframe src="https://www.youtube.com/embed/jBCh7LNYyjg?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen id="entry-video"></iframe>
                     </div>
+                </div>
+                <h1>Welcome to your dashboard!</h1>
+                <p>We're so excited to have you join us! To capitalize on our services, take this quick tour.</p>
+                <div id="new-user-buttons">
+                    <button onclick="completeEntry()">Continue</button>
                 </div>
             </div>
         </div>

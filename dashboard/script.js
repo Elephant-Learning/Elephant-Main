@@ -15,6 +15,28 @@ function pushIndexToFront(array, index){
     return newArray;
 }
 
+function playVideo(){
+    document.querySelectorAll(".video-container-child")[0].classList.remove("active-video-container-child");
+    document.querySelectorAll(".video-container-child")[1].classList.add("active-video-container-child");
+    document.getElementById("entry-video").src += "&autoplay=1";
+}
+
+async function completeEntry(){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/misc/newUserFalse?id=' + savedUserId, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    document.getElementById("new-user-modal-bg").classList.add("inactive-modal");
+}
+
 function addCard(params, type){
     const images = ["../flashcards/icons/deck.png", "../answers/icons/answers.png"];
 
@@ -121,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function(e){
 
 async function locateUserInfo(){
     window.scrollTo(0, 0);
-    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
     const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
         headers: {
