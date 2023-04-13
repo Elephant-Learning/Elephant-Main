@@ -1,30 +1,74 @@
-function heartDeck(deckId, image){
+const tags = [];
+
+async function heartDeck(deckId, image){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
     if(image.classList.contains("unliked")){
         image.src = "../../flashcards/icons/filled_heart.png";
         image.classList.remove("unliked");
         image.classList.add("liked");
+
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/like', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                userId: savedUserId,
+                answerId: deckId
+            }),
+            mode: 'cors'
+        })
+
+        const context = await response.json();
+        document.getElementById("answers-heart-" + deckId).innerHTML = parseInt(document.getElementById("answers-heart-" + deckId).textContent) + 1;
     } else {
         image.src = "../../flashcards/icons/unfilled_heart.png";
         image.classList.add("unliked");
         image.classList.remove("liked");
+
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/unlike', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                userId: savedUserId,
+                answerId: deckId
+            }),
+            mode: 'cors'
+        })
+
+        const context = await response.json();
+        document.getElementById("answers-heart-" + deckId).innerHTML = parseInt(document.getElementById("answers-heart-" + deckId).textContent) - 1;
     }
 }
 
-function createQuestion(title, tagsArray, text, authorName, authorPfpId, timeAgo, commentAmount, likeAmount, liked){
+function createQuestion(title, tagsArray, text, authorName, authorPfpId, timeAgo, commentAmount, likeAmount, liked, id){
     let newDiv = document.createElement('div');
 
     let heartDiv = document.createElement('div');
     let heartImg = document.createElement('img');
     let heartText = document.createElement('p');
 
-    heartImg.src = "../../flashcards/icons/unfilled_heart.png";
     heartText.innerHTML = likeAmount;
+    heartText.id = "answers-heart-" + id;
 
-    if(liked) heartImg.classList.add("liked");
-    else heartImg.classList.add("unliked");
+    if(liked) {
+        heartImg.src = "../../flashcards/icons/filled_heart.png";
+        heartImg.classList.add("liked");
+    } else {
+        heartImg.src = "../../flashcards/icons/unfilled_heart.png";
+        heartImg.classList.add("unliked");
+    }
 
-    heartImg.setAttribute("onclick", "heartDeck(0, this)")
-
+    heartImg.setAttribute("onclick", "heartDeck(" + id + ", this)")
     heartDiv.append(heartImg, heartText);
 
     let mainDiv = document.createElement('div');
@@ -108,14 +152,16 @@ function selectTag(index){
     else document.getElementById("tags-modal-button").classList = "inactive-modal-button";
 }
 
-function parseData(tags){
-    for(let i = 0; i < tags.tags.length; i++){
+function parseData(tagsData){
+    for(let i = 0; i < tagsData.tags.length; i++){
         let newDiv = document.createElement('div');
-        newDiv.innerHTML = tags.tags[i];
+        newDiv.innerHTML = tagsData.tags[i];
         newDiv.setAttribute("onclick", "selectTag(" + i + ")");
         newDiv.id = "tagItem-" + i;
         newDiv.classList.add("tag-item");
         document.getElementById("tags-list").appendChild(newDiv);
+
+        tags.push(tagsData.tags[i]);
     }
 }
 
@@ -137,8 +183,7 @@ async function initialize(user){
 
     if(user.elephantAnswersTags.length <= 0) {
         document.getElementById("tags-modal-bg").classList.remove("inactive-modal");
-        initializeTags();
-    }
+    } initializeTags();
 
     for(let i = 0; i < user.answers.length; i++){
         let newDiv = document.createElement("div");
@@ -170,11 +215,23 @@ async function initialize(user){
 
     closeLoader();
 
-    createQuestion("Why did the chicken cross the road?", [2,3,5,6], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Ronak Kothari", 45, "Posted 12+ Hours Ago", 50, 123, false);
-    createQuestion("Why did your mother sleep with my dad?", [2,5,6], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Ronak Kothari", 45, "Posted 1 Week Ago", 50, 123, false);
-    createQuestion("How to add two letters?", [2,4,6], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Shrihun Sankepally", 41, "Posted 2 Weeks Ago", 50, 123, false);
-    createQuestion("How to write a good question title?", [1,3,4,5], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Shrihun Sankepally", 41, "Posted 3+ Hours Ago", 50, 123, false);
-    createQuestion("Will making marijuana illegal solve the drug issues America is facing?", [1,3,4], "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex iusto molestias suscipit. Amet magni non recusandae. Ab ad aliquid commodi consequatur corporis doloremque ea eos error est et eum ex facere harum impedit incidunt itaque iusto, labore laborum magni maiores minus nemo nobis nostrum odio optio perspiciatis provident quas quibusdam rem sunt tempora tenetur totam velit. Atque, cupiditate ratione. Nemo odit quam quis reprehenderit. Alias consequatur magni neque praesentium totam. Animi consequatur ipsam perferendis perspiciatis quisquam voluptas, voluptatem. Eligendi, expedita!", "Ronak Kothari", 45, "Posted 3 Weeks Ago", 50, 123, false);
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/getAnswersForUser?userId=' + user.id, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const content = await response.json();
+    console.log(content)
+
+    for(let i = 0; i < content.context.answers.length; i++){
+        createQuestion(content.context.answers[i].title, content.context.answers[i].tags, content.context.answers[i].description, "Ronak Kothari", 45, computeTime(content.context.answers[i].created), content.context.answers[i].comments.length, content.context.answers[i].numberOfLikes, user.elephantAnswersLiked.includes(content.context.answers[i].id), content.context.answers[i].id)
+    }
 
     document.getElementById('loading-div').classList.add('inactive-modal');
 }
