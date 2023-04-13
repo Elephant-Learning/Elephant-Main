@@ -299,3 +299,118 @@
     font-weight:400;
     transition-duration:250ms;
 }
+
+#tags-modal-bg{
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:5;
+    width:100vw;
+    height:100vh;
+    backdrop-filter:blur(calc(var(--size) * 5px));
+    background:rgba(255,255,255,0.5);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    transition-duration:250ms;
+}
+
+#tags-modal{
+    width:calc(var(--size) * 512px);
+    background:var(--bg-color-1);
+    padding:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 24px);
+    box-shadow:0 0 calc(var(--size) * 24px) 0 var(--light-border-color);
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    gap:calc(var(--size) * 6px);
+}
+
+#tags-modal > div:first-of-type{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    width:calc(var(--size) * 42px);
+    height:calc(var(--size) * 42px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    margin-bottom:calc(var(--size) * 18px);
+}
+
+#tags-modal > div:first-of-type > img{
+    height:calc(var(--size) * 24px);
+    filter:invert(1);
+}
+
+#tags-modal > h1{
+    margin:0;
+    font-size:calc(var(--size) * 18px);
+}
+
+#tags-modal > p{
+    margin:0;
+    font-size:calc(var(--size) * 14px);
+    color:gray;
+}
+
+#tags-modal-buttons{
+    margin-top:calc(var(--size) * 24px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+#tags-modal-buttons > button{
+    width:calc(var(--size) * 512px);
+    height:calc(var(--size) * 48px);
+    font-size:calc(var(--size) * 14px);
+    text-transform:uppercase;
+    font-weight:600;
+    letter-spacing:1px;
+    border-radius:calc(var(--size) * 12px);
+    border:none;
+    cursor:pointer;
+    transition-duration:1s;
+}
+
+#tags-modal-buttons > button.inactive-modal-button{
+    background:var(--bg-color-2);
+    color:lightgray;
+    cursor:default;
+}
+
+#tags-modal-buttons > button:not(.inactive-modal-button){
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    color:white;
+    cursor:pointer;
+}
+
+#tags-list{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    gap:calc(var(--size) * 6px);
+}
+
+#tags-list > div{
+    font-size:calc(var(--size) * 12px);
+    padding:calc(var(--size) * 4px) calc(var(--size) * 6px);
+    border:1px solid var(--light-border-color);
+    border-radius:calc(var(--size) * 6px);
+    cursor:pointer;
+    color:gray;
+}
+
+#tags-list > div.active-tag{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    color:white;
+}

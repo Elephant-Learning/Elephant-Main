@@ -70,6 +70,59 @@ function createQuestion(title, tagsArray, text, authorName, authorPfpId, timeAgo
     document.getElementById('desktop-answers-main').appendChild(newDiv);
 }
 
+async function completeEntry(){
+    if(document.getElementById("tags-modal-button").classList.contains("inactive-modal-button")) return;
+
+    let tagsArray = [];
+
+    document.querySelectorAll(".active-tag").forEach(function(element){
+        tagsArray.push(element.id.split("-")[1]);
+    });
+
+    let savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
+    await fetch('https://elephantsuite-rearend.herokuapp.com/answers/setUserTags', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        body: JSON.stringify({
+            tags: tagsArray,
+            userId: savedUserId
+        }),
+        mode: 'cors'
+    })
+
+    document.getElementById("tags-modal-bg").classList.add("inactive-modal");
+}
+
+function selectTag(index){
+    if(document.querySelectorAll(".tag-item")[index].classList.contains("active-tag")){
+        document.querySelectorAll(".tag-item")[index].classList.remove("active-tag")
+    } else document.querySelectorAll(".tag-item")[index].classList.add("active-tag")
+
+    if(document.querySelectorAll(".active-tag").length >= 3) document.getElementById("tags-modal-button").classList = "";
+    else document.getElementById("tags-modal-button").classList = "inactive-modal-button";
+}
+
+function parseData(tags){
+    for(let i = 0; i < tags.tags.length; i++){
+        let newDiv = document.createElement('div');
+        newDiv.innerHTML = tags.tags[i];
+        newDiv.setAttribute("onclick", "selectTag(" + i + ")");
+        newDiv.id = "tagItem-" + i;
+        newDiv.classList.add("tag-item");
+        document.getElementById("tags-list").appendChild(newDiv);
+    }
+}
+
+function initializeTags(){
+    fetch("../answers.json").then(function(response){return response.json();}).then(function(data){parseData(data)}).catch(function(error){console.log(`Error: ${error}`)})
+}
+
 async function initialize(user){
     if(user.status === "FAILURE" || user.error === "Bad Request") {
         location.href = "../../login"
@@ -80,6 +133,11 @@ async function initialize(user){
 
     if(user.type !== "EMPLOYEE"){
         document.getElementById('desktop-sidebar-employee').classList.add('inactive-modal')
+    }
+
+    if(user.elephantAnswersTags.length <= 0) {
+        document.getElementById("tags-modal-bg").classList.remove("inactive-modal");
+        initializeTags();
     }
 
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png";

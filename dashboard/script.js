@@ -126,6 +126,9 @@ async function initialize(user){
 
     document.getElementById("profile-banner").classList.add(mainColor)
 
+    if(user.decks.length > 0) document.querySelectorAll(".recent-activity-no")[0].classList.add("inactive-modal");
+    if(user.answers.length > 0) document.querySelectorAll(".recent-activity-no")[0].classList.add("inactive-modal");
+
     await notificationsManager(user);
     toggleNotificationTab(0);
 

@@ -27,6 +27,20 @@
         <button id="delete-login-proceed" onclick="deleteAccount()">Delete Anyway</button>
     </div>
 </div>
+<div id="tags-modal-bg" class="inactive-modal">
+    <div id="tags-modal">
+        <div>
+            <img src="../answers/icons/tags.png" alt="">
+        </div>
+        <h1>Set User Tags</h1>
+        <p>To effectively use Elephant Answers, please select at least 3 subjects you are interested in.</p>
+        <div id="tags-list"></div>
+        <div id="tags-modal-buttons">
+            <button onclick="cancelEntry()">Cancel</button>
+            <button onclick="completeEntry()" class="inactive-modal-button" id="tags-modal-button">Save Changes</button>
+        </div>
+    </div>
+</div>
 <div id="desktop-wrapper">
     <div id="desktop-notifications-modal" class="inactive-modal">
         <div id="desktop-notifications-header">
@@ -252,7 +266,7 @@
                             </div>
                             <div class="my-profile-information">
                                 <img src="./icons/tags.png" alt="">
-                                <p id="my-profile-tags">Arts & Humanities, Science, Mathematics</p>
+                                <p id="my-profile-tags"></p>
                             </div>
                         </div>
                     </div>

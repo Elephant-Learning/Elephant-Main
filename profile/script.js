@@ -1,4 +1,5 @@
 let selectedProfile = 0;
+let savedTags;
 
 async function toggleAvatarModal(){
     if(document.getElementById('desktop-avatar-container').classList.contains('inactive-modal')){
@@ -27,7 +28,18 @@ async function toggleAvatarModal(){
 }
 
 function toggleTagsModal(){
+    document.getElementById("tags-modal-bg").classList.remove("inactive-modal");
+}
 
+function parseData(tags){
+    for(let i = 0; i < tags.tags.length; i++){
+        let newDiv = document.createElement('div');
+        newDiv.innerHTML = tags.tags[i];
+        newDiv.setAttribute("onclick", "selectTag(" + i + ")");
+        newDiv.id = "tagItem-" + i;
+        newDiv.classList.add("tag-item");
+        document.getElementById("tags-list").appendChild(newDiv);
+    }
 }
 
 function toggleDeleteModal(){
@@ -44,6 +56,79 @@ function selectPfp(index){
     document.getElementById('desktop-avatar-current').src = "../../icons/avatars/" + index + ".png";
     try{document.querySelector('.selected-avatar-img').classList.remove('selected-avatar-img');} catch{}
     document.querySelectorAll('.avatar-img')[selectedProfile].classList.add('selected-avatar-img')
+}
+
+async function cancelEntry(){
+    document.getElementById("tags-modal-bg").classList.add("inactive-modal")
+
+    removeAllChildNodes(document.getElementById("tags-list"));
+
+    let tagsList;
+
+    await fetch("../answers/answers.json").then(function(response){return response.json();}).then(function(data){tagsList = data.tags}).catch(function(error){console.log(`Error: ${error}`)})
+
+    for(let i = 0; i < tagsList.length; i++){
+        let newDiv = document.createElement('div');
+        newDiv.innerHTML = tagsList[i];
+        newDiv.setAttribute("onclick", "selectTag(" + i + ")");
+        newDiv.id = "tagItem-" + i;
+        newDiv.classList.add("tag-item");
+
+        if(savedTags.includes(i)) newDiv.classList.add("active-tag");
+        document.getElementById("tags-list").appendChild(newDiv);
+    }
+
+    if(document.querySelectorAll(".active-tag").length >= 3) document.getElementById("tags-modal-button").classList = "";
+    else document.getElementById("tags-modal-button").classList = "inactive-modal-button";
+}
+
+async function completeEntry(){
+    if(document.getElementById("tags-modal-button").classList.contains("inactive-modal-button")) return;
+
+    let tagsArray = [];
+
+    document.querySelectorAll(".active-tag").forEach(function(element){
+        tagsArray.push(element.id.split("-")[1]);
+    });
+
+    let savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
+    await fetch('https://elephantsuite-rearend.herokuapp.com/answers/setUserTags', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        body: JSON.stringify({
+            tags: tagsArray,
+            userId: savedUserId
+        }),
+        mode: 'cors'
+    })
+
+    document.getElementById("tags-modal-bg").classList.add("inactive-modal");
+
+    let tags = "";
+    let tagsList;
+
+    await fetch("../answers/answers.json").then(function(response){return response.json();}).then(function(data){tagsList = data.tags}).catch(function(error){console.log(`Error: ${error}`)})
+
+    for(let i = 0; i < tagsArray.length; i++){
+        tags += tagsList[tagsArray[i]] + ", ";
+    } document.getElementById("my-profile-tags").innerHTML = tags;
+
+    console.log(tags);
+}
+
+function selectTag(index){
+    if(document.querySelectorAll(".tag-item")[index].classList.contains("active-tag")){
+        document.querySelectorAll(".tag-item")[index].classList.remove("active-tag")
+    } else document.querySelectorAll(".tag-item")[index].classList.add("active-tag")
+
+    if(document.querySelectorAll(".active-tag").length >= 3) document.getElementById("tags-modal-button").classList = "";
+    else document.getElementById("tags-modal-button").classList = "inactive-modal-button";
 }
 
 async function initialize(user){
@@ -80,6 +165,34 @@ async function initialize(user){
     document.getElementById('my-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
     document.getElementById('my-profile-email').innerHTML = user.email;
     document.getElementById('my-profile-location').innerHTML = COUNTRY_LIST[user.countryCode];
+
+    let tags = "";
+    let tagsList;
+
+    savedTags = user.elephantAnswersTags;
+
+    removeAllChildNodes(document.getElementById("tags-list"));
+
+    await fetch("../answers/answers.json").then(function(response){return response.json();}).then(function(data){tagsList = data.tags}).catch(function(error){console.log(`Error: ${error}`)})
+
+    for(let i = 0; i < tagsList.length; i++){
+        let newDiv = document.createElement('div');
+        newDiv.innerHTML = tagsList[i];
+        newDiv.setAttribute("onclick", "selectTag(" + i + ")");
+        newDiv.id = "tagItem-" + i;
+        newDiv.classList.add("tag-item");
+
+        if(savedTags.includes(i)) newDiv.classList.add("active-tag");
+        document.getElementById("tags-list").appendChild(newDiv);
+    }
+
+    if(document.querySelectorAll(".active-tag").length >= 3) document.getElementById("tags-modal-button").classList = "";
+    else document.getElementById("tags-modal-button").classList = "inactive-modal-button";
+
+    for(let i = 0; i < user.elephantAnswersTags.length; i++){
+        tags += tagsList[user.elephantAnswersTags[i]] + ", ";
+    } document.getElementById("my-profile-tags").innerHTML = tags;
+
     if(user.elephantUserStatistics.daysStreak === 1) document.getElementById('my-profile-streak').innerHTML = user.elephantUserStatistics.daysStreak + " Day Streak";
     else document.getElementById('my-profile-streak').innerHTML = user.elephantUserStatistics.daysStreak + " Days Streak";
 

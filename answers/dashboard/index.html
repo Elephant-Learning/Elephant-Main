@@ -21,6 +21,19 @@
             <div id="desktop-loader-bg-right"></div>
             <p id="desktop-loader-text"></p>
         </div>
+        <div id="tags-modal-bg" class="inactive-modal">
+            <div id="tags-modal">
+                <div>
+                    <img src="../icons/tags.png" alt="">
+                </div>
+                <h1>Set User Tags</h1>
+                <p>To effectively use Elephant Answers, please select at least 3 subjects you are interested in.</p>
+                <div id="tags-list"></div>
+                <div id="tags-modal-buttons">
+                    <button onclick="completeEntry()" class="inactive-modal-button" id="tags-modal-button">Continue</button>
+                </div>
+            </div>
+        </div>
         <div id="desktop-notifications-modal" class="inactive-modal">
             <div id="desktop-notifications-header">
                 <h1>Notifications</h1>
@@ -127,7 +140,7 @@
                             </div>
                         </div>
                         <div class="profile-break"></div>
-                        <div onclick="localStorage.removeItem('savedUserId'); location.href = '../login'">
+                        <div onclick="localStorage.removeItem('savedUserId'); location.href = '../../login'">
                             <img src="../../flashcards/icons/logout.png">
                             <p>Log Out</p>
                         </div>
