@@ -144,6 +144,7 @@ async function initialize(user){
 
     removeAllChildNodes(document.getElementById('my-profile-friends'));
     removeAllChildNodes(document.getElementById('my-profile-decks'));
+    removeAllChildNodes(document.getElementById('my-profile-answers'));
 
     let newHeader = document.createElement('h1');
     let newDeckHeader = document.createElement('h1')

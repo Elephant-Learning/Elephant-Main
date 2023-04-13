@@ -77,9 +77,8 @@ async function initialize(user){
 
     if(user.newUser) document.getElementById('new-user-modal-bg').classList.remove('inactive-modal');
 
-    if(user.type === "ADMIN"){
-        document.getElementById('desktop-sidebar-employee').classList.remove('inactive-modal')
-    }
+    //if(user.type === "ADMIN") document.getElementById('desktop-sidebar-employee').classList.remove('inactive-modal')
+
 
     //console.log(user);
 
