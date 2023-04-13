@@ -13,6 +13,27 @@
 </head>
 <body>
     <div id="desktop-container">
+        <div id="publish-modal-bg" class="inactive-modal">
+            <div id="publish-modal">
+                <div>
+                    <img src="../icons/answers.png" alt="">
+                </div>
+                <h1>Ask Question</h1>
+                <p>Review the Following and Set Tags to enable public discovery.</p>
+                <div class="publish-modal-input">
+                    <h6>Question Title</h6>
+                    <input type="text" id="question-title" placeholder="Input Title Here">
+                </div>
+                <div class="publish-modal-input">
+                    <h6>Relevant Tags</h6>
+                    <div id="tags-list"></div>
+                </div>
+                <div id="publish-modal-buttons">
+                    <button onclick="cancelQuestion()">Cancel</button>
+                    <button onclick="askQuestion()" class="inactive-modal-button" id="tags-modal-button">Save Changes</button>
+                </div>
+            </div>
+        </div>
         <div id="desktop-navbar">
             <div id="desktop-main-image">
                 <div onclick="leaveEditor('../dashboard')"><img src="../../icons/elephant-answers-2.png" alt="Elephant Logo"></div>
@@ -138,12 +159,13 @@
                         <p>Code</p>
                     </div>
                 </div>
+                <button onclick="saveChanges()">Ask Question</button>
             </div>
         </div>
         <div id="desktop-bottom-buttons">
-            <div class="desktop-bottom-btn" onclick="askQuestion();">
+            <!--<div class="desktop-bottom-btn" onclick="askQuestion();">
                 <img src="../../flashcards/editor/icons/save.png" alt="">
-            </div>
+            </div>-->
             <div class="desktop-bottom-btn" onclick="leaveEditor();">
                 <img src="../../flashcards/icons/back.png" alt="">
             </div>

@@ -15,7 +15,7 @@
     align-items:center;
     gap:calc(var(--size) * 12px);
     bottom:calc(var(--size) * 12px);
-    right:calc(var(--size) * 12px);
+    left:calc(var(--size) * 12px);
 }
 
 .desktop-bottom-btn{
@@ -176,4 +176,178 @@
 #question-text-editor > p{
     font-size:calc(var(--size) * 12px);
     color:gray;
+}
+
+#editor-tools > button{
+    position:absolute;
+    bottom:calc(var(--size) * 24px);
+    height:calc(var(--size) * 32px);
+    width:calc(var(--size) * 256px);
+    border:none;
+    outline:none;
+    border-radius:calc(var(--size) * 6px);
+    background:var(--dark-gray);
+    font-weight:700;
+    font-size:calc(var(--size) * 12px);
+    transition-duration:250ms;
+    cursor:pointer;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:white;
+}
+
+#editor-tools > button:hover{
+    box-shadow:0 0 calc(var(--size) * 6px) 0 black;
+}
+
+#editor-tools > button:active{
+    box-shadow:none;
+}
+
+#publish-modal-bg{
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:5;
+    width:100vw;
+    height:100vh;
+    backdrop-filter:blur(calc(var(--size) * 5px));
+    background:rgba(255,255,255,0.5);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    transition-duration:250ms;
+}
+
+#publish-modal{
+    width:calc(var(--size) * 512px);
+    background:var(--bg-color-1);
+    padding:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 24px);
+    box-shadow:0 0 calc(var(--size) * 24px) 0 var(--light-border-color);
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    gap:calc(var(--size) * 6px);
+}
+
+#publish-modal > div:first-of-type{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    width:calc(var(--size) * 42px);
+    height:calc(var(--size) * 42px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    margin-bottom:calc(var(--size) * 18px);
+}
+
+#publish-modal > div:first-of-type > img{
+    height:calc(var(--size) * 24px);
+    filter:invert(1);
+}
+
+#publish-modal > h1{
+    margin:0;
+    font-size:calc(var(--size) * 18px);
+}
+
+#publish-modal > p{
+    margin:0;
+    font-size:calc(var(--size) * 14px);
+    color:gray;
+}
+
+#publish-modal-buttons{
+    margin-top:calc(var(--size) * 24px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    gap:calc(var(--size) * 12px)
+}
+
+#publish-modal-buttons > button{
+    outline:none;
+    font-size:calc(var(--size) * 14px);
+    text-transform:uppercase;
+    font-weight:600;
+    letter-spacing:1px;
+    border-radius:calc(var(--size) * 12px);
+    width:calc(var(--size) * 250px);
+    height:calc(var(--size) * 48px);
+    border:none;
+    cursor:pointer;
+    transition-duration:1s;
+}
+
+#publish-modal-buttons > button:first-of-type{
+    color:gray;
+    background:transparent;
+    border:calc(var(--size) * 2px) dashed var(--light-border-color);
+}
+
+#publish-modal-buttons > button:last-of-type.inactive-modal-button{
+    background:var(--bg-color-2);
+    color:lightgray;
+    cursor:default;
+}
+
+#publish-modal-buttons > button:last-of-type:not(.inactive-modal-button){
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    color:white;
+    cursor:pointer;
+}
+
+.publish-modal-input{
+    width:calc(var(--size) * 512px);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    margin:calc(var(--size) * 6px) 0;
+    gap:calc(var(--size) * 6px);
+}
+
+.publish-modal-input > h6{
+    margin:0;
+    font-size:calc(var(--size) * 10px);
+    font-weight:700;
+}
+
+.publish-modal-input > input{
+    width:calc(var(--size) * 488px);
+    border:1px solid var(--light-border-color);
+    border-radius:calc(var(--size) * 6px);
+    padding:calc(var(--size) * 6px) calc(var(--size) * 12px);
+    color:gray;
+    outline:none;
+}
+
+#tags-list{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    gap:calc(var(--size) * 6px);
+}
+
+#tags-list > div{
+    font-size:calc(var(--size) * 12px);
+    padding:calc(var(--size) * 4px) calc(var(--size) * 6px);
+    border:1px solid var(--light-border-color);
+    border-radius:calc(var(--size) * 6px);
+    cursor:pointer;
+    color:gray;
+}
+
+#tags-list > div.active-tag{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    color:white;
 }

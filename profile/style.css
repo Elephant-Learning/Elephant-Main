@@ -511,6 +511,7 @@
     align-items:flex-start;
     flex-wrap:wrap;
     gap:calc(var(--size) * 6px);
+    margin-top:calc(var(--size) * 18px);
 }
 
 #tags-list > div{

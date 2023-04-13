@@ -140,6 +140,29 @@ async function initialize(user){
         initializeTags();
     }
 
+    for(let i = 0; i < user.answers.length; i++){
+        let newDiv = document.createElement("div");
+        let imageDiv = document.createElement("div");
+        let image = document.createElement("img");
+
+        image.src = "../icons/answers.png";
+        imageDiv.appendChild(image);
+
+        let textDiv = document.createElement("div");
+        let header = document.createElement("h1");
+        let para = document.createElement("p");
+
+        header.innerHTML = user.answers[i].title;
+        if(user.answers[i].answered) para.innerHTML = "Status: Answered";
+        else para.innerHTML = "Status: Unanswered";
+
+        textDiv.append(header, para);
+        newDiv.append(imageDiv, textDiv);
+        newDiv.setAttribute("onclick", "location.href = '../question/?id=" + user.answers[i].id + "'")
+
+        document.getElementById("your-answers").appendChild(newDiv);
+    }
+
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png";
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();

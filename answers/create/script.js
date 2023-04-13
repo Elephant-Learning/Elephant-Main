@@ -1,3 +1,39 @@
+function saveChanges(){
+    document.getElementById("question-title").value = document.getElementById("question-header").value;
+    document.getElementById("publish-modal-bg").classList.remove("inactive-modal")
+}
+
+function cancelQuestion(){
+    document.getElementById("publish-modal-bg").classList.add("inactive-modal")
+    removeAllChildNodes(document.getElementById("tags-list"));
+
+    initializeTags();
+}
+
+function parseData(tags){
+    for(let i = 0; i < tags.tags.length; i++){
+        let newDiv = document.createElement('div');
+        newDiv.innerHTML = tags.tags[i];
+        newDiv.setAttribute("onclick", "selectTag(" + i + ")");
+        newDiv.id = "tagItem-" + i;
+        newDiv.classList.add("tag-item");
+        document.getElementById("tags-list").appendChild(newDiv);
+    }
+}
+
+function initializeTags(){
+    fetch("../answers.json").then(function(response){return response.json();}).then(function(data){parseData(data)}).catch(function(error){console.log(`Error: ${error}`)})
+}
+
+function selectTag(index){
+    if(document.querySelectorAll(".tag-item")[index].classList.contains("active-tag")){
+        document.querySelectorAll(".tag-item")[index].classList.remove("active-tag")
+    } else document.querySelectorAll(".tag-item")[index].classList.add("active-tag")
+
+    if(document.querySelectorAll(".active-tag").length >= 3) document.getElementById("tags-modal-button").classList = "";
+    else document.getElementById("tags-modal-button").classList = "inactive-modal-button";
+}
+
 function alterEditor(alterIndex){
     if(alterIndex === 0){
         textField.document.execCommand("bold", false, null);
@@ -32,13 +68,15 @@ function leaveEditor(){
 }
 
 async function askQuestion(){
+    if(document.getElementById("tags-modal-button").classList.contains("inactive-modal-button")) return;
+
     let savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
 
     const content = document.getElementById("question-text-editor").contentDocument.body.innerHTML;
     console.log(content);
 
     const bodyJSON = JSON.stringify({
-        title: document.getElementById('question-header').value,
+        title: document.getElementById('question-title').value,
         description: content,
         userId: savedUserId
     })
@@ -58,7 +96,29 @@ async function askQuestion(){
     })
 
     const context = await response.json();
-    console.log(context);
+
+    let tagsArray = [];
+
+    document.querySelectorAll(".active-tag").forEach(function(element){
+        tagsArray.push(element.id.split("-")[1]);
+    });
+
+    await fetch('https://elephantsuite-rearend.herokuapp.com/answers/setTags', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        body: JSON.stringify({
+            tags: tagsArray,
+            answerId: context.context.answer.id
+        }),
+        mode: 'cors'
+    })
+
+    leaveEditor();
 }
 
 async function initialize(user){
@@ -79,6 +139,8 @@ async function initialize(user){
             alterEditor(i);
         })
     }
+
+    initializeTags();
 
     const emojis_refactored = ["confused", "cool", "happy", "laugh", "nerd", "neutral", "unamused", "uwu", "wink"];
 

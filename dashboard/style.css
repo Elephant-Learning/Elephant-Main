@@ -375,8 +375,8 @@
 #new-user-video-container{
     position:relative;
     width:100%;
-    height:256px;
-    margin-bottom:calc(var(--size) * 24px);
+    height:calc(var(--size) * 256px);
+    margin-bottom:calc(var(--size) * 18px);
 }
 
 .video-container-child{
