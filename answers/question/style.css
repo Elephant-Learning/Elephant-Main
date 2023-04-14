@@ -5,6 +5,7 @@
     flex-direction:row;
     align-items:flex-start;
     justify-content:flex-start;
+    overflow-y:scroll;
 }
 
 #desktop-bottom-buttons{
@@ -58,19 +59,56 @@
 }
 
 #desktop-parent-main{
-    width:calc(100vw - var(--size) * 355px);
-    margin: calc(var(--size) * 24px) calc(var(--size) * 24px) 0;
-    padding: calc(var(--size) * 24px) calc(var(--size) * 24px) 0;
-    height:calc(100% - var(--size) * 50px);
-    background:var(--bg-color-1);
-    border-radius: calc(var(--size) * 12px) calc(var(--size) * 12px) 0 0;
-    border:1px solid var(--light-border-color);
+    position:relative;
+    width:calc(100vw - var(--size) * 259px);
     display:flex;
     flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:calc(var(--size) * 24px);
+    padding:calc(var(--size) * 24px);
+}
+
+#desktop-parent-main > div:first-of-type{
+    width:calc(100vw - var(--size) * 355px);
+    padding: calc(var(--size) * 24px);
+    background:var(--bg-color-1);
+    border-radius: calc(var(--size) * 12px);
+    border:1px solid var(--light-border-color);
+    display:flex;
+    flex-direction:row;
     align-items:flex-start;
     justify-content:flex-start;
-    gap:calc(var(--size) * 24px);
+    gap:calc(var(--size) * 12px);
     border-bottom:none;
+}
+
+#desktop-parent-main > div:first-of-type > div:first-of-type{
+    /*background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));*/
+    background:var(--bg-color-2);
+    border:1px solid var(--light-border-color);
+    width:calc(var(--size) * 48px);
+    height:calc(var(--size) * 48px);
+    border-radius:50%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+#desktop-parent-main > div:first-of-type > div:first-of-type > img{
+    height:calc(var(--size) * 24px);
+}
+
+#desktop-parent-main > div:first-of-type > div:nth-of-type(2) > h1{
+    font-size:calc(var(--size) * 24px);
+    margin:0;
+}
+
+#desktop-parent-main > div:first-of-type > div:nth-of-type(2) > div{
+    font-size:calc(var(--size) * 14px);
+    color:gray;
+    margin:0;
 }
 
 #desktop-parent-sidebar > h1{
@@ -82,4 +120,71 @@
     font-size:calc(var(--size) * 12px);
     color:gray;
     margin:0;
+}
+
+#parent-comments{
+    width:calc(100vw - var(--size) * 307px);
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 12px);
+}
+
+#parent-comments-amount{
+    font-size:calc(var(--size) * 14px);
+    font-weight:500;
+    margin:0;
+}
+
+#parent-comments-input-div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 12px);
+    width:100%;
+}
+
+#parent-comments-input-div > div:first-of-type{
+    /*background:var(--bg-color-1);
+    border:1px solid var(--light-border-color);
+    border-radius:50%;*/
+    width:calc(var(--size) * 36px);
+    height:calc(var(--size) * 36px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+#parent-comments-input-div > div:first-of-type > img{
+    height:calc(var(--size) * 24px);
+}
+
+#parent-comments-input{
+    width:calc(100% - var(--size) * 219px);
+    border:1px solid var(--light-border-color);
+    height:calc(var(--size) * 30px);
+    padding:0 calc(var(--size) * 12px);
+    outline:none;
+    border-radius:calc(var(--size) * 6px);
+    color:gray;
+    background:var(--bg-color-1);
+}
+
+#parent-comments-input-div > button{
+    width:calc(var(--size) * 128px);
+    height:calc(var(--size) * 30px);
+    border:none;
+    outline:none;
+    background:var(--dark-gray);
+    color:white;
+    font-size:calc(var(--size) * 12px);
+    letter-spacing:1px;
+    text-transform:uppercase;
+    font-weight:700;
+    border-radius:calc(var(--size) * 6px);
+    cursor:pointer;
 }

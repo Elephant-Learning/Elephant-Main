@@ -68,7 +68,11 @@ function createQuestion(title, tagsArray, text, authorName, authorPfpId, timeAgo
         heartImg.classList.add("unliked");
     }
 
-    heartImg.setAttribute("onclick", "heartDeck(" + id + ", this)")
+    heartImg.addEventListener("click", function(e){
+        e.stopPropagation();
+        heartDeck(id, this);
+    });
+    //heartImg.setAttribute("onclick", "heartDeck(" + id + ", this)")
     heartDiv.append(heartImg, heartText);
 
     let mainDiv = document.createElement('div');
@@ -110,6 +114,10 @@ function createQuestion(title, tagsArray, text, authorName, authorPfpId, timeAgo
 
     mainDiv.append(questionTitle, questionText, tagsList, breakDiv, footerDiv);
     newDiv.append(heartDiv, mainDiv);
+    newDiv.addEventListener("click", function(e){
+        location.href = `../question/?id=${id}`
+    })
+    newDiv.setAttribute("onclick", "location.href = '../question/?id=" + id + "'")
 
     document.getElementById('desktop-answers-main').appendChild(newDiv);
 }
@@ -230,7 +238,7 @@ async function initialize(user){
     console.log(content)
 
     for(let i = 0; i < content.context.answers.length; i++){
-        createQuestion(content.context.answers[i].title, content.context.answers[i].tags, content.context.answers[i].description, "Ronak Kothari", 45, computeTime(content.context.answers[i].created), content.context.answers[i].comments.length, content.context.answers[i].numberOfLikes, user.elephantAnswersLiked.includes(content.context.answers[i].id), content.context.answers[i].id)
+        createQuestion(content.context.answers[i].title, content.context.answers[i].tags, content.context.answers[i].description, content.context.answers[i].authorName, content.context.answers[i].authorPfpId, computeTime(content.context.answers[i].created), content.context.answers[i].comments.length, content.context.answers[i].numberOfLikes, user.elephantAnswersLiked.includes(content.context.answers[i].id), content.context.answers[i].id)
     }
 
     document.getElementById('loading-div').classList.add('inactive-modal');

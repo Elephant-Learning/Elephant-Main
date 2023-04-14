@@ -129,6 +129,7 @@
     flex-direction:row;
     align-items:flex-start;
     justify-content:flex-start;
+    cursor:pointer;
 }
 
 #desktop-answers-main > div:not(#loading-div) > div:first-of-type{
@@ -439,7 +440,6 @@
     padding:calc(var(--size) * 18px);
     gap:calc(var(--size) * 12px);
     transition-duration:250ms;
-    cursor:pointer;
 }
 
 #your-answers > div:hover{
