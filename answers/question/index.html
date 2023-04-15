@@ -87,7 +87,7 @@
                         </div>
                     </div>
                     <div class="profile-break"></div>
-                    <div onclick="location.href = '../dashboard/'">
+                    <div onclick="location.href = '../../login'">
                         <img src="../../flashcards/icons/logout.png">
                         <p>Log Out</p>
                     </div>
@@ -103,6 +103,7 @@
                     <img src="" alt="" id="question-author-pfp">
                 </div>
                 <div>
+                    <h6 id="question-author"></h6>
                     <h1 id="question-title"></h1>
                     <div id="question-body"></div>
                 </div>
@@ -122,12 +123,16 @@
         <div id="desktop-parent-sidebar">
             <h1>Question Details</h1>
             <h2>Top Contributors</h2>
+            <div id="top-contributors"></div>
         </div>
     </div>
     <div id="desktop-bottom-buttons">
-        <div class="desktop-bottom-btn" onclick="location.href = '../dashboard/'">
+        <a class="desktop-bottom-btn" href='../dashboard/'>
             <img src="../../flashcards/icons/back.png" alt="">
-        </div>
+        </a>
+        <a class="desktop-bottom-btn" id="edit-btn">
+            <img src="../../flashcards/editor/icons/edit.png" alt="">
+        </a>
     </div>
 </div>
 </body>

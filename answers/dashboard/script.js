@@ -17,7 +17,6 @@ async function search(){
         })
 
         const content = await response.json();
-        console.log(content)
 
         for(let i = 0; i < content.context.answers.length; i++){
             createQuestion(content.context.answers[i].title, content.context.answers[i].tags, content.context.answers[i].description, content.context.answers[i].authorName, content.context.answers[i].authorPfpId, computeTime(content.context.answers[i].created), content.context.answers[i].comments.length, content.context.answers[i].numberOfLikes, likedAnswers.includes(content.context.answers[i].id), content.context.answers[i].id)
@@ -216,6 +215,21 @@ function parseData(tagsData){
     }
 }
 
+async function deleteQuestion(id){
+    await fetch('https://elephantsuite-rearend.herokuapp.com/answers/deleteAnswer?id=' + id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    document.getElementById("your-answer-" + id).remove();
+}
+
 function initializeTags(){
     fetch("../answers.json").then(function(response){return response.json();}).then(function(data){parseData(data)}).catch(function(error){console.log(`Error: ${error}`)})
 }
@@ -253,8 +267,23 @@ async function initialize(user){
         else para.innerHTML = "Status: Unanswered";
 
         textDiv.append(header, para);
-        newDiv.append(imageDiv, textDiv);
+
+        let optionsDiv = document.createElement("div");
+        let deleteImg = document.createElement("img");
+
+        deleteImg.src = "./icons/trash.png";
+
+        deleteImg.addEventListener("click", function(e){
+            e.stopPropagation();
+
+            deleteQuestion(user.answers[i].id);
+        })
+
+        optionsDiv.appendChild(deleteImg);
+
+        newDiv.append(imageDiv, textDiv, optionsDiv);
         newDiv.setAttribute("onclick", "location.href = '../question/?id=" + user.answers[i].id + "'")
+        newDiv.id = "your-answer-" + user.answers[i].id;
 
         document.getElementById("your-answers").appendChild(newDiv);
     }
@@ -265,6 +294,7 @@ async function initialize(user){
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
     document.getElementById('desktop-profile-user-img').src = "../../flashcards/icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
+    document.getElementById("answers-score-header").innerHTML = user.elephantAnswersScore;
 
     closeLoader();
     search();

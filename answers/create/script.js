@@ -30,7 +30,7 @@ function selectTag(index){
         document.querySelectorAll(".tag-item")[index].classList.remove("active-tag")
     } else document.querySelectorAll(".tag-item")[index].classList.add("active-tag")
 
-    if(document.querySelectorAll(".active-tag").length >= 3) document.getElementById("tags-modal-button").classList = "";
+    if(document.querySelectorAll(".active-tag").length >= 1) document.getElementById("tags-modal-button").classList = "";
     else document.getElementById("tags-modal-button").classList = "inactive-modal-button";
 }
 

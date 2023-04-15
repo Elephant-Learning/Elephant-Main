@@ -89,7 +89,8 @@
 }
 
 #ask-new-btn{
-    background:var(--bg-color-1);
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    text-transform:uppercase;
     cursor:pointer;
     border-radius:calc(var(--size) * 6px);
     display:flex;
@@ -117,7 +118,8 @@
 #ask-new-btn > p{
     margin:0;
     font-size:calc(var(--size) * 12px);
-    font-weight:500;
+    color:white;
+    font-weight:700;
 }
 
 #desktop-answers-main > div:not(#loading-div){
@@ -417,6 +419,45 @@
     color:white;
 }
 
+#answers-score{
+    background:var(--bg-color-1);
+    height:calc(var(--size) * 128px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:calc(var(--size) * 12px);
+    border-radius:calc(var(--size) * 6px);
+    border:1px solid var(--light-border-color);
+    margin-bottom:calc(var(--size) * 24px);
+}
+
+#answers-score > h1{
+    margin:0;
+    font-size:calc(var(--size) * 48px);
+    animation-name:pulseAnimation;
+    animation-iteration-count: infinite;
+    animation-duration:3s;
+}
+
+@keyframes pulseAnimation {
+    from{
+        text-shadow:none;
+    } 33%{
+        text-shadow:0 0 calc(var(--size) * 6px);
+    } 66%{
+        text-shadow:none;
+    }
+}
+
+#answers-score > p{
+    margin:0;
+    font-size:calc(var(--size) * 14px);
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:gray;
+}
+
 #your-answers{
     display:flex;
     flex-direction:column;
@@ -425,7 +466,7 @@
     gap:calc(var(--size) * 6px);
     overflow-y:scroll;
     width:calc(var(--size) * 256px);
-    height:calc(100vh - var(--size) * 232px)
+    height:calc(100vh - var(--size) * 360px);
 }
 
 #your-answers > div{
@@ -462,21 +503,40 @@
     height:calc(var(--size) * 24px);
 }
 
-#your-answers > div > div:last-of-type > h1{
+#your-answers > div > div:nth-of-type(2) > h1{
     font-size:calc(var(--size) * 14px);
     font-weight:700;
-    width: calc(var(--size) * 154px);
+    width: calc(var(--size) * 124px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     margin:0;
 }
 
-#your-answers > div > div:last-of-type > p{
+#your-answers > div > div:nth-of-type(2) > p{
     font-size:calc(var(--size) * 12px);
-    width: calc(var(--size) * 154px);
+    width: calc(var(--size) * 124px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     margin:0;
+}
+
+#your-answers > div > div:last-of-type{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 6px);
+}
+
+#your-answers > div > div:last-of-type > img{
+    transition-duration:250ms;
+    height:calc(var(--size) * 18px);
+    filter:invert(var(--image-invert));
+}
+
+#your-answers > div > div:last-of-type > img:hover{
+    transform:scale(1.1);
+    cursor:pointer;
 }

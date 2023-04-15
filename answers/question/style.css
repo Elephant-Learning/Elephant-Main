@@ -101,9 +101,23 @@
     height:calc(var(--size) * 24px);
 }
 
+#desktop-parent-main > div:first-of-type > div:nth-of-type(2) > h6{
+    margin:0;
+    font-size:calc(var(--size) * 10px);
+}
+
 #desktop-parent-main > div:first-of-type > div:nth-of-type(2) > h1{
     font-size:calc(var(--size) * 24px);
     margin:0;
+}
+
+#desktop-parent-main > div:first-of-type > div:nth-of-type(2) > h1 > span{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    color:white;
+    font-size:calc(var(--size) * 16px);
+    padding:calc(var(--size) * 4px) calc(var(--size) * 8px);
+    border-radius:calc(var(--size) * 6px);
+    margin-left:calc(var(--size) * 12px);
 }
 
 #desktop-parent-main > div:first-of-type > div:nth-of-type(2) > div{
@@ -203,6 +217,7 @@
     align-items:flex-start;
     justify-content:flex-start;
     gap:calc(var(--size) * 24px);
+    width:100%;
 }
 
 .parent-comment, .parent-comment > div:last-of-type > div:last-of-type > div{
@@ -259,7 +274,43 @@
     color:gray;
 }
 
-.parent-comment > div:last-of-type > div:nth-of-type(2){
+.parent-comment-edit-div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 6px);
+    width:100%;
+}
+
+.parent-comment-edit-div > input{
+    width:calc(100% - var(--size) * 226px);
+    padding:0 calc(var(--size) * 12px);
+    height:calc(var(--size) * 22px);
+    outline:none;
+    border:1px solid var(--light-border-color);
+    border-radius:calc(var(--size) * 6px);
+    background:var(--bg-color-1);
+    color:gray;
+    font-size:calc(var(--size) * 14px);
+}
+
+.parent-comment-edit-div > button{
+    width:calc(var(--size) * 192px);
+    height:calc(var(--size) * 24px);
+    background:var(--dark-gray);
+    color:white;
+    font-size:calc(var(--size) * 12px);
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    cursor:pointer;
+    border-radius:calc(var(--size) * 6px);
+    border:none;
+    outline:none;
+}
+
+.parent-comment-options-div{
     display:flex;
     flex-direction:row;
     align-items:center;
@@ -267,18 +318,18 @@
     gap:calc(var(--size) * 6px);
 }
 
-.parent-comment > div:last-of-type > div:nth-of-type(2) > img{
-    height:calc(var(--size) * 24px);
+.parent-comment-options-div > img{
+    height:calc(var(--size) * 18px);
     filter:invert(var(--image-invert));
     transition-duration:250ms;
     cursor:pointer;
 }
 
-.parent-comment > div:last-of-type > div:nth-of-type(2) > img:hover{
+.parent-comment-options-div > img:hover{
     transform:scale(1.1);
 }
 
-.parent-comment > div:last-of-type > div:nth-of-type(2) > p{
+.parent-comment-options-div > p{
     font-size:calc(var(--size) * 12px);
     font-weight:700;
     margin: 0 calc(var(--size) * 12px) 0 0;
@@ -339,4 +390,33 @@
     letter-spacing:1px;
     font-size:calc(var(--size) * 12px);
     cursor:pointer;
+}
+
+#top-contributors{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 6px);
+}
+
+#top-contributors > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 12px);
+}
+
+#top-contributors > div > img{
+    height:calc(var(--size) * 24px);
+}
+
+#top-contributors > div > h1{
+    margin:0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size:calc(var(--size) * 12px);
+    width:calc(var(--size) * 220px);
 }

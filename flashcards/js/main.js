@@ -378,6 +378,34 @@ async function notificationsManager(user){
                     notificationId: user.notifications[i].id
                 })
             } catch(e){}
+        } else if(user.notifications[i].type === "ANSWER_ANSWER"){
+            try{
+                const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + user.notifications[i].senderId, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type'
+                    },
+                    mode: 'cors'
+                })
+
+                const context = await response.json();
+
+                createNotification("questionAnswered", {
+                    name: context.context.user.firstName + " " + context.context.user.lastName,
+                    pfpId: context.context.user.pfpId,
+                    senderId: user.notifications[i].senderId,
+                    time: user.notifications[i].time,
+                    questionName: user.notifications[i].message,
+                    questionId: user.notifications[i].answerId,
+                    commentId: user.notifications[i].commentId,
+                    notificationId: user.notifications[i].id
+                })
+            } catch(e){
+                console.log("Error")
+            }
         }
     }
 
@@ -477,6 +505,24 @@ async function addDeckShared(deckID, adding, notificationId){
     }
 }
 
+async function viewComment(questionId, commentId, notificationId){
+    const userResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/notifications/delete?id=' + notificationId, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const userContext = await userResponse.json();
+    console.log(userContext);
+
+    location.href = `../../answers/question/?id=${questionId}`;
+}
+
 function createNotification(TYPE, DATA){
     let newDiv = document.createElement('div');
     let unreadDiv = document.createElement('div');
@@ -562,6 +608,33 @@ function createNotification(TYPE, DATA){
         header.append(span1, document.createTextNode(" favorited your deck, "), span2, document.createTextNode("."));
 
         textDiv.append(header, timeDiv);
+
+        parentDiv = document.querySelectorAll('.desktop-notifications-list')[0];
+
+        document.querySelectorAll('.desktop-notifications-tab-number')[0].innerHTML = (parseInt(document.querySelectorAll('.desktop-notifications-tab-number')[0].textContent) + 1).toString();
+    } else if(TYPE === "questionAnswered"){
+        let header = document.createElement('h1');
+        let span1 = document.createElement('span');
+        let span2 = document.createElement('span');
+        let btn1 = document.createElement('button');
+
+        span1.classList.add('bolded')
+        span2.classList.add('bolded')
+        span1.innerHTML = DATA.name;
+        span2.innerHTML = DATA.questionName;
+
+        btn1.innerHTML = "View";
+        btn1.classList.add('desktop-notification-btn-1');
+        btn1.addEventListener("click", function(e){
+            viewComment(DATA.questionId, DATA.commentId, DATA.notificationId);
+        });
+
+        header.append(span1, document.createTextNode(" commented on your question, "), span2, document.createTextNode("."));
+
+        optionsDiv.appendChild(btn1);
+        optionsDiv.classList.add('desktop-notification-options');
+
+        textDiv.append(header, timeDiv, optionsDiv);
 
         parentDiv = document.querySelectorAll('.desktop-notifications-list')[0];
 
