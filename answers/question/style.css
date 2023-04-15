@@ -5,7 +5,6 @@
     flex-direction:row;
     align-items:flex-start;
     justify-content:flex-start;
-    overflow-y:scroll;
 }
 
 #desktop-bottom-buttons{
@@ -59,18 +58,20 @@
 }
 
 #desktop-parent-main{
-    position:relative;
-    width:calc(100vw - var(--size) * 259px);
+    width:calc(100vw - var(--size) * 355px);
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:center;
+    justify-content:flex-start;
     gap:calc(var(--size) * 24px);
     padding:calc(var(--size) * 24px);
+    height:calc(100% - var(--size) * 48px);
+    overflow-y:scroll;
+    overflow-x:hidden;
 }
 
 #desktop-parent-main > div:first-of-type{
-    width:calc(100vw - var(--size) * 355px);
+    width:calc(100vw - var(--size) * 403px);
     padding: calc(var(--size) * 24px);
     background:var(--bg-color-1);
     border-radius: calc(var(--size) * 12px);
@@ -106,9 +107,14 @@
 }
 
 #desktop-parent-main > div:first-of-type > div:nth-of-type(2) > div{
-    font-size:calc(var(--size) * 14px);
-    color:gray;
     margin:0;
+    font-size:calc(var(--size) * 12px) !important;
+    color:gray !important;
+}
+
+#desktop-parent-main > div:first-of-type > div:nth-of-type(2) > div *{
+    font-size:calc(var(--size) * 12px) !important;
+    color:gray !important;
 }
 
 #desktop-parent-sidebar > h1{
@@ -123,7 +129,7 @@
 }
 
 #parent-comments{
-    width:calc(100vw - var(--size) * 307px);
+    width:calc(100vw - var(--size) * 355px);
     height:100vh;
     display:flex;
     flex-direction:column;
@@ -151,8 +157,8 @@
     /*background:var(--bg-color-1);
     border:1px solid var(--light-border-color);
     border-radius:50%;*/
-    width:calc(var(--size) * 36px);
-    height:calc(var(--size) * 36px);
+    width:calc(var(--size) * 24px);
+    height:calc(var(--size) * 24px);
     display:flex;
     flex-direction:row;
     align-items:center;
@@ -164,7 +170,7 @@
 }
 
 #parent-comments-input{
-    width:calc(100% - var(--size) * 219px);
+    width:calc(100% - var(--size) * 207px);
     border:1px solid var(--light-border-color);
     height:calc(var(--size) * 30px);
     padding:0 calc(var(--size) * 12px);
@@ -172,6 +178,7 @@
     border-radius:calc(var(--size) * 6px);
     color:gray;
     background:var(--bg-color-1);
+    font-size:calc(var(--size) * 14px);
 }
 
 #parent-comments-input-div > button{
@@ -186,5 +193,150 @@
     text-transform:uppercase;
     font-weight:700;
     border-radius:calc(var(--size) * 6px);
+    cursor:pointer;
+}
+
+#parent-comments-list{
+    margin-top:calc(var(--size) * 12px);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 24px);
+}
+
+.parent-comment, .parent-comment > div:last-of-type > div:last-of-type > div{
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 12px);
+    width:100%;
+}
+
+.parent-comment > div:first-of-type, .parent-comment > div:last-of-type > div:last-of-type > div > div:first-of-type{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 12px);
+}
+
+.parent-comment > div:first-of-type > img, .parent-comment > div:last-of-type > div:last-of-type > div > div:first-of-type > img{
+    height:calc(var(--size) * 24px);
+}
+
+.parent-comment > div:last-of-type{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 6px);
+    width:100%;
+}
+
+.parent-comment > div:last-of-type > div:first-of-type, .parent-comment > div:last-of-type > div:last-of-type > div > div:last-of-type > div:first-of-type{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 6px);
+}
+
+.parent-comment > div:last-of-type > div:first-of-type > h6, .parent-comment > div:last-of-type > div:last-of-type > div > div:last-of-type > div:first-of-type > h6{
+    margin:0;
+    font-size:calc(var(--size) * 12px);
+}
+
+.parent-comment > div:last-of-type > div:first-of-type > p, .parent-comment > div:last-of-type > div:last-of-type > div > div:last-of-type > div:first-of-type > p{
+    margin:0;
+    font-size:calc(var(--size) * 12px);
+}
+
+.parent-comment > div:last-of-type > p, .parent-comment > div:last-of-type > div:last-of-type > div > div:last-of-type > p{
+    margin:0;
+    font-size:calc(var(--size) * 14px);
+    color:gray;
+}
+
+.parent-comment > div:last-of-type > div:nth-of-type(2){
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 6px);
+}
+
+.parent-comment > div:last-of-type > div:nth-of-type(2) > img{
+    height:calc(var(--size) * 24px);
+    filter:invert(var(--image-invert));
+    transition-duration:250ms;
+    cursor:pointer;
+}
+
+.parent-comment > div:last-of-type > div:nth-of-type(2) > img:hover{
+    transform:scale(1.1);
+}
+
+.parent-comment > div:last-of-type > div:nth-of-type(2) > p{
+    font-size:calc(var(--size) * 12px);
+    font-weight:700;
+    margin: 0 calc(var(--size) * 12px) 0 0;
+}
+
+.parent-comment > div:last-of-type > div:last-of-type{
+    padding-left:calc(var(--size) * 24px);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 12px);
+    margin-top:calc(var(--size) * 6px)
+}
+
+.parent-comment-reply-input{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    padding-left:calc(var(--size) * 24px);
+    width:calc(100% - var(--size) * 24px);
+    gap:calc(var(--size) * 6px);
+    transition-duration:250ms;
+    transition-property:opacity;
+    opacity:1;
+    visibility:visible;
+}
+
+.parent-comment-reply-input.inactive-modal{
+    opacity:0;
+    visibility:hidden;
+    height:0;
+}
+
+.parent-comment-reply-input > input{
+    background:var(--bg-color-1);
+    height:calc(var(--size) * 24px);
+    font-size:calc(var(--size) * 12px);
+    padding:0 calc(var(--size) * 12px);
+    border-radius:calc(var(--size) * 6px);
+    border:1px solid var(--light-border-color);
+    outline:none;
+    color:gray;
+    width:calc(100% - var(--size) * 256px)
+}
+
+.parent-comment-reply-input > button{
+    height:calc(var(--size) * 24px);
+    border:none;
+    outline:none;
+    color:white;
+    border-radius:calc(var(--size) * 6px);
+    width:calc(var(--size) * 224px);
+    background:var(--dark-gray);
+    text-transform:uppercase;
+    font-weight:700;
+    letter-spacing:1px;
+    font-size:calc(var(--size) * 12px);
     cursor:pointer;
 }

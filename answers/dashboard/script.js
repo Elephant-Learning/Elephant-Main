@@ -1,4 +1,47 @@
 const tags = [];
+let likedAnswers;
+
+async function search(){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
+    if(document.getElementById("desktop-navbar-input").value === ""){
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/getAnswersForUser?userId=' + savedUserId, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        })
+
+        const content = await response.json();
+        console.log(content)
+
+        for(let i = 0; i < content.context.answers.length; i++){
+            createQuestion(content.context.answers[i].title, content.context.answers[i].tags, content.context.answers[i].description, content.context.answers[i].authorName, content.context.answers[i].authorPfpId, computeTime(content.context.answers[i].created), content.context.answers[i].comments.length, content.context.answers[i].numberOfLikes, likedAnswers.includes(content.context.answers[i].id), content.context.answers[i].id)
+        }
+    } else {
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/searchByName?name=' + document.getElementById("desktop-navbar-input").value, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        })
+
+        const content = await response.json();
+        console.log(content)
+
+        for(let i = 0; i < content.context.answers.length; i++){
+            createQuestion(content.context.answers[i].title, content.context.answers[i].tags, content.context.answers[i].description, content.context.answers[i].authorName, content.context.answers[i].authorPfpId, computeTime(content.context.answers[i].created), content.context.answers[i].comments.length, content.context.answers[i].numberOfLikes, user.elephantAnswersLiked.includes(content.context.answers[i].id), content.context.answers[i].id)
+        }
+    }
+}
 
 async function heartDeck(deckId, image){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
@@ -216,30 +259,15 @@ async function initialize(user){
         document.getElementById("your-answers").appendChild(newDiv);
     }
 
+    likedAnswers = user.elephantAnswersLiked;
+
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png";
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
     document.getElementById('desktop-profile-user-img').src = "../../flashcards/icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
 
     closeLoader();
-
-    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/getAnswersForUser?userId=' + user.id, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type'
-        },
-        mode: 'cors'
-    })
-
-    const content = await response.json();
-    console.log(content)
-
-    for(let i = 0; i < content.context.answers.length; i++){
-        createQuestion(content.context.answers[i].title, content.context.answers[i].tags, content.context.answers[i].description, content.context.answers[i].authorName, content.context.answers[i].authorPfpId, computeTime(content.context.answers[i].created), content.context.answers[i].comments.length, content.context.answers[i].numberOfLikes, user.elephantAnswersLiked.includes(content.context.answers[i].id), content.context.answers[i].id)
-    }
+    search();
 
     document.getElementById('loading-div').classList.add('inactive-modal');
 }
