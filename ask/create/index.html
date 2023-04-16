@@ -5,18 +5,18 @@
     <title>Create - Answers | Elephant - The Ultimate Student Suite</title>
 
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="../../flashcards/css/main.css">
+    <link rel="stylesheet" href="../../flip/css/main.css">
     <link rel="icon" href="../../icons/elephant-400-400-grayscale.png">
 
     <script src="script.js" defer></script>
-    <script src="../../flashcards/js/main.js" defer></script>
+    <script src="../../flip/js/main.js" defer></script>
 </head>
 <body>
     <div id="desktop-container">
         <div id="publish-modal-bg" class="inactive-modal">
             <div id="publish-modal">
                 <div>
-                    <img src="../icons/answers.png" alt="">
+                    <img src="../icons/ask.png" alt="">
                 </div>
                 <h1>Ask Question</h1>
                 <p>Review the Following and Set Tags to enable public discovery.</p>
@@ -39,7 +39,7 @@
                 <div onclick="leaveEditor('../dashboard')"><img src="../../icons/elephant-answers-3.png" alt="Elephant Logo"></div>
             </div>
             <!--<div id="desktop-input-div">
-                <img src="../../flashcards/icons/search.png" alt="Search" id="desktop-input-img">
+                <img src="../../flip/icons/search.png" alt="Search" id="desktop-input-img">
                 <input type="text" id="desktop-navbar-input" placeholder="Search Decks, Users, Classrooms">
             </div>-->
             <div id="desktop-navbar-right">
@@ -47,69 +47,69 @@
                     <img src="../icons/music.png" alt="Notifications">
                 </div>-->
                 <div id="desktop-navbar-profile">
-                    <img src="../../flashcards/editor/icons/crowd.png" alt="" id="desktop-navbar-profile-image">
+                    <img src="../../flip/editor/icons/crowd.png" alt="" id="desktop-navbar-profile-image">
                     <div id="navbar-profile-text">
                         <h1 id="desktop-navbar-profile-name"></h1>
                         <p id="desktop-navbar-profile-type"></p>
                     </div>
-                    <img src="../../flashcards/icons/expand_down.png" alt="Dropdown">
+                    <img src="../../flip/icons/expand_down.png" alt="Dropdown">
                     <div id="desktop-profile-modal" class="active-modal">
                         <div onclick="location.href = '../../profile'">
-                            <img src="../../flashcards/icons/emojis/happy.png" id="desktop-profile-user-img" alt="">
+                            <img src="../../flip/icons/emojis/happy.png" id="desktop-profile-user-img" alt="">
                             <p>Your Profile</p>
                         </div>
                         <div>
-                            <img src="../../flashcards/icons/theme.png" alt="">
+                            <img src="../../flip/icons/theme.png" alt="">
                             <p>Theme</p>
-                            <img src="../../flashcards/icons/expand-right.png" alt="">
+                            <img src="../../flip/icons/expand-right.png" alt="">
                             <div class="profile-sub-modal">
                                 <div onclick="toggleTheme(0)">
-                                    <img src="../../flashcards/icons/sun.png" alt="">
+                                    <img src="../../flip/icons/sun.png" alt="">
                                     <p>Light Theme</p>
-                                    <img src="../../flashcards/icons/check.png" alt="" class="profile-theme-check-img">
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-theme-check-img">
                                 </div>
                                 <div onclick="toggleTheme(1)">
-                                    <img src="../../flashcards/icons/moon.png" alt="">
+                                    <img src="../../flip/icons/moon.png" alt="">
                                     <p>Dark Theme</p>
-                                    <img src="../../flashcards/icons/check.png" alt="" class="profile-theme-check-img">
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-theme-check-img">
                                 </div>
                                 <div onclick="toggleTheme(2)">
-                                    <img src="../../flashcards/icons/50%25.png" alt="">
+                                    <img src="../../flip/icons/50%25.png" alt="">
                                     <p>System Default</p>
-                                    <img src="../../flashcards/icons/check.png" alt="" class="profile-theme-check-img">
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-theme-check-img">
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <img src="../../flashcards/icons/zoom.png">
+                            <img src="../../flip/icons/zoom.png">
                             <p>Accessibility Zoom</p>
-                            <img src="../../flashcards/icons/expand-right.png" alt="">
+                            <img src="../../flip/icons/expand-right.png" alt="">
                             <div class="profile-sub-modal">
                                 <div onclick="toggleSizeSetting(0); recalculateTextfieldSize();">
-                                    <img src="../../flashcards/icons/zoom_out.png" alt="">
+                                    <img src="../../flip/icons/zoom_out.png" alt="">
                                     <p>75%</p>
-                                    <img src="../../flashcards/icons/check.png" alt="" class="profile-zoom-check-img">
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
                                 </div>
                                 <div onclick="toggleSizeSetting(1); recalculateTextfieldSize();">
-                                    <img src="../../flashcards/icons/search.png" alt="">
+                                    <img src="../../flip/icons/search.png" alt="">
                                     <p>100%</p>
-                                    <img src="../../flashcards/icons/check.png" alt="" class="profile-zoom-check-img">
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
                                 </div>
                                 <div onclick="toggleSizeSetting(2); recalculateTextfieldSize();">
-                                    <img src="../../flashcards/icons/zoom_in.png" alt="">
+                                    <img src="../../flip/icons/zoom_in.png" alt="">
                                     <p>125%</p>
-                                    <img src="../../flashcards/icons/check.png" alt="" class="profile-zoom-check-img">
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
                                 </div>
                                 <div onclick="toggleSizeSetting(3); recalculateTextfieldSize();">
-                                    <img src="../../flashcards/icons/zoom_in.png" alt="">
+                                    <img src="../../flip/icons/zoom_in.png" alt="">
                                     <p>150%</p>
-                                    <img src="../../flashcards/icons/check.png" alt="" class="profile-zoom-check-img">
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
                                 </div>
                             </div>
                         </div>
                         <div class="profile-break"></div>
                         <div onclick="leaveEditor('../../login')">
-                            <img src="../../flashcards/icons/logout.png">
+                            <img src="../../flip/icons/logout.png">
                             <p>Log Out</p>
                         </div>
                         <!--<button>Get Premium</button>-->
@@ -164,10 +164,10 @@
         </div>
         <div id="desktop-bottom-buttons">
             <!--<div class="desktop-bottom-btn" onclick="askQuestion();">
-                <img src="../../flashcards/editor/icons/save.png" alt="">
+                <img src="../../flip/editor/icons/save.png" alt="">
             </div>-->
             <div class="desktop-bottom-btn" onclick="leaveEditor();">
-                <img src="../../flashcards/icons/back.png" alt="">
+                <img src="../../flip/icons/back.png" alt="">
             </div>
         </div>
     </div>

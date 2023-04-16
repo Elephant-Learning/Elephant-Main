@@ -505,7 +505,7 @@ async function addDeckShared(deckID, adding, notificationId){
     }
 }
 
-async function viewComment(questionId, commentId, notificationId){
+async function viewComment(questionId, commentId, notificationId, view){
     const userResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/notifications/delete?id=' + notificationId, {
         method: 'DELETE',
         headers: {
@@ -520,7 +520,7 @@ async function viewComment(questionId, commentId, notificationId){
     const userContext = await userResponse.json();
     console.log(userContext);
 
-    location.href = `../../answers/question/?id=${questionId}`;
+    if(view) location.href = `../../ask/question/?id=${questionId}`;
 }
 
 function createNotification(TYPE, DATA){
@@ -617,6 +617,7 @@ function createNotification(TYPE, DATA){
         let span1 = document.createElement('span');
         let span2 = document.createElement('span');
         let btn1 = document.createElement('button');
+        let btn2 = document.createElement('button');
 
         span1.classList.add('bolded')
         span2.classList.add('bolded')
@@ -624,14 +625,22 @@ function createNotification(TYPE, DATA){
         span2.innerHTML = DATA.questionName;
 
         btn1.innerHTML = "View";
+        btn2.innerHTML = "Delete";
         btn1.classList.add('desktop-notification-btn-1');
+        btn2.classList.add('desktop-notification-btn-2');
+
         btn1.addEventListener("click", function(e){
-            viewComment(DATA.questionId, DATA.commentId, DATA.notificationId);
+            viewComment(DATA.questionId, DATA.commentId, DATA.notificationId, true);
+        });
+
+        btn2.addEventListener("click", function(e){
+            viewComment(DATA.questionId, DATA.commentId, DATA.notificationId, false);
+            newDiv.remove();
         });
 
         header.append(span1, document.createTextNode(" commented on your question, "), span2, document.createTextNode("."));
 
-        optionsDiv.appendChild(btn1);
+        optionsDiv.append(btn1, btn2);
         optionsDiv.classList.add('desktop-notification-options');
 
         textDiv.append(header, timeDiv, optionsDiv);

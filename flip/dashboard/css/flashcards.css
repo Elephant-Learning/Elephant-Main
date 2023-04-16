@@ -28,11 +28,11 @@
     cursor:pointer;
 }
 
-/*#flashcards-main-options > div:nth-of-type(1):hover{
+/*#flip-main-options > div:nth-of-type(1):hover{
     border:1px solid var(--primary-accent);
 }
 
-#flashcards-main-options > div:nth-of-type(2):hover{
+#flip-main-options > div:nth-of-type(2):hover{
     border:1px solid var(--secondary-accent);
 }*/
 
@@ -509,7 +509,7 @@
     align-items:center;
 }
 
-/*#flashcards-information-editor > div:first-of-type {
+/*#flip-information-editor > div:first-of-type {
     background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
     width:calc(var(--size) * 125px);
     height:calc(var(--size) * 125px);
@@ -523,7 +523,7 @@
     justify-content:center;
 }
 
-#flashcards-information-editor > div:first-of-type > div{
+#flip-information-editor > div:first-of-type > div{
     width:calc(var(--size) * 100px);
     height:calc(var(--size) * 100px);
     background:var(--bg-color-1);
@@ -536,7 +536,7 @@
     justify-content:center;
 }
 
-#flashcards-information-editor > div:first-of-type > div > img{
+#flip-information-editor > div:first-of-type > div > img{
     width:calc(var(--size) * 60px);
     filter:invert(calc(var(--image-invert) * 0.5 + 0.25));
 }*/

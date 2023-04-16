@@ -46,7 +46,7 @@ async function heartDeck(deckId, image){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
 
     if(image.classList.contains("unliked")){
-        image.src = "../../flashcards/icons/filled_heart.png";
+        image.src = "../../flip/icons/filled_heart.png";
         image.classList.remove("unliked");
         image.classList.add("liked");
 
@@ -66,9 +66,9 @@ async function heartDeck(deckId, image){
         })
 
         const context = await response.json();
-        document.getElementById("answers-heart-" + deckId).innerHTML = parseInt(document.getElementById("answers-heart-" + deckId).textContent) + 1;
+        document.getElementById("ask-heart-" + deckId).innerHTML = parseInt(document.getElementById("ask-heart-" + deckId).textContent) + 1;
     } else {
-        image.src = "../../flashcards/icons/unfilled_heart.png";
+        image.src = "../../flip/icons/unfilled_heart.png";
         image.classList.add("unliked");
         image.classList.remove("liked");
 
@@ -88,7 +88,7 @@ async function heartDeck(deckId, image){
         })
 
         const context = await response.json();
-        document.getElementById("answers-heart-" + deckId).innerHTML = parseInt(document.getElementById("answers-heart-" + deckId).textContent) - 1;
+        document.getElementById("ask-heart-" + deckId).innerHTML = parseInt(document.getElementById("ask-heart-" + deckId).textContent) - 1;
     }
 }
 
@@ -100,13 +100,13 @@ function createQuestion(title, tagsArray, text, authorName, authorPfpId, timeAgo
     let heartText = document.createElement('p');
 
     heartText.innerHTML = likeAmount;
-    heartText.id = "answers-heart-" + id;
+    heartText.id = "ask-heart-" + id;
 
     if(liked) {
-        heartImg.src = "../../flashcards/icons/filled_heart.png";
+        heartImg.src = "../../flip/icons/filled_heart.png";
         heartImg.classList.add("liked");
     } else {
-        heartImg.src = "../../flashcards/icons/unfilled_heart.png";
+        heartImg.src = "../../flip/icons/unfilled_heart.png";
         heartImg.classList.add("unliked");
     }
 
@@ -255,7 +255,7 @@ async function initialize(user){
         let imageDiv = document.createElement("div");
         let image = document.createElement("img");
 
-        image.src = "../icons/answers.png";
+        image.src = "../icons/ask.png";
         imageDiv.appendChild(image);
 
         let textDiv = document.createElement("div");
@@ -293,7 +293,7 @@ async function initialize(user){
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png";
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
-    document.getElementById('desktop-profile-user-img').src = "../../flashcards/icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
+    document.getElementById('desktop-profile-user-img').src = "../../flip/icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
     document.getElementById("answers-score-header").innerHTML = user.elephantAnswersScore;
 
     closeLoader();

@@ -38,7 +38,7 @@ async function completeEntry(){
 }
 
 function addCard(params, type){
-    const images = ["../flashcards/icons/deck.png", "../answers/icons/answers.png"];
+    const images = ["../flip/icons/deck.png", "../ask/icons/ask.png"];
 
     let newLink = document.createElement("a");
     let imageDiv = document.createElement('div');
@@ -63,8 +63,8 @@ function addCard(params, type){
     textDiv.append(newHeader, newPara);
 
     newLink.append(imageDiv, textDiv);
-    if(type === 0) newLink.setAttribute("href", "../flashcards/viewer/?deck=" + params.id);
-    else if(type === 1) newLink.setAttribute("href", "../answers/question/?id=" + params.id)
+    if(type === 0) newLink.setAttribute("href", "../flip/viewer/?deck=" + params.id);
+    else if(type === 1) newLink.setAttribute("href", "../ask/question/?id=" + params.id)
     document.querySelectorAll('.recent-activity-div')[type].appendChild(newLink);
 }
 

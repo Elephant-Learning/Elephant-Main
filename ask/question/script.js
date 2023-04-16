@@ -85,7 +85,7 @@ async function likeComment(commentId){
         console.log(context);
 
         if(context.status === "SUCCESS"){
-            document.getElementById(`parent-comment-heart-${commentId}`).src = "../../flashcards/icons/filled_heart.png"
+            document.getElementById(`parent-comment-heart-${commentId}`).src = "../../flip/icons/filled_heart.png"
             document.getElementById(`parent-comment-heart-${commentId}`).classList.add("liked");
             document.getElementById(`parent-comment-like-number-${commentId}`).innerHTML = (parseInt(document.getElementById(`parent-comment-like-number-${commentId}`).textContent) + 1).toString();
         }
@@ -112,7 +112,7 @@ async function likeComment(commentId){
         console.log(context);
 
         if(context.status === "SUCCESS"){
-            document.getElementById(`parent-comment-heart-${commentId}`).src = "../../flashcards/icons/unfilled_heart.png"
+            document.getElementById(`parent-comment-heart-${commentId}`).src = "../../flip/icons/unfilled_heart.png"
             document.getElementById(`parent-comment-heart-${commentId}`).classList.remove("liked");
             document.getElementById(`parent-comment-like-number-${commentId}`).innerHTML = (parseInt(document.getElementById(`parent-comment-like-number-${commentId}`).textContent) - 1).toString();
         }
@@ -259,10 +259,10 @@ function createComment(params){
     let likeNumbers = document.createElement("p");
 
     if(params.commentLiked){
-        heartImg.src = "../../flashcards/icons/filled_heart.png";
+        heartImg.src = "../../flip/icons/filled_heart.png";
         heartImg.classList.add("liked");
     } else {
-        heartImg.src = "../../flashcards/icons/unfilled_heart.png";
+        heartImg.src = "../../flip/icons/unfilled_heart.png";
         heartImg.classList.add("unliked")
     }
 
@@ -305,7 +305,7 @@ function createComment(params){
         let editImg = document.createElement("img");
         let deleteImg = document.createElement("img");
 
-        editImg.src = "../../flashcards/editor/icons/edit.png";
+        editImg.src = "../../flip/editor/icons/edit.png";
         deleteImg.src = "../dashboard/icons/trash.png";
 
         deleteImg.addEventListener("click", function(e){
@@ -425,7 +425,7 @@ async function initialize(user){
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png";
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
-    document.getElementById('desktop-profile-user-img').src = "../../flashcards/icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
+    document.getElementById('desktop-profile-user-img').src = "../../flip/icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
 
     questionId = document.location.href.split("=")[1];
 
