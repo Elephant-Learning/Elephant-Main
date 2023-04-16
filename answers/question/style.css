@@ -263,6 +263,15 @@
     font-size:calc(var(--size) * 12px);
 }
 
+.parent-comment > div:last-of-type > div:first-of-type > h2{
+    color:white;
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    padding:calc(var(--size) * 3px) calc(var(--size) * 6px);
+    font-size:calc(var(--size) * 10px);
+    margin:0;
+    border-radius:calc(var(--size) * 6px);
+}
+
 .parent-comment > div:last-of-type > div:first-of-type > p, .parent-comment > div:last-of-type > div:last-of-type > div > div:last-of-type > div:first-of-type > p{
     margin:0;
     font-size:calc(var(--size) * 12px);
@@ -281,6 +290,10 @@
     justify-content:flex-start;
     gap:calc(var(--size) * 6px);
     width:100%;
+}
+
+.liked{
+    filter: invert(43%) sepia(84%) saturate(879%) hue-rotate(302deg) brightness(104%) contrast(99%) !important;
 }
 
 .parent-comment-edit-div > input{
@@ -322,6 +335,7 @@
     height:calc(var(--size) * 18px);
     filter:invert(var(--image-invert));
     transition-duration:250ms;
+    transition-property:transform;
     cursor:pointer;
 }
 

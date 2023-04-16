@@ -62,24 +62,61 @@ async function postAnswer(){
 }
 
 async function likeComment(commentId){
-    let savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
+    if(!document.getElementById(`parent-comment-heart-${commentId}`).classList.contains("liked")){
+        let savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
 
-    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/likeComment?id=' + commentId, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type'
-        },
-        body: JSON.stringify({
-            userId: savedUserId
-        }),
-        mode: 'cors'
-    })
+        console.log(commentId, savedUserId);
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/likeComment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                userId: savedUserId,
+                commentId: commentId
+            }),
+            mode: 'cors'
+        })
 
-    const context = await response.json();
-    console.log(context);
+        const context = await response.json();
+        console.log(context);
+
+        if(context.status === "SUCCESS"){
+            document.getElementById(`parent-comment-heart-${commentId}`).src = "../../flashcards/icons/filled_heart.png"
+            document.getElementById(`parent-comment-heart-${commentId}`).classList.add("liked");
+            document.getElementById(`parent-comment-like-number-${commentId}`).innerHTML = (parseInt(document.getElementById(`parent-comment-like-number-${commentId}`).textContent) + 1).toString();
+        }
+    } else {
+        let savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
+
+        console.log(commentId, savedUserId);
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/unlikeComment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                userId: savedUserId,
+                commentId: commentId
+            }),
+            mode: 'cors'
+        })
+
+        const context = await response.json();
+        console.log(context);
+
+        if(context.status === "SUCCESS"){
+            document.getElementById(`parent-comment-heart-${commentId}`).src = "../../flashcards/icons/unfilled_heart.png"
+            document.getElementById(`parent-comment-heart-${commentId}`).classList.remove("liked");
+            document.getElementById(`parent-comment-like-number-${commentId}`).innerHTML = (parseInt(document.getElementById(`parent-comment-like-number-${commentId}`).textContent) - 1).toString();
+        }
+    }
 }
 
 async function reply(commentId){
@@ -109,7 +146,7 @@ async function reply(commentId){
     const context = await response.json();
     console.log(context);
 
-    if(context.status === "SUCCESS") document.getElementById(`parent-comment-reply-input-${commentId}`).value = "";
+    if(context.status === "SUCCESS") location.reload();
 }
 
 async function deleteComment(commentId){
@@ -130,8 +167,8 @@ async function deleteComment(commentId){
     if(context.status === "SUCCESS") document.getElementById(`parent-comment-${commentId}`).remove();
 }
 
-async function answerQuestion(id, commenter){
-    await fetch('https://elephantsuite-rearend.herokuapp.com/answers/setAnswered?id=' + id, {
+async function answerQuestion(answerId, commentId, commenter){
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/setAnswered', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -139,6 +176,10 @@ async function answerQuestion(id, commenter){
             'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type'
         },
+        body: JSON.stringify({
+            commentId: commentId,
+            answerId: answerId
+        }),
         mode: 'cors'
     })
 
@@ -155,7 +196,10 @@ async function answerQuestion(id, commenter){
             score: 1
         }),
         mode: 'cors'
-    })
+    });
+
+    const context = await response.json();
+    console.log(context);
 
     location.reload();
 }
@@ -195,10 +239,17 @@ function createComment(params){
 
     let contentDiv = document.createElement("div");
     let nameDiv = document.createElement("div");
-    let name = document.createElement("h6")
+    let name = document.createElement("h6");
 
     name.innerHTML = params.commenterName;
     nameDiv.appendChild(name);
+
+    if(params.finalAnswer){
+        let newAnswered = document.createElement("h2");
+        newAnswered.innerHTML = "Selected Answer";
+
+        nameDiv.appendChild(newAnswered);
+    }
 
     let mainContent = document.createElement("p");
     mainContent.innerHTML = params.description
@@ -207,23 +258,31 @@ function createComment(params){
     let heartImg = document.createElement("img");
     let likeNumbers = document.createElement("p");
 
-    heartImg.src = "../../flashcards/icons/unfilled_heart.png";
+    if(params.commentLiked){
+        heartImg.src = "../../flashcards/icons/filled_heart.png";
+        heartImg.classList.add("liked");
+    } else {
+        heartImg.src = "../../flashcards/icons/unfilled_heart.png";
+        heartImg.classList.add("unliked")
+    }
+
+
     likeNumbers.innerHTML = params.numberOfLikes;
+    likeNumbers.id = `parent-comment-like-number-${params.id}`
 
     heartImg.classList.add("parent-comment-heart");
+    heartImg.id = `parent-comment-heart-${params.id}`;
 
     heartImg.addEventListener("click", function(e){
         likeComment(params.id);
     });
 
-    console.log(savedUserId, params.answerAuthorId);
-
-    if(savedUserId === params.answerAuthorId && !params.answered){
+    if(savedUserId === params.answerAuthorId && !params.questionAnswered){
         let checkImg = document.createElement("img");
         checkImg.src = "./icons/check.png";
 
         checkImg.addEventListener("click", function(e){
-            answerQuestion(params.answerId, params.commenterId)
+            answerQuestion(params.answerId, params.id, params.commenterId)
         })
 
         optionsDiv.appendChild(checkImg);
@@ -232,19 +291,17 @@ function createComment(params){
     optionsDiv.append(heartImg, likeNumbers);
     optionsDiv.classList.add("parent-comment-options-div")
 
-    if(!params.answered){
-        let commentImg = document.createElement("img");
-        commentImg.src = "../dashboard/icons/comment.png";
-        commentImg.classList.add("parent-comment-reply");
+    let commentImg = document.createElement("img");
+    commentImg.src = "../dashboard/icons/comment.png";
+    commentImg.classList.add("parent-comment-reply");
 
-        commentImg.addEventListener("click", function(e){
-            document.getElementById(`parent-comment-reply-input-div-${params.id}`).classList.toggle("inactive-modal");
-        });
+    commentImg.addEventListener("click", function(e){
+        document.getElementById(`parent-comment-reply-input-div-${params.id}`).classList.toggle("inactive-modal");
+    });
 
-        optionsDiv.appendChild(commentImg);
-    }
+    optionsDiv.appendChild(commentImg);
 
-    if(savedUserId === params.commenterId){
+    if(savedUserId === params.commenterId && !params.questionAnswered){
         let editImg = document.createElement("img");
         let deleteImg = document.createElement("img");
 
@@ -332,6 +389,31 @@ function createComment(params){
     document.getElementById("parent-comments-list").appendChild(newDiv);
 }
 
+function sortArrayDescending(array) {
+    var done = false;
+    while (!done) {
+        done = true;
+        for (var i = 1; i < array.length; i += 1) {
+            if (array[i - 1].numberOfLikes > array[i].numberOfLikes) {
+                done = false;
+                var tmp = array[i - 1];
+                array[i - 1] = array[i];
+                array[i] = tmp;
+            }
+        }
+    }
+
+    return array;
+}
+
+function reverseArr(input) {
+    var ret = new Array;
+    for(var i = input.length-1; i >= 0; i--) {
+        ret.push(input[i]);
+    }
+    return ret;
+}
+
 async function initialize(user){
     if(user.status === "FAILURE" || user.error === "Bad Request") {
         location.href = "../../login"
@@ -380,13 +462,31 @@ async function initialize(user){
     document.getElementById("parent-comments-amount").innerHTML = `Answers: ${context.context.answer.comments.length}`;
     document.getElementById("edit-btn").setAttribute("href", `../create/?id=${context.context.answer.id}`)
 
+    let comments = context.context.answer.comments;
+
+    comments = sortArrayDescending(comments);
+    comments = reverseArr(comments);
+
+    console.log(comments)
+
+    for(let i = 0; i < comments.length; i++){
+        if(comments[i].finalAnswer){
+            let temp = comments[0];
+            comments[0] = comments[i];
+            comments[i] = temp;
+
+            break;
+        }
+    }
+
     let commentIds = [];
 
-    for(let i = 0; i < context.context.answer.comments.length; i++){
-        let comment = context.context.answer.comments[i];
+    for(let i = 0; i < comments.length; i++){
+        let comment = comments[i];
         comment.answerAuthorId = context.context.answer.authorId;
         comment.answerId = context.context.answer.id;
-        comment.answered = context.context.answer.answered;
+        comment.questionAnswered = context.context.answer.answered;
+        comment.commentLiked = user.commentsLiked.includes(comment.id);
 
         createComment(comment);
         if(!commentIds.includes(comment.commenterId)){
