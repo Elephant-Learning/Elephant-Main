@@ -63,7 +63,10 @@ async function postAnswer(){
 
 async function likeComment(commentId){
     if(!document.getElementById(`parent-comment-heart-${commentId}`).classList.contains("liked")){
-        let savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
+        let savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
+        document.getElementById(`parent-comment-heart-${commentId}`).src = "../../flip/icons/filled_heart.png"
+        document.getElementById(`parent-comment-heart-${commentId}`).classList.add("liked");
 
         console.log(commentId, savedUserId);
         const response = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/likeComment', {
@@ -85,12 +88,13 @@ async function likeComment(commentId){
         console.log(context);
 
         if(context.status === "SUCCESS"){
-            document.getElementById(`parent-comment-heart-${commentId}`).src = "../../flip/icons/filled_heart.png"
-            document.getElementById(`parent-comment-heart-${commentId}`).classList.add("liked");
             document.getElementById(`parent-comment-like-number-${commentId}`).innerHTML = (parseInt(document.getElementById(`parent-comment-like-number-${commentId}`).textContent) + 1).toString();
         }
     } else {
-        let savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
+        let savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
+        document.getElementById(`parent-comment-heart-${commentId}`).src = "../../flip/icons/unfilled_heart.png"
+        document.getElementById(`parent-comment-heart-${commentId}`).classList.remove("liked");
 
         console.log(commentId, savedUserId);
         const response = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/unlikeComment', {
@@ -112,8 +116,6 @@ async function likeComment(commentId){
         console.log(context);
 
         if(context.status === "SUCCESS"){
-            document.getElementById(`parent-comment-heart-${commentId}`).src = "../../flip/icons/unfilled_heart.png"
-            document.getElementById(`parent-comment-heart-${commentId}`).classList.remove("liked");
             document.getElementById(`parent-comment-like-number-${commentId}`).innerHTML = (parseInt(document.getElementById(`parent-comment-like-number-${commentId}`).textContent) - 1).toString();
         }
     }

@@ -144,7 +144,7 @@ async function initialize(user){
 
     removeAllChildNodes(document.getElementById('my-profile-friends'));
     removeAllChildNodes(document.getElementById('my-profile-decks'));
-    removeAllChildNodes(document.getElementById('my-profile-ask'));
+    removeAllChildNodes(document.getElementById('my-profile-answers'));
 
     let newHeader = document.createElement('h1');
     let newDeckHeader = document.createElement('h1')
@@ -174,7 +174,7 @@ async function initialize(user){
 
     removeAllChildNodes(document.getElementById("tags-list"));
 
-    await fetch("../answers/answers.json").then(function(response){return response.json();}).then(function(data){tagsList = data.tags}).catch(function(error){console.log(`Error: ${error}`)})
+    await fetch("../ask/answers.json").then(function(response){return response.json();}).then(function(data){tagsList = data.tags}).catch(function(error){console.log(`Error: ${error}`)})
 
     for(let i = 0; i < tagsList.length; i++){
         let newDiv = document.createElement('div');
@@ -261,7 +261,7 @@ async function initialize(user){
         newTxtDiv.append(newName, newEmail);
         newDiv.append(newImg, newTxtDiv);
 
-        document.getElementById('my-profile-ask').appendChild(newDiv);
+        document.getElementById('my-profile-answers').appendChild(newDiv);
     }
 
     selectedProfile = user.pfpId;

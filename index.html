@@ -2,131 +2,137 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://elephantsuite.me/">
-    <meta property="og:site_name" content="Elephant - The Ultimate Student Suite">
-    <meta property="og:title" content="Elephant - The Ultimate Student Suite">
-    <meta property="og:description" content="Redefining the Future of Eductational Tools">
-    <meta property="og:image" content="https://elephantsuite.me/icons/idk.png">
-    <title>Elephant - The Ultimate Student Suite</title>
+    <title>Home | Elephant - The Ultimate Student Suite</title>
 
-    <link rel="icon" href="icons/elephant-400-400-grayscale.png" class="icon">
+    <link rel="icon" href="icons/elephant-400-400-grayscale.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="footer.css">
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7659700279033478"
-     crossorigin="anonymous"></script>
-    <script src="dependencies/faviconGenerator.js" defer></script>
-    <script src="navbar.js" defer></script>
     <script src="script.js" defer></script>
+    <script src="navbar.js" defer></script>
 </head>
 <body>
-    <div id="main-wrapper">
+    <p id="navbar-prefix">./</p>
+    <div id="desktop-wrapper">
         <div id="navbar">
-            <div>
-                <p id="navbar-prefix">./</p>
-                <a href="./"><img src="./icons/elephant-400-400-white.png" alt="" id="navbar-image"></a>
-                <div class="navbar-dropdown">
-                    <p>Services</p>
-                    <div class="navbar-subcontainer">
-                        <div>
-                            <div class="navbar-subcontainer-row">
-                                <p>Services We Offer</p>
-                                <div>
-                                    <div onclick="location.href = './services/flip/'">
-                                        <img src="flip/icons/deck.png" alt="">
-                                        <p>Elephant Flip</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <a href="./login/?signup">Join Elephant</a>
-                        </div>
+            <div id="navbar-left">
+                <a href="newLanding">
+                    <img src="icons/elephant-400-400-pink-02.png" alt="">
+                </a>
+                <h1>Elephant</h1>
+            </div>
+            <div id="navbar-middle">
+                <div class="navbar-modal">
+                    <div>
+                        <p>Our Services</p>
+                        <img src="icons/landing/down.png" alt="">
                     </div>
-                    <!--<img src="./flip/viewer/icons/expand.png" alt="">-->
+                    <div>
+                        <a href="services/flip">
+                            <div>
+                                <img src="flip/icons/deck.png" alt="">
+                            </div>
+                            <h1>Flip</h1>
+                        </a>
+                        <a href="services/ask">
+                            <div>
+                                <img src="icons/landing/employees.png" alt="">
+                            </div>
+                            <h1>Ask</h1>
+                        </a>
+                    </div>
                 </div>
-                <div class="navbar-dropdown">
-                    <p>About Elephant</p>
-                    <div class="navbar-subcontainer">
-                        <div>
-                            <div class="navbar-subcontainer-row">
-                                <p>About Elephant</p>
-                                <div>
-                                    <div onclick="location.href = './about/mission/'">
-                                        <img src="./icons/landing/mission.png" alt="">
-                                        <p>Our Mission</p>
-                                    </div>
-                                    <div onclick="location.href = './about/employees/'">
-                                        <img src="./icons/landing/user.png" alt="">
-                                        <p>Employees</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <a href="./login/?signup">Join Elephant</a>
-                        </div>
+                <div class="navbar-modal">
+                    <div>
+                        <p>About Us</p>
+                        <img src="icons/landing/down.png" alt="">
                     </div>
-                    <!--<img src="./flip/viewer/icons/expand.png" alt="">-->
+                    <div>
+                        <a href="about/mission">
+                            <div>
+                                <img src="icons/landing/mission.png" alt="">
+                            </div>
+                            <h1>Our Mission</h1>
+                        </a>
+                        <a href="about/employees">
+                            <div>
+                                <img src="icons/landing/employees.png" alt="">
+                            </div>
+                            <h1>Our Staff</h1>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div>
-                <a href="./login/?signup" id="login-link">Sign Up</a>
+            <div id="navbar-right">
+                <a id="login-link" href="login" class="button-smaller">Login</a>
+                <a href="./login/?signup" class="button-large">Join Elephant</a>
             </div>
         </div>
         <div id="main-container">
-            <h1>Next-Gen Online Services to Revolutionize Education Everywhere!</h1>
-            <p>Hyper-Advanced products with many classroom features to take your educational game to the next level!</p>
-            <div id="main-transition-container">
-                <div id="transition-image-container">
-                    <div></div>
-                </div>
-                <div id="transition-text-container">
-                    <div class="header-label">Built By You</div>
-                    <h1>By Students For Students</h1>
-                    <p>Our product is developed by students, which allows us to have a unique understanding of the challenges and needs that students face. This insight enables us to tailor our product to better meet your specific needs</p>
-                    <a href="./login/?signup">Join Elephant Today</a>
+            <h1>Welcome to Elephant - The Ultimate Student Suite!</h1>
+            <p>We're here to help you unleash your full intellectual potential with our comprehensive suite of services, including student connection, advanced flashcards, and academic forums. Join us today and take your productivity as a student to the next level!</p>
+            <a href="login?signup">Join The Elephant Community Today</a>
+        </div>
+        <div class="video-container" style="background:var(--light-accent)">
+            <div>
+                <img src="videos/Main-Tour.gif" alt="">
+            </div>
+            <div>
+                <h6 class="header-label">Our Services</h6>
+                <h1>Empowering Students with Powerful Services</h1>
+                <p>Our services at Elephant - The Ultimate Student Suite are designed to revolutionize the way students learn and connect. With Elephant Flip, our online flashcards service, you can now tie multiple definitions to one term, allowing for a more comprehensive and efficient way of studying. Plus, with enhanced privacy and memorization options, you can customize your flashcard experience to suit your unique learning style. Looking to connect with fellow students who share similar interests? Elephant Ask is our student forum that facilitates meaningful discussions and fosters a vibrant community of learners. And that's not all - we're constantly working on bringing cutting-edge services your way to further enhance your student journey.</p>
+                <div>
+                    <div>
+                        <div><img src="flip/icons/deck.png" alt=""></div>
+                        <h1>Elephant Flip</h1>
+                    </div>
+                    <div>
+                        <div><img src="ask/icons/ask.png" alt=""></div>
+                        <h1>Elephant Ask</h1>
+                    </div>
+                    <div>
+                        <div><img src="flip/icons/plus.png" alt=""></div>
+                        <h1>More On The Way</h1>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="content-container">
+        <div class="video-container">
             <div>
-                <div class="header-label">Sets Up For Success</div>
+                <h6 class="header-label">Highly Customizable</h6>
+                <h1>Personalize Your Student Experience</h1>
+                <p>At Elephant - The Ultimate Student Suite, we believe that no student should face unnecessary barriers in their academic journey. That's why we've made our service highly customizable, allowing you to tailor your experience to your preferences. We understand that every student is unique, and our goal is to eliminate any obstacles that may hinder your productivity. For instance, our light and dark theme options enable you to choose the visual style that suits your preferences, making your studying experience more comfortable and enjoyable. With our commitment to customization, we strive to provide a seamless and personalized experience that empowers you to maximize your full intellectual potential without any hindrances.</p>
             </div>
             <div>
-
+                <img src="videos/Themes.gif" alt="">
             </div>
         </div>
         <div id="footer">
             <div>
                 <div>
-                    <img src="./icons/elephant-400-400-white.png" alt="">
+                    <img src="icons/elephant-400-400-white.png" alt="">
                     <div>
                         <h1>Join Elephant Today</h1>
                         <p>Sign up for our online educational service and gain access to high-quality educational products that will help you excel in educational journey.</p>
                     </div>
                 </div>
-                <a href=".login/?signup">Join Elephant</a>
+                <a href="login?signup">Join Elephant</a>
             </div>
             <div>
                 <div>
                     <div>
                         <div>
-                            <img src="./icons/elephant-400-400-white.png" alt="">
+                            <img src="icons/elephant-400-400-white.png" alt="">
                             <h1>Elephant</h1>
                         </div>
                         <p>Elephant provides accessible, high-quality educational products and services that empower individuals to achieve their goals and reach their full potential.</p>
                         <div>
                             <div>
-                                <img src="./icons/landing/phone.png" alt="">
+                                <img src="icons/landing/phone.png" alt="">
                                 <p>+1 (425) 289-9748</p>
                             </div>
                             <div>
-                                <img src="./icons/landing/email.png" alt="">
+                                <img src="icons/landing/email.png" alt="">
                                 <p>elephantsuitenoreply@gmail.com</p>
                             </div>
                         </div>
@@ -134,13 +140,13 @@
                     <div>
                         <div>
                             <h1>Services</h1>
-                            <a href="./services/flip/">Flip</a>
-                            <a href=".services/answers/">Answers</a>
+                            <a href="services/flip">Flip</a>
+                            <a href="services/ask">Ask</a>
                         </div>
                         <div>
                             <h1>About Us</h1>
-                            <a href="./about/mission">Our Mission</a>
-                            <a href="./about/employees/">Employee Directory</a>
+                            <a href="about/mission">Our Mission</a>
+                            <a href="about/employees">Employee Directory</a>
                         </div>
                     </div>
                 </div>
@@ -150,11 +156,17 @@
                         <p>© 2023 Kothari Enterprises LLC</p>
                     </div>
                     <div>
+                        <a href="https://www.youtube.com/@ElephantSuite"><img src="icons/landing/youtube.png" alt=""></a>
                         <a href="https://www.instagram.com/elephantsuite/"><img src="icons/landing/instagram.png" alt=""></a>
+                        <a href="https://www.tiktok.com/@elephantsuite"><img src="icons/landing/tiktok.png" alt=""></a>
+                        <a href="https://discord.gg/YbZS8H6RbB/"><img src="icons/landing/discord.png" alt=""></a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div id="mobile-wrapper">
+
     </div>
 </body>
 </html>
