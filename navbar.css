@@ -1,178 +1,171 @@
+.header-label{
+    background:hotpink;
+    padding:6px 18px;
+    text-transform:uppercase;
+    font-weight:700;
+    border-radius:17px;
+    font-size:14px;
+    color:white;
+    margin:0;
+}
+
 #navbar{
-    height:50px;
-    background:var(--dark-gray);
-    width:84vw;
-    padding:0 8vw;
     display:flex;
     flex-direction:row;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
+    width:calc(100vw - 128px);
+    padding:0 64px;
+    height:96px;
+    position:absolute;
+    top:0;
+    left:0;
 }
 
 #navbar > div{
+    width:33%;
+}
+
+#navbar-left{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:16px;
+}
+
+#navbar-left > a > img{
+    height:48px;
+    cursor:pointer;
+}
+
+#navbar-left > h1{
+    margin:0;
+    font-size:24px;
+    display:none;
+}
+
+#navbar-middle{
     display:flex;
     flex-direction:row;
     align-items:center;
     justify-content:center;
-    gap:18px;
-    color:white;
+    gap:24px;
 }
 
-#navbar > div:first-of-type > a > img:first-of-type{
-    height:28px;
-    margin-right:36px;
-}
-
-#navbar > div:first-of-type > h1{
-    font-size:20px;
-}
-
-.navbar-dropdown{
+.navbar-modal{
+    position:relative;
     display:flex;
-    flex-direction:row;
+    flex-direction:column;
     align-items:center;
-    cursor:pointer;
+    justify-content:center;
 }
 
-.navbar-dropdown > p{
+.navbar-modal > div:first-of-type > p{
+    margin:0;
+    font-size:14px;
     font-weight:600;
-    font-size:13px;
-    cursor:pointer;
-    color:gray;
-    transition-duration:250ms;
-}
-
-.navbar-dropdown > p:hover{
-    color:white;
-}
-
-.navbar-subcontainer{
-    visibility:hidden;
-    transition-delay:500ms;
-    transition-duration:250ms;
-    position:absolute;
-    width:100vw;
-    background:var(--light-gray);
-    top:50px;
-    left:0;
     cursor:default;
-    opacity:0;
+}
+
+.navbar-modal > div:first-of-type > img{
+    height:18px;
+}
+
+.navbar-modal > div:first-of-type{
     display:flex;
     flex-direction:row;
+    align-items:center;
     justify-content:center;
 }
 
-.navbar-subcontainer > div:first-of-type{
-    width:calc(84vw - 385px);
-    padding:32px 8vw;
+.navbar-modal > div:last-of-type{
+    position:absolute;
+    visibility:hidden;
+    opacity:0;
+    transition-duration:250ms;
+    transition-delay:500ms;
+    top:32px;
+    background:white;
+    padding:24px;
+    border:1px solid var(--light-border-color);
+    border-radius:6px;
     display:flex;
     flex-direction:column;
     align-items:flex-start;
     justify-content:flex-start;
     gap:12px;
+    z-index:2;
 }
 
-.navbar-subcontainer-row{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    justify-content:flex-start;
-    gap:18px;
+.navbar-modal > div:first-of-type:hover ~ div:last-of-type, .navbar-modal > div:last-of-type:hover{
+    visibility:visible;
+    transition-delay:0ms;
+    opacity:1;
 }
 
-.navbar-subcontainer-row > p{
-    font-size:14px;
-    font-weight:700;
-    width:calc(84vw - 385px);
-    border-bottom:1px solid gray;
-    padding-bottom:6px;
-    margin:0;
-}
-
-.navbar-subcontainer-row > div{
+.navbar-modal > div:last-of-type > a{
     display:flex;
     flex-direction:row;
     align-items:center;
     justify-content:flex-start;
-    gap:24px;
+    text-decoration:none;
+    gap:12px;
+    width:144px;
 }
 
-.navbar-subcontainer-row > div > div{
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    gap:6px;
-}
-
-.navbar-subcontainer-row > div > div > img{
-    height:18px;
-    filter:invert(0.5);
-}
-
-.navbar-subcontainer-row > div > div:hover > img{
-    filter: invert(55%) sepia(18%) saturate(6750%) hue-rotate(304deg) brightness(101%) contrast(99%);
-}
-
-.navbar-subcontainer-row > div > div > p{
-    color:gray;
-    font-weight:600;
-    font-size:14px;
-    transition-duration:250ms;
-    margin:0;
-}
-
-.navbar-subcontainer-row > div > div:hover > p{
-    color:var(--primary-accent);
-}
-
-.navbar-subcontainer > div:last-of-type{
-    width:336px;
-    border-right:1px solid var(--dark-gray);
-    background:var(--dark-border-color);
-    padding:24px;
-}
-
-.navbar-subcontainer > div:last-of-type > a{
-    width:336px;
-    height:48px;
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:center;
+.navbar-modal > div:last-of-type > a > div{
     background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
-    font-size:16px;
-    font-weight:700;
-    text-decoration:none;
-    border-radius:12px;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
 }
 
-.navbar-dropdown > p:hover ~ .navbar-subcontainer, .navbar-subcontainer:hover{
-    visibility:visible !important;
-    opacity:1 !important;
-}
-
-#navbar a:not(.navbar-subcontainer > div > a){
-    font-size:12px;
-    color:var(--primary-accent);
-    font-weight:600;
-    text-decoration:none;
-}
-
-.navbar-dropdown > img{
-    height:20px;
+.navbar-modal > div:last-of-type > a > div > img{
+    height:18px;
     filter:invert(1);
 }
 
-.navbar-dropdown:not(.active-dropdown) > img{
-    transform:rotate(90deg);
+.navbar-modal > div:last-of-type > a > h1{
+    margin:0;
+    font-size:16px;
+    color:black;
 }
 
-.navbar-dropdown.active-dropdown > img{
-    transform:rotate(-90deg);
+#navbar-right{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-end;
+    gap:24px;
+}
+
+#navbar-right > .button-smaller{
+    font-size:12px;
+    text-decoration:none;
+    color:black;
+    font-weight:700;
+}
+
+#navbar-right > .button-large{
+    font-size:12px;
+    text-decoration:none;
+    color:white;
+    font-weight:700;
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    padding:12px 24px;
+    border-radius:6px;
 }
 
 #navbar-prefix{
     display:none;
+}
+
+.pink-image{
+    filter: invert(43%) sepia(84%) saturate(879%) hue-rotate(302deg) brightness(104%) contrast(99%) !important;
 }

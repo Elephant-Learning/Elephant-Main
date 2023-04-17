@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards | Elephant - The Ultimate Student Suite</title>
+
+    <link rel="icon" href="../../icons/elephant-400-400-grayscale.png">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/kanban.css">
+    <link rel="stylesheet" href="css/list.css">
+    <link rel="stylesheet" href="css/presentation.css">
+
+    <script src="../js/main.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div id="desktop-container">
+        <!--<div id="desktop-music-container" class="inactive-modal">
+            <div id="desktop-music-main">
+                <div id="music-image-div">
+                    <img src="../music/covers/space-trip.png" id="music-image">
+                </div>
+                <h1 id="music-name"></h1>
+                <p id="music-author"></p>
+                <input type="range" value="0" id="slider-input" min="0" max="10000" disabled="disabled">
+                <div id="music-controls">
+                    <img src="../icons/unfilled_heart.png" alt="">
+                    <img src="../icons/play.png" id="music-play-img">
+                    <img src="../icons/forward.png" id="music-next-img">
+                </div>
+                <div id="playlist-list"></div>
+                <div id="playlist-playing"></div>
+            </div>
+        </div>-->
+        <div id="desktop-backpack-modal" class="inactive-modal desktop-modal">
+            <div class="desktop-modal-image-container">
+                <img src="./icons/pack.png" alt="" id="backpack-main-image">
+            </div>
+            <h1>Your Backpack</h1>
+            <p>Create decks with cards already made by others to save time and focus on what really matters!</p>
+            <div id="backpack-card-list"></div>
+            <button id="backpack-done" onclick="toggleBackpackModal()">Done</button>
+        </div>
+        <div id="desktop-navbar">
+            <div id="desktop-main-image">
+                <div onclick="leaveEditor('../dashboard')"><img src="../../icons/elephant-400-400-pink-flashcards-02.png" alt="Elephant Logo"></div>
+            </div>
+            <div id="desktop-input-div">
+                <img src="../icons/search.png" alt="Search" id="desktop-input-img">
+                <input type="text" id="desktop-navbar-input" placeholder="Search Decks, Users, Classrooms">
+            </div>
+            <div id="desktop-navbar-right">
+                <!--<div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
+                    <img src="../icons/music.png" alt="Notifications">
+                </div>-->
+                <div id="desktop-navbar-profile">
+                    <img src="./icons/crowd.png" alt="" id="desktop-navbar-profile-image">
+                    <div id="navbar-profile-text">
+                        <h1 id="desktop-navbar-profile-name"></h1>
+                        <p id="desktop-navbar-profile-type"></p>
+                    </div>
+                    <img src="../icons/expand_down.png" alt="Dropdown">
+                    <div id="desktop-profile-modal" class="active-modal">
+                        <div onclick="location.href = '../../profile'">
+                            <img src="../icons/emojis/happy.png" id="desktop-profile-user-img" alt="">
+                            <p>Your Profile</p>
+                        </div>
+                        <div>
+                            <img src="../icons/theme.png" alt="">
+                            <p>Theme</p>
+                            <img src="../icons/expand-right.png" alt="">
+                            <div class="profile-sub-modal">
+                                <div onclick="toggleTheme(0)">
+                                    <img src="../icons/sun.png" alt="">
+                                    <p>Light Theme</p>
+                                    <img src="../icons/check.png" alt="" class="profile-theme-check-img">
+                                </div>
+                                <div onclick="toggleTheme(1)">
+                                    <img src="../icons/moon.png" alt="">
+                                    <p>Dark Theme</p>
+                                    <img src="../icons/check.png" alt="" class="profile-theme-check-img">
+                                </div>
+                                <div onclick="toggleTheme(2)">
+                                    <img src="../icons/50%25.png" alt="">
+                                    <p>System Default</p>
+                                    <img src="../icons/check.png" alt="" class="profile-theme-check-img">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="../icons/zoom.png">
+                            <p>Accessibility Zoom</p>
+                            <img src="../icons/expand-right.png" alt="">
+                            <div class="profile-sub-modal">
+                                <div onclick="toggleSizeSetting(0)">
+                                    <img src="../icons/zoom_out.png" alt="">
+                                    <p>75%</p>
+                                    <img src="../icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                                <div onclick="toggleSizeSetting(1)">
+                                    <img src="../icons/search.png" alt="">
+                                    <p>100%</p>
+                                    <img src="../icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                                <div onclick="toggleSizeSetting(2)">
+                                    <img src="../icons/zoom_in.png" alt="">
+                                    <p>125%</p>
+                                    <img src="../icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                                <div onclick="toggleSizeSetting(3)">
+                                    <img src="../icons/zoom_in.png" alt="">
+                                    <p>150%</p>
+                                    <img src="../icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-break"></div>
+                        <div onclick="leaveEditor('../../login')">
+                            <img src="../icons/logout.png">
+                            <p>Log Out</p>
+                        </div>
+                        <!--<button>Get Premium</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="desktop-parent-container">
+            <div id="editor-tools">
+                <div id="editor-tools-left">
+                    <div id="deck-info-tools">
+                        <h1 contenteditable="true" id="deck-name" onclick="document.execCommand('selectAll',false,null)" onchange="nameCheck()"></h1>
+                        <div class="deck-info-tools-option" onclick="document.getElementById('deck-name').focus(); document.execCommand('selectAll',false,null)">
+                            <img src="./icons/edit.png" alt="Edit">
+                        </div>
+                        <div id="deck-privacy-div"></div>
+                        <div id="deck-author">
+                            <img id="deck-author-img" alt="">
+                            <p id="deck-author-p"></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="add-to-folder" class="inactive-modal">
+                    <div id="folder-btn-hitbox" onclick="toggleFolderModal()"></div>
+                    <img src="./icons/add_folder.png" alt="">
+                    <p>Add To Folder</p>
+                    <img src="./icons/expand.png" alt="">
+                    <div id="desktop-folder-modal" class="desktop-modal inactive-modal">
+                        <div class="desktop-modal-image-container">
+                            <img src="../icons/add_folder.png" alt="">
+                        </div>
+                        <h1>Add to Folder</h1>
+                        <p>Organize your Elephant Decks into neat and easy-to-use folders!</p>
+                        <h6>Folders</h6>
+                        <div id="folder-list">
+
+                        </div>
+                    </div>
+                </div>
+                <div id="publish-btn" class="inactive-modal">
+                    <div id="publish-btn-hitbox"></div>
+                    <img id="publish-image" src="./icons/plus.png" alt="">
+                    <p id="publish-text">Invite</p>
+                    <div id="desktop-publish-modal" class="inactive-modal desktop-modal">
+                        <div class="desktop-modal-image-container">
+                            <img src="./icons/share.png" alt="">
+                        </div>
+                        <h1>Share Deck With The World</h1>
+                        <p>You've already created your deck. Give the link to your friends so they can study too!</p>
+                        <h6>Share Link</h6>
+                        <div id="desktop-publish-input-container">
+                            <input type="text" id="desktop-publish-input" readonly>
+                            <img src="./icons/duplicate.png" alt="" onclick="copyPublishLink()">
+                        </div>
+                        <button id="publish-done" onclick="togglePublishModal(true)">Done</button>
+                    </div>
+                </div>
+                <div id="invite-btn" class="inactive-modal">
+                    <div id="invite-btn-hitbox" onclick="toggleSharingModal()"></div>
+                    <img src="./icons/plus.png" alt="">
+                    <p>Invite</p>
+                    <div id="desktop-sharing-modal" class="inactive-modal desktop-modal">
+                        <div class="desktop-modal-image-container">
+                            <img src="./icons/share.png" alt="" id="sharing-main-image">
+                        </div>
+                        <h1>Share Deck With Friends</h1>
+                        <p>You've already created your deck. Now get some friends to study along with you!</p>
+                        <div id="sharing-friends-list"></div>
+                        <h6>Friends</h6>
+                        <div id="sharing-input">
+                            <img src="./icons/crowd.png" alt="">
+                            <p>Select Friend</p>
+                            <img src="./icons/expand.png" alt="">
+                            <div id="sharing-input-hitbox" onclick="toggleSharedInputList()"></div>
+                            <div id="sharing-input-friends-list" class="inactive-modal">
+                                <div id="no-friends"></div>
+                            </div>
+                        </div>
+                        <button id="sharing-done" onclick="toggleSharingModal()">Done</button>
+                    </div>
+                </div>
+                <div id="view-buttons">
+                    <div class="view-button" onclick="toggleDisplayView(0)">
+                        <img src="./icons/kanban.png" alt="Kanban">
+                    </div>
+                    <div class="view-button" onclick="toggleDisplayView(1)">
+                        <img src="./icons/list.png" alt="List">
+                    </div>
+                    <div class="view-button" onclick="toggleDisplayView(2)">
+                        <img src="./icons/presentation.png" alt="PowerPoint">
+                    </div>
+                </div>
+            </div>
+            <div id="desktop-main-container-bg"></div>
+            <div id="desktop-main-container" class="kanban">
+                <div id="flashcards-add-card" onclick="createCard()">+ Create New Card</div>
+            </div>
+            <div id="desktop-alert-container">
+                <div id="desktop-alert-error" class="desktop-alert inactive-modal">
+                    <div class="desktop-alert-img">
+                        <img src="./icons/error.png" alt="Error">
+                    </div>
+                    <div class="desktop-alert-text">
+                        <h1>Unable To Save Deck</h1>
+                        <p class="desktop-alert-desc"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-btns">
+                <div id="save-deck">
+                    <img src="./icons/save.png" alt="">
+                </div>
+                <div id="view-deck" class="inactive-modal">
+                    <img src="./icons/search.png" alt="">
+                </div>
+                <div onclick="leaveEditor('../dashboard')" id="back-btn">
+                    <img src="../icons/back.png" alt="">
+                </div>
+            </div>
+            <div class="bottom-left-btns">
+                <div id="backpack-btn" onclick="toggleBackpackModal()">
+                    <img src="./icons/pack.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

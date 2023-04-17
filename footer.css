@@ -182,6 +182,11 @@
 }
 
 #footer > div:last-of-type > div:last-of-type > div > a > img{
-    filter:invert(1);
+    transition-duration:250ms;
+    filter:invert(0.5);
     height:18px;
+}
+
+#footer > div:last-of-type > div:last-of-type > div > a > img:hover{
+    filter:invert(1);
 }

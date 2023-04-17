@@ -15,57 +15,59 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div id="navbar">
-    <div>
-        <p id="navbar-prefix">../../</p>
-        <a href="../../"><img src="../../icons/elephant-400-400-white.png" alt="" id="navbar-image"></a>
-        <div class="navbar-dropdown">
-            <p>Services</p>
-            <div class="navbar-subcontainer">
-                <div>
-                    <div class="navbar-subcontainer-row">
-                        <p>Services We Offer</p>
-                        <div>
-                            <div onclick="location.href = './'">
-                                <img src="../../flashcards/icons/deck.png" alt="">
-                                <p>Elephant Flip</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <a href="../../login/?signup">Join Elephant</a>
-                </div>
+<p id="navbar-prefix">../../</p>
+<div id="navbar">
+    <div id="navbar-left">
+        <a href="../../">
+            <img src="../../icons/elephant-400-400-pink-02.png" alt="">
+        </a>
+        <h1>Elephant</h1>
+    </div>
+    <div id="navbar-middle">
+        <div class="navbar-modal">
+            <div>
+                <p>Our Services</p>
+                <img src="../../icons/landing/down.png" alt="">
             </div>
-            <!--<img src="./flashcards/viewer/icons/expand.png" alt="">-->
+            <div>
+                <a href="../../services/flip">
+                    <div>
+                        <img src="../../flip/icons/deck.png" alt="">
+                    </div>
+                    <h1>Flip</h1>
+                </a>
+                <a href="../../services/ask">
+                    <div>
+                        <img src="../../icons/landing/employees.png" alt="">
+                    </div>
+                    <h1>Ask</h1>
+                </a>
+            </div>
         </div>
-        <div class="navbar-dropdown">
-            <p>About Elephant</p>
-            <div class="navbar-subcontainer">
-                <div>
-                    <div class="navbar-subcontainer-row">
-                        <p>About Elephant</p>
-                        <div>
-                            <div onclick="location.href = '../../about/mission/'">
-                                <img src="../../icons/landing/mission.png" alt="">
-                                <p>Our Mission</p>
-                            </div>
-                            <div onclick="location.href = '../../about/employees/'">
-                                <img src="../../icons/landing/user.png" alt="">
-                                <p>Employees</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <a href="./login/?signup">Join Elephant</a>
-                </div>
+        <div class="navbar-modal">
+            <div>
+                <p>About Us</p>
+                <img src="../../icons/landing/down.png" alt="">
             </div>
-            <!--<img src="./flashcards/viewer/icons/expand.png" alt="">-->
+            <div>
+                <a href="../../about/mission">
+                    <div>
+                        <img src="../../icons/landing/mission.png" alt="">
+                    </div>
+                    <h1>Our Mission</h1>
+                </a>
+                <a href="../../about/employees">
+                    <div>
+                        <img src="../../icons/landing/employees.png" alt="">
+                    </div>
+                    <h1>Our Staff</h1>
+                </a>
+            </div>
         </div>
     </div>
-    <div>
-        <a href="./login/?signup" id="login-link">Sign Up</a>
+    <div id="navbar-right">
+        <a id="login-link" href="../../login" class="button-smaller">Login</a>
+        <a href="../../login/?signup" class="button-large">Join Elephant</a>
     </div>
 </div>
     <div id="header-container">
@@ -109,30 +111,14 @@
             </div>
         </div>
     </div>
-    <div id="carousel-div">
-        <div class="carousel-elem">
-            <div>
-                <div class="header-label">Modern Dashboard</div>
-                <h1>Clean and Simple Dashboard</h1>
-                <p>The intuitive design allows for easy navigation and organization, making it simple for users to find and review the flashcards they need. The modern look and feel of the dashboard provides a pleasant and efficient studying experience.</p>
-            </div>
-            <div class="carousel-image" id="carousel-image-1"></div>
+    <div class="video-container">
+        <div>
+            <img src="../../videos/Flashcards.gif" alt="">
         </div>
-        <div class="carousel-elem">
-            <div>
-                <div class="header-label">Advanced Editor</div>
-                <h1>High-Level Editor</h1>
-                <p>Elephant Flip features an advanced editor with a multitude of features, allowing users to create and customize their flashcards to fit their unique learning style and needs. With the advanced editor, users have the flexibility to create flashcards that are tailored to their specific learning needs.</p>
-            </div>
-            <div class="carousel-image" id="carousel-image-2"></div>
-        </div>
-        <div class="carousel-elem">
-            <div>
-                <div class="header-label">Intuitive Viewport</div>
-                <h1>Minimalistic Interface</h1>
-                <p>Elephant Flip offers a simple flashcards viewport with many features that make studying and learning easy and efficient. The user-friendly interface allows for smooth navigation, providing easy access to all flashcards and features</p>
-            </div>
-            <div class="carousel-image" id="carousel-image-3"></div>
+        <div>
+            <h6 class="header-label">What Is Flip</h6>
+            <h1>Memorization Made Easy</h1>
+            <p>Elephant Flip is our cutting-edge online flashcards service that takes studying to the next level. With the latest technology, Elephant Flip allows you to tie multiple definitions to a single term, giving you a more comprehensive and efficient way of mastering complex concepts. Whether you're studying for exams, memorizing vocabulary, or learning new information, Elephant Flip makes it easy and effective. But that's not all - we've also prioritized user preferences by offering customizable options such as privacy settings and memorization options. With Elephant Flip, you can create, customize, and master flashcards in a way that works best for you, empowering you to succeed in your academic endeavors. </p>
         </div>
     </div>
     <div id="footer">
@@ -140,11 +126,11 @@
             <div>
                 <img src="../../icons/elephant-400-400-white.png" alt="">
                 <div>
-                    <h1>Try Elephant Flip Today</h1>
+                    <h1>Join Elephant Today</h1>
                     <p>Sign up for our online educational service and gain access to high-quality educational products that will help you excel in educational journey.</p>
                 </div>
             </div>
-            <a href="../../login/?signup">Join Elephant</a>
+            <a href="../../login?signup">Join Elephant</a>
         </div>
         <div>
             <div>
@@ -168,7 +154,8 @@
                 <div>
                     <div>
                         <h1>Services</h1>
-                        <a href="./">Flip</a>
+                        <a href="../../services/flip">Flip</a>
+                        <a href="../../services/ask">Ask</a>
                     </div>
                     <div>
                         <h1>About Us</h1>

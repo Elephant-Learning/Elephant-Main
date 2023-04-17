@@ -2,9 +2,260 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard | Elephant - The Ultimate Student Suite</title>
+
+    <link rel="icon" href="../icons/elephant-400-400-grayscale.png">
+    <link rel="stylesheet" href="../flip/css/main.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="../flip/js/main.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
-
+    <div id="desktop-wrapper">
+        <div id="desktop-loader-container">
+            <div id="desktop-loader-bg-left"></div>
+            <div id="desktop-loader"></div>
+            <img src="../../icons/elephant-400-400-white.png" alt="Loading Ain't Loading" id="desktop-loader-img">
+            <div id="desktop-loader-bg-right"></div>
+            <p id="desktop-loader-text"></p>
+        </div>
+        <div id="new-user-modal-bg" class="inactive-modal">
+            <div id="new-user-modal">
+                <div id="new-user-video-container">
+                    <div class="video-container-child active-video-container-child" onclick="playVideo()">
+                        <div></div>
+                        <div>
+                            <img src="./icons/play.png" alt="">
+                        </div>
+                    </div>
+                    <div class="video-container-child">
+                        <iframe src="https://www.youtube.com/embed/jBCh7LNYyjg?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen id="entry-video"></iframe>
+                    </div>
+                </div>
+                <h1>Welcome to your dashboard!</h1>
+                <p>We're so excited to have you join us! To capitalize on our services, take this quick tour.</p>
+                <div id="new-user-buttons">
+                    <button onclick="completeEntry()">Continue</button>
+                </div>
+            </div>
+        </div>
+        <div id="desktop-notifications-modal" class="inactive-modal">
+            <div id="desktop-notifications-header">
+                <h1>Notifications</h1>
+                <img src="../icons/x.png" alt="" onclick="toggleNotificationsModal()">
+            </div>
+            <div id="desktop-notifications-tabs">
+                <div class="desktop-notifications-tab active-notifications-tab" onclick="toggleNotificationTab(0)">
+                    <h1>General</h1>
+                    <p class="desktop-notifications-tab-number">0</p>
+                </div>
+                <div class="desktop-notifications-tab" onclick="toggleNotificationTab(1)">
+                    <h1>Friends</h1>
+                    <p class="desktop-notifications-tab-number">0</p>
+                </div>
+            </div>
+            <div id="desktop-notifications-list-container">
+                <div id="desktop-notifications-list">
+                    <div class="desktop-notifications-list active-notifications-list"></div>
+                    <div class="desktop-notifications-list"></div>
+                </div>
+                <div id="no-notifications">
+                    <p>You're up to date! Now get back to studying.</p>
+                    <button onclick="refreshNotifications()">Refresh</button>
+                </div>
+            </div>
+        </div>
+        <div id="desktop-navbar">
+            <div id="desktop-main-image">
+                <a href="../"><img src="../icons/elephant-400-400-white.png" alt="Elephant Logo"></a>
+            </div>
+            <div id="desktop-input-div">
+                <img src="../flip/icons/search.png" alt="Search" id="desktop-input-img">
+                <input type="text" id="desktop-navbar-input" placeholder="Search Users, Classrooms">
+            </div>
+            <div id="desktop-navbar-right">
+                <!--<div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
+                    <img src="../flip/icons/music.png" alt="Notifications">
+                </div>
+                <div class="desktop-navbar-right-img" onclick="toggleFriendingModal(false)">
+                    <img src="../flip/icons/add_friend.png" alt="Friend Request">
+                </div>-->
+                <div class="desktop-navbar-right-img" onclick="toggleNotificationsModal()" id="desktop-navbar-notifications-container">
+                    <img src="../flip/icons/notification.png" alt="Notifications" id="notifications-btn">
+                </div>
+                <div id="desktop-navbar-profile">
+                    <img src="" alt="Image" id="desktop-navbar-profile-image">
+                    <div id="navbar-profile-text">
+                        <h1 id="desktop-navbar-profile-name"></h1>
+                        <p id="desktop-navbar-profile-type"></p>
+                    </div>
+                    <img src="../flip/icons/expand_down.png" alt="Dropdown">
+                    <div id="desktop-profile-modal" class="active-modal">
+                        <div onclick="location.href = '../profile'">
+                            <img src="../flip/icons/emojis/happy.png" id="desktop-profile-user-img" alt="">
+                            <p>Your Profile</p>
+                        </div>
+                        <div>
+                            <img src="../flip/icons/theme.png" alt="">
+                            <p>Theme</p>
+                            <img src="../flip/icons/expand-right.png" alt="">
+                            <div class="profile-sub-modal">
+                                <div onclick="toggleTheme(0)">
+                                    <img src="../flip/icons/sun.png" alt="">
+                                    <p>Light Theme</p>
+                                    <img src="../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                                </div>
+                                <div onclick="toggleTheme(1)">
+                                    <img src="../flip/icons/moon.png" alt="">
+                                    <p>Dark Theme</p>
+                                    <img src="../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                                </div>
+                                <div onclick="toggleTheme(2)">
+                                    <img src="../flip/icons/50%25.png" alt="">
+                                    <p>System Default</p>
+                                    <img src="../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="../flip/icons/zoom.png">
+                            <p>Accessibility Zoom</p>
+                            <img src="../flip/icons/expand-right.png" alt="">
+                            <div class="profile-sub-modal">
+                                <div onclick="toggleSizeSetting(0)">
+                                    <img src="../flip/icons/zoom_out.png" alt="">
+                                    <p>75%</p>
+                                    <img src="../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                                <div onclick="toggleSizeSetting(1)">
+                                    <img src="../flip/icons/search.png" alt="">
+                                    <p>100%</p>
+                                    <img src="../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                                <div onclick="toggleSizeSetting(2)">
+                                    <img src="../flip/icons/zoom_in.png" alt="">
+                                    <p>125%</p>
+                                    <img src="../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                                <div onclick="toggleSizeSetting(3)">
+                                    <img src="../flip/icons/zoom_in.png" alt="">
+                                    <p>150%</p>
+                                    <img src="../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-break"></div>
+                        <div onclick="localStorage.removeItem('savedUserId'); location.href = '../login'">
+                            <img src="../flip/icons/logout.png">
+                            <p>Log Out</p>
+                        </div>
+                        <!--<button>Get Premium</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="desktop-parent-container">
+            <div id="desktop-sidebar">
+                <div id="desktop-sidebar-categories">
+                    <div class="desktop-sidebar-category active-sidebar-category" onclick="location.href = './'">
+                        <div>
+                            <img src="../flip/icons/dashboard.png" alt="Recent">
+                        </div>
+                        <p>My Dashboard</p>
+                    </div>
+                    <div class="desktop-sidebar-break"></div>
+                    <div class="desktop-sidebar-category" onclick="location.href = '../flip/dashboard'">
+                        <div>
+                            <img src="../flip/icons/deck.png" alt="Recent">
+                        </div>
+                        <p>Flip</p>
+                    </div>
+                    <div class="desktop-sidebar-category" onclick="location.href = '../ask/dashboard'">
+                        <div>
+                            <img src="../ask/icons/ask.png" alt="Recent">
+                        </div>
+                        <p>Ask</p>
+                    </div>
+                    <div id="desktop-sidebar-employee" class="desktop-sidebar-category inactive-modal" onclick="togglePageFlip(9, 1)">
+                        <div>
+                            <img src="../flip/icons/admin.png" alt="Recent">
+                        </div>
+                        <p>Admin Portal</p>
+                    </div>
+                    <!--<div class="desktop-sidebar-break"></div>-->
+                </div>
+            </div>
+            <div id="desktop-main-container">
+                <div id="desktop-main-news">
+                    <!--<img src="./icons/discord.png" alt="">
+                    <a href="https://discord.gg/YbZS8H6RbB/">Join The New Elephant Discord Server</a>
+                    <p onclick="closeNews()">X</p>-->
+                </div>
+                <p id="desktop-main-container-tab">My Dashboard</p>
+                <div id="my-dashboard">
+                    <div id="dashboard-left">
+                        <div id="quick-buttons">
+                            <a href="../flip/dashboard/">
+                                <div></div>
+                                <img src="../flip/icons/deck.png" alt="">
+                                <div>
+                                    <h1>Flip</h1>
+                                    <p>Memorization Made Easy</p>
+                                </div>
+                            </a>
+                            <a href="../ask/dashboard/">
+                                <div></div>
+                                <img src="../ask/icons/ask.png" alt="">
+                                <div>
+                                    <h1>Ask</h1>
+                                    <p>Academic Support Network</p>
+                                </div>
+                            </a>
+                        </div>
+                        <h1>Recent Activity</h1>
+                        <h2>Elephant Flip</h2>
+                        <div class="recent-activity-div" id="flashcards-activity">
+                            <div class="recent-activity-no">No Decks</div>
+                        </div>
+                        <h2>Elephant Ask</h2>
+                        <div class="recent-activity-div" id="answers-activity">
+                            <div class="recent-activity-no">No Questions</div>
+                        </div>
+                    </div>
+                    <div id="dashboard-right">
+                        <div id="profile-at-glance">
+                            <div id="profile-banner"></div>
+                            <div id="profile-image-container">
+                                <img src="../flip/icons/unfilled_heart.png" alt="" id="profile-image">
+                            </div>
+                            <h1 id="profile-name"></h1>
+                            <p id="profile-desc"></p>
+                            <div class="profile-divider"></div>
+                            <div class="profile-information">
+                                <img src="../flip/icons/email.png" alt="">
+                                <p id="profile-email"></p>
+                            </div>
+                            <div class="profile-information">
+                                <img src="../flip/icons/fire.png" alt="">
+                                <p id="profile-streak"></p>
+                            </div>
+                            <div class="profile-divider"></div>
+                            <div class="profile-information">
+                                <img src="../flip/icons/deck.png" alt="">
+                                <p id="profile-decks"></p>
+                            </div>
+                            <div class="profile-information">
+                                <img src="../ask/icons/ask.png" alt="">
+                                <p id="profile-answers"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

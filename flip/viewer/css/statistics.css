@@ -1,0 +1,83 @@
+#deck-statistics{
+    padding:calc(var(--size) * 24px);
+    width:calc(100vw - var(--size) * 304px) !important;
+    height:calc(100vh - var(--size) * 140px) !important;
+    gap:calc(var(--size) * 24px);
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:flex-start;
+}
+
+.statistics-column{
+    background:var(--bg-color-1);
+    width:calc((100% - var(--size) * 50px) / 3);
+    height:100%;
+    overflow:hidden;
+    border:1px solid var(--light-border-color);
+    border-radius:calc(var(--size) * 6px);
+}
+
+.statistics-column > div:first-of-type{
+    width:100%;
+    height:calc(var(--size) * 64px);
+}
+
+.statistics-column:nth-of-type(3) > div:first-of-type{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient)) !important;
+}
+
+.statistics-column:nth-of-type(1) > div:first-of-type{
+    background:linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient)) !important;
+}
+
+.statistics-column:nth-of-type(2) > div:first-of-type{
+    background:linear-gradient(135deg, var(--tertiary-accent), var(--tertiary-accent-gradient)) !important;
+}
+
+.statistics-column > h1{
+    margin:0;
+    font-size:calc(var(--size) * 14px);
+    border-top:1px solid var(--light-border-color);
+    border-bottom:1px solid var(--light-border-color);
+    padding:calc(var(--size) * 6px) 0;
+    text-align:center;
+}
+
+.statistics-column > div:last-of-type{
+    width:calc(100% - var(--size) * 48px);
+    height:calc(100% - var(--size) * 138px);
+    padding:calc(var(--size) * 24px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    gap:calc(var(--size) * 12px);
+}
+
+.statistics-column > div:last-of-type > div{
+    border:1px solid var(--light-border-color);
+    padding:calc(var(--size) * 12px);
+    border-radius:calc(var(--size) * 6px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    width:calc(100% - var(--size) * 24px);
+    gap:calc(var(--size) * 12px);
+}
+
+.statistics-column > div:last-of-type > div > h1{
+    width:calc(50% - var(--size) * 6px);
+    font-size:calc(var(--size) * 12px);
+    text-align:center;
+}
+
+.statistics-column > div:last-of-type > div > p{
+    width:calc(50% - var(--size) * 6px);
+    font-size:calc(var(--size) * 10px);
+    color:gray;
+    text-align:center;
+}

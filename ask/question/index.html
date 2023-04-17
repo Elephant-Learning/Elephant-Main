@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Answers | Elephant - The Ultimate Student Suite</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../flip/css/main.css">
+    <link rel="icon" href="../../icons/elephant-400-400-grayscale.png">
+
+    <script src="script.js" defer></script>
+    <script src="../../flip/js/main.js" defer></script>
+</head>
+<body>
+<div id="desktop-wrapper">
+    <div id="desktop-navbar">
+        <div id="desktop-main-image">
+            <div onclick="location.href = '../dashboard/'"><img src="../../icons/elephant-answers-3.png" alt="Elephant Logo"></div>
+        </div>
+        <!--<div id="desktop-input-div">
+            <img src="../../flip/icons/search.png" alt="Search" id="desktop-input-img">
+            <input type="text" id="desktop-navbar-input" placeholder="Search Decks, Users, Classrooms">
+        </div>-->
+        <div id="desktop-navbar-right">
+            <!--<div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
+                <img src="../icons/music.png" alt="Notifications">
+            </div>-->
+            <div id="desktop-navbar-profile">
+                <img src="../../flip/editor/icons/crowd.png" alt="" id="desktop-navbar-profile-image">
+                <div id="navbar-profile-text">
+                    <h1 id="desktop-navbar-profile-name"></h1>
+                    <p id="desktop-navbar-profile-type"></p>
+                </div>
+                <img src="../../flip/icons/expand_down.png" alt="Dropdown">
+                <div id="desktop-profile-modal" class="active-modal">
+                    <div onclick="location.href = '../../profile'">
+                        <img src="../../flip/icons/emojis/happy.png" id="desktop-profile-user-img" alt="">
+                        <p>Your Profile</p>
+                    </div>
+                    <div>
+                        <img src="../../flip/icons/theme.png" alt="">
+                        <p>Theme</p>
+                        <img src="../../flip/icons/expand-right.png" alt="">
+                        <div class="profile-sub-modal">
+                            <div onclick="toggleTheme(0)">
+                                <img src="../../flip/icons/sun.png" alt="">
+                                <p>Light Theme</p>
+                                <img src="../../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                            </div>
+                            <div onclick="toggleTheme(1)">
+                                <img src="../../flip/icons/moon.png" alt="">
+                                <p>Dark Theme</p>
+                                <img src="../../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                            </div>
+                            <div onclick="toggleTheme(2)">
+                                <img src="../../flip/icons/50%25.png" alt="">
+                                <p>System Default</p>
+                                <img src="../../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="../../flip/icons/zoom.png">
+                        <p>Accessibility Zoom</p>
+                        <img src="../../flip/icons/expand-right.png" alt="">
+                        <div class="profile-sub-modal">
+                            <div onclick="toggleSizeSetting(0)">
+                                <img src="../../flip/icons/zoom_out.png" alt="">
+                                <p>75%</p>
+                                <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                            </div>
+                            <div onclick="toggleSizeSetting(1)">
+                                <img src="../../flip/icons/search.png" alt="">
+                                <p>100%</p>
+                                <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                            </div>
+                            <div onclick="toggleSizeSetting(2)">
+                                <img src="../../flip/icons/zoom_in.png" alt="">
+                                <p>125%</p>
+                                <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                            </div>
+                            <div onclick="toggleSizeSetting(3)">
+                                <img src="../../flip/icons/zoom_in.png" alt="">
+                                <p>150%</p>
+                                <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-break"></div>
+                    <div onclick="location.href = '../../login'">
+                        <img src="../../flip/icons/logout.png">
+                        <p>Log Out</p>
+                    </div>
+                    <!--<button>Get Premium</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="desktop-parent-container">
+        <div id="desktop-parent-main">
+            <div>
+                <div>
+                    <img src="" alt="" id="question-author-pfp">
+                </div>
+                <div>
+                    <h6 id="question-author"></h6>
+                    <h1 id="question-title"></h1>
+                    <div id="question-body"></div>
+                </div>
+            </div>
+            <div id="parent-comments">
+                <p id="parent-comments-amount"></p>
+                <div id="parent-comments-input-div">
+                    <div>
+                        <img src="" alt="" id="your-comment-pfp">
+                    </div>
+                    <input type="text" placeholder="Answer Question" id="parent-comments-input">
+                    <button onclick="postAnswer()">Answer</button>
+                </div>
+                <div id="parent-comments-list"></div>
+            </div>
+        </div>
+        <div id="desktop-parent-sidebar">
+            <h1>Question Details</h1>
+            <h2>Top Contributors</h2>
+            <div id="top-contributors"></div>
+        </div>
+    </div>
+    <div id="desktop-bottom-buttons">
+        <a class="desktop-bottom-btn" href='../dashboard/'>
+            <img src="../../flip/icons/back.png" alt="">
+        </a>
+        <a class="desktop-bottom-btn" id="edit-btn">
+            <img src="../../flip/editor/icons/edit.png" alt="">
+        </a>
+    </div>
+</div>
+</body>
+</html>

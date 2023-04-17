@@ -1,4 +1,5 @@
 let selectedProfile = 0;
+let savedTags;
 
 async function toggleAvatarModal(){
     if(document.getElementById('desktop-avatar-container').classList.contains('inactive-modal')){
@@ -26,6 +27,21 @@ async function toggleAvatarModal(){
     }
 }
 
+function toggleTagsModal(){
+    document.getElementById("tags-modal-bg").classList.remove("inactive-modal");
+}
+
+function parseData(tags){
+    for(let i = 0; i < tags.tags.length; i++){
+        let newDiv = document.createElement('div');
+        newDiv.innerHTML = tags.tags[i];
+        newDiv.setAttribute("onclick", "selectTag(" + i + ")");
+        newDiv.id = "tagItem-" + i;
+        newDiv.classList.add("tag-item");
+        document.getElementById("tags-list").appendChild(newDiv);
+    }
+}
+
 function toggleDeleteModal(){
     if(document.getElementById('delete-login-modal-bg').classList.contains("inactive-modal")){
         document.getElementById('confirm-password-delete-input').value = "";
@@ -42,6 +58,79 @@ function selectPfp(index){
     document.querySelectorAll('.avatar-img')[selectedProfile].classList.add('selected-avatar-img')
 }
 
+async function cancelEntry(){
+    document.getElementById("tags-modal-bg").classList.add("inactive-modal")
+
+    removeAllChildNodes(document.getElementById("tags-list"));
+
+    let tagsList;
+
+    await fetch("../answers/answers.json").then(function(response){return response.json();}).then(function(data){tagsList = data.tags}).catch(function(error){console.log(`Error: ${error}`)})
+
+    for(let i = 0; i < tagsList.length; i++){
+        let newDiv = document.createElement('div');
+        newDiv.innerHTML = tagsList[i];
+        newDiv.setAttribute("onclick", "selectTag(" + i + ")");
+        newDiv.id = "tagItem-" + i;
+        newDiv.classList.add("tag-item");
+
+        if(savedTags.includes(i)) newDiv.classList.add("active-tag");
+        document.getElementById("tags-list").appendChild(newDiv);
+    }
+
+    if(document.querySelectorAll(".active-tag").length >= 3) document.getElementById("tags-modal-button").classList = "";
+    else document.getElementById("tags-modal-button").classList = "inactive-modal-button";
+}
+
+async function completeEntry(){
+    if(document.getElementById("tags-modal-button").classList.contains("inactive-modal-button")) return;
+
+    let tagsArray = [];
+
+    document.querySelectorAll(".active-tag").forEach(function(element){
+        tagsArray.push(element.id.split("-")[1]);
+    });
+
+    let savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
+    await fetch('https://elephantsuite-rearend.herokuapp.com/answers/setUserTags', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        body: JSON.stringify({
+            tags: tagsArray,
+            userId: savedUserId
+        }),
+        mode: 'cors'
+    })
+
+    document.getElementById("tags-modal-bg").classList.add("inactive-modal");
+
+    let tags = "";
+    let tagsList;
+
+    await fetch("../answers/answers.json").then(function(response){return response.json();}).then(function(data){tagsList = data.tags}).catch(function(error){console.log(`Error: ${error}`)})
+
+    for(let i = 0; i < tagsArray.length; i++){
+        tags += tagsList[tagsArray[i]] + ", ";
+    } document.getElementById("my-profile-tags").innerHTML = tags;
+
+    console.log(tags);
+}
+
+function selectTag(index){
+    if(document.querySelectorAll(".tag-item")[index].classList.contains("active-tag")){
+        document.querySelectorAll(".tag-item")[index].classList.remove("active-tag")
+    } else document.querySelectorAll(".tag-item")[index].classList.add("active-tag")
+
+    if(document.querySelectorAll(".active-tag").length >= 3) document.getElementById("tags-modal-button").classList = "";
+    else document.getElementById("tags-modal-button").classList = "inactive-modal-button";
+}
+
 async function initialize(user){
     if(user.status === "FAILURE") {
         location.href = "../login"
@@ -55,14 +144,18 @@ async function initialize(user){
 
     removeAllChildNodes(document.getElementById('my-profile-friends'));
     removeAllChildNodes(document.getElementById('my-profile-decks'));
+    removeAllChildNodes(document.getElementById('my-profile-answers'));
 
     let newHeader = document.createElement('h1');
     let newDeckHeader = document.createElement('h1')
+    let newAnswersHeader = document.createElement('h1');
+    newAnswersHeader.innerHTML = "Elephant Questions"
     newDeckHeader.innerHTML = "Elephant Decks"
     newHeader.innerHTML = "Friends"
 
     document.getElementById('my-profile-friends').appendChild(newHeader);
     document.getElementById('my-profile-decks').appendChild(newDeckHeader);
+    document.getElementById('my-profile-answers').append(newAnswersHeader);
 
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png"
     document.getElementById('my-profile-img').src = "../../icons/avatars/" + user.pfpId + ".png"
@@ -73,6 +166,34 @@ async function initialize(user){
     document.getElementById('my-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
     document.getElementById('my-profile-email').innerHTML = user.email;
     document.getElementById('my-profile-location').innerHTML = COUNTRY_LIST[user.countryCode];
+
+    let tags = "";
+    let tagsList;
+
+    savedTags = user.elephantAnswersTags;
+
+    removeAllChildNodes(document.getElementById("tags-list"));
+
+    await fetch("../ask/answers.json").then(function(response){return response.json();}).then(function(data){tagsList = data.tags}).catch(function(error){console.log(`Error: ${error}`)})
+
+    for(let i = 0; i < tagsList.length; i++){
+        let newDiv = document.createElement('div');
+        newDiv.innerHTML = tagsList[i];
+        newDiv.setAttribute("onclick", "selectTag(" + i + ")");
+        newDiv.id = "tagItem-" + i;
+        newDiv.classList.add("tag-item");
+
+        if(savedTags.includes(i)) newDiv.classList.add("active-tag");
+        document.getElementById("tags-list").appendChild(newDiv);
+    }
+
+    if(document.querySelectorAll(".active-tag").length >= 3) document.getElementById("tags-modal-button").classList = "";
+    else document.getElementById("tags-modal-button").classList = "inactive-modal-button";
+
+    for(let i = 0; i < user.elephantAnswersTags.length; i++){
+        tags += tagsList[user.elephantAnswersTags[i]] + ", ";
+    } document.getElementById("my-profile-tags").innerHTML = tags;
+
     if(user.elephantUserStatistics.daysStreak === 1) document.getElementById('my-profile-streak').innerHTML = user.elephantUserStatistics.daysStreak + " Day Streak";
     else document.getElementById('my-profile-streak').innerHTML = user.elephantUserStatistics.daysStreak + " Days Streak";
 
@@ -116,7 +237,7 @@ async function initialize(user){
         let newName = document.createElement('h1');
         let newEmail = document.createElement('p');
 
-        newImg.src = "../flashcards/icons/deck.png";
+        newImg.src = "../flip/icons/deck.png";
         newName.innerHTML = user.decks[i].name;
         newEmail.innerHTML =  "Created: " + computeTime(user.decks[i].created);
 
@@ -124,6 +245,23 @@ async function initialize(user){
         newDiv.append(newImg, newTxtDiv);
 
         document.getElementById('my-profile-decks').appendChild(newDiv);
+    }
+
+    for(let i = 0; i < user.answers.length; i++){
+        let newDiv = document.createElement('div');
+        let newImg = document.createElement('img');
+        let newTxtDiv = document.createElement('div');
+        let newName = document.createElement('h1');
+        let newEmail = document.createElement('p');
+
+        newImg.src = "../ask/icons/ask.png";
+        newName.innerHTML = user.answers[i].title;
+        newEmail.innerHTML =  "Created: " + computeTime(user.answers[i].created);
+
+        newTxtDiv.append(newName, newEmail);
+        newDiv.append(newImg, newTxtDiv);
+
+        document.getElementById('my-profile-answers').appendChild(newDiv);
     }
 
     selectedProfile = user.pfpId;

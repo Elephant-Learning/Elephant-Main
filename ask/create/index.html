@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create - Answers | Elephant - The Ultimate Student Suite</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../flip/css/main.css">
+    <link rel="icon" href="../../icons/elephant-400-400-grayscale.png">
+
+    <script src="script.js" defer></script>
+    <script src="../../flip/js/main.js" defer></script>
+</head>
+<body>
+    <div id="desktop-container">
+        <div id="publish-modal-bg" class="inactive-modal">
+            <div id="publish-modal">
+                <div>
+                    <img src="../icons/ask.png" alt="">
+                </div>
+                <h1>Ask Question</h1>
+                <p>Review the Following and Set Tags to enable public discovery.</p>
+                <div class="publish-modal-input">
+                    <h6>Question Title</h6>
+                    <input type="text" id="question-title" placeholder="Input Title Here">
+                </div>
+                <div class="publish-modal-input">
+                    <h6>Relevant Tags</h6>
+                    <div id="tags-list"></div>
+                </div>
+                <div id="publish-modal-buttons">
+                    <button onclick="cancelQuestion()">Cancel</button>
+                    <button onclick="askQuestion()" class="inactive-modal-button" id="tags-modal-button">Save Changes</button>
+                </div>
+            </div>
+        </div>
+        <div id="desktop-navbar">
+            <div id="desktop-main-image">
+                <div onclick="leaveEditor('../dashboard')"><img src="../../icons/elephant-answers-3.png" alt="Elephant Logo"></div>
+            </div>
+            <!--<div id="desktop-input-div">
+                <img src="../../flip/icons/search.png" alt="Search" id="desktop-input-img">
+                <input type="text" id="desktop-navbar-input" placeholder="Search Decks, Users, Classrooms">
+            </div>-->
+            <div id="desktop-navbar-right">
+                <!--<div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
+                    <img src="../icons/music.png" alt="Notifications">
+                </div>-->
+                <div id="desktop-navbar-profile">
+                    <img src="../../flip/editor/icons/crowd.png" alt="" id="desktop-navbar-profile-image">
+                    <div id="navbar-profile-text">
+                        <h1 id="desktop-navbar-profile-name"></h1>
+                        <p id="desktop-navbar-profile-type"></p>
+                    </div>
+                    <img src="../../flip/icons/expand_down.png" alt="Dropdown">
+                    <div id="desktop-profile-modal" class="active-modal">
+                        <div onclick="location.href = '../../profile'">
+                            <img src="../../flip/icons/emojis/happy.png" id="desktop-profile-user-img" alt="">
+                            <p>Your Profile</p>
+                        </div>
+                        <div>
+                            <img src="../../flip/icons/theme.png" alt="">
+                            <p>Theme</p>
+                            <img src="../../flip/icons/expand-right.png" alt="">
+                            <div class="profile-sub-modal">
+                                <div onclick="toggleTheme(0)">
+                                    <img src="../../flip/icons/sun.png" alt="">
+                                    <p>Light Theme</p>
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                                </div>
+                                <div onclick="toggleTheme(1)">
+                                    <img src="../../flip/icons/moon.png" alt="">
+                                    <p>Dark Theme</p>
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                                </div>
+                                <div onclick="toggleTheme(2)">
+                                    <img src="../../flip/icons/50%25.png" alt="">
+                                    <p>System Default</p>
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="../../flip/icons/zoom.png">
+                            <p>Accessibility Zoom</p>
+                            <img src="../../flip/icons/expand-right.png" alt="">
+                            <div class="profile-sub-modal">
+                                <div onclick="toggleSizeSetting(0); recalculateTextfieldSize();">
+                                    <img src="../../flip/icons/zoom_out.png" alt="">
+                                    <p>75%</p>
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                                <div onclick="toggleSizeSetting(1); recalculateTextfieldSize();">
+                                    <img src="../../flip/icons/search.png" alt="">
+                                    <p>100%</p>
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                                <div onclick="toggleSizeSetting(2); recalculateTextfieldSize();">
+                                    <img src="../../flip/icons/zoom_in.png" alt="">
+                                    <p>125%</p>
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                                <div onclick="toggleSizeSetting(3); recalculateTextfieldSize();">
+                                    <img src="../../flip/icons/zoom_in.png" alt="">
+                                    <p>150%</p>
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-break"></div>
+                        <div onclick="leaveEditor('../../login')">
+                            <img src="../../flip/icons/logout.png">
+                            <p>Log Out</p>
+                        </div>
+                        <!--<button>Get Premium</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="desktop-parent-container">
+            <div id="question-panel">
+                <input id="question-header" placeholder="Question Title">
+                <iframe id="question-text-editor" name="textField"></iframe>
+            </div>
+            <div id="editor-tools">
+                <h1>Editor Tools</h1>
+                <!--<h2>Text Styles</h2>
+                <div id="editor-add-text-panel">
+                    <div class="text-element-btn sidebar-elem-btn">P</div>
+                    <div class="text-element-btn sidebar-elem-btn">H1</div>
+                    <div class="text-element-btn sidebar-elem-btn">H2</div>
+                    <div class="text-element-btn sidebar-elem-btn">H3</div>
+                </div>-->
+                <h2>Text Decorations</h2>
+                <div id="editor-add-style-panel">
+                    <div style="font-weight:900;" class="sidebar-elem-btn">B</div>
+                    <div style="font-style:italic;" class="sidebar-elem-btn">I</div>
+                    <div style="text-decoration:underline;" class="sidebar-elem-btn">U</div>
+                </div>
+                <h2>Lists</h2>
+                <div id="editor-add-lists-panel">
+                    <div class="sidebar-elem-btn">
+                        <img src="./icons/unordered-list.png" alt="">
+                        <p>Bulleted List</p>
+                    </div>
+                    <div class="sidebar-elem-btn">
+                        <img src="./icons/ordered-list.png" alt="">
+                        <p>Numbered List</p>
+                    </div>
+                </div>
+                <h2>Additional Tools</h2>
+                <div id="editor-add-tools-panel">
+                    <div>
+                        <img src="./icons/link.png" alt="">
+                        <p>Link</p>
+                    </div>
+                    <div>
+                        <img src="./icons/code.png" alt="">
+                        <p>Code</p>
+                    </div>
+                </div>
+                <button onclick="saveChanges()">Ask Question</button>
+            </div>
+        </div>
+        <div id="desktop-bottom-buttons">
+            <!--<div class="desktop-bottom-btn" onclick="askQuestion();">
+                <img src="../../flip/editor/icons/save.png" alt="">
+            </div>-->
+            <div class="desktop-bottom-btn" onclick="leaveEditor();">
+                <img src="../../flip/icons/back.png" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
