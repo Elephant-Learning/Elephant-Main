@@ -9,6 +9,10 @@
     margin:0;
 }
 
+.bold{
+    font-weight:700;
+}
+
 #navbar{
     display:flex;
     flex-direction:row;
@@ -168,4 +172,28 @@
 
 .pink-image{
     filter: invert(43%) sepia(84%) saturate(879%) hue-rotate(302deg) brightness(104%) contrast(99%) !important;
+}
+
+@media (max-width:950px) {
+    #main-container > h1{
+        font-size:32px;
+    }
+
+    #navbar-right{
+        display:none !important;
+    }
+
+    .video-container{
+        flex-direction:column;
+        height:auto;
+        padding:64px 0;
+        gap:32px;
+        text-align:center;
+    }
+
+    .video-container > div{
+        align-items:center;
+        height:auto;
+        width:85vw;
+    }
 }
