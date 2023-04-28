@@ -439,11 +439,6 @@ async function login(){
     let email = document.getElementById('login-username').value;
     let password = document.getElementById('login-password').value;
 
-    console.log(JSON.stringify({
-        "email": email,
-        "password": password
-    }));
-
     const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login', {
         method: 'POST',
         headers: {
@@ -458,8 +453,9 @@ async function login(){
         }),
         mode: 'cors'
     });
+
     const content = await response.json();
-    console.log(content)
+    console.log(content);
 
     document.getElementById('desktop-loading-modal').classList.add('inactive-modal');
 
