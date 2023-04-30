@@ -116,6 +116,7 @@ body *{
 
 #numbers-container > img{
     width:38vw;
+    border-radius:24px;
 }
 
 #numbers-container > div > h1{
