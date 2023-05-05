@@ -124,11 +124,7 @@ body *{
     font-weight:400;
 }
 
-#founder-wrap{
-    margin-top:64px;
-}
-
-#staff-wrap{
+.staff-wrap{
     display:flex;
     flex-direction:row;
     align-items:flex-start;
@@ -137,7 +133,7 @@ body *{
     gap:24px;
 }
 
-#staff-wrap > div, #founder-wrap{
+.staff-wrap > div{
     display:flex;
     flex-direction:column;
     align-items:flex-start;
@@ -146,13 +142,13 @@ body *{
     gap:24px;
 }
 
-#staff-wrap > div > img, #founder-wrap > img{
+.staff-wrap > div > img{
     height:256px;
     width:256px;
     border-radius:12px;
 }
 
-#staff-wrap > div > div, #founder-wrap > div{
+.staff-wrap > div > div{
     display:flex;
     flex-direction:column;
     align-items:flex-start;
@@ -160,14 +156,14 @@ body *{
     gap:6px;
 }
 
-#staff-wrap > div > div > h1, #founder-wrap > div > h1{
+.staff-wrap > div > div > h1{
     margin:0;
     font-size:18px;
     color:var(--primary-accent);
     font-weight:700;
 }
 
-#staff-wrap > div > div > p, #founder-wrap > div > p{
+.staff-wrap > div > div > p{
     font-size:14px;
     font-weight:500;
     margin:0;
