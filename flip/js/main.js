@@ -55,8 +55,8 @@ function toggleTheme(themeIndex){
         root.style.setProperty("--secondary-accent-gradient", "#27b4b9");
         root.style.setProperty("--tertiary-accent", "#db7735");
         root.style.setProperty("--tertiary-accent-gradient", "#d47d39");
-        root.style.setProperty("--quaternary-accent", "#8900ae");
-        root.style.setProperty("--quaternary-accent-gradient", "#5d0076");
+        root.style.setProperty("--quaternary-accent", "#9a0bad");
+        root.style.setProperty("--quaternary-accent-gradient", "#6609c3");
     } else if(themeIndex === 0){
         root.style.setProperty('--text-color', 'black');
         root.style.setProperty("--bg-color-1", "#ffffff");
@@ -75,8 +75,8 @@ function toggleTheme(themeIndex){
         root.style.setProperty("--secondary-accent-gradient", "#31d6dc");
         root.style.setProperty("--tertiary-accent", "#f8680a");
         root.style.setProperty("--tertiary-accent-gradient", "#fa8d37");
-        root.style.setProperty("--quaternary-accent", "#c900ff");
-        root.style.setProperty("--quaternary-accent-gradient", "#8900ae");
+        root.style.setProperty("--quaternary-accent", "#e100ff");
+        root.style.setProperty("--quaternary-accent-gradient", "#7f00ff");
     } else if(themeIndex === 2){
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) toggleTheme(1);
         else toggleTheme(0)
