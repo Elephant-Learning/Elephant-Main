@@ -1,4 +1,6 @@
 let correntAnswerNumber = 0;
+let memorizeStarted = false;
+let memorizeTimer = 0;
 let indexesIncomplete, indexesReviewed, indexesComplete, memorizeWriteCorrectAnswers, deckMaxDefinitions, answeredQuestions, answeredCorrectly, currentQuestionIndex, memorizeSettings;
 
 let unableToAnswer = false;
@@ -301,8 +303,11 @@ function setupWrite(deckIndex){
                                     //Badges index 0: level (1-3), name, condition
 
                                     const badges = [
+                                        [3, "< 1 Minute per Question", memorizeTimer / answeredQuestions <= 60],
                                         [3, "Scored over 50%", answeredCorrectly / answeredQuestions >= 0.5],
+                                        [2, "< 30 Seconds per Question", memorizeTimer / answeredQuestions <= 30],
                                         [2, "Scored over 80%", answeredCorrectly / answeredQuestions >= 0.8],
+                                        [1, "< 10 Seconds per Question", memorizeTimer / answeredQuestions <= 10],
                                         [1, "Scored 100%", answeredCorrectly / answeredQuestions === 1],
                                     ]
 
@@ -314,7 +319,9 @@ function setupWrite(deckIndex){
                                     document.getElementById('desktop-memorize-complete-text').innerHTML = "You answered " + answeredCorrectly + " questions correctly out of " + answeredQuestions + " questions!"
                                     document.querySelector('.active-memorize-item').classList.remove('active-memorize-item');
                                     document.getElementById('desktop-memorize-complete').classList.add('active-memorize-item');
-                                }, 500)
+
+                                    clearInterval(memorizeTimerFunc);
+                                }, 500);
 
                                 return;
                             }
@@ -403,8 +410,11 @@ function setupWrite(deckIndex){
                                         //Badges index 0: level (1-3), name, condition
 
                                         const badges = [
+                                            [3, "< 1 Minute per Question", memorizeTimer / answeredQuestions <= 60],
                                             [3, "Scored over 50%", answeredCorrectly / answeredQuestions >= 0.5],
+                                            [2, "< 30 Seconds per Question", memorizeTimer / answeredQuestions <= 30],
                                             [2, "Scored over 80%", answeredCorrectly / answeredQuestions >= 0.8],
+                                            [1, "< 10 Seconds per Question", memorizeTimer / answeredQuestions <= 10],
                                             [1, "Scored 100%", answeredCorrectly / answeredQuestions === 1],
                                         ]
 
@@ -416,6 +426,8 @@ function setupWrite(deckIndex){
                                         document.getElementById('desktop-memorize-complete-text').innerHTML = "You answered " + answeredCorrectly + " questions correctly out of " + answeredQuestions + " questions!"
                                         document.querySelector('.active-memorize-item').classList.remove('active-memorize-item');
                                         document.getElementById('desktop-memorize-complete').classList.add('active-memorize-item');
+
+                                        clearInterval(memorizeTimerFunc);
                                     }, 500)
 
                                     return;
@@ -532,6 +544,22 @@ function setupCard(deckIndex){
     }
 }
 
+let memorizeTimerFunc;
+
+function resetTimer(){
+    memorizeTimer = 0;
+    clearInterval(memorizeTimerFunc);
+    memorizeTimerFunc = setInterval(function(){
+        memorizeTimer++;
+        let minutes = (Math.floor(memorizeTimer / 60)).toString();
+        let seconds = (memorizeTimer % 60).toString();
+
+        if(minutes.length === 1) minutes = "0" + minutes;
+        if(seconds.length === 1) seconds = "0" + seconds;
+        document.getElementById("time-spent").innerHTML = `${minutes}:${seconds}`;
+    } ,1000);
+}
+
 function initializeMemorize(){
     indexesIncomplete = [];
     indexesReviewed = [];
@@ -541,6 +569,8 @@ function initializeMemorize(){
     answeredQuestions = -1;
     answeredCorrectly = 0;
     currentQuestionIndex = 0;
+
+    document.getElementById("time-spent").innerHTML = "00:00";
 
     document.querySelectorAll('.active-memorize-item').forEach(function(element){
         element.classList.remove('active-memorize-item');
@@ -571,4 +601,5 @@ function initializeMemorize(){
     else setupWrite(Math.floor(Math.random() * indexesReviewed.length));*/
 
     skipQuestion();
+    resetTimer();
 }

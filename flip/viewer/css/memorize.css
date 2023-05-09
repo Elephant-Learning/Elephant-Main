@@ -55,6 +55,14 @@
     color:gray;
 }
 
+#desktop-memorize-panel-questions-left-container > h2{
+    margin:0;
+    margin-top:calc(var(--size) * 12px);
+    font-size:calc(var(--size) * 16px);
+    color:gray;
+    font-weight:700;
+}
+
 #desktop-memorize-panel-questions-left-progress{
     width:100%;
     height:calc(var(--size) * 8px);
