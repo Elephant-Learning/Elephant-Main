@@ -22,6 +22,8 @@ function togglePageFlip(index, sidebar, link){
         }
     }
 
+    if(index === 1 && !memorizeStarted) resetTimer();
+
     try{document.querySelectorAll('.desktop-sidebar-category')[sidebar].classList.add('active-sidebar-category')} catch{}
     try {document.querySelector(".active-tab").classList.remove('active-tab')} catch{}
     document.querySelectorAll('.desktop-tab')[index].classList.add('active-tab')
