@@ -236,6 +236,26 @@ function skipQuestion(){
     document.getElementById('desktop-memorize-panel-questions-left').innerHTML = indexesIncomplete.length * 2 + indexesReviewed.length;
 }
 
+function compareSentences(sentence1, sentence2) {
+    // Tokenize the sentences
+    const tokens1 = sentence1.split(' ');
+    const tokens2 = sentence2.split(' ');
+
+    // Calculate the number of common words
+    let commonWords = 0;
+    for (let i = 0; i < tokens1.length; i++) {
+        for (let j = 0; j < tokens2.length; j++) {
+            if (tokens1[i] === tokens2[j]) {
+                commonWords++;
+                break;
+            }
+        }
+    }
+
+    // Calculate the percentage of similarity
+    return (commonWords / Math.max(tokens1.length, tokens2.length));
+}
+
 function setupWrite(deckIndex){
     removeAllChildNodes(document.getElementById('desktop-memorize-definitions-list'));
 
@@ -267,7 +287,13 @@ function setupWrite(deckIndex){
             if(e.key !== "Enter") return;
             let inputValue = this.value.toLowerCase();
 
-            if(memorizeWriteCorrectAnswers.includes(inputValue)){
+            let passTest = false;
+
+            for(let i = 0; i < memorizeWriteCorrectAnswers.length; i++){
+                if(compareSentences(inputValue, memorizeWriteCorrectAnswers[i]) > 0.5) passTest = true;
+            }
+
+            if(passTest){
                 let correct = true;
 
                 document.querySelectorAll('.desktop-memorize-write-input').forEach(function(element){

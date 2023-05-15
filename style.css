@@ -128,7 +128,7 @@ body *{
     flex-direction:column;
     align-items:flex-start;
     justify-content:center;
-    gap:16px;
+    gap:18px;
 }
 
 .video-container > div > div > div{
@@ -136,23 +136,24 @@ body *{
     flex-direction:row;
     align-items:center;
     justify-content:center;
-    background:var(--bg-color-1);
-    /*background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));*/
-    padding:12px 24px;
+    /*background:var(--bg-color-1);
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));*/
+    padding:0 24px;
     border-radius:24px;
     gap:16px;
 }
 
 .video-container > div > div > div > h1{
     margin:0;
-    font-size:18px;
+    font-size:16px;
     color:black;
+    font-weight:700;
 }
 
 .video-container > div > div > div > div{
     background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
-    width:24px;
-    height:24px;
+    width:30px;
+    height:30px;
     border-radius:18px;
     display:flex;
     flex-direction:row;
