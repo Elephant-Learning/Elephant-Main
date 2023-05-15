@@ -279,6 +279,7 @@ function setupWrite(deckIndex){
         newImgDiv.classList.add('shared');
         newImg.src = "./icons/minus.png"
         newImg.id = "desktop-memorize-write-img-" + i.toString();
+        newImg.classList.add("desktop-memorize-write-img");
         newImgDiv.id = "desktop-memorize-write-img-div-" + i.toString();
         newInput.id = "desktop-memorize-write-input-" + i.toString();
         newInput.classList.add("desktop-memorize-write-input");
@@ -288,9 +289,14 @@ function setupWrite(deckIndex){
             let inputValue = this.value.toLowerCase();
 
             let passTest = false;
+            let passTestInt = 0;
 
             for(let i = 0; i < memorizeWriteCorrectAnswers.length; i++){
                 if(compareSentences(inputValue, memorizeWriteCorrectAnswers[i]) > 0.5) passTest = true;
+
+                if(compareSentences(inputValue, memorizeWriteCorrectAnswers[i]) > passTestInt) passTestInt = compareSentences(inputValue, memorizeWriteCorrectAnswers[i]);
+
+                //console.log(compareSentences(inputValue, memorizeWriteCorrectAnswers[i]), passTest);
             }
 
             if(passTest){
@@ -307,7 +313,9 @@ function setupWrite(deckIndex){
 
                 if(correct){
                     document.getElementById("desktop-memorize-write-img-div-" + i.toString()).className = "personal";
-                    document.getElementById("desktop-memorize-write-img-" + i.toString()).src = "./icons/correct.png";
+                    if(passTestInt === 1) document.getElementById("desktop-memorize-write-img-" + i.toString()).src = "./icons/correct.png";
+                    else document.getElementById("desktop-memorize-write-img-" + i.toString()).src = "./icons/minus.png";
+
                     this.setAttribute('readonly', 'true');
 
                     correntAnswerNumber--;
@@ -316,6 +324,12 @@ function setupWrite(deckIndex){
                         answeredCorrectly++;
 
                         incrementRight(deck[deckIndex].id);
+
+                        let timeOutNum = 0;
+
+                        document.querySelectorAll(".desktop-memorize-write-img").forEach(function(elem){
+                            if(elem.src.substring(elem.src.length - 16) === "/icons/minus.png") timeOutNum = 1000;
+                        })
 
                         setTimeout(function(){
                             indexesReviewed.splice(indexesReviewed.indexOf(deckIndex), 1);
@@ -353,7 +367,7 @@ function setupWrite(deckIndex){
                             }
 
                             askMemorizeQuestion();
-                        }, 0);
+                        }, timeOutNum);
                     }
                 } else {
                     document.getElementById("desktop-memorize-write-img-div-" + i.toString()).className = "shared";
@@ -392,6 +406,7 @@ function setupWrite(deckIndex){
             newImgDiv.classList.add('shared');
             newImg.src = "./icons/minus.png"
             newImg.id = "desktop-memorize-write-img-" + i.toString();
+            newImg.classList.add("desktop-memorize-write-img");
             newImgDiv.id = "desktop-memorize-write-img-div-" + i.toString();
             newInput.id = "desktop-memorize-write-input-" + i.toString();
             newInput.classList.add("desktop-memorize-write-input");
@@ -400,7 +415,16 @@ function setupWrite(deckIndex){
                 if(e.key !== "Enter") return;
                 let inputValue = this.value.toLowerCase();
 
-                if(memorizeWriteCorrectAnswers.includes(inputValue)){
+                let passTest = false;
+                let passTestInt = 0;
+
+                for(let i = 0; i < memorizeWriteCorrectAnswers.length; i++){
+                    if(compareSentences(inputValue, memorizeWriteCorrectAnswers[i]) > 0.5) passTest = true;
+
+                    if(compareSentences(inputValue, memorizeWriteCorrectAnswers[i]) > passTestInt) passTestInt = compareSentences(inputValue, memorizeWriteCorrectAnswers[i]);
+                }
+
+                if(passTest){
                     let correct = true;
 
                     document.querySelectorAll('.desktop-memorize-write-input').forEach(function(element){
@@ -414,7 +438,9 @@ function setupWrite(deckIndex){
 
                     if(correct){
                         document.getElementById("desktop-memorize-write-img-div-" + i.toString()).className = "personal";
-                        document.getElementById("desktop-memorize-write-img-" + i.toString()).src = "./icons/correct.png";
+                        if(passTestInt === 1) document.getElementById("desktop-memorize-write-img-" + i.toString()).src = "./icons/correct.png";
+                        else document.getElementById("desktop-memorize-write-img-" + i.toString()).src = "./icons/minus.png";
+
                         this.setAttribute('readonly', 'true');
 
                         correntAnswerNumber--;
@@ -423,6 +449,17 @@ function setupWrite(deckIndex){
                             answeredCorrectly++;
 
                             incrementRight(deck[deckIndex].id);
+
+                            let timeOutNum = 0;
+
+                            console.log("length: " + document.querySelectorAll(".desktop-memorize-write-img").length);
+
+                            document.querySelectorAll(".desktop-memorize-write-img").forEach(function(elem){
+                                if(elem.src.substring(elem.src.length - 16) === "/icons/minus.png") timeOutNum = 1000;
+                                //console.log(elem.src.substring(elem.src.length - 16), "/icons/minus.png", elem.src.substring(elem.src.length - 16) === "/icons/minus.png")
+                            });
+
+                            console.log(timeOutNum);
 
                             setTimeout(function(){
                                 indexesReviewed.splice(indexesReviewed.indexOf(deckIndex), 1);
@@ -460,7 +497,7 @@ function setupWrite(deckIndex){
                                 }
 
                                 askMemorizeQuestion();
-                            }, 0);
+                            }, timeOutNum);
                         }
                     } else {
                         document.getElementById("desktop-memorize-write-img-div-" + i.toString()).className = "shared";
