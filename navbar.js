@@ -25,7 +25,23 @@ async function initializeNavbar(prefix){
         console.log("Welcome to Elephant")
     }
 
+    try{
+        if(!JSON.parse(localStorage.getItem("cookiesAccepted"))) showCookiesModal();
+    } catch (e){
+        localStorage.setItem("cookiesAccepted", JSON.stringify(false));
+        showCookiesModal();
+    }
+
     console.log("sdf")
+}
+
+function showCookiesModal(){
+    document.getElementById("cookies-modal").classList.remove("inactive-modal");
+}
+
+function acceptCookies(){
+    document.getElementById("cookies-modal").classList.add("inactive-modal");
+    localStorage.setItem("cookiesAccepted", JSON.stringify(true));
 }
 
 initializeNavbar(document.getElementById('navbar-prefix').innerHTML);
