@@ -1,0 +1,154 @@
+html {
+    scroll-behavior: smooth;
+}
+
+#desktop-parent-container{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+}
+
+.bottom-btns, .bottom-left-btns{
+    position:absolute;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    bottom:calc(var(--size) * 12px);
+    gap:calc(var(--size) * 6px);
+    z-index:2;
+}
+
+.bottom-btns{
+    right:calc(var(--size) * 12px);
+}
+
+.bottom-left-btns{
+    left:calc(var(--size) * 12px);
+}
+
+.bottom-btns > a.inactive-modal, .bottom-btns > div.inactive-modal, .bottom-left-btns > a.inactive-modal, .bottom-left-btns > div.inactive-modal{
+    display:none;
+}
+
+.bottom-btns > a, .bottom-btns > div, .bottom-left-btns > a, .bottom-left-btns > div{
+    width:calc(var(--size) * 36px);
+    height:calc(var(--size) * 36px);
+    background:var(--dark-gray);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    cursor:pointer;
+    transition-duration:250ms;
+}
+
+.bottom-btns > a:hover, .bottom-btns > div:hover, .bottom-left-btns > a:hover, .bottom-left-btns > div:hover{
+    box-shadow:0 0 calc(var(--size) * 6px) 0 var(--dark-gray);
+}
+
+.bottom-btns > a > img, .bottom-btns > div > img, .bottom-left-btns > a > img, .bottom-left-btns > div > img{
+    height:calc(var(--size) * 20px);
+    filter:invert(1);
+}
+
+.personal, .active-view-button{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient)) !important;
+}
+
+.community{
+    background:linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient)) !important;
+}
+
+.shared{
+    background:linear-gradient(135deg, var(--tertiary-accent), var(--tertiary-accent-gradient)) !important;
+}
+
+#editor-tools{
+    background:var(--bg-color-1);
+    width:100vw;
+    height:calc(var(--size) * 42px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    border-bottom:1px solid var(--light-border-color);
+    gap:calc(var(--size) * 12px);
+}
+
+#editor-tools > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:12px;
+}
+
+#editor-tools-left{
+    position:absolute;
+    left:calc(var(--size) * 24px);
+}
+
+#editor-tools-right{
+    position:absolute;
+    right:calc(var(--size) * 24px);
+}
+
+#editor-tools-middle > button{
+    width:calc(var(--size) * 128px);
+    font-size:calc(var(--size) * 12px);
+    height:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 6px);
+    outline:none;
+    font-weight:600;
+    cursor:pointer;
+    transition-duration:250ms;
+}
+
+#editor-tools-middle > button::before{
+    content:'+';
+    margin-right:calc(Var(--size) * 6px);
+    font-size:calc(var(--size) * 12px);
+}
+
+#create-event-btn{
+    border:1px solid var(--dark-border-color);
+    background:var(--dark-gray);
+    color:white;
+}
+
+#create-marker-btn{
+    background:var(--bg-color-1);
+    border:1px dashed var(--dark-border-color);
+}
+
+#editor-tools-middle > button:hover{
+    box-shadow:0 0 calc(var(--size) * 6px) 0 gray;
+}
+
+#editor-tools-middle > button:active{
+    box-shadow:none;
+}
+
+#editor-tools-left > h1{
+    font-size:calc(var(--size) * 12px);
+    outline:none;
+    min-width:calc(var(--size) * 128px);
+}
+
+#editor-tools-left > h1:focus{
+    background:var(--bg-color-2);
+    border-bottom:1px solid var(--light-border-color);
+}
+
+#desktop-main-container{
+    width:100vw;
+    height:calc(100vh - var(--size) * 90px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    position:absolute;
+    top:calc(var(--size) * 42px);
+}

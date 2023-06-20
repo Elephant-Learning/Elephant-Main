@@ -44,6 +44,10 @@
     gap:16px;
 }
 
+#navbar-left > a{
+    outline:none;
+}
+
 #navbar-left > a > img{
     height:48px;
     cursor:pointer;
@@ -87,6 +91,10 @@
     flex-direction:row;
     align-items:center;
     justify-content:center;
+    transition-duration:250ms;
+    border:1px solid var(--bg-color-1);
+    padding:12px 18px;
+    border-radius:12px;
 }
 
 .navbar-modal > div:last-of-type{
@@ -95,7 +103,7 @@
     opacity:0;
     transition-duration:250ms;
     transition-delay:500ms;
-    top:32px;
+    top:48px;
     background:white;
     padding:24px;
     border:1px solid var(--light-border-color);
@@ -106,6 +114,11 @@
     justify-content:flex-start;
     gap:12px;
     z-index:2;
+}
+
+.navbar-modal > div:first-of-type:hover{
+    background:var(--bg-color-2);
+    border:1px solid var(--light-border-color);
 }
 
 .navbar-modal > div:first-of-type:hover ~ div:last-of-type, .navbar-modal > div:last-of-type:hover{

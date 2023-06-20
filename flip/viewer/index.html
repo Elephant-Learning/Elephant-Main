@@ -17,11 +17,13 @@
     <link rel="stylesheet" href="css/review.css">
     <link rel="stylesheet" href="../editor/css/list.css">
     <link rel="stylesheet" href="css/statistics.css">
+    <link rel="stylesheet" href="css/crossword.css">
 
     <script src="../js/main.js" defer></script>
     <script src="js/script.js" defer></script>
     <script src="js/carousel.js" defer></script>
     <script src="js/memorize.js" defer></script>
+    <script src="js/crossword.js" defer></script>
 </head>
 <body>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7659700279033478"
@@ -156,15 +158,21 @@
                     </div>
                     <p>Deck Match</p>
                 </div>
+                <div class="desktop-sidebar-category"  onclick="togglePageFlip(4, 4, undefined)">
+                    <div>
+                        <img src="./icons/puzzle.png" alt="Recent">
+                    </div>
+                    <p>Deck Crossword</p>
+                </div>
                 <div class="desktop-sidebar-break"></div>
                 <h1>Information</h1>
-                <div class="desktop-sidebar-category" onclick="togglePageFlip(3, 4, undefined)">
+                <div class="desktop-sidebar-category" onclick="togglePageFlip(5, 5, undefined)">
                     <div>
                         <img src="./icons/statistics.png" alt="Recent">
                     </div>
                     <p>Deck Statistics</p>
                 </div>
-                <div class="desktop-sidebar-category" onclick="togglePageFlip(4, 5, undefined)">
+                <div class="desktop-sidebar-category" onclick="togglePageFlip(6, 6, undefined)">
                     <div>
                         <img src="../icons/deck.png" alt="Recent">
                     </div>
@@ -342,6 +350,31 @@
                     <div id="desktop-review-panel">
                         <div id="desktop-review-panel-bottom">
                             <button>Generate Test</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="desktop-tab" id="deck-match"></div>
+                <div class="desktop-tab" id="deck-crossword">
+                    <div id="crossword-wrapper">
+                        <table id="crossword-container">
+                            <tr>
+                                <td>wef</td>
+                                <td>fs</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="crossword-clues-wrapper">
+                        <h1>Across</h1>
+                        <div class="crossword-clues-container">
+                            <p>Your Mother</p>
+                            <p>Your Mother</p>
+                            <p>Your Mother</p>
+                        </div>
+                        <h1>Down</h1>
+                        <div class="crossword-clues-container">
+                            <p>Your Mother</p>
+                            <p>Your Mother</p>
+                            <p>Your Mother</p>
                         </div>
                     </div>
                 </div>

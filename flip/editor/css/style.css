@@ -84,6 +84,14 @@ html {
     left:calc(var(--size) * 24px);
 }
 
+#editor-tools-right{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    position:absolute;
+    right:calc(var(--size) * 24px);
+}
+
 #deck-info-tools{
     display:flex;
     flex-direction:row;

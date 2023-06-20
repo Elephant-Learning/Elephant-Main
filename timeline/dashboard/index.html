@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Answers | Elephant - The Ultimate Student Suite</title>
+    <title>Timeline | Elephant - The Ultimate Student Suite</title>
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../../flip/css/main.css">
@@ -19,19 +19,6 @@
             <img src="../../icons/elephant-400-400-white.png" alt="Loading Ain't Loading" id="desktop-loader-img">
             <div id="desktop-loader-bg-right"></div>
             <p id="desktop-loader-text"></p>
-        </div>
-        <div id="tags-modal-bg" class="inactive-modal">
-            <div id="tags-modal">
-                <div>
-                    <img src="../icons/tags.png" alt="">
-                </div>
-                <h1>Set User Tags</h1>
-                <p>To effectively use Elephant Answers, please select at least 3 subjects you are interested in.</p>
-                <div id="tags-list"></div>
-                <div id="tags-modal-buttons">
-                    <button onclick="completeEntry()" class="inactive-modal-button" id="tags-modal-button">Continue</button>
-                </div>
-            </div>
         </div>
         <div id="desktop-notifications-modal" class="inactive-modal">
             <div id="desktop-notifications-header">
@@ -61,7 +48,7 @@
         </div>
         <div id="desktop-navbar">
             <div id="desktop-main-image">
-                <a href="./"><img src="../../icons/elephant-answers-3.png" alt="Elephant Logo"></a>
+                <a href="./"><img src="../../icons/elephant-400-400-pink-timeline.png" alt="Elephant Logo"></a>
             </div>
             <div id="desktop-input-div">
                 <img src="../../flip/icons/search.png" alt="Search" id="desktop-input-img">
@@ -164,15 +151,15 @@
                         </div>
                         <p>Flip</p>
                     </div>
-                    <div class="desktop-sidebar-category active-sidebar-category" onclick="location.href = './'">
+                    <div class="desktop-sidebar-category" onclick="location.href = '../../ask/dashboard'">
                         <div>
-                            <img src="../icons/ask.png" alt="Recent">
+                            <img src="../../ask/icons/ask.png" alt="Recent">
                         </div>
                         <p>Ask</p>
                     </div>
-                    <div class="desktop-sidebar-category unavailable-sidebar-category">
+                    <div class="desktop-sidebar-category active-sidebar-category" onclick="location.href = './'">
                         <div>
-                            <img src="../../timeline/icons/timeline.png" alt="Recent">
+                            <img src="../icons/timeline.png" alt="Recent">
                         </div>
                         <p>Timeline</p>
                     </div>
@@ -191,30 +178,33 @@
                     <a href="https://discord.gg/YbZS8H6RbB/">Join The New Elephant Discord Server</a>
                     <p onclick="closeNews()">X</p>-->
                 </div>
-                <p id="desktop-main-container-tab">Elephant Ask</p>
-                <div id="desktop-answers-dashboard">
-                    <div id="desktop-answers-main">
-                        <div id="loading-div">
-                            <img src="../../icons/elephant-answers-2.png" alt="">
-                            <p id="loading-text"></p>
+                <p id="desktop-main-container-tab">Elephant Timeline</p>
+                <div id="desktop-timeline-dashboard">
+                    <div id="timeline-main-options">
+                        <div onclick="createTimeline()">
+                            <img src="../../flip/icons/add_file.png" alt="">
+                            <div>
+                                <h1>Create New Timeline</h1>
+                                <p>Memorize History Easy</p>
+                            </div>
+                            <img src="../../flip/icons/plus.png" alt="">
                         </div>
+                        <!--<div onclick="createFolder()">
+                            <img src="../icons/add_folder.png" alt="">
+                            <div>
+                                <h1>Create New Folder</h1>
+                                <p>Organize and Group Decks</p>
+                            </div>
+                            <img src="../icons/plus.png" alt="">
+                        </div>-->
                     </div>
-                    <div id="desktop-answers-sidebar">
-                        <div id="answers-score">
-                            <h1 id="answers-score-header"></h1>
-                            <p>Your Score</p>
-                        </div>
-                        <div id="ask-new-btn" onclick="location.href = '../create'">
-                            <!--<img src="../../flip/editor/icons/plus.png" alt="">-->
-                            <p>+ Ask New Question</p>
-                        </div>
-                        <p>Your Questions</p>
-                        <div id="your-answers"></div>
+                    <div id="timeline-filter-container">
+                        <input type="text" id="timeline-filter" placeholder="Search your Timelines">
                     </div>
                 </div>
                 <div id="desktop-bottom-buttons">
-                    <div class="desktop-bottom-btn" onclick="location.href = '../create/'">
-                        <img src="../icons/ask.png" alt="">
+                    <div class="desktop-bottom-btn" onclick="createTimeline()">
+                        <img src="./icons/plus.png" alt="">
                     </div>
                 </div>
             </div>

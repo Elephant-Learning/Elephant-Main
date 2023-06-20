@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline Editor | Elephant - The Ultimate Student Suite</title>
+
+    <link rel="icon" href="../../icons/elephant-400-400-grayscale.png">
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../flip/css/main.css">
+
+    <script src="../../flip/js/main.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div id="desktop-container">
+        <div id="context-menus">
+            <div class="context-menu">
+                <div>
+                    <img src="" alt="">
+                    <p>+ New Event</p>
+                </div>
+                <div>
+                    <img src="" alt="">
+                    <p>+ New Marker</p>
+                </div>
+            </div>
+            <div class="context-menu">
+                <div>
+                    <img src="" alt="">
+                    <p>Edit Node</p>
+                </div>
+                <div>
+                    <img src="" alt="">
+                    <p>Delete Node</p>
+                </div>
+            </div>
+        </div>
+        <div id="desktop-navbar">
+            <div id="desktop-main-image">
+                <div onclick="leaveEditor('../dashboard')"><img src="../../icons/elephant-400-400-pink-timeline.png" alt="Elephant Logo"></div>
+            </div>
+            <!-- <div id="desktop-input-div">
+                 <img src="../../flip/icons/search.png" alt="Search" id="desktop-input-img">
+                 <input type="text" id="desktop-navbar-input" placeholder="Search Decks, Users, Classrooms">
+            </div>-->
+            <div id="desktop-navbar-right">
+                <!--<div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
+                    <img src="../icons/music.png" alt="Notifications">
+                </div>-->
+                <div id="desktop-navbar-profile">
+                    <img src="../../flip/editor/icons/crowd.png" alt="" id="desktop-navbar-profile-image">
+                    <div id="navbar-profile-text">
+                        <h1 id="desktop-navbar-profile-name"></h1>
+                        <p id="desktop-navbar-profile-type"></p>
+                    </div>
+                    <img src="../../flip/icons/expand_down.png" alt="Dropdown">
+                    <div id="desktop-profile-modal" class="active-modal">
+                        <div onclick="location.href = '../../profile'">
+                            <img src="../../flip/icons/emojis/happy.png" id="desktop-profile-user-img" alt="">
+                            <p>Your Profile</p>
+                        </div>
+                        <div>
+                            <img src="../../flip/icons/theme.png" alt="">
+                            <p>Theme</p>
+                            <img src="../../flip/icons/expand-right.png" alt="">
+                            <div class="profile-sub-modal">
+                                <div onclick="toggleTheme(0)">
+                                    <img src="../../flip/icons/sun.png" alt="">
+                                    <p>Light Theme</p>
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                                </div>
+                                <div onclick="toggleTheme(1)">
+                                    <img src="../../flip/icons/moon.png" alt="">
+                                    <p>Dark Theme</p>
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                                </div>
+                                <div onclick="toggleTheme(2)">
+                                    <img src="../../flip/icons/50%25.png" alt="">
+                                    <p>System Default</p>
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="../../flip/icons/zoom.png">
+                            <p>Accessibility Zoom</p>
+                            <img src="../../flip/icons/expand-right.png" alt="">
+                            <div class="profile-sub-modal">
+                                <div onclick="toggleSizeSetting(0)">
+                                    <img src="../../flip/icons/zoom_out.png" alt="">
+                                    <p>75%</p>
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                                <div onclick="toggleSizeSetting(1)">
+                                    <img src="../../flip/icons/search.png" alt="">
+                                    <p>100%</p>
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                                <div onclick="toggleSizeSetting(2)">
+                                    <img src="../../flip/icons/zoom_in.png" alt="">
+                                    <p>125%</p>
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                                <div onclick="toggleSizeSetting(3)">
+                                    <img src="../../flip/icons/zoom_in.png" alt="">
+                                    <p>150%</p>
+                                    <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-break"></div>
+                        <div onclick="leaveEditor('../../login')">
+                            <img src="../../flip/icons/logout.png">
+                            <p>Log Out</p>
+                        </div>
+                        <!--<button>Get Premium</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="desktop-parent-container">
+            <div id="editor-tools">
+                <div id="editor-tools-left">
+                    <h1 contenteditable="true">New Timeline</h1>
+                </div>
+                <div id="editor-tools-middle">
+                    <button onclick="createTimelineEvent()" id="create-event-btn">Create Event</button>
+                    <button onclick="createTimelineMarker()" id="create-marker-btn">Create Marker</button>
+                </div>
+                <div id="editor-tools-right"></div>
+            </div>
+            <div id="desktop-main-container" class="default">
+                <div id="desktop-main-timeline-container">
+                    <p id="start-date">Start Date</p>
+                    <div></div>
+                    <p id="end-date">End Date</p>
+                </div>
+                <div id="desktop-main-misc-container">
+                    <div id="desktop-main-event-containers">
+                        <div class="event-container-top">
+                            <div>
+                                <img src="./icons/edit.png" alt="">
+                                <img src="./icons/delete.png" alt="">
+                            </div>
+                            <h3>August 2nd, 1776</h3>
+                            <h1>Declaration of Independence Signed</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque dignissimos doloremque eaque illo magni quia quos? Adipisci at beatae commodi, dolor eius eligendi error, eveniet, iste modi non nostrum officia sit voluptates? Debitis odio praesentium quam quis sapiente sequi voluptatibus.</p>
+                        </div>
+                        <div class="event-container-bottom" style="left:128px">
+                            <div>
+                                <img src="./icons/edit.png" alt="">
+                                <img src="./icons/delete.png" alt="">
+                            </div>
+                            <h3>August 2nd, 1776</h3>
+                            <h1>Declaration of Independence Signed</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet, aperiam, blanditiis cupiditate eaque earum eos esse exercitationem impedit in inventore ipsum nam nobis nulla odit officia officiis perferendis quidem repellat reprehenderit saepe velit vitae. Beatae blanditiis dignissimos eaque esse iste labore nihil nisi, non numquam officiis quam repudiandae, rerum soluta temporibus totam veritatis vitae! Accusamus, ad animi aspernatur doloribus dolorum ducimus eveniet ex excepturi facere, fugiat maiores minus, mollitia nihil nobis nulla quod sed sequi sunt totam ut. Ab accusantium aliquam corporis cum deleniti dignissimos dolor eaque eos facere fugit iste itaque natus necessitatibus nemo nihil nobis officia perferendis quod ratione rem reprehenderit saepe tempore tenetur voluptatem, voluptatibus? Deserunt dicta doloribus expedita in nostrum, quaerat quod saepe sit veniam.</p>
+                        </div>
+                    </div>
+                    <div id="desktop-main-marker-container">
+                        <div style="left:50%;">
+                            <p>Shrihun Cringe Era</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="edit-modal" class="inactive-modal">
+                    <div id="edit-bottom-btns">
+                        <button>Create</button>
+                        <button>Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-btns">
+                <div id="save-deck">
+                    <img src="../../flip/editor/icons/save.png" alt="">
+                </div>
+                <div id="view-deck" class="inactive-modal">
+                    <img src="../../flip/editor/icons/search.png" alt="">
+                </div>
+                <div onclick="leaveEditor('../dashboard')" id="back-btn">
+                    <img src="../../flip/icons/back.png" alt="">
+                </div>
+            </div>
+            <div class="bottom-left-btns">
+                <!--<div id="backpack-btn" onclick="toggleBackpackModal()">
+                    <img src="../../flip/editor/icons/pack.png" alt="">
+                </div>-->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

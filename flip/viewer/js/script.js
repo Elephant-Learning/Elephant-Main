@@ -4,7 +4,7 @@ let activeFlashcardCard = 0;
 
 function togglePageFlip(index, sidebar, link){
 
-    const pages = ["Deck Carousel", "Deck Memorize", "Deck Review", "Deck Statistics", "Deck Cards"];
+    const pages = ["Deck Carousel", "Deck Memorize", "Deck Review", "Deck Match", "Deck Crossword","Deck Statistics", "Deck Cards"];
 
     if(link){
         window.location.href = link;
@@ -376,7 +376,7 @@ function initialize(user){
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
 
-    togglePageFlip(0, 0);
+    togglePageFlip(4, 4);
 }
 
 async function locateUserInfo(){

@@ -1,0 +1,61 @@
+#deck-crossword {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+#crossword-wrapper {
+    width: calc(100vw - var(--size) * 561px);
+    padding: calc(var(--size) * 24px);
+}
+
+#crossword-clues-wrapper {
+    width: calc(var(--size) * 208px);
+    padding: calc(var(--size) * 24px);
+    border-left: 1px solid var(--light-border-color);
+    height: 100%;
+}
+
+#crossword-clues-wrapper h1 {
+    font-size: calc(var(--size) * 14px);
+    font-weight: 700;
+    margin: 0;
+}
+
+#crossword-clues-wrapper p {
+    margin: calc(var(--size) * 4px) 0;
+    font-size:calc(var(--size) * 12px);
+    font-weight:400;
+}
+
+.crossword-clues-container{
+    margin-bottom:calc(var(--size) * 12px);
+}
+
+#crossword-wrapper{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:100%;
+}
+
+#crossword-container tr{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+#crossword-container td{
+    border:1px solid black;
+    min-width:calc(var(--size) * 24px);
+    min-height:calc(var(--size) * 24px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    margin:0;
+}

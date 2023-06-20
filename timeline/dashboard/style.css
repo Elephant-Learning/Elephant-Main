@@ -1,0 +1,143 @@
+#desktop-main-container{
+    width:calc(100vw - calc(var(--size) * 256px));
+    height:calc(100vh - calc(var(--size) * 48px));
+}
+
+#desktop-bottom-buttons{
+    position:absolute;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:calc(var(--size) * 12px);
+    bottom:calc(var(--size) * 12px);
+    right:calc(var(--size) * 12px);
+}
+
+.desktop-bottom-btn{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    background:var(--dark-gray);
+    width:calc(var(--size) * 36px);
+    height:calc(var(--size) * 36px);
+    border-radius:50%;
+    cursor:pointer;
+    transition-duration:250ms;
+}
+
+.desktop-bottom-btn:not(.inactive-modal){
+    opacity:1;
+    visibility:visible;
+}
+
+.desktop-bottom-btn > img{
+    height:calc(var(--size) * 20px);
+    filter:invert(1);
+}
+
+.desktop-bottom-btn:hover{
+    box-shadow:0 0 calc(var(--size) * 6px) 0 var(--dark-gray);
+}
+
+#desktop-main-container-tab{
+    font-size:calc(var(--size) * 12px);
+    width:calc(100% - var(--size) * 48px);
+    padding:calc(var(--size) * 14px) calc(var(--size) * 24px);
+    font-weight:600;
+    border-bottom:1px solid var(--light-border-color);
+    margin:0;
+    position:absolute;
+    top:0;
+}
+
+#desktop-timeline-dashboard{
+    position:absolute;
+    top:calc(var(--size) * 44px);
+    left:calc(var(--size) * 256px);
+    width:calc(100vw - var(--size) * 256px);
+    height:calc(100vh - var(--size) * 92px);
+    overflow-y:scroll !important;
+    overflow-x:hidden;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+}
+
+#timeline-main-options, #folder-main-options{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    flex-wrap:wrap;
+    gap:calc(var(--size) * 24px);
+    margin:calc(var(--size) * 24px);
+    width:calc(100vw - calc(var(--size) * 304px));
+}
+
+#timeline-main-options > div, #folder-main-options > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--light-border-color);
+    gap:calc(var(--size) * 18px);
+    padding:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 6px);
+    background:var(--bg-color-1);
+    transition-duration:250ms;
+    cursor:pointer;
+}
+
+/*#flip-main-options > div:nth-of-type(1):hover{
+    border:1px solid var(--primary-accent);
+}
+
+#flip-main-options > div:nth-of-type(2):hover{
+    border:1px solid var(--secondary-accent);
+}*/
+
+#timeline-main-options > div:hover, #folder-main-options > div:hover{
+    border:1px solid var(--primary-accent);
+}
+
+#timeline-main-options > div > img:first-of-type, #folder-main-options > div > img:first-of-type{
+    height:calc(var(--size) * 30px);
+    filter:invert(1) brightness(var(--image-invert));
+}
+
+#timeline-main-options > div > div > h1, #folder-main-options > div > div > h1{
+    font-size:calc(var(--size) * 14px);
+    font-weight:600;
+    margin:0;
+    cursor:pointer;
+}
+
+#timeline-main-options > div > div > p, #folder-main-options > div > div > p{
+    font-size:calc(var(--size) * 12px);
+    margin:0;
+    color:gray;
+    cursor:pointer;
+}
+
+#timeline-main-options > div > img:last-of-type, #folder-main-options > div > img:last-of-type{
+    height:calc(var(--size) * 18px);
+    margin-left:calc(var(--size) * 18px);
+    filter:invert(1) brightness(var(--image-invert));
+}
+
+#timeline-filter-container{
+    margin-left:calc(var(--size) * 24px);
+}
+
+#timeline-filter{
+    width:calc(var(--size) * 384px);
+    font-size:calc(var(--size) * 12px);
+    padding:calc(var(--size) * 8px) calc(var(--size) * 12px);
+    border-radius:calc(var(--size) * 6px);
+    color:gray;
+    outline:none;
+    border:1px solid var(--light-border-color);
+    background:var(--bg-color-1);
+}

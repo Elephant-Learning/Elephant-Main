@@ -69,6 +69,18 @@ body *{
 #main-container > h1{
     margin:0;
     font-size:48px;
+    animation-name:spark;
+    animation-iteration-count: infinite;
+    animation-duration:5s;
+}
+
+@keyframes spark{
+    from{
+        text-shadow:0 0 0 white;
+    }
+    50%{
+        text-shadow:0 0 6px var(--primary-accent);
+    }
 }
 
 #main-container > p{
@@ -91,6 +103,15 @@ body *{
     flex-direction:row;
     align-items:center;
     justify-content:space-evenly;
+    width:100vw;
+    height:100vh;
+}
+
+.column-container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     width:100vw;
     height:100vh;
 }
@@ -164,6 +185,87 @@ body *{
 .video-container > div > div > div > div > img{
     height:18px;
     filter:invert(1);
+}
+
+#testimonies{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:48px;
+}
+
+#testimonies > h1{
+    font-size:48px;
+    color:white;
+    margin:0;
+    text-align:center;
+}
+
+#testimonies > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:24px;
+}
+
+#testimonies > div > div{
+    width:256px;
+    height:256px;
+    background:var(--bg-color-1);
+    padding:24px;
+    border-radius:24px;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:6px;
+}
+
+#testimonies > div > div > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:12px;
+}
+
+#testimonies > div > div > div > div{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    width:32px;
+    height:32px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    border-radius:16px;
+}
+
+#testimonies > div > div > div > h1{
+    margin:0;
+    font-size:16px;
+    width:calc(100% - 44px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#testimonies > div > div > div > div > img{
+    height:18px;
+}
+
+#testimonies > div > div > p{
+    font-size:12px;
+    color:gray;
+    width:100%;
+    height:calc(100% - 38px);
+    margin:0;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 @media (max-width:950px) {
