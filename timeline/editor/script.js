@@ -1,17 +1,56 @@
 function createTimelineEvent(params){
     /**
-     * {
+     * params = {
      *     name:string
      *     description:string
      *     start:double
      *     end:double
-     *
      * }
      */
 }
 
 function createTimelineMarker(){
 
+}
+
+function createItem(){
+
+}
+
+function openCreateModal(window){
+    if(document.getElementById("edit-modal").classList.contains("inactive-modal")){
+        document.getElementById("edit-modal").classList.remove("inactive-modal")
+    }
+
+    if(window === 0){
+        if(document.getElementById("new-event-window").classList.contains("inactive-modal")) document.getElementById("new-event-window").classList.remove("inactive-modal");
+        if(!document.getElementById("new-marker-window").classList.contains("inactive-modal")) document.getElementById("new-marker-window").classList.add("inactive-modal");
+    } else if(window === 1){
+        if(document.getElementById("new-marker-window").classList.contains("inactive-modal")) document.getElementById("new-marker-window").classList.remove("inactive-modal");
+        if(!document.getElementById("new-event-window").classList.contains("inactive-modal")) document.getElementById("new-event-window").classList.add("inactive-modal");
+    }
+}
+
+function closeCreateModal(){
+    let eventNodes = document.getElementById("new-event-window").children;
+
+    for(let i = 0; i < eventNodes.length; i++){
+        if(eventNodes[i].nodeName === "INPUT" || eventNodes[i].nodeName === "TEXTAREA"){
+            eventNodes[i].value = "";
+        }
+    }
+
+    eventNodes = document.getElementById("new-marker-window").children;
+
+    for(let i = 0; i < eventNodes.length; i++){
+        if(eventNodes[i].nodeName === "INPUT" || eventNodes[i].nodeName === "TEXTAREA"){
+            eventNodes[i].value = "";
+        }
+    }
+
+    if(!document.getElementById("edit-modal").classList.contains("inactive-modal")){
+        document.getElementById("edit-modal").classList.add("inactive-modal")
+    }
 }
 
 async function initialize(user){

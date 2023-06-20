@@ -127,8 +127,8 @@
                     <h1 contenteditable="true">New Timeline</h1>
                 </div>
                 <div id="editor-tools-middle">
-                    <button onclick="createTimelineEvent()" id="create-event-btn">Create Event</button>
-                    <button onclick="createTimelineMarker()" id="create-marker-btn">Create Marker</button>
+                    <button onclick="openCreateModal(0)" id="create-event-btn">Create Event</button>
+                    <button onclick="openCreateModal(1)" id="create-marker-btn">Create Marker</button>
                 </div>
                 <div id="editor-tools-right"></div>
             </div>
@@ -166,9 +166,27 @@
                     </div>
                 </div>
                 <div id="edit-modal" class="inactive-modal">
+                    <div id="edit-modal-windows">
+                        <div id="new-event-window" class="inactive-modal">
+                            <h6>Event Name</h6>
+                            <input type="text" placeholder="Event Name">
+                            <h6>Event Starting Date</h6>
+                            <input type="date" placeholder="Event Start Time">
+                            <h6>Event Ending Date (Optional)</h6>
+                            <input type="date" placeholder="Event End Time">
+                            <h6>Description of Event</h6>
+                            <textarea name="" id="" cols="30" rows="10" placeholder="Description of the Event"></textarea>
+                        </div>
+                        <div id="new-marker-window">
+                            <h6>Marker Name</h6>
+                            <input type="text" placeholder="Marker Name">
+                            <h6>Marker Date</h6>
+                            <input type="date" placeholder="Marker Start Time">
+                        </div>
+                    </div>
                     <div id="edit-bottom-btns">
                         <button>Create</button>
-                        <button>Cancel</button>
+                        <button onclick="closeCreateModal()">Cancel</button>
                     </div>
                 </div>
             </div>

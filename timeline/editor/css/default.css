@@ -134,6 +134,9 @@
     height:calc(var(--size) * 18px);
     border-radius:50%;
     border:calc(var(--size) * 4px) solid var(--light-border-color);
+    animation-name:pulse;
+    animation-duration:3s;
+    animation-iteration-count: infinite;
 }
 
 .event-container-bottom::before{
@@ -158,6 +161,27 @@
     height:calc(var(--size) * 18px);
     border-radius:50%;
     border:calc(var(--size) * 4px) solid var(--light-border-color);
+    animation-name:pulse;
+    animation-duration:3s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pulse{
+    from{
+        transform:scale(1);
+        filter:brightness(1);
+    }
+    40%{
+        transform:scale(1.1);
+        filter:brightness(1.25);
+    }
+    80%{
+        transform:scale(1);
+        filter:brightness(1);
+    }
+    to{
+        transform:scale(1);
+    }
 }
 
 #desktop-main-marker-container > div{
@@ -203,6 +227,9 @@
     height:calc(var(--size) * 18px);
     border-radius:50%;
     border:calc(var(--size) * 4px) solid var(--light-border-color);
+    animation-name:pulse;
+    animation-duration:3s;
+    animation-iteration-count: infinite;
 }
 
 #edit-modal{
@@ -262,5 +289,61 @@
 
 #edit-bottom-btns > button:last-of-type{
     background:var(--bg-color-1);
-    border:2px dashed var(--dark-gray);
+    border:2px dashed gray;
+    color:gray !important;
+}
+
+#edit-modal-windows{
+    position:absolute;
+    width:calc(var(--size) * 384px);
+    top:calc(var(--size) * 24px);
+    height:calc(100vh - var(--size) * 232px);
+}
+
+#edit-modal-windows > div{
+    transition-duration:250ms;
+    opacity:1;
+    visibility:visible;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    position:absolute;
+    top:0;
+}
+
+#edit-modal-windows > div.inactive-modal{
+    opacity:0 !important;
+    visibility:hidden;
+}
+
+#edit-modal-windows > div > h6{
+    margin:0;
+    font-size:calc(var(--size) * 12px);
+}
+
+#edit-modal-windows > div > input{
+    margin-bottom:calc(var(--size) * 12px);
+    width:calc(var(--size) * 360px);
+    padding:calc(var(--size) * 6px) calc(var(--size) * 12px);
+    border-radius:calc(var(--size) * 6px);
+    border:1px solid var(--light-border-color);
+    background:var(--bg-color-2);
+    outline:none;
+    font-size:calc(var(--size) * 14px);
+}
+
+#edit-modal-windows > div > textarea{
+    resize:none;
+    border-radius:calc(var(--size) * 6px);
+    border:1px solid var(--light-border-color);
+    width:calc(var(--size) * 360px);
+    padding:calc(var(--size) * 12px);
+    background:var(--bg-color-2);
+    outline:none;
+    font-size:calc(var(--size) * 12px);
+}
+
+#new-event-window > textarea{
+    height:calc(100vh - var(--size) * 452px);
 }
