@@ -3,7 +3,38 @@ let start;
 let end;
 
 function convertToText(date){
-    return date;
+    const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ]
+
+    let returnString = "";
+
+    returnString += months[parseInt(date.split("-")[1]) - 1] + " " + parseInt(date.split("-")[2]);
+
+    if(parseInt(date.split("-")[2]) % 10 === 1){
+        returnString += "st, ";
+    } else if(parseInt(date.split("-")[2]) % 10 === 2){
+        returnString += "nd, ";
+    } else if(parseInt(date.split("-")[2]) % 10 === 3){
+        returnString += "rd, ";
+    } else {
+        returnString += "th, ";
+    }
+
+    returnString += date.split("-")[0];
+
+    return returnString;
 }
 
 function daysBetweenYears(year1, year2) {
@@ -110,7 +141,7 @@ function createTimelineMarker(params){
 
     optionsDiv.append(editOption, deleteOption);
 
-    date.innerHTML = params.date;
+    date.innerHTML = convertToText(params.date);
     title.innerHTML = params.name;
 
     newDiv.append(optionsDiv, date, title);
