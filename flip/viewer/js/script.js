@@ -160,7 +160,6 @@ function updateDeckStatistics(userStatistics, deck){
     const deckCardIds = [];
     const deckCardInfo = [];
 
-    console.log(userStatistics, deck);
     removeAllChildNodes(document.getElementById("incorrect-column"));
     removeAllChildNodes(document.getElementById("lol-no-column"));
     removeAllChildNodes(document.getElementById("correct-column"));
@@ -275,6 +274,7 @@ window.onload = async function(){
         document.getElementById('title').innerHTML = "Trivia | Elephant - The Ultimate Student Suite"
         updateCardsList();
         updateFlashcard();
+        createCrossword();
         initializeMemorize();
         return;
     }
@@ -354,6 +354,7 @@ window.onload = async function(){
 
     updateCardsList();
     updateFlashcard();
+    createCrossword();
     updateDeckStatistics(userContext.context.user.elephantUserStatistics.cardStatistics, deck);
     initializeMemorize();
 }
@@ -376,7 +377,7 @@ function initialize(user){
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
 
-    togglePageFlip(4, 4);
+    togglePageFlip(0, 0);
 }
 
 async function locateUserInfo(){
