@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa11e6ba-231d-4bf8-b1de-6e62baad04b5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/answers/create/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/answers/create/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/answers/dashboard/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/answers/dashboard/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/profile/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/profile/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/timeline/dashboard/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/timeline/dashboard/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/timeline/editor/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/timeline/editor/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/timeline/editor/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/timeline/editor/script.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +20,25 @@
         <option value="JavaScript File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingMarkupGrave">
+    <markupCoffin contentHash="-519729806" url="file://$PROJECT_DIR$/timeline/dashboard/index.html">
+      <highlighter start="2009" end="2019" layer="3000" target="0">
+        <option name="myExternalName" value="GRAMMAR_ERROR" />
+      </highlighter>
+      <highlighter start="2543" end="2548" layer="4000" target="0">
+        <option name="myExternalName" value="WARNING_ATTRIBUTES" />
+      </highlighter>
+      <highlighter start="5640" end="5643" layer="4000" target="0">
+        <option name="myExternalName" value="WARNING_ATTRIBUTES" />
+      </highlighter>
+      <highlighter start="7546" end="7549" layer="4000" target="0">
+        <option name="myExternalName" value="WARNING_ATTRIBUTES" />
+      </highlighter>
+    </markupCoffin>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -35,13 +53,14 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;prod&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/ronak/Documents/GitHub/Elephant-Website&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -84,6 +103,7 @@
       <workItem from="1674870560146" duration="6039000" />
       <workItem from="1674923853989" duration="4152000" />
       <workItem from="1674934173319" duration="2111000" />
+      <workItem from="1687802903438" duration="131000" />
     </task>
     <servers />
   </component>

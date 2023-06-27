@@ -37,6 +37,89 @@ function convertToText(date){
     return returnString;
 }
 
+async function saveChanges(){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/timeline/create', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        body: JSON.stringify({
+            name:document.getElementById("timeline-name").textContent,
+            description:"New Timeline",
+            userId: savedUserId,
+            timelineVisibility: "PRIVATE"
+        }),
+        mode: 'cors'
+    });
+
+    const context = await response.json();
+    console.log(context);
+
+    for(let i = 0; i < nodes.length; i++){
+        if(nodes[i].type === "EVENT"){
+            const response2 = await fetch('https://elephantsuite-rearend.herokuapp.com/timeline/createEvent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                body: JSON.stringify({
+                    timelineId:context.context.timeline.id,
+                    name: nodes[i].name,
+                    date: nodes[i].start,
+                    endDate: nodes[i].end,
+                    description: nodes[i].description,
+                    importance:1
+                }),
+                mode: 'cors'
+            });
+
+            console.log({
+                timelineId:context.context.timeline.id,
+                name: nodes[i].name,
+                date: nodes[i].start,
+                endDate: nodes[i].end,
+                description: nodes[i].description,
+                importance:1
+            })
+
+            const context2 = response2.json();
+            console.log(context2);
+
+        } else if(nodes[i].type === "MARKER"){
+            const response2 = await fetch('https://elephantsuite-rearend.herokuapp.com/timeline/createMarker', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                body: JSON.stringify({
+                    timelineId:context.context.timeline.id,
+                    name: nodes[i].name,
+                    date: nodes[i].date,
+                }),
+                mode: 'cors'
+            });
+
+            const context2 = response2.json();
+            console.log(context2);
+        }
+    }
+}
+
+function leaveEditor(link){
+    location.href = link;
+}
+
 function daysBetweenYears(year1, year2) {
     let days = 0;
     for (let year = year1; year <= year2; year++) {

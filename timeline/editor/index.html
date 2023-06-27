@@ -124,7 +124,7 @@
         <div id="desktop-parent-container">
             <div id="editor-tools">
                 <div id="editor-tools-left">
-                    <h1 contenteditable="true">New Timeline</h1>
+                    <h1 contenteditable="true" id="timeline-name">New Timeline</h1>
                 </div>
                 <div id="editor-tools-middle">
                     <button onclick="openCreateModal(0)" id="create-event-btn">Create Event</button>
@@ -168,7 +168,7 @@
                 </div>
             </div>
             <div class="bottom-btns">
-                <div id="save-deck">
+                <div id="save-deck" onclick="saveChanges()">
                     <img src="../../flip/editor/icons/save.png" alt="">
                 </div>
                 <div id="view-deck" class="inactive-modal">
