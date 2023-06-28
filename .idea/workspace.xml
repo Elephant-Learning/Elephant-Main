@@ -5,9 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa11e6ba-231d-4bf8-b1de-6e62baad04b5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/timeline/dashboard/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/timeline/dashboard/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/timeline/editor/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/timeline/editor/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/timeline/editor/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/timeline/editor/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/timeline/icons/interactive.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/timeline/icons/personalization.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/timeline/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/timeline/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/timeline/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/about/employees/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/about/employees/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/about/mission/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/about/mission/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/ask/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/services/ask/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/flip/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/services/flip/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,18 +33,21 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingMarkupGrave">
-    <markupCoffin contentHash="-519729806" url="file://$PROJECT_DIR$/timeline/dashboard/index.html">
-      <highlighter start="2009" end="2019" layer="3000" target="0">
+    <markupCoffin contentHash="-441251390" url="file://$PROJECT_DIR$/index.html">
+      <highlighter start="7315" end="7321" layer="3000" target="0">
+        <option name="myExternalName" value="TYPO" />
+      </highlighter>
+      <highlighter start="7643" end="7648" layer="3000" target="0">
+        <option name="myExternalName" value="TYPO" />
+      </highlighter>
+      <highlighter start="7903" end="7906" layer="3000" target="0">
         <option name="myExternalName" value="GRAMMAR_ERROR" />
       </highlighter>
-      <highlighter start="2543" end="2548" layer="4000" target="0">
-        <option name="myExternalName" value="WARNING_ATTRIBUTES" />
+      <highlighter start="11533" end="11540" layer="3000" target="0">
+        <option name="myExternalName" value="TYPO" />
       </highlighter>
-      <highlighter start="5640" end="5643" layer="4000" target="0">
-        <option name="myExternalName" value="WARNING_ATTRIBUTES" />
-      </highlighter>
-      <highlighter start="7546" end="7549" layer="4000" target="0">
-        <option name="myExternalName" value="WARNING_ATTRIBUTES" />
+      <highlighter start="11923" end="11936" layer="3000" target="0">
+        <option name="myExternalName" value="TYPO" />
       </highlighter>
     </markupCoffin>
   </component>
@@ -44,31 +55,37 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2KgyiDk62m9FLpEq5IaZXfLvyLV" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;prod&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ronak/Documents/GitHub/Elephant-Website&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "prod",
+    "last_opened_file_path": "C:/Users/ronak/Documents/GitHub/Elephant-Website/services/timeline/icons",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="JavaScript Debug.index.html (4)">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ronak\Documents\GitHub\Elephant-Website\services\timeline\icons" />
+      <recent name="C:\Users\ronak\Documents\GitHub\Elephant-Website\services\timeline" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JavaScript Debug.index.html (5)">
     <configuration name="index.html (1)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Elephant-Website/index.html" useBuiltInWebServerPort="true">
-      <method v="2" />
-    </configuration>
-    <configuration name="index.html (2)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Elephant-Website/services/flip/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="index.html (3)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Elephant-Website/about/mission/index.html" useBuiltInWebServerPort="true">
@@ -77,16 +94,19 @@
     <configuration name="index.html (4)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Elephant-Website/answers/dashboard/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
-    <configuration name="script.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/flashcards/editor/script.js" working-dir="$PROJECT_DIR$/flashcards/editor">
+    <configuration name="index.html (5)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Elephant-Website/services/timeline/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Elephant-Website/timeline/dashboard/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.index.html (5)" />
+        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="JavaScript Debug.index.html (4)" />
         <item itemvalue="JavaScript Debug.index.html (1)" />
         <item itemvalue="JavaScript Debug.index.html (3)" />
-        <item itemvalue="JavaScript Debug.index.html (2)" />
-        <item itemvalue="Node.js.script.js" />
       </list>
     </recent_temporary>
   </component>
@@ -104,6 +124,7 @@
       <workItem from="1674923853989" duration="4152000" />
       <workItem from="1674934173319" duration="2111000" />
       <workItem from="1687802903438" duration="131000" />
+      <workItem from="1687973120219" duration="2165000" />
     </task>
     <servers />
   </component>
