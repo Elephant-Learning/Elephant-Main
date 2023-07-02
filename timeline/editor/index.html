@@ -38,6 +38,25 @@
                 </div>
             </div>
         </div>
+        <div id="upload-image-modal-container" class="inactive-modal">
+            <div id="upload-image-modal">
+                <h1>Select an Image</h1>
+                <div id="upload-image-container">
+                    <input type="file" id="upload-file-image" accept=".gif,.jpg,.jpeg,.png">
+                    <img src="./icons/upload.png" alt="">
+                    <h1 id="upload-file-image-header">Drag & Drop or <span>Browse</span></h1>
+                    <p>Supports: JPG, JPEG, PNG, GIF</p>
+                </div>
+                <div class="upload-image-line" data="or choose from image library"></div>
+                <div id="upload-image-library"></div>
+                <div id="upload-image-close" onclick="closeUploadModal()">
+                    <img src="./icons/close.png" alt="">
+                </div>
+            </div>
+            <div id="edit-image-modal" class="inactive-modal">
+
+            </div>
+        </div>
         <div id="desktop-navbar">
             <div id="desktop-main-image">
                 <div onclick="leaveEditor('../dashboard')"><img src="../../icons/elephant-400-400-pink-timeline.png" alt="Elephant Logo"></div>
@@ -152,13 +171,26 @@
                             <h6>Event Ending Date (Optional)</h6>
                             <input type="date" placeholder="Event End Time">
                             <h6>Description of Event</h6>
-                            <textarea name="" id="" cols="30" rows="10" placeholder="Description of the Event"></textarea>
+                            <textarea name="" cols="30" rows="10" placeholder="Description of the Event"></textarea>
+                            <h6>(Optional) Event Banner</h6>
+                            <div id="event-banner-showcase">
+                                <p id="event-banner-p" onclick="openUploadModal()">Import an Image</p>
+                                <div class="inactive-modal" id="uploaded-image-container">
+                                    <img src="" alt="" id="uploaded-image">
+                                    <p id="uploaded-image-data"></p>
+                                    <button id="clear-uploaded-image">Select Different Image</button>
+                                </div>
+                            </div>
                         </div>
                         <div id="new-marker-window">
                             <h6>Marker Name</h6>
                             <input type="text" placeholder="Marker Name">
                             <h6>Marker Date</h6>
                             <input type="date" placeholder="Marker Start Time">
+                            <div class="checkbox inactive-checkbox">
+                                <div onclick="toggleCheckbox(0)"></div>
+                                <p>Present Day?</p>
+                            </div>
                         </div>
                     </div>
                     <div id="edit-bottom-btns">

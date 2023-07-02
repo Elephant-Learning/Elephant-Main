@@ -5,17 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa11e6ba-231d-4bf8-b1de-6e62baad04b5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/services/timeline/icons/interactive.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/timeline/icons/personalization.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/timeline/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/timeline/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/timeline/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timeline/editor/icons/back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timeline/editor/icons/close.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timeline/editor/icons/upload.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timeline/images/0.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timeline/images/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timeline/images/10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timeline/images/11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timeline/images/12.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timeline/images/13.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timeline/images/2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timeline/images/3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timeline/images/4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timeline/images/5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timeline/images/6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timeline/images/7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timeline/images/8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timeline/images/9.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/about/employees/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/about/employees/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/about/mission/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/about/mission/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/ask/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/services/ask/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/flip/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/services/flip/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/timeline/editor/css/default.css" beforeDir="false" afterPath="$PROJECT_DIR$/timeline/editor/css/default.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/timeline/editor/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/timeline/editor/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/timeline/editor/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/timeline/editor/script.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,25 +43,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="HighlightingMarkupGrave">
-    <markupCoffin contentHash="-441251390" url="file://$PROJECT_DIR$/index.html">
-      <highlighter start="7315" end="7321" layer="3000" target="0">
-        <option name="myExternalName" value="TYPO" />
-      </highlighter>
-      <highlighter start="7643" end="7648" layer="3000" target="0">
-        <option name="myExternalName" value="TYPO" />
-      </highlighter>
-      <highlighter start="7903" end="7906" layer="3000" target="0">
-        <option name="myExternalName" value="GRAMMAR_ERROR" />
-      </highlighter>
-      <highlighter start="11533" end="11540" layer="3000" target="0">
-        <option name="myExternalName" value="TYPO" />
-      </highlighter>
-      <highlighter start="11923" end="11936" layer="3000" target="0">
-        <option name="myExternalName" value="TYPO" />
-      </highlighter>
-    </markupCoffin>
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -62,33 +54,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "prod",
-    "last_opened_file_path": "C:/Users/ronak/Documents/GitHub/Elephant-Website/services/timeline/icons",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;prod&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ronak/Documents/GitHub/Elephant-Website/services/timeline/icons&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ronak\Documents\GitHub\Elephant-Website\services\timeline\icons" />
       <recent name="C:\Users\ronak\Documents\GitHub\Elephant-Website\services\timeline" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.index.html (5)">
+  <component name="RunManager" selected="JavaScript Debug.index.html (2)">
     <configuration name="index.html (1)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Elephant-Website/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
-    <configuration name="index.html (3)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Elephant-Website/about/mission/index.html" useBuiltInWebServerPort="true">
+    <configuration name="index.html (2)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Elephant-Website/timeline/editor/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="index.html (4)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Elephant-Website/answers/dashboard/index.html" useBuiltInWebServerPort="true">
@@ -102,11 +96,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JavaScript Debug.index.html (5)" />
+        <item itemvalue="JavaScript Debug.index.html (2)" />
         <item itemvalue="JavaScript Debug.index.html" />
+        <item itemvalue="JavaScript Debug.index.html (5)" />
         <item itemvalue="JavaScript Debug.index.html (4)" />
         <item itemvalue="JavaScript Debug.index.html (1)" />
-        <item itemvalue="JavaScript Debug.index.html (3)" />
       </list>
     </recent_temporary>
   </component>
@@ -125,10 +119,20 @@
       <workItem from="1674934173319" duration="2111000" />
       <workItem from="1687802903438" duration="131000" />
       <workItem from="1687973120219" duration="2165000" />
+      <workItem from="1687982365670" duration="6119000" />
+      <workItem from="1688142752929" duration="1005000" />
+      <workItem from="1688148747587" duration="505000" />
+      <workItem from="1688181213694" duration="1999000" />
+      <workItem from="1688195917447" duration="502000" />
+      <workItem from="1688222356107" duration="9692000" />
+      <workItem from="1688257672675" duration="2702000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
