@@ -8,43 +8,16 @@
     <meta property="og:site_name" content="Elephant - The Ultimate Student Suite">
     <meta property="og:title" content="Elephant Deck" id="discord-embed-title">
     <meta property="og:description" content="Elephant Deck - By User" id="discord-embed-desc">
-    <title id="title">Flip | Elephant - The Ultimate Student Suite</title>
+    <title id="title">Timeline | Elephant - The Ultimate Student Suite</title>
 
     <link rel="icon" href="../../icons/elephant-400-400-grayscale.png">
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../../flip/css/main.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/memorize.css">
-    <link rel="stylesheet" href="css/review.css">
-    <link rel="stylesheet" href="../editor/css/list.css">
-    <link rel="stylesheet" href="css/statistics.css">
-    <link rel="stylesheet" href="css/crossword.css">
 
-    <script src="../js/main.js" defer></script>
+    <script src="../../flip/js/main.js" defer></script>
     <script src="js/script.js" defer></script>
-    <script src="js/carousel.js" defer></script>
-    <script src="js/memorize.js" defer></script>
-    <script src="js/crossword.js" defer></script>
 </head>
 <body>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7659700279033478"
-            crossorigin="anonymous"></script>
-    <div id="desktop-music-container" class="inactive-modal">
-        <div id="desktop-music-main">
-            <div id="music-image-div">
-                <img src="../music/covers/space-trip.png" id="music-image">
-            </div>
-            <h1 id="music-name"></h1>
-            <p id="music-author"></p>
-            <input type="range" value="0" id="slider-input" min="0" max="10000" disabled="disabled">
-            <div id="music-controls">
-                <img src="../icons/favorite.png" alt="">
-                <img src="../icons/play.png" id="music-play-img">
-                <img src="../icons/forward.png" id="music-next-img">
-            </div>
-            <div id="playlist-list"></div>
-            <div id="playlist-playing"></div>
-        </div>
-    </div>
     <div id="desktop-navbar">
         <div id="desktop-main-image">
             <a href="../dashboard"><img src="../../icons/elephant-400-400-pink-flashcards-02.png" alt="Elephant Logo"></a>
@@ -138,45 +111,13 @@
                     <div>
                         <img src="./icons/carousel.png" alt="Recent">
                     </div>
-                    <p>Deck Carousel</p>
+                    <p>Timeline Viewer</p>
                 </div>
                 <div class="desktop-sidebar-category" onclick="togglePageFlip(1, 1, undefined)">
                     <div>
                         <img src="./icons/memorize.png" alt="Recent">
                     </div>
-                    <p>Deck Memorize</p>
-                </div>
-                <div class="desktop-sidebar-category unavailable-sidebar-category"> <!--onclick="togglePageFlip(2, 2, undefined)"-->
-                    <div>
-                        <img src="../icons/test.png" alt="Recent">
-                    </div>
-                    <p>Deck Review</p>
-                </div>
-                <div class="desktop-sidebar-category unavailable-sidebar-category">
-                    <div>
-                        <img src="./icons/timer.png" alt="Recent">
-                    </div>
-                    <p>Deck Match</p>
-                </div>
-                <div class="desktop-sidebar-category"  onclick="togglePageFlip(4, 4, undefined)">
-                    <div>
-                        <img src="./icons/puzzle.png" alt="Recent">
-                    </div>
-                    <p>Deck Crossword</p>
-                </div>
-                <div class="desktop-sidebar-break"></div>
-                <h1>Information</h1>
-                <div class="desktop-sidebar-category" onclick="togglePageFlip(5, 5, undefined)">
-                    <div>
-                        <img src="./icons/statistics.png" alt="Recent">
-                    </div>
-                    <p>Deck Statistics</p>
-                </div>
-                <div class="desktop-sidebar-category" onclick="togglePageFlip(6, 6, undefined)">
-                    <div>
-                        <img src="../icons/deck.png" alt="Recent">
-                    </div>
-                    <p>Deck Cards</p>
+                    <p>Timeline Memorize</p>
                 </div>
             </div>
             <div id="desktop-sidebar-information">
