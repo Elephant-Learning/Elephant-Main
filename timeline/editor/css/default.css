@@ -64,16 +64,17 @@
     background:var(--bg-color-1);
     padding:0 calc(var(--size) * 12px);
     height:calc(var(--size) * 24px);
-    opacity:0;
     visibility:hidden;
     transition-duration:250ms;
     border-top-left-radius:calc(var(--size) * 6px);
     border-top-right-radius:calc(var(--size) * 6px);
+    transform:translateY(calc(var(--size) * 24px));
+    transition-property:transform;
 }
 
 #desktop-main-event-containers > div:hover > div{
     visibility:visible;
-    opacity:1;
+    transform:translateY(0);
 }
 
 #desktop-main-event-containers > div > div > img{
@@ -81,6 +82,13 @@
     cursor:pointer;
     filter:invert(0.5);
     transition-duration:250ms;
+    opacity:0;
+    visibility:hidden;
+}
+
+#desktop-main-event-containers > div:hover > div > img{
+    opacity:1;
+    visibility:visible;
 }
 
 #desktop-main-marker-container > div > div > img{

@@ -190,6 +190,30 @@ async function saveChanges(){
 
     for(let i = 0; i < nodes.length; i++){
         if(nodes[i].type === "EVENT"){
+
+            let content;
+
+            if(nodes[i].image !== ""){
+                content = {
+                    timelineId:context.context.timeline.id,
+                    name: nodes[i].name,
+                    date: nodes[i].start,
+                    endDate: nodes[i].end,
+                    description: nodes[i].description,
+                    image: nodes[i].image,
+                    importance:1
+                }
+            } else {
+                content = {
+                    timelineId:context.context.timeline.id,
+                    name: nodes[i].name,
+                    date: nodes[i].start,
+                    endDate: nodes[i].end,
+                    description: nodes[i].description,
+                    importance:1
+                }
+            }
+
             const response2 = await fetch('https://elephantsuite-rearend.herokuapp.com/timeline/createEvent', {
                 method: 'POST',
                 headers: {
@@ -198,25 +222,9 @@ async function saveChanges(){
                     'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
                     'Access-Control-Allow-Headers': 'Content-Type'
                 },
-                body: JSON.stringify({
-                    timelineId:context.context.timeline.id,
-                    name: nodes[i].name,
-                    date: nodes[i].start,
-                    endDate: nodes[i].end,
-                    description: nodes[i].description,
-                    importance:1
-                }),
+                body: JSON.stringify(content),
                 mode: 'cors'
             });
-
-            console.log({
-                timelineId:context.context.timeline.id,
-                name: nodes[i].name,
-                date: nodes[i].start,
-                endDate: nodes[i].end,
-                description: nodes[i].description,
-                importance:1
-            })
 
             const context2 = response2.json();
             console.log(context2);
@@ -248,6 +256,8 @@ async function saveChanges(){
             console.log(context2);
         }
     }
+
+    location.href = "../dashboard/";
 }
 
 function leaveEditor(link){

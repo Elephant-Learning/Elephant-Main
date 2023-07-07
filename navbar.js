@@ -31,8 +31,6 @@ async function initializeNavbar(prefix){
         localStorage.setItem("cookiesAccepted", JSON.stringify(false));
         showCookiesModal();
     }
-
-    console.log("sdf")
 }
 
 function showCookiesModal(){
