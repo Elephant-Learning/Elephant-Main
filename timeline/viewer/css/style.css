@@ -1,0 +1,72 @@
+#desktop-main-container{
+    width:calc(100vw - calc(var(--size) * 256px));
+    height:calc(100vh - calc(var(--size) * 48px));
+}
+
+#desktop-main-container-tab{
+    font-size:calc(var(--size) * 12px);
+    width:calc(100% - var(--size) * 48px);
+    padding:calc(var(--size) * 14px) calc(var(--size) * 24px);
+    font-weight:600;
+    border-bottom:1px solid var(--light-border-color);
+    margin:0;
+    position:absolute;
+    top:0;
+}
+
+.bottom-btns{
+    position:absolute;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    bottom:calc(var(--size) * 12px);
+    right:calc(var(--size) * 12px);
+    gap:calc(var(--size) * 6px);
+    z-index:2;
+}
+
+.bottom-btns > a, .bottom-btns > div{
+    width:calc(var(--size) * 36px);
+    height:calc(var(--size) * 36px);
+    background:var(--dark-gray);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    cursor:pointer;
+    transition-duration:250ms;
+}
+
+.bottom-btns > a:hover, .bottom-btns > div:hover{
+    box-shadow:0 0 calc(var(--size) * 6px) 0 var(--dark-gray);
+}
+
+.bottom-btns > a > img, .bottom-btns > div > img{
+    height:calc(var(--size) * 20px);
+    filter:invert(1);
+}
+
+.desktop-tab:not(.active-tab){
+    visibility:hidden;
+    opacity:0;
+}
+
+.active-tab{
+    opacity:1;
+    visibility:visible;
+}
+
+#desktop-main-tabs{
+    width:100%;
+}
+
+.desktop-tab{
+    transition-duration:250ms;
+    transition-property:opacity;
+    position:absolute;
+    top:calc(var(--size) * 44px);
+    left:calc(var(--size) * 256px);
+    width:calc(100vw - var(--size) * 256px);
+    height:calc(100vh - var(--size) * 92px)
+}
