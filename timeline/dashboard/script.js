@@ -114,7 +114,7 @@ async function createNode(params){
 
     mainDiv.classList.add(params.timelineVisibility.toLowerCase() + "-timeline-border");
     mainDiv.classList.add("faded-out");
-    mainDiv.setAttribute('onclick', "location.href = '../viewer/?deck=" + params.deckID + "'");
+    mainDiv.setAttribute('onclick', "location.href = '../viewer/?timeline=" + params.id + "'");
 
     document.getElementById("my-timelines").appendChild(mainDiv);
 
