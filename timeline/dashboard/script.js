@@ -2,6 +2,85 @@ function createTimeline(){
     location.href = '../editor/';
 }
 
+async function favoriteDeck(elem, id){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
+    if(elem.classList.contains('unloved')){
+        elem.src = "./icons/filled_heart.png";
+        elem.classList.remove('unloved');
+        elem.classList.add('loved');
+
+        const deckLikeResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/timeline/like', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                userId: savedUserId,
+                timelineId: id
+            }),
+            mode: 'cors'
+        })
+
+        const deckLikeContext = await deckLikeResponse.json()
+
+        console.log(deckLikeContext);
+
+        try {
+            document.getElementById('favorite-number-' + id).innerHTML = (parseInt(document.getElementById('favorite-number-' + id).textContent) + 1).toString();
+        } catch (e){}
+    } else {
+        elem.src = "./icons/unfilled_heart.png";
+        elem.classList.add('unloved');
+        elem.classList.remove('loved')
+
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/timeline/unlike', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                userId: savedUserId,
+                timelineId: id
+            }),
+            mode: 'cors'
+        })
+
+        try {
+            document.getElementById('favorite-number-' + id).innerHTML = (parseInt(document.getElementById('favorite-number-' + id).textContent) - 1).toString();
+        } catch (e){}
+    }
+}
+
+function editTimeline(id){
+    location.href = "../editor/?timeline=" + id;
+}
+
+async function deleteDeck(id){
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/timeline/delete?id=' + id, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Expose-Headers': 'Content-Length, X-JSON',
+            'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+        },
+        method: 'DELETE',
+        mode: 'cors'
+    })
+
+    const context = await response.json();
+    console.log(context);
+
+    refreshTimelines(null);
+}
+
 async function createNode(params){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
     let mainDiv = document.createElement('div');
@@ -23,12 +102,12 @@ async function createNode(params){
     let authorImg = document.createElement('img');
     let authorText = document.createElement('p');
 
-    if(params.authorName !== undefined && params.authorPfp !== undefined){
+    if(params.authorName !== undefined && params.authorPfpId !== undefined){
         authorText.innerHTML = params.authorName;
-        authorImg.src = "../../icons/avatars/" + params.authorPfp + ".png";
+        authorImg.src = "../../icons/avatars/" + params.authorPfpId + ".png";
     } else {
         try{
-            const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + params.author, {
+            const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + params.authorId, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -82,13 +161,13 @@ async function createNode(params){
     favoriteImg.addEventListener('click', function(e){
         e.preventDefault();
         e.stopPropagation();
-        favoriteDeck(this, params.id, params.name, params.author, params.timelineVisibility);
+        favoriteDeck(this, params.id);
     })
 
     editImg.addEventListener('click', function(e){
         e.preventDefault();
         e.stopPropagation();
-        editFlashcard(params.id);
+        editTimeline(params.id);
     })
 
     deleteImg.addEventListener('click', function(e){
@@ -97,13 +176,9 @@ async function createNode(params){
         deleteDeck(params.id);
     });
 
-    if(!params.search){
-        favoriteDiv.append(favoriteImg, favoriteNumDiv)
-    } else {
-        favoriteDiv.append(favoriteImg)
-    }
+    favoriteDiv.append(favoriteImg, favoriteNumDiv);
 
-    if(params.author === savedUserId){
+    if(params.authorId === savedUserId){
         options.append(editImg, favoriteDiv, deleteImg);
     } else {
         options.append(favoriteDiv);
@@ -119,7 +194,7 @@ async function createNode(params){
     document.getElementById("my-timelines").appendChild(mainDiv);
 
     requestAnimationFrame(() => {
-        mainDiv.classList.remove("faded-out");s
+        mainDiv.classList.remove("faded-out");
     });
 }
 
@@ -157,21 +232,23 @@ document.addEventListener('DOMContentLoaded', function(e){
 });
 
 async function refreshTimelines(timelines){
+    removeAllChildNodes(document.getElementById("my-timelines"));
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
+    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const context = await response.json();
+
     if(timelines === null){
-        const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
-
-        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type'
-            },
-            mode: 'cors'
-        })
-
-        const context = await response.json();
         timelines = context.context.user.timelines;
     }
 
@@ -181,8 +258,12 @@ async function refreshTimelines(timelines){
         document.getElementById("no-timelines").classList.add("inactive-modal");
 
         for(let i = 0; i < timelines.length; i++){
+            let object = timelines[i];
+
+            if(context.context.user.likedTimelineIds.includes(object.id)) object.favorite = true;
+            else object.favorite = false;
+
             await createNode(timelines[i]);
-            console.log("woag")
         }
     } else {
         document.getElementById("no-timelines").classList.remove("inactive-modal");

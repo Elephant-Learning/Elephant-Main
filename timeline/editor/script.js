@@ -1,6 +1,7 @@
 const nodes = [];
 let start;
 let end;
+let editing = false;
 
 const dragArea = document.getElementById("upload-image-container");
 
@@ -166,7 +167,7 @@ async function toggleVisibilityModal(){
     }
 }
 
-async function toggleVisibilityOptions(index){
+async function toggleVisibilityOptions(index, set){
     document.querySelectorAll(".active-visibility-button")[0].classList.remove("active-visibility-button");
     document.querySelectorAll(".active-visibility-options")[0].classList.remove("active-visibility-options");
 
@@ -174,18 +175,77 @@ async function toggleVisibilityOptions(index){
     document.getElementById("visibility-carousel").children[index].classList.add("active-visibility-options");
 
     if(index === 0){
+        if(set){
+            await fetch("https://elephantsuite-rearend.herokuapp.com/timeline/setVisibility", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                body: JSON.stringify({
+                    visibility: "PRIVATE",
+                    timelineId: editing
+                }),
+                mode: 'cors'
+            })
+        }
+
         document.getElementById("visibility-image-container").className = "desktop-modal-image-container personal";
         document.getElementById("sharing-done").className = "personal";
         document.getElementById("change-visibility").className = "personal";
     } else if(index === 1){
+        if(set){
+            await fetch("https://elephantsuite-rearend.herokuapp.com/timeline/setVisibility", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                body: JSON.stringify({
+                    visibility: "PUBLIC",
+                    timelineId: editing
+                }),
+                mode: 'cors'
+            })
+        }
+
         document.getElementById("visibility-image-container").className = "desktop-modal-image-container community";
         document.getElementById("sharing-done").className = "community";
         document.getElementById("change-visibility").className = "community";
+        document.getElementById("desktop-publish-input").value = "https://elephantsuite.net/timeline/viewer/?timeline=" + editing;
     } else if(index === 2){
+        if(set){
+            await fetch("https://elephantsuite-rearend.herokuapp.com/timeline/setVisibility", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                body: JSON.stringify({
+                    visibility: "SHARED",
+                    timelineId: editing
+                }),
+                mode: 'cors'
+            })
+        }
+
         document.getElementById("visibility-image-container").className = "desktop-modal-image-container shared";
         document.getElementById("sharing-done").className = "shared";
         document.getElementById("change-visibility").className = "shared";
     }
+}
+
+function copyPublishLink() {
+    const input = document.getElementById("desktop-publish-input");
+    input.select();
+    document.execCommand("copy");
+    document.getSelection().removeAllRanges()
 }
 
 function toggleSharedInputList(){
@@ -298,7 +358,7 @@ async function saveChanges(){
         }
     }
 
-    location.href = "../dashboard/";
+
 }
 
 function leaveEditor(link){
@@ -377,7 +437,7 @@ function createTimelineEvent(params){
         date.innerHTML = `${convertToText(params.start)} - ${convertToText(params.end)}`;
     }
 
-    if(params.image !== ""){
+    if(params.image !== "" && params.image !== null){
         headerImg.src = params.image;
         newDiv.append(optionsDiv, headerImg, date, title, desc);
 
@@ -665,4 +725,68 @@ async function locateUserInfo(){
     await initialize(context)
 }
 
-locateUserInfo();
+window.onload = async function(){
+    await locateUserInfo();
+
+    if(location.href.split("=")[1] !== undefined){
+        const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
+        const response = await fetch("https://elephantsuite-rearend.herokuapp.com/timeline/get?userId=" + savedUserId +"&timelineId=" + parseInt(location.href.split("=")[1]), {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        })
+
+        let context = await response.json();
+        console.log(context);
+
+        if(context.status === "SUCCESS"){
+            context = context.context.timeline;
+
+            if(savedUserId !== context.authorId){
+                document.getElementById("restricted-access-container").classList.remove("inactive-modal");
+                return;
+            }
+
+            editing = parseInt(location.href.split("=")[1]);
+            document.getElementById("timeline-name").textContent = context.name;
+
+            if(context.timelineVisibility === "PRIVATE"){
+                toggleVisibilityOptions(0, false);
+            } else if(context.timelineVisibility === "PUBLIC"){
+                toggleVisibilityOptions(1, false);
+            } else if(context.timelineVisibility === "SHARED"){
+                toggleVisibilityOptions(2, false);
+            }
+
+            for(let i = 0; i < context.events.length; i++){
+                nodes.push({
+                    name: context.events[i].name,
+                    start: context.events[i].startDate,
+                    end: context.events[i].endDate,
+                    description: context.events[i].description,
+                    image: context.events[i].image,
+                    type: "EVENT"
+                });
+            }
+
+            for(let i = 0; i < context.markers.length; i++){
+                nodes.push({
+                    name: context.markers[i].name,
+                    date: context.markers[i].date,
+                    type: "MARKER",
+                })
+            }
+
+            refreshNodes();
+
+        } else {
+            document.getElementById("restricted-access-container").classList.remove("inactive-modal");
+        }
+    }
+}
