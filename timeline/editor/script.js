@@ -158,6 +158,25 @@ function convertToText(date){
     return returnString;
 }
 
+async function toggleVisibilityModal(){
+    if(document.getElementById("change-visibility-modal").classList.contains("inactive-modal")){
+        document.getElementById("change-visibility-modal").classList.remove("inactive-modal")
+    } else {
+        document.getElementById("change-visibility-modal").classList.add("inactive-modal")
+    }
+}
+
+function toggleSharedInputList(){
+    if(document.getElementById('sharing-input-friends-list').classList.contains('inactive-modal')){
+        const noFriends = ["LOL YOU HAVE NO FRIENDS", "Imagine not having any friends", "Bruh you actually are friendless", "Well isn't this awkward", "Friend... more like end...", "No Friends. That's Crazy", "Nah you actually have 0 friends"]
+        document.getElementById('no-friends').innerHTML = noFriends[Math.floor(Math.random() * noFriends.length)];
+
+        document.getElementById('sharing-input-friends-list').classList.remove('inactive-modal')
+    } else {
+        document.getElementById('sharing-input-friends-list').classList.add('inactive-modal')
+    }
+}
+
 document.getElementById("clear-uploaded-image").addEventListener("click", function(e){
     document.getElementById("uploaded-image-container").classList.add("inactive-modal");
     document.getElementById("uploaded-image").src = "";

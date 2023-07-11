@@ -57,6 +57,25 @@
 
             </div>
         </div>
+        <div id="change-visibility-modal" class="inactive-modal desktop-modal">
+            <div class="desktop-modal-image-container" class="personal">
+                <img src="./icons/upload.png" alt="">
+            </div>
+            <h1>Change Timeline Visibility</h1>
+            <p>You've already created your timeline. Now choose who you want to share this knowledge with!</p>
+            <div id="sharing-friends-list"></div>
+            <h6>Friends</h6>
+            <div id="sharing-input">
+                <img src="../../flip/editor/icons/crowd.png" alt="">
+                <p>Select Friend</p>
+                <img src="../../flip/editor/icons/expand.png" alt="">
+                <div id="sharing-input-hitbox" onclick="toggleSharedInputList()"></div>
+                <div id="sharing-input-friends-list" class="inactive-modal">
+                    <div id="no-friends"></div>
+                </div>
+            </div>
+            <button id="sharing-done" onclick="toggleVisibilityModal()" class="personal">Done</button>
+        </div>
         <div id="desktop-navbar">
             <div id="desktop-main-image">
                 <div onclick="leaveEditor('../dashboard')"><img src="../../icons/elephant-400-400-pink-timeline.png" alt="Elephant Logo"></div>
@@ -149,7 +168,9 @@
                     <button onclick="openCreateModal(0)" id="create-event-btn">Create Event</button>
                     <button onclick="openCreateModal(1)" id="create-marker-btn">Create Marker</button>
                 </div>
-                <div id="editor-tools-right"></div>
+                <div id="editor-tools-right">
+                    <button onclick="toggleVisibilityModal()" class="personal" id="change-visibility">Change Visibility</button>
+                </div>
             </div>
             <div id="desktop-main-container" class="default">
                 <div id="desktop-main-timeline-container">
