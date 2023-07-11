@@ -212,6 +212,7 @@ async function locateUserInfo(){
     })
 
     const context = await response.json();
+    console.log(context);
     await initialize(context)
 }
 
