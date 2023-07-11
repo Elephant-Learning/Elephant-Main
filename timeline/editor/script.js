@@ -166,6 +166,28 @@ async function toggleVisibilityModal(){
     }
 }
 
+async function toggleVisibilityOptions(index){
+    document.querySelectorAll(".active-visibility-button")[0].classList.remove("active-visibility-button");
+    document.querySelectorAll(".active-visibility-options")[0].classList.remove("active-visibility-options");
+
+    document.getElementById("visibility-options").children[index].classList.add("active-visibility-button");
+    document.getElementById("visibility-carousel").children[index].classList.add("active-visibility-options");
+
+    if(index === 0){
+        document.getElementById("visibility-image-container").className = "desktop-modal-image-container personal";
+        document.getElementById("sharing-done").className = "personal";
+        document.getElementById("change-visibility").className = "personal";
+    } else if(index === 1){
+        document.getElementById("visibility-image-container").className = "desktop-modal-image-container community";
+        document.getElementById("sharing-done").className = "community";
+        document.getElementById("change-visibility").className = "community";
+    } else if(index === 2){
+        document.getElementById("visibility-image-container").className = "desktop-modal-image-container shared";
+        document.getElementById("sharing-done").className = "shared";
+        document.getElementById("change-visibility").className = "shared";
+    }
+}
+
 function toggleSharedInputList(){
     if(document.getElementById('sharing-input-friends-list').classList.contains('inactive-modal')){
         const noFriends = ["LOL YOU HAVE NO FRIENDS", "Imagine not having any friends", "Bruh you actually are friendless", "Well isn't this awkward", "Friend... more like end...", "No Friends. That's Crazy", "Nah you actually have 0 friends"]

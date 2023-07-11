@@ -38,6 +38,17 @@
                 </div>
             </div>
         </div>
+        <div id="restricted-access-container" class="inactive-modal">
+            <div></div>
+            <div id="restricted-access-modal">
+                <div>
+                    <img src="./icons/stop.svg" alt="">
+                </div>
+                <h1>Take It Easy There</h1>
+                <p>It looks like you are not the owner of this deck, and therefore I cannot let you make any edits. I do hope that you understand</p>
+                <a href="../dashboard/">Return to Dashboard</a>
+            </div>
+        </div>
         <div id="upload-image-modal-container" class="inactive-modal">
             <div id="upload-image-modal">
                 <h1>Select an Image</h1>
@@ -58,20 +69,37 @@
             </div>
         </div>
         <div id="change-visibility-modal" class="inactive-modal desktop-modal">
-            <div class="desktop-modal-image-container" class="personal">
+            <div id="visibility-image-container" class="desktop-modal-image-container personal">
                 <img src="./icons/upload.png" alt="">
             </div>
             <h1>Change Timeline Visibility</h1>
             <p>You've already created your timeline. Now choose who you want to share this knowledge with!</p>
-            <div id="sharing-friends-list"></div>
-            <h6>Friends</h6>
-            <div id="sharing-input">
-                <img src="../../flip/editor/icons/crowd.png" alt="">
-                <p>Select Friend</p>
-                <img src="../../flip/editor/icons/expand.png" alt="">
-                <div id="sharing-input-hitbox" onclick="toggleSharedInputList()"></div>
-                <div id="sharing-input-friends-list" class="inactive-modal">
-                    <div id="no-friends"></div>
+            <div id="visibility-options">
+                <button class="active-visibility-button personal" onclick="toggleVisibilityOptions(0)">Personal</button>
+                <button class="community" onclick="toggleVisibilityOptions(1)">Community</button>
+                <button class="shared" onclick="toggleVisibilityOptions(2)">Shared</button>
+            </div>
+            <div id="visibility-carousel">
+                <div class="active-visibility-options"></div>
+                <div>
+                    <h6>Share Link</h6>
+                    <div id="desktop-publish-input-container">
+                        <input type="text" id="desktop-publish-input" readonly="readonly">
+                        <img src="../../flip/editor/icons/duplicate.png" alt="" onclick="copyPublishLink()">
+                    </div>
+                </div>
+                <div>
+                    <div id="sharing-friends-list"></div>
+                    <h6>Friends</h6>
+                    <div id="sharing-input">
+                        <img src="../../flip/editor/icons/crowd.png" alt="">
+                        <p>Select Friend</p>
+                        <img src="../../flip/editor/icons/expand.png" alt="">
+                        <div id="sharing-input-hitbox" onclick="toggleSharedInputList()"></div>
+                        <div id="sharing-input-friends-list" class="inactive-modal">
+                            <div id="no-friends"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <button id="sharing-done" onclick="toggleVisibilityModal()" class="personal">Done</button>
