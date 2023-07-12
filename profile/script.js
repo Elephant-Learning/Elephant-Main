@@ -131,6 +131,55 @@ function selectTag(index){
     else document.getElementById("tags-modal-button").classList = "inactive-modal-button";
 }
 
+function createBadge(name, index, level){
+    const badges = [
+        ["goat", "has created 2 timelines", "has created 8 timelines", "has created 16 timelines", "has created 64 timelines"],
+        ["squirrel", "has made 2 friends", "has made 8 friends", "has made 16 friends", "has made 32 friends"],
+        ["wolf", "has created 2 flip decks", "has created 8 flip decks", "has created 16 flip decks", "has created 64 flip decks"],
+        ["dolphin", "has answered 2 questions", "has answered 8 questions", "has answered 16 questions", "has answered 64 questions"],
+        ["lion", "has achieved a 7 day streak on Elephant", "has achieved a 14 day streak on Elephant", "has achieved a 1 month streak on Elephant", "has achieved a 2 month streak on Elephant"],
+        ["elephant", "has earned every single badge of normal level", "has earned every single badge of bronze level", "has earned every single badge of silver level", "has earned every single badge of gold level"],
+    ];
+
+    const newDiv = document.createElement("div");
+
+    const newImg = document.createElement("img");
+    newImg.src = `../icons/badges/${badges[index][0]}_128.jpg`
+
+    const alertDiv = document.createElement("div");
+
+    const backgroundDivContainer = document.createElement("div");
+    const backgroundDiv = document.createElement("div");
+    backgroundDiv.style.backgroundImage = `url("../icons/badges/${badges[index][0]}.jpg")`
+
+    const badgeImg = document.createElement("img");
+    badgeImg.src = `../icons/badges/${badges[index][0]}_128.jpg`;
+
+    const textDiv = document.createElement("div");
+    const headerText = document.createElement("h1");
+    const paraText = document.createElement("p");
+
+    headerText.innerHTML = `${badges[index][0].charAt(0).toUpperCase() + badges[index][0].slice(1)} Badge`;
+    paraText.innerHTML = `${name} ${badges[index][level]}`;
+
+    if(level > 1){
+        const levels = [["Bronze", "#CD7F32"], ["Silver", "#C0C0C0"], ["Gold", "#FFD700"]];
+
+        const newSpan = document.createElement("span");
+        newSpan.innerHTML = levels[level - 2][0];
+        newSpan.style.color = levels[level - 2][1];
+        newSpan.style.border = `1px solid ${levels[level - 2][1]}`;
+        headerText.appendChild(newSpan);
+    }
+
+    textDiv.append(headerText, paraText);
+    backgroundDivContainer.appendChild(backgroundDiv);
+
+    alertDiv.append(backgroundDivContainer, badgeImg, textDiv)
+    newDiv.append(newImg, alertDiv);
+    document.getElementById("my-profile-badges").appendChild(newDiv);
+}
+
 async function initialize(user){
     if(user.status === "FAILURE") {
         location.href = "../login"
@@ -193,6 +242,19 @@ async function initialize(user){
 
     removeAllChildNodes(document.getElementById("tags-list"));
 
+    for(let i = 0; i < user.elephantUserStatistics.medals.length; i++){
+        const badgeList = ["TIME_MASTER", "", "FLIP_MASTER", "", "", "BADGE_MASTER"];
+
+        if(user.elephantUserStatistics.medals[i].level !== 0) createBadge(user.fullName, badgeList.indexOf(user.elephantUserStatistics.medals[i].type), user.elephantUserStatistics.medals[i].level);
+    }
+
+    if(user.elephantUserStatistics.medals.length === 0){
+        const newPara = document.createElement("p");
+        newPara.innerHTML = "No Badges";
+
+        document.getElementById("my-profile-badges").appendChild(newPara);
+    }
+
     await fetch("../ask/answers.json").then(function(response){return response.json();}).then(function(data){tagsList = data.tags}).catch(function(error){console.log(`Error: ${error}`)})
 
     for(let i = 0; i < tagsList.length; i++){
@@ -218,7 +280,7 @@ async function initialize(user){
 
     document.getElementById('delete-acc-text').innerHTML = "You cannot undo this. By continuing, you'll lose " + user.friendIds.length + " friends and " + user.decks.length + " decks."
 
-    /*for(let i = 0; i < user.friendIds.length; i++){
+    for(let i = 0; i < user.friendIds.length; i++){
         const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + user.friendIds[i], {
             method: 'GET',
             headers: {
@@ -246,7 +308,7 @@ async function initialize(user){
         newTxtDiv.append(newName, newEmail);
         newDiv.append(newImg, newTxtDiv);
 
-        document.getElementById('my-profile-friends').appendChild(newDiv);
+        document.getElementById('profile-friends-list').appendChild(newDiv);
     }
 
     for(let i = 0; i < user.decks.length; i++){
@@ -263,7 +325,7 @@ async function initialize(user){
         newTxtDiv.append(newName, newEmail);
         newDiv.append(newImg, newTxtDiv);
 
-        document.getElementById('my-profile-decks').appendChild(newDiv);
+        document.getElementById('profile-decks-list').appendChild(newDiv);
     }
 
     for(let i = 0; i < user.answers.length; i++){
@@ -274,14 +336,31 @@ async function initialize(user){
         let newEmail = document.createElement('p');
 
         newImg.src = "../ask/icons/ask.png";
-        newName.innerHTML = user.answers[i].title;
+        newName.innerHTML = user.answers[i].name;
         newEmail.innerHTML =  "Created: " + computeTime(user.answers[i].created);
 
         newTxtDiv.append(newName, newEmail);
         newDiv.append(newImg, newTxtDiv);
 
-        document.getElementById('my-profile-answers').appendChild(newDiv);
-    }*/
+        document.getElementById('profile-questions-list').appendChild(newDiv);
+    }
+
+    for(let i = 0; i < user.timelines.length; i++){
+        let newDiv = document.createElement('div');
+        let newImg = document.createElement('img');
+        let newTxtDiv = document.createElement('div');
+        let newName = document.createElement('h1');
+        let newEmail = document.createElement('p');
+
+        newImg.src = "../timeline/icons/timeline.png";
+        newName.innerHTML = user.timelines[i].name;
+        newEmail.innerHTML =  `Timelines Visibility: ${user.timelines[i].timelineVisibility}`;
+
+        newTxtDiv.append(newName, newEmail);
+        newDiv.append(newImg, newTxtDiv);
+
+        document.getElementById('profile-timelines-list').appendChild(newDiv);
+    }
 
     selectedProfile = user.pfpId;
 
