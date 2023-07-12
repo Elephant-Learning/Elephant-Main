@@ -250,43 +250,81 @@
             </div>
             <p id="desktop-main-container-tab">User Profile</p>
             <div id="desktop-profile-section">
-                <div id="my-profile-container">
-                    <div id="my-profile-image-container">
+                <div id="desktop-profile-card">
+                    <div id="desktop-profile-banner"></div>
+                    <div id="desktop-profile-image-container">
                         <img src="" alt="" id="my-profile-img">
                     </div>
-                    <div id="my-profile-text-container">
-                        <h1 id="my-profile-name"></h1>
-                        <p id="my-profile-type"></p>
-                        <div id="my-profile-information">
-                            <div class="my-profile-information">
-                                <img src="../flip/icons/email.png" alt="">
-                                <p id="my-profile-email"></p>
+                    <h1 id="my-profile-name"></h1>
+                    <p id="my-profile-type"></p>
+                    <button id="edit-profile-btn">Edit Profile</button>
+                    <div class="my-profile-break"></div>
+                    <div class="my-profile-information-container">
+                        <div class="my-profile-information">
+                            <img src="../flip/icons/email.png" alt="">
+                            <p id="my-profile-email"></p>
+                        </div>
+                        <div class="my-profile-information">
+                            <img src="../login/icons/location.png" alt="">
+                            <p id="my-profile-location"></p>
+                        </div>
+                        <div class="my-profile-information">
+                            <img src="../flip/icons/fire.png" alt="">
+                            <p id="my-profile-streak"></p>
+                        </div>
+                        <div class="my-profile-information">
+                            <img src="./icons/tags.png" alt="">
+                            <p id="my-profile-tags"></p>
+                        </div>
+                    </div>
+                    <div class="my-profile-break"></div>
+                    <div class="my-profile-information-container">
+                        <div class="my-profile-information">
+                            <img src="../flip/icons/deck.png" alt="">
+                            <p id="my-profile-decks-num"></p>
+                        </div>
+                        <div class="my-profile-information">
+                            <img src="../ask/icons/ask.png" alt="">
+                            <p id="my-profile-ask-num"></p>
+                        </div>
+                        <div class="my-profile-information">
+                            <img src="../timeline/icons/timeline.png" alt="">
+                            <p id="my-profile-timeline-num"></p>
+                        </div>
+                    </div>
+                    <div class="my-profile-break"></div>
+                    <h1 class="my-profile-section-header">Badges</h1>
+                    <div id="my-profile-badges">
+                        <div>
+                            <img src="../icons/badges/squirrel_128.jpg" alt="">
+                            <div>
+                                <div>
+                                    <div style="background-image:url('../icons/badges/squirrel.jpg')"></div>
+                                </div>
+                                <img src="../icons/badges/squirrel_128.jpg" alt="">
+                                <div>
+                                    <h1>Squirrel Badge</h1>
+                                    <p>Ronak Kothari has created 2 Flip Decks</p>
+                                </div>
                             </div>
-                            <div class="my-profile-information">
-                                <img src="../login/icons/location.png" alt="">
-                                <p id="my-profile-location"></p>
-                            </div>
-                            <div class="my-profile-information">
-                                <img src="../flip/icons/fire.png" alt="">
-                                <p id="my-profile-streak"></p>
-                            </div>
-                            <div class="my-profile-information">
-                                <img src="./icons/tags.png" alt="">
-                                <p id="my-profile-tags"></p>
+                        </div>
+                        <div>
+                            <img src="../icons/badges/horse_128.jpg" alt="">
+                            <div>
+                                <div>
+                                    <div style="background-image:url('../icons/badges/horse.jpg')"></div>
+                                </div>
+                                <img src="../icons/badges/horse_128.jpg" alt="">
+                                <div>
+                                    <h1>Horse Badge</h1>
+                                    <p>Ronak Kothari has created 2 Flip Decks</p>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <p class="experimental">Beta</p>
                 </div>
-                <div id="my-profile-options">
-                    <button id="pfp-change-btn" onclick="toggleAvatarModal()">Change Profile Picture</button>
-                    <button id="tags-change-btn" onclick="toggleTagsModal()">Edit Your Tags</button>
-                    <button id="delete-acc-btn" onclick="toggleDeleteModal()">Delete Account</button>
-                </div>
-                <div id="my-profile-misc">
-                    <div id="my-profile-friends"></div>
-                    <div id="my-profile-decks"></div>
-                    <div id="my-profile-answers"></div>
-                </div>
+                <div id="desktop-profile-information"></div>
             </div>
         </div>
     </div>

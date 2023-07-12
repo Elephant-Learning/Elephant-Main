@@ -140,9 +140,9 @@ async function initialize(user){
         document.getElementById('desktop-sidebar-employee').classList.remove('inactive-modal')
     }
 
-    //console.log(user);
+    console.log(user);
 
-    removeAllChildNodes(document.getElementById('my-profile-friends'));
+    /*removeAllChildNodes(document.getElementById('my-profile-friends'));
     removeAllChildNodes(document.getElementById('my-profile-decks'));
     removeAllChildNodes(document.getElementById('my-profile-answers'));
 
@@ -155,7 +155,7 @@ async function initialize(user){
 
     document.getElementById('my-profile-friends').appendChild(newHeader);
     document.getElementById('my-profile-decks').appendChild(newDeckHeader);
-    document.getElementById('my-profile-answers').append(newAnswersHeader);
+    document.getElementById('my-profile-answers').append(newAnswersHeader);*/
 
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png"
     document.getElementById('my-profile-img').src = "../../icons/avatars/" + user.pfpId + ".png"
@@ -166,6 +166,25 @@ async function initialize(user){
     document.getElementById('my-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
     document.getElementById('my-profile-email').innerHTML = user.email;
     document.getElementById('my-profile-location').innerHTML = COUNTRY_LIST[user.countryCode];
+
+    if(user.type === "INDIVIDUAL"){
+        document.getElementById("desktop-profile-banner").className = "personal";
+    } else if(user.type === "STUDENT"){
+        document.getElementById("desktop-profile-banner").className = "community";
+    } else if(user.type === "INSTRUCTOR"){
+        document.getElementById("desktop-profile-banner").className = "shared";
+    } else if(user.type === "ADMIN"){
+        document.getElementById("desktop-profile-banner").className = "admin";
+    }
+
+    if(user.decks.length === 1) document.getElementById('my-profile-decks-num').innerHTML = user.decks.length + " deck";
+    else document.getElementById('my-profile-decks-num').innerHTML = user.decks.length + " decks";
+
+    if(user.answers.length === 1) document.getElementById('my-profile-ask-num').innerHTML = user.answers.length + " question";
+    else document.getElementById('my-profile-ask-num').innerHTML = user.answers.length + " questions";
+
+    if(user.timelines.length === 1) document.getElementById('my-profile-timeline-num').innerHTML = user.timelines.length + " timeline";
+    else document.getElementById('my-profile-timeline-num').innerHTML = user.timelines.length + " timelines";
 
     let tags = "";
     let tagsList;
@@ -199,7 +218,7 @@ async function initialize(user){
 
     document.getElementById('delete-acc-text').innerHTML = "You cannot undo this. By continuing, you'll lose " + user.friendIds.length + " friends and " + user.decks.length + " decks."
 
-    for(let i = 0; i < user.friendIds.length; i++){
+    /*for(let i = 0; i < user.friendIds.length; i++){
         const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + user.friendIds[i], {
             method: 'GET',
             headers: {
@@ -262,15 +281,11 @@ async function initialize(user){
         newDiv.append(newImg, newTxtDiv);
 
         document.getElementById('my-profile-answers').appendChild(newDiv);
-    }
+    }*/
 
     selectedProfile = user.pfpId;
 
-    let element = document.getElementById('desktop-avatar-selector-main');
-
-    while(element.lastChild) {
-        element.lastChild.remove();
-    }
+    removeAllChildNodes(document.getElementById('desktop-avatar-selector-main'));
 
     await notificationsManager(user);
     toggleNotificationTab(0);
@@ -280,7 +295,7 @@ async function initialize(user){
         newImg.src = "../../icons/avatars/" + i + ".png";
         newImg.setAttribute("onclick", "selectPfp(" + i + ")")
         newImg.classList.add('avatar-img')
-        element.appendChild(newImg);
+        document.getElementById('desktop-avatar-selector-main').appendChild(newImg);
     }
 
     selectPfp(selectedProfile);
