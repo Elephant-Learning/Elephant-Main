@@ -52,7 +52,8 @@ async function search(){
     removeAllChildNodes(document.getElementById('search-results-flashcards'));
     removeAllChildNodes(document.getElementById('search-results-users'));
 
-    togglePageFlip(3, undefined);
+    togglePageFlip(1);
+    document.getElementById("desktop-main-container-tab").innerHTML = `Searching for ${document.getElementById('desktop-navbar-input').value}`
 
     //console.log(decks);
 
@@ -111,31 +112,17 @@ function toggleSettingsModal(){
     }
 }
 
-function togglePageFlip(index, sidebar, link){
+function togglePageFlip(index){
 
-    if(link){
-        window.location.href = link;
-        return;
-    }
-
-    if(index === 4) document.getElementById('desktop-main-container-tab').innerHTML = document.querySelectorAll('.desktop-sidebar-folder')[sidebar - document.querySelectorAll('.desktop-sidebar-category').length].children[1].textContent;
-    else document.getElementById('desktop-main-container-tab').innerHTML = pages[index];
+    const pages = ["Elephant Flip", "Elephant Flip - Search"]
 
     try{document.querySelector(".active-sidebar-category").classList.remove('active-sidebar-category')} catch{}
 
-    if(!(sidebar === undefined)){
-        if(sidebar >= document.querySelectorAll('.desktop-sidebar-category').length){
-            document.getElementById("desktop-sidebar-folders").children[sidebar - document.querySelectorAll('.desktop-sidebar-category').length].classList.add('active-sidebar-category')
-        } else {
-            document.getElementById("desktop-sidebar-folders").children[sidebar].classList.add('active-sidebar-category')
-        }
-    }
-
-    try{document.querySelectorAll('.desktop-sidebar-category')[sidebar].classList.add('active-sidebar-category')} catch{}
     try {document.querySelector(".active-tab").classList.remove('active-tab')} catch{}
     document.querySelectorAll('.desktop-tab')[index].classList.add('active-tab')
+    document.getElementById("desktop-main-container-tab").innerHTML = pages[index];
 
-    const removeBottomBtns = [1, 2, 3, 4, 5, 6, 7]
+    const removeBottomBtns = [1]
 
     if(removeBottomBtns.includes(index)){
         document.querySelectorAll('.desktop-bottom-btn').forEach(function(item){
@@ -148,8 +135,6 @@ function togglePageFlip(index, sidebar, link){
             })
         } catch{}
     }
-
-    history.push([index, sidebar]);
 }
 
 async function refreshFolders(){
@@ -569,7 +554,7 @@ async function initialize(user){
 
     await displayFlashcardsManager(user);
 
-    togglePageFlip(0,0, false);
+    togglePageFlip(0);
     closeLoader();
 }
 

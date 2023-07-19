@@ -61,14 +61,14 @@ function toggleTheme(themeIndex){
         root.style.setProperty('--text-color', 'black');
         root.style.setProperty("--bg-color-1", "#ffffff");
         root.style.setProperty("--bg-color-2", "#f6f7fb")
-        root.style.setProperty("--light-border-color", "#ebebeb");
+        root.style.setProperty("--light-border-color", "#eaecf0");
         root.style.setProperty("--dark-border-color", "#21262d");
         root.style.setProperty("--dark-gray", "black");
         root.style.setProperty("--light-gray", "#010409");
         root.style.setProperty("--hover-dark", "#16171a");
         root.style.setProperty("--hover-light", "#f5f5f5");
         root.style.setProperty("--image-invert", "0");
-        root.style.setProperty("--light-accent", "#eaecf0");
+        root.style.setProperty("--light-accent", "#dadce5");
         root.style.setProperty("--primary-accent", "#fe599d");
         root.style.setProperty("--primary-accent-gradient", "#f30096");
         root.style.setProperty("--secondary-accent", "#00a8ff");

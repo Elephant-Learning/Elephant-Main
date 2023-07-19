@@ -1,0 +1,29 @@
+#desktop-main-container{
+    width:calc(100vw - calc(var(--size) * 256px));
+    height:calc(100vh - calc(var(--size) * 48px));
+}
+
+#desktop-main-container-tab{
+    font-size:calc(var(--size) * 12px);
+    width:calc(100% - var(--size) * 48px);
+    padding:calc(var(--size) * 14px) calc(var(--size) * 24px);
+    font-weight:600;
+    border-bottom:1px solid var(--light-border-color);
+    margin:0;
+    position:absolute;
+    top:0;
+}
+
+#folder-container{
+    position:absolute;
+    top:calc(var(--size) * 44px);
+    left:calc(var(--size) * 256px);
+    width:calc(100vw - var(--size) * 256px);
+    height:calc(100vh - var(--size) * 92px);
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:flex-start;
+    overflow-y:scroll !important;
+    overflow-x:hidden;
+}
