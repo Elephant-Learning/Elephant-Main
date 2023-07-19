@@ -159,39 +159,44 @@
         </div>
         <div id="desktop-parent-container">
             <div id="desktop-sidebar">
-                <div id="desktop-sidebar-categories">
-                    <div class="desktop-sidebar-category active-sidebar-category" onclick="location.href = './'">
+                <div class="sidebar-button active-sidebar-button">
+                    <img src="../flip/icons/dashboard.png" alt="Recent">
+                    <p>My Dashboard</p>
+                </div>
+                <div class="sidebar-dropdown">
+                    <div>
+                        <img src="../flip/icons/compass.png" alt="">
+                        <p>Applications</p>
                         <div>
-                            <img src="../flip/icons/dashboard.png" alt="Recent">
+                            <img src="../flip/icons/expand_down.png" alt="" class="">
                         </div>
-                        <p>My Dashboard</p>
                     </div>
-                    <div class="desktop-sidebar-break"></div>
-                    <div class="desktop-sidebar-category" onclick="location.href = '../flip/dashboard'">
-                        <div>
+                    <div>
+                        <div onclick="location.href='../flip/dashboard'">
                             <img src="../flip/icons/deck.png" alt="Recent">
+                            <p>Flip</p>
                         </div>
-                        <p>Flip</p>
-                    </div>
-                    <div class="desktop-sidebar-category" onclick="location.href = '../ask/dashboard'">
-                        <div>
+                        <div onclick="location.href='../ask/dashboard'">
                             <img src="../ask/icons/ask.png" alt="Recent">
+                            <p>Ask</p>
                         </div>
-                        <p>Ask</p>
-                    </div>
-                    <div class="desktop-sidebar-category" onclick="location.href = '../timeline/dashboard/'">
-                        <div>
+                        <div onclick="location.href='../timeline/dashboard'">
                             <img src="../timeline/icons/timeline.png" alt="Recent">
+                            <p>Timeline</p>
                         </div>
-                        <p>Timeline</p>
                     </div>
-                    <div id="desktop-sidebar-employee" class="desktop-sidebar-category inactive-modal" onclick="togglePageFlip(9, 1)">
+                </div>
+                <div class="sidebar-break"></div>
+                <div class="sidebar-dropdown">
+                    <div>
+                        <img src="../flip/icons/open_folder.png" alt="">
+                        <p>Folders</p>
                         <div>
-                            <img src="../flip/icons/admin.png" alt="Recent">
+                            <img src="../flip/icons/plus.png" alt="" id="create-folder-btn">
+                            <img src="../flip/icons/expand_down.png" alt="">
                         </div>
-                        <p>Admin Portal</p>
                     </div>
-                    <!--<div class="desktop-sidebar-break"></div>-->
+                    <div id="desktop-sidebar-folders"></div>
                 </div>
             </div>
             <div id="desktop-main-container">

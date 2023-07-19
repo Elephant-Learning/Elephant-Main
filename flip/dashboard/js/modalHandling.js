@@ -125,9 +125,9 @@ function togglePageFlip(index, sidebar, link){
 
     if(!(sidebar === undefined)){
         if(sidebar >= document.querySelectorAll('.desktop-sidebar-category').length){
-            document.querySelectorAll('.desktop-sidebar-folder')[sidebar - document.querySelectorAll('.desktop-sidebar-category').length].classList.add('active-sidebar-category')
+            document.getElementById("desktop-sidebar-folders").children[sidebar - document.querySelectorAll('.desktop-sidebar-category').length].classList.add('active-sidebar-category')
         } else {
-            document.querySelectorAll('.desktop-sidebar-category')[sidebar].classList.add('active-sidebar-category')
+            document.getElementById("desktop-sidebar-folders").children[sidebar].classList.add('active-sidebar-category')
         }
     }
 
@@ -150,69 +150,6 @@ function togglePageFlip(index, sidebar, link){
     }
 
     history.push([index, sidebar]);
-}
-
-async function viewFolder(folderId, sidebarNum){
-    togglePageFlip(4, sidebarNum);
-    removeAllChildNodes(document.getElementById('folder-flashcard-display'));
-
-    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
-    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/folder/get?id=' + folderId, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type'
-        },
-        mode: 'cors'
-    })
-
-    const context = await response.json();
-    console.log(context);
-
-    const userResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type'
-        },
-        mode: 'cors'
-    })
-
-    const userContext = await userResponse.json();
-
-    let userLikedDecks = userContext.context.user.likedDecksIds;
-
-    for(let i = 0; i < context.context.folder.deckIds.length; i++){
-
-        const flashcard = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/get?id=' + context.context.folder.deckIds[i], {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type'
-            },
-            mode: 'cors'
-        });
-
-        let flashcardContext = await flashcard.json();
-        flashcardContext = flashcardContext.context.deck
-        console.log(flashcardContext);
-
-        displayFlashcard("folder", {
-            name: flashcardContext.name,
-            author: flashcardContext.authorId,
-            type: flashcardContext.visibility,
-            deckID: flashcardContext.id,
-            favorite: userLikedDecks.includes(flashcardContext.id),
-            likesNumber: flashcardContext.numberOfLikes,
-            search: false
-        })
-    }
 }
 
 async function refreshFolders(){
@@ -248,23 +185,68 @@ async function deleteFolder(folderId){
     refreshFolders()
 }
 
+document.getElementById("create-folder-btn").addEventListener("click", function(e){
+    e.preventDefault();
+    e.stopPropagation();
+
+    let newDiv = document.createElement('div');
+    let img = document.createElement('img');
+    let input = document.createElement('input');
+
+    img.src = "../icons/folder.png";
+    input.placeholder = "Folder Name";
+
+    input.addEventListener("change", async function (e) {
+        if(input.value === ""){
+            newDiv.remove();
+            return;
+        }
+
+        const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/folder/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                name: input.value,
+                userId: savedUserId,
+                deckIds: []
+            }),
+            mode: 'cors'
+        })
+
+        const context = await response.json();
+        console.log(context);
+
+        if(context.status === "SUCCESS"){
+            newDiv.remove();
+            refreshFolders();
+        }
+    })
+
+    newDiv.append(img, input);
+    document.getElementById('desktop-sidebar-folders').appendChild(newDiv);
+
+    input.focus();
+})
+
 function sidebarFolder(title, folderId){
     let newDiv = document.createElement('div');
-    let imgDiv = document.createElement('div');
     let img = document.createElement('img');
     let para = document.createElement('p');
 
     img.src = "../icons/folder.png";
-    imgDiv.appendChild(img);
-
     para.innerHTML = title;
 
-    newDiv.append(imgDiv, para);
-    newDiv.classList.add('desktop-sidebar-folder');
+    newDiv.append(img, para);
 
     folderAmount++;
 
-    newDiv.setAttribute('onclick', "viewFolder(" + folderId + ", " + (folderAmount + document.querySelectorAll('.desktop-sidebar-category').length - 1) + ")")
+    newDiv.setAttribute('onclick', `location.href = \`../../folder/?id=${folderId}\``)
     newDiv.addEventListener('contextmenu', function(e){
         e.preventDefault();
         e.stopPropagation();
@@ -558,11 +540,6 @@ async function initialize(user){
     } else user = user.context.user;
 
     const emojis_refactored = ["confused", "cool", "happy", "laugh", "nerd", "neutral", "unamused", "uwu", "wink"];
-
-    if(user.type !== "EMPLOYEE"){
-        document.getElementById('desktop-sidebar-employee').classList.add('inactive-modal')
-        admin = true;
-    }
 
     displayFolders(user)
 

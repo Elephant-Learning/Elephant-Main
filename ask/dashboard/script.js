@@ -242,10 +242,6 @@ async function initialize(user){
 
     const emojis_refactored = ["confused", "cool", "happy", "laugh", "nerd", "neutral", "unamused", "uwu", "wink"];
 
-    if(user.type !== "EMPLOYEE"){
-        document.getElementById('desktop-sidebar-employee').classList.add('inactive-modal')
-    }
-
     if(user.elephantAnswersTags.length <= 0) {
         document.getElementById("tags-modal-bg").classList.remove("inactive-modal");
     } initializeTags();
