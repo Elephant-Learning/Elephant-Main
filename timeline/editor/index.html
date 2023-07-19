@@ -49,6 +49,15 @@
                 <a href="../dashboard/">Return to Dashboard</a>
             </div>
         </div>
+        <div id="desktop-folder-modal" class="desktop-modal inactive-modal">
+            <div class="desktop-modal-image-container">
+                <img src="../../flip/icons/add_folder.png" alt="">
+            </div>
+            <h1>Add to Folder</h1>
+            <p>Organize your Elephant Timelines into neat and easy-to-use folders!</p>
+            <h6>Folders</h6>
+            <div id="folder-list"></div>
+        </div>
         <div id="upload-image-modal-container" class="inactive-modal">
             <div id="upload-image-modal">
                 <h1>Select an Image</h1>
@@ -102,7 +111,7 @@
                     </div>
                 </div>
             </div>
-            <button id="sharing-done" onclick="toggleVisibilityModal()" class="personal">Done</button>
+            <button id="sharing-done" onclick="toggleModal(document.getElementById('change-visibility-modal'))" class="personal">Done</button>
         </div>
         <div id="desktop-navbar">
             <div id="desktop-main-image">
@@ -197,7 +206,12 @@
                     <button onclick="openCreateModal(1)" id="create-marker-btn">Create Marker</button>
                 </div>
                 <div id="editor-tools-right">
-                    <button onclick="toggleVisibilityModal()" class="personal" id="change-visibility">Change Visibility</button>
+                    <button onclick="toggleModal(document.getElementById('desktop-folder-modal'))" id="add-to-folder-btn">
+                        <img src="../../flip/icons/add_folder.png" alt="">
+                        <p>Add To Folder</p>
+                        <img src="../../flip/icons/expand_down.png" alt="">
+                    </button>
+                    <button onclick="toggleModal(document.getElementById('change-visibility-modal'))" class="personal" id="change-visibility">Change Visibility</button>
                 </div>
             </div>
             <div id="desktop-main-container" class="default">

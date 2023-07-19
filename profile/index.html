@@ -15,6 +15,21 @@
     <script src="script.js" defer></script>
 </head>
 <body>
+<div id="account-settings-modal-container" class="inactive-modal">
+    <div id="account-settings-modal-bg"></div>
+    <div id="account-settings-modal">
+        <div>
+            <img id="account-settings-modal-image" src="../icons/avatars/45.png" alt="">
+            <div>
+                <button>Change Profile</button>
+            </div>
+        </div>
+        <div>
+            <button>Save Changes</button>
+            <button onclick="toggleAccountSettingsModal()">Cancel</button>
+        </div>
+    </div>
+</div>
 <div id="delete-login-modal-bg" class="inactive-modal">
     <div id="delete-login-modal">
         <div>

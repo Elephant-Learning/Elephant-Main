@@ -159,12 +159,82 @@ function convertToText(date){
     return returnString;
 }
 
-async function toggleVisibilityModal(){
-    if(document.getElementById("change-visibility-modal").classList.contains("inactive-modal")){
-        document.getElementById("change-visibility-modal").classList.remove("inactive-modal")
+async function deckToTimeline(adding, folderId){
+    console.log(adding, folderId, editing);
+
+    if(adding){
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/folder/addTimeline', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS, PUT',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                folderId: folderId,
+                timelineId: editing
+            }),
+            mode: 'cors'
+        });
+
+        const context = await response.json();
+        console.log(context);
     } else {
-        document.getElementById("change-visibility-modal").classList.add("inactive-modal")
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/folder/removeTimeline', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                folderId: folderId,
+                timelineId: editing
+            }),
+            mode: 'cors'
+        });
+
+        const context = await response.json();
+        console.log(context);
     }
+
+    await refreshFolders()
+}
+
+async function createFolderOption(params){
+    let newDiv = document.createElement('div');
+    let imageDiv = document.createElement('div');
+    let image = document.createElement('img');
+    let textDiv = document.createElement('div');
+    let nameText = document.createElement('h1');
+    let lengthText = document.createElement('p');
+    let activeText = document.createElement('p');
+
+    image.src = "../../flip/icons/folder.png";
+    imageDiv.appendChild(image);
+
+    nameText.innerHTML = params.name;
+    lengthText.innerHTML = "Amount of Timelines: " + params.timelineIds.length;
+
+    if(params.active){
+        activeText.innerHTML = "Remove";
+        activeText.addEventListener('click', function(e){
+            deckToTimeline(false, params.id)
+        })
+    } else{
+        activeText.innerHTML = "Add";
+        activeText.addEventListener('click', function(e){
+            deckToTimeline(true, params.id)
+        })
+    }
+
+    textDiv.append(nameText, lengthText);
+    newDiv.append(imageDiv, textDiv, activeText);
+    newDiv.classList.add('folder-option')
+
+    document.getElementById('folder-list').appendChild(newDiv);
 }
 
 async function toggleVisibilityOptions(index, set){
@@ -256,6 +326,14 @@ function toggleSharedInputList(){
         document.getElementById('sharing-input-friends-list').classList.remove('inactive-modal')
     } else {
         document.getElementById('sharing-input-friends-list').classList.add('inactive-modal')
+    }
+}
+
+function toggleModal(modal){
+    if(modal.classList.contains('inactive-modal')){
+        modal.classList.remove('inactive-modal');
+    } else {
+        modal.classList.add('inactive-modal');
     }
 }
 
@@ -498,7 +576,7 @@ function createTimelineMarker(params){
 
     newDiv.style.left = `${(daysBetweenYearStartAndDate(start,params.date)/(daysBetweenYears(start,end) - 1)) * document.getElementById('desktop-main-event-containers').clientWidth - 101}px`;
 
-    console.log((daysBetweenYearStartAndDate(start,params.date)/(daysBetweenYears(start,end) - 1)) * document.getElementById('desktop-main-event-containers').clientWidth);
+    //console.log((daysBetweenYearStartAndDate(start,params.date)/(daysBetweenYears(start,end) - 1)) * document.getElementById('desktop-main-event-containers').clientWidth);
 
     document.getElementById("desktop-main-marker-container").appendChild(newDiv);
 }
@@ -528,7 +606,7 @@ function refreshNodes(){
     removeAllChildNodes(document.getElementById("desktop-main-event-containers"));
     removeAllChildNodes(document.getElementById("desktop-main-marker-container"));
 
-    console.log(nodes);
+    //console.log(nodes);
 
     if(nodes.length === 0) return;
     let eventCount = 1;
@@ -725,6 +803,32 @@ async function locateUserInfo(){
     await initialize(context)
 }
 
+async function refreshFolders(){
+    removeAllChildNodes(document.getElementById('folder-list'));
+
+    const savedUserId  = JSON.parse(localStorage.getItem('savedUserId'));
+    const userResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    let user = await userResponse.json();
+    user = user.context.user;
+
+    for(let i = 0; i < user.folders.length; i++){
+        let folder = user.folders[i];
+        folder.active = user.folders[i].timelineIds.includes(parseInt(location.href.split("=")[1]));
+
+        await createFolderOption(folder)
+    }
+}
+
 window.onload = async function(){
     await locateUserInfo();
 
@@ -783,10 +887,13 @@ window.onload = async function(){
                 })
             }
 
+            await refreshFolders();
             refreshNodes();
 
         } else {
             document.getElementById("restricted-access-container").classList.remove("inactive-modal");
         }
+    } else {
+
     }
 }

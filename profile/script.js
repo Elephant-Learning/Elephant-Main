@@ -51,6 +51,16 @@ function toggleDeleteModal(){
     }
 }
 
+document.getElementById("edit-profile-btn").onclick = toggleAccountSettingsModal;
+
+function toggleAccountSettingsModal(){
+    if(document.getElementById('account-settings-modal-container').classList.contains("inactive-modal")){
+        document.getElementById('account-settings-modal-container').classList.remove("inactive-modal")
+    } else {
+        document.getElementById('account-settings-modal-container').classList.add("inactive-modal")
+    }
+}
+
 function selectPfp(index){
     selectedProfile = index;
     document.getElementById('desktop-avatar-current').src = "../../icons/avatars/" + index + ".png";
@@ -131,49 +141,111 @@ function selectTag(index){
     else document.getElementById("tags-modal-button").classList = "inactive-modal-button";
 }
 
-function createBadge(name, index, level){
+function convertGMTtoLocalTime(gmtTime) {
+    const dateObj = new Date(gmtTime);
+    const options = { month: 'long', day: 'numeric', year: 'numeric' };
+    const localTime = dateObj.toLocaleDateString('en-US', options);
+    return localTime.replace(/(\d)(st|nd|rd|th)/, '$1<sup>$2</sup>');
+}
+
+function createBadge(params){
     const badges = [
-        ["goat", "has created 2 timelines", "has created 8 timelines", "has created 16 timelines", "has created 64 timelines"],
-        ["squirrel", "has made 2 friends", "has made 8 friends", "has made 16 friends", "has made 32 friends"],
-        ["wolf", "has created 2 flip decks", "has created 8 flip decks", "has created 16 flip decks", "has created 64 flip decks"],
-        ["dolphin", "has answered 2 questions", "has answered 8 questions", "has answered 16 questions", "has answered 64 questions"],
-        ["lion", "has achieved a 7 day streak on Elephant", "has achieved a 14 day streak on Elephant", "has achieved a 1 month streak on Elephant", "has achieved a 2 month streak on Elephant"],
-        ["elephant", "has earned every single badge of normal level", "has earned every single badge of bronze level", "has earned every single badge of silver level", "has earned every single badge of gold level"],
+        ["goat", "has created 2 timelines", "has created 8 timelines", "has created 16 timelines", "has created 64 timelines", "Create 2 timelines", "Create 8 timelines", "Create 16 timelines", "Create 64 timelines"],
+        ["squirrel", "has made 2 friends", "has made 8 friends", "has made 16 friends", "has made 32 friends", "Make 2 Friends", "Make 8 friends", "Make 16 friends", "Make 32 friends"],
+        ["wolf", "has created 2 flip decks", "has created 8 flip decks", "has created 16 flip decks", "has created 64 flip decks", "Create 2 flip decks", "Create 8 flip decks", "Create 16 flip decks", "Create 64 flip decks"],
+        ["dolphin", "has answered 2 questions", "has answered 8 questions", "has answered 16 questions", "has answered 64 questions", "Answer 2 questions", "Answer 8 questions", "Answer 16 questions", "Answer 64 questions"],
+        ["lion", "has achieved a 7 day streak on Elephant", "has achieved a 14 day streak on Elephant", "has achieved a 1 month streak on Elephant", "has achieved a 2 month streak on Elephant", "Achieve a 7 day streak on Elephant", "Achieve a 14 day streak on Elephant", "Achieve a 1 month streak on Elephant", "Achieve a 2 month streak on Elephant"],
+        ["elephant", "has earned every single badge of normal level", "has earned every single badge of bronze level", "has earned every single badge of silver level", "has earned every single badge of gold level", "Earn every single badge", "Earn every single badge of bronze level", "Earn every single badge of silver level", "Earn every single badge of gold level"],
     ];
+
+    const badgeTypes = ["TIME_MASTER", "FRIEND_MASTER", "FLIP_MASTER", "GALAXY_BRAIN", "MASTER_STREAKER", "BADGE_MASTER"];
+    const levels = [["Badge", "gray"], ["Bronze", "#CD7F32"], ["Silver", "#C0C0C0"], ["Gold", "#ffbf00"]];
+
+    console.log(params)
 
     const newDiv = document.createElement("div");
 
     const newImg = document.createElement("img");
-    newImg.src = `../icons/badges/${badges[index][0]}_128.jpg`
+    newImg.src = `../icons/badges/${badges[badgeTypes.indexOf(params.type)][0]}_128.jpg`
 
     const alertDiv = document.createElement("div");
 
     const backgroundDivContainer = document.createElement("div");
     const backgroundDiv = document.createElement("div");
-    backgroundDiv.style.backgroundImage = `url("../icons/badges/${badges[index][0]}.jpg")`
+    backgroundDiv.style.backgroundImage = `url("../icons/badges/${badges[badgeTypes.indexOf(params.type)][0]}.jpg")`
 
     const badgeImg = document.createElement("img");
-    badgeImg.src = `../icons/badges/${badges[index][0]}_128.jpg`;
+    badgeImg.src = `../icons/badges/${badges[badgeTypes.indexOf(params.type)][0]}_128.jpg`;
 
     const textDiv = document.createElement("div");
     const headerText = document.createElement("h1");
     const paraText = document.createElement("p");
 
-    headerText.innerHTML = `${badges[index][0].charAt(0).toUpperCase() + badges[index][0].slice(1)} Badge`;
-    paraText.innerHTML = `${name} ${badges[index][level]}`;
+    headerText.innerHTML = `${badges[badgeTypes.indexOf(params.type)][0].charAt(0).toUpperCase() + badges[badgeTypes.indexOf(params.type)][0].slice(1)} Badge`;
+    paraText.innerHTML = `${params.name} ${badges[badgeTypes.indexOf(params.type)][params.level]}`;
 
-    if(level > 1){
-        const levels = [["Bronze", "#CD7F32"], ["Silver", "#C0C0C0"], ["Gold", "#FFD700"]];
+    if(params.level === 0){
+        newImg.style.filter = "grayscale(1)";
+        backgroundDivContainer.style.filter = "grayscale(1)";
+        badgeImg.style.filter = "grayscale(1)";
 
+        paraText.innerHTML = "Badge to Explore"
+
+        textDiv.append(headerText, paraText);
+
+        const goForNext = document.createElement("h2");
+        const goForNextSpan = document.createElement("span");
+        const goForNextText = document.createTextNode(` ${badges[badgeTypes.indexOf(params.type)][5]}`);
+        goForNextSpan.style.color = levels[params.level][1];
+        goForNextSpan.style.border = `1px solid ${levels[params.level][1]}`;
+        goForNextSpan.innerHTML = `Go For ${levels[params.level][0]}`;
+
+        goForNext.append(goForNextSpan, goForNextText);
+        textDiv.appendChild(goForNext);
+
+        backgroundDivContainer.appendChild(backgroundDiv);
+
+        alertDiv.append(backgroundDivContainer, badgeImg, textDiv)
+        newDiv.append(newImg, alertDiv);
+
+        document.getElementById("my-profile-badges").appendChild(newDiv);
+
+        return;
+    }
+
+    if(params.level > 1){
         const newSpan = document.createElement("span");
-        newSpan.innerHTML = levels[level - 2][0];
-        newSpan.style.color = levels[level - 2][1];
-        newSpan.style.border = `1px solid ${levels[level - 2][1]}`;
+        newSpan.innerHTML = levels[params.level - 1][0];
+        newSpan.style.color = levels[params.level - 1][1];
+        newSpan.style.border = `1px solid ${levels[params.level - 1][1]}`;
         headerText.appendChild(newSpan);
     }
 
     textDiv.append(headerText, paraText);
     backgroundDivContainer.appendChild(backgroundDiv);
+
+    for(let i = params.earnedTimes.length - 1; i > 0; i--){
+        const newHeader2 = document.createElement("h6");
+        const newSpan2 = document.createElement("span");
+
+        newSpan2.innerHTML = levels[i - 1][0];
+        newSpan2.style.color = levels[i - 1][1];
+        newSpan2.style.border = `1px solid ${levels[i - 1][1]}`;
+
+        const newText = document.createTextNode(` was earned on ${convertGMTtoLocalTime(params.earnedTimes[i])}`);
+        newHeader2.append(newSpan2, newText);
+        textDiv.appendChild(newHeader2);
+    }
+
+    const goForNext = document.createElement("h2");
+    const goForNextSpan = document.createElement("span");
+    const goForNextText = document.createTextNode(` ${badges[badgeTypes.indexOf(params.type)][params.level + 5]}`);
+    goForNextSpan.style.color = levels[params.level][1];
+    goForNextSpan.style.border = `1px solid ${levels[params.level][1]}`;
+    goForNextSpan.innerHTML = `Go For ${levels[params.level][0]}`;
+
+    goForNext.append(goForNextSpan, goForNextText);
+    textDiv.appendChild(goForNext);
 
     alertDiv.append(backgroundDivContainer, badgeImg, textDiv)
     newDiv.append(newImg, alertDiv);
@@ -208,6 +280,7 @@ async function initialize(user){
 
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png"
     document.getElementById('my-profile-img').src = "../../icons/avatars/" + user.pfpId + ".png"
+    document.getElementById("account-settings-modal-image").src = "../../icons/avatars/" + user.pfpId + ".png"
     document.getElementById('desktop-avatar-current').src = "../../icons/avatars/" + user.pfpId + ".png"
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('my-profile-name').innerHTML = user.firstName + " " + user.lastName;
@@ -243,9 +316,10 @@ async function initialize(user){
     removeAllChildNodes(document.getElementById("tags-list"));
 
     for(let i = 0; i < user.elephantUserStatistics.medals.length; i++){
-        const badgeList = ["TIME_MASTER", "", "FLIP_MASTER", "", "", "BADGE_MASTER"];
+        let badge = user.elephantUserStatistics.medals[i];
+        badge.name = user.fullName;
 
-        if(user.elephantUserStatistics.medals[i].level !== 0) createBadge(user.fullName, badgeList.indexOf(user.elephantUserStatistics.medals[i].type), user.elephantUserStatistics.medals[i].level);
+        createBadge(badge);
     }
 
     if(user.elephantUserStatistics.medals.length === 0){
@@ -336,7 +410,7 @@ async function initialize(user){
         let newEmail = document.createElement('p');
 
         newImg.src = "../ask/icons/ask.png";
-        newName.innerHTML = user.answers[i].name;
+        newName.innerHTML = user.answers[i].title;
         newEmail.innerHTML =  "Created: " + computeTime(user.answers[i].created);
 
         newTxtDiv.append(newName, newEmail);
