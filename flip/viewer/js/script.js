@@ -2,29 +2,17 @@ let deck;
 let termActiveSlide = true;
 let activeFlashcardCard = 0;
 
-function togglePageFlip(index, sidebar, link){
+function togglePageFlip(index, sidebar){
 
     const pages = ["Deck Carousel", "Deck Memorize", "Deck Review", "Deck Match", "Deck Crossword","Deck Statistics", "Deck Cards"];
 
-    if(link){
-        window.location.href = link;
-        return;
-    }
-
     document.getElementById('desktop-main-container-tab').innerHTML = pages[index];
-    try{document.querySelector(".active-sidebar-category").classList.remove('active-sidebar-category')} catch{}
+    try{document.querySelector(".active-sidebar-dropdown-category").classList.remove('active-sidebar-dropdown-category')} catch{}
 
-    if(!(sidebar === undefined)){
-        if(sidebar >= document.querySelectorAll('.desktop-sidebar-category').length){
-            document.querySelectorAll('.desktop-sidebar-folder')[sidebar - document.querySelectorAll('.desktop-sidebar-category').length].classList.add('active-sidebar-category')
-        } else {
-            document.querySelectorAll('.desktop-sidebar-category')[sidebar].classList.add('active-sidebar-category')
-        }
-    }
+    document.querySelectorAll('.sidebar-node')[sidebar].classList.add('active-sidebar-dropdown-category')
 
     if(index === 1 && !memorizeStarted) resetTimer();
 
-    try{document.querySelectorAll('.desktop-sidebar-category')[sidebar].classList.add('active-sidebar-category')} catch{}
     try {document.querySelector(".active-tab").classList.remove('active-tab')} catch{}
     document.querySelectorAll('.desktop-tab')[index].classList.add('active-tab')
 
@@ -303,7 +291,7 @@ window.onload = async function(){
         document.getElementById('edit-btn').setAttribute("href", "../editor/?deck=" + context.context.deck.id);
     }
 
-    for(let i = 0; i < context.context.deck.name.length; i++){
+    /*for(let i = 0; i < context.context.deck.name.length; i++){
         document.getElementById("desktop-sidebar-deck-name").innerHTML = context.context.deck.name.substring(0, i);
         if(document.getElementById("desktop-sidebar-deck-name").clientWidth > 160) {
             document.getElementById("desktop-sidebar-deck-name").innerHTML = context.context.deck.name.substring(0, i - 1) + "...";
@@ -313,7 +301,7 @@ window.onload = async function(){
 
     if(context.context.deck.visibility === "PUBLIC") document.getElementById('desktop-sidebar-deck-type').classList.add('community');
     else if(context.context.deck.visibility === "SHARED") document.getElementById('desktop-sidebar-deck-type').classList.add('shared');
-    else if(context.context.deck.visibility === "PRIVATE") document.getElementById('desktop-sidebar-deck-type').classList.add('personal');
+    else if(context.context.deck.visibility === "PRIVATE") document.getElementById('desktop-sidebar-deck-type').classList.add('personal');*/
 
     const recentDeckResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/statistics/recentlyViewedDecks', {
         method: 'POST',
@@ -345,8 +333,8 @@ window.onload = async function(){
 
     document.getElementById('discord-embed-title').setAttribute('content', context.context.deck.name);
     document.getElementById('discord-embed-desc').setAttribute('content', context.context.deck.name + " - By " + userContext.context.user.firstName + " " + userContext.context.user.lastName);
-    document.getElementById('desktop-sidebar-deck-author-img').src = "../../icons/avatars/" + userContext.context.user.pfpId + ".png"
-    document.getElementById('desktop-sidebar-deck-author').innerHTML = userContext.context.user.firstName + " " + userContext.context.user.lastName
+    //document.getElementById('desktop-sidebar-deck-author-img').src = "../../icons/avatars/" + userContext.context.user.pfpId + ".png"
+    //document.getElementById('desktop-sidebar-deck-author').innerHTML = userContext.context.user.firstName + " " + userContext.context.user.lastName
     document.getElementById('title').innerHTML = context.context.deck.name + " | Elephant - The Ultimate Student Suite";
     document.getElementById('desktop-review-deck-name').innerHTML = "Test Deck: " + context.context.deck.name;
 
@@ -376,7 +364,7 @@ function initialize(user){
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
 
-    togglePageFlip(4, 4);
+    togglePageFlip(0, 0);
 }
 
 async function locateUserInfo(){

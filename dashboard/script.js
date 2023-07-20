@@ -68,6 +68,113 @@ function addCard(params, type){
     document.querySelectorAll('.recent-activity-div')[type].appendChild(newLink);
 }
 
+document.getElementById("create-folder-btn").addEventListener("click", function(e){
+    e.preventDefault();
+    e.stopPropagation();
+
+    let newDiv = document.createElement('div');
+    let img = document.createElement('img');
+    let input = document.createElement('input');
+
+    img.src = "../flip/icons/folder.png";
+    input.placeholder = "Folder Name";
+
+    input.addEventListener("change", async function (e) {
+        if(input.value === ""){
+            newDiv.remove();
+            return;
+        }
+
+        const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/folder/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                name: input.value,
+                userId: savedUserId,
+                deckIds: []
+            }),
+            mode: 'cors'
+        })
+
+        const context = await response.json();
+        console.log(context);
+
+        if(context.status === "SUCCESS"){
+            newDiv.remove();
+            await refreshFolders();
+        }
+    })
+
+    newDiv.append(img, input);
+    document.getElementById('desktop-sidebar-folders').appendChild(newDiv);
+
+    input.focus();
+})
+
+async function refreshFolders(){
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
+    const userResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    })
+
+    const userContext = await userResponse.json();
+    await displayFolders(userContext.context.user);
+}
+
+async function displayFolders(user){
+    removeAllChildNodes(document.getElementById('desktop-sidebar-folders'));
+
+    for(let i = 0; i < user.folders.length; i++){
+        sidebarFolder(user.folders[i].name, user.folders[i].id)
+    }
+}
+
+function sidebarFolder(title, folderId){
+    let newDiv = document.createElement('div');
+    let img = document.createElement('img');
+    let para = document.createElement('p');
+
+    img.src = "../flip/icons/folder.png";
+    para.innerHTML = title;
+
+    newDiv.append(img, para);
+
+    newDiv.setAttribute('onclick', `location.href = \`../folder/?id=${folderId}\``)
+    /*newDiv.addEventListener('contextmenu', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        while (document.getElementById('context-menu').firstChild) {
+            document.getElementById('context-menu').firstChild.remove()
+        }
+
+        let options = [
+            ["folder", "Open Folder", "viewFolder(" + folderId + ", " + (folderAmount + document.querySelectorAll('.desktop-sidebar-category').length - 1) + ")"],
+            //["../editor/icons/edit", "Edit Folder", ""],
+            ["delete", "Delete Folder", "deleteFolder(" + folderId + ")"]
+        ]
+
+        contextMenuOptions(options)
+        toggleContextMenu(true, e);
+    })*/
+
+    document.getElementById('desktop-sidebar-folders').appendChild(newDiv);
+}
+
 async function initialize(user){
     if(user.status === "FAILURE") {
         location.href = "../login"
@@ -128,6 +235,7 @@ async function initialize(user){
     if(user.decks.length > 0) document.querySelectorAll(".recent-activity-no")[0].classList.add("inactive-modal");
     if(user.answers.length > 0) document.querySelectorAll(".recent-activity-no")[1].classList.add("inactive-modal");
 
+    await displayFolders(user);
     await notificationsManager(user);
     toggleNotificationTab(0);
 
@@ -163,4 +271,4 @@ async function locateUserInfo(){
     initialize(context)
 }
 
-locateUserInfo()
+locateUserInfo();

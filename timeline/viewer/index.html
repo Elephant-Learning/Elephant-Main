@@ -18,6 +18,17 @@
     <script src="js/script.js" defer></script>
 </head>
 <body>
+    <div id="restricted-access-container" class="inactive-modal">
+        <div></div>
+        <div id="restricted-access-modal">
+            <div>
+                <img src="./icons/stop.svg" alt="">
+            </div>
+            <h1>Take It Easy There</h1>
+            <p>It looks like you are not the owner of this deck, and therefore I cannot let you make any edits. I do hope that you understand</p>
+            <a href="../dashboard/">Return to Dashboard</a>
+        </div>
+    </div>
     <div id="desktop-navbar">
         <div id="desktop-main-image">
             <a href="../dashboard"><img src="../../icons/elephant-400-400-pink-timeline.png" alt="Elephant Logo"></a>
@@ -144,5 +155,8 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="fonts/Urbanist-Regular-normal.js" type="module"></script>
 </body>
 </html>

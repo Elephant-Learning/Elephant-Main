@@ -235,46 +235,43 @@
         </div>
         <div id="desktop-parent-container">
             <div id="desktop-sidebar">
-                <div id="desktop-sidebar-categories">
-                    <div class="desktop-sidebar-category-2" onclick="location.href = '../../dashboard'">
+                <div class="sidebar-button" onclick="location.href='../../dashboard/'">
+                    <img src="../icons/dashboard.png" alt="Recent">
+                    <p>My Dashboard</p>
+                </div>
+                <div class="sidebar-dropdown">
+                    <div>
+                        <img src="../icons/compass.png" alt="">
+                        <p>Applications</p>
                         <div>
-                            <img src="../icons/dashboard.png" alt="Recent">
+                            <img src="../icons/expand_down.png" alt="" class="">
                         </div>
-                        <p>My Dashboard</p>
                     </div>
-                    <div class="desktop-sidebar-break"></div>
-                    <div class="desktop-sidebar-category" onclick="location.href = './'">
-                        <div>
+                    <div>
+                        <div class="active-sidebar-dropdown-category">
                             <img src="../icons/deck.png" alt="Recent">
+                            <p>Flip</p>
                         </div>
-                        <p>Flip</p>
-                    </div>
-                    <div class="desktop-sidebar-category-2" onclick="location.href = '../../ask/dashboard/'">
-                        <div>
+                        <div onclick="location.href='../../ask/dashboard'">
                             <img src="../../ask/icons/ask.png" alt="Recent">
+                            <p>Ask</p>
                         </div>
-                        <p>Ask</p>
-                    </div>
-                    <div class="desktop-sidebar-category-2" onclick="location.href = '../../timeline/dashboard/'">
-                        <div>
+                        <div onclick="location.href='../../timeline/dashboard'">
                             <img src="../../timeline/icons/timeline.png" alt="Recent">
+                            <p>Timeline</p>
                         </div>
-                        <p>Timeline</p>
                     </div>
-                    <!--<div class="desktop-sidebar-category unavailable-sidebar-category" onclick="">
+                </div>
+                <div class="sidebar-break"></div>
+                <div class="sidebar-dropdown">
+                    <div>
+                        <img src="../icons/open_folder.png" alt="">
+                        <p>Folders</p>
                         <div>
-                            <img src="./icons/network.png" alt="Recent">
+                            <img src="../icons/plus.png" alt="" id="create-folder-btn">
+                            <img src="../icons/expand_down.png" alt="">
                         </div>
-                        <p>Community</p>
-                    </div>-->
-                    <div id="desktop-sidebar-employee" class="desktop-sidebar-category" onclick="location.href = '../../employee'">
-                        <div>
-                            <img src="../icons/admin.png" alt="Recent">
-                        </div>
-                        <p>Admin Portal</p>
                     </div>
-                    <div class="desktop-sidebar-break"></div>
-                    <h1>Folders</h1>
                     <div id="desktop-sidebar-folders"></div>
                 </div>
             </div>
@@ -333,23 +330,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="desktop-tab" id="task-manager-tab">
-                        stop cring
-                        <a href="http://www.google.com/" > Google </a>
-                    </div>
-                    <div class="desktop-tab" id="chat-div">
-                        <div id="chat-main-container">
-                            <div id="chat-window"></div>
-                            <div id="chat-input-div">
-                                <textarea placeholder="Message Skyline High School..." id="chat-input" onkeydown="textAreaAdjust(this)"></textarea>
-                                <div id="chat-options">
-                                    <img src="../icons/emojis/happy.png" id="emojis-btn" alt="Emojis">
-                                    <img src="../icons/deck.png" alt="Decks">
-                                </div>
-                            </div>
-                        </div>
-                        <div id="chat-members"></div>
-                    </div>
                     <div class="desktop-tab" id="search-results">
                         <div id="search-results-main">
                             <p id="search-decks-para"></p>
@@ -358,30 +338,6 @@
                             <div id="search-results-users"></div>
                         </div>
                     </div>
-                    <div class="desktop-tab" id="folder-viewer">
-                        <div id="folder-main-options">
-                            <div onclick="createDeck()">
-                                <img src="../icons/edit_folder.png" alt="">
-                                <div>
-                                    <h1>Edit Folder Decks</h1>
-                                    <p>More Decks For Folder</p>
-                                </div>
-                                <img src="../editor/icons/edit.png" alt="">
-                            </div>
-                        </div>
-                        <div id="folder-main-container">
-                            <div class="flashcard-sorting">
-                                <p>Sort By:</p>
-                                <select onchange="">
-                                    <option value="0">Last Viewed</option>
-                                    <option value="1">Favorited</option>
-                                    <option value="2">Alphabetical</option>
-                                </select>
-                            </div>
-                            <div id="folder-flashcard-display"></div>
-                        </div>
-                    </div>
-                    <div class="desktop-tab" id="administrator-portal"></div>
                 </div>
                 <div id="desktop-bottom-buttons">
                     <div class="desktop-bottom-btn" onclick="createDeck()">

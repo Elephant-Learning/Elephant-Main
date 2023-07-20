@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Dashboard | Elephant - The Ultimate Student Suite</title>
+    <title id="webpage-title">Folder Details | Elephant - The Ultimate Student Suite</title>
 
     <link rel="icon" href="../icons/elephant-400-400-grayscale.png">
     <link rel="stylesheet" href="../flip/css/main.css">
@@ -14,6 +14,38 @@
     <script src="script.js" defer></script>
 </head>
 <body>
+    <div id="delete-folder-modal" class="desktop-modal inactive-modal">
+        <div class="desktop-modal-image-container">
+            <img src="../flip/icons/delete_folder.png" alt="">
+        </div>
+        <h1>Delete Folder</h1>
+        <p>No longer using this folder? Clear up the clutter and delete the folder! Confirm deletion by typing the folder name.</p>
+        <h6 id="delete-folder-header"></h6>
+        <div class="desktop-modal-input-container" id="folder-delete-input-container">
+            <img src="../flip/icons/folder.png" alt="">
+            <input type="text" id="folder-delete-input" placeholder="Type Folder Name">
+        </div>
+        <div class="desktop-modal-buttons-container">
+            <button onclick="toggleFolderModal(false)">Cancel</button>
+            <button onclick="toggleFolderModal(true)">Delete</button>
+        </div>
+    </div>
+    <div id="rename-folder-modal" class="desktop-modal inactive-modal">
+        <div class="desktop-modal-image-container">
+            <img src="../flip/icons/edit_folder.png" alt="">
+        </div>
+        <h1>Rename Folder</h1>
+        <p>Not happy with the folder's name? Rename it now.</p>
+        <h6 id="rename-folder-header"></h6>
+        <div class="desktop-modal-input-container" id="rename-delete-input-container">
+            <img src="../flip/icons/folder.png" alt="">
+            <input type="text" id="folder-rename-input" placeholder="New Folder Name">
+        </div>
+        <div class="desktop-modal-buttons-container">
+            <button onclick="toggleRenameModal(false)">Cancel</button>
+            <button onclick="toggleRenameModal(true)">Rename</button>
+        </div>
+    </div>
     <div id="desktop-wrapper">
         <div id="desktop-loader-container">
             <div id="desktop-loader-bg-left"></div>
@@ -21,26 +53,6 @@
             <img src="../icons/elephant-400-400-white.png" alt="Loading Ain't Loading" id="desktop-loader-img">
             <div id="desktop-loader-bg-right"></div>
             <p id="desktop-loader-text"></p>
-        </div>
-        <div id="new-user-modal-bg" class="inactive-modal">
-            <div id="new-user-modal">
-                <div id="new-user-video-container">
-                    <div class="video-container-child active-video-container-child" onclick="playVideo()">
-                        <div></div>
-                        <div>
-                            <img src="./icons/play.png" alt="">
-                        </div>
-                    </div>
-                    <div class="video-container-child">
-                        <iframe src="https://www.youtube.com/embed/jBCh7LNYyjg?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen id="entry-video"></iframe>
-                    </div>
-                </div>
-                <h1>Welcome to your dashboard!</h1>
-                <p>We're so excited to have you join us! To capitalize on our services, take this quick tour.</p>
-                <div id="new-user-buttons">
-                    <button onclick="completeEntry()">Continue</button>
-                </div>
-            </div>
         </div>
         <div id="desktop-notifications-modal" class="inactive-modal">
             <div id="desktop-notifications-header">
@@ -159,7 +171,7 @@
         </div>
         <div id="desktop-parent-container">
             <div id="desktop-sidebar">
-                <div class="sidebar-button active-sidebar-button">
+                <div class="sidebar-button" onclick="location.href='../dashboard/'">
                     <img src="../flip/icons/dashboard.png" alt="Recent">
                     <p>My Dashboard</p>
                 </div>
@@ -205,70 +217,49 @@
                     <a href="https://discord.gg/YbZS8H6RbB/">Join The New Elephant Discord Server</a>
                     <p onclick="closeNews()">X</p>-->
                 </div>
-                <p id="desktop-main-container-tab">My Dashboard</p>
-                <div id="my-dashboard">
-                    <div id="dashboard-left">
-                        <div id="quick-buttons">
-                            <a href="../flip/dashboard/">
-                                <div></div>
-                                <img src="../flip/icons/deck.png" alt="">
-                                <div>
-                                    <h1>Flip</h1>
-                                    <p>Memorization Made Easy</p>
-                                </div>
-                            </a>
-                            <a href="../ask/dashboard/">
-                                <div></div>
-                                <img src="../ask/icons/ask.png" alt="">
-                                <div>
-                                    <h1>Ask</h1>
-                                    <p>Academic Support Network</p>
-                                </div>
-                            </a>
-                            <a href="../ask/dashboard/">
-                                <div></div>
-                                <img src="../timeline/icons/timeline.png" alt="">
-                                <div>
-                                    <h1>Timeline</h1>
-                                    <p>Advanced Timeline Editor</p>
-                                </div>
-                            </a>
-                        </div>
-                        <h1>Recent Activity</h1>
-                        <h2>Elephant Flip</h2>
-                        <div class="recent-activity-div" id="flashcards-activity">
-                            <div class="recent-activity-no">No Decks</div>
-                        </div>
-                        <h2>Elephant Ask</h2>
-                        <div class="recent-activity-div" id="answers-activity">
-                            <div class="recent-activity-no">No Questions</div>
-                        </div>
+                <p id="desktop-main-container-tab"></p>
+                <div id="folder-container">
+                    <div id="folder-left">
+                        <h1>Elephant Flip Decks</h1>
+                        <div class="folder-list"></div>
+                        <h1>Elephant Timelines</h1>
+                        <div class="folder-list"></div>
                     </div>
-                    <div id="dashboard-right">
-                        <div id="profile-at-glance">
-                            <div id="profile-banner"></div>
-                            <div id="profile-image-container">
-                                <img src="../flip/icons/unfilled_heart.png" alt="" id="profile-image">
+                    <div id="folder-right">
+                        <div id="pie-chart-container">
+                            <div id="pie-chart">
+                                <h1 id="folder-item-numbers">50</h1>
+                                <p>Items</p>
                             </div>
-                            <h1 id="profile-name"></h1>
-                            <p id="profile-desc"></p>
-                            <div class="profile-divider"></div>
-                            <div class="profile-information">
-                                <img src="../flip/icons/email.png" alt="">
-                                <p id="profile-email"></p>
+                        </div>
+                        <div id="pie-chart-legend">
+                            <div>
+                                <div class="personal">
+                                    <img src="../flip/icons/deck.png" alt="">
+                                </div>
+                                <div>
+                                    <h1>Elephant Flip</h1>
+                                    <p class="folder-numbers">23 Flip Decks</p>
+                                </div>
                             </div>
-                            <div class="profile-information">
-                                <img src="../flip/icons/fire.png" alt="">
-                                <p id="profile-streak"></p>
+                            <div>
+                                <div class="community">
+                                    <img src="../timeline/icons/timeline.png" alt="">
+                                </div>
+                                <div>
+                                    <h1>Elephant Timeline</h1>
+                                    <p class="folder-numbers">23 Timelines</p>
+                                </div>
                             </div>
-                            <div class="profile-divider"></div>
-                            <div class="profile-information">
-                                <img src="../flip/icons/deck.png" alt="">
-                                <p id="profile-decks"></p>
+                        </div>
+                        <div id="folder-options">
+                            <div onclick="toggleRenameModal(false)">
+                                <img src="../flip/icons/edit_folder.png" alt="">
+                                <p>Rename Folder</p>
                             </div>
-                            <div class="profile-information">
-                                <img src="../ask/icons/ask.png" alt="">
-                                <p id="profile-answers"></p>
+                            <div class="personal" onclick="toggleFolderModal(false)">
+                                <img src="../flip/icons/delete.png" alt="">
+                                <p>Delete Folder</p>
                             </div>
                         </div>
                     </div>
