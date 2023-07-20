@@ -165,6 +165,7 @@
     cursor:pointer;
     filter:grayscale(1) brightness(0.5);
     transition-duration:250ms;
+    background:var(--light-gray);
 }
 
 #folder-options > div:hover{
@@ -396,7 +397,7 @@
     position:relative;
 }
 
-#delete-folder-modal{
+#delete-folder-modal, #rename-folder-modal{
     bottom:calc(var(--size) * 12px);
     right:calc(var(--size) * 276px);
 }

@@ -406,6 +406,7 @@ function sidebarFolder(title, folderId){
     if(folderId === parseInt(location.href.split("=")[1])){
         newDiv.classList.add("active-sidebar-dropdown-category")
         document.getElementById("desktop-main-container-tab").innerHTML = title;
+        document.getElementById("webpage-title").innerHTML = `${title} | Elephant - The Ultimate Student Suite`;
     }
 
     if(parseInt(location.href.split("=")[1]) === folderId) pass = true;
@@ -504,6 +505,7 @@ function toggleModal(modal){
 
 async function toggleFolderModal(deleting){
     toggleModal(document.getElementById("delete-folder-modal"));
+    if(!document.getElementById("rename-folder-modal").classList.contains("inactive-modal")) document.getElementById("rename-folder-modal").classList.add("inactive-modal");
 
     if(deleting && document.getElementById("folder-delete-input").value === document.getElementById("folder-delete-input").getAttribute("data")){
         const response = await fetch('https://elephantsuite-rearend.herokuapp.com/folder/delete?id=' + location.href.split("=")[1], {
@@ -520,6 +522,39 @@ async function toggleFolderModal(deleting){
         const context = await response.json();
 
         if(context.status === "SUCCESS") location.href = "../dashboard/";
+    }
+}
+
+async function toggleRenameModal(renaming){
+    toggleModal(document.getElementById("rename-folder-modal"));
+    if(!document.getElementById("delete-folder-modal").classList.contains("inactive-modal")) document.getElementById("delete-folder-modal").classList.add("inactive-modal");
+
+    if(renaming){
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/folder/setName', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                folderId: location.href.split("=")[1],
+                name: document.getElementById("folder-rename-input").value
+            }),
+            mode: 'cors'
+        });
+
+        const context = await response.json();
+        console.log(context);
+
+        if(context.status === "SUCCESS") {
+            document.getElementById("desktop-main-container-tab").innerHTML = context.context.folder.name;
+            document.getElementById("webpage-title").innerHTML = `${context.context.folder.name} | Elephant - The Ultimate Student Suite`;
+            document.querySelector(".active-sidebar-dropdown-category").children[1].innerHTML = context.context.folder.name
+            document.getElementById("delete-folder-header").innerHTML = `Type "${context.context.folder.name}" to Confirm`;
+            document.getElementById("folder-delete-input").setAttribute("data", context.context.folder.name);
+        }
     }
 }
 

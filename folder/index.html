@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Folder Details | Elephant - The Ultimate Student Suite</title>
+    <title id="webpage-title">Folder Details | Elephant - The Ultimate Student Suite</title>
 
     <link rel="icon" href="../icons/elephant-400-400-grayscale.png">
     <link rel="stylesheet" href="../flip/css/main.css">
@@ -26,8 +26,24 @@
             <input type="text" id="folder-delete-input" placeholder="Type Folder Name">
         </div>
         <div class="desktop-modal-buttons-container">
-            <button id="friending-cancel" onclick="toggleFolderModal(false)">Cancel</button>
-            <button id="friending-done" onclick="toggleFolderModal(true)">Delete</button>
+            <button onclick="toggleFolderModal(false)">Cancel</button>
+            <button onclick="toggleFolderModal(true)">Delete</button>
+        </div>
+    </div>
+    <div id="rename-folder-modal" class="desktop-modal inactive-modal">
+        <div class="desktop-modal-image-container">
+            <img src="../flip/icons/edit_folder.png" alt="">
+        </div>
+        <h1>Rename Folder</h1>
+        <p>Not happy with the folder's name? Rename it now.</p>
+        <h6 id="rename-folder-header"></h6>
+        <div class="desktop-modal-input-container" id="rename-delete-input-container">
+            <img src="../flip/icons/folder.png" alt="">
+            <input type="text" id="folder-rename-input" placeholder="New Folder Name">
+        </div>
+        <div class="desktop-modal-buttons-container">
+            <button onclick="toggleRenameModal(false)">Cancel</button>
+            <button onclick="toggleRenameModal(true)">Rename</button>
         </div>
     </div>
     <div id="desktop-wrapper">
@@ -237,6 +253,10 @@
                             </div>
                         </div>
                         <div id="folder-options">
+                            <div onclick="toggleRenameModal(false)">
+                                <img src="../flip/icons/edit_folder.png" alt="">
+                                <p>Rename Folder</p>
+                            </div>
                             <div class="personal" onclick="toggleFolderModal(false)">
                                 <img src="../flip/icons/delete.png" alt="">
                                 <p>Delete Folder</p>

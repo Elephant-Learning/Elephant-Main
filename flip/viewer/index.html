@@ -133,61 +133,46 @@
     </div>
     <div id="desktop-parent-container">
         <div id="desktop-sidebar">
-            <div id="desktop-sidebar-categories">
-                <div class="desktop-sidebar-category active-sidebar-category" onclick="togglePageFlip(0, 0)">
+            <div class="sidebar-dropdown">
+                <div>
+                    <img src="../icons/test.png" alt="">
+                    <p>Services</p>
                     <div>
+                        <img src="../icons/expand_down.png" alt="" class="">
+                    </div>
+                </div>
+                <div>
+                    <div onclick="togglePageFlip(0, 0)" class="sidebar-node">
                         <img src="./icons/carousel.png" alt="Recent">
+                        <p>Deck Carousel</p>
                     </div>
-                    <p>Deck Carousel</p>
-                </div>
-                <div class="desktop-sidebar-category" onclick="togglePageFlip(1, 1, undefined)">
-                    <div>
+                    <div onclick="togglePageFlip(1, 1)" class="sidebar-node">
                         <img src="./icons/memorize.png" alt="Recent">
+                        <p>Deck Memorize</p>
                     </div>
-                    <p>Deck Memorize</p>
-                </div>
-                <div class="desktop-sidebar-category unavailable-sidebar-category"> <!--onclick="togglePageFlip(2, 2, undefined)"-->
-                    <div>
-                        <img src="../icons/test.png" alt="Recent">
-                    </div>
-                    <p>Deck Review</p>
-                </div>
-                <div class="desktop-sidebar-category unavailable-sidebar-category">
-                    <div>
-                        <img src="./icons/timer.png" alt="Recent">
-                    </div>
-                    <p>Deck Match</p>
-                </div>
-                <div class="desktop-sidebar-category"  onclick="togglePageFlip(4, 4, undefined)">
-                    <div>
+                    <div onclick="togglePageFlip(4, 2)" class="sidebar-node">
                         <img src="./icons/puzzle.png" alt="Recent">
+                        <p>Deck Crossword</p>
                     </div>
-                    <p>Deck Crossword</p>
-                </div>
-                <div class="desktop-sidebar-break"></div>
-                <h1>Information</h1>
-                <div class="desktop-sidebar-category" onclick="togglePageFlip(5, 5, undefined)">
-                    <div>
-                        <img src="./icons/statistics.png" alt="Recent">
-                    </div>
-                    <p>Deck Statistics</p>
-                </div>
-                <div class="desktop-sidebar-category" onclick="togglePageFlip(6, 6, undefined)">
-                    <div>
-                        <img src="../icons/deck.png" alt="Recent">
-                    </div>
-                    <p>Deck Cards</p>
                 </div>
             </div>
-            <div id="desktop-sidebar-information">
-                <div id="desktop-sidebar-deck-type">
-                    <img src="../icons/deck.png" alt="">
+            <div class="sidebar-break"></div>
+            <div class="sidebar-dropdown">
+                <div>
+                    <img src="./icons/information.png" alt="">
+                    <p>Information</p>
+                    <div>
+                        <img src="../icons/expand_down.png" alt="">
+                    </div>
                 </div>
-                <div id="desktop-sidebar-deck-text">
-                    <div id="desktop-sidebar-deck-name"></div>
-                    <div id="desktop-sidebar-deck-author-container">
-                        <img src="" alt="" id="desktop-sidebar-deck-author-img">
-                        <p id="desktop-sidebar-deck-author"></p>
+                <div>
+                    <div onclick="togglePageFlip(5, 3)" class="sidebar-node">
+                        <img src="./icons/statistics.png" alt="Recent">
+                        <p>Deck Statistics</p>
+                    </div>
+                    <div onclick="togglePageFlip(6, 4)" class="sidebar-node">
+                        <img src="../icons/deck.png" alt="Recent">
+                        <p>Deck Cards</p>
                     </div>
                 </div>
             </div>

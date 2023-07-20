@@ -170,10 +170,7 @@ async function deleteFolder(folderId){
     refreshFolders()
 }
 
-document.getElementById("create-folder-btn").addEventListener("click", function(e){
-    e.preventDefault();
-    e.stopPropagation();
-
+function createFolderNode(){
     let newDiv = document.createElement('div');
     let img = document.createElement('img');
     let input = document.createElement('input');
@@ -217,6 +214,13 @@ document.getElementById("create-folder-btn").addEventListener("click", function(
     document.getElementById('desktop-sidebar-folders').appendChild(newDiv);
 
     input.focus();
+}
+
+document.getElementById("create-folder-btn").addEventListener("click", function(e){
+    e.preventDefault();
+    e.stopPropagation();
+
+    createFolderNode();
 })
 
 function sidebarFolder(title, folderId){
@@ -260,7 +264,7 @@ document.getElementById('desktop-sidebar').addEventListener('contextmenu', funct
         document.getElementById('context-menu').firstChild.remove()
     }
 
-    const options = [["add_folder", "New Folder", "createFolder()"]]
+    const options = [["add_folder", "New Folder", "createFolderNode()"]]
 
     contextMenuOptions(options)
 
@@ -282,7 +286,7 @@ document.getElementById('desktop-main-container').addEventListener('contextmenu'
         document.getElementById('context-menu').firstChild.remove()
     }
 
-    const options = [["add_file", "New Deck", "createDeck()"], ["add_folder", "New Folder", "createFolder()"]]
+    const options = [["add_file", "New Deck", "location.href('../editor/')"], ["add_folder", "New Folder", "createFolder()"]]
 
     contextMenuOptions(options)
 
