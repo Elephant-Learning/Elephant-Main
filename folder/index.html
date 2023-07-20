@@ -14,6 +14,22 @@
     <script src="script.js" defer></script>
 </head>
 <body>
+    <div id="delete-folder-modal" class="desktop-modal inactive-modal">
+        <div class="desktop-modal-image-container">
+            <img src="../flip/icons/delete_folder.png" alt="">
+        </div>
+        <h1>Delete Folder</h1>
+        <p>No longer using this folder? Clear up the clutter and delete the folder! Confirm deletion by typing the folder name.</p>
+        <h6 id="delete-folder-header"></h6>
+        <div class="desktop-modal-input-container" id="folder-delete-input-container">
+            <img src="../flip/icons/folder.png" alt="">
+            <input type="text" id="folder-delete-input" placeholder="Type Folder Name">
+        </div>
+        <div class="desktop-modal-buttons-container">
+            <button id="friending-cancel" onclick="toggleFolderModal(false)">Cancel</button>
+            <button id="friending-done" onclick="toggleFolderModal(true)">Delete</button>
+        </div>
+    </div>
     <div id="desktop-wrapper">
         <div id="desktop-loader-container">
             <div id="desktop-loader-bg-left"></div>
@@ -186,7 +202,48 @@
                     <p onclick="closeNews()">X</p>-->
                 </div>
                 <p id="desktop-main-container-tab"></p>
-                <div id="folder-container"></div>
+                <div id="folder-container">
+                    <div id="folder-left">
+                        <h1>Elephant Flip Decks</h1>
+                        <div class="folder-list"></div>
+                        <h1>Elephant Timelines</h1>
+                        <div class="folder-list"></div>
+                    </div>
+                    <div id="folder-right">
+                        <div id="pie-chart-container">
+                            <div id="pie-chart">
+                                <h1 id="folder-item-numbers">50</h1>
+                                <p>Items</p>
+                            </div>
+                        </div>
+                        <div id="pie-chart-legend">
+                            <div>
+                                <div class="personal">
+                                    <img src="../flip/icons/deck.png" alt="">
+                                </div>
+                                <div>
+                                    <h1>Elephant Flip</h1>
+                                    <p class="folder-numbers">23 Flip Decks</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="community">
+                                    <img src="../timeline/icons/timeline.png" alt="">
+                                </div>
+                                <div>
+                                    <h1>Elephant Timeline</h1>
+                                    <p class="folder-numbers">23 Timelines</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="folder-options">
+                            <div class="personal" onclick="toggleFolderModal(false)">
+                                <img src="../flip/icons/delete.png" alt="">
+                                <p>Delete Folder</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
