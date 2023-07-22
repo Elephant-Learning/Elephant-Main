@@ -148,3 +148,27 @@
     margin-top:calc(var(--size) * 24px);
     text-transform:uppercase;
 }
+
+.desktop-tab:not(.active-tab){
+    visibility:hidden;
+    opacity:0;
+}
+
+.active-tab{
+    opacity:1;
+    visibility:visible;
+}
+
+#desktop-main-tabs{
+    width:100%;
+}
+
+.desktop-tab{
+    transition-duration:250ms;
+    transition-property:opacity;
+    position:absolute;
+    top:calc(var(--size) * 44px);
+    left:calc(var(--size) * 256px);
+    width:calc(100vw - var(--size) * 256px);
+    height:calc(100vh - var(--size) * 92px)
+}

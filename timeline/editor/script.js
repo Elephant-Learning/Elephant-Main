@@ -347,96 +347,98 @@ document.getElementById("clear-uploaded-image").addEventListener("click", functi
 async function saveChanges(){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
 
-    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/timeline/create', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type'
-        },
-        body: JSON.stringify({
-            name:document.getElementById("timeline-name").textContent,
-            description:"New Timeline",
-            userId: savedUserId,
-            timelineVisibility: "PRIVATE"
-        }),
-        mode: 'cors'
-    });
+    if(!editing){
+        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/timeline/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            body: JSON.stringify({
+                name:document.getElementById("timeline-name").textContent,
+                description:"New Timeline",
+                userId: savedUserId,
+                timelineVisibility: "PRIVATE"
+            }),
+            mode: 'cors'
+        });
 
-    const context = await response.json();
-    console.log(context);
+        const context = await response.json();
+        console.log(context);
 
-    for(let i = 0; i < nodes.length; i++){
-        if(nodes[i].type === "EVENT"){
+        for(let i = 0; i < nodes.length; i++){
+            if(nodes[i].type === "EVENT"){
 
-            let content;
+                let content;
 
-            if(nodes[i].image !== ""){
-                content = {
-                    timelineId:context.context.timeline.id,
-                    name: nodes[i].name,
-                    date: nodes[i].start,
-                    endDate: nodes[i].end,
-                    description: nodes[i].description,
-                    image: nodes[i].image,
-                    importance:1
+                if(nodes[i].image !== ""){
+                    content = {
+                        timelineId:context.context.timeline.id,
+                        name: nodes[i].name,
+                        date: nodes[i].start,
+                        endDate: nodes[i].end,
+                        description: nodes[i].description,
+                        image: nodes[i].image,
+                        importance:1
+                    }
+                } else {
+                    content = {
+                        timelineId:context.context.timeline.id,
+                        name: nodes[i].name,
+                        date: nodes[i].start,
+                        endDate: nodes[i].end,
+                        description: nodes[i].description,
+                        importance:1
+                    }
                 }
-            } else {
-                content = {
-                    timelineId:context.context.timeline.id,
-                    name: nodes[i].name,
-                    date: nodes[i].start,
-                    endDate: nodes[i].end,
-                    description: nodes[i].description,
-                    importance:1
-                }
-            }
 
-            const response2 = await fetch('https://elephantsuite-rearend.herokuapp.com/timeline/createEvent', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                    'Access-Control-Allow-Headers': 'Content-Type'
-                },
-                body: JSON.stringify(content),
-                mode: 'cors'
-            });
+                const response2 = await fetch('https://elephantsuite-rearend.herokuapp.com/timeline/createEvent', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type'
+                    },
+                    body: JSON.stringify(content),
+                    mode: 'cors'
+                });
 
-            const context2 = response2.json();
-            console.log(context2);
+                const context2 = response2.json();
+                console.log(context2);
 
-        } else if(nodes[i].type === "MARKER"){
-            const response2 = await fetch('https://elephantsuite-rearend.herokuapp.com/timeline/createMarker', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                    'Access-Control-Allow-Headers': 'Content-Type'
-                },
-                body: JSON.stringify({
+            } else if(nodes[i].type === "MARKER"){
+                const response2 = await fetch('https://elephantsuite-rearend.herokuapp.com/timeline/createMarker', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type'
+                    },
+                    body: JSON.stringify({
+                        timelineId:context.context.timeline.id,
+                        name: nodes[i].name,
+                        date: nodes[i].date,
+                    }),
+                    mode: 'cors'
+                });
+
+                console.log({
                     timelineId:context.context.timeline.id,
                     name: nodes[i].name,
                     date: nodes[i].date,
-                }),
-                mode: 'cors'
-            });
+                });
 
-            console.log({
-                timelineId:context.context.timeline.id,
-                name: nodes[i].name,
-                date: nodes[i].date,
-            });
-
-            const context2 = response2.json();
-            console.log(context2);
+                const context2 = response2.json();
+                console.log(context2);
+            }
         }
+    } else {
+
     }
-
-
 }
 
 function leaveEditor(link){

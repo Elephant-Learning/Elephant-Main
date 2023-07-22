@@ -52,7 +52,7 @@ async function displayFlashcard(flashcardType, id){
         iconDiv.classList.add(params.timelineVisibility.toLowerCase() + "-flashcard");
     }
 
-    //console.log(params)
+    console.log(params)
 
     iconDiv.appendChild(icon);
 
@@ -300,10 +300,10 @@ async function displayFlashcard(flashcardType, id){
 
     if(flashcardType === "flashcard"){
         mainDiv.classList.add(params.visibility.toLowerCase() + "-flashcard-border");
-        mainDiv.setAttribute('onclick', "location.href = '../flip/viewer/?deck=" + params.deckID + "'");
+        mainDiv.setAttribute('onclick', "location.href = '../flip/viewer/?deck=" + params.id + "'");
     } else if(flashcardType === "timeline"){
         mainDiv.classList.add(params.timelineVisibility.toLowerCase() + "-flashcard-border");
-        mainDiv.setAttribute('onclick', "location.href = '../timeline/viewer/?timeline=" + params.deckID + "'");
+        mainDiv.setAttribute('onclick', "location.href = '../timeline/viewer/?timeline=" + params.id + "'");
     }
 
     mainDiv.classList.add("faded-out");

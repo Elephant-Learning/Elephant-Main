@@ -1,4 +1,5 @@
 let timeline;
+let activeTab;
 
 window.onload = async function(){
     locateUserInfo();
@@ -35,6 +36,8 @@ window.onload = async function(){
     }
 
     Object.freeze(timeline)
+
+    createChronology(timeline);
 }
 
 window.jsPDF = window.jspdf.jsPDF;
@@ -76,6 +79,35 @@ function createPDF(){
     doc.save(`${timeline.name}.pdf`);
 }
 
+function togglePageFlip(index, sidebar){
+
+    const pages = ["Timeline Viewer", "Timeline Memorize", "Timeline Chronology"];
+
+    document.getElementById('desktop-main-container-tab').innerHTML = pages[index];
+    try{document.querySelector(".active-sidebar-dropdown-category").classList.remove('active-sidebar-dropdown-category')} catch{}
+
+    document.querySelectorAll('.sidebar-node')[sidebar].classList.add('active-sidebar-dropdown-category')
+
+    try {document.querySelector(".active-tab").classList.remove('active-tab')} catch{}
+    document.querySelectorAll('.desktop-tab')[index].classList.add('active-tab')
+
+    const removeBottomBtns = [1, 2, 3, 4, 5, 6, 7]
+
+    if(removeBottomBtns.includes(index)){
+        document.querySelectorAll('.desktop-bottom-btn').forEach(function(item){
+            item.classList.add('inactive-modal')
+        })
+    } else {
+        try {
+            document.querySelectorAll('.desktop-bottom-btn').forEach(function(item){
+                item.classList.remove('inactive-modal')
+            })
+        } catch{}
+    }
+
+    activeTab = index;
+}
+
 async function initialize(user){
     if(user.status === "FAILURE" || user.error === "Bad Request") {
         location.href = "../../login"
@@ -114,4 +146,6 @@ async function locateUserInfo(){
 
     const context = await response.json();
     await initialize(context)
+
+    togglePageFlip(0, 0);
 }

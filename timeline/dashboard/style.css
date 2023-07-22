@@ -365,3 +365,7 @@
     border-right: calc(var(--size) * 8px) solid transparent;
     border-top: calc(var(--size) * 6px) solid var(--light-gray);
 }
+
+.desktop-bottom-btn{
+    z-index:1;
+}

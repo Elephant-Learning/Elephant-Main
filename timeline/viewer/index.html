@@ -13,9 +13,13 @@
     <link rel="icon" href="../../icons/elephant-400-400-grayscale.png">
     <link rel="stylesheet" href="../../flip/css/main.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/chronology.css">
+    <link rel="stylesheet" href="css/viewer.css">
 
     <script src="../../flip/js/main.js" defer></script>
     <script src="js/script.js" defer></script>
+    <script src="js/chronology.js" defer></script>
+    <script src="js/viewer.js" defer></script>
 </head>
 <body>
     <div id="restricted-access-container" class="inactive-modal">
@@ -113,24 +117,46 @@
     </div>
     <div id="desktop-parent-container">
         <div id="desktop-sidebar">
-            <div id="desktop-sidebar-categories">
-                <div class="desktop-sidebar-category active-sidebar-category" onclick="togglePageFlip(0, 0)">
+            <div class="sidebar-dropdown">
+                <div>
+                    <img src="../../flip/icons/test.png" alt="">
+                    <p>Services</p>
                     <div>
+                        <img src="../../flip/icons/expand_down.png" alt="" class="">
+                    </div>
+                </div>
+                <div>
+                    <div onclick="togglePageFlip(0, 0)" class="sidebar-node">
                         <img src="./icons/timeline.png" alt="Recent">
+                        <p>Timeline Viewer</p>
                     </div>
-                    <p>Timeline Viewer</p>
-                </div>
-                <div class="desktop-sidebar-category" onclick="togglePageFlip(1, 1, undefined)">
-                    <div>
+                    <div onclick="togglePageFlip(1, 1)" class="sidebar-node">
                         <img src="./icons/brain.png" alt="Recent">
+                        <p>Timeline Memorize</p>
                     </div>
-                    <p>Timeline Memorize</p>
-                </div>
-                <div class="desktop-sidebar-category" onclick="togglePageFlip(1, 1, undefined)">
-                    <div>
+                    <div onclick="togglePageFlip(2, 2)" class="sidebar-node">
                         <img src="./icons/chronology.png" alt="Recent">
+                        <p>Timeline Chronology</p>
                     </div>
-                    <p>Timeline Chronology</p>
+                </div>
+            </div>
+            <div class="sidebar-dropdown">
+                <div>
+                    <img src="../../flip/icons/settings.png" alt="">
+                    <p>Options</p>
+                    <div>
+                        <img src="../../flip/icons/expand_down.png" alt="" class="">
+                    </div>
+                </div>
+                <div>
+                    <div onclick="togglePageFlip(0, 0)" class="sidebar-node">
+                        <img src="../../flip/icons/deck.png" alt="Recent">
+                        <p>Convert to Flip Deck</p>
+                    </div>
+                    <div class="sidebar-node unavailable-sidebar-node">
+                        <img src="./icons/printer.png" alt="Recent">
+                        <p>Create Printout</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -138,18 +164,26 @@
             <p id="desktop-main-container-tab">Timeline Viewer</p>
             <div id="desktop-main-tabs">
                 <div class="desktop-tab" id="timeline-viewer">
+                    <div id="slider-viewport">
+                        <div id="slider-inner">
+                            <div class="viewer-pipe" style="width:calc(var(--size) * 256px)"></div>
 
+                        </div>
+                    </div>
                 </div>
                 <div class="desktop-tab" id="timeline-memorize"></div>
-                <div class="deskop-tab" id="timeline-chronology">
-                    <!--https://www.youtube.com/watch?v=_G8G1OrEOrI-->
+                <div class="desktop-tab" id="timeline-chronology">
+                    <div id="chronology-box-container">
+                        <div class="chronology-box"></div>
+                        <div class="chronology-box"></div>
+                        <div class="chronology-box"></div>
+                        <div class="chronology-box"></div>
+                    </div>
+                    <div id="chronology-event-container"></div>
                 </div>
             </div>
             <div class="bottom-btns">
-                <a href="../editor/" id="edit-btn" class="inactive-modal">
-                    <img src="../editor/icons/edit.png" alt="">
-                </a>
-                <a href="../dashboard/" id="back-btn">
+                <a href="../dashboard/" id="back-btn" class="desktop-bottom-btn">
                     <img src="../../flip/icons/back.png" alt="">
                 </a>
             </div>

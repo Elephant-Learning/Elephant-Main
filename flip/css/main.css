@@ -965,6 +965,7 @@ body *{
 
 .sidebar-button > img, .sidebar-dropdown > div:first-of-type > img:first-of-type, .sidebar-dropdown > div:last-of-type > div > img{
     height:calc(var(--size) * 16px);
+    filter:invert(var(--image-invert));
 }
 
 .sidebar-dropdown > div:first-of-type > div:last-of-type{
@@ -978,6 +979,7 @@ body *{
 
 .sidebar-dropdown > div:first-of-type > div:last-of-type > img{
     height:calc(var(--size) * 16px);
+    filter:invert(var(--image-invert));
     transition-duration:250ms;
 }
 
@@ -1006,6 +1008,7 @@ body *{
     border-radius:calc(var(--size) * 6px);
     font-weight:500;
     padding:calc(var(--size) * 2px) calc(var(--size) * 6px);
+    background:var(--bg-color-1);
 }
 
 .sidebar-break{
@@ -1013,6 +1016,19 @@ body *{
     width:calc(var(--size) * 220px);
     border-top:1px solid var(--light-border-color);
     margin:calc(var(--size) * 12px) calc(var(--size) * 18px);
+}
+
+.unavailable-sidebar-node{
+    cursor:not-allowed !important;
+    background:var(--light-border-color);
+}
+
+.unavailable-sidebar-node > img{
+    filter:invert(0.5) !important;
+}
+
+.unavailable-sidebar-node > p{
+    color:gray !important;
 }
 
 /*.desktop-sidebar-category, .desktop-sidebar-folder, .desktop-sidebar-category-2{
