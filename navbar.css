@@ -57,11 +57,13 @@ p{
 
 .header-label{
     margin:0;
-    font-weight:500;
+    font-weight:700;
     background:hotpink;
     font-size:12px;
     padding:6px 12px;
     border-radius:6px;
+    color:white;
+    text-transform:uppercase;
 }
 
 .inactive-modal{
@@ -93,7 +95,14 @@ p{
     flex-direction:row;
     justify-content:space-between;
     align-items:center;
-    gap:18px;
+}
+
+#navbar > div:first-of-type{
+    gap:24px;
+}
+
+#navbar > div:last-of-type{
+    gap:12px;
 }
 
 #navbar-left > a > img{
@@ -101,6 +110,7 @@ p{
     border-radius:3px;
     transition-duration:250ms;
     cursor:pointer;
+    margin-right:-12px;
 }
 
 #navbar-left > a > img:hover{
@@ -129,7 +139,7 @@ p{
 
 .navbar-modal > div:last-of-type{
     position:absolute;
-    top:42px;
+    top:48px;
     left:-48px;
     border:1px solid var(--light-border-color);
     overflow:hidden;
@@ -244,6 +254,15 @@ p{
 .navbar-modal > div:last-of-type > div:last-of-type > a{
     padding:8px 12px;
     border-radius:6px;
+    transition-duration:250ms;
+}
+
+.navbar-modal > div:last-of-type > div:last-of-type > a:hover{
+    transform:scale(1.05);
+}
+
+.navbar-modal > div:last-of-type > div:last-of-type > a:active{
+    transform:scale(1);
 }
 
 #navbar-right > a{
