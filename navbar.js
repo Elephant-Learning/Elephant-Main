@@ -25,13 +25,6 @@ async function initializeNavbar(prefix){
         console.log("Welcome to Elephant")
     }
 
-    try{
-        if(!JSON.parse(localStorage.getItem("cookiesAccepted"))) showCookiesModal();
-    } catch (e){
-        localStorage.setItem("cookiesAccepted", JSON.stringify(false));
-        showCookiesModal();
-    }
-
     console.log("sdf")
 }
 
@@ -44,4 +37,11 @@ function acceptCookies(){
     localStorage.setItem("cookiesAccepted", JSON.stringify(true));
 }
 
-initializeNavbar(document.getElementById('navbar-prefix').innerHTML);
+initializeNavbar(document.getElementById('navbar-prefix').innerHTML).then(r => {
+    try{
+        if(!JSON.parse(localStorage.getItem("cookiesAccepted"))) showCookiesModal();
+    } catch (e){
+        localStorage.setItem("cookiesAccepted", JSON.stringify(false));
+        showCookiesModal();
+    }
+});
