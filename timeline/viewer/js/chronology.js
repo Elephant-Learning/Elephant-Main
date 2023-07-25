@@ -101,7 +101,7 @@ window.addEventListener("mousemove", function(e){
 window.addEventListener("mouseup", function(){
     pressed = false;
 
-    if(targetContainer){
+    if(targetContainer && activeTab === 2){
         if(targetContainer.children.length !== 0){
             target.style.left = `${startX + target.offsetLeft}px`;
             target.style.top = `${startY + target.offsetTop}px`;

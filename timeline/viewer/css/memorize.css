@@ -1,0 +1,150 @@
+#memorize-main-container{
+    width:calc(100vw - calc(var(--size) * 586px));
+    height:calc(100vh - calc(var(--size) * 142px));
+    position:absolute;
+    left:calc(var(--size) * 24px);
+    top:calc(var(--size) * 24px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    transition-duration:250ms;
+    transition-property:transform;
+}
+
+.memorize-container{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:flex-start;
+    gap:calc(var(--size) * 24px);
+}
+
+#memorize-flashcard{
+    background:var(--bg-color-1);
+    border:1px solid var(--light-border-color);
+    width:100%;
+    height:calc(100% - var(--size) * 192px);
+    border-radius:calc(var(--size) * 12px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    font-size:calc(var(--size) * 24px);
+}
+
+#memorize-actions{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    height:168px;
+    width:100%;
+    justify-content:center;
+    gap:calc(var(--size) * 12px)
+}
+
+.memorize-box{
+    width:calc(25% - var(--size) * 32px);
+    padding:calc(var(--size) * 12px);
+    background:var(--bg-color-1);
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    border:1px solid var(--light-border-color);
+    border-radius:calc(var(--size) * 12px);
+    cursor:pointer;
+}
+
+.active-box{
+    box-shadow:inset 0 0 calc(var(--size) * 12px) 0 var(--light-accent);
+}
+
+.memorize-box > p{
+    font-size:calc(var(--size) * 14px);
+    font-weight:700;
+}
+
+.memorize-box > div{
+    position:absolute;
+    left:calc(var(--size) * 12px);
+    top:calc(var(--size) * 12px);
+    height:calc(var(--size) * 24px);
+    width:calc(var(--size) * 24px);
+    font-size:calc(var(--size) * 12px);
+    background:var(--bg-color-2);
+    border:1px solid var(--light-border-color);
+    border-radius:50%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
+#desktop-memorize-panel{
+    width:calc(var(--size) * 208px);
+    height:calc(100vh - calc(var(--size) * 224px));
+    padding:calc(var(--size) * 24px);
+    border:1px solid var(--light-border-color);
+    background:var(--bg-color-1);
+    position:absolute;
+    right:calc(var(--size) * 24px);
+    top:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 12px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    text-align:center;
+}
+
+#desktop-memorize-panel-questions-left-container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+}
+
+#desktop-memorize-panel-questions-left-container > h1{
+    font-size:calc(var(--size) * 64px);
+    font-weight:700;
+    margin:0;
+}
+
+#desktop-memorize-panel-questions-left-container > p{
+    font-size:calc(var(--size) * 12px);
+    margin:0;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:gray;
+}
+
+#desktop-memorize-panel-questions-left-container > h2{
+    margin:0;
+    margin-top:calc(var(--size) * 12px);
+    font-size:calc(var(--size) * 16px);
+    color:gray;
+    font-weight:700;
+}
+
+#desktop-memorize-panel-questions-left-progress{
+    width:100%;
+    height:calc(var(--size) * 8px);
+    border:1px solid var(--light-border-color);
+    border-radius:calc(var(--size) * 4px);
+    margin-top:calc(var(--size) * 12px);
+    position:relative;
+}
+
+#desktop-memorize-panel-questions-left-information {
+    position: absolute;
+    right: calc(var(--size) * -18px);
+    top: calc(var(--size) * -18px);
+}
