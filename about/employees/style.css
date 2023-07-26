@@ -52,7 +52,7 @@
     align-items:center;
     justify-content:flex-start;
     gap:18px;
-    background:var(--bg-color-1);
+    background:var(--bg-color-2);
     padding:128px 8vw;
 }
 
@@ -114,4 +114,48 @@
     font-size:14px;
     font-weight:500;
     margin:0;
+}
+
+#get-involved{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:var(--bg-color-1);
+    padding:128px 8vw;
+    gap:12px;
+}
+
+#get-involved > h1{
+    font-size:36px;
+}
+
+#get-involved > p{
+    font-size:14px;
+    color:gray;
+}
+
+#get-involved > div:last-of-type{
+    width:calc(50vw - 128px);
+    background-image:url("../../videos/Main-Tour.gif");
+    height:20vw;
+    background-repeat:no-repeat;
+    background-size:cover;
+    border-radius:24px;
+    margin:24px 0;
+}
+
+#get-involved > *{
+    margin:0;
+}
+
+#get-involved > a{
+    padding:12px 24px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+#get-involved > *:not(a){
+    max-width:calc(55vw - 128px);
+    text-align:center;
 }
