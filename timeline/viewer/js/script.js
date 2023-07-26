@@ -1,8 +1,43 @@
 let timeline;
 let activeTab;
 
+function convertToText(date){
+    const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ]
+
+    let returnString = "";
+
+    returnString += months[parseInt(date.split("-")[1]) - 1] + " " + parseInt(date.split("-")[2]);
+
+    if(parseInt(date.split("-")[2]) % 10 === 1){
+        returnString += "st, ";
+    } else if(parseInt(date.split("-")[2]) % 10 === 2){
+        returnString += "nd, ";
+    } else if(parseInt(date.split("-")[2]) % 10 === 3){
+        returnString += "rd, ";
+    } else {
+        returnString += "th, ";
+    }
+
+    returnString += date.split("-")[0];
+
+    return returnString;
+}
+
 window.onload = async function(){
-    locateUserInfo();
+    await locateUserInfo();
 
     if(isNaN(parseInt(location.href.split("=")[1]))){
         timeline = {
@@ -37,6 +72,7 @@ window.onload = async function(){
 
     Object.freeze(timeline)
 
+    initializeMemorize(timeline);
     createChronology(timeline);
 }
 

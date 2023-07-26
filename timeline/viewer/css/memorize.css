@@ -1,6 +1,6 @@
 #memorize-main-container{
     width:calc(100vw - calc(var(--size) * 586px));
-    height:calc(100vh - calc(var(--size) * 142px));
+    height:calc(100vh - calc(var(--size) * 154px));
     position:absolute;
     left:calc(var(--size) * 24px);
     top:calc(var(--size) * 24px);
@@ -60,6 +60,10 @@
     border:1px solid var(--light-border-color);
     border-radius:calc(var(--size) * 12px);
     cursor:pointer;
+}
+
+.memorize-box:active{
+    box-shadow:inset 0 0 calc(var(--size) * 12px) 0 var(--light-accent);
 }
 
 .active-box{
