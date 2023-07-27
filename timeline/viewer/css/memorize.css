@@ -26,8 +26,9 @@
 #memorize-flashcard{
     background:var(--bg-color-1);
     border:1px solid var(--light-border-color);
-    width:100%;
-    height:calc(100% - var(--size) * 192px);
+    padding:calc(var(--size) * 24px);
+    width:calc(100% - var(--size) * 48px);
+    height:calc(100% - var(--size) * 240px);
     border-radius:calc(var(--size) * 12px);
     display:flex;
     flex-direction:column;

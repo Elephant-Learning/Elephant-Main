@@ -24,7 +24,27 @@ function initializeMemorize(timeline){
             eventsRandomGen.splice(randomNum, 1);
         }
 
+        eventsRandomGen = [];
+
+        for(let j = 0; j < timeline.events.length; j++){
+            eventsRandomGen.push(timeline.events[j]);
+        }
+
+        let description = timeline.events[i].description;
+
+        description = description.replaceAll(timeline.events[i].name,'_______');
+
+        let question2 = [`The description "${description}" most directly represents which event?`, [timeline.events[i].name]];
+        eventsRandomGen.splice(i, 1);
+
+        for(let j = 0; j < 3; j++){
+            let randomNum = Math.floor(Math.random() * eventsRandomGen.length);
+            question2[1].push(eventsRandomGen[randomNum].name);
+            eventsRandomGen.splice(randomNum, 1);
+        }
+
         memorizeCards.push(question1);
+        memorizeCards.push(question2);
     }
 
     startAmount = memorizeCards.length;
@@ -43,10 +63,39 @@ function checkAnswer(boxIndex){
     if(boxIndex === memorizeCorrectIndex){
         memorizeCards.splice(memorizeIndexNum, 1);
 
+        if(memorizeCards.length !== 0){
+            const audio2 = new Audio('../sounds/win.mp3');
+            audio2.play();
+        }
+
         setupMemorizeSidebar();
 
         if(memorizeCards.length !== 0) createMemorizeOption();
+        else {
+            let randomNum = Math.floor(Math.random() * 50);
+
+            if(randomNum === 0){
+                let audio = ["complete_8bit", "complete_banjo"]
+
+                randomNum = Math.floor(Math.random() * 2);
+
+                setTimeout(function(){
+                    const audio2 = new Audio(`../sounds/${audio[randomNum]}.mp3`);
+                    audio2.play();
+                }, 250)
+
+
+            } else {
+                setTimeout(function(){
+                    const audio2 = new Audio('../sounds/complete.mp3');
+                    audio2.play();
+                }, 250);
+            }
+        }
     } else {
+        const audio2 = new Audio('../sounds/lose.mp3');
+        audio2.play();
+
         document.querySelectorAll(".memorize-box").forEach(function(elem){
             elem.style.border = "1px solid var(--primary-accent)";
         });
