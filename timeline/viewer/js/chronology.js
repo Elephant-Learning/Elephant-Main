@@ -147,7 +147,7 @@ window.addEventListener("mouseup", function(){
                 const audio2 = new Audio('../sounds/win.mp3');
                 audio2.play();
 
-                createChronology(timeline);
+                createChronology(TIMELINE);
             } else {
                 const audio2 = new Audio('../sounds/lose.mp3');
                 audio2.play();

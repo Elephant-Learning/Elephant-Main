@@ -1,12 +1,28 @@
 let memorizeCards;
 let memorizeIndexNum;
 let memorizeCorrectIndex;
-let startAmount;
+let startAmount, memorizeTimerFunc;
+
+function resetTimer(){
+    memorizeTimer = 0;
+    clearInterval(memorizeTimerFunc);
+    memorizeTimerFunc = setInterval(function(){
+        memorizeTimer++;
+        let minutes = (Math.floor(memorizeTimer / 60)).toString();
+        let seconds = (memorizeTimer % 60).toString();
+
+        if(minutes.length === 1) minutes = "0" + minutes;
+        if(seconds.length === 1) seconds = "0" + seconds;
+        document.getElementById("time-spent").innerHTML = `${minutes}:${seconds}`;
+    } ,1000);
+}
 
 function initializeMemorize(timeline){
     removeAllChildNodes(document.getElementById("memorize-flashcard"));
 
     memorizeCards = [];
+
+    console.log(timeline);
 
     for(let i = 0; i < timeline.events.length; i++){
         let eventsRandomGen = [];
@@ -51,6 +67,7 @@ function initializeMemorize(timeline){
 
     setupMemorizeSidebar();
     createMemorizeOption();
+    resetTimer();
 }
 
 function setupMemorizeSidebar(){
@@ -72,6 +89,7 @@ function checkAnswer(boxIndex){
 
         if(memorizeCards.length !== 0) createMemorizeOption();
         else {
+            clearInterval(memorizeTimerFunc);
             let randomNum = Math.floor(Math.random() * 50);
 
             if(randomNum === 0){

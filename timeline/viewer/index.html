@@ -132,11 +132,11 @@
                         <img src="./icons/timeline.png" alt="Recent">
                         <p>Timeline Viewer</p>
                     </div>
-                    <div onclick="togglePageFlip(1, 1)" class="sidebar-node">
+                    <div onclick="" class="sidebar-node unavailable-sidebar-node">
                         <img src="./icons/brain.png" alt="Recent">
                         <p>Timeline Memorize</p>
                     </div>
-                    <div onclick="togglePageFlip(2, 2)" class="sidebar-node">
+                    <div onclick="togglePageFlip(2, 2)" class="sidebar-node unavailable-sidebar-node">
                         <img src="./icons/chronology.png" alt="Recent">
                         <p>Timeline Chronology</p>
                     </div>
@@ -202,7 +202,10 @@
                             <h1 id="desktop-memorize-panel-questions-left">4</h1>
                             <p>Questions Left</p>
                             <div id="desktop-memorize-panel-questions-left-progress"></div>
-                            <!--<h2 id="time-spent">00:00</h2>-->
+                            <h2 id="time-spent">00:00</h2>
+                        </div>
+                        <div id="desktop-memorize-panel-bottom">
+                            <button id="deck-memorize-reset" onclick="initializeMemorize(TIMELINE)">Reset</button>
                         </div>
                     </div>
                 </div>

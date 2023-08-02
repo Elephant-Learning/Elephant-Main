@@ -132,8 +132,7 @@
 }
 
 #desktop-memorize-panel-questions-left-container > h2{
-    margin:0;
-    margin-top:calc(var(--size) * 12px);
+    margin: calc(var(--size) * 12px) 0 0;
     font-size:calc(var(--size) * 16px);
     color:gray;
     font-weight:700;
@@ -152,4 +151,23 @@
     position: absolute;
     right: calc(var(--size) * -18px);
     top: calc(var(--size) * -18px);
+}
+
+#desktop-memorize-panel-bottom{
+    position:absolute;
+    bottom:calc(var(--size) * 24px);
+    width:100%;
+}
+
+#deck-memorize-reset{
+    height:calc(var(--size) * 24px);
+    width:calc(100% - var(--size) * 48px);
+    border-radius:calc(var(--size) * 6px);
+    background:var(--light-gray);
+    color:white;
+    font-weight:500;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    cursor:pointer;
+    border:none;
 }

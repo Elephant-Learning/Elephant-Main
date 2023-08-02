@@ -1,4 +1,4 @@
-let timeline;
+let TIMELINE;
 let activeTab;
 
 function convertToText(date){
@@ -40,7 +40,7 @@ window.onload = async function(){
     await locateUserInfo();
 
     if(isNaN(parseInt(location.href.split("=")[1]))){
-        timeline = {
+        TIMELINE = {
             name: "Sample Elephant Timeline",
             authorPfpId: 47,
             authorName: "Elephant - The Ultimate Student Suite",
@@ -66,14 +66,27 @@ window.onload = async function(){
         })
 
         const context = await response.json();
-        timeline = context.context.timeline;
+        TIMELINE = context.context.timeline;
         console.log(context);
     }
 
-    Object.freeze(timeline)
+    Object.freeze(TIMELINE);
 
-    initializeMemorize(timeline);
-    createChronology(timeline);
+    if(TIMELINE.events.length >= 4){
+        document.querySelectorAll(".sidebar-node")[1].classList.remove("unavailable-sidebar-node");
+        document.querySelectorAll(".sidebar-node")[2].classList.remove("unavailable-sidebar-node");
+
+        document.querySelectorAll(".sidebar-node")[1].addEventListener("click", function(e){
+            togglePageFlip(1, 1);
+        });
+
+        document.querySelectorAll(".sidebar-node")[2].addEventListener("click", function(e){
+            togglePageFlip(2, 2);
+        })
+    }
+
+    initializeMemorize(TIMELINE);
+    createChronology(TIMELINE);
 }
 
 window.jsPDF = window.jspdf.jsPDF;
@@ -86,16 +99,16 @@ function createPDF(){
     doc.setFont("helvetica", "bold");
     doc.setFontSize(12);
 
-    doc.text(20, 20, `${timeline.name}`);
+    doc.text(20, 20, `${TIMELINE.name}`);
 
     let img = new Image()
-    img.src = `../../icons/avatars/${timeline.authorPfpId}.png`
+    img.src = `../../icons/avatars/${TIMELINE.authorPfpId}.png`
     doc.addImage(img, 'png', 20, 30, 10, 10)
 
     doc.setFont("helvetica", "normal");
     doc.setFontSize(10);
 
-    doc.text(35, 30, `${timeline.authorName}`);
+    doc.text(35, 30, `${TIMELINE.authorName}`);
 
 // Add new page
     doc.addPage();
@@ -112,7 +125,7 @@ function createPDF(){
     });
 
 // Save the PDF
-    doc.save(`${timeline.name}.pdf`);
+    doc.save(`${TIMELINE.name}.pdf`);
 }
 
 function togglePageFlip(index, sidebar){
