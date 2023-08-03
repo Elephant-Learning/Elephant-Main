@@ -211,7 +211,7 @@ async function initialize(user){
     else if(user.type === "INSTRUCTOR") mainColor = "shared-banner";
     else mainColor = "other-banner";
 
-    let userDecks = user.decks;
+    /*let userDecks = user.decks;
     let userDeckIds = [];
 
     for(let i = 0; i < userDecks.length; i++) userDeckIds.push(userDecks[i].id);
@@ -230,10 +230,10 @@ async function initialize(user){
         addCard(user.answers[i], 1);
     }
 
-    document.getElementById("profile-banner").classList.add(mainColor)
-
     if(user.decks.length > 0) document.querySelectorAll(".recent-activity-no")[0].classList.add("inactive-modal");
-    if(user.answers.length > 0) document.querySelectorAll(".recent-activity-no")[1].classList.add("inactive-modal");
+    if(user.answers.length > 0) document.querySelectorAll(".recent-activity-no")[1].classList.add("inactive-modal");*/
+
+    document.getElementById("profile-banner").classList.add(mainColor)
 
     await displayFolders(user);
     await notificationsManager(user);

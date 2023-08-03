@@ -68,15 +68,19 @@ function toggleTheme(themeIndex){
         root.style.setProperty("--hover-dark", "#16171a");
         root.style.setProperty("--hover-light", "#f5f5f5");
         root.style.setProperty("--image-invert", "0");
-        root.style.setProperty("--light-accent", "#dadce5");
+        root.style.setProperty("--light-accent", "#fdeefa");
         root.style.setProperty("--primary-accent", "#fe599d");
         root.style.setProperty("--primary-accent-gradient", "#f30096");
         root.style.setProperty("--secondary-accent", "#00a8ff");
         root.style.setProperty("--secondary-accent-gradient", "#31d6dc");
+        root.style.setProperty("--light-secondary", "#edf9fe");
         root.style.setProperty("--tertiary-accent", "#f8680a");
         root.style.setProperty("--tertiary-accent-gradient", "#fa8d37");
+        root.style.setProperty("--light-tertiary", "#fefaed");
+        root.style.setProperty("--light-quaternary", "#fdeefd");
         root.style.setProperty("--quaternary-accent", "#e100ff");
         root.style.setProperty("--quaternary-accent-gradient", "#7f00ff");
+
     } else if(themeIndex === 2){
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) toggleTheme(1);
         else toggleTheme(0)

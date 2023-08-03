@@ -19,6 +19,8 @@
     --tertiary-accent-gradient:#fa8d37;
     --quaternary-accent:#00ff77;
     --quaternary-accent-gradient:#19cf77;
+    --light-secondary:#edf9fe;
+    --light-tertiary:#fefaed;
         /*--tertiary-accent:#00ff6e;
         --tertiary-accent-gradient:#31dc53;*/
     --accent-highlight:#f30096;
@@ -42,6 +44,18 @@
 
 *::-webkit-scrollbar-corner{
     background:transparent;
+}
+
+.primary-filter{
+    filter: invert(64%) sepia(80%) saturate(4293%) hue-rotate(305deg) brightness(102%) contrast(99%);
+}
+
+.secondary-filter{
+    filter: invert(41%) sepia(71%) saturate(2119%) hue-rotate(178deg) brightness(108%) contrast(106%);
+}
+
+.tertiary-filter{
+    filter: invert(49%) sepia(44%) saturate(3737%) hue-rotate(355deg) brightness(97%) contrast(101%);
 }
 
 body{
