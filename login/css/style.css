@@ -56,18 +56,9 @@ input:-webkit-autofill:active{
     align-items:center;
 }
 
-#desktop-wrapper > div{
+#desktop-wrapper > div:first-of-type{
     width:50vw;
     height:100vh;
-}
-
-.break{
-    margin-top:24px;
-}
-
-#desktop-color-container{
-    transition-duration:250ms;
-    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
 }
 
 .desktop-tab{
@@ -81,6 +72,20 @@ input:-webkit-autofill:active{
     left:0;
     height:100%;
     width:50vw;
+}
+
+#desktop-wrapper > div:last-of-type{
+    width:50vw;
+    height:100vh;
+}
+
+.break{
+    margin-top:24px;
+}
+
+#desktop-color-container{
+    transition-duration:250ms;
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
 }
 
 .desktop-tab:not(.inactive-tab){

@@ -53,34 +53,103 @@ body *{
     text-transform:uppercase;
 }
 
-.video-container{
+#services-container{
+    display:flex;
+    flex-direction:column;
+    width:calc(100vw - 256px);
+    align-items:center;
+    justify-content:center;
+    padding:0 128px;
+    gap:16px;
+}
+
+#services-container > h1{
+    max-width:36vw;
+    text-align:center;
+    font-size:32px;
+    margin:0;
+}
+
+#services-container > p{
+    margin:0;
+    font-size:14px;
+    color:gray;
+    width:36vw;
+    text-align:center;
+}
+
+#services-container-list{
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:24px;
+    margin-top:48px;
+}
+
+#services-container-list > div{
+    position:relative;
+    border-radius:24px;
+    border:1px solid var(--light-border-color);
+    padding: 192px 24px 24px;
+    overflow:hidden;
+    width:256px;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 0 16px -10px gray;
+    transition-duration:250ms;
+    gap:12px;
+}
+
+#services-container-list > div:hover{
+    transform:scale(1.05);
+    cursor:default;
+}
+
+#services-container-list > div > img{
+    position:absolute;
+    top:0;
+    right:0;
+    height:256px;
+}
+
+#services-container-list > div > div:first-of-type{
+    width:64px;
+    height:64px;
     display:flex;
     flex-direction:row;
     align-items:center;
-    justify-content:space-evenly;
-    width:100vw;
-    height:100vh;
+    justify-content:center;
+    border-radius:16px;
 }
 
-.column-container{
+#services-container-list > div > div:first-of-type > img{
+    height:32px;
+}
+
+#services-container-list > div > h1{
+    font-size:18px;
+    margin:0;
+}
+
+#services-container-list > div > p{
+    font-size:13px;
+    margin:0;
+    color:gray;
+}
+
+#services-container-list > div > a{
+    font-weight:700;
+    font-size:14px;
+    text-decoration:none;
     display:flex;
-    flex-direction:column;
-    justify-content:center;
+    flex-direction:row;
     align-items:center;
-    width:100vw;
-    height:100vh;
 }
 
-.video-container > div{
-    width:calc(50% - 128px);
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:flex-start;
-    position:relative;
-    height:calc(100vh - 256px);
-    border-radius:32px;
-    gap:16px;
+#services-container-list > div > a > span > img{
+    height:24px;
 }
 
 .video-container > div > img{

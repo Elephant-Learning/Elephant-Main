@@ -11,10 +11,13 @@
     --hover-light:#f5f5f5;
     --primary-accent:#fe599d;
     --primary-accent-gradient:#f30096;
+    --primary-light:#fdeefa;
     --secondary-accent:#00a8ff;
     --secondary-accent-gradient:#31d6dc;
+    --secondary-light:#edf9fe;
     --tertiary-accent:#f8680a;
     --tertiary-accent-gradient:#fa8d37;
+    --tertiary-light:#fefaed;
     /*--tertiary-accent:#00ff6e;
     --tertiary-accent-gradient:#31dc53;*/
     --accent-highlight:#f30096;
@@ -64,6 +67,30 @@ p{
     border-radius:6px;
     color:white;
     text-transform:uppercase;
+}
+
+.primary-filter{
+    filter: invert(64%) sepia(80%) saturate(4293%) hue-rotate(305deg) brightness(102%) contrast(99%);
+}
+
+.secondary-filter{
+    filter: invert(41%) sepia(71%) saturate(2119%) hue-rotate(178deg) brightness(108%) contrast(106%);
+}
+
+.tertiary-filter{
+    filter: invert(49%) sepia(44%) saturate(3737%) hue-rotate(355deg) brightness(97%) contrast(101%);
+}
+
+.primary-color{
+    color:var(--primary-accent);
+}
+
+.secondary-color{
+    color:var(--secondary-accent);
+}
+
+.tertiary-color{
+    color:var(--tertiary-accent);
 }
 
 .inactive-modal{
@@ -395,6 +422,36 @@ p{
     top:0;
 }
 
+.video-container{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-evenly;
+    width:100vw;
+    height:100vh;
+}
+
+.column-container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:100vw;
+    height:100vh;
+}
+
+.video-container > div{
+    width:calc(50% - 192px);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    position:relative;
+    height:calc(100vh - 256px);
+    border-radius:32px;
+    gap:16px;
+}
+
 @media (max-width:950px) {
     #main-container > h1{
         font-size:32px;
@@ -407,7 +464,7 @@ p{
     .video-container{
         flex-direction:column;
         height:auto;
-        padding:64px 0;
+        padding:128px 0;
         gap:32px;
         text-align:center;
     }
@@ -415,6 +472,6 @@ p{
     .video-container > div{
         align-items:center;
         height:auto;
-        width:85vw;
+        width:calc(100vw - 256px);
     }
 }
