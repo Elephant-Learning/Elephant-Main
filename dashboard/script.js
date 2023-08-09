@@ -249,6 +249,16 @@ function closeLoader(){
     document.getElementById('desktop-loader-container').classList.add('inactive-modal')
 }
 
+document.getElementById("desktop-navbar-input").addEventListener("keypress", function(e){
+    if (e.key === "Enter") {
+        e.preventDefault();
+        let content = document.getElementById("desktop-navbar-input").value;
+
+        content = content.replaceAll(" ", "+");
+        location.href = `../search/?query=${content}`;
+    }
+})
+
 document.addEventListener('DOMContentLoaded', function(e){
     document.getElementById('desktop-loader-text').innerHTML = randomChatMessage[Math.floor(Math.random() * randomChatMessage.length)];
 })

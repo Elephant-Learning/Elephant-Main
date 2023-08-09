@@ -1,58 +1,25 @@
-let pass = false;
 let pfpId, fullName, favoriteDecks, favoriteTimelines;
 
-async function displayFlashcard(flashcardType, id){
+async function displayFlashcard(flashcardType, params){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
     let mainDiv = document.createElement('div');
 
     let iconDiv = document.createElement('div');
     let icon = document.createElement('img');
 
-    let params;
-
     if(flashcardType === "flashcard"){
-        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/deck/get?id=' + id, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type'
-            },
-            mode: 'cors'
-        })
-
-        params = await response.json();
-        params = params.context.deck;
-
         if(params.visibility === "PRIVATE") params.visibility = "PERSONAL";
         else if(params.visibility === "PUBLIC") params.visibility = "COMMUNITY";
 
         icon.src = "../flip/icons/file.png";
         iconDiv.classList.add(params.visibility.toLowerCase() + "-flashcard");
     } else if(flashcardType === "timeline"){
-        const response = await fetch(`https://elephantsuite-rearend.herokuapp.com/timeline/get?userId=${savedUserId}&timelineId=${id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type'
-            },
-            mode: 'cors'
-        })
-
-        params = await response.json();
-        params = params.context.timeline;
-
         if(params.timelineVisibility === "PRIVATE") params.timelineVisibility = "PERSONAL";
         else if(params.timelineVisibility === "PUBLIC") params.timelineVisibility = "COMMUNITY";
 
         icon.src = "../timeline/icons/timeline.png";
         iconDiv.classList.add(params.timelineVisibility.toLowerCase() + "-flashcard");
     }
-
-    console.log(params)
 
     iconDiv.appendChild(icon);
 
@@ -62,11 +29,18 @@ async function displayFlashcard(flashcardType, id){
     let authorImg = document.createElement('img');
     let authorText = document.createElement('p');
 
-    authorText.innerHTML = fullName;
-    authorImg.src = pfpId;
+    if(flashcardType === "flashcard"){
+        authorText.innerHTML = computeTime(params.created)
 
-    nameText.innerHTML = params.name
-    authorDiv.append(authorImg, authorText);
+        nameText.innerHTML = params.name
+        authorDiv.appendChild(authorText);
+    } else if(flashcardType === "timeline"){
+        authorText.innerHTML = params.authorName;
+        authorImg.src = `../icons/avatars/${params.authorPfpId}.png`;
+
+        nameText.innerHTML = params.name
+        authorDiv.append(authorImg, authorText);
+    }
 
     textDiv.append(nameText, authorDiv);
 
@@ -309,9 +283,9 @@ async function displayFlashcard(flashcardType, id){
     mainDiv.classList.add("faded-out");
 
     if(flashcardType === "flashcard") {
-        document.querySelectorAll(".folder-list")[0].appendChild(mainDiv);
+        document.querySelectorAll(".search-result-container")[0].appendChild(mainDiv);
     } else if(flashcardType === "timeline"){
-        document.querySelectorAll(".folder-list")[1].appendChild(mainDiv);
+        document.querySelectorAll(".search-result-container")[2].appendChild(mainDiv);
     }
 
     requestAnimationFrame(() => {
@@ -394,16 +368,6 @@ async function displayFolders(user){
     }
 }
 
-document.getElementById("desktop-navbar-input").addEventListener("keypress", function(e){
-    if (e.key === "Enter") {
-        e.preventDefault();
-        let content = document.getElementById("desktop-navbar-input").value;
-
-        content = content.replaceAll(" ", "+");
-        location.href = `../search/?query=${content}`;
-    }
-})
-
 function sidebarFolder(title, folderId){
     let newDiv = document.createElement('div');
     let img = document.createElement('img');
@@ -413,13 +377,6 @@ function sidebarFolder(title, folderId){
     para.innerHTML = title;
 
     newDiv.append(img, para);
-    if(folderId === parseInt(location.href.split("=")[1])){
-        newDiv.classList.add("active-sidebar-dropdown-category")
-        document.getElementById("desktop-main-container-tab").innerHTML = title;
-        document.getElementById("webpage-title").innerHTML = `${title} | Elephant - The Ultimate Student Suite`;
-    }
-
-    if(parseInt(location.href.split("=")[1]) === folderId) pass = true;
 
     newDiv.setAttribute('onclick', `location.href = \`../folder/?id=${folderId}\``)
     /*newDiv.addEventListener('contextmenu', function(e){
@@ -450,11 +407,6 @@ async function initialize(user){
         user = user.context.user;
     } catch(e){ location.href = "../login"}
 
-    //if(user.type === "ADMIN") document.getElementById('desktop-sidebar-employee').classList.remove('inactive-modal')
-
-
-    //console.log(user);
-
     console.log(user);
 
     document.getElementById('desktop-navbar-profile-image').src = "../icons/avatars/" + user.pfpId + ".png"
@@ -467,8 +419,6 @@ async function initialize(user){
     favoriteTimelines = user.likedTimelineIds;
 
     await displayFolders(user);
-
-    if(!pass) location.href = "../dashboard/";
 
     await notificationsManager(user);
     toggleNotificationTab(0);
@@ -499,11 +449,21 @@ async function locateUserInfo(){
             'Access-Control-Allow-Headers': 'Content-Type'
         },
         mode: 'cors'
-    })
+    });
 
     const context = await response.json();
-    initialize(context)
+    await initialize(context)
 }
+
+document.getElementById("desktop-navbar-input").addEventListener("keypress", function(e){
+    if (e.key === "Enter") {
+        e.preventDefault();
+        let content = document.getElementById("desktop-navbar-input").value;
+
+        content = content.replaceAll(" ", "+");
+        location.href = `../search/?query=${content}`;
+    }
+})
 
 function toggleModal(modal){
     if(modal.classList.contains('inactive-modal')){
@@ -513,73 +473,18 @@ function toggleModal(modal){
     }
 }
 
-async function toggleFolderModal(deleting){
-    toggleModal(document.getElementById("delete-folder-modal"));
-    if(!document.getElementById("rename-folder-modal").classList.contains("inactive-modal")) document.getElementById("rename-folder-modal").classList.add("inactive-modal");
-
-    if(deleting && document.getElementById("folder-delete-input").value === document.getElementById("folder-delete-input").getAttribute("data")){
-        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/folder/delete?id=' + location.href.split("=")[1], {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type'
-            },
-            mode: 'cors'
-        });
-
-        const context = await response.json();
-
-        if(context.status === "SUCCESS") location.href = "../dashboard/";
-    }
-}
-
-async function toggleRenameModal(renaming){
-    toggleModal(document.getElementById("rename-folder-modal"));
-    if(!document.getElementById("delete-folder-modal").classList.contains("inactive-modal")) document.getElementById("delete-folder-modal").classList.add("inactive-modal");
-
-    if(renaming){
-        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/folder/setName', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type'
-            },
-            body: JSON.stringify({
-                folderId: location.href.split("=")[1],
-                name: document.getElementById("folder-rename-input").value
-            }),
-            mode: 'cors'
-        });
-
-        const context = await response.json();
-        console.log(context);
-
-        if(context.status === "SUCCESS") {
-            document.getElementById("desktop-main-container-tab").innerHTML = context.context.folder.name;
-            document.getElementById("webpage-title").innerHTML = `${context.context.folder.name} | Elephant - The Ultimate Student Suite`;
-            document.querySelector(".active-sidebar-dropdown-category").children[1].innerHTML = context.context.folder.name
-            document.getElementById("delete-folder-header").innerHTML = `Type "${context.context.folder.name}" to Confirm`;
-            document.getElementById("folder-delete-input").setAttribute("data", context.context.folder.name);
-        }
-    }
-}
-
-document.getElementById("folder-delete-input").addEventListener("input", function(e){
-    if(document.getElementById("folder-delete-input").value === document.getElementById("folder-delete-input").getAttribute("data")){
-        document.getElementById("folder-delete-input-container").style.border = "1px solid var(--primary-accent)";
-    } else {
-        document.getElementById("folder-delete-input-container").style.border = "1px solid var(--light-border-color)";
-    }
-});
-
 window.onload = async function(){
-    if(!location.href.split("=")[1]) location.href = "../dashboard/";
+    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+    let query = location.href.split("?query")[1];
+    let number = 0;
 
-    const response = await fetch('https://elephantsuite-rearend.herokuapp.com/folder/get?id=' + location.href.split("=")[1], {
+    if(!query) location.href = "./?query=LOL+BRUH";
+
+    query = query.replaceAll("+", " ").slice(1);
+
+    await locateUserInfo();
+
+    const deckResponse = await fetch(`https://elephantsuite-rearend.herokuapp.com/deck/getByName?name=${query}&userId=${savedUserId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -590,27 +495,42 @@ window.onload = async function(){
         mode: 'cors'
     });
 
-    const context = await response.json();
-    console.log(context);
+    const deckContext = await deckResponse.json();
 
-    const total = context.context.folder.deckIds.length + context.context.folder.timelineIds.length;
+    console.log(`https://elephantsuite-rearend.herokuapp.com/timeline/search?query=${query}&userId=${savedUserId}`);
 
-    document.getElementById("folder-item-numbers").innerHTML = total;
-    document.querySelectorAll(".folder-numbers")[0].innerHTML = context.context.folder.deckIds.length + " Flip Decks";
-    document.querySelectorAll(".folder-numbers")[1].innerHTML = context.context.folder.timelineIds.length + " Timelines";
-    document.getElementById("delete-folder-header").innerHTML = `Type "${context.context.folder.name}" to Confirm`;
-    document.getElementById("folder-delete-input").setAttribute("data", context.context.folder.name);
+    const timelineResponse = await fetch(`https://elephantsuite-rearend.herokuapp.com/timeline/search?query=${query}&userId=${savedUserId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    });
 
-    if(total != 0) document.getElementById("pie-chart-container").style.background = `conic-gradient(var(--primary-accent) 0deg, var(--primary-accent-gradient) ${Math.floor(context.context.folder.deckIds.length / total * 360)}deg, var(--secondary-accent) ${Math.floor(context.context.folder.deckIds.length / total * 360)}deg, var(--secondary-accent-gradient) 360deg, var(--light-border-color) 360deg)`;
-    else document.getElementById("pie-chart-container").style.background = `var(--light-border-color)`;
+    const timelineContext = await timelineResponse.json();
 
-    await locateUserInfo();
+    console.log(timelineContext);
+    number += deckContext.context.decks.length;
+    number += timelineContext.context.timelines.length;
 
-    for(let i = 0; i < context.context.folder.deckIds.length; i++){
-        await displayFlashcard("flashcard", context.context.folder.deckIds[i]);
+    if(deckContext.context.decks.length === 0){
+
+    } else {
+        for(let i = 0; i < deckContext.context.decks.length; i++){
+            await displayFlashcard("flashcard", deckContext.context.decks[i]);
+        }
     }
 
-    for(let i = 0; i < context.context.folder.timelineIds.length; i++){
-        await displayFlashcard("timeline", context.context.folder.timelineIds[i]);
+    if(timelineContext.context.timelines.length === 0){
+
+    } else {
+        for(let i = 0; i < timelineContext.context.timelines.length; i++){
+            await displayFlashcard("timeline", timelineContext.context.timelines[i]);
+        }
     }
+
+    document.getElementById("desktop-main-container-tab").innerHTML = `Search Results for "${query}" - ${number.toString()} Results`;
 }

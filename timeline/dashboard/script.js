@@ -2,6 +2,16 @@ function createTimeline(){
     location.href = '../editor/';
 }
 
+document.getElementById("desktop-navbar-input").addEventListener("keypress", function(e){
+    if (e.key === "Enter") {
+        e.preventDefault();
+        let content = document.getElementById("desktop-navbar-input").value;
+
+        content = content.replaceAll(" ", "+");
+        location.href = `../../search/?query=${content}`;
+    }
+});
+
 async function favoriteDeck(elem, id){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
 

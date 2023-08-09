@@ -1,46 +1,15 @@
 const tags = [];
 let likedAnswers;
 
-async function search(){
-    const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+document.getElementById("desktop-navbar-input").addEventListener("keypress", function(e){
+    if (e.key === "Enter") {
+        e.preventDefault();
+        let content = document.getElementById("desktop-navbar-input").value;
 
-    if(document.getElementById("desktop-navbar-input").value === ""){
-        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/getAnswersForUser?userId=' + savedUserId, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type'
-            },
-            mode: 'cors'
-        })
-
-        const content = await response.json();
-
-        for(let i = 0; i < content.context.answers.length; i++){
-            createQuestion(content.context.answers[i].title, content.context.answers[i].tags, content.context.answers[i].description, content.context.answers[i].authorName, content.context.answers[i].authorPfpId, computeTime(content.context.answers[i].created), content.context.answers[i].comments.length, content.context.answers[i].numberOfLikes, likedAnswers.includes(content.context.answers[i].id), content.context.answers[i].id)
-        }
-    } else {
-        const response = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/searchByName?name=' + document.getElementById("desktop-navbar-input").value, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type'
-            },
-            mode: 'cors'
-        })
-
-        const content = await response.json();
-        console.log(content)
-
-        for(let i = 0; i < content.context.answers.length; i++){
-            createQuestion(content.context.answers[i].title, content.context.answers[i].tags, content.context.answers[i].description, content.context.answers[i].authorName, content.context.answers[i].authorPfpId, computeTime(content.context.answers[i].created), content.context.answers[i].comments.length, content.context.answers[i].numberOfLikes, user.elephantAnswersLiked.includes(content.context.answers[i].id), content.context.answers[i].id)
-        }
+        content = content.replaceAll(" ", "+");
+        location.href = `../../search/?query=${content}`;
     }
-}
+});
 
 async function heartDeck(deckId, image){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
