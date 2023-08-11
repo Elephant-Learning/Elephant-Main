@@ -337,7 +337,7 @@ p{
     transition-delay:250ms;
 }
 
-.navbar-image-button > div{
+.navbar-image-button > div:first-of-type{
     opacity:0;
     transition-delay:250ms;
     visibility:hidden;
@@ -353,8 +353,20 @@ p{
     padding:6px 12px;
     border-radius:6px;
     display:flex;
-    flex-direction:column;
+    flex-direction:row;
     align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.navbar-image-button > div:nth-of-type(2){
+    position:absolute;
+    top:-1px;
+    right:-1px;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
 }
 
 #navbar-prefix{
