@@ -329,14 +329,6 @@ function toggleSharedInputList(){
     }
 }
 
-function toggleModal(modal){
-    if(modal.classList.contains('inactive-modal')){
-        modal.classList.remove('inactive-modal');
-    } else {
-        modal.classList.add('inactive-modal');
-    }
-}
-
 document.getElementById("clear-uploaded-image").addEventListener("click", function(e){
     document.getElementById("uploaded-image-container").classList.add("inactive-modal");
     document.getElementById("uploaded-image").src = "";

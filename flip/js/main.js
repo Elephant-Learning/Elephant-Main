@@ -51,10 +51,13 @@ function toggleTheme(themeIndex){
         root.style.setProperty("--light-accent", "#30363d");
         root.style.setProperty("--primary-accent", "#e32b78");
         root.style.setProperty("--primary-accent-gradient", "#b11074");
+        root.style.setProperty("--light-secondary", "#30363d");
         root.style.setProperty("--secondary-accent", "#0d87c5");
         root.style.setProperty("--secondary-accent-gradient", "#27b4b9");
         root.style.setProperty("--tertiary-accent", "#db7735");
         root.style.setProperty("--tertiary-accent-gradient", "#d47d39");
+        root.style.setProperty("--light-tertiary", "#30363d");
+        root.style.setProperty("--light-quaternary", "#30363d");
         root.style.setProperty("--quaternary-accent", "#9a0bad");
         root.style.setProperty("--quaternary-accent-gradient", "#6609c3");
     } else if(themeIndex === 0){
@@ -723,6 +726,18 @@ function mainInitialize(){
     //initializeMusic();
 
     localStorage.setItem('preferences', JSON.stringify(preferences));
+}
+
+function toggleModal(modal){
+    if(modal.classList.contains('inactive-modal')){
+        modal.classList.remove('inactive-modal');
+    } else {
+        modal.classList.add('inactive-modal');
+    }
+}
+
+function toggleMusicModal(){
+    toggleModal(document.getElementById("music-modal"));
 }
 
 mainInitialize()

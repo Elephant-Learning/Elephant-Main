@@ -439,135 +439,49 @@ body *{
     flex-direction:row;
 }
 
-#desktop-music-modal{
-    position:absolute;
-    bottom:calc(var(--size) * 64px);
-    right:calc(var(--size) * 24px);
-    width:calc(var(--size) * 276px);
-    height:calc(var(--size) * 350px);
-    z-index:2;
-}
-
-#desktop-music-modal-bg{
-    position:absolute;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
+#music-modal{
     background:var(--bg-color-1);
-    border:1px solid var(--light-border-color);
-    opacity:1;
-    backdrop-filter:blur(10px);
-    border-radius:calc(var(--size) * 36px);
-}
-
-#desktop-music-modal-main{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
     position:absolute;
-    gap:calc(var(--size) * 24px);
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-}
-
-#desktop-music-modal-image-container{
-    position:relative;
-    width:calc(var(--size) * 152px);
-    height:calc(var(--size) * 152px);
-}
-
-#desktop-music-modal-image-bg{
-    width:calc(var(--size) * 152px);
-    height:calc(var(--size) * 152px);
-    position:absolute;
-    top:0;
-    left:0;
-    filter:blur(calc(var(--size) * 8px));
-    border-radius:calc(var(--size) * 24px);
-}
-
-#desktop-music-modal-image{
-    width:calc(var(--size) * 128px);
-    height:calc(var(--size) * 128px);
-    position:absolute;
-    top:calc(var(--size) * 12px);
-    left:calc(var(--size) * 12px);
-    border-radius:calc(var(--size) * 24px);
-}
-
-#desktop-music-text{
-    display:flex;
-    flex-direction:column;
-    text-align:center;
-    justify-content:center;
-    align-items:center;
-}
-
-#desktop-music-name{
-    color:var(--text-color);
-    margin:0;
-    font-size:calc(var(--size) * 18px);
-}
-
-#desktop-music-author{
-    margin:0;
-    color:gray;
-    font-size:calc(var(--size) * 12px)
-}
-
-#desktop-music-options{
+    z-index:4;
+    bottom:calc(var(--size) * 24px);
+    padding:calc(var(--size) * 12px) calc(var(--size) * 24px);
+    right:calc(var(--size) * 24px);
     display:flex;
     flex-direction:row;
-    align-items:center;
     justify-content:space-between;
-    width:calc(100% - var(--size) * 72px);
+    align-items:center;
+    gap:calc(var(--size) * 12px);
+    border-radius:calc(var(--size) * 12px);
+    box-shadow:0 0 calc(var(--size) * 12px) 0 var(--light-border-color);
+    transition-duration:250ms;
 }
 
-#desktop-music-options > div{
-    background:var(--bg-color-2);
-    border:1px solid var(--light-border-color);
+#music-image{
+    width:calc(var(--size) * 24px);
+    height:calc(var(--size) * 24px);
+    background-image:url("../../music/covers/nostalgia.png");
     border-radius:calc(var(--size) * 6px);
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-#pause-btn{
-    width:calc(var(--size) * 36px);
-    height:calc(var(--size) * 36px);
+#music-controls{
     display:flex;
     flex-direction:row;
+    justify-content:space-between;
     align-items:center;
-    justify-content:center;
+    gap:calc(var(--size) * 12px);
+}
+
+#music-controls > img{
+    height:calc(var(--size) * 18px);
     cursor:pointer;
 }
 
-#pause-btn > img{
-    width:calc(var(--size) * 24px);
-    filter:invert(0.5);
-}
-
-#track{
-    width:calc(100% - var(--size) * 60px);
-    height:calc(var(--size) * 24px);
-    padding:calc(var(--size) * 6px);
-    display:flex;
-    flex-direction:row;
-    align-items:flex-end;
-    gap:calc(var(--size) * 4px);
-}
-
-#track > div{
-    width:calc(var(--size) * 4px);
-}
-
-.track-item:not(.passed-track-item){
-    background:gray;
-}
-
-.passed-track-item{
-    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+#music-name{
+    font-size:calc(var(--size) * 14px);
+    margin: 0 calc(var(--size) * 24px) 0 0;
 }
 
 #desktop-notifications-modal{
