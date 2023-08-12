@@ -15,22 +15,18 @@ async function initializeNavbar(prefix){
 
             const context = await response.json();
 
-            document.getElementById("login-link").innerHTML = "Login as " + context.context.user.firstName;
+            document.getElementById("login-link-name").innerHTML = "Login as " + context.context.user.firstName;
             console.log(context.context.user.firstName)
-            document.getElementById("login-link").setAttribute("href", prefix + "dashboard/");
+            document.getElementById("login-link-name").previousElementSibling.setAttribute("href", prefix + "dashboard/");
+            document.getElementById("login-link-name").parentElement.appendChild(document.createElement("div"));
         } else {
             console.log(JSON.parse(localStorage.getItem('autoLogin')))
         }
     } catch (e){
         console.log("Welcome to Elephant")
     }
-
-    try{
-        if(!JSON.parse(localStorage.getItem("cookiesAccepted"))) showCookiesModal();
-    } catch (e){
-        localStorage.setItem("cookiesAccepted", JSON.stringify(false));
-        showCookiesModal();
-    }
+  
+    console.log("sdf")
 }
 
 function showCookiesModal(){
@@ -42,4 +38,11 @@ function acceptCookies(){
     localStorage.setItem("cookiesAccepted", JSON.stringify(true));
 }
 
-initializeNavbar(document.getElementById('navbar-prefix').innerHTML);
+initializeNavbar(document.getElementById('navbar-prefix').innerHTML).then(r => {
+    try{
+        if(!JSON.parse(localStorage.getItem("cookiesAccepted"))) showCookiesModal();
+    } catch (e){
+        localStorage.setItem("cookiesAccepted", JSON.stringify(false));
+        showCookiesModal();
+    }
+});
