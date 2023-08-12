@@ -25,7 +25,7 @@ async function initializeNavbar(prefix){
     } catch (e){
         console.log("Welcome to Elephant")
     }
-
+  
     console.log("sdf")
 }
 

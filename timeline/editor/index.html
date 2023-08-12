@@ -38,6 +38,81 @@
                 </div>
             </div>
         </div>
+        <div id="restricted-access-container" class="inactive-modal">
+            <div></div>
+            <div id="restricted-access-modal">
+                <div>
+                    <img src="./icons/stop.svg" alt="">
+                </div>
+                <h1>Take It Easy There</h1>
+                <p>It looks like you are not the owner of this deck, and therefore I cannot let you make any edits. I do hope that you understand</p>
+                <a href="../dashboard/">Return to Dashboard</a>
+            </div>
+        </div>
+        <div id="desktop-folder-modal" class="desktop-modal inactive-modal">
+            <div class="desktop-modal-image-container">
+                <img src="../../flip/icons/add_folder.png" alt="">
+            </div>
+            <h1>Add to Folder</h1>
+            <p>Organize your Elephant Timelines into neat and easy-to-use folders!</p>
+            <h6>Folders</h6>
+            <div id="folder-list"></div>
+        </div>
+        <div id="upload-image-modal-container" class="inactive-modal">
+            <div id="upload-image-modal">
+                <h1>Select an Image</h1>
+                <div id="upload-image-container">
+                    <input type="file" id="upload-file-image" accept=".gif,.jpg,.jpeg,.png">
+                    <img src="./icons/upload.png" alt="">
+                    <h1 id="upload-file-image-header">Drag & Drop or <span>Browse</span></h1>
+                    <p>Supports: JPG, JPEG, PNG, GIF</p>
+                </div>
+                <div class="upload-image-line" data="or choose from image library"></div>
+                <div id="upload-image-library"></div>
+                <div id="upload-image-close" onclick="closeUploadModal()">
+                    <img src="./icons/close.png" alt="">
+                </div>
+            </div>
+            <div id="edit-image-modal" class="inactive-modal">
+
+            </div>
+        </div>
+        <div id="change-visibility-modal" class="inactive-modal desktop-modal">
+            <div id="visibility-image-container" class="desktop-modal-image-container personal">
+                <img src="./icons/upload.png" alt="">
+            </div>
+            <h1>Change Timeline Visibility</h1>
+            <p>You've already created your timeline. Now choose who you want to share this knowledge with!</p>
+            <div id="visibility-options">
+                <button class="active-visibility-button personal" onclick="toggleVisibilityOptions(0, true)">Personal</button>
+                <button class="community" onclick="toggleVisibilityOptions(1, true)">Community</button>
+                <button class="shared" onclick="toggleVisibilityOptions(2, true)">Shared</button>
+            </div>
+            <div id="visibility-carousel">
+                <div class="active-visibility-options"></div>
+                <div>
+                    <h6>Share Link</h6>
+                    <div id="desktop-publish-input-container">
+                        <input type="text" id="desktop-publish-input" readonly="readonly">
+                        <img src="../../flip/editor/icons/duplicate.png" alt="" onclick="copyPublishLink()">
+                    </div>
+                </div>
+                <div>
+                    <div id="sharing-friends-list"></div>
+                    <h6>Friends</h6>
+                    <div id="sharing-input">
+                        <img src="../../flip/editor/icons/crowd.png" alt="">
+                        <p>Select Friend</p>
+                        <img src="../../flip/editor/icons/expand.png" alt="">
+                        <div id="sharing-input-hitbox" onclick="toggleSharedInputList()"></div>
+                        <div id="sharing-input-friends-list" class="inactive-modal">
+                            <div id="no-friends"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="sharing-done" onclick="toggleModal(document.getElementById('change-visibility-modal'))" class="personal">Done</button>
+        </div>
         <div id="desktop-navbar">
             <div id="desktop-main-image">
                 <div onclick="leaveEditor('../dashboard')"><img src="../../icons/elephant-400-400-pink-timeline.png" alt="Elephant Logo"></div>
@@ -124,13 +199,20 @@
         <div id="desktop-parent-container">
             <div id="editor-tools">
                 <div id="editor-tools-left">
-                    <h1 contenteditable="true">New Timeline</h1>
+                    <h1 contenteditable="true" id="timeline-name">New Timeline</h1>
                 </div>
                 <div id="editor-tools-middle">
-                    <button onclick="createTimelineEvent()" id="create-event-btn">Create Event</button>
-                    <button onclick="createTimelineMarker()" id="create-marker-btn">Create Marker</button>
+                    <button onclick="openCreateModal(0)" id="create-event-btn">Create Event</button>
+                    <button onclick="openCreateModal(1)" id="create-marker-btn">Create Marker</button>
                 </div>
-                <div id="editor-tools-right"></div>
+                <div id="editor-tools-right">
+                    <button onclick="toggleModal(document.getElementById('desktop-folder-modal'))" id="add-to-folder-btn">
+                        <img src="../../flip/icons/add_folder.png" alt="">
+                        <p>Add To Folder</p>
+                        <img src="../../flip/icons/expand_down.png" alt="">
+                    </button>
+                    <button onclick="toggleModal(document.getElementById('change-visibility-modal'))" class="personal" id="change-visibility">Change Visibility</button>
+                </div>
             </div>
             <div id="desktop-main-container" class="default">
                 <div id="desktop-main-timeline-container">
@@ -139,41 +221,49 @@
                     <p id="end-date">End Date</p>
                 </div>
                 <div id="desktop-main-misc-container">
-                    <div id="desktop-main-event-containers">
-                        <div class="event-container-top">
-                            <div>
-                                <img src="./icons/edit.png" alt="">
-                                <img src="./icons/delete.png" alt="">
-                            </div>
-                            <h3>August 2nd, 1776</h3>
-                            <h1>Declaration of Independence Signed</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque dignissimos doloremque eaque illo magni quia quos? Adipisci at beatae commodi, dolor eius eligendi error, eveniet, iste modi non nostrum officia sit voluptates? Debitis odio praesentium quam quis sapiente sequi voluptatibus.</p>
-                        </div>
-                        <div class="event-container-bottom" style="left:128px">
-                            <div>
-                                <img src="./icons/edit.png" alt="">
-                                <img src="./icons/delete.png" alt="">
-                            </div>
-                            <h3>August 2nd, 1776</h3>
-                            <h1>Declaration of Independence Signed</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet, aperiam, blanditiis cupiditate eaque earum eos esse exercitationem impedit in inventore ipsum nam nobis nulla odit officia officiis perferendis quidem repellat reprehenderit saepe velit vitae. Beatae blanditiis dignissimos eaque esse iste labore nihil nisi, non numquam officiis quam repudiandae, rerum soluta temporibus totam veritatis vitae! Accusamus, ad animi aspernatur doloribus dolorum ducimus eveniet ex excepturi facere, fugiat maiores minus, mollitia nihil nobis nulla quod sed sequi sunt totam ut. Ab accusantium aliquam corporis cum deleniti dignissimos dolor eaque eos facere fugit iste itaque natus necessitatibus nemo nihil nobis officia perferendis quod ratione rem reprehenderit saepe tempore tenetur voluptatem, voluptatibus? Deserunt dicta doloribus expedita in nostrum, quaerat quod saepe sit veniam.</p>
-                        </div>
-                    </div>
-                    <div id="desktop-main-marker-container">
-                        <div style="left:50%;">
-                            <p>Shrihun Cringe Era</p>
-                        </div>
-                    </div>
+                    <div id="desktop-main-event-containers"></div>
+                    <div id="desktop-main-marker-container"></div>
                 </div>
                 <div id="edit-modal" class="inactive-modal">
+                    <div id="edit-modal-windows">
+                        <div id="new-event-window" class="inactive-modal">
+                            <h6>Event Name</h6>
+                            <input type="text" placeholder="Event Name">
+                            <h6>Event Starting Date</h6>
+                            <input type="date" placeholder="Event Start Time">
+                            <h6>Event Ending Date (Optional)</h6>
+                            <input type="date" placeholder="Event End Time">
+                            <h6>Description of Event</h6>
+                            <textarea name="" cols="30" rows="10" placeholder="Description of the Event"></textarea>
+                            <h6>(Optional) Event Banner</h6>
+                            <div id="event-banner-showcase">
+                                <p id="event-banner-p" onclick="openUploadModal()">Import an Image</p>
+                                <div class="inactive-modal" id="uploaded-image-container">
+                                    <img src="" alt="" id="uploaded-image">
+                                    <p id="uploaded-image-data"></p>
+                                    <button id="clear-uploaded-image">Select Different Image</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="new-marker-window">
+                            <h6>Marker Name</h6>
+                            <input type="text" placeholder="Marker Name">
+                            <h6>Marker Date</h6>
+                            <input type="date" placeholder="Marker Start Time">
+                            <div class="checkbox inactive-checkbox">
+                                <div onclick="toggleCheckbox(0)"></div>
+                                <p>Present Day?</p>
+                            </div>
+                        </div>
+                    </div>
                     <div id="edit-bottom-btns">
-                        <button>Create</button>
-                        <button>Cancel</button>
+                        <button onclick="createItem()">Create</button>
+                        <button onclick="closeCreateModal()">Cancel</button>
                     </div>
                 </div>
             </div>
             <div class="bottom-btns">
-                <div id="save-deck">
+                <div id="save-deck" onclick="saveChanges()">
                     <img src="../../flip/editor/icons/save.png" alt="">
                 </div>
                 <div id="view-deck" class="inactive-modal">

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="webpage-title">Folder Details | Elephant - The Ultimate Student Suite</title>
+
+    <link rel="icon" href="../icons/elephant-400-400-grayscale.png">
+    <link rel="stylesheet" href="../flip/css/main.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="../flip/js/main.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div id="delete-folder-modal" class="desktop-modal inactive-modal">
+        <div class="desktop-modal-image-container">
+            <img src="../flip/icons/delete_folder.png" alt="">
+        </div>
+        <h1>Delete Folder</h1>
+        <p>No longer using this folder? Clear up the clutter and delete the folder! Confirm deletion by typing the folder name.</p>
+        <h6 id="delete-folder-header"></h6>
+        <div class="desktop-modal-input-container" id="folder-delete-input-container">
+            <img src="../flip/icons/folder.png" alt="">
+            <input type="text" id="folder-delete-input" placeholder="Type Folder Name">
+        </div>
+        <div class="desktop-modal-buttons-container">
+            <button onclick="toggleFolderModal(false)">Cancel</button>
+            <button onclick="toggleFolderModal(true)">Delete</button>
+        </div>
+    </div>
+    <div id="rename-folder-modal" class="desktop-modal inactive-modal">
+        <div class="desktop-modal-image-container">
+            <img src="../flip/icons/edit_folder.png" alt="">
+        </div>
+        <h1>Rename Folder</h1>
+        <p>Not happy with the folder's name? Rename it now.</p>
+        <h6 id="rename-folder-header"></h6>
+        <div class="desktop-modal-input-container" id="rename-delete-input-container">
+            <img src="../flip/icons/folder.png" alt="">
+            <input type="text" id="folder-rename-input" placeholder="New Folder Name">
+        </div>
+        <div class="desktop-modal-buttons-container">
+            <button onclick="toggleRenameModal(false)">Cancel</button>
+            <button onclick="toggleRenameModal(true)">Rename</button>
+        </div>
+    </div>
+    <div id="desktop-wrapper">
+        <div id="desktop-loader-container">
+            <div id="desktop-loader-bg-left"></div>
+            <div id="desktop-loader"></div>
+            <img src="../icons/elephant-400-400-white.png" alt="Loading Ain't Loading" id="desktop-loader-img">
+            <div id="desktop-loader-bg-right"></div>
+            <p id="desktop-loader-text"></p>
+        </div>
+        <div id="desktop-notifications-modal" class="inactive-modal">
+            <div id="desktop-notifications-header">
+                <h1>Notifications</h1>
+                <img src="../icons/x.png" alt="" onclick="toggleNotificationsModal()">
+            </div>
+            <div id="desktop-notifications-tabs">
+                <div class="desktop-notifications-tab active-notifications-tab" onclick="toggleNotificationTab(0)">
+                    <h1>General</h1>
+                    <p class="desktop-notifications-tab-number">0</p>
+                </div>
+                <div class="desktop-notifications-tab" onclick="toggleNotificationTab(1)">
+                    <h1>Friends</h1>
+                    <p class="desktop-notifications-tab-number">0</p>
+                </div>
+            </div>
+            <div id="desktop-notifications-list-container">
+                <div id="desktop-notifications-list">
+                    <div class="desktop-notifications-list active-notifications-list"></div>
+                    <div class="desktop-notifications-list"></div>
+                </div>
+                <div id="no-notifications">
+                    <p>You're up to date! Now get back to studying.</p>
+                    <button onclick="refreshNotifications()">Refresh</button>
+                </div>
+            </div>
+        </div>
+        <div id="desktop-navbar">
+            <div id="desktop-main-image">
+                <a href="../"><img src="../icons/elephant-400-400-white.png" alt="Elephant Logo"></a>
+            </div>
+            <div id="desktop-input-div">
+                <img src="../flip/icons/search.png" alt="Search" id="desktop-input-img">
+                <input type="text" id="desktop-navbar-input" placeholder="Search Users, Classrooms">
+            </div>
+            <div id="desktop-navbar-right">
+                <div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
+                    <img src="../flip/icons/music.png" alt="Notifications">
+                </div>
+                <!--<div class="desktop-navbar-right-img" onclick="toggleFriendingModal(false)">
+                    <img src="../flip/icons/add_friend.png" alt="Friend Request">
+                </div>-->
+                <div class="desktop-navbar-right-img" onclick="toggleNotificationsModal()" id="desktop-navbar-notifications-container">
+                    <img src="../flip/icons/notification.png" alt="Notifications" id="notifications-btn">
+                </div>
+                <div id="desktop-navbar-profile">
+                    <img src="" alt="Image" id="desktop-navbar-profile-image">
+                    <div id="navbar-profile-text">
+                        <h1 id="desktop-navbar-profile-name"></h1>
+                        <p id="desktop-navbar-profile-type"></p>
+                    </div>
+                    <img src="../flip/icons/expand_down.png" alt="Dropdown">
+                    <div id="desktop-profile-modal" class="active-modal">
+                        <div onclick="location.href = '../profile'">
+                            <img src="../flip/icons/emojis/happy.png" id="desktop-profile-user-img" alt="">
+                            <p>Your Profile</p>
+                        </div>
+                        <div>
+                            <img src="../flip/icons/theme.png" alt="">
+                            <p>Theme</p>
+                            <img src="../flip/icons/expand-right.png" alt="">
+                            <div class="profile-sub-modal">
+                                <div onclick="toggleTheme(0)">
+                                    <img src="../flip/icons/sun.png" alt="">
+                                    <p>Light Theme</p>
+                                    <img src="../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                                </div>
+                                <div onclick="toggleTheme(1)">
+                                    <img src="../flip/icons/moon.png" alt="">
+                                    <p>Dark Theme</p>
+                                    <img src="../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                                </div>
+                                <div onclick="toggleTheme(2)">
+                                    <img src="../flip/icons/50%25.png" alt="">
+                                    <p>System Default</p>
+                                    <img src="../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="../flip/icons/zoom.png">
+                            <p>Accessibility Zoom</p>
+                            <img src="../flip/icons/expand-right.png" alt="">
+                            <div class="profile-sub-modal">
+                                <div onclick="toggleSizeSetting(0)">
+                                    <img src="../flip/icons/zoom_out.png" alt="">
+                                    <p>75%</p>
+                                    <img src="../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                                <div onclick="toggleSizeSetting(1)">
+                                    <img src="../flip/icons/search.png" alt="">
+                                    <p>100%</p>
+                                    <img src="../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                                <div onclick="toggleSizeSetting(2)">
+                                    <img src="../flip/icons/zoom_in.png" alt="">
+                                    <p>125%</p>
+                                    <img src="../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                                <div onclick="toggleSizeSetting(3)">
+                                    <img src="../flip/icons/zoom_in.png" alt="">
+                                    <p>150%</p>
+                                    <img src="../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-break"></div>
+                        <div onclick="localStorage.removeItem('savedUserId'); location.href = '../login'">
+                            <img src="../flip/icons/logout.png">
+                            <p>Log Out</p>
+                        </div>
+                        <!--<button>Get Premium</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="desktop-parent-container">
+            <div id="desktop-sidebar">
+                <div class="sidebar-button" onclick="location.href='../dashboard/'">
+                    <img src="../flip/icons/dashboard.png" alt="Recent">
+                    <p>My Dashboard</p>
+                </div>
+                <div class="sidebar-dropdown">
+                    <div>
+                        <img src="../flip/icons/compass.png" alt="">
+                        <p>Applications</p>
+                        <div>
+                            <img src="../flip/icons/expand_down.png" alt="" class="">
+                        </div>
+                    </div>
+                    <div>
+                        <div onclick="location.href='../flip/dashboard'">
+                            <img src="../flip/icons/deck.png" alt="Recent">
+                            <p>Flip</p>
+                        </div>
+                        <div onclick="location.href='../ask/dashboard'">
+                            <img src="../ask/icons/ask.png" alt="Recent">
+                            <p>Ask</p>
+                        </div>
+                        <div onclick="location.href='../timeline/dashboard'">
+                            <img src="../timeline/icons/timeline.png" alt="Recent">
+                            <p>Timeline</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-break"></div>
+                <div class="sidebar-dropdown">
+                    <div>
+                        <img src="../flip/icons/open_folder.png" alt="">
+                        <p>Folders</p>
+                        <div>
+                            <img src="../flip/icons/plus.png" alt="" id="create-folder-btn">
+                            <img src="../flip/icons/expand_down.png" alt="">
+                        </div>
+                    </div>
+                    <div id="desktop-sidebar-folders"></div>
+                </div>
+            </div>
+            <div id="desktop-main-container">
+                <div id="desktop-main-news">
+                    <!--<img src="./icons/discord.png" alt="">
+                    <a href="https://discord.gg/YbZS8H6RbB/">Join The New Elephant Discord Server</a>
+                    <p onclick="closeNews()">X</p>-->
+                </div>
+                <p id="desktop-main-container-tab"></p>
+                <div id="folder-container">
+                    <div id="folder-left">
+                        <h1>Elephant Flip Decks</h1>
+                        <div class="folder-list"></div>
+                        <h1>Elephant Timelines</h1>
+                        <div class="folder-list"></div>
+                    </div>
+                    <div id="folder-right">
+                        <div id="pie-chart-container">
+                            <div id="pie-chart">
+                                <h1 id="folder-item-numbers">50</h1>
+                                <p>Items</p>
+                            </div>
+                        </div>
+                        <div id="pie-chart-legend">
+                            <div>
+                                <div class="personal">
+                                    <img src="../flip/icons/deck.png" alt="">
+                                </div>
+                                <div>
+                                    <h1>Elephant Flip</h1>
+                                    <p class="folder-numbers">23 Flip Decks</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="community">
+                                    <img src="../timeline/icons/timeline.png" alt="">
+                                </div>
+                                <div>
+                                    <h1>Elephant Timeline</h1>
+                                    <p class="folder-numbers">23 Timelines</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="folder-options">
+                            <div onclick="toggleRenameModal(false)">
+                                <img src="../flip/icons/edit_folder.png" alt="">
+                                <p>Rename Folder</p>
+                            </div>
+                            <div class="personal" onclick="toggleFolderModal(false)">
+                                <img src="../flip/icons/delete.png" alt="">
+                                <p>Delete Folder</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
