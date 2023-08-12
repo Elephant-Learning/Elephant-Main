@@ -317,7 +317,7 @@ p{
     height:24px;
 }
 
-.navbar-image-button:hover > div, .navbar-image-button:hover::after{
+.navbar-image-button:hover > div:first-of-type, .navbar-image-button:hover::after{
     opacity:1;
     visibility:visible;
 }
@@ -357,6 +357,7 @@ p{
     align-items:center;
     justify-content:center;
     text-align:center;
+    white-space:nowrap;
 }
 
 .navbar-image-button > div:nth-of-type(2){
