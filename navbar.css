@@ -314,7 +314,7 @@ p{
 }
 
 .navbar-image-button > a > img{
-    height:24px;
+    height:18px;
 }
 
 .navbar-image-button:hover > div:first-of-type, .navbar-image-button:hover::after{
@@ -330,7 +330,7 @@ p{
     border-right: 6px solid transparent;
     border-bottom: 6px solid var(--light-gray);
     position:absolute;
-    top:52px;
+    top:53px;
     visibility:hidden;
     opacity:0;
     transition-duration:250ms;
@@ -362,8 +362,8 @@ p{
 
 .navbar-image-button > div:nth-of-type(2){
     position:absolute;
-    top:-1px;
-    right:-1px;
+    top:-3px;
+    right:-3px;
     width:10px;
     height:10px;
     border-radius:50%;

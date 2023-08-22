@@ -144,6 +144,7 @@ body *{
 }
 
 #services-container-list > div:hover{
+    box-shadow:0 0 32px -10px gray;
     transform:scale(1.05);
     cursor:default;
 }

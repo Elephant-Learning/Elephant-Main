@@ -85,6 +85,7 @@ window.onload = async function(){
         })
     }
 
+    initializeViewer(TIMELINE)
     initializeMemorize(TIMELINE);
     createChronology(TIMELINE);
 }
