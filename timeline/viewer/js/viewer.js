@@ -31,13 +31,16 @@ function checkBoundary(){
     let outer = slider.getBoundingClientRect();
     let inner = innerSlider.getBoundingClientRect();
 
-    console.log(inner.width);
+    //console.log(inner.width);
 
     if(parseInt(innerSlider.style.left) > 0){
         innerSlider.style.left = "0px";
     } else if(inner.right < outer.right){
         innerSlider.style.left = `-${inner.width - outer.width}px`
     }
+
+    console.log(100 * Math.abs(parseInt(innerSlider.style.left) / (inner.width - outer.width)))
+    document.getElementById("slider-progress").style.background = `linear-gradient(135deg, var(--primary-accent) 0%, var(--primary-accent-gradient) ${100 * Math.abs(parseInt(innerSlider.style.left) / (inner.width - outer.width))}%, var(--bg-color-1) ${100 * Math.abs(parseInt(innerSlider.style.left) / (inner.width - outer.width))}%, var(--bg-color-1) 100%)`;
 }
 
 function getShortestTimeBetweenEvents(viewerEvents) {
@@ -101,6 +104,7 @@ function createViewerEvent(event){
     let newEventHeaderDiv = document.createElement("div");
     let newEventDateDiv = document.createElement("div");
 
+    let newEventImage = document.createElement("img");
     let newEventHeader = document.createElement("h1");
     let newEventPara = document.createElement("p");
     let newEventDate = document.createElement("p");
@@ -108,6 +112,9 @@ function createViewerEvent(event){
     newEventHeader.innerHTML = event.name;
     newEventPara.innerHTML = event.description;
     newEventDate.innerHTML = trimFirstWord(convertToText(event.startDate), 3);
+    newEventImage.src = event.image;
+
+    if(event.image) newEventHeaderDiv.appendChild(newEventImage);
 
     newEventHeaderDiv.append(newEventHeader, newEventPara);
     newEventDateDiv.appendChild(newEventDate);
