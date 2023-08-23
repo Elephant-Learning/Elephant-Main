@@ -258,80 +258,128 @@ body *{
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    gap:48px;
+    gap:16px;
+    padding:128px 64px;
+    width:calc(100vw - 128px);
+    background:var(--primary-light);
 }
 
 #testimonies > h1{
-    font-size:48px;
-    color:white;
+    font-size:32px;
     margin:0;
     text-align:center;
+    max-width:36vw;
+}
+
+#testimonies > p{
+    font-size:14px;
+    margin:0;
+    text-align:center;
+    color:gray;
+    max-width:36vw;
 }
 
 #testimonies > div{
     display:flex;
     flex-direction:row;
-    align-items:center;
+    align-items:flex-start;
     justify-content:center;
     flex-wrap:wrap;
     gap:24px;
+    margin-top:48px;
 }
 
 #testimonies > div > div{
-    width:256px;
-    height:256px;
-    background:var(--bg-color-1);
-    padding:24px;
-    border-radius:24px;
     display:flex;
     flex-direction:column;
     align-items:flex-start;
     justify-content:flex-start;
     gap:6px;
+    width:272px;
+    padding:32px;
+    border-radius:12px;
+    box-shadow:0 0 16px -10px gray;
+    background:var(--bg-color-1);
 }
 
-#testimonies > div > div > div{
+#testimonies > div > div > div:first-of-type{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+    width:100%;
+    margin-bottom:18px;
+}
+
+#testimonies > div > div > div:first-of-type > img{
+    height:28px;
+    filter:invert(0.5);
+}
+
+#testimonies > div > div > div:first-of-type > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:6px;
+    padding:0 18px;
+    height:30px;
+    background:var(--primary-light);
+    border-radius:15px;
+}
+
+#testimonies > div > div > div:first-of-type > div > p{
+    color:var(--primary-accent);
+    font-weight:700;
+    font-size:18px;
+    margin:0;
+}
+
+#testimonies > div > div > div:first-of-type > div > img{
+    height:18px;
+}
+
+#testimonies > div > div > h1{
+    font-size:18px;
+    margin:0;
+}
+
+#testimonies > div > div > p{
+    font-size:13px;
+    margin:0;
+    color:gray;
+    display: -webkit-box;
+    -webkit-line-clamp: 9   ;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+#testimonies > div > div > div:nth-of-type(2){
     display:flex;
     flex-direction:row;
     align-items:center;
     justify-content:flex-start;
     gap:12px;
+    margin-top:32px;
 }
 
-#testimonies > div > div > div > div{
-    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
-    width:32px;
+#testimonies > div > div > div:nth-of-type(2) > img{
     height:32px;
+}
+
+#testimonies > div > div > div:nth-of-type(2) > div{
     display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:center;
-    border-radius:16px;
+    flex-direction:column;
 }
 
-#testimonies > div > div > div > h1{
+#testimonies > div > div > div:nth-of-type(2) > div > h1{
+    font-size:14px;
     margin:0;
-    font-size:16px;
-    width:calc(100% - 44px);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
-#testimonies > div > div > div > div > img{
-    height:18px;
-}
-
-#testimonies > div > div > p{
+#testimonies > div > div > div:nth-of-type(2) > div > p{
     font-size:12px;
     color:gray;
-    width:100%;
-    height:calc(100% - 38px);
     margin:0;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
 }
 
 @media (max-width:950px) {
