@@ -103,6 +103,41 @@ p{
     font-weight:700;
 }
 
+#announcements{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    height:36px;
+    background:var(--light-gray);
+    overflow:none;
+    transition-duration:500ms;
+}
+
+#announcements.inactive-modal{
+    height:0;
+}
+
+#announcements > p{
+    font-size:13px;
+    font-weight:500;
+    color:white;
+    margin:0;
+}
+
+#announcements > button{
+    position:absolute;
+    right:12px;
+    height:24px;
+    width:24px;
+    font-weight:700;
+    color:gray;
+    background:transparent;
+    border:none;
+    cursor:pointer;
+}
+
 #navbar{
     width:calc(100vw - 96px);
     padding:0 48px;

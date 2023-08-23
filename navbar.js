@@ -27,8 +27,32 @@ async function initializeNavbar(prefix){
     } catch (e){
         console.log("Welcome to Elephant")
     }
-  
+
     console.log("sdf")
+}
+
+function showAnnouncementsModal(index){
+    const announcements = [
+        "📢New Timeline Feature Released on Elephant - The Ultimate Student Suite",
+    ]
+
+    try{
+        let userAnnouncements = JSON.parse(localStorage.getItem('announcementsChecked'));
+
+        if(!userAnnouncements.includes(index)){
+            document.getElementById("announcements-para").innerHTML = announcements[index];
+            document.getElementById("announcements-button").addEventListener("click", function(e){
+                userAnnouncements.push(index);
+                localStorage.setItem('announcementsChecked', JSON.stringify(userAnnouncements));
+
+                document.getElementById("announcements").classList.add("inactive-modal");
+            })
+
+            document.getElementById("announcements").classList.remove("inactive-modal");
+        }
+    } catch(e){
+        localStorage.setItem('announcementsChecked', JSON.stringify([]));
+    }
 }
 
 function showCookiesModal(){
@@ -47,4 +71,6 @@ initializeNavbar(document.getElementById('navbar-prefix').innerHTML).then(r => {
         localStorage.setItem("cookiesAccepted", JSON.stringify(false));
         showCookiesModal();
     }
+
+    showAnnouncementsModal(0);
 });
