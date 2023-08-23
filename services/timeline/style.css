@@ -1,0 +1,209 @@
+.header-label{
+    background:#008dff !important;
+}
+
+#header-container{
+    height:450px;
+    background:linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient));
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    width:84vw;
+    padding:0 8vw;
+    overflow:hidden;
+    margin-top:56px;
+}
+
+#header-container > img:first-of-type{
+    opacity:0.1;
+    position:absolute;
+    height:600px;
+    right:-50px;
+    top:-25px;
+}
+
+#header-container > *:not(img:first-of-type){
+    max-width:40vw;
+    margin:4px 0;
+    color:white;
+}
+
+#header-container > h1{
+    font-size:64px;
+    text-transform:uppercase;
+}
+
+#header-container > p{
+    font-size:16px;
+    line-height:22px;
+    font-weight:500;
+}
+
+#selling-points{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    gap:18px;
+    background:var(--bg-color-1);
+    padding:128px 8vw;
+}
+
+#selling-points > h1{
+    font-size:36px;
+    width:50vw;
+    text-align:center;
+    margin:0;
+}
+
+#selling-points > p{
+    width:50vw;
+    text-align:center;
+    margin:0;
+    font-size:14px;
+    font-weight:400;
+}
+
+#selling-wrap > div{
+    border-radius:24px;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-end;
+    position:relative;
+    padding:24px;
+    width:192px;
+    height:192px;
+    background:var(--bg-color-2);
+}
+
+#selling-wrap > div > div{
+    background:linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient));
+    width:30px;
+    height:30px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    position:absolute;
+    top:24px;
+    left:24px;
+}
+
+#selling-wrap > div > div > img{
+    height:18px;
+    filter:invert(1);
+}
+
+#selling-wrap > div > h1{
+    margin:0;
+    font-size:32px;
+    transition-duration:250ms;
+}
+
+#selling-wrap > div > h1{
+    font-size:24px
+}
+
+#selling-wrap > div:hover > h1{
+    color:var(--secondary-accent);
+}
+
+#selling-wrap > div > p{
+    margin:0;
+    font-size:13px;
+}
+
+#selling-wrap{
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:24px;
+    width:84vw;
+    margin-top:64px;
+}
+
+.video-container{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-evenly;
+    width:100vw;
+    height:100vh;
+    background:var(--bg-color-2);
+}
+
+.video-container > div{
+    width:calc(50% - 128px);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    position:relative;
+    height:calc(100vh - 256px);
+    border-radius:32px;
+    gap:16px;
+}
+
+.video-container > div > img{
+    width:100%;
+    border-radius:32px;
+}
+
+.video-container > div > h1{
+    margin:0;
+    font-size:32px;
+}
+
+.video-container > div > p{
+    margin:0;
+    font-size:14px;
+    color:gray;
+}
+
+.video-container > div > div{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    gap:16px;
+}
+
+.video-container > div > div > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    background:var(--bg-color-1);
+    /*background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));*/
+    padding:12px 24px;
+    border-radius:24px;
+    gap:16px;
+}
+
+.video-container > div > div > div > h1{
+    margin:0;
+    font-size:18px;
+    color:black;
+}
+
+.video-container > div > div > div > div{
+    background:linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient));
+    width:24px;
+    height:24px;
+    border-radius:18px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+.video-container > div > div > div > div > img{
+    height:18px;
+    filter:invert(1);
+}

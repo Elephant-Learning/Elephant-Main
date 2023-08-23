@@ -15,6 +15,14 @@
 </head>
 <body>
     <div id="desktop-wrapper">
+        <div id="music-modal" class="inactive-modal">
+            <div id="music-image"></div>
+            <h1 id="music-name">Rainy Café</h1>
+            <div id="music-controls">
+                <img src="./icons/play.png" alt="" id="music-pause-play">
+                <img src="./icons/next.png" alt="" id="music-next">
+            </div>
+        </div>
         <div id="desktop-loader-container">
             <div id="desktop-loader-bg-left"></div>
             <div id="desktop-loader"></div>
@@ -77,10 +85,10 @@
                 <input type="text" id="desktop-navbar-input" placeholder="Search Users, Classrooms">
             </div>
             <div id="desktop-navbar-right">
-                <!--<div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
+                <div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
                     <img src="../flip/icons/music.png" alt="Notifications">
                 </div>
-                <div class="desktop-navbar-right-img" onclick="toggleFriendingModal(false)">
+                <!--<div class="desktop-navbar-right-img" onclick="toggleFriendingModal(false)">
                     <img src="../flip/icons/add_friend.png" alt="Friend Request">
                 </div>-->
                 <div class="desktop-navbar-right-img" onclick="toggleNotificationsModal()" id="desktop-navbar-notifications-container">
@@ -159,39 +167,44 @@
         </div>
         <div id="desktop-parent-container">
             <div id="desktop-sidebar">
-                <div id="desktop-sidebar-categories">
-                    <div class="desktop-sidebar-category active-sidebar-category" onclick="location.href = './'">
+                <div class="sidebar-button active-sidebar-button">
+                    <img src="../flip/icons/dashboard.png" alt="Recent">
+                    <p>My Dashboard</p>
+                </div>
+                <div class="sidebar-dropdown">
+                    <div>
+                        <img src="../flip/icons/compass.png" alt="">
+                        <p>Applications</p>
                         <div>
-                            <img src="../flip/icons/dashboard.png" alt="Recent">
+                            <img src="../flip/icons/expand_down.png" alt="" class="">
                         </div>
-                        <p>My Dashboard</p>
                     </div>
-                    <div class="desktop-sidebar-break"></div>
-                    <div class="desktop-sidebar-category" onclick="location.href = '../flip/dashboard'">
-                        <div>
+                    <div>
+                        <div onclick="location.href='../flip/dashboard'">
                             <img src="../flip/icons/deck.png" alt="Recent">
+                            <p>Flip</p>
                         </div>
-                        <p>Flip</p>
-                    </div>
-                    <div class="desktop-sidebar-category" onclick="location.href = '../ask/dashboard'">
-                        <div>
+                        <div onclick="location.href='../ask/dashboard'">
                             <img src="../ask/icons/ask.png" alt="Recent">
+                            <p>Ask</p>
                         </div>
-                        <p>Ask</p>
-                    </div>
-                    <div class="desktop-sidebar-category unavailable-sidebar-category">
-                        <div>
+                        <div onclick="location.href='../timeline/dashboard'">
                             <img src="../timeline/icons/timeline.png" alt="Recent">
+                            <p>Timeline</p>
                         </div>
-                        <p>Timeline</p>
                     </div>
-                    <div id="desktop-sidebar-employee" class="desktop-sidebar-category inactive-modal" onclick="togglePageFlip(9, 1)">
+                </div>
+                <div class="sidebar-break"></div>
+                <div class="sidebar-dropdown">
+                    <div>
+                        <img src="../flip/icons/open_folder.png" alt="">
+                        <p>Folders</p>
                         <div>
-                            <img src="../flip/icons/admin.png" alt="Recent">
+                            <img src="../flip/icons/plus.png" alt="" id="create-folder-btn">
+                            <img src="../flip/icons/expand_down.png" alt="">
                         </div>
-                        <p>Admin Portal</p>
                     </div>
-                    <!--<div class="desktop-sidebar-break"></div>-->
+                    <div id="desktop-sidebar-folders"></div>
                 </div>
             </div>
             <div id="desktop-main-container">
@@ -203,32 +216,31 @@
                 <p id="desktop-main-container-tab">My Dashboard</p>
                 <div id="my-dashboard">
                     <div id="dashboard-left">
-                        <div id="quick-buttons">
-                            <a href="../flip/dashboard/">
-                                <div></div>
-                                <img src="../flip/icons/deck.png" alt="">
-                                <div>
-                                    <h1>Flip</h1>
-                                    <p>Memorization Made Easy</p>
+                        <div id="services-container">
+                            <div>
+                                <div style="background:var(--light-accent);">
+                                    <img src="../flip/icons/deck.png" alt="" class="primary-filter">
                                 </div>
-                            </a>
-                            <a href="../ask/dashboard/">
-                                <div></div>
-                                <img src="../ask/icons/ask.png" alt="">
-                                <div>
-                                    <h1>Ask</h1>
-                                    <p>Academic Support Network</p>
+                                <h1>Elephant Flip</h1>
+                                <p>Memorizing Made Easy</p>
+                                <a href="../flip/dashboard" style="background:var(--light-accent); color:var(--primary-accent);">Flip Dashboard</a>
+                            </div>
+                            <div>
+                                <div style="background:var(--light-secondary);">
+                                    <img src="../ask/icons/ask.png" alt="" class="secondary-filter">
                                 </div>
-                            </a>
-                        </div>
-                        <h1>Recent Activity</h1>
-                        <h2>Elephant Flip</h2>
-                        <div class="recent-activity-div" id="flashcards-activity">
-                            <div class="recent-activity-no">No Decks</div>
-                        </div>
-                        <h2>Elephant Ask</h2>
-                        <div class="recent-activity-div" id="answers-activity">
-                            <div class="recent-activity-no">No Questions</div>
+                                <h1>Elephant Ask</h1>
+                                <p>Ask Questions Faster</p>
+                                <a href="../ask/dashboard" style="background:var(--light-secondary); color:var(--secondary-accent);">Ask Dashboard</a>
+                            </div>
+                            <div>
+                                <div style="background:var(--light-tertiary);">
+                                    <img src="../timeline/icons/timeline.png" alt="" class="tertiary-filter">
+                                </div>
+                                <h1>Elephant Timeline</h1>
+                                <p>History Made Easy</p>
+                                <a href="../timeline/dashboard" style="background:var(--light-tertiary); color:var(--tertiary-accent);">Timeline Dashboard</a>
+                            </div>
                         </div>
                     </div>
                     <div id="dashboard-right">

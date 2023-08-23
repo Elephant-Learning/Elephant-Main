@@ -15,6 +15,8 @@ async function initializeNavbar(prefix){
 
             const context = await response.json();
 
+            console.log("Login as " + context.context.user.firstName);
+
             document.getElementById("login-link-name").innerHTML = "Login as " + context.context.user.firstName;
             console.log(context.context.user.firstName)
             document.getElementById("login-link-name").previousElementSibling.setAttribute("href", prefix + "dashboard/");
@@ -25,7 +27,7 @@ async function initializeNavbar(prefix){
     } catch (e){
         console.log("Welcome to Elephant")
     }
-
+  
     console.log("sdf")
 }
 

@@ -143,7 +143,7 @@ p{
 }
 
 #navbar-right{
-    gap:24px;
+    gap:32px;
 }
 
 .navbar-modal{
@@ -314,10 +314,10 @@ p{
 }
 
 .navbar-image-button > a > img{
-    height:24px;
+    height:18px;
 }
 
-.navbar-image-button:hover > div, .navbar-image-button:hover::after{
+.navbar-image-button:hover > div:first-of-type, .navbar-image-button:hover::after{
     opacity:1;
     visibility:visible;
 }
@@ -330,7 +330,7 @@ p{
     border-right: 6px solid transparent;
     border-bottom: 6px solid var(--light-gray);
     position:absolute;
-    top:52px;
+    top:53px;
     visibility:hidden;
     opacity:0;
     transition-duration:250ms;
@@ -357,12 +357,13 @@ p{
     align-items:center;
     justify-content:center;
     text-align:center;
+    white-space:nowrap;
 }
 
 .navbar-image-button > div:nth-of-type(2){
     position:absolute;
-    top:-1px;
-    right:-1px;
+    top:-3px;
+    right:-3px;
     width:10px;
     height:10px;
     border-radius:50%;
@@ -412,9 +413,8 @@ p{
     bottom:24px;
     left:24px;
     background:var(--bg-color-1);
-    box-shadow:0 0 12px 0 gray;
+    box-shadow:0 0 6px 0 gray;
     width:256px;
-    padding:30px;
     border-radius:12px;
     display:flex;
     flex-direction:row;
@@ -424,6 +424,7 @@ p{
     gap:18px;
     transition-duration:1000ms;
     transition-property:opacity, transform;
+    padding: 30px 30px 58px;
 }
 
 #cookies-modal.inactive-modal{
@@ -470,21 +471,18 @@ p{
 
 #cookies-modal > button{
     position:absolute;
+    bottom:30px;
     right:30px;
-    display:flex;
-    flex-direction:row;
-    align-items:flex-start;
-    justify-content:flex-start;
-    color:gray;
-    background:transparent;
-    outline:none;
+    height:18px;
+    width:128px;
+    color:white;
+    font-size:10px;
+    font-weight:700;
+    border-radius:6px;
     border:none;
+    outline:none;
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
     cursor:pointer;
-    font-weight:500;
-    font-size:16px;
-    height:16px;
-    width:16px;
-    text-align:right;
 }
 
 #desktop-wrapper{

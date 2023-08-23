@@ -123,37 +123,118 @@
     width:calc(100vw - var(--size) * 280px);
 }
 
-#my-profile-image-container{
-    border:1px solid var(--light-border-color);
-    background:var(--bg-color-1);
-    width:calc(var(--size) * 128px);
-    height:calc(var(--size) * 128px);
-    border-radius:50%;
+.personal{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient)) !important;
+}
+
+.community{
+    background:linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-gradient)) !important;
+}
+
+.shared{
+    background:linear-gradient(135deg, var(--tertiary-accent), var(--tertiary-accent-gradient)) !important;
+}
+
+.admin{
+    background:linear-gradient(135deg, var(--quaternary-accent), var(--quaternary-accent-gradient)) !important;
+}
+
+#desktop-profile-section{
     display:flex;
     flex-direction:row;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 24px);
+}
+
+#desktop-profile-card{
+    width:calc(var(--size) * 320px);
+    background:var(--bg-color-1);
+    border-radius:calc(var(--size) * 12px);
+    border:1px solid var(--light-border-color);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+}
+
+#desktop-profile-card > *{
+    width:calc(var(--size) * 272px);
+}
+
+#desktop-profile-banner{
+    width:calc(var(--size) * 320px);
+    height:calc(var(--size) * 96px);
+    margin-bottom:calc(var(--size) * -32px);
+    border-top-left-radius:calc(var(--size) * 12px);
+    border-top-right-radius:calc(var(--size) * 12px);
+}
+
+#desktop-profile-image-container{
+    width:calc(var(--size) * 64px);
+    height:calc(var(--size) * 64px);
+    background:var(--bg-color-1);
+    border-radius:50%;
+    display:flex;
+    flex-direction:column;
     align-items:center;
     justify-content:center;
 }
 
-#my-profile-img{
-    height:calc(var(--size) * 72px);
+#desktop-profile-image-container > img{
+    height:calc(var(--size) * 36px);
 }
 
 #my-profile-name{
+    font-size:calc(var(--size) * 16px);
+    text-align:center;
     margin:0;
-    font-size:calc(var(--size) * 24px);
 }
 
 #my-profile-type{
+    font-size:calc(var(--size) * 12px);
+    color:gray;
     margin:0;
-    font-size:calc(var(--size) * 14px);
+    text-align:center;
 }
 
-#my-profile-information{
+.my-profile-break{
+    width:100%;
+    height:0;
+    border-top:1px solid lightgray;
+    margin:calc(var(--size) * 24px) 0;
+}
+
+#edit-profile-btn{
+    margin-top:calc(var(--size) * 18px);
+    background:var(--bg-color-2);
+    height:calc(var(--size) * 28px);
+    font-size:calc(var(--size) * 12px);
+    font-weight:400;
+    cursor:pointer;
+    text-transform:uppercase;
+    border:1px solid var(--light-border-color);
+    letter-spacing:1px;
+    color:gray;
+    outline:none;
+    border-radius:calc(var(--size) * 6px);
+    transition-duration:250ms;
+}
+
+#edit-profile-btn:hover{
+    box-shadow:0 0 calc(var(--size) * 4px) 0 lightgray;
+}
+
+#edit-profile-btn:active{
+    box-shadow:none;
+}
+
+.my-profile-information-container{
     display:flex;
     flex-direction:column;
-    gap:calc(var(--size) * 6px);
-    margin-top:calc(var(--size) * 12px);
+    align-items:center;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 3px);
 }
 
 .my-profile-information{
@@ -168,53 +249,304 @@
     filter:invert(0.5);
 }
 
-.my-profile-information > p{
-    font-size:calc(var(--size) * 12px);
-    width:calc(100vw - var(--size) * 768px);
+.my-profile-information > p {
+    font-size: calc(var(--size) * 12px);
+    max-width:calc(var(--size) * 250px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color:gray;
-    margin:0;
+    color: gray;
+    margin: 0;
 }
 
-#my-profile-options{
-    margin-top:calc(var(--size) * 24px);
+.my-profile-section-header{
+    margin:0;
+    font-size:calc(var(--size) * 12px);
+    font-weight:500;
+    text-align:center;
+}
+
+.experimental{
+    font-size:calc(var(--size) * 10px);
+    color:var(--primary-accent);
+    text-transform:uppercase;
+    font-weight:500;
+    border:1px solid var(--primary-accent);
+    padding:calc(var(--size) * 2px) calc(var(--size) * 6px);
+    width:auto !important;
+    border-radius:calc(var(--size) * 9px);
+}
+
+#my-profile-badges{
     display:flex;
     flex-direction:row;
     align-items:center;
+    justify-content:center;
+    gap:calc(var(--size) * 12px);
+    margin-top:calc(var(--size) * 12px);
+    flex-wrap:wrap;
+}
+
+#my-profile-badges > p{
+    margin:0;
+    color:gray;
+    text-transform:uppercase;
+    font-size:calc(var(--size) * 10px);
+    width:100%;
+    height:calc(var(--size) * 32px);
+    text-align:center;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    border:1px dashed lightgray;
+    border-radius:calc(var(--size) * 6px);
+}
+
+#my-profile-badges > div{
+    position:relative;
+}
+
+#my-profile-badges > div > img{
+    box-shadow:0 0 calc(var(--size) * 6px) calc(var(--size) * 4px) var(--light-border-color);
+    height:calc(var(--size) * 64px);
+    border-radius:50%;
+}
+
+#my-profile-badges > div > div::before{
+    position:absolute;
+    top:calc(var(--size) * -12px);
+    left:calc(var(--size) * 24px);
+    width: 0;
+    height: 0;
+    border-left: calc(var(--size) * 12px) solid transparent;
+    border-right: calc(var(--size) * 12px) solid transparent;
+    border-bottom: calc(var(--size) * 12px) solid var(--light-border-color);
+    content:'';
+}
+
+#my-profile-badges > div > div{
+    visibility:hidden;
+    opacity:0;
+    transition-duration:250ms;
+    position:absolute;
+    top:calc(var(--size) * 82px);
+    transition-delay:0ms;
+    width:calc(var(--size) * 320px);
+    background:var(--bg-color-1);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    border-radius:calc(var(--size) * 12px);
+    margin-bottom:calc(var(--size) * 24px);
+    border:1px solid var(--light-border-color);
+    z-index:2;
+}
+
+#my-profile-badges > div > div > div:first-of-type{
+    overflow:hidden;
+    width:calc(var(--size) * 320px);
+    height:calc(var(--size) * 192px);
+    margin-bottom:calc(var(--size) * -144px);
+    border-top-left-radius:calc(var(--size) * 12px);
+    border-top-right-radius:calc(var(--size) * 12px);
+}
+
+#my-profile-badges > div > div > div:first-of-type > div{
+    width:100%;
+    height:100%;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:cover;
+    filter:blur(calc(var(--size) * 12px));
+}
+
+#my-profile-badges > div > div > img{
+    width:calc(var(--size) * 96px);
+    margin-bottom:calc(var(--size) * 48px);
+    border-radius:50%;
+    box-shadow:0 0 calc(var(--size) * 24px) 0 black;
+    z-index:1;
+}
+
+#my-profile-badges > div > div > div:last-of-type{
+    background:var(--bg-color-1);
+    width:calc(var(--size) * 272px);
+    padding:calc(var(--size) * 24px);
+    display:flex;
+    flex-direction:column;
+    gap:calc(var(--size) * 4px);
+    border-bottom-left-radius:calc(var(--size) * 12px);
+    border-bottom-right-radius:calc(var(--size) * 12px);
+    z-index:1;
+}
+
+#my-profile-badges > div > div > div:last-of-type > h1{
+    font-size:calc(var(--size) * 16px);
+    margin:0;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:calc(var(--size) * 6px);
+}
+
+#my-profile-badges > div > div > div:last-of-type > h1 > span{
+    font-size:calc(var(--size) * 10px);
+    font-weight:500;
+    text-transform:uppercase;
+    padding:calc(var(--size) * 2px) calc(var(--size) * 6px);
+    border-radius:calc(var(--size) * 10px);
+}
+
+#my-profile-badges > div > div > div:last-of-type > p{
+    font-size:calc(var(--size) * 12px);
+    margin:0;
+    color:gray;
+}
+
+#my-profile-badges > div > div > div:last-of-type > h6:first-of-type{
+    margin-top:calc(var(--size) * 12px);
+}
+
+#my-profile-badges > div > div > div:last-of-type > h6:not(:first-of-type)::before{
+    content:'';
+    position:absolute;
+    background:var(--bg-color-1);
+    border:calc(var(--size) * 2px) solid gray;
+    width:calc(var(--size) * 8px);
+    height:calc(var(--size) * 8px);
+    border-radius:calc(var(--size) * 6px);
+    left:calc(var(--size) * -21px);
+}
+
+#my-profile-badges > div > div > div:last-of-type > h6:not(:first-of-type)::after{
+    content:'';
+    position:absolute;
+    height:calc(var(--size) * 18px);
+    width:0;
+    left:calc(var(--size) * -16px);
+    border-left:calc(var(--size) * 2px) solid gray;
+    bottom:calc(var(--size) * 12px);
+}
+
+#my-profile-badges > div > div > div:last-of-type > h6:first-of-type::before{
+    content:'';
+    position:absolute;
+    background-image:url("./icons/trophy.png");
+    background-size:cover;
+    filter:invert(0.5);
+    width:calc(var(--size) * 18px);
+    height:calc(var(--size) * 18px);
+    border-radius:calc(var(--size) * 7px);
+    left:calc(var(--size) * -24px);
+}
+
+#my-profile-badges > div > div > div:last-of-type > h6{
+    position:relative;
+    font-size:calc(var(--size) * 10px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:calc(var(--size) * 6px);
+    font-weight:400;
+    color:gray;
+    margin: calc(var(--size) * 4px) 0 calc(var(--size) * 4px) calc(var(--size) * 24px);
+}
+
+#my-profile-badges > div > div > div:last-of-type > h6 > span{
+    font-size:calc(var(--size) * 8px);
+    font-weight:500;
+    text-transform:uppercase;
+    padding:calc(var(--size) * 2px) calc(var(--size) * 6px);
+    border-radius:calc(var(--size) * 9px);
+}
+
+#my-profile-badges > div > div > div:last-of-type > h2{
+    font-size:calc(var(--size) * 12px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:calc(var(--size) * 6px);
+    margin: calc(var(--size) * 12px) 0 0;
+    color:gray;
+    font-weight:400;
+}
+
+#my-profile-badges > div > div > div:last-of-type > h2 > span{
+    font-size:calc(var(--size) * 8px);
+    font-weight:500;
+    text-transform:uppercase;
+    padding:calc(var(--size) * 2px) calc(var(--size) * 6px);
+    border-radius:calc(var(--size) * 9px);
+}
+
+#my-profile-badges > div:hover > div{
+    visibility:visible;
+    transition-delay:500ms;
+    opacity:1;
+}
+
+#desktop-profile-information{
+    width:calc(100vw - var(--size) * 660px);
+}
+
+#desktop-profile-information > div:not(.main-profile-break){
+    background:var(--bg-color-1);
+    padding:calc(var(--size) * 24px);
+    border:1px solid var(--light-border-color);
+    border-radius:calc(var(--size) * 12px);
+    display:flex;
+    flex-direction:column;
+    gap:calc(var(--size) * 12px);
+    margin-bottom:calc(var(--size) * 24px);
+}
+
+#desktop-profile-information > div:not(.main-profile-break) > h1{
+    margin:0;
+    font-size:calc(var(--size) * 16px);
+}
+
+.main-profile-break{
+    width:100%;
+    height:0;
+    border-top:calc(var(--size) * 2px) solid var(--light-border-color);
+    margin-bottom:calc(var(--size) * 24px);
+}
+
+#profile-friends-list, .profile-item-list{
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
     justify-content:flex-start;
     gap:calc(var(--size) * 12px);
     flex-wrap:wrap;
 }
 
-#my-profile-options > button{
-    padding:calc(var(--size) * 6px) calc(var(--size) * 36px);
-    border:none;
-    color:white;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    border-radius:calc(var(--size) * 12px);
+#profile-friends-list > div, .profile-item-list > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:calc(var(--size) * 12px);
+}
+
+#profile-friends-list > div > img, .profile-item-list > div > img{
+    height:calc(var(--size) * 24px);
+}
+
+.profile-item-list > div > img{
+    filter:invert(var(--image-invert));
+}
+
+#profile-friends-list > div > div > h1, .profile-item-list > div > div > h1{
+    margin:0;
     font-size:calc(var(--size) * 12px);
-    transition-duration:250ms;
-    outline:none;
-    cursor:pointer;
 }
 
-#my-profile-options > button:not(#delete-acc-btn){
-    background:var(--light-gray);
-}
-
-#delete-acc-btn{
-    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
-}
-
-#my-profile-options > button:hover{
-    box-shadow:0 0 calc(var(--size) * 6px) 0 var(--dark-gray);
-}
-
-#my-profile-options > button:active{
-    box-shadow:none;
+#profile-friends-list > div > div > p, .profile-item-list > div > div > p{
+    font-size:calc(var(--size) * 10px);
+    color:gray;
+    margin:0;
 }
 
 #desktop-avatar-container{
@@ -527,3 +859,64 @@
     background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
     color:white;
 }
+
+#account-settings-modal-container{
+    width:100vw;
+    height:calc(100vh - var(--size) * 48px);
+    position:absolute;
+    top:calc(vaR(--size) * 48px);
+    left:0;
+    z-index:1;
+    transition-duration:250ms;
+    backdrop-filter:blur(calc(var(--size) * 4px));
+    display:flex;
+    flex-direction:row;
+    align-items:flex-end;
+    justify-content:center;
+}
+
+#account-settings-modal-bg{
+    background:var(--bg-color-1);
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    opacity:0.675;
+}
+
+#account-settings-modal-container.inactive-modal > #account-settings-modal{
+    transform:translateY(100vh);
+}
+
+#account-settings-modal{
+    width:calc(var(--size) * 768px);
+    height:calc(100vh - var(--size) * 128px);
+    background:var(--bg-color-1);
+    border:1px solid var(--light-border-color);
+    padding:calc(var(--size) * 24px);
+    border-top-right-radius:calc(var(--size) * 24px);
+    border-top-left-radius:calc(var(--size) * 24px);
+    box-shadow:0 0 calc(var(--size) * 24px) 0 gray;
+    transition-duration:1s;
+    transition-delay:250ms;
+    z-index:2;
+}
+
+#account-settings-modal > div:first-of-type{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+    gap:calc(var(--size) * 12px);
+    background:var(--dark-gray);
+    width:calc(100% - var(--size) * 48px);
+    height:calc(var(--size) * 80px);
+    border-radius:calc(var(--size) * 12px);
+    padding:calc(var(--size) * 24px);
+}
+
+#account-settings-modal > div:first-of-type > img{
+    height:calc(var(--size) * 80px);
+}
+

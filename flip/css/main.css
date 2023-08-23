@@ -19,6 +19,8 @@
     --tertiary-accent-gradient:#fa8d37;
     --quaternary-accent:#00ff77;
     --quaternary-accent-gradient:#19cf77;
+    --light-secondary:#edf9fe;
+    --light-tertiary:#fefaed;
         /*--tertiary-accent:#00ff6e;
         --tertiary-accent-gradient:#31dc53;*/
     --accent-highlight:#f30096;
@@ -42,6 +44,18 @@
 
 *::-webkit-scrollbar-corner{
     background:transparent;
+}
+
+.primary-filter{
+    filter: invert(64%) sepia(80%) saturate(4293%) hue-rotate(305deg) brightness(102%) contrast(99%);
+}
+
+.secondary-filter{
+    filter: invert(41%) sepia(71%) saturate(2119%) hue-rotate(178deg) brightness(108%) contrast(106%);
+}
+
+.tertiary-filter{
+    filter: invert(49%) sepia(44%) saturate(3737%) hue-rotate(355deg) brightness(97%) contrast(101%);
 }
 
 body{
@@ -425,135 +439,49 @@ body *{
     flex-direction:row;
 }
 
-#desktop-music-modal{
-    position:absolute;
-    bottom:calc(var(--size) * 64px);
-    right:calc(var(--size) * 24px);
-    width:calc(var(--size) * 276px);
-    height:calc(var(--size) * 350px);
-    z-index:2;
-}
-
-#desktop-music-modal-bg{
-    position:absolute;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
+#music-modal{
     background:var(--bg-color-1);
-    border:1px solid var(--light-border-color);
-    opacity:1;
-    backdrop-filter:blur(10px);
-    border-radius:calc(var(--size) * 36px);
-}
-
-#desktop-music-modal-main{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
     position:absolute;
-    gap:calc(var(--size) * 24px);
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-}
-
-#desktop-music-modal-image-container{
-    position:relative;
-    width:calc(var(--size) * 152px);
-    height:calc(var(--size) * 152px);
-}
-
-#desktop-music-modal-image-bg{
-    width:calc(var(--size) * 152px);
-    height:calc(var(--size) * 152px);
-    position:absolute;
-    top:0;
-    left:0;
-    filter:blur(calc(var(--size) * 8px));
-    border-radius:calc(var(--size) * 24px);
-}
-
-#desktop-music-modal-image{
-    width:calc(var(--size) * 128px);
-    height:calc(var(--size) * 128px);
-    position:absolute;
-    top:calc(var(--size) * 12px);
-    left:calc(var(--size) * 12px);
-    border-radius:calc(var(--size) * 24px);
-}
-
-#desktop-music-text{
-    display:flex;
-    flex-direction:column;
-    text-align:center;
-    justify-content:center;
-    align-items:center;
-}
-
-#desktop-music-name{
-    color:var(--text-color);
-    margin:0;
-    font-size:calc(var(--size) * 18px);
-}
-
-#desktop-music-author{
-    margin:0;
-    color:gray;
-    font-size:calc(var(--size) * 12px)
-}
-
-#desktop-music-options{
+    z-index:4;
+    bottom:calc(var(--size) * 24px);
+    padding:calc(var(--size) * 12px) calc(var(--size) * 24px);
+    right:calc(var(--size) * 24px);
     display:flex;
     flex-direction:row;
-    align-items:center;
     justify-content:space-between;
-    width:calc(100% - var(--size) * 72px);
+    align-items:center;
+    gap:calc(var(--size) * 12px);
+    border-radius:calc(var(--size) * 12px);
+    box-shadow:0 0 calc(var(--size) * 12px) 0 var(--light-border-color);
+    transition-duration:250ms;
 }
 
-#desktop-music-options > div{
-    background:var(--bg-color-2);
-    border:1px solid var(--light-border-color);
+#music-image{
+    width:calc(var(--size) * 24px);
+    height:calc(var(--size) * 24px);
+    background-image:url("../../music/covers/nostalgia.png");
     border-radius:calc(var(--size) * 6px);
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-#pause-btn{
-    width:calc(var(--size) * 36px);
-    height:calc(var(--size) * 36px);
+#music-controls{
     display:flex;
     flex-direction:row;
+    justify-content:space-between;
     align-items:center;
-    justify-content:center;
+    gap:calc(var(--size) * 12px);
+}
+
+#music-controls > img{
+    height:calc(var(--size) * 18px);
     cursor:pointer;
 }
 
-#pause-btn > img{
-    width:calc(var(--size) * 24px);
-    filter:invert(0.5);
-}
-
-#track{
-    width:calc(100% - var(--size) * 60px);
-    height:calc(var(--size) * 24px);
-    padding:calc(var(--size) * 6px);
-    display:flex;
-    flex-direction:row;
-    align-items:flex-end;
-    gap:calc(var(--size) * 4px);
-}
-
-#track > div{
-    width:calc(var(--size) * 4px);
-}
-
-.track-item:not(.passed-track-item){
-    background:gray;
-}
-
-.passed-track-item{
-    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+#music-name{
+    font-size:calc(var(--size) * 14px);
+    margin: 0 calc(var(--size) * 24px) 0 0;
 }
 
 #desktop-notifications-modal{
@@ -864,9 +792,174 @@ body *{
     background:transparent;
     background:var(--bg-color-1);
     padding:calc(var(--size) * 12px) 0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 6px);
 }
 
-.desktop-sidebar-category, .desktop-sidebar-folder, .desktop-sidebar-category-2{
+.sidebar-button, .sidebar-dropdown > div:first-of-type{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 12px);
+    padding:calc(var(--size) * 6px) 0;
+    width:calc(var(--size) * 208px);
+    border-radius:calc(var(--size) * 6px);
+    cursor:pointer;
+}
+
+.sidebar-button{
+    transition-duration:250ms;
+    padding: calc(var(--size) * 6px) calc(var(--size) * 12px);
+}
+
+.sidebar-button:not(.active-sidebar-button):hover, .sidebar-dropdown > div:last-of-type > div:not(.active-sidebar-dropdown-category):hover{
+    background:var(--light-border-color);
+}
+
+.sidebar-dropdown{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+}
+
+.active-sidebar-dropdown > div:first-of-type > div:last-of-type > img:last-of-type{
+    transform:rotate(180deg);
+}
+
+.sidebar-dropdown:not(.active-sidebar-dropdown) > div:last-of-type{
+    height:0;
+    overflow-y:hidden;
+}
+
+.sidebar-dropdown > div:last-of-type{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    width:calc(var(--size) * 184px);
+    gap:calc(var(--size) * 6px);
+    height:auto;
+    transition-duration:250ms;
+}
+
+.sidebar-dropdown > div:last-of-type > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 12px);
+    padding:calc(var(--size) * 6px) calc(var(--size) * 12px);
+    border-radius:calc(var(--size) * 6px);
+    width:calc(var(--size) * 160px);
+    transition-duration:250ms;
+    cursor:pointer;
+}
+
+.sidebar-dropdown > div:last-of-type > div::before{
+    content:'';
+    background:var(--light-border-color);
+    width:calc(var(--size) * 8px);
+    height:calc(var(--size) * 8px);
+    position:absolute;
+    left:calc(var(--size) * -20px);
+    border-radius:50%;
+    z-index:1;
+}
+
+.active-sidebar-dropdown-category::before{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient)) !important;
+}
+
+.sidebar-dropdown > div:last-of-type > div:not(:last-of-type)::after{
+    content:'';
+    width:calc(var(--size) * 2px);
+    height:calc(var(--size) * 30px);
+    position:absolute;
+    left:calc(var(--size) * -17px);
+    top:calc(var(--size) * 16px);
+    background:var(--light-border-color);
+}
+
+.active-sidebar-dropdown-category, .active-sidebar-button{
+    background:var(--light-accent);
+}
+
+.sidebar-dropdown > div:first-of-type, .sidebar-dropdown > div:last-of-type > div{
+    position:relative;
+}
+
+.sidebar-button > img, .sidebar-dropdown > div:first-of-type > img:first-of-type, .sidebar-dropdown > div:last-of-type > div > img{
+    height:calc(var(--size) * 16px);
+    filter:invert(var(--image-invert));
+}
+
+.sidebar-dropdown > div:first-of-type > div:last-of-type{
+    position:absolute;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:calc(var(--size) * 6px);
+    right:0;
+}
+
+.sidebar-dropdown > div:first-of-type > div:last-of-type > img{
+    height:calc(var(--size) * 16px);
+    filter:invert(var(--image-invert));
+    transition-duration:250ms;
+}
+
+.sidebar-dropdown > div:first-of-type > div:last-of-type > img:hover{
+    transform:scale(1.25);
+}
+
+.active-sidebar-dropdown > div:first-of-type > div:last-of-type > img:last-of-type:hover{
+    transform:scale(1.25) rotate(180deg) !important;
+}
+
+.sidebar-button > p, .sidebar-dropdown > div:first-of-type > p, .sidebar-dropdown > div:last-of-type > div > p{
+    font-size:calc(var(--size) * 12px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight:500;
+    margin:0;
+}
+
+.sidebar-dropdown > div:last-of-type > div > input{
+    font-size:calc(var(--size) * 12px);
+    width:calc(var(--size) * 116px);
+    border:1px solid var(--dark-border-color);
+    outline:none;
+    border-radius:calc(var(--size) * 6px);
+    font-weight:500;
+    padding:calc(var(--size) * 2px) calc(var(--size) * 6px);
+    background:var(--bg-color-1);
+}
+
+.sidebar-break{
+    height:0;
+    width:calc(var(--size) * 220px);
+    border-top:1px solid var(--light-border-color);
+    margin:calc(var(--size) * 12px) calc(var(--size) * 18px);
+}
+
+.unavailable-sidebar-node{
+    cursor:not-allowed !important;
+    background:var(--light-border-color);
+}
+
+.unavailable-sidebar-node > img{
+    filter:invert(0.5) !important;
+}
+
+.unavailable-sidebar-node > p{
+    color:gray !important;
+}
+
+/*.desktop-sidebar-category, .desktop-sidebar-folder, .desktop-sidebar-category-2{
     width:calc(var(--size) * 256px);
     display:flex;
     align-items:center;
@@ -921,7 +1014,7 @@ body *{
     font-size:calc(var(--size) * 12px);
     font-weight:700;
     margin: 0 0 calc(var(--size) * 6px) calc(var(--size) * 18px);
-}
+}*/
 
 #context-menu:not(.inactive-modal){
     visibility: visible;
@@ -933,7 +1026,6 @@ body *{
     display:flex;
     flex-direction:column;
     padding:calc(var(--size) * 12px) 0;
-    /*border-radius:5px;*/
     overflow:hidden;
     border-radius:calc(var(--size) * 6px);
     box-shadow:0 0 calc(var(--size) * 12px) 0 black;
@@ -969,6 +1061,10 @@ body *{
 
 #desktop-sidebar-employee.inactive-modal{
     display:none;
+}
+
+.active-sidebar-category{
+    background:var(--light-accent);
 }
 
 #desktop-friending-modal.inactive-modal{
@@ -1117,8 +1213,4 @@ body *{
 
 .desktop-modal-buttons-container > button:active, .desktop-modal-buttons-container > button:active{
     box-shadow:none;
-}
-
-.active-sidebar-category{
-    background:var(--light-accent);
 }

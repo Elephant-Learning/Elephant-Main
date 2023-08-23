@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Elephant - The Ultimate Student Suite">
+    <meta property="og:title" content="Elephant Deck" id="discord-embed-title">
+    <meta property="og:description" content="Elephant Timeline - By User" id="discord-embed-desc">
+    <title id="title">Timeline | Elephant - The Ultimate Student Suite</title>
+
+    <link rel="icon" href="../../icons/elephant-400-400-grayscale.png">
+    <link rel="stylesheet" href="../../flip/css/main.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/chronology.css">
+    <link rel="stylesheet" href="css/viewer.css">
+    <link rel="stylesheet" href="css/memorize.css">
+
+    <script src="../../flip/js/main.js" defer></script>
+    <script src="js/script.js" defer></script>
+    <script src="js/chronology.js" defer></script>
+    <script src="js/viewer.js" defer></script>
+    <script src="js/memorize.js" defer></script>
+</head>
+<body>
+    <div id="restricted-access-container" class="inactive-modal">
+        <div></div>
+        <div id="restricted-access-modal">
+            <div>
+                <img src="./icons/stop.svg" alt="">
+            </div>
+            <h1>Take It Easy There</h1>
+            <p>It looks like you are not the owner of this deck, and therefore I cannot let you make any edits. I do hope that you understand</p>
+            <a href="../dashboard/">Return to Dashboard</a>
+        </div>
+    </div>
+    <div id="desktop-navbar">
+        <div id="desktop-main-image">
+            <a href="../dashboard"><img src="../../icons/elephant-400-400-pink-timeline.png" alt="Elephant Logo"></a>
+        </div>
+        <div id="desktop-navbar-right">
+            <!--<div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
+                    <img src="../icons/music.png" alt="Notifications">
+                </div>
+            <div class="desktop-navbar-right-img" onclick="toggleNotificationsModal()">
+                <img src="../icons/notification.png" alt="Notifications" id="notifications-btn">
+            </div>-->
+            <div id="desktop-navbar-profile">
+                <img src="../../flip/editor/icons/crowd.png" alt="" id="desktop-navbar-profile-image">
+                <div id="navbar-profile-text">
+                    <h1 id="desktop-navbar-profile-name"></h1>
+                    <p id="desktop-navbar-profile-type"></p>
+                </div>
+                <img src="../../flip/icons/expand_down.png" alt="Dropdown">
+                <div id="desktop-profile-modal" class="active-modal">
+                    <div onclick="location.href = '../../profile'">
+                        <img src="../../flip/icons/emojis/happy.png" id="desktop-profile-user-img" alt="">
+                        <p>Your Profile</p>
+                    </div>
+                    <div>
+                        <img src="../../flip/icons/theme.png" alt="">
+                        <p>Theme</p>
+                        <img src="../../flip/icons/expand-right.png" alt="">
+                        <div class="profile-sub-modal">
+                            <div onclick="toggleTheme(0)">
+                                <img src="../../flip/icons/sun.png" alt="">
+                                <p>Light Theme</p>
+                                <img src="../../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                            </div>
+                            <div onclick="toggleTheme(1)">
+                                <img src="../../flip/icons/moon.png" alt="">
+                                <p>Dark Theme</p>
+                                <img src="../../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                            </div>
+                            <div onclick="toggleTheme(2)">
+                                <img src="../../flip/icons/50%25.png" alt="">
+                                <p>System Default</p>
+                                <img src="../../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="../../flip/icons/zoom.png">
+                        <p>Accessibility Zoom</p>
+                        <img src="../../flip/icons/expand-right.png" alt="">
+                        <div class="profile-sub-modal">
+                            <div onclick="toggleSizeSetting(0)">
+                                <img src="../../flip/icons/zoom_out.png" alt="">
+                                <p>75%</p>
+                                <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                            </div>
+                            <div onclick="toggleSizeSetting(1)">
+                                <img src="../../flip/icons/search.png" alt="">
+                                <p>100%</p>
+                                <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                            </div>
+                            <div onclick="toggleSizeSetting(2)">
+                                <img src="../../flip/icons/zoom_in.png" alt="">
+                                <p>125%</p>
+                                <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                            </div>
+                            <div onclick="toggleSizeSetting(3)">
+                                <img src="../../flip/icons/zoom_in.png" alt="">
+                                <p>150%</p>
+                                <img src="../../flip/icons/check.png" alt="" class="profile-zoom-check-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-break"></div>
+                    <div onclick="localStorage.removeItem('savedUserId'); location.href = '../../login'">
+                        <img src="../../flip/icons/logout.png">
+                        <p>Log Out</p>
+                    </div>
+                    <!--<button>Get Premium</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="desktop-parent-container">
+        <div id="desktop-sidebar">
+            <div class="sidebar-dropdown">
+                <div>
+                    <img src="../../flip/icons/test.png" alt="">
+                    <p>Services</p>
+                    <div>
+                        <img src="../../flip/icons/expand_down.png" alt="" class="">
+                    </div>
+                </div>
+                <div>
+                    <div onclick="togglePageFlip(0, 0)" class="sidebar-node">
+                        <img src="./icons/timeline.png" alt="Recent">
+                        <p>Timeline Viewer</p>
+                    </div>
+                    <div onclick="" class="sidebar-node unavailable-sidebar-node">
+                        <img src="./icons/brain.png" alt="Recent">
+                        <p>Timeline Memorize</p>
+                    </div>
+                    <div onclick="togglePageFlip(2, 2)" class="sidebar-node unavailable-sidebar-node">
+                        <img src="./icons/chronology.png" alt="Recent">
+                        <p>Timeline Chronology</p>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-dropdown">
+                <div>
+                    <img src="../../flip/icons/settings.png" alt="">
+                    <p>Options</p>
+                    <div>
+                        <img src="../../flip/icons/expand_down.png" alt="" class="">
+                    </div>
+                </div>
+                <div>
+                    <div onclick="togglePageFlip(0, 0)" class="sidebar-node">
+                        <img src="../../flip/icons/deck.png" alt="Recent">
+                        <p>Convert to Flip Deck</p>
+                    </div>
+                    <div class="sidebar-node unavailable-sidebar-node">
+                        <img src="./icons/printer.png" alt="Recent">
+                        <p>Create Printout</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="desktop-main-container">
+            <p id="desktop-main-container-tab">Timeline Viewer</p>
+            <div id="desktop-main-tabs">
+                <div class="desktop-tab" id="timeline-viewer">
+                    <div id="slider-viewport">
+                        <div id="slider-inner">
+                            <!--<div class="viewer-pipe" style="width:calc(var(--size) * 256px)"><div>Fast Forward</div></div>
+                            <div class="viewer-event">
+                                <div>
+                                    <h1>Event Name</h1>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dolore, explicabo fugit hic modi nobis quibusdam quidem sunt? Alias consectetur dignissimos, dolor fugiat, id iste iure laborum nulla perferendis perspiciatis quam quis quisquam! At, beatae culpa cupiditate earum eligendi esse ipsam libero molestias quas rem sapiente sed similique sunt veritatis?</p>
+                                </div>
+                                <div>
+                                    <p>Feb 23, 2023</p>
+                                </div>
+                            </div>
+                            <div class="viewer-pipe" style="width:calc(var(--size) * 256px)"></div>
+                            <div class="viewer-event">
+                                <div>
+                                    <h1>Event Name</h1>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At dolore, explicabo fugit hic modi nobis quibusdam quidem sunt? Alias consectetur dignissimos, dolor fugiat, id iste iure laborum nulla perferendis perspiciatis quam quis quisquam! At, beatae culpa cupiditate earum eligendi esse ipsam libero molestias quas rem sapiente sed similique sunt veritatis?</p>
+                                </div>
+                                <div>
+                                    <p>Feb 23, 2023</p>
+                                </div>
+                            </div>
+                            <div class="viewer-pipe" style="width:calc(var(--size) * 256px)"></div>-->
+                        </div>
+                    </div>
+                    <div id="slider-progress"></div>
+                </div>
+                <div class="desktop-tab" id="timeline-memorize">
+                    <div id="memorize-main-container">
+                        <div class="memorize-container">
+                            <div id="memorize-flashcard"></div>
+                            <div id="memorize-actions">
+                                <div class="memorize-box" onclick="checkAnswer(0)">
+                                    <p class="memorize-label"></p>
+                                    <div>1</div>
+                                </div>
+                                <div class="memorize-box" onclick="checkAnswer(1)">
+                                    <p class="memorize-label"></p>
+                                    <div>2</div>
+                                </div>
+                                <div class="memorize-box" onclick="checkAnswer(2)">
+                                    <p class="memorize-label"></p>
+                                    <div>3</div>
+                                </div>
+                                <div class="memorize-box" onclick="checkAnswer(3)">
+                                    <p class="memorize-label"></p>
+                                    <div>4</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="desktop-memorize-panel">
+                        <div id="desktop-memorize-panel-questions-left-container">
+                            <h1 id="desktop-memorize-panel-questions-left">4</h1>
+                            <p>Questions Left</p>
+                            <div id="desktop-memorize-panel-questions-left-progress"></div>
+                            <h2 id="time-spent">00:00</h2>
+                        </div>
+                        <div id="desktop-memorize-panel-bottom">
+                            <button id="deck-memorize-reset" onclick="initializeMemorize(TIMELINE)">Reset</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="desktop-tab" id="timeline-chronology">
+                    <div id="chronology-box-container">
+                        <div class="chronology-box"></div>
+                        <div class="chronology-box"></div>
+                        <div class="chronology-box"></div>
+                        <div class="chronology-box"></div>
+                    </div>
+                    <div id="chronology-event-container"></div>
+                </div>
+            </div>
+            <div class="bottom-btns">
+                <a href="../dashboard/" id="back-btn" class="desktop-bottom-btn">
+                    <img src="../../flip/icons/back.png" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="fonts/Urbanist-Regular-normal.js" type="module"></script>
+</body>
+</html>

@@ -296,26 +296,6 @@ async function favoriteDeck(elem, id, deck, author){
 
         console.log(deckLikeContext);
 
-        /*const response = await fetch('https://elephantsuite-rearend.herokuapp.com/notifications/sendLikedDeck', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type'
-            },
-            body: JSON.stringify({
-                recipientId: author,
-                deckId: id,
-                type: "LIKED_DECK",
-                message: "Your Deck, " + deck + ", was liked by bruh"
-            }),
-            mode: 'cors'
-        })
-
-        const context = await response.json();
-        console.log(context);*/
-
         try {
             document.getElementById('favorite-number-' + id).innerHTML = (parseInt(document.getElementById('favorite-number-' + id).textContent) + 1).toString();
         } catch (e){}

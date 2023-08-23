@@ -1,0 +1,102 @@
+#timeline-chronology{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+}
+
+#chronology-box-container{
+    width:calc(100%  - var(--size) * 48px);
+    height:calc(var(--size) * 192px);
+    padding:calc(var(--size) * 24px) 0;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    gap:calc(var(--size) * 24px);
+}
+
+.chronology-box{
+    width:calc(25% - var(--size) * 18px);
+    height:100%;
+    border-radius:calc(var(--size) * 6px);
+    border:1px dashed var(--dark-border-color);
+    position:relative;
+}
+
+.chronology-box::before{
+    position:absolute;
+    z-index:1;
+    bottom:calc(var(--size) * 12px);
+    right:calc(var(--size) * 12px);
+    color:gray;
+    text-transform:uppercase;
+    font-weight:500;
+    font-size:calc(var(--size) * 12px);
+}
+
+.chronology-box:first-of-type::before{
+    content:'First';
+}
+
+.chronology-box:last-of-type::before{
+    content:'Last';
+}
+
+.chronology-box > div{
+    position:absolute;
+    width:calc(100% - var(--size) * 22px);
+    height:calc(100% - var(--size) * 22px);
+    padding:calc(var(--size) * 12px);
+    left:calc(var(--size) * -1px);
+    top:calc(var(--size) * -1px);
+    background:var(--bg-color-1);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    box-shadow:0 0 calc(var(--size) * 6px) 0 gray;
+    border-radius:calc(var(--size) * 6px);
+    text-transform:uppercase;
+    color:var(--dark-gray);
+    font-size:calc(var(--size) * 14px);
+    font-weight:500;
+    cursor:default;
+}
+
+.chronology-box > img{
+    position:absolute;
+    height:calc(var(--size) * 16px);
+    top:calc(var(--size) * 12px);
+    right:calc(var(--size) * 12px);
+    filter:invert(var(--image-invert));
+}
+
+#chronology-event-container{
+    width:calc(100% - var(--size) * 96px);
+    height:calc(100vh - var(--size) * 405px);
+    padding:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 6px);
+    border:1px dashed var(--dark-border-color);
+    position:relative;
+}
+
+.chronology-node{
+    position:absolute;
+    max-width:calc(var(--size) * 192px);
+    padding:calc(var(--size) * 24px);
+    background:var(--bg-color-1);
+    border-radius:calc(var(--size) * 6px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    border:1px solid var(--light-border-color);
+    color:gray;
+    border-radius:calc(var(--size) * 6px);
+    text-transform:uppercase;
+    font-size:calc(var(--size) * 14px);
+    font-weight:500;
+}

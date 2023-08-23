@@ -108,6 +108,7 @@
 
 #editor-add-lists-panel > div > img, #editor-add-tools-panel > div > img{
     height:calc(var(--size) * 16px);
+    filter:invert(var(--image-invert));
 }
 
 #question-panel{
@@ -133,6 +134,7 @@
     cursor:text;
     margin-bottom:calc(var(--size) * 12px);
     border-bottom:1px solid var(--light-border-color);
+    background:var(--bg-color-1);
     font-weight:700;
     width:100%;
 }
@@ -312,6 +314,7 @@
     justify-content:flex-start;
     margin:calc(var(--size) * 6px) 0;
     gap:calc(var(--size) * 6px);
+    background:var(--bg-color-1);
 }
 
 .publish-modal-input > h6{
@@ -327,6 +330,7 @@
     padding:calc(var(--size) * 6px) calc(var(--size) * 12px);
     color:gray;
     outline:none;
+    background:var(--bg-color-1);
 }
 
 #tags-list{
