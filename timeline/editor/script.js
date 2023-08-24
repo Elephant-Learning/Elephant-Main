@@ -1,9 +1,53 @@
 const nodes = [];
-let start;
-let end;
+let start, end, pressed;
 let editing = false;
 
 const dragArea = document.getElementById("upload-image-container");
+const slider = document.querySelector("#slider-viewport");
+const innerSlider = document.querySelector("#slider-inner");
+
+/*slider.addEventListener("mousedown", function(e){
+    pressed = true;
+    startX = e.offsetX - innerSlider.offsetLeft;
+    slider.style.cursor = "grabbing";
+});
+
+slider.addEventListener("mouseenter", function(){
+    slider.style.cursor = "grab";
+    pressed = false;
+});
+
+slider.addEventListener("mouseup", function(){
+    slider.style.cursor = "grab";
+    pressed = false;
+});
+
+slider.addEventListener("mousemove", function(e){
+    if(!pressed) return;
+
+    //e.preventDefault();
+
+    x = e.offsetX;
+
+    innerSlider.style.left = `${x - startX}px`
+
+    checkBoundary();
+});*/
+
+function checkBoundary(){
+    let outer = slider.getBoundingClientRect();
+    let inner = innerSlider.getBoundingClientRect();
+
+    //console.log(inner.width);
+
+    if(parseInt(innerSlider.style.left) > 0){
+        innerSlider.style.left = "0px";
+    } else if(inner.right < outer.right){
+        innerSlider.style.left = `-${inner.width - outer.width}px`
+    }
+
+    console.log(100 * Math.abs(parseInt(innerSlider.style.left) / (inner.width - outer.width)))
+}
 
 dragArea.addEventListener("dragover", function(e){
     document.getElementById("upload-file-image-header").innerHTML = "Release to Upload";
@@ -428,6 +472,8 @@ async function saveChanges(){
                 console.log(context2);
             }
         }
+
+        location.href = `./?timeline=${context.context.timeline.id}`
     } else {
 
     }
@@ -596,79 +642,155 @@ function toggleCheckbox(num){
     }
 }
 
+function getShortestTimeBetweenEvents(viewerEvents) {
+    let shortestTime = Infinity;
+
+    for (let i = 0; i < viewerEvents.length - 1; i++) {
+        const startA = new Date(viewerEvents[i].start);
+        const startB = new Date(viewerEvents[i + 1].start);
+        const timeBetween = Math.abs(startB - startA) / (1000 * 60 * 60 * 24);
+
+        if (timeBetween < shortestTime) {
+            shortestTime = timeBetween;
+        }
+    }
+
+    return shortestTime;
+}
+
+function trimFirstWord(text, amount) {
+    var wordArray = text.split(" ");
+    wordArray[0] = wordArray[0].substring(0, amount);
+    wordArray = wordArray.join(" ");
+    return wordArray;
+}
+
+function getDaysBetweenEvents(eventA, eventB) {
+    const startA = new Date(eventA.start);
+    const startB = new Date(eventB.start);
+    const timeBetween = Math.abs(startB - startA);
+    return Math.ceil(timeBetween / (1000 * 60 * 60 * 24));
+}
+
+function createViewerText(text){
+    let newText = document.createElement("p");
+    newText.innerHTML = text;
+
+    document.getElementById("slider-inner").appendChild(newText);
+}
+
+function createViewerPipe(width, shortestDays){
+    let newPipe = document.createElement("div");
+
+    console.log(shortestDays);
+
+    if(width > 512) {
+        let fastForward = document.createElement("div");
+        fastForward.innerHTML = `Fast Forward ${Math.floor((width) / 256 * shortestDays)} Days`;
+
+        newPipe.append(fastForward);
+        width = 512;
+    }
+
+    newPipe.classList.add("viewer-pipe");
+    newPipe.style.width = `calc(var(--size) * ${width}px)`;
+
+    document.getElementById("slider-inner").appendChild(newPipe);
+}
+
+function createViewerEvent(event){
+    let newEvent = document.createElement("div");
+    let newEventHeaderDiv = document.createElement("div");
+    let newEventDateDiv = document.createElement("div");
+
+    let newEventImage = document.createElement("img");
+    let newEventHeader = document.createElement("h1");
+    let newEventPara = document.createElement("p");
+    let newEventDate = document.createElement("p");
+
+    newEventHeader.innerHTML = event.name;
+    newEventPara.innerHTML = event.description;
+    newEventDate.innerHTML = trimFirstWord(convertToText(event.start), 3);
+    newEventImage.src = event.image;
+
+    if(event.image) newEventHeaderDiv.appendChild(newEventImage);
+
+    newEventHeaderDiv.append(newEventHeader, newEventPara);
+    newEventDateDiv.appendChild(newEventDate);
+
+    let optionsDiv = document.createElement("div");
+    let editOption = document.createElement("img");
+    let deleteOption = document.createElement("img");
+
+    editOption.src = "./icons/edit.png";
+    deleteOption.src = "./icons/delete.png";
+
+    deleteOption.addEventListener("click", function(e){
+        newDiv.remove();
+        nodes.splice(params.id, 1);
+
+        refreshNodes();
+    });
+
+    optionsDiv.append(editOption, deleteOption);
+
+    newEvent.append(newEventHeaderDiv, newEventDateDiv, optionsDiv);
+    newEvent.classList.add("viewer-event");
+    document.getElementById("slider-inner").appendChild(newEvent);
+}
+
+function initializeViewer(timeline){
+    removeAllChildNodes(document.getElementById("slider-inner"));
+
+    const viewerEvents = [];
+
+    for(let i = 0; i < timeline.events.length; i++){
+        viewerEvents.push(timeline.events[i]);
+    }
+
+    viewerEvents.sort((a, b) => {
+        const dateA = new Date(a.start);
+        const dateB = new Date(b.start);
+        return dateA - dateB;
+    });
+
+    const shortestTime = getShortestTimeBetweenEvents(viewerEvents);
+
+    if(viewerEvents.length === 0) return;
+
+    createViewerText(viewerEvents[0].start.split("-")[0])
+    createViewerPipe(getDaysBetweenEvents({
+        start: `${viewerEvents[0].start.split("-")[0]}-01-01`
+    }, viewerEvents[0]) * 328 / shortestTime - 328, shortestTime);
+
+    for(let i = 0; i < viewerEvents.length - 1; i++){
+        createViewerEvent(viewerEvents[i]);
+        createViewerPipe(getDaysBetweenEvents(viewerEvents[i + 1], viewerEvents[i]) * 328 / shortestTime - 328, shortestTime);
+    }
+
+    createViewerEvent(viewerEvents[viewerEvents.length - 1]);
+    createViewerPipe(getDaysBetweenEvents(viewerEvents[viewerEvents.length - 1], {
+        start: `${viewerEvents[viewerEvents.length - 1].start.split("-")[0]}-12-31`
+    }) * 328 / shortestTime - 328, shortestTime);
+    createViewerText(viewerEvents[viewerEvents.length - 1].start.split("-")[0]);
+}
+
 function refreshNodes(){
-    removeAllChildNodes(document.getElementById("desktop-main-event-containers"));
-    removeAllChildNodes(document.getElementById("desktop-main-marker-container"));
-
-    //console.log(nodes);
-
-    if(nodes.length === 0) return;
-    let eventCount = 1;
-
-    if(nodes[0].type === "EVENT"){
-        start = parseInt(nodes[0].start.split("-")[0]);
-
-        if(nodes[0].end === ""){
-            end = parseInt(nodes[0].start.split("-")[0]);
-        } else {
-            end = parseInt(nodes[0].end.split("-")[0]);
-        }
-
-        nodes[0].top = true;
-    } else if(nodes[0].type === "MARKER"){
-        if(nodes[0].date === "Present Day"){
-            start = new Date().getFullYear();
-            end = new Date().getFullYear();
-        } else {
-            start = parseInt(nodes[0].date.split("-")[0]);
-            end = parseInt(nodes[0].date.split("-")[0]);
-        }
-    }
-
-    nodes[0].id = 0;
-
-    for(let i = 1; i < nodes.length; i++){
-        if(nodes[i].type === "EVENT"){
-            if(parseInt(nodes[i].start.split("-")[0]) < start){
-                start = parseInt(nodes[i].start.split("-")[0])
-            } if(nodes[i].end !== ""){
-                if(parseInt(nodes[i].end.split("-")[0]) > end){
-                    end = parseInt(nodes[i].end.split("-")[0])
-                }
-            } else {
-                if(parseInt(nodes[i].start.split("-")[0]) > end){
-                    end = parseInt(nodes[i].start.split("-")[0])
-                }
-            } nodes[i].top = eventCount % 2 === 0; eventCount++;
-        } else if(nodes[i].type === "MARKER"){
-            if(nodes[0].date === "Present Day"){
-                if(new Date().getFullYear() < start) {
-                    start = new Date().getFullYear();
-                } else if(new Date().getFullYear() > end){
-                    end = new Date().getFullYear();
-                }
-            } else {
-                if(parseInt(nodes[i].date.split("-")[0]) < start) {
-                    start = parseInt(nodes[i].date.split("-")[0]);
-                } else if(parseInt(nodes[i].date.split("-")[0]) > end){
-                    end = parseInt(nodes[i].date.split("-")[0]);
-                }
-            }
-        }
-
-        nodes[i].id = i;
-    }
-
-    document.getElementById("start-date").innerHTML = `Jan 1st, ${start.toString()}`;
-    document.getElementById("end-date").innerHTML = `Dec 31st, ${end.toString()}`;
+    const EVENTS = [];
+    const MARKERS = [];
 
     for(let i = 0; i < nodes.length; i++){
         if(nodes[i].type === "EVENT"){
-            createTimelineEvent(nodes[i]);
+            EVENTS.push(nodes[i]);
         } else if(nodes[i].type === "MARKER"){
-            createTimelineMarker(nodes[i]);
+            MARKERS.push(nodes[i]);
         }
     }
+
+    initializeViewer({
+        events:EVENTS,
+        markers:MARKERS
+    })
 }
 
 function createItem(){
@@ -880,6 +1002,8 @@ window.onload = async function(){
                     type: "MARKER",
                 })
             }
+
+            document.getElementById("editor-tools-right").classList.remove("inactive-modal");
 
             await refreshFolders();
             refreshNodes();

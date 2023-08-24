@@ -205,7 +205,7 @@
                     <button onclick="openCreateModal(0)" id="create-event-btn">Create Event</button>
                     <button onclick="openCreateModal(1)" id="create-marker-btn">Create Marker</button>
                 </div>
-                <div id="editor-tools-right">
+                <div id="editor-tools-right" class="inactive-modal">
                     <button onclick="toggleModal(document.getElementById('desktop-folder-modal'))" id="add-to-folder-btn">
                         <img src="../../flip/icons/add_folder.png" alt="">
                         <p>Add To Folder</p>
@@ -215,14 +215,10 @@
                 </div>
             </div>
             <div id="desktop-main-container" class="default">
-                <div id="desktop-main-timeline-container">
-                    <p id="start-date">Start Date</p>
-                    <div></div>
-                    <p id="end-date">End Date</p>
-                </div>
-                <div id="desktop-main-misc-container">
-                    <div id="desktop-main-event-containers"></div>
-                    <div id="desktop-main-marker-container"></div>
+                <div id="slider-viewport">
+                    <div id="slider-inner">
+
+                    </div>
                 </div>
                 <div id="edit-modal" class="inactive-modal">
                     <div id="edit-modal-windows">
