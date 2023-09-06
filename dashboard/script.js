@@ -205,6 +205,7 @@ async function initialize(user){
     document.getElementById('profile-streak').innerHTML = user.elephantUserStatistics.daysStreak + streakSuffix;
     document.getElementById('profile-decks').innerHTML = user.decks.length + " decks";
     document.getElementById('profile-answers').innerHTML = user.answers.length + " questions";
+    document.getElementById('profile-timelines').innerHTML = user.timelines.length + " timelines";
 
     if(user.type === "INDIVIDUAL") mainColor = "personal-banner";
     else if(user.type === "STUDENT") mainColor = "community-banner";

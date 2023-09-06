@@ -330,5 +330,5 @@ function createFolder(){
 }
 
 function createDeck(){
-    togglePageFlip(undefined, undefined, "../editor");
+    location.href = "../editor/"
 }

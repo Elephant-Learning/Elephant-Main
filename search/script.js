@@ -1,4 +1,4 @@
-let pfpId, fullName, favoriteDecks, favoriteTimelines, friends;
+let pfpId, fullName, favoriteDecks, favoriteAsk, favoriteTimelines, friends;
 
 async function displayFlashcard(flashcardType, params){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
@@ -12,6 +12,12 @@ async function displayFlashcard(flashcardType, params){
         else if(params.visibility === "PUBLIC") params.visibility = "COMMUNITY";
 
         icon.src = "../flip/icons/file.png";
+        iconDiv.classList.add(params.visibility.toLowerCase() + "-flashcard");
+    } else if(flashcardType === "ask"){
+        if(params.answered === true) params.visibility = "PERSONAL";
+        else if(params.answered === false) params.visibility = "COMMUNITY";
+
+        icon.src = "../ask/icons/ask.png";
         iconDiv.classList.add(params.visibility.toLowerCase() + "-flashcard");
     } else if(flashcardType === "timeline"){
         if(params.timelineVisibility === "PRIVATE") params.timelineVisibility = "PERSONAL";
@@ -44,6 +50,12 @@ async function displayFlashcard(flashcardType, params){
 
         nameText.innerHTML = params.name
         authorDiv.appendChild(authorText);
+    } else if(flashcardType === "ask"){
+        authorText.innerHTML = params.authorName;
+        authorImg.src = `../icons/avatars/${params.authorPfpId}.png`;
+
+        nameText.innerHTML = params.title
+        authorDiv.append(authorImg, authorText);
     } else if(flashcardType === "timeline"){
         authorText.innerHTML = params.authorName;
         authorImg.src = `../icons/avatars/${params.authorPfpId}.png`;
@@ -140,6 +152,85 @@ async function displayFlashcard(flashcardType, params){
                 } catch (e){}
             }
         });
+
+        favoriteDiv.append(favoriteImg, favoriteNumDiv);
+        options.append(favoriteDiv);
+    } else if(flashcardType === "ask"){
+        if(params.answered) tag.innerHTML = "ANSWERED";
+        else tag.innerHTML = "UNANSWERED";
+
+        tag.classList.add(params.visibility.toLowerCase() + "-flashcard");
+
+        let favoriteDiv = document.createElement('div');
+        let favoriteImg = document.createElement('img');
+
+        if(favoriteAsk.includes(params.id)){
+            favoriteImg.src = "../flip/icons/filled_heart.png";
+            favoriteImg.classList.add('loved');
+        } else {
+            favoriteImg.src = "../flip/icons/unfilled_heart.png";
+            favoriteImg.classList.add('unloved');
+        }
+
+        let favoriteNumDiv = document.createElement('div');
+        favoriteNumDiv.innerHTML = params.numberOfLikes;
+        favoriteNumDiv.id = "favorite-number-" + params.id;
+
+        favoriteImg.addEventListener('click', async function(e){
+            e.preventDefault();
+            e.stopPropagation();
+
+            if(favoriteImg.classList.contains('unloved')){
+                favoriteImg.src = "../flip/icons/filled_heart.png";
+                favoriteImg.classList.remove('unloved');
+                favoriteImg.classList.add('loved');
+
+                const deckLikeResponse = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/like', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type'
+                    },
+                    body: JSON.stringify({
+                        userId: savedUserId,
+                        timelineId: params.id
+                    }),
+                    mode: 'cors'
+                });
+
+                const something = await deckLikeResponse.json();
+                console.log(something);
+
+                try {
+                    document.getElementById('favorite-number-' + params.id).innerHTML = (parseInt(document.getElementById('favorite-number-' + params.id).textContent) + 1).toString();
+                } catch (e){}
+            } else {
+                favoriteImg.src = "../flip/icons/unfilled_heart.png";
+                favoriteImg.classList.add('unloved');
+                favoriteImg.classList.remove('loved')
+
+                const response = await fetch('https://elephantsuite-rearend.herokuapp.com/answers/unlike', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type'
+                    },
+                    body: JSON.stringify({
+                        userId: savedUserId,
+                        deckId: params.id
+                    }),
+                    mode: 'cors'
+                });
+
+                try {
+                    document.getElementById('favorite-number-' + params.id).innerHTML = (parseInt(document.getElementById('favorite-number-' + params.id).textContent) - 1).toString();
+                } catch (e){}
+            }
+        })
 
         favoriteDiv.append(favoriteImg, favoriteNumDiv);
         options.append(favoriteDiv);
@@ -312,6 +403,9 @@ async function displayFlashcard(flashcardType, params){
     if(flashcardType === "flashcard"){
         mainDiv.classList.add(params.visibility.toLowerCase() + "-flashcard-border");
         mainDiv.setAttribute('onclick', "location.href = '../flip/viewer/?deck=" + params.id + "'");
+    } else if(flashcardType === "ask"){
+        mainDiv.classList.add(params.visibility.toLowerCase() + "-flashcard-border");
+        mainDiv.setAttribute('onclick', "location.href = '../ask/question/?id=" + params.id + "'");
     } else if(flashcardType === "timeline"){
         mainDiv.classList.add(params.timelineVisibility.toLowerCase() + "-flashcard-border");
         mainDiv.setAttribute('onclick', "location.href = '../timeline/viewer/?timeline=" + params.id + "'");
@@ -321,6 +415,8 @@ async function displayFlashcard(flashcardType, params){
 
     if(flashcardType === "flashcard") {
         document.querySelectorAll(".search-result-container")[0].appendChild(mainDiv);
+    } else if(flashcardType === "ask"){
+        document.querySelectorAll(".search-result-container")[1].appendChild(mainDiv);
     } else if(flashcardType === "timeline"){
         document.querySelectorAll(".search-result-container")[2].appendChild(mainDiv);
     } else if(flashcardType === "user"){
@@ -455,6 +551,7 @@ async function initialize(user){
     pfpId = "../icons/avatars/" + user.pfpId + ".png";
     fullName = user.firstName + " " + user.lastName;
     favoriteDecks = user.likedDecksIds;
+    favoriteAsk = user.elephantAnswersLiked;
     favoriteTimelines = user.likedTimelineIds;
     friends = user.friendIds
 
@@ -535,7 +632,19 @@ window.onload = async function(){
 
     const deckContext = await deckResponse.json();
 
-    console.log(`https://elephantsuite-rearend.herokuapp.com/timeline/search?query=${query}&userId=${savedUserId}`);
+    const askResponse = await fetch(`https://elephantsuite-rearend.herokuapp.com/answers/searchByName?name=${query}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        mode: 'cors'
+    });
+
+    const askContext = await askResponse.json();
+    console.log(askContext);
 
     const timelineResponse = await fetch(`https://elephantsuite-rearend.herokuapp.com/timeline/search?query=${query}&userId=${savedUserId}`, {
         method: 'GET',
@@ -565,6 +674,7 @@ window.onload = async function(){
 
     console.log(userContext);
     number += deckContext.context.decks.length;
+    number += askContext.context.answers.length;
     number += timelineContext.context.timelines.length;
     number += userContext.context.users.length;
 
@@ -573,6 +683,14 @@ window.onload = async function(){
     } else {
         for(let i = 0; i < deckContext.context.decks.length; i++){
             await displayFlashcard("flashcard", deckContext.context.decks[i]);
+        }
+    }
+
+    if(askContext.context.answers.length === 0){
+
+    } else {
+        for(let i = 0; i < askContext.context.answers.length; i++){
+            await displayFlashcard("ask", askContext.context.answers[i]);
         }
     }
 

@@ -386,7 +386,7 @@ async function initialize(user){
 
     document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png"
     document.getElementById('my-profile-img').src = "../../icons/avatars/" + user.pfpId + ".png"
-    document.getElementById("account-settings-modal-image").src = "../../icons/avatars/" + user.pfpId + ".png"
+    //document.getElementById("account-settings-modal-image").src = "../../icons/avatars/" + user.pfpId + ".png"
     document.getElementById('desktop-avatar-current').src = "../../icons/avatars/" + user.pfpId + ".png"
     document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
     document.getElementById('my-profile-name').innerHTML = user.firstName + " " + user.lastName;
