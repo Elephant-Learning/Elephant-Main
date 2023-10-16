@@ -409,6 +409,47 @@ async function displayFlashcard(flashcardType, params){
     } else if(flashcardType === "timeline"){
         mainDiv.classList.add(params.timelineVisibility.toLowerCase() + "-flashcard-border");
         mainDiv.setAttribute('onclick', "location.href = '../timeline/viewer/?timeline=" + params.id + "'");
+    } else if(flashcardType === "user"){
+        mainDiv.classList.add(params.type.toLowerCase() + "-flashcard-border");
+        mainDiv.addEventListener("click", async function(e){
+            document.getElementById("profile-name").innerHTML = "";
+            document.getElementById("profile-image").src = `../icons/elephant-400-400-pink-02.png`;
+            document.getElementById("profile-desc").innerHTML = "";
+
+            document.querySelectorAll(".profile-public-display-tag").forEach(function(e){
+                e.innerHTML = "";
+            });
+
+            document.getElementById("profile-public-display-container").classList.remove("inactive-modal");
+
+            //SET PROFILE THING
+
+            const userResponse = await fetch(`https://elephantsuite-rearend.herokuapp.com/login/user?id=${params.id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                mode: 'cors'
+            });
+
+            let userContext = await userResponse.json();
+            userContext = userContext.context.user;
+
+            console.log(userContext);
+
+            document.getElementById("profile-name").innerHTML = userContext.firstName + " " + userContext.lastName;
+            document.getElementById("profile-image").src = `../icons/avatars/${userContext.pfpId}.png`;
+            document.getElementById("profile-desc").innerHTML = "Elephant " + toTitleCase(userContext.type);
+
+            document.querySelectorAll(".profile-public-display-tag")[0].innerHTML = userContext.elephantUserStatistics.daysStreak + " Day Streak";
+            document.querySelectorAll(".profile-public-display-tag")[1].innerHTML = userContext.decks.length + " Flip Decks";
+            document.querySelectorAll(".profile-public-display-tag")[2].innerHTML = userContext.answers.length + " Questions Asked";
+            document.querySelectorAll(".profile-public-display-tag")[3].innerHTML = userContext.timelines.length + " Timelines";
+            document.querySelectorAll(".profile-public-display-tag")[4].innerHTML = userContext.email;
+        })
     }
 
     mainDiv.classList.add("faded-out");
@@ -590,6 +631,10 @@ async function locateUserInfo(){
     await initialize(context)
 }
 
+document.getElementById("profile-public-display-bg").onclick = function(){
+    document.getElementById("profile-public-display-container").classList.add("inactive-modal");
+}
+
 document.getElementById("desktop-navbar-input").addEventListener("keypress", function(e){
     if (e.key === "Enter") {
         e.preventDefault();
@@ -598,7 +643,7 @@ document.getElementById("desktop-navbar-input").addEventListener("keypress", fun
         content = content.replaceAll(" ", "+");
         location.href = `../search/?query=${content}`;
     }
-})
+});
 
 function toggleModal(modal){
     if(modal.classList.contains('inactive-modal')){
