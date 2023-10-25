@@ -1,28 +1,36 @@
 @media only screen and (max-width: 1075px){
-    #desktop-wrapper > div:first-of-type{
+    #desktop-alert-modal.inactive-modal{
+        display:none;
+    }
+
+    #desktop-wrapper{
         width:100vw;
-        height:75vh;
+        height:100vh;
+        padding:0;
+        background:var(--bg-color-1);
+        display:flex;
+        flex-direction:column;
+        overflow:hidden;
+    }
+
+    #desktop-wrapper > div:first-of-type{
+        overflow-y:scroll;
+        width:calc(100vw - 42px);
+        height:calc(100vh - 42px);
+        background:transparent;
     }
 
     #desktop-wrapper > div:last-of-type{
-        width:100vw;
-        height:25vh;
-    }
-
-    #desktop-color-container{
-        position:absolute;
-        top:0;
-        width:100vw;
-        height:calc(25vh + 24px);
-        z-index:1;
-        left:0;
+        display:none;
     }
 
     #desktop-main-container{
         position:absolute;
         bottom:0;
-        width:100vw;
-        height:80vh;
+        width:calc(100% - 48px);
+        padding:24px;
+        height:calc(100% - 48px);
+        background:red;
         border-radius:24px 24px 0 0;
         z-index:2;
         background:var(--bg-color-1);
@@ -32,7 +40,30 @@
 
     .desktop-tab{
         bottom:0;
+        width:calc(100% - 48px);
+        height:calc(100% - 48px);
+        padding:24px;
+        overflow-y:scroll;
+    }
+
+    .account-option-div{
+        width:75%;
+    }
+
+    .account-option-div > div:nth-of-type(2){
+        width:calc(100% - 48px);
+    }
+
+    .input-div{
+        width:75% !important;
+        justify-content:flex-start;
+    }
+
+    .desktop-tab > button:not(.small-btn){
         width:100%;
-        height:80vh;
+    }
+
+    .split-div{
+        width:100%;
     }
 }

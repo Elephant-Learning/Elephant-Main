@@ -174,8 +174,13 @@ span.action-item, h6.action-item{
     font-size:12px;
     font-weight:400;
     margin:24px;
+    margin-bottom:0;
     color:gray;
     text-align:center;
+}
+
+.desktop-tab h6 > a{
+    color:var(--primary-accent);
 }
 
 .desktop-tab > button:not(.small-btn){
