@@ -35,6 +35,43 @@
                 <div id="playlist-playing"></div>
             </div>
         </div>-->
+        <div id="ai-generation-modal-container" class="inactive-modal">
+            <div id="ai-generation-modal-bg"></div>
+            <div id="ai-generation-modal">
+                <div class="ai-generation-container">
+                    <div>
+                        <img src="../icons/ai.png" alt="">
+                    </div>
+                    <h1>NEW AI FEATURE</h1>
+                    <p>Generate Flip Decks with a SINGLE sentence!!!</p>
+                    <div id="ai-generation-main-input">
+                        <div class="ai-generation-input-container">
+                            <h6>I would like a deck about...</h6>
+                            <input type="text" class="ai-generation-input">
+                        </div>
+                        <div>
+                            <div>
+                                <img src="../icons/settings.png" alt="">
+                            </div>
+                            <div>
+                                <h2 style="margin-bottom:calc(var(--size) * 6px)">Extra Settings</h2>
+                                <div class="ai-generation-input-container">
+                                    <h6># of Cards...</h6>
+                                    <input type="number" value="25" maxlength="2" oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="ai-generation-input">
+                                </div>
+                                <button>Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="generate-btn">Generate Deck</button>
+                </div>
+                <div class="ai-generation-container">
+                    <h1>Or Create Manually</h1>
+                    <p>Create the Deck Yourself using our Intuitive Interface!</p>
+                    <button onclick="toggleAIModal(false);">Create Manually</button>
+                </div>
+            </div>
+        </div>
         <div id="desktop-backpack-modal" class="inactive-modal desktop-modal">
             <div class="desktop-modal-image-container">
                 <img src="./icons/pack.png" alt="" id="backpack-main-image">
@@ -80,6 +117,11 @@
                                     <img src="../icons/check.png" alt="" class="profile-theme-check-img">
                                 </div>
                                 <div onclick="toggleTheme(2)">
+                                    <img src="../icons/gsun.png" alt="">
+                                    <p>Gradient Light</p>
+                                    <img src="../icons/check.png" alt="" class="profile-theme-check-img">
+                                </div>
+                                <div onclick="toggleTheme(3)">
                                     <img src="../icons/50%25.png" alt="">
                                     <p>System Default</p>
                                     <img src="../icons/check.png" alt="" class="profile-theme-check-img">
@@ -87,7 +129,7 @@
                             </div>
                         </div>
                         <div>
-                            <img src="../icons/zoom.png">
+                            <img src="../icons/zoom.png" alt="zoom">
                             <p>Accessibility Zoom</p>
                             <img src="../icons/expand-right.png" alt="">
                             <div class="profile-sub-modal">
@@ -115,7 +157,7 @@
                         </div>
                         <div class="profile-break"></div>
                         <div onclick="leaveEditor('../../login')">
-                            <img src="../icons/logout.png">
+                            <img src="../icons/logout.png" alt="LOGOUT">
                             <p>Log Out</p>
                         </div>
                         <!--<button>Get Premium</button>-->
@@ -133,7 +175,7 @@
                         </div>
                         <div id="deck-privacy-div"></div>
                         <div id="deck-author">
-                            <img id="deck-author-img" alt="">
+                            <img id="deck-author-img" alt="woh" src="">
                             <p id="deck-author-p"></p>
                         </div>
                     </div>
@@ -164,7 +206,7 @@
                             <img src="./icons/share.png" alt="">
                         </div>
                         <h1>Share Deck With The World</h1>
-                        <p>You've already created your deck. Give the link to your friends so they can study too!</p>
+                        <p>You've already created your deck. Give the link to your friends, so they can study too!</p>
                         <h6>Share Link</h6>
                         <div id="desktop-publish-input-container">
                             <input type="text" id="desktop-publish-input" readonly>

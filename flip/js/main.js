@@ -19,25 +19,30 @@ function setupMusic(){
 function toggleTheme(themeIndex){
     let root = document.querySelector(":root");
 
-    if(themeIndex === 1){
-        /*root.style.setProperty('--text-color', 'white');
-        root.style.setProperty("--bg-color-1", "#25282d");
-        root.style.setProperty("--bg-color-2", "#1a1b1e")
-        root.style.setProperty("--light-border-color", "#2e3138");
-        root.style.setProperty("--dark-border-color", "#1a1b1e");
-        root.style.setProperty("--dark-gray", "#101213");
-        root.style.setProperty("--light-gray", "#16171a");
+    if(themeIndex === 0){
+        root.style.setProperty('--text-color', 'black');
+        root.style.setProperty("--bg-color-1", "#ffffff");
+        root.style.setProperty("--bg-color-2", "#f6f7fb")
+        root.style.setProperty("--light-border-color", "#eaecf0");
+        root.style.setProperty("--dark-border-color", "#21262d");
+        root.style.setProperty("--dark-gray", "black");
+        root.style.setProperty("--light-gray", "#010409");
         root.style.setProperty("--hover-dark", "#16171a");
-        root.style.setProperty("--hover-light", "#171717");
-        root.style.setProperty("--image-invert", "0.75");
-        root.style.setProperty("--light-accent", "#383a42");
-        root.style.setProperty("--primary-accent", "#e32b78");
-        root.style.setProperty("--primary-accent-gradient", "#b11074");
-        root.style.setProperty("--secondary-accent", "#0d87c5");
-        root.style.setProperty("--secondary-accent-gradient", "#27b4b9");
-        root.style.setProperty("--tertiary-accent", "#db7735");
-        root.style.setProperty("--tertiary-accent-gradient", "#d47d39");*/
-
+        root.style.setProperty("--hover-light", "#f5f5f5");
+        root.style.setProperty("--image-invert", "0");
+        root.style.setProperty("--light-accent", "#fdeefa");
+        root.style.setProperty("--primary-accent", "#fe599d");
+        root.style.setProperty("--primary-accent-gradient", "#fe599d");
+        root.style.setProperty("--secondary-accent", "#00a8ff");
+        root.style.setProperty("--secondary-accent-gradient", "#00a8ff");
+        root.style.setProperty("--light-secondary", "#edf9fe");
+        root.style.setProperty("--tertiary-accent", "#f8680a");
+        root.style.setProperty("--tertiary-accent-gradient", "#f8680a");
+        root.style.setProperty("--light-tertiary", "#fefaed");
+        root.style.setProperty("--light-quaternary", "#fdeefd");
+        root.style.setProperty("--quaternary-accent", "#e100ff");
+        root.style.setProperty("--quaternary-accent-gradient", "#e100ff");
+    } else if(themeIndex === 1){
         root.style.setProperty('--text-color', 'white');
         root.style.setProperty("--bg-color-1", "#161b22");
         root.style.setProperty("--bg-color-2", "#0d1117")
@@ -60,7 +65,8 @@ function toggleTheme(themeIndex){
         root.style.setProperty("--light-quaternary", "#30363d");
         root.style.setProperty("--quaternary-accent", "#9a0bad");
         root.style.setProperty("--quaternary-accent-gradient", "#6609c3");
-    } else if(themeIndex === 0){
+
+    } else if(themeIndex === 2){
         root.style.setProperty('--text-color', 'black');
         root.style.setProperty("--bg-color-1", "#ffffff");
         root.style.setProperty("--bg-color-2", "#f6f7fb")
@@ -83,8 +89,7 @@ function toggleTheme(themeIndex){
         root.style.setProperty("--light-quaternary", "#fdeefd");
         root.style.setProperty("--quaternary-accent", "#e100ff");
         root.style.setProperty("--quaternary-accent-gradient", "#7f00ff");
-
-    } else if(themeIndex === 2){
+    } else if(themeIndex === 3){
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) toggleTheme(1);
         else toggleTheme(0)
     }

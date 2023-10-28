@@ -18,11 +18,69 @@
 <div id="account-settings-modal-container" class="inactive-modal">
     <div id="account-settings-modal-bg"></div>
     <div id="account-settings-modal">
-        <div id="account-settings-modal-sidebar">
-            
+        <div>
+            <div id="account-settings-modal-sidebar">
+                <a href="#general-information">
+                    <img src="./icons/profile.png" alt="">
+                    <p>General Information</p>
+                </a>
+                <a href="#misc-information">
+                    <img src="./icons/extra.png" alt="">
+                    <p>Misc Information</p>
+                </a>
+                <a href="#ask-tags">
+                    <img src="./icons/tags.png" alt="">
+                    <p>Ask Tags</p>
+                </a>
+            </div>
+            <div id="account-settings-display">
+                <div id="general-information">
+                    <h1>General Information</h1>
+                    <p>User information that will be used throughout the website</p>
+                    <div class="account-input-container">
+                        <h6>First Name</h6>
+                        <input type="text" class="account-input">
+                    </div>
+                    <div class="account-input-container">
+                        <h6>Last Name</h6>
+                        <input type="text" class="account-input">
+                    </div>
+                    <div class="account-input-container">
+                        <h6>Email Address</h6>
+                        <input type="text" class="account-input">
+                    </div>
+                    <button class="account-button">Request New Password</button>
+                </div>
+                <div id="misc-information">
+                    <h1>Miscellaneous Information</h1>
+                    <p>Extra information to enhance your experience and will be useful for Elephant development</p>
+                    <div class="account-input-container">
+                        <h6>User Country</h6>
+                        <input type="text" class="account-input">
+                    </div>
+                    <div class="account-input-container">
+                        <h6>Email Address</h6>
+                        <input type="text" class="account-input">
+                    </div>
+                    <div class="account-input-container">
+                        <h6>Email Address</h6>
+                        <input type="text" class="account-input">
+                    </div>
+                    <div class="account-input-container">
+                        <h6>Email Address</h6>
+                        <input type="text" class="account-input">
+                    </div>
+                    <div class="account-input-container">
+                        <h6>Email Address</h6>
+                        <input type="text" class="account-input">
+                    </div>
+                </div>
+                <div id="ask-tags">
+                    <h1>Set User Tags</h1>
+                    <p>Enhance your experience using Elephant Ask</p>
+                </div>
+            </div>
         </div>
-
-
         <div>
             <button>Save Changes</button>
             <button onclick="toggleAccountSettingsModal()">Cancel</button>
@@ -176,6 +234,11 @@
                                 <img src="../flip/icons/check.png" alt="" class="profile-theme-check-img">
                             </div>
                             <div onclick="toggleTheme(2)">
+                                <img src="../flip/icons/gsun.png" alt="">
+                                <p>Gradient Light</p>
+                                <img src="../flip/icons/check.png" alt="" class="profile-theme-check-img">
+                            </div>
+                            <div onclick="toggleTheme(3)">
                                 <img src="../flip/icons/50%25.png" alt="">
                                 <p>System Default</p>
                                 <img src="../flip/icons/check.png" alt="" class="profile-theme-check-img">

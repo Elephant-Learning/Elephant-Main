@@ -62,6 +62,13 @@
     height:calc(100vh - var(--size) * 140px);
 }
 
+/*#crossword-container{
+    border-radius:calc(var(--size) * 20px);
+    overflow:hidden;
+    border:1px solid var(--dark-gray);
+    padding:0;
+}*/
+
 #crossword-container tr{
     display:flex;
     flex-direction:row;

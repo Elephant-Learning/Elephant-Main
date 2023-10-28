@@ -863,13 +863,13 @@
 
 #account-settings-modal-container{
     width:100vw;
-    height:calc(100vh - var(--size) * 48px);
+    height:100vh;
     position:absolute;
-    top:calc(vaR(--size) * 48px);
+    top:0;
     left:0;
     z-index:3;
     transition-duration:750ms;
-    backdrop-filter:blur(calc(var(--size) * 10px));
+    backdrop-filter:blur(calc(var(--size) * 4px));
     display:flex;
     flex-direction:row;
     align-items:flex-end;
@@ -883,7 +883,7 @@
     position:absolute;
     top:0;
     left:0;
-    opacity:0.675;
+    opacity:1;
 }
 
 #account-settings-modal-container.inactive-modal > #account-settings-modal{
@@ -892,10 +892,104 @@
 
 #account-settings-modal{
     width:100vw;
-    height:calc(100vh - var(--size) * 97px);
+    height:100vh;
     background:var(--bg-color-2);
-    padding:calc(var(--size) * 24px);
     transition-duration:1s;
     /*transition-delay:250ms;*/
     z-index:2;
+    display:flex;
+    flex-direction:column;
+}
+
+#account-settings-modal > div:first-of-type{
+    height:calc(100% - var(--size) * 64px);
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:flex-start;
+}
+
+#account-settings-modal-sidebar{
+    border-right:1px solid var(--light-border-color);
+    padding:calc(var(--size) * 24px);
+    width:calc(var(--size) * 208px);
+    display:flex;
+    flex-direction:column;
+    gap:calc(var(--size) * 12px);
+    height:calc(100% - var(--size) * 48px);
+}
+
+#account-settings-modal-sidebar > a{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 12px);
+    width:calc(100% - var(--size) * 12px);
+    padding:calc(var(--size) * 12px);
+    height:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 12px);
+    text-decoration:none;
+}
+
+#account-settings-modal-sidebar > a > img{
+    height:calc(var(--size) * 24px);
+    filter:invert(0.25);
+}
+
+#account-settings-modal-sidebar > a > p{
+    font-size:calc(var(--size) * 14px);
+    font-weight:700;
+    color:#404040;
+}
+
+#account-settings-display{
+    overflow-y:scroll;
+    width:calc(100% - var(--size) * 304px);
+    height:calc(100% - var(--size) * 48px);
+    padding:calc(var(--size) * 24px);
+}
+
+#account-settings-display h1{
+    margin:0;
+    font-size:calc(var(--size) * 32px);
+}
+
+#account-settings-display p{
+    margin:0;
+    font-size:calc(var(--size) * 14px);
+    color:gray;
+}
+
+#account-settings-modal > div:last-of-type{
+    height:calc(var(--size) * 64px);
+    width:calc(100% - var(--size) * 48px);
+    padding:0 calc(var(--size) * 24px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:calc(var(--size) * 24px);
+    border-top:1px solid var(--light-border-color);
+}
+
+#account-settings-modal > div:last-of-type > button{
+    height:calc(var(--size) * 32px);
+    font-size:calc(var(--size) * 12px);
+    font-weight:700;
+    text-transform:uppercase;
+    border:none;
+    border-radius:calc(var(--size) * 6px);
+    cursor:pointer;
+}
+
+#account-settings-modal > div:last-of-type > button:first-of-type{
+    padding:0 calc(var(--size) * 36px) 0;
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    color:white;
+}
+
+#account-settings-modal > div:last-of-type > button:last-of-type{
+    padding:0 calc(var(--size) * 24px) 0;
+    background:transparent;
+    color:var(--primary-accent);
 }

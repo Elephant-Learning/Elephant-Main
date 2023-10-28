@@ -718,6 +718,28 @@ async function leaveEditor(link){
     location.href = link
 }
 
+document.getElementById("generate-btn").addEventListener("click", function(e){
+    toggleAIModal(true);
+});
+
+function toggleAIModal(generation){
+
+    if(document.getElementById("ai-generation-modal-container").classList.contains("inactive-modal")){
+        document.getElementById("ai-generation-modal-container").classList.remove("inactive-modal")
+    } else {
+        if(generation){
+            removeAllChildNodes(document.getElementById("generate-btn"));
+
+            let newImg = document.createElement("img");
+            newImg.src = `./icons/loading/${Math.floor(Math.random() * 5)}.png`
+
+            document.getElementById("generate-btn").appendChild(newImg);
+        } else {
+            document.getElementById("ai-generation-modal-container").classList.add("inactive-modal");
+        }
+    }
+}
+
 document.getElementById('save-deck').onclick = saveDeck;
 
 async function saveDeck(){
@@ -976,6 +998,9 @@ async function checkForEditing(){
         document.getElementById('deck-privacy-div').innerHTML = "PERSONAL";
         document.getElementById('deck-privacy-div').classList.add('personal');
         document.getElementById('deck-name').innerHTML = "New Elephant Deck";
+
+        //toggleAIModal(false);
+
         editing = undefined;
     }
 }

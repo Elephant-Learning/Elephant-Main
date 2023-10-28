@@ -675,3 +675,261 @@ html {
     width:calc(100vw - var(--size) * 64px);
     z-index:1;
 }
+
+#ai-generation-modal-container{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    z-index:3;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    transition-duration:250ms;
+}
+
+#ai-generation-modal-container{
+    position:relative;
+    top:0;
+    left:0;
+    backdrop-filter:blur(calc(var(--size) * 4px));
+}
+
+#ai-generation-modal{
+    background:var(--bg-color-1);
+    width:40%;
+    height:55%;
+    border-radius:calc(var(--size) * 12px);
+    box-shadow:0 0 calc(var(--size) * 12px) 0 var(--light-border-color);
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:flex-start;
+}
+
+.ai-generation-container{
+    width:calc(50% - var(--size) * 48px);
+    height:calc(100% - var(--size) * 48px);
+    padding:calc(var(--size) * 24px);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-start;
+    gap:calc(var(--size) * 12px);
+    position:relative;
+}
+
+.ai-generation-container > button:last-of-type{
+    position:absolute;
+    bottom:calc(var(--size) * 24px);
+    width:calc(100% - var(--size) * 48px);
+    box-shadow:0 0 calc(var(--size) * 12px) 0 var(--light-border-color);
+    font-weight:700;
+    font-size:calc(var(--size) * 12px);
+    color:var(--primary-accent);
+    text-transform:uppercase;
+    border-radius:calc(var(--size) * 6px);
+    cursor:pointer;
+    height:calc(var(--size) * 32px);
+    background:var(--light-accent);
+    transition-duration:250ms;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    border:none;
+}
+
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+    from {
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes rotating {
+    from {
+        -ms-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -ms-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.ai-generation-container > button:last-of-type > img{
+    height:calc(var(--size) * 24px);
+    -webkit-animation: rotating 1s linear infinite;
+    -moz-animation: rotating 1s linear infinite;
+    -ms-animation: rotating 1s linear infinite;
+    -o-animation: rotating 1s linear infinite;
+    animation: rotating 1s linear infinite;
+    filter:invert(1);
+
+}
+
+.ai-generation-container > button:last-of-type:hover{
+    box-shadow:0 0 calc(var(--size) * 12px) calc(var(--size) * 6px) var(--light-border-color);
+    background:var(--primary-accent);
+    color:white;
+    transform:scale(1.05);
+}
+
+.ai-generation-container:first-of-type {
+    border-right: 1px solid var(--light-border-color);
+}
+
+.ai-generation-container > div:first-of-type{
+    background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+    width:calc(var(--size) * 64px);
+    height:calc(var(--size) * 64px);
+    border-radius:50%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+.ai-generation-container > div:first-of-type > img{
+    filter:invert(1);
+    height:calc(var(--size) * 48px);
+}
+
+.ai-generation-container > h1{
+    font-size:calc(var(--size) * 18px);
+    margin:0;
+}
+
+.ai-generation-container h2{
+    font-size:calc(var(--size) * 12px);
+    margin:0;
+}
+
+.ai-generation-container > p{
+    margin:0;
+    font-size:calc(var(--size) * 14px);
+    color:gray;
+}
+
+.ai-generation-container > p:last-of-type{
+    margin-bottom:calc(var(--size) * 12px);
+}
+
+.ai-generation-input-container{
+    display:flex;
+    flex-direction:column;
+    gap:calc(var(--size) * 6px);
+}
+
+.ai-generation-input-container > h6{
+    margin:0;
+    font-size:calc(var(--size) * 10px);
+}
+
+.ai-generation-input{
+    padding:calc(var(--size) * 6px);
+    font-size:calc(var(--size) * 12px);
+    border-radius:calc(var(--size) * 6px);
+    border:1px solid var(--light-border-color);
+    background:var(--bg-color-2);
+    color:gray;
+    outline:none;
+}
+
+.ai-generation-input:focus{
+    outline:2px solid var(--primary-accent);
+}
+
+#ai-generation-main-input{
+    display:flex;
+    flex-direction:row;
+    width:100%;
+    align-items:center;
+    justify-content:space-between;
+}
+
+#ai-generation-main-input > .ai-generation-input-container{
+    width:calc(100% - var(--size) * 60px);
+}
+
+#ai-generation-main-input > div:last-of-type{
+    position:relative;
+}
+
+#ai-generation-main-input > div:last-of-type > div:first-of-type{
+    height:calc(var(--size) * 24px);
+    width:calc(var(--size) * 24px);
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:var(--light-border-color);
+}
+
+#ai-generation-main-input > div:last-of-type > div:first-of-type > img{
+    height:calc(var(--size) * 16px);
+}
+
+#ai-generation-main-input > div:last-of-type > div:last-of-type{
+    position:absolute;
+    bottom:calc(var(--size) * 36px);
+    background:var(--bg-color-1);
+    border:1px solid var(--light-border-color);
+    box-shadow:0 0 calc(var(--size) * 12px) 0 var(--light-border-color);
+    border-radius:calc(var(--size) * 6px);
+    padding:calc(var(--size) * 12px);
+    visibility:hidden;
+    opacity:0;
+    transition-duration:250ms;
+    z-index:5;
+    transition-delay:1s;
+    left:0;
+}
+
+#ai-generation-main-input > div:last-of-type > div:last-of-type input{
+    width:calc(var(--size) * 144px);
+}
+
+#ai-generation-main-input > div:last-of-type > div:last-of-type button{
+    height:calc(var(--size) * 24px);
+    margin-top:calc(var(--size) * 6px);
+    border-radius:calc(var(--size) * 6px);
+    color:white;
+    text-transform:uppercase;
+    border:none;
+    outline:none;
+    background:var(--primary-accent);
+    font-weight:700;
+    font-size:calc(var(--size) * 10px);
+    cursor:pointer;
+}
+
+#ai-generation-main-input > div:last-of-type:hover > div:last-of-type{
+    opacity:1;
+    visibility:visible;
+    transition-delay:250ms;
+}
+
+#ai-generation-main-input > .ai-generation-input-container > input{
+    width:100%;
+}
+
+#ai-generation-main-input > div:first-of-type{
+
+}
