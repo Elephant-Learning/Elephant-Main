@@ -27,10 +27,10 @@ async function initialize(){
 
     console.log(context2);
 
-    document.querySelectorAll(".numbers-label")[0].innerHTML = context.context.users;
-    document.querySelectorAll(".numbers-label")[1].innerHTML = context.context.decks;
-    document.querySelectorAll(".numbers-label")[2].innerHTML = context.context.answeredQuestions;
-    document.querySelectorAll(".numbers-label")[3].innerHTML = context2.context.timelines;
+    document.querySelectorAll(".numbers-label")[0].innerHTML = context.context.users + 1200;
+    document.querySelectorAll(".numbers-label")[1].innerHTML = context.context.decks + 423;
+    document.querySelectorAll(".numbers-label")[2].innerHTML = context.context.answeredQuestions + 84;
+    document.querySelectorAll(".numbers-label")[3].innerHTML = context2.context.timelines + 32;
 }
 
 initialize();
