@@ -1,0 +1,1 @@
+createComponent("Components/navbar.html", document.getElementById("navbar-container"));

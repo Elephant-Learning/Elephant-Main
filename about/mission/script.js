@@ -33,4 +33,6 @@ async function initialize(){
     document.querySelectorAll(".numbers-label")[3].innerHTML = context2.context.timelines + 32;
 }
 
+createComponent("../../Components/navbar.html", document.getElementById("navbar-container"));
+
 initialize();

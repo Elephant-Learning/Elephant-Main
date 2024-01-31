@@ -1,4 +1,6 @@
 function initialize(){
+    createComponent("../../Components/navbar.html", document.getElementById("navbar-container"));
+
     fetch('user-agreement.dat')
         .then(response => response.text())
         .then(data => {

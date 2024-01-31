@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Employee Directory | Elephant - The Ultimate Student Suite</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Directory | Elephant - The Ultimate Student Suite</title>
 
-  <link rel="icon" href="../../icons/elephant-400-400-grayscale.png">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="../../navbar.css">
-  <link rel="stylesheet" href="../../footer.css">
+    <link rel="icon" href="../../icons/elephant-400-400-grayscale.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../navbar.css">
+    <link rel="stylesheet" href="../../footer.css">
 
-  <script src="../../navbar.js" defer></script>
+    <script src="../../ComponentLib.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <p id="navbar-prefix">../../</p>
@@ -31,105 +32,7 @@
         <p id="announcements-para"></p>
         <button id="announcements-button">X</button>
     </div>
-    <div id="navbar">
-        <div id="navbar-left">
-            <a href="../../#main-container"><img src="../../icons/elephant-400-400-pink-02.png" alt="Elephant - The Ultimate Student Suite"></a>
-            <h1>Elephant</h1>
-        </div>
-        <div id="navbar-right">
-            <div class="navbar-modal">
-                <div>
-                    <p>Services</p>
-                </div>
-                <div>
-                    <div>
-                        <div>
-                            <a href="../../services/flip">
-                                <img src="../../flip/icons/deck.png" alt="">
-                                <div>
-                                    <h1>Elephant Flip</h1>
-                                    <p>Memorization Made Easy</p>
-                                </div>
-                            </a>
-                            <a href="../../services/ask">
-                                <img src="../../ask/icons/ask.png" alt="">
-                                <div>
-                                    <h1>Elephant Ask</h1>
-                                    <p>Memorization Made Easy</p>
-                                </div>
-                            </a>
-                            <a href="../../services/timeline">
-                                <img src="../../timeline/icons/timeline.png" alt="">
-                                <div>
-                                    <h1>Elephant Timeline</h1>
-                                    <p>Memorization Made Easy</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <h1>Learn More</h1>
-                            <a href="https://docs.elephantsuite.net/docs/elephant-services.html">Elephant Services</a>
-                            <a href="https://docs.elephantsuite.net/docs/how-to-create-flip-deck.html">Create Flip Deck</a>
-                            <a href="https://docs.elephantsuite.net/docs/how-to-use-flip-deck.html">Study Flip Deck</a>
-                            <a href="https://docs.elephantsuite.net/docs/asking-questions-with-elephant-ask.html">Asking Questions</a>
-                            <a href="https://docs.elephantsuite.net/docs/earning-ask-points.html">Earning Ask Points</a>
-                            <a href="https://docs.elephantsuite.net/docs/how-to-create-timelines.html">Creating Timelines</a>
-                            <a href="https://docs.elephantsuite.net/docs/how-to-study-timelines.html">Studying Timelines</a>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <h1>Ready to Use These Services?</h1>
-                            <p>Join Elephant today to gain access to all services for free!</p>
-                        </div>
-                        <a href="../../login/?signup" class="button-secondary">Join Elephant</a>
-                    </div>
-                </div>
-            </div>
-            <div class="navbar-modal">
-                <div>
-                    <p>About Us</p>
-                </div>
-                <div>
-                    <div>
-                        <div>
-                            <a href="../../about/mission">
-                                <img src="../../icons/landing/mission.png" alt="">
-                                <div>
-                                    <h1>Our Mission</h1>
-                                    <p>Why we do what we do</p>
-                                </div>
-                            </a>
-                            <a href="../../about/employees">
-                                <img src="../../icons/landing/employees.png" alt="">
-                                <div>
-                                    <h1>Our Employees</h1>
-                                    <p>Who Made This Happen</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <h1>Help Elephant</h1>
-                            <a href="https://docs.elephantsuite.net/docs/elephant-careers.html">Careers</a>
-                            <a href="https://docs.elephantsuite.net/docs/contribute-to-elephant.html">Contribute</a>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <h1>Want to Contribute to Elephant?</h1>
-                            <p>Help students maximize their full intellectual potential!</p>
-                        </div>
-                        <a href="https://docs.elephantsuite.net/docs/contribute-to-elephant.html" class="button-secondary">Contribute</a>
-                    </div>
-                </div>
-            </div>
-            <a href="https://docs.elephantsuite.net/">Support</a>
-            <div class="navbar-image-button">
-                <a href="../../login/?signup" class="button-tertiary"><img src="../../icons/landing/login.png" alt=""></a>
-                <div id="login-link-name">Login</div>
-            </div>
-        </div>
-    </div>
+    <div id="navbar-container"></div>
     <div id="header-container">
       <img src="../../icons/elephant-400-400-white.png" alt="">
       <div class="header-label">About</div>
@@ -170,16 +73,16 @@
                 <img src="./images/Advay_Patil.jpeg" alt="">
                 <div>
                     <h1>Advay Patil</h1>
-                    <p>Developer</p>
+                    <p>Mobile App Developer</p>
                 </div>
-            </div>
+            </div>-->
             <div>
                 <img src="./images/Abhiram_Boddu.jpg" alt="">
                 <div>
                     <h1>Abhiram Boddu</h1>
-                    <p>Marketer</p>
+                    <p>Director of Music Production</p>
                 </div>
-            </div>-->
+            </div>
         </div>
     </div>
     <div id="get-involved"></div>
