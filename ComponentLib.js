@@ -27,22 +27,22 @@ async function createComponent(htmlFilePath, targetElement) {
     }
 }
 
-function resolveRelativePaths(container, htmlFilePath) {
-    const baseUri = new URL(htmlFilePath, window.location.href);
+function resolveRelativePaths(container, baseUrl) {
+    const base = new URL(baseUrl, window.location.href);
     const elementsWithSrc = container.querySelectorAll('[src]');
-    const elementsWithHref = container.querySelectorAll('[href]');
+    const elementsWithHref = container.querySelectorAll('a[href], link[href]');
 
     elementsWithSrc.forEach(el => {
         const src = el.getAttribute('src');
         if (src && !src.startsWith('http://') && !src.startsWith('https://')) {
-            el.src = new URL(src, baseUri).href;
+            el.src = new URL(src, base).href;
         }
     });
 
     elementsWithHref.forEach(el => {
         const href = el.getAttribute('href');
-        if (href && !href.startsWith('http://') && !href.startsWith('https://')) {
-            el.href = new URL(href, baseUri).href;
+        if (href && !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('#')) {
+            el.href = new URL(href, base).href;
         }
     });
 }

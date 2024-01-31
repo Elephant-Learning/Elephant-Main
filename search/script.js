@@ -583,6 +583,8 @@ async function initialize(user){
         user = user.context.user;
     } catch(e){ location.href = "../login"}
 
+    await createComponent("../Components/app-navbar.html", document.getElementById("desktop-navbar-container"));
+
     console.log(user);
 
     document.getElementById('desktop-navbar-profile-image').src = "../icons/avatars/" + user.pfpId + ".png"
@@ -634,16 +636,6 @@ async function locateUserInfo(){
 document.getElementById("profile-public-display-bg").onclick = function(){
     document.getElementById("profile-public-display-container").classList.add("inactive-modal");
 }
-
-document.getElementById("desktop-navbar-input").addEventListener("keypress", function(e){
-    if (e.key === "Enter") {
-        e.preventDefault();
-        let content = document.getElementById("desktop-navbar-input").value;
-
-        content = content.replaceAll(" ", "+");
-        location.href = `../search/?query=${content}`;
-    }
-});
 
 function toggleModal(modal){
     if(modal.classList.contains('inactive-modal')){

@@ -1076,6 +1076,7 @@ async function initialize(user){
         location.href = "../../login"
     } else user = user.context.user;
 
+    await createComponent("../../Components/app-navbar.html", document.getElementById("desktop-navbar-container"));
     await checkForEditing();
 
     const noFriends = ["LOL YOU HAVE NO FRIENDS", "Imagine not having any friends", "Bruh you actually are friendless", "Well isn't this awkward", "Friend... more like end..."]

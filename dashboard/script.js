@@ -180,12 +180,14 @@ async function initialize(user){
         location.href = "../login"
     } else try{
         user = user.context.user;
-    } catch(e){ location.href = "../login"};
+    } catch(e){ location.href = "../login"}
 
     if(user.newUser) document.getElementById('new-user-modal-bg').classList.remove('inactive-modal');
 
     //if(user.type === "ADMIN") document.getElementById('desktop-sidebar-employee').classList.remove('inactive-modal')
 
+    console.log("Creating")
+    await createComponent("../Components/app-navbar.html", document.getElementById("desktop-navbar-container"));
 
     //console.log(user);
 
@@ -249,16 +251,6 @@ let randomChatMessage = ["Rearranging Your Cards Into Decks...", "Managing Your 
 function closeLoader(){
     document.getElementById('desktop-loader-container').classList.add('inactive-modal')
 }
-
-document.getElementById("desktop-navbar-input").addEventListener("keypress", function(e){
-    if (e.key === "Enter") {
-        e.preventDefault();
-        let content = document.getElementById("desktop-navbar-input").value;
-
-        content = content.replaceAll(" ", "+");
-        location.href = `../search/?query=${content}`;
-    }
-})
 
 document.addEventListener('DOMContentLoaded', function(e){
     document.getElementById('desktop-loader-text').innerHTML = randomChatMessage[Math.floor(Math.random() * randomChatMessage.length)];

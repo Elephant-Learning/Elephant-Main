@@ -394,16 +394,6 @@ async function displayFolders(user){
     }
 }
 
-document.getElementById("desktop-navbar-input").addEventListener("keypress", function(e){
-    if (e.key === "Enter") {
-        e.preventDefault();
-        let content = document.getElementById("desktop-navbar-input").value;
-
-        content = content.replaceAll(" ", "+");
-        location.href = `../search/?query=${content}`;
-    }
-})
-
 function sidebarFolder(title, folderId){
     let newDiv = document.createElement('div');
     let img = document.createElement('img');
@@ -449,6 +439,8 @@ async function initialize(user){
     } else try{
         user = user.context.user;
     } catch(e){ location.href = "../login"}
+
+    await createComponent("../Components/app-navbar.html", document.getElementById("desktop-navbar-container"));
 
     //if(user.type === "ADMIN") document.getElementById('desktop-sidebar-employee').classList.remove('inactive-modal')
 

@@ -369,6 +369,8 @@ async function initialize(user){
 
     console.log(user);
 
+    await createComponent("../Components/app-navbar.html", document.getElementById("desktop-navbar-container"));
+
     /*removeAllChildNodes(document.getElementById('my-profile-friends'));
     removeAllChildNodes(document.getElementById('my-profile-decks'));
     removeAllChildNodes(document.getElementById('my-profile-answers'));

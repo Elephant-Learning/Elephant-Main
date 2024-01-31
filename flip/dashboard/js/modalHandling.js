@@ -10,16 +10,6 @@ let folderAmount = 0;
 
 const flashcardsVersion = "v1.0.0";
 
-document.getElementById("desktop-navbar-input").addEventListener("keypress", function(e){
-    if (e.key === "Enter") {
-        e.preventDefault();
-        let content = document.getElementById("desktop-navbar-input").value;
-
-        content = content.replaceAll(" ", "+");
-        location.href = `../../search/?query=${content}`;
-    }
-});
-
 function toggleSettingsModal(){
     if(document.getElementById('desktop-settings-modal').classList.contains('inactive-modal')){
         document.getElementById('desktop-settings-modal').classList.remove('inactive-modal');
@@ -189,10 +179,6 @@ document.getElementById('desktop-sidebar').addEventListener('contextmenu', funct
 
 document.addEventListener('click', function(e){
     toggleContextMenu(false);
-})
-
-document.getElementById('desktop-navbar-profile').addEventListener('click', function(e){
-
 })
 
 document.getElementById('desktop-main-container').addEventListener('contextmenu', function(e){
@@ -371,7 +357,7 @@ async function displayFlashcardsManager(user){
             }
         }
 
-        console.log(success);
+        //console.log(success);
 
         if(success){
             if((context !== undefined && document.getElementById('flashcards-view-sorting').value === "1" && context.authorId === user.id) || (document.getElementById('flashcards-view-sorting').value === "2" && user.sharedDeckIds.includes(context.id) || (document.getElementById('flashcards-view-sorting').value === "0"))){
@@ -445,6 +431,8 @@ async function initialize(user){
     } else user = user.context.user;
 
     const emojis_refactored = ["confused", "cool", "happy", "laugh", "nerd", "neutral", "unamused", "uwu", "wink"];
+
+    await createComponent("../../Components/app-navbar.html", document.getElementById("desktop-navbar-container"));
 
     displayFolders(user)
 

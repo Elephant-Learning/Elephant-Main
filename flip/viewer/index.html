@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="css/statistics.css">
     <link rel="stylesheet" href="css/crossword.css">
 
-    <script src="../js/main.js" defer></script>
+    <script src="../../ComponentLib.js" defer></script>
     <script src="js/script.js" defer></script>
     <script src="js/carousel.js" defer></script>
     <script src="js/memorize.js" defer></script>
@@ -28,114 +28,7 @@
 <body>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7659700279033478"
             crossorigin="anonymous"></script>
-    <div id="desktop-music-container" class="inactive-modal">
-        <div id="desktop-music-main">
-            <div id="music-image-div">
-                <img src="../../music/covers/space-trip.png" id="music-image">
-            </div>
-            <h1 id="music-name"></h1>
-            <p id="music-author"></p>
-            <input type="range" value="0" id="slider-input" min="0" max="10000" disabled="disabled">
-            <div id="music-controls">
-                <img src="../icons/favorite.png" alt="">
-                <img src="../icons/play.png" id="music-play-img">
-                <img src="../icons/forward.png" id="music-next-img">
-            </div>
-            <div id="playlist-list"></div>
-            <div id="playlist-playing"></div>
-        </div>
-    </div>
-    <div id="desktop-navbar">
-        <div id="desktop-main-image">
-            <a href="../dashboard"><img src="../../icons/elephant-400-400-pink-flashcards-02.png" alt="Elephant Logo"></a>
-        </div>
-        <div id="desktop-input-div">
-            <img src="../icons/search.png" alt="Search" id="desktop-input-img">
-            <input type="text" id="desktop-navbar-input" placeholder="Search Decks, Users, Classrooms">
-        </div>
-        <div id="desktop-navbar-right">
-            <!--<div class="desktop-navbar-right-img" onclick="toggleMusicModal()">
-                    <img src="../icons/music.png" alt="Notifications">
-                </div>
-            <div class="desktop-navbar-right-img" onclick="toggleNotificationsModal()">
-                <img src="../icons/notification.png" alt="Notifications" id="notifications-btn">
-            </div>-->
-            <div id="desktop-navbar-profile">
-                <img src="../editor/icons/crowd.png" alt="" id="desktop-navbar-profile-image">
-                <div id="navbar-profile-text">
-                    <h1 id="desktop-navbar-profile-name"></h1>
-                    <p id="desktop-navbar-profile-type"></p>
-                </div>
-                <img src="../icons/expand_down.png" alt="Dropdown">
-                <div id="desktop-profile-modal" class="active-modal">
-                    <div onclick="location.href = '../../profile'">
-                        <img src="../icons/emojis/happy.png" id="desktop-profile-user-img" alt="">
-                        <p>Your Profile</p>
-                    </div>
-                    <div>
-                        <img src="../icons/theme.png" alt="">
-                        <p>Theme</p>
-                        <img src="../icons/expand-right.png" alt="">
-                        <div class="profile-sub-modal">
-                            <div onclick="toggleTheme(0)">
-                                <img src="../icons/sun.png" alt="">
-                                <p>Light Theme</p>
-                                <img src="../icons/check.png" alt="" class="profile-theme-check-img">
-                            </div>
-                            <div onclick="toggleTheme(1)">
-                                <img src="../icons/moon.png" alt="">
-                                <p>Dark Theme</p>
-                                <img src="../icons/check.png" alt="" class="profile-theme-check-img">
-                            </div>
-                            <div onclick="toggleTheme(2)">
-                                <img src="../icons/gsun.png" alt="">
-                                <p>Gradient Light</p>
-                                <img src="../icons/check.png" alt="" class="profile-theme-check-img">
-                            </div>
-                            <div onclick="toggleTheme(3)">
-                                <img src="../icons/50%25.png" alt="">
-                                <p>System Default</p>
-                                <img src="../icons/check.png" alt="" class="profile-theme-check-img">
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <img src="../icons/zoom.png">
-                        <p>Accessibility Zoom</p>
-                        <img src="../icons/expand-right.png" alt="">
-                        <div class="profile-sub-modal">
-                            <div onclick="toggleSizeSetting(0)">
-                                <img src="../icons/zoom_out.png" alt="">
-                                <p>75%</p>
-                                <img src="../icons/check.png" alt="" class="profile-zoom-check-img">
-                            </div>
-                            <div onclick="toggleSizeSetting(1)">
-                                <img src="../icons/search.png" alt="">
-                                <p>100%</p>
-                                <img src="../icons/check.png" alt="" class="profile-zoom-check-img">
-                            </div>
-                            <div onclick="toggleSizeSetting(2)">
-                                <img src="../icons/zoom_in.png" alt="">
-                                <p>125%</p>
-                                <img src="../icons/check.png" alt="" class="profile-zoom-check-img">
-                            </div>
-                            <div onclick="toggleSizeSetting(3)">
-                                <img src="../icons/zoom_in.png" alt="">
-                                <p>150%</p>
-                                <img src="../icons/check.png" alt="" class="profile-zoom-check-img">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="profile-break"></div>
-                    <div onclick="localStorage.removeItem('savedUserId'); location.href = '../../login'">
-                        <img src="../icons/logout.png">
-                        <p>Log Out</p>
-                    </div>
-                    <!--<button>Get Premium</button>-->
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="desktop-navbar-container"></div>
     <div id="desktop-parent-container">
         <div id="desktop-sidebar">
             <div class="sidebar-dropdown">

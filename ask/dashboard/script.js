@@ -1,16 +1,6 @@
 const tags = [];
 let likedAnswers;
 
-document.getElementById("desktop-navbar-input").addEventListener("keypress", function(e){
-    if (e.key === "Enter") {
-        e.preventDefault();
-        let content = document.getElementById("desktop-navbar-input").value;
-
-        content = content.replaceAll(" ", "+");
-        location.href = `../../search/?query=${content}`;
-    }
-});
-
 async function heartDeck(deckId, image){
     const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
 
@@ -207,6 +197,9 @@ async function initialize(user){
     if(user.status === "FAILURE" || user.error === "Bad Request") {
         location.href = "../../login"
     } else user = user.context.user;
+
+    await createComponent("../../Components/app-navbar.html", document.getElementById("desktop-navbar-container"));
+
     console.log(user);
 
     const emojis_refactored = ["confused", "cool", "happy", "laugh", "nerd", "neutral", "unamused", "uwu", "wink"];

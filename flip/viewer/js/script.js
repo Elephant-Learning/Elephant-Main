@@ -347,12 +347,14 @@ window.onload = async function(){
     initializeMemorize();
 }
 
-function initialize(user){
+async function initialize(user){
     console.log(user);
 
     if(user.status === "FAILURE" || user.error === "Bad Request") {
         location.href = "../../../login"
     } else user = user.context.user;
+
+    await createComponent("../../Components/app-navbar.html", document.getElementById("desktop-navbar-container"));
 
     let memorizeSettings = 0;
 
