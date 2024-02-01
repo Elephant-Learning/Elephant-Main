@@ -184,7 +184,7 @@
         top:0;
     }
 
-    #desktop-profile-modal > div:not(.profile-break), .profile-sub-modal > div{
+    #desktop-profile-modal > div:not(.profile-break), .profile-sub-modal > div, #desktop-profile-modal > a{
         display:flex;
         flex-direction:row;
         justify-content:flex-start;
@@ -203,7 +203,7 @@
         opacity:0;
     }
 
-    #desktop-profile-modal > div:not(.profile-break):hover, .profile-sub-modal > div:hover{
+    #desktop-profile-modal > div:not(.profile-break):hover, .profile-sub-modal > div:hover, #desktop-profile-modal > a:hover{
         background:var(--primary-accent);
     }
 
@@ -212,7 +212,7 @@
         opacity:1;
     }
 
-    #desktop-profile-modal > div:not(.profile-break) > img:first-of-type, .profile-sub-modal > div > img:first-of-type{
+    #desktop-profile-modal > div:not(.profile-break) > img:first-of-type, .profile-sub-modal > div > img:first-of-type, #desktop-profile-modal > a > img{
         height:calc(var(--size) * 17px);
         filter:invert(1);
     }
@@ -224,12 +224,16 @@
         filter:invert(1);
     }
 
-    #desktop-profile-modal > div:not(.profile-break) > p, .profile-sub-modal > div > p{
+    #desktop-profile-modal > div:not(.profile-break) > p, .profile-sub-modal > div > p, #desktop-profile-modal > a > p{
         font-size:calc(var(--size) * 13px);
         cursor:pointer;
         margin:0;
         font-weight:400;
         color:white;
+    }
+
+    #desktop-profile-modal > a{
+        text-decoration:none;
     }
 
     .profile-break{
@@ -411,10 +415,10 @@
             </div>
             <img src="../flip/icons/expand_down.png" alt="Dropdown">
             <div id="desktop-profile-modal" class="active-modal">
-                <div onclick="location.href = '../profile/'">
+                <a href="../profile/">
                     <img src="../flip/icons/emojis/happy.png" id="desktop-profile-user-img" alt="">
                     <p>Your Profile</p>
-                </div>
+                </a>
                 <div>
                     <img src="../flip/icons/theme.png" alt="">
                     <p>Theme</p>

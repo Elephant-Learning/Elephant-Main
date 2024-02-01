@@ -1,5 +1,6 @@
-function initialize(){
-    createComponent("../../Components/navbar.html", document.getElementById("navbar-container"));
+async function initialize(){
+    await createComponent("../../Components/navbar.html", document.getElementById("navbar-container"));
+    await createComponent("../../Components/footer.html", document.getElementById("footer-container"));
 
     fetch('user-agreement.dat')
         .then(response => response.text())
