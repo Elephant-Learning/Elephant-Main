@@ -333,3 +333,74 @@
 #services-container > div > a:hover{
     filter:grayscale(0);
 }
+
+#quick-actions{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    flex-wrap:wrap;
+    gap:calc(var(--size) * 24px);
+    width:calc(100vw - calc(var(--size) * 593px));
+}
+
+#quick-actions > a{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--light-border-color);
+    text-decoration:none !important;
+    gap:calc(var(--size) * 18px);
+    padding:calc(var(--size) * 24px);
+    border-radius:calc(var(--size) * 6px);
+    background:var(--bg-color-1);
+    transition-duration:250ms;
+    cursor:pointer;
+}
+
+#quick-actions > a:nth-of-type(1):hover{
+    border:1px solid var(--primary-accent);
+    background:var(--light-accent);
+}
+
+#quick-actions > a:nth-of-type(2):hover{
+    border:1px solid var(--secondary-accent);
+    background:var(--light-secondary);
+}
+
+#quick-actions > a:nth-of-type(3):hover{
+    border:1px solid var(--tertiary-accent);
+    background:var(--light-tertiary);
+}
+
+#quick-actions > a > img:first-of-type{
+    height:calc(var(--size) * 30px);
+    filter:invert(1) brightness(var(--image-invert));
+}
+
+#quick-actions > a > div > h1{
+    font-size:calc(var(--size) * 14px);
+    font-weight:600;
+    margin:0;
+    cursor:pointer;
+}
+
+#quick-actions > a > div > p{
+    font-size:calc(var(--size) * 12px);
+    margin:0;
+    color:gray;
+    cursor:pointer;
+}
+
+#quick-actions > a > img:last-of-type{
+    height:calc(var(--size) * 18px);
+    margin-left:calc(var(--size) * 18px);
+    filter:invert(1) brightness(var(--image-invert));
+}
+
+#dashboard-left > h1{
+    font-size:calc(var(--size) * 12px);
+    font-weight:600;
+    margin:calc(var(--size) * 24px) 0;
+}
