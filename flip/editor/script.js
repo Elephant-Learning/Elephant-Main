@@ -573,6 +573,8 @@ function displayAlert(index, content){
         }
 
         document.querySelectorAll('.desktop-alert-desc')[index].innerHTML = "Please Correct The Following Errors: " + refactoredContent;
+    } else if(index === 1){
+        document.querySelectorAll('.desktop-alert-desc')[index].innerHTML = "AI Generation Failed. Perhaps Try Again";
     }
 
     document.querySelectorAll('.desktop-alert')[index].classList.remove('inactive-modal');
@@ -722,7 +724,7 @@ document.getElementById("generate-btn").addEventListener("click", function(e){
     toggleAIModal(true);
 });
 
-function toggleAIModal(generation){
+async function toggleAIModal(generation){
 
     if(document.getElementById("ai-generation-modal-container").classList.contains("inactive-modal")){
         document.getElementById("ai-generation-modal-container").classList.remove("inactive-modal")
@@ -734,6 +736,50 @@ function toggleAIModal(generation){
             newImg.src = `./icons/loading/${Math.floor(Math.random() * 5)}.png`
 
             document.getElementById("generate-btn").appendChild(newImg);
+
+            const savedUserId = JSON.parse(localStorage.getItem('savedUserId'));
+
+            const response = await fetch('https://elephantsuite-rearend.herokuapp.com/ai/createDeck', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                },
+                body: JSON.stringify({
+                    userId: savedUserId,
+                    topic: document.getElementById("ai-generation-input").value,
+                    termNumber: document.getElementById("ai-generation-number").value,
+                    deckVisibility: "PRIVATE"
+                }),
+                mode: 'cors'
+            });
+
+            const context = await response.json();
+            console.log(context);
+
+            if(context.status === "SUCCESS") {
+                await fetch('https://elephantsuite-rearend.herokuapp.com/statistics/recentlyViewedDecks', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type'
+                    },
+                    body: JSON.stringify({
+                        userId: savedUserId,
+                        deckId: context.context.deck.id
+                    }),
+                    mode: 'cors'
+                });
+
+                enableRedirect = true;
+                location.href = `./?deck=${context.context.deck.id}`
+            }
+            else displayAlert(1);
+
         } else {
             document.getElementById("ai-generation-modal-container").classList.add("inactive-modal");
         }
@@ -999,7 +1045,7 @@ async function checkForEditing(){
         document.getElementById('deck-privacy-div').classList.add('personal');
         document.getElementById('deck-name').innerHTML = "New Elephant Deck";
 
-        //toggleAIModal(false);
+        toggleAIModal(false);
 
         editing = undefined;
     }
