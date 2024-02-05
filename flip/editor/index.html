@@ -47,7 +47,7 @@
                     <div id="ai-generation-main-input">
                         <div class="ai-generation-input-container">
                             <h6>I would like a deck about...</h6>
-                            <input type="text" class="ai-generation-input">
+                            <input type="text" class="ai-generation-input" id="ai-generation-input">
                         </div>
                         <div>
                             <div>
@@ -57,7 +57,7 @@
                                 <h2 style="margin-bottom:calc(var(--size) * 6px)">Extra Settings</h2>
                                 <div class="ai-generation-input-container">
                                     <h6># of Cards...</h6>
-                                    <input type="number" value="25" maxlength="2" oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="ai-generation-input">
+                                    <input type="number" value="25" maxlength="2" oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="ai-generation-input" id="ai-generation-number">
                                 </div>
                                 <button>Save Changes</button>
                             </div>
