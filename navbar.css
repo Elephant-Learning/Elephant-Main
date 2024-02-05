@@ -58,6 +58,10 @@ p{
     font-family: 'Montserrat', sans-serif !important;
 }
 
+#navbar-prefix{
+    display:none;
+}
+
 .header-label{
     margin:0;
     font-weight:700;
