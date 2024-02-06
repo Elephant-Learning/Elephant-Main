@@ -37,7 +37,7 @@
     #navbar-banner{
         width:100vw;
         height:12px;
-        background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient));
+        background:linear-gradient(135deg, var(--primary-accent), var(--primary-accent-gradient), var(--tertiary-accent), var(--tertiary-accent-gradient));
     }
 
     #navbar{
@@ -81,7 +81,7 @@
 
     #navbar-header-left > a{
         color:black;
-        font-weight:500;
+        font-weight:600;
         font-size:14px;
         text-decoration:none;
         margin:0;
@@ -112,7 +112,7 @@
 
     }
 
-    #navbar-body > img{
+    #navbar-body > a > img{
         height:36px;
     }
 
@@ -156,6 +156,13 @@
         padding:0 24px;
         font-weight:600;
         cursor:pointer;
+        text-decoration:none;
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        font-size:14px;
     }
 
     .button-heavy{
@@ -360,13 +367,32 @@
         font-weight:600;
         color:black;
     }
+
+    #navbar-search-modal{
+        width:calc(100vw - 342px);
+        height:calc(70vh - 128px);
+        position:absolute;
+        background:white;
+        z-index:3;
+        left:96px;
+        top:133px;
+        border-bottom-right-radius:12px;
+        border-bottom-left-radius:12px;
+        transition-duration:250ms;
+        visibility:visible;
+    }
+
+    #navbar-search-modal.inactive-modal{
+        height:0;
+        visibility:hidden;
+    }
 </style>
 <div id="navbar">
     <div id="navbar-banner"></div>
     <div id="navbar-header">
         <div id="navbar-header-left">
-            <img src="../flip/icons/emojis/laugh.png" alt="">
-            <a href="https://www.elephantsuite.net">Elephant - The Ultimate Student Suite</a>
+            <img src="../flip/icons/emojis/laugh.png" alt="" id="navbar-emoji">
+            <a href="../">Elephant - The Ultimate Student Suite</a>
         </div>
         <div id="navbar-header-right">
             <div class="navbar-modal">
@@ -459,16 +485,72 @@
         </div>
     </div>
     <div id="navbar-body">
-        <img src="../icons/elephant-400-400-pink-02.png" alt="">
+        <a href="../"><img src="../icons/elephant-400-400-pink-02.png" alt=""></a>
         <div id="navbar-body-input-container">
             <img src="../flip/icons/search.png" alt="">
-            <input type="text" id="navbar-body-input" placeholder="Search Decks, Timelines, Questions, Etc.">
+            <input type="text" id="navbar-body-input" placeholder="Power Search Decks, Timelines, Questions, Users, Etc.">
             <button id="navbar-search">Search</button>
         </div>
         <a href="../login/?signup" class="button-heavy">Sign Up</a>
         <a href="../login/" class="button-light">Sign In</a>
     </div>
+    <a href="../search?query=" id="search-hyperlink"></a>
+</div>
+<div id="navbar-search-modal" class="inactive-modal">
+
 </div>
 <script>
+    document.getElementById("navbar-body-input").addEventListener("focus", function(e){
+        document.getElementById("navbar-search-modal").classList.remove("inactive-modal")
+    });
 
+    document.getElementById("navbar-body-input").onblur = function(){
+        document.getElementById("navbar-search-modal").classList.add("inactive-modal");
+    }
+
+    document.getElementById("navbar-search").onclick = async function(){
+        document.getElementById("navbar-body-input").focus();
+
+        const query = document.getElementById("navbar-body-input").value;
+
+        const userResponse = await fetch(`https://elephantsuite-rearend.herokuapp.com/login/userByName?name=${query}&userId=${0}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        });
+
+        const userContext = await userResponse.json();
+
+        console.log(userContext);
+    }
+
+    window.onload = function (){
+        const emojis = [
+            "angry",
+            "confused",
+            "cool",
+            "cry",
+            "happy",
+            "laugh",
+            "nerd",
+            "neutral",
+            "sad",
+            "skull",
+            "unamused",
+            "uwu",
+            "wink"
+        ];
+
+        console.log();
+
+        //document.getElementById("navbar-emoji").setAttribute("src", ``)
+
+        if(Math.floor(Math.random() * 100) === 0) `${document.getElementById("navbar-emoji").src.substring(0, document.getElementById("navbar-emoji").src.lastIndexOf('/'))}/frog.png`
+        else document.getElementById("navbar-emoji").setAttribute("src", `${document.getElementById("navbar-emoji").src.substring(0, document.getElementById("navbar-emoji").src.lastIndexOf('/'))}/${emojis[Math.floor(Math.random() * emojis.length)]}.png`)
+    };
 </script>
