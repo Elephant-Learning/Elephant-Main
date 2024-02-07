@@ -426,15 +426,9 @@ async function displayFolders(user){
 }
 
 async function initialize(user){
-    if(user.status === "FAILURE" || user.error === "Bad Request") {
-        location.href = "../../../login"
-    } else user = user.context.user;
-
     const emojis_refactored = ["confused", "cool", "happy", "laugh", "nerd", "neutral", "unamused", "uwu", "wink"];
 
     await createComponent("../../Components/app-navbar.html", document.getElementById("desktop-navbar-container"));
-
-    displayFolders(user)
 
     if(document.getElementById('desktop-main-news').hasChildNodes()){
         document.getElementById('desktop-main-news').style.visibility = "visible";
@@ -448,21 +442,24 @@ async function initialize(user){
         document.getElementById('desktop-music-container').style.height = "calc(100vh - var(--size) * 72px)";
     }
 
-    closeNews()
+    closeNews();
+    togglePageFlip(0);
+
+    await initNavbar(user);
+
+    if(user === null){
+        closeLoader();
+        return;
+    }
+
+    user = user.context.user;
+
+    document.getElementById('desktop-profile-user-img').src = "../icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
+
+    await displayFolders(user)
 
     console.log(user);
 
-    document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png";
-    document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
-    document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
-    document.getElementById('desktop-profile-user-img').src = "../icons/emojis/" + emojis_refactored[Math.floor(Math.random() * emojis_refactored.length)] + ".png"
-
-    await notificationsManager(user);
-    toggleNotificationTab(0);
-
-    await displayFlashcardsManager(user);
-
-    togglePageFlip(0);
     closeLoader();
 }
 
@@ -497,10 +494,14 @@ async function locateUserInfo(){
     try{
         savedUserId = JSON.parse(localStorage.getItem('savedUserId'))
     } catch {
-        location.href = "../../../login";
+        await initialize(null);
+        return;
     }
 
-    if(!savedUserId  && savedUserId !== 0) location.href = "../../../login";
+    if(!savedUserId  && savedUserId !== 0) {
+        await initialize(null)
+        return;
+    }
 
     const response = await fetch('https://elephantsuite-rearend.herokuapp.com/login/user?id=' + savedUserId, {
         method: 'GET',
@@ -514,7 +515,11 @@ async function locateUserInfo(){
     })
 
     const context = await response.json();
-    initialize(context);
+
+    if(context.status === "FAILURE" || context.error === "Bad Request"){
+        await initialize(null)
+        return;
+    } await initialize(context);
 }
 
 locateUserInfo();

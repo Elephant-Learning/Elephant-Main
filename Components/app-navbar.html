@@ -401,21 +401,21 @@
         <input type="text" id="desktop-navbar-input" placeholder="Search Items, Users, Classrooms">
     </div>
     <div id="desktop-navbar-right">
-        <div class="desktop-navbar-right-img" onclick="toggleFriendingModal(false)">
+        <div class="desktop-navbar-right-img" onclick="toggleFriendingModal(false)" id="desktop-navbar-friending-container">
             <img src="../flip/icons/add_friend.png" alt="Friend Request">
         </div>
         <div class="desktop-navbar-right-img" onclick="toggleNotificationsModal()" id="desktop-navbar-notifications-container">
             <img src="../flip/icons/notification.png" alt="Notifications" id="notifications-btn">
         </div>
         <div id="desktop-navbar-profile">
-            <img src="" alt="Image" id="desktop-navbar-profile-image">
+            <img src="../icons/avatars/47.png" alt="Image" id="desktop-navbar-profile-image">
             <div id="navbar-profile-text">
-                <h1 id="desktop-navbar-profile-name"></h1>
-                <p id="desktop-navbar-profile-type"></p>
+                <h1 id="desktop-navbar-profile-name">Login / Sign Up</h1>
+                <p id="desktop-navbar-profile-type">Unlock More With Login</p>
             </div>
             <img src="../flip/icons/expand_down.png" alt="Dropdown">
             <div id="desktop-profile-modal" class="active-modal">
-                <a href="../profile/">
+                <a href="../profile/" id="your-profile-btn">
                     <img src="../flip/icons/emojis/happy.png" id="desktop-profile-user-img" alt="">
                     <p>Your Profile</p>
                 </a>
@@ -470,8 +470,9 @@
                 </div>
                 <div class="profile-break"></div>
                 <div onclick="localStorage.removeItem('savedUserId'); location.href = '../login'">
-                    <img src="../flip/icons/logout.png">
-                    <p>Log Out</p>
+                    <img src="../flip/icons/logout.png" id="logout-btn-img">
+                    <img src="../flip/icons/login.png" alt="login-btn-img">
+                    <p id="login-logout-btn-txt">Log Out</p>
                 </div>
                 <!--<button>Get Premium</button>-->
             </div>
@@ -692,6 +693,29 @@
         const userContext = await userResponse.json()
 
         await notificationsManager(userContext.context.user);
+    }
+
+    async function initNavbar(user){
+        if(user === null){
+            document.getElementById("your-profile-btn").remove();
+            document.getElementById("logout-btn-img").remove();
+            document.getElementById("login-logout-btn-txt").innerHTML = "Log In";
+
+            document.getElementById("desktop-navbar-notifications-container").remove();
+            document.getElementById("desktop-navbar-friending-container").remove();
+
+            return;
+        }
+
+        document.getElementById('desktop-navbar-profile-image').src = "../../icons/avatars/" + user.pfpId + ".png";
+        document.getElementById('desktop-navbar-profile-name').innerHTML = user.firstName + " " + user.lastName;
+        document.getElementById('desktop-navbar-profile-type').innerHTML = "Elephant " + user.type.charAt(0).toUpperCase() + user.type.substr(1).toLowerCase();
+        document.getElementById("login-btn-img").remove();
+
+        await notificationsManager(user);
+        toggleNotificationTab(0);
+
+        await displayFlashcardsManager(user);
     }
 
     async function toggleFriendingModal(send){
