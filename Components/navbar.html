@@ -369,8 +369,9 @@
     }
 
     #navbar-search-modal{
-        width:calc(100vw - 342px);
-        height:calc(70vh - 128px);
+        width:calc(100vw - 390px);
+        height:calc(70vh - 176px);
+        padding:24px;
         position:absolute;
         background:white;
         z-index:3;
@@ -380,11 +381,111 @@
         border-bottom-left-radius:12px;
         transition-duration:250ms;
         visibility:visible;
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+        justify-content:flex-start;
+        overflow-y:scroll;
+        gap:6px;
     }
 
     #navbar-search-modal.inactive-modal{
         height:0;
         visibility:hidden;
+    }
+
+    #navbar-search-modal > h1{
+        font-size:calc(var(--size) * 14px);
+        font-weight:600;
+        margin:0;
+    }
+
+    .navbar-search-modal-result-container{
+        width:100%;
+        margin-bottom:12px;
+    }
+
+    .navbar-search-modal-loader{
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        gap:24px;
+        width:100%;
+    }
+
+    .skeleton-loader{
+        display:block;
+        background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0) 80%
+        ),
+        var(--light-border-color);
+        background-repeat: repeat-y;
+        background-size: 50px 500px;
+        background-position: 0 0;
+        animation: shine 2500ms infinite;
+    }
+
+    .navbar-search-modal-loader > div:first-of-type{
+        width:36px;
+        height:36px;
+    }
+
+    .navbar-search-modal-loader > div:last-of-type{
+        display:flex;
+        flex-direction:column;
+        width:100%;
+        gap:6px;
+    }
+
+    .navbar-search-modal-loader > div:last-of-type > div:first-of-type{
+        width:100%;
+        height:16px;
+    }
+
+    .navbar-search-modal-loader > div:last-of-type > div:last-of-type{
+        width:100%;
+        height:14px;
+    }
+
+    @keyframes shine {
+        to {
+            background-position: 100% 0, 0 0;
+        }
+    }
+
+    .navbar-search-modal-template{
+        display:none;
+    }
+
+    .navbar-search-modal-result-container > div:not(.navbar-search-modal-loader):not(.navbar-search-modal-template){
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        gap:24px;
+        margin-bottom:6px;
+    }
+
+    .navbar-search-modal-result-container > div:not(.navbar-search-modal-loader):not(.navbar-search-modal-template) > img{
+        height:24px;
+    }
+
+    .navbar-search-modal-result-container > div:not(.navbar-search-modal-loader):not(.navbar-search-modal-template) > div{
+        display:flex;
+        flex-direction:column;
+    }
+
+    .navbar-search-modal-result-container > div:not(.navbar-search-modal-loader):not(.navbar-search-modal-template) > div > h1{
+        margin:0;
+        font-size:14px;
+    }
+
+    .navbar-search-modal-result-container > div:not(.navbar-search-modal-loader):not(.navbar-search-modal-template) > div > p{
+        margin:0;
+        font-size:12px;
+        color:gray;
     }
 </style>
 <div id="navbar">
@@ -497,7 +598,74 @@
     <a href="../search?query=" id="search-hyperlink"></a>
 </div>
 <div id="navbar-search-modal" class="inactive-modal">
-
+    <h1>Elephant Flip Decks</h1>
+    <div class="navbar-search-modal-result-container inactive-modal">
+        <div class="navbar-search-modal-loader">
+            <div class="skeleton-loader"></div>
+            <div>
+                <div class="skeleton-loader"></div>
+                <div class="skeleton-loader"></div>
+            </div>
+        </div>
+        <div class="navbar-search-modal-template">
+            <img src="../flip/icons/deck.png" alt="">
+            <div>
+                <h1>Something</h1>
+                <p>Another Thing</p>
+            </div>
+        </div>
+    </div>
+    <h1>Elephant Ask Questions</h1>
+    <div class="navbar-search-modal-result-container inactive-modal">
+        <div class="navbar-search-modal-loader">
+            <div class="skeleton-loader"></div>
+            <div>
+                <div class="skeleton-loader"></div>
+                <div class="skeleton-loader"></div>
+            </div>
+        </div>
+        <div class="navbar-search-modal-template">
+            <img src="../ask/icons/ask.png" alt="">
+            <div>
+                <h1>Something</h1>
+                <p>Another Thing</p>
+            </div>
+        </div>
+    </div>
+    <h1>Elephant Timelines</h1>
+    <div class="navbar-search-modal-result-container inactive-modal">
+        <div class="navbar-search-modal-loader">
+            <div class="skeleton-loader"></div>
+            <div>
+                <div class="skeleton-loader"></div>
+                <div class="skeleton-loader"></div>
+            </div>
+        </div>
+        <div class="navbar-search-modal-template">
+            <img src="../timeline/icons/timeline.png" alt="">
+            <div>
+                <h1>Something</h1>
+                <p>Another Thing</p>
+            </div>
+        </div>
+    </div>
+    <h1>Elephant Users</h1>
+    <div class="navbar-search-modal-result-container inactive-modal">
+        <div class="navbar-search-modal-loader">
+            <div class="skeleton-loader"></div>
+            <div>
+                <div class="skeleton-loader"></div>
+                <div class="skeleton-loader"></div>
+            </div>
+        </div>
+        <div class="navbar-search-modal-template">
+            <img src="../flip/icons/user.png" alt="">
+            <div>
+                <h1>Something</h1>
+                <p>Another Thing</p>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
     document.getElementById("navbar-body-input").addEventListener("focus", function(e){
@@ -511,9 +679,69 @@
     document.getElementById("navbar-search").onclick = async function(){
         document.getElementById("navbar-body-input").focus();
 
-        const query = document.getElementById("navbar-body-input").value;
+        document.querySelectorAll(".navbar-search-modal-result-container").forEach(function(elem){
+            for(let i = 0; i < elem.children.length; i++){
+                if(!elem.children[i].classList.contains("navbar-search-modal-loader") && !elem.children[i].classList.contains("navbar-search-modal-template")){
+                    elem.children[i].remove();
+                    i--;
+                }
+            }
+        })
 
-        const userResponse = await fetch(`https://elephantsuite-rearend.herokuapp.com/login/userByName?name=${query}&userId=${0}`, {
+        document.querySelectorAll(".navbar-search-modal-loader").forEach(function(elem){
+            elem.classList.remove("inactive-modal");
+        });
+
+        document.querySelectorAll(".navbar-search-modal-result-container").forEach(function(elem){
+            elem.classList.remove("inactive-modal");
+        });
+
+        const query = document.getElementById("navbar-body-input").value;
+        const elems = [];
+
+        const deckResponse = await fetch(`https://elephantsuite-rearend.herokuapp.com/deck/getByName?name=${query}&userId=-1`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        });
+
+        const deckContext = await deckResponse.json();
+        elems.push(deckContext.context.decks);
+
+        const askResponse = await fetch(`https://elephantsuite-rearend.herokuapp.com/answers/searchByName?name=${query}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        });
+
+        const askContext = await askResponse.json();
+        elems.push(askContext.context.answers);
+
+        const timelineResponse = await fetch(`https://elephantsuite-rearend.herokuapp.com/timeline/search?query=${query}&userId=-1`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            },
+            mode: 'cors'
+        });
+
+        const timelineContext = await timelineResponse.json();
+        elems.push(timelineContext.context.timelines);
+
+        const userResponse = await fetch(`https://elephantsuite-rearend.herokuapp.com/login/userByName?name=${query}&userId=-1`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -525,8 +753,39 @@
         });
 
         const userContext = await userResponse.json();
+        elems.push(userContext.context.users);
 
-        console.log(userContext);
+        console.log(elems);
+
+        let i = 0;
+
+        document.querySelectorAll(".navbar-search-modal-result-container").forEach(function(elem){
+            for(let j = 0; j < elems[i].length; j++){
+                console.log(i)
+                let newNode = document.querySelectorAll(".navbar-search-modal-template")[i].cloneNode(true);
+
+                if(i === 0){
+                    newNode.children[1].children[0].innerHTML = elems[i][j].name;
+                } else if(i === 1){
+                    newNode.children[1].children[0].innerHTML = elems[i][j].title;
+                    newNode.children[1].children[1].innerHTML = elems[i][j].authorName;
+                } else if(i === 2){
+                    newNode.children[1].children[0].innerHTML = elems[i][j].name;
+                    newNode.children[1].children[1].innerHTML = elems[i][j].name;
+                } else if(i === 3){
+                    newNode.children[1].children[0].innerHTML = elems[i][j].fullName;
+                    newNode.children[1].children[1].innerHTML = elems[i][j].type;
+                }
+
+                newNode.classList.remove("navbar-search-modal-template");
+
+                elem.appendChild(newNode);
+            } i++;
+        });
+
+        document.querySelectorAll(".navbar-search-modal-loader").forEach(function(elem){
+            elem.classList.add("inactive-modal");
+        });
     }
 
     window.onload = function (){
