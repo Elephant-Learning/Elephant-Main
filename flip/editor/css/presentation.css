@@ -5,7 +5,9 @@
     justify-content:flex-start;
     gap:calc(var(--size) * 18px);
     width:100vw;
-    overflow-x:scroll;
+    flex-wrap:wrap;
+    overflow-x:hidden;
+    overflow-y:scroll;
 }
 
 .presentation > #flashcards-add-card{
@@ -60,6 +62,30 @@
     justify-content:space-between;
     align-items:center;
     width:100%;
+}
+
+.presentation > .flashcards-card > .flashcards-card-copyright > img{
+    height:calc(var(--size) * 14px);
+    filter:invert(calc(-0.8 * var(--image-invert) + 0.9));
+}
+
+.presentation > .flashcards-card > .flashcards-card-copyright > div{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-end;
+    gap:calc(var(--size) * 4px);
+}
+
+.presentation > .flashcards-card > .flashcards-card-copyright > div > p{
+    font-size:calc(var(--size) * 10px);
+    color:lightgray;
+    margin:0;
+}
+
+.presentation > .flashcards-card > .flashcards-card-copyright > div > img{
+    height:calc(var(--size) * 12px);
+    filter:invert(calc(-0.5 * var(--image-invert) + 0.75));
 }
 
 .presentation > .flashcards-card > input{
